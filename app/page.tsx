@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { ArrowDown, ArrowRight, Check, ChevronDown, CreditCard, PackageCheck, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowDown, ArrowRight, CarFront, Check, CheckCircle2, ChevronDown, CreditCard, LoaderCircle, LockKeyhole, PackageCheck, ShieldCheck, Sparkles } from 'lucide-react';
 import { LicensePlate } from '@/components/license-plate';
 import { formatPrice, PRODUCTS, SHIPPING_PRICE, type PlateType } from '@/config/products';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 const PLATE_TYPES = Object.keys(PRODUCTS) as PlateType[];
 const FAQS = [
@@ -24,6 +25,9 @@ export default function Home() {
   const [quantity, setQuantity] = useState<1 | 2 | 3>(2);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [paymentState, setPaymentState] = useState<'idle' | 'processing' | 'success'>('idle');
   const product = PRODUCTS[plateType];
   const plateSubtotal = product.prices[quantity] * quantity;
   const total = plateSubtotal + SHIPPING_PRICE;
@@ -45,6 +49,17 @@ export default function Home() {
     setTilt({ x: ((event.clientY - rect.top) / rect.height - 0.5) * -5, y: ((event.clientX - rect.left) / rect.width - 0.5) * 7 });
   }
 
+  function openCheckout() {
+    setCartOpen(false);
+    setPaymentState('idle');
+    setCheckoutOpen(true);
+  }
+
+  function simulatePayment() {
+    setPaymentState('processing');
+    window.setTimeout(() => setPaymentState('success'), 1100);
+  }
+
   return (
     <main>
       <header className="site-header">
@@ -54,9 +69,78 @@ export default function Home() {
           <a href="#ablauf" onClick={() => setMenuOpen(false)}>So funktioniert&apos;s</a>
           <a href="#faq" onClick={() => setMenuOpen(false)}>FAQ</a>
         </nav>
-        <a className="button button-small header-cta" href="#konfigurator">Konfigurieren <ArrowRight size={17} /></a>
-        <button className="menu-button" type="button" aria-label="Menü öffnen" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
+        <div className="header-actions">
+          <button className="car-cart" type="button" aria-label={`Bestellung öffnen, ${quantity} Kennzeichen`} onClick={() => setCartOpen(true)}>
+            <CarFront aria-hidden="true" />
+            <span className="cart-badge">{quantity}</span>
+          </button>
+          <button className="menu-button" type="button" aria-label="Menü öffnen" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}><span /><span /></button>
+        </div>
       </header>
+
+      <Dialog open={cartOpen} onOpenChange={setCartOpen}>
+        <DialogContent className="cart-dialog">
+          <DialogHeader>
+            <p className="dialog-kicker">Deine Bestellung</p>
+            <DialogTitle>Bereit für die Straße.</DialogTitle>
+            <DialogDescription>Prüfe dein Kennzeichen, bevor du zur Demo-Zahlung gehst.</DialogDescription>
+          </DialogHeader>
+          <LicensePlate value={plateValue} type={plateType} className="cart-plate" />
+          <div className="cart-order-line">
+            <div><strong>{product.label}</strong><span>{product.size} · {quantity} {quantity === 1 ? 'Schild' : 'Schilder'}</span></div>
+            <strong>{formatPrice(plateSubtotal)}</strong>
+          </div>
+          <div className="cart-order-line shipping"><span>DHL-Versandpaket</span><strong>{formatPrice(SHIPPING_PRICE)}</strong></div>
+          <div className="cart-total"><span>Gesamt</span><strong>{formatPrice(total)}</strong></div>
+          <button className="button button-wide" type="button" onClick={openCheckout}>Mit Stripe bezahlen <ArrowRight size={18} /></button>
+          <p className="demo-disclaimer"><LockKeyhole size={15} /> Demo-Modus – es wird keine echte Zahlung ausgelöst.</p>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={checkoutOpen} onOpenChange={setCheckoutOpen}>
+        <DialogContent className="stripe-dialog" showCloseButton={paymentState !== 'processing'}>
+          {paymentState === 'success' ? (
+            <div className="payment-success">
+              <span className="success-icon"><CheckCircle2 /></span>
+              <p className="dialog-kicker">Testzahlung erfolgreich</p>
+              <DialogTitle>Bestellung simuliert.</DialogTitle>
+              <DialogDescription>Es wurde kein Geld abgebucht und keine Bestellung übertragen.</DialogDescription>
+              <div className="success-order"><span>{plateValue} · {quantity} × {product.label}</span><strong>{formatPrice(total)}</strong></div>
+              <button className="button button-wide" type="button" onClick={() => setCheckoutOpen(false)}>Demo abschließen</button>
+            </div>
+          ) : (
+            <div className="stripe-shell">
+              <aside className="stripe-summary">
+                <span className="stripe-back" aria-hidden="true">←</span>
+                <p>kennzeichen-lieferung.de</p>
+                <span className="stripe-label">Gesamtbetrag</span>
+                <strong className="stripe-amount">{formatPrice(total)}</strong>
+                <LicensePlate value={plateValue} type={plateType} className="stripe-plate" />
+                <div className="stripe-product"><div><strong>{quantity} × {product.label}</strong><span>{plateValue} · {product.size}</span></div><strong>{formatPrice(plateSubtotal)}</strong></div>
+                <div className="stripe-product muted"><span>Versand</span><strong>{formatPrice(SHIPPING_PRICE)}</strong></div>
+              </aside>
+              <section className="stripe-payment">
+                <div className="stripe-wordmark"><span>stripe</span><em>DEMO</em></div>
+                <DialogHeader>
+                  <DialogTitle>Zahlungsdetails</DialogTitle>
+                  <DialogDescription>Testformular – bitte keine echten Zahlungsdaten eingeben.</DialogDescription>
+                </DialogHeader>
+                <label className="stripe-field">E-Mail<input type="email" value="demo@kennzeichen-lieferung.de" readOnly /></label>
+                <div className="stripe-field card-field">
+                  <span>Karteninformationen</span>
+                  <div><CreditCard size={18} /><input aria-label="Test-Kartennummer" value="4242 4242 4242 4242" readOnly /></div>
+                  <div className="card-meta"><input aria-label="Ablaufdatum" value="12 / 30" readOnly /><input aria-label="Prüfnummer" value="123" readOnly /></div>
+                </div>
+                <label className="stripe-field">Name des Karteninhabers<input value="Demo Kunde" readOnly /></label>
+                <button className="stripe-pay-button" type="button" disabled={paymentState === 'processing'} onClick={simulatePayment}>
+                  {paymentState === 'processing' ? <><LoaderCircle className="spin" size={19} /> Testzahlung wird verarbeitet</> : <><LockKeyhole size={17} /> {formatPrice(total)} bezahlen</>}
+                </button>
+                <p className="stripe-secure"><LockKeyhole size={13} /> Sichere Demo-Zahlung · keine Datenübertragung</p>
+              </section>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <section className="hero" id="top">
         <div className="ambient ambient-one" /><div className="ambient ambient-two" />
@@ -97,7 +181,7 @@ export default function Home() {
             <div className="step-label second"><b>02</b><span>Anzahl prüfen</span></div>
             <div className="quantity-row"><div className="quantity-control" aria-label="Anzahl Kennzeichen">{([1, 2, 3] as const).map((number) => <button key={number} type="button" aria-pressed={quantity === number} onClick={() => setQuantity(number)}>{number}</button>)}</div><span>{quantity === 2 ? 'Vorne & hinten' : `${quantity} ${quantity === 1 ? 'Schild' : 'Schilder'}`}</span></div>
             <div className="price-card"><div><span>{quantity} × {product.label}, {product.size}</span><strong>{formatPrice(plateSubtotal)}</strong></div><div><span>DHL-Versandpaket</span><strong>{formatPrice(SHIPPING_PRICE)}</strong></div><div className="price-total"><span>Gesamt</span><strong>{formatPrice(total)}</strong></div><small>Preise gemäß bereitgestellter Preisinformation. Steuerangaben werden vor Veröffentlichung ergänzt.</small></div>
-            <a className="button button-wide" href="#checkout">Auswahl prüfen <ArrowRight size={19} /></a>
+            <button className="button button-wide" type="button" onClick={openCheckout}>Jetzt bestellen <ArrowRight size={19} /></button>
             <p className="scope-note"><ShieldCheck size={17} /> Geprägte Schilder – ohne Reservierung, Zulassung oder amtliche Plaketten.</p>
           </div>
         </div>
@@ -115,7 +199,7 @@ export default function Home() {
 
       <section className="checkout-section" id="checkout">
         <div className="checkout-intro"><p className="eyebrow light"><span /> One-Page-Checkout</p><h2>Genau dieses<br />Kennzeichen.</h2><p>Deine Vorschau bleibt sichtbar, während du deine Bestellung abschließt.</p><LicensePlate value={plateValue} type={plateType} className="checkout-plate" /><div className="checkout-summary"><span>{product.label} · {product.size} · {quantity} ×</span><strong>{formatPrice(total)}</strong></div></div>
-        <div className="checkout-form" aria-label="Checkout-Vorschau"><div className="form-heading"><span>Bestelldaten</span><em>Struktur vorbereitet</em></div><label>E-Mail-Adresse<input type="email" placeholder="name@beispiel.de" /></label><div className="form-row"><label>Vorname<input type="text" placeholder="Max" /></label><label>Nachname<input type="text" placeholder="Mustermann" /></label></div><label>Straße und Hausnummer<input type="text" placeholder="Musterstraße 12" /></label><div className="form-row small-first"><label>PLZ<input type="text" inputMode="numeric" placeholder="12345" /></label><label>Ort<input type="text" placeholder="Musterstadt" /></label></div><div className="payment-placeholder"><CreditCard size={22} /><div><strong>Sichere Zahlung</strong><span>Stripe Payment Element wird hier eingebunden.</span></div></div><button className="button button-wide" type="button" disabled>Checkout folgt im nächsten Schritt</button><small>Dies ist noch kein zahlungspflichtiger Bestellbutton.</small></div>
+          <div className="checkout-form" aria-label="Checkout-Vorschau"><div className="form-heading"><span>Bestelldaten</span><em>Demo-Checkout</em></div><label>E-Mail-Adresse<input type="email" placeholder="name@beispiel.de" /></label><div className="form-row"><label>Vorname<input type="text" placeholder="Max" /></label><label>Nachname<input type="text" placeholder="Mustermann" /></label></div><label>Straße und Hausnummer<input type="text" placeholder="Musterstraße 12" /></label><div className="form-row small-first"><label>PLZ<input type="text" inputMode="numeric" placeholder="12345" /></label><label>Ort<input type="text" placeholder="Musterstadt" /></label></div><div className="payment-placeholder"><CreditCard size={22} /><div><strong>Sichere Zahlung</strong><span>Stripe Payment Element als Simulation öffnen.</span></div></div><button className="button button-wide" type="button" onClick={openCheckout}>Mit Stripe bezahlen · {formatPrice(total)}</button><small>Demo-Modus: Es wird keine echte Zahlung ausgelöst.</small></div>
       </section>
 
       <section className="faq-section" id="faq">
@@ -124,7 +208,7 @@ export default function Home() {
       </section>
 
       <footer><div className="footer-brand"><span>kennzeichen-lieferung<span>.de</span></span><p>Modern. Sicher. Zuverlässig.</p></div><div className="footer-note">Grundgerüst · Rechtliche Angaben, Kontakt und finale Lieferinformationen werden vor Veröffentlichung ergänzt.</div><a href="#top" aria-label="Nach oben">Nach oben ↑</a></footer>
-      <div className="mobile-bar"><div><span>{plateValue}</span><strong>{formatPrice(total)}</strong></div><a href="#konfigurator">Bestellen <ArrowRight size={17} /></a></div>
+      <div className="mobile-bar"><div><span>{plateValue}</span><strong>{formatPrice(total)}</strong></div><button type="button" onClick={openCheckout}>Bestellen <ArrowRight size={17} /></button></div>
     </main>
   );
 }
