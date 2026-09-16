@@ -173,6 +173,7 @@ export default function Home() {
           <div className="config-preview">
             <div className="preview-meta"><span>{product.shortLabel}</span><span>{product.size}</span></div>
             <LicensePlate value={plateValue} type={plateType} color={plateColor} className="config-plate" />
+            {plateColor === 'carbon' && <div className="carbon-closeup"><span>CARBON · VERGRÖSSERTES MATERIALDETAIL</span><strong aria-hidden="true">{serialLetters || 'AB'} {serialNumbers || '123'}</strong></div>}
             <div className={`scan-status ${status ? 'is-valid' : ''}`}><span className="scan-line" /><div><Check size={16} /> Format {status ? 'erkannt' : 'prüfen'}</div><div><Check size={16} /> Kombination übernommen</div><div><Check size={16} /> Vorschau erstellt</div></div>
           </div>
           <div className="config-controls">
