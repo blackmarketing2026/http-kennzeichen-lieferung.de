@@ -89,6 +89,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .registration-seal b { position: relative; z-index: 1; font-size: .26em; }
 .registration-seal small { position: absolute; z-index: 1; bottom: 10%; font-size: .09em; font-weight: 900; letter-spacing: .02em; }
 .plate-seals.is-compact { width: 38px; height: 64px; font-size: 2.5rem; }
+.plate-seals.recreated-seals { background: url('/plate-seals-preview.png') center / contain no-repeat; filter: drop-shadow(0 1px 1px rgb(0 0 0 / 18%)); }
 .season-mark { align-self: stretch; margin: 11px -2% 11px -4%; padding-left: 2%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-family: var(--font-geist-sans); font-size: clamp(.62rem, 1vw, 1rem); text-shadow: none; }
 .season-mark i { width: 20px; border-top: 2px solid #111; }
 .plate-shine { position: absolute; z-index: 4; top: -60%; left: -35%; width: 24%; height: 220%; background: linear-gradient(90deg, transparent, rgb(255 255 255 / 74%), transparent); transform: rotate(15deg); animation: shine 11s 2s ease-in-out infinite; pointer-events: none; }

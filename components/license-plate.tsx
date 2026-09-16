@@ -6,10 +6,7 @@ const stars = Array.from({ length: 12 });
 
 export function PlateSeals({ compact = false }: { compact?: boolean }) {
   return (
-    <span className={`plate-seals ${compact ? 'is-compact' : ''}`} aria-hidden="true">
-      <i className="hu-seal"><span>12</span><b>26</b><small>HU</small></i>
-      <i className="registration-seal"><span>MUSTER</span><b>DE</b><small>ZULASSUNG</small></i>
-    </span>
+    <span className={`plate-seals recreated-seals ${compact ? 'is-compact' : ''}`} aria-hidden="true" title="HU- und Niedersachsen-Dienstsiegel: nachgezeichnete Vorschau-Muster, nicht im Lieferumfang" />
   );
 }
 
