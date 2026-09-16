@@ -145,7 +145,7 @@ export default function Home() {
 
       <section className="how-section" id="ablauf">
         <div className="section-heading centered"><p className="eyebrow"><span /> Einfach bis zum Schluss</p><h2>Drei Schritte.<br />Ein klares Ergebnis.</h2></div>
-        <div className="steps"><article><b>1</b><div><h3>Kennzeichen eingeben</h3><p>Art, Kombination und Anzahl wählen. Du siehst jede Änderung sofort.</p></div></article><ArrowRight className="step-arrow" aria-hidden="true" /><article><b>2</b><div><h3>Auswahl prüfen</h3><p>Kombination, Ausführung, Größe, Anzahl und Gesamtpreis kontrollieren.</p></div></article><ArrowRight className="step-arrow" aria-hidden="true" /><article><b>3</b><div><h3>Sicher bezahlen</h3><p>Der Stripe-Checkout wird im nächsten Ausbauschritt angeschlossen.</p></div></article></div>
+        <div className="steps"><article><b>1</b><div><h3>Kennzeichen eingeben</h3><p>Art, Kombination und Anzahl wählen. Du siehst jede Änderung sofort.</p></div></article><ArrowRight className="step-arrow" aria-hidden="true" /><article><b>2</b><div><h3>Auswahl prüfen</h3><p>Kombination, Ausführung, Größe, Anzahl und Gesamtpreis kontrollieren.</p></div></article><ArrowRight className="step-arrow" aria-hidden="true" /><article><b>3</b><div><h3>Sicher bezahlen</h3><p>Zahlung und Lieferadresse direkt in unserem eingebetteten Stripe-Checkout abschließen.</p></div></article></div>
       </section>
 
       <section className="checkout-section" id="checkout">
