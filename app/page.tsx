@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { ArrowDown, ArrowRight, CarFront, Check, CheckCircle2, ChevronDown, CreditCard, LoaderCircle, LockKeyhole, PackageCheck, ShieldCheck, Sparkles } from 'lucide-react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { ArrowDown, ArrowRight, CarFront, Check, ChevronDown, CreditCard, LockKeyhole, PackageCheck, ShieldCheck, Sparkles } from 'lucide-react';
 import { LicensePlate } from '@/components/license-plate';
 import { formatPrice, PRODUCTS, SHIPPING_PRICE, type PlateType } from '@/config/products';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -12,7 +14,7 @@ const FAQS = [
   ['Welche Kennzeichenarten kann ich konfigurieren?', 'Das Grundgerüst zeigt Auto-, Motorrad-, E-, H- und Saisonkennzeichen. Das finale Sortiment und verfügbare Maße werden vor dem Shop-Start verbindlich festgelegt.'],
   ['Welche Größen gibt es?', 'Für Standard-Autokennzeichen ist aktuell 520 mm hinterlegt. Weitere ein- und zweizeilige Formate sind in der bereitgestellten Preisinformation vorgesehen.'],
   ['Wie schnell wird versendet?', 'Eine verbindliche Produktions-, Versand- oder Zustellfrist ist noch nicht hinterlegt. Deshalb zeigen wir hier bewusst keine erfundene Lieferzeit.'],
-  ['Welche Zahlungsmethoden werden angeboten?', 'Der Checkout ist als Struktur vorbereitet. Die tatsächlich verfügbaren Zahlungsarten werden nach der Stripe-Konfiguration angezeigt.'],
+  ['Welche Zahlungsmethoden werden angeboten?', 'Im eingebetteten Stripe-Checkout werden die für diese Bestellung verfügbaren Zahlungsarten sicher direkt auf unserer Seite angezeigt.'],
 ];
 
 function sanitizePlate(value: string) {
@@ -20,14 +22,13 @@ function sanitizePlate(value: string) {
 }
 
 export default function Home() {
+  const router = useRouter();
   const [plateType, setPlateType] = useState<PlateType>('standard');
   const [plateValue, setPlateValue] = useState('OL AB 123');
   const [quantity, setQuantity] = useState<1 | 2 | 3>(2);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
-  const [paymentState, setPaymentState] = useState<'idle' | 'processing' | 'success'>('idle');
   const product = PRODUCTS[plateType];
   const plateSubtotal = product.prices[quantity] * quantity;
   const total = plateSubtotal + SHIPPING_PRICE;
@@ -51,19 +52,14 @@ export default function Home() {
 
   function openCheckout() {
     setCartOpen(false);
-    setPaymentState('idle');
-    setCheckoutOpen(true);
-  }
-
-  function simulatePayment() {
-    setPaymentState('processing');
-    window.setTimeout(() => setPaymentState('success'), 1100);
+    const params = new URLSearchParams({ plate: plateValue.trim(), type: plateType, quantity: String(quantity) });
+    router.push(`/checkout?${params.toString()}`);
   }
 
   return (
     <main>
       <header className="site-header">
-        <a href="#top" className="brand" aria-label="kennzeichen-lieferung.de Startseite"><span className="brand-crop"><img src="/kennzeichen-lieferung-logo.png" alt="kennzeichen-lieferung.de" /></span></a>
+        <a href="#top" className="brand" aria-label="kennzeichen-lieferung.de Startseite"><span className="brand-crop"><Image src="/kennzeichen-lieferung-logo.png" alt="kennzeichen-lieferung.de" width={2172} height={724} priority /></span></a>
         <nav className={menuOpen ? 'nav-open' : ''} aria-label="Hauptnavigation">
           <a href="#konfigurator" onClick={() => setMenuOpen(false)}>Kennzeichen bestellen</a>
           <a href="#ablauf" onClick={() => setMenuOpen(false)}>So funktioniert&apos;s</a>
@@ -83,7 +79,7 @@ export default function Home() {
           <DialogHeader>
             <p className="dialog-kicker">Deine Bestellung</p>
             <DialogTitle>Bereit für die Straße.</DialogTitle>
-            <DialogDescription>Prüfe dein Kennzeichen, bevor du zur Demo-Zahlung gehst.</DialogDescription>
+            <DialogDescription>Prüfe dein Kennzeichen, bevor du zum sicheren Checkout gehst.</DialogDescription>
           </DialogHeader>
           <LicensePlate value={plateValue} type={plateType} className="cart-plate" />
           <div className="cart-order-line">
@@ -93,52 +89,7 @@ export default function Home() {
           <div className="cart-order-line shipping"><span>DHL-Versandpaket</span><strong>{formatPrice(SHIPPING_PRICE)}</strong></div>
           <div className="cart-total"><span>Gesamt</span><strong>{formatPrice(total)}</strong></div>
           <button className="button button-wide" type="button" onClick={openCheckout}>Mit Stripe bezahlen <ArrowRight size={18} /></button>
-          <p className="demo-disclaimer"><LockKeyhole size={15} /> Demo-Modus – es wird keine echte Zahlung ausgelöst.</p>
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={checkoutOpen} onOpenChange={setCheckoutOpen}>
-        <DialogContent className="stripe-dialog" showCloseButton={paymentState !== 'processing'}>
-          {paymentState === 'success' ? (
-            <div className="payment-success">
-              <span className="success-icon"><CheckCircle2 /></span>
-              <p className="dialog-kicker">Testzahlung erfolgreich</p>
-              <DialogTitle>Bestellung simuliert.</DialogTitle>
-              <DialogDescription>Es wurde kein Geld abgebucht und keine Bestellung übertragen.</DialogDescription>
-              <div className="success-order"><span>{plateValue} · {quantity} × {product.label}</span><strong>{formatPrice(total)}</strong></div>
-              <button className="button button-wide" type="button" onClick={() => setCheckoutOpen(false)}>Demo abschließen</button>
-            </div>
-          ) : (
-            <div className="stripe-shell">
-              <aside className="stripe-summary">
-                <span className="stripe-back" aria-hidden="true">←</span>
-                <p>kennzeichen-lieferung.de</p>
-                <span className="stripe-label">Gesamtbetrag</span>
-                <strong className="stripe-amount">{formatPrice(total)}</strong>
-                <LicensePlate value={plateValue} type={plateType} className="stripe-plate" />
-                <div className="stripe-product"><div><strong>{quantity} × {product.label}</strong><span>{plateValue} · {product.size}</span></div><strong>{formatPrice(plateSubtotal)}</strong></div>
-                <div className="stripe-product muted"><span>Versand</span><strong>{formatPrice(SHIPPING_PRICE)}</strong></div>
-              </aside>
-              <section className="stripe-payment">
-                <div className="stripe-wordmark"><span>stripe</span><em>DEMO</em></div>
-                <DialogHeader>
-                  <DialogTitle>Zahlungsdetails</DialogTitle>
-                  <DialogDescription>Testformular – bitte keine echten Zahlungsdaten eingeben.</DialogDescription>
-                </DialogHeader>
-                <label className="stripe-field">E-Mail<input type="email" value="demo@kennzeichen-lieferung.de" readOnly /></label>
-                <div className="stripe-field card-field">
-                  <span>Karteninformationen</span>
-                  <div><CreditCard size={18} /><input aria-label="Test-Kartennummer" value="4242 4242 4242 4242" readOnly /></div>
-                  <div className="card-meta"><input aria-label="Ablaufdatum" value="12 / 30" readOnly /><input aria-label="Prüfnummer" value="123" readOnly /></div>
-                </div>
-                <label className="stripe-field">Name des Karteninhabers<input value="Demo Kunde" readOnly /></label>
-                <button className="stripe-pay-button" type="button" disabled={paymentState === 'processing'} onClick={simulatePayment}>
-                  {paymentState === 'processing' ? <><LoaderCircle className="spin" size={19} /> Testzahlung wird verarbeitet</> : <><LockKeyhole size={17} /> {formatPrice(total)} bezahlen</>}
-                </button>
-                <p className="stripe-secure"><LockKeyhole size={13} /> Sichere Demo-Zahlung · keine Datenübertragung</p>
-              </section>
-            </div>
-          )}
+          <p className="demo-disclaimer"><LockKeyhole size={15} /> Sicher eingebettet mit Stripe – ohne Weiterleitung.</p>
         </DialogContent>
       </Dialog>
 
@@ -199,7 +150,7 @@ export default function Home() {
 
       <section className="checkout-section" id="checkout">
         <div className="checkout-intro"><p className="eyebrow light"><span /> One-Page-Checkout</p><h2>Genau dieses<br />Kennzeichen.</h2><p>Deine Vorschau bleibt sichtbar, während du deine Bestellung abschließt.</p><LicensePlate value={plateValue} type={plateType} className="checkout-plate" /><div className="checkout-summary"><span>{product.label} · {product.size} · {quantity} ×</span><strong>{formatPrice(total)}</strong></div></div>
-          <div className="checkout-form" aria-label="Checkout-Vorschau"><div className="form-heading"><span>Bestelldaten</span><em>Demo-Checkout</em></div><label>E-Mail-Adresse<input type="email" placeholder="name@beispiel.de" /></label><div className="form-row"><label>Vorname<input type="text" placeholder="Max" /></label><label>Nachname<input type="text" placeholder="Mustermann" /></label></div><label>Straße und Hausnummer<input type="text" placeholder="Musterstraße 12" /></label><div className="form-row small-first"><label>PLZ<input type="text" inputMode="numeric" placeholder="12345" /></label><label>Ort<input type="text" placeholder="Musterstadt" /></label></div><div className="payment-placeholder"><CreditCard size={22} /><div><strong>Sichere Zahlung</strong><span>Stripe Payment Element als Simulation öffnen.</span></div></div><button className="button button-wide" type="button" onClick={openCheckout}>Mit Stripe bezahlen · {formatPrice(total)}</button><small>Demo-Modus: Es wird keine echte Zahlung ausgelöst.</small></div>
+          <div className="checkout-form checkout-launch" aria-label="Checkout starten"><div className="form-heading"><span>Sicher bezahlen</span><em>Stripe Elements</em></div><div className="payment-placeholder"><CreditCard size={22} /><div><strong>Checkout auf unserer Seite</strong><span>Zahlungsdaten werden direkt und verschlüsselt von Stripe verarbeitet.</span></div></div><ul><li><Check size={17} /> Keine Weiterleitung zu stripe.com</li><li><Check size={17} /> Lieferadresse und Zahlung in einem Schritt</li><li><Check size={17} /> Servergeprüfter Gesamtbetrag</li></ul><button className="button button-wide" type="button" onClick={openCheckout}>Zum sicheren Checkout · {formatPrice(total)}</button><small>Mit dem Klick öffnet sich unsere eigene Checkout-Seite.</small></div>
       </section>
 
       <section className="faq-section" id="faq">
