@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 function getSmtpConfig() {
   const host = process.env.smtp_server?.trim();
   const user = process.env.smtp_user?.trim();
-  const pass = process.env.smtp_password?.trim();
+  const pass = process.env.smtp_passwort?.trim();
 
   if (!host || !user || !pass) {
     return null;
@@ -19,7 +19,7 @@ export function isMailConfigured() {
 export function getMailTransport() {
   const config = getSmtpConfig();
   if (!config) {
-    throw new Error('SMTP ist nicht vollständig konfiguriert (smtp_server, smtp_user, smtp_password).');
+    throw new Error('SMTP ist nicht vollständig konfiguriert (smtp_server, smtp_user, smtp_passwort).');
   }
 
   return nodemailer.createTransport({
