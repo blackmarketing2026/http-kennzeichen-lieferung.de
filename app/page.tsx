@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ArrowDown, ArrowRight, CarFront, Check, ChevronDown, CreditCard, LockKeyhole, PackageCheck, ShieldCheck, Sparkles } from 'lucide-react';
@@ -16,6 +16,42 @@ const FAQS = [
   ['Wie schnell wird versendet?', 'Eine verbindliche Produktions-, Versand- oder Zustellfrist ist noch nicht hinterlegt. Deshalb zeigen wir hier bewusst keine erfundene Lieferzeit.'],
   ['Welche Zahlungsmethoden werden angeboten?', 'Im eingebetteten Stripe-Checkout werden die für diese Bestellung verfügbaren Zahlungsarten sicher direkt auf unserer Seite angezeigt.'],
 ];
+
+type PlateEditorProps = {
+  city: string;
+  letters: string;
+  numbers: string;
+  suffix: string;
+  color: PlateColor;
+  isSeason: boolean;
+  isValid: boolean;
+  onCityChange: (value: string) => void;
+  onLettersChange: (value: string) => void;
+  onNumbersChange: (value: string) => void;
+};
+
+function PlateEditor({ city, letters, numbers, suffix, color, isSeason, isValid, onCityChange, onLettersChange, onNumbersChange }: PlateEditorProps) {
+  const lettersRef = useRef<HTMLInputElement>(null);
+  const numbersRef = useRef<HTMLInputElement>(null);
+
+  return (
+    <div className={`plate-editor-shell ${isValid ? 'is-valid' : 'is-invalid'}`}>
+      <div className="plate-editor-labels" aria-hidden="true"><span>Ort</span><span>Buchstaben</span><span>Zahlen</span></div>
+      <div className={`plate-editor ${color === 'carbon' ? 'is-carbon' : ''}`}>
+        <div className="plate-editor-eu"><span>✦</span><b>D</b></div>
+        <div className="plate-editor-fields">
+          <input aria-label="Ortskürzel" value={city} placeholder="B" maxLength={3} autoComplete="off" spellCheck={false} onChange={(event) => { onCityChange(event.target.value); if (event.target.value.replace(/[^A-Za-zÄÖÜäöü]/g, '').length >= 3) lettersRef.current?.focus(); }} />
+          <span className="plate-editor-space" aria-hidden="true" />
+          <input ref={lettersRef} aria-label="Erkennungsbuchstaben" value={letters} placeholder="AB" maxLength={2} autoComplete="off" spellCheck={false} onChange={(event) => { onLettersChange(event.target.value); if (event.target.value.replace(/[^A-Za-z]/g, '').length >= 2) numbersRef.current?.focus(); }} />
+          <input ref={numbersRef} aria-label="Erkennungsnummer" value={numbers} placeholder="123" maxLength={4} inputMode="numeric" pattern="[0-9]*" autoComplete="off" onChange={(event) => onNumbersChange(event.target.value)} onKeyDown={(event) => { if (event.key === 'Backspace' && !numbers) lettersRef.current?.focus(); }} />
+          {suffix && <strong className="plate-editor-suffix">{suffix}</strong>}
+          {isSeason && <span className="plate-editor-season"><b>04</b><i /><b>10</b></span>}
+        </div>
+      </div>
+      <div className="plate-editor-feedback"><span className="live-dot" />{isValid ? 'Kombination ist bereit' : 'Bitte Kombination vervollständigen oder kürzen'}<em>{city.length + letters.length + numbers.length + suffix.length} Zeichen</em></div>
+    </div>
+  );
+}
 
 export default function Home() {
   const router = useRouter();
@@ -141,14 +177,14 @@ export default function Home() {
           </div>
           <div className="config-controls">
             <div className="step-label"><b>01</b><span>Kombination eingeben</span></div>
-            <label className="field-label" htmlFor="plate-city-input">Bereits reservierte oder zugeteilte Kombination</label>
-            <div className="plate-fields"><label><span>Ort</span><input id="plate-city-input" value={cityCode} onChange={(event) => updateCity(event.target.value)} maxLength={3} autoComplete="off" spellCheck={false} /></label><label><span>Buchstaben</span><input value={serialLetters} onChange={(event) => updateLetters(event.target.value)} maxLength={2} autoComplete="off" spellCheck={false} /></label><label><span>Zahlen</span><input value={serialNumbers} onChange={(event) => updateNumbers(event.target.value)} inputMode="numeric" pattern="[0-9]*" maxLength={4} autoComplete="off" /></label></div>
-            <p className={`field-help ${status ? '' : 'is-error'}`}>{status ? 'Zahlen stehen immer am Ende. Wir prüfen das Format, nicht die behördliche Verfügbarkeit.' : `Die Kombination ist zu lang oder unvollständig${suffix ? ` – vor dem ${suffix} sind maximal 7 Zeichen erlaubt` : ''}.`}</p>
+            <p className="control-intro">Klicke direkt in das Kennzeichen und gib deine zugeteilte Kombination ein.</p>
+            <PlateEditor city={cityCode} letters={serialLetters} numbers={serialNumbers} suffix={suffix} color={plateColor} isSeason={plateType === 'season'} isValid={status} onCityChange={updateCity} onLettersChange={updateLetters} onNumbersChange={updateNumbers} />
+            <p className={`field-help ${status ? '' : 'is-error'}`}>{status ? 'Zahlen stehen immer am Ende. Die behördliche Verfügbarkeit wird nicht geprüft.' : `Die Kombination ist zu lang oder unvollständig${suffix ? ` – vor dem ${suffix} sind maximal 7 Zeichen erlaubt` : ''}.`}</p>
             <div className="step-label second"><b>02</b><span>Zusatz wählen</span></div>
-            <div className="option-group" aria-label="Kennzeichenzusatz"><button type="button" className={!suffix && plateType === 'standard' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('')}>Ohne</button><button type="button" className={suffix === 'E' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('E')}>E-Kennzeichen</button><button type="button" className={suffix === 'H' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('H')}>H-Kennzeichen</button></div>
+            <div className="option-group addon-options" aria-label="Kennzeichenzusatz"><button type="button" className={!suffix && plateType === 'standard' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('')}><strong>–</strong><span>Ohne Zusatz</span><i /></button><button type="button" className={suffix === 'E' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('E')}><strong>E</strong><span>Elektro</span><i /></button><button type="button" className={suffix === 'H' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('H')}><strong>H</strong><span>Historisch</span><i /></button></div>
             {(plateType === 'motorcycle' || plateType === 'season') && <p className="field-help">E- und H-Zusatz sind in dieser Konfiguration nur beim Auto auswählbar.</p>}
             <div className="step-label second"><b>03</b><span>Schriftfarbe wählen</span></div>
-            <div className="option-group color-options" aria-label="Schriftfarbe"><button type="button" className={plateColor === 'black' ? 'active' : ''} onClick={() => setPlateColor('black')}><i className="color-dot black" /> Schwarz</button><button type="button" className={plateColor === 'carbon' ? 'active' : ''} onClick={() => setPlateColor('carbon')}><i className="color-dot carbon" /> Carbon</button></div>
+            <div className="option-group color-options" aria-label="Schriftfarbe"><button type="button" className={plateColor === 'black' ? 'active' : ''} onClick={() => setPlateColor('black')}><i className="color-sample black">AB</i><span><strong>Schwarz</strong><small>Klassische Prägung</small></span></button><button type="button" className={plateColor === 'carbon' ? 'active' : ''} onClick={() => setPlateColor('carbon')}><i className="color-sample carbon">AB</i><span><strong>Carbon</strong><small>Strukturierte Optik</small></span></button></div>
             <div className="step-label second"><b>04</b><span>Anzahl prüfen</span></div>
             <div className="quantity-row"><div className="quantity-control" aria-label="Anzahl Kennzeichen">{([1, 2, 3] as const).map((number) => <button key={number} type="button" aria-pressed={quantity === number} onClick={() => setQuantity(number)}>{number}</button>)}</div><span>{quantity === 2 ? 'Vorne & hinten' : `${quantity} ${quantity === 1 ? 'Schild' : 'Schilder'}`}</span></div>
             <div className="price-card"><div><span>{quantity} × {product.label}, {product.size}, {plateColor === 'carbon' ? 'Carbon' : 'Schwarz'}</span><strong>{formatPrice(plateSubtotal)}</strong></div><div><span>DHL-Versandpaket</span><strong>{formatPrice(SHIPPING_PRICE)}</strong></div><div className="price-total"><span>Gesamt</span><strong>{formatPrice(total)}</strong></div><small>Preise gemäß bereitgestellter Preisinformation. Steuerangaben werden vor Veröffentlichung ergänzt.</small></div>
