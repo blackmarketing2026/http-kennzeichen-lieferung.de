@@ -1,4 +1,5 @@
 export type PlateType = 'standard' | 'motorcycle' | 'electric' | 'historic' | 'season';
+export type PlateColor = 'black' | 'carbon';
 
 export const SHIPPING_PRICE = 4.47;
 
@@ -19,3 +20,22 @@ export const PRODUCTS: Record<PlateType, {
 
 export const formatPrice = (value: number) =>
   new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(value);
+
+const CARBON_PRICES = {
+  long: { 1: 3.27, 2: 3.12, 3: 3.06 },
+  motorcycle: { 1: 3.47, 2: 3.32, 3: 3.27 },
+} satisfies Record<'long' | 'motorcycle', Record<1 | 2 | 3, number>>;
+
+export function getUnitPrice(plateType: PlateType, color: PlateColor, quantity: 1 | 2 | 3) {
+  const product = PRODUCTS[plateType];
+  return color === 'carbon' ? CARBON_PRICES[product.format][quantity] : product.prices[quantity];
+}
+
+export function isValidPlate(plate: string, plateType: PlateType) {
+  const match = /^([A-ZÄÖÜ]{1,3}) ([A-Z]{1,2}) ([1-9]\d{0,3})$/.exec(plate);
+  if (!match) return false;
+  const [, city, letters, numbers] = match;
+  if (plateType === 'motorcycle') return letters.length + numbers.length <= 5;
+  const maximum = plateType === 'standard' ? 8 : 7;
+  return city.length + letters.length + numbers.length <= maximum;
+}

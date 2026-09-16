@@ -7,9 +7,9 @@ import { AddressElement, Elements, PaymentElement, useElements, useStripe } from
 import { loadStripe } from '@stripe/stripe-js';
 import { ArrowLeft, CheckCircle2, LoaderCircle, LockKeyhole } from 'lucide-react';
 import { LicensePlate } from '@/components/license-plate';
-import { formatPrice, PRODUCTS, SHIPPING_PRICE, type PlateType } from '@/config/products';
+import { formatPrice, getUnitPrice, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 
-type CheckoutSelection = { plate: string; plateType: PlateType; quantity: 1 | 2 | 3 };
+type CheckoutSelection = { plate: string; plateType: PlateType; plateColor: PlateColor; quantity: 1 | 2 | 3 };
 
 function PaymentForm({ selection }: { selection: CheckoutSelection }) {
   const stripe = useStripe();
@@ -18,7 +18,7 @@ function PaymentForm({ selection }: { selection: CheckoutSelection }) {
   const [isPaying, setIsPaying] = useState(false);
   const [message, setMessage] = useState('');
   const [succeeded, setSucceeded] = useState(false);
-  const total = PRODUCTS[selection.plateType].prices[selection.quantity] * selection.quantity + SHIPPING_PRICE;
+  const total = getUnitPrice(selection.plateType, selection.plateColor, selection.quantity) * selection.quantity + SHIPPING_PRICE;
 
   async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -96,7 +96,7 @@ export function EmbeddedCheckout({ selection }: { selection: CheckoutSelection }
   const [error, setError] = useState('');
   const cartId = useRef<string | null>(null);
   const product = PRODUCTS[selection.plateType];
-  const subtotal = product.prices[selection.quantity] * selection.quantity;
+  const subtotal = getUnitPrice(selection.plateType, selection.plateColor, selection.quantity) * selection.quantity;
   const total = subtotal + SHIPPING_PRICE;
 
   useEffect(() => {
@@ -105,7 +105,7 @@ export function EmbeddedCheckout({ selection }: { selection: CheckoutSelection }
     fetch('/api/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ plate: selection.plate, plateType: selection.plateType, quantity: selection.quantity, cartId: cartId.current }),
+      body: JSON.stringify({ plate: selection.plate, plateType: selection.plateType, color: selection.plateColor, quantity: selection.quantity, cartId: cartId.current }),
       signal: controller.signal,
     })
       .then(async (response) => {
@@ -119,7 +119,7 @@ export function EmbeddedCheckout({ selection }: { selection: CheckoutSelection }
         if (requestError.name !== 'AbortError') setError(requestError.message);
       });
     return () => controller.abort();
-  }, [selection.plate, selection.plateType, selection.quantity]);
+  }, [selection.plate, selection.plateType, selection.plateColor, selection.quantity]);
 
   const stripePromise = useMemo(() => publishableKey ? loadStripe(publishableKey) : null, [publishableKey]);
 
@@ -129,8 +129,8 @@ export function EmbeddedCheckout({ selection }: { selection: CheckoutSelection }
         <Link className="checkout-back" href="/"><ArrowLeft /> Konfiguration ändern</Link>
         <Link className="checkout-logo" href="/"><Image src="/kennzeichen-lieferung-logo.png" alt="kennzeichen-lieferung.de" width={2172} height={724} priority /></Link>
         <div className="checkout-order-copy"><span>Deine Bestellung</span><h1>Genau dieses<br />Kennzeichen.</h1></div>
-        <LicensePlate value={selection.plate} type={selection.plateType} className="real-checkout-plate" />
-        <div className="real-order-line"><div><strong>{selection.quantity} × {product.label}</strong><span>{selection.plate} · {product.size}</span></div><strong>{formatPrice(subtotal)}</strong></div>
+        <LicensePlate value={selection.plate} type={selection.plateType} color={selection.plateColor} className="real-checkout-plate" />
+        <div className="real-order-line"><div><strong>{selection.quantity} × {product.label}</strong><span>{selection.plate} · {product.size} · {selection.plateColor === 'carbon' ? 'Carbon' : 'Schwarz'}</span></div><strong>{formatPrice(subtotal)}</strong></div>
         <div className="real-order-line"><span>DHL-Versandpaket</span><strong>{formatPrice(SHIPPING_PRICE)}</strong></div>
         <div className="real-order-total"><span>Gesamt</span><strong>{formatPrice(total)}</strong></div>
         <p className="checkout-scope">Du bestellst geprägte Schilder. Reservierung, Zulassung und amtliche Plaketten sind nicht enthalten.</p>

@@ -5,10 +5,10 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ArrowDown, ArrowRight, CarFront, Check, ChevronDown, CreditCard, LockKeyhole, PackageCheck, ShieldCheck, Sparkles } from 'lucide-react';
 import { LicensePlate } from '@/components/license-plate';
-import { formatPrice, PRODUCTS, SHIPPING_PRICE, type PlateType } from '@/config/products';
+import { formatPrice, getUnitPrice, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
-const PLATE_TYPES = Object.keys(PRODUCTS) as PlateType[];
+const BASE_PLATE_TYPES = ['standard', 'motorcycle', 'season'] as const;
 const FAQS = [
   ['Ist die Bestellung eine Reservierung bei der Zulassungsstelle?', 'Nein. Du bestellst geprägte Kennzeichenschilder. Reservierung, Fahrzeugzulassung und amtliche Plaketten sind nicht enthalten.'],
   ['Welche Kennzeichenarten kann ich konfigurieren?', 'Das Grundgerüst zeigt Auto-, Motorrad-, E-, H- und Saisonkennzeichen. Das finale Sortiment und verfügbare Maße werden vor dem Shop-Start verbindlich festgelegt.'],
@@ -17,25 +17,39 @@ const FAQS = [
   ['Welche Zahlungsmethoden werden angeboten?', 'Im eingebetteten Stripe-Checkout werden die für diese Bestellung verfügbaren Zahlungsarten sicher direkt auf unserer Seite angezeigt.'],
 ];
 
-function sanitizePlate(value: string) {
-  return value.toUpperCase().replace(/[^A-ZÄÖÜ0-9\s-]/g, '').replace(/-/g, ' ').replace(/\s+/g, ' ').trimStart().slice(0, 12);
-}
-
 export default function Home() {
   const router = useRouter();
   const [plateType, setPlateType] = useState<PlateType>('standard');
-  const [plateValue, setPlateValue] = useState('OL AB 123');
+  const [cityCode, setCityCode] = useState('OL');
+  const [serialLetters, setSerialLetters] = useState('AB');
+  const [serialNumbers, setSerialNumbers] = useState('123');
+  const [plateColor, setPlateColor] = useState<PlateColor>('black');
   const [quantity, setQuantity] = useState<1 | 2 | 3>(2);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const product = PRODUCTS[plateType];
-  const plateSubtotal = product.prices[quantity] * quantity;
+  const plateValue = `${cityCode} ${serialLetters} ${serialNumbers}`;
+  const plateSubtotal = getUnitPrice(plateType, plateColor, quantity) * quantity;
   const total = plateSubtotal + SHIPPING_PRICE;
-  const status = useMemo(() => {
-    const parts = plateValue.trim().split(/\s+/);
-    return parts.length >= 3 && /[A-ZÄÖÜ]/.test(parts[0]) && /\d/.test(parts[2]);
-  }, [plateValue]);
+  const status = useMemo(() => isValidPlate(plateValue, plateType), [plateValue, plateType]);
+  const suffix = plateType === 'electric' ? 'E' : plateType === 'historic' ? 'H' : '';
+
+  function updateCity(value: string) {
+    setCityCode(value.toUpperCase().replace(/[^A-ZÄÖÜ]/g, '').slice(0, 3));
+  }
+
+  function updateLetters(value: string) {
+    setSerialLetters(value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 2));
+  }
+
+  function updateNumbers(value: string) {
+    setSerialNumbers(value.replace(/\D/g, '').replace(/^0+/, '').slice(0, 4));
+  }
+
+  function chooseSuffix(nextSuffix: '' | 'E' | 'H') {
+    setPlateType(nextSuffix === 'E' ? 'electric' : nextSuffix === 'H' ? 'historic' : 'standard');
+  }
 
   useEffect(() => {
     const onScroll = () => document.documentElement.classList.toggle('is-scrolled', window.scrollY > 24);
@@ -51,8 +65,9 @@ export default function Home() {
   }
 
   function openCheckout() {
+    if (!status) return;
     setCartOpen(false);
-    const params = new URLSearchParams({ plate: plateValue.trim(), type: plateType, quantity: String(quantity) });
+    const params = new URLSearchParams({ plate: plateValue, type: plateType, quantity: String(quantity), color: plateColor });
     router.push(`/checkout?${params.toString()}`);
   }
 
@@ -81,9 +96,9 @@ export default function Home() {
             <DialogTitle>Bereit für die Straße.</DialogTitle>
             <DialogDescription>Prüfe dein Kennzeichen, bevor du zum sicheren Checkout gehst.</DialogDescription>
           </DialogHeader>
-          <LicensePlate value={plateValue} type={plateType} className="cart-plate" />
+          <LicensePlate value={plateValue} type={plateType} color={plateColor} className="cart-plate" />
           <div className="cart-order-line">
-            <div><strong>{product.label}</strong><span>{product.size} · {quantity} {quantity === 1 ? 'Schild' : 'Schilder'}</span></div>
+            <div><strong>{product.label}</strong><span>{product.size} · {plateColor === 'carbon' ? 'Carbon' : 'Schwarz'} · {quantity} {quantity === 1 ? 'Schild' : 'Schilder'}</span></div>
             <strong>{formatPrice(plateSubtotal)}</strong>
           </div>
           <div className="cart-order-line shipping"><span>DHL-Versandpaket</span><strong>{formatPrice(SHIPPING_PRICE)}</strong></div>
@@ -103,11 +118,11 @@ export default function Home() {
         </div>
         <div className="hero-product" onPointerMove={handlePointerMove} onPointerLeave={() => setTilt({ x: 0, y: 0 })}>
           <span className="product-label">Live-Vorschau</span>
-          <LicensePlate value={plateValue} type={plateType} className="hero-plate" style={{ transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }} />
+          <LicensePlate value={plateValue} type={plateType} color={plateColor} className="hero-plate" style={{ transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }} />
           <div className="quick-entry">
-            <label htmlFor="hero-plate-input">Deine Kombination</label>
-            <div className="entry-row"><input id="hero-plate-input" value={plateValue} onChange={(event) => setPlateValue(sanitizePlate(event.target.value))} autoComplete="off" spellCheck={false} aria-describedby="plate-help" /><a className="button" href="#konfigurator">Weiter <ArrowRight size={18} /></a></div>
-            <p id="plate-help">Beispiel: OL AB 123 · keine Verfügbarkeitsprüfung</p>
+            <label htmlFor="hero-city-input">Deine Kombination</label>
+            <div className="entry-row"><div className="plate-fields compact"><input id="hero-city-input" aria-label="Ortskürzel" value={cityCode} onChange={(event) => updateCity(event.target.value)} maxLength={3} /><input aria-label="Buchstaben" value={serialLetters} onChange={(event) => updateLetters(event.target.value)} maxLength={2} /><input aria-label="Zahlen" value={serialNumbers} onChange={(event) => updateNumbers(event.target.value)} inputMode="numeric" maxLength={4} /></div><a className="button" href="#konfigurator">Weiter <ArrowRight size={18} /></a></div>
+            <p id="plate-help">Ort · Buchstaben · Zahlen am Ende</p>
           </div>
         </div>
         <div className="hero-trust" aria-label="Vorteile"><span><ShieldCheck size={18} /> Sichere Bestellführung</span><span><Sparkles size={18} /> Live-Vorschau</span><span><PackageCheck size={18} /> Transparente Kosten</span></div>
@@ -116,30 +131,35 @@ export default function Home() {
       <section className="config-section" id="konfigurator">
         <div className="section-heading"><p className="eyebrow"><span /> Dein Schild</p><h2>Welches Kennzeichen<br />brauchst du?</h2><p>Wähle zuerst die Art. Deine Eingabe bleibt beim Wechsel erhalten.</p></div>
         <div className="type-switcher" role="tablist" aria-label="Kennzeichenart">
-          {PLATE_TYPES.map((type) => <button key={type} type="button" role="tab" aria-selected={plateType === type} className={plateType === type ? 'active' : ''} onClick={() => setPlateType(type)}>{PRODUCTS[type].label}</button>)}
+          {BASE_PLATE_TYPES.map((type) => <button key={type} type="button" role="tab" aria-selected={plateType === type || (type === 'standard' && (plateType === 'electric' || plateType === 'historic'))} className={plateType === type || (type === 'standard' && (plateType === 'electric' || plateType === 'historic')) ? 'active' : ''} onClick={() => setPlateType(type)}>{PRODUCTS[type].label}</button>)}
         </div>
         <div className="configurator-grid">
           <div className="config-preview">
             <div className="preview-meta"><span>{product.shortLabel}</span><span>{product.size}</span></div>
-            <LicensePlate value={plateValue} type={plateType} className="config-plate" />
+            <LicensePlate value={plateValue} type={plateType} color={plateColor} className="config-plate" />
             <div className={`scan-status ${status ? 'is-valid' : ''}`}><span className="scan-line" /><div><Check size={16} /> Format {status ? 'erkannt' : 'prüfen'}</div><div><Check size={16} /> Kombination übernommen</div><div><Check size={16} /> Vorschau erstellt</div></div>
           </div>
           <div className="config-controls">
             <div className="step-label"><b>01</b><span>Kombination eingeben</span></div>
-            <label className="field-label" htmlFor="plate-input">Bereits reservierte oder zugeteilte Kombination</label>
-            <input className="plate-input" id="plate-input" value={plateValue} onChange={(event) => setPlateValue(sanitizePlate(event.target.value))} autoComplete="off" spellCheck={false} />
-            <p className="field-help">Wir prüfen das Schreibformat, nicht die behördliche Verfügbarkeit.</p>
-            <div className="step-label second"><b>02</b><span>Anzahl prüfen</span></div>
+            <label className="field-label" htmlFor="plate-city-input">Bereits reservierte oder zugeteilte Kombination</label>
+            <div className="plate-fields"><label><span>Ort</span><input id="plate-city-input" value={cityCode} onChange={(event) => updateCity(event.target.value)} maxLength={3} autoComplete="off" spellCheck={false} /></label><label><span>Buchstaben</span><input value={serialLetters} onChange={(event) => updateLetters(event.target.value)} maxLength={2} autoComplete="off" spellCheck={false} /></label><label><span>Zahlen</span><input value={serialNumbers} onChange={(event) => updateNumbers(event.target.value)} inputMode="numeric" pattern="[0-9]*" maxLength={4} autoComplete="off" /></label></div>
+            <p className={`field-help ${status ? '' : 'is-error'}`}>{status ? 'Zahlen stehen immer am Ende. Wir prüfen das Format, nicht die behördliche Verfügbarkeit.' : `Die Kombination ist zu lang oder unvollständig${suffix ? ` – vor dem ${suffix} sind maximal 7 Zeichen erlaubt` : ''}.`}</p>
+            <div className="step-label second"><b>02</b><span>Zusatz wählen</span></div>
+            <div className="option-group" aria-label="Kennzeichenzusatz"><button type="button" className={!suffix && plateType === 'standard' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('')}>Ohne</button><button type="button" className={suffix === 'E' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('E')}>E-Kennzeichen</button><button type="button" className={suffix === 'H' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('H')}>H-Kennzeichen</button></div>
+            {(plateType === 'motorcycle' || plateType === 'season') && <p className="field-help">E- und H-Zusatz sind in dieser Konfiguration nur beim Auto auswählbar.</p>}
+            <div className="step-label second"><b>03</b><span>Schriftfarbe wählen</span></div>
+            <div className="option-group color-options" aria-label="Schriftfarbe"><button type="button" className={plateColor === 'black' ? 'active' : ''} onClick={() => setPlateColor('black')}><i className="color-dot black" /> Schwarz</button><button type="button" className={plateColor === 'carbon' ? 'active' : ''} onClick={() => setPlateColor('carbon')}><i className="color-dot carbon" /> Carbon</button></div>
+            <div className="step-label second"><b>04</b><span>Anzahl prüfen</span></div>
             <div className="quantity-row"><div className="quantity-control" aria-label="Anzahl Kennzeichen">{([1, 2, 3] as const).map((number) => <button key={number} type="button" aria-pressed={quantity === number} onClick={() => setQuantity(number)}>{number}</button>)}</div><span>{quantity === 2 ? 'Vorne & hinten' : `${quantity} ${quantity === 1 ? 'Schild' : 'Schilder'}`}</span></div>
-            <div className="price-card"><div><span>{quantity} × {product.label}, {product.size}</span><strong>{formatPrice(plateSubtotal)}</strong></div><div><span>DHL-Versandpaket</span><strong>{formatPrice(SHIPPING_PRICE)}</strong></div><div className="price-total"><span>Gesamt</span><strong>{formatPrice(total)}</strong></div><small>Preise gemäß bereitgestellter Preisinformation. Steuerangaben werden vor Veröffentlichung ergänzt.</small></div>
-            <button className="button button-wide" type="button" onClick={openCheckout}>Jetzt bestellen <ArrowRight size={19} /></button>
+            <div className="price-card"><div><span>{quantity} × {product.label}, {product.size}, {plateColor === 'carbon' ? 'Carbon' : 'Schwarz'}</span><strong>{formatPrice(plateSubtotal)}</strong></div><div><span>DHL-Versandpaket</span><strong>{formatPrice(SHIPPING_PRICE)}</strong></div><div className="price-total"><span>Gesamt</span><strong>{formatPrice(total)}</strong></div><small>Preise gemäß bereitgestellter Preisinformation. Steuerangaben werden vor Veröffentlichung ergänzt.</small></div>
+            <button className="button button-wide" type="button" onClick={openCheckout} disabled={!status}>Jetzt bestellen <ArrowRight size={19} /></button>
             <p className="scope-note"><ShieldCheck size={17} /> Geprägte Schilder – ohne Reservierung, Zulassung oder amtliche Plaketten.</p>
           </div>
         </div>
       </section>
 
       <section className="process-band">
-        <div className="process-sticky"><div><p className="eyebrow light"><span /> Von der Eingabe zum Versand</p><h2>Heute konfiguriert.<br />Klar geprüft.<br /><em>Bereit zum Prägen.</em></h2></div><LicensePlate value={plateValue} type={plateType} className="story-plate" /></div>
+        <div className="process-sticky"><div><p className="eyebrow light"><span /> Von der Eingabe zum Versand</p><h2>Heute konfiguriert.<br />Klar geprüft.<br /><em>Bereit zum Prägen.</em></h2></div><LicensePlate value={plateValue} type={plateType} color={plateColor} className="story-plate" /></div>
         <div className="process-cards"><article><span>01</span><h3>Hochwertige Prägung</h3><p>Deine Kombination steht im Mittelpunkt – groß, klar und vor dem nächsten Schritt kontrollierbar.</p></article><article><span>02</span><h3>Reflektierende Oberfläche</h3><p>Die digitale Vorschau vermittelt Material, Kontur und Lichtwirkung des späteren Schildes.</p></article><article><span>03</span><h3>Sorgfältig versendet</h3><p>Versandkosten werden separat und nachvollziehbar ausgewiesen. Lieferzeiten folgen nach operativer Freigabe.</p></article></div>
       </section>
 
@@ -149,8 +169,8 @@ export default function Home() {
       </section>
 
       <section className="checkout-section" id="checkout">
-        <div className="checkout-intro"><p className="eyebrow light"><span /> One-Page-Checkout</p><h2>Genau dieses<br />Kennzeichen.</h2><p>Deine Vorschau bleibt sichtbar, während du deine Bestellung abschließt.</p><LicensePlate value={plateValue} type={plateType} className="checkout-plate" /><div className="checkout-summary"><span>{product.label} · {product.size} · {quantity} ×</span><strong>{formatPrice(total)}</strong></div></div>
-          <div className="checkout-form checkout-launch" aria-label="Checkout starten"><div className="form-heading"><span>Sicher bezahlen</span><em>Stripe Elements</em></div><div className="payment-placeholder"><CreditCard size={22} /><div><strong>Checkout auf unserer Seite</strong><span>Zahlungsdaten werden direkt und verschlüsselt von Stripe verarbeitet.</span></div></div><ul><li><Check size={17} /> Keine Weiterleitung zu stripe.com</li><li><Check size={17} /> Lieferadresse und Zahlung in einem Schritt</li><li><Check size={17} /> Servergeprüfter Gesamtbetrag</li></ul><button className="button button-wide" type="button" onClick={openCheckout}>Zum sicheren Checkout · {formatPrice(total)}</button><small>Mit dem Klick öffnet sich unsere eigene Checkout-Seite.</small></div>
+        <div className="checkout-intro"><p className="eyebrow light"><span /> One-Page-Checkout</p><h2>Genau dieses<br />Kennzeichen.</h2><p>Deine Vorschau bleibt sichtbar, während du deine Bestellung abschließt.</p><LicensePlate value={plateValue} type={plateType} color={plateColor} className="checkout-plate" /><div className="checkout-summary"><span>{product.label} · {plateColor === 'carbon' ? 'Carbon' : 'Schwarz'} · {quantity} ×</span><strong>{formatPrice(total)}</strong></div></div>
+          <div className="checkout-form checkout-launch" aria-label="Checkout starten"><div className="form-heading"><span>Sicher bezahlen</span><em>Stripe Elements</em></div><div className="payment-placeholder"><CreditCard size={22} /><div><strong>Checkout auf unserer Seite</strong><span>Zahlungsdaten werden direkt und verschlüsselt von Stripe verarbeitet.</span></div></div><ul><li><Check size={17} /> Keine Weiterleitung zu stripe.com</li><li><Check size={17} /> Lieferadresse und Zahlung in einem Schritt</li><li><Check size={17} /> Servergeprüfter Gesamtbetrag</li></ul><button className="button button-wide" type="button" onClick={openCheckout} disabled={!status}>Zum sicheren Checkout · {formatPrice(total)}</button><small>Mit dem Klick öffnet sich unsere eigene Checkout-Seite.</small></div>
       </section>
 
       <section className="faq-section" id="faq">
@@ -159,7 +179,7 @@ export default function Home() {
       </section>
 
       <footer><div className="footer-brand"><span>kennzeichen-lieferung<span>.de</span></span><p>Modern. Sicher. Zuverlässig.</p></div><div className="footer-note">Grundgerüst · Rechtliche Angaben, Kontakt und finale Lieferinformationen werden vor Veröffentlichung ergänzt.</div><a href="#top" aria-label="Nach oben">Nach oben ↑</a></footer>
-      <div className="mobile-bar"><div><span>{plateValue}</span><strong>{formatPrice(total)}</strong></div><button type="button" onClick={openCheckout}>Bestellen <ArrowRight size={17} /></button></div>
+      <div className="mobile-bar"><div><span>{plateValue}{suffix && ` ${suffix}`}</span><strong>{formatPrice(total)}</strong></div><button type="button" onClick={openCheckout} disabled={!status}>Bestellen <ArrowRight size={17} /></button></div>
     </main>
   );
 }

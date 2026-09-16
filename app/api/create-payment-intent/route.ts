@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { PRODUCTS, SHIPPING_PRICE, type PlateType } from '@/config/products';
+import { getUnitPrice, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 
 export const runtime = 'nodejs';
 
@@ -32,7 +32,7 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Ungültige Anfrage.' }, { status: 403 });
   }
 
-  let body: { plate?: string; plateType?: string; quantity?: number; cartId?: string };
+  let body: { plate?: string; plateType?: string; color?: string; quantity?: number; cartId?: string };
   try {
     body = await request.json();
   } catch {
@@ -40,15 +40,16 @@ export async function POST(request: Request) {
   }
 
   const plateType = body.plateType as PlateType;
+  const color = body.color as PlateColor;
   const quantity = Number(body.quantity) as 1 | 2 | 3;
   const plate = body.plate?.toUpperCase().replace(/\s+/g, ' ').trim() ?? '';
 
-  if (!PLATE_TYPES.includes(plateType) || ![1, 2, 3].includes(quantity) || !/^[A-ZÄÖÜ]{1,3} [A-ZÄÖÜ]{1,2} \d{1,4}$/.test(plate)) {
+  if (!PLATE_TYPES.includes(plateType) || !['black', 'carbon'].includes(color) || ![1, 2, 3].includes(quantity) || !isValidPlate(plate, plateType)) {
     return Response.json({ error: 'Bitte prüfe Kennzeichenart, Kombination und Anzahl.' }, { status: 400 });
   }
 
   const product = PRODUCTS[plateType];
-  const unitPrice = Math.round(product.prices[quantity] * 100);
+  const unitPrice = Math.round(getUnitPrice(plateType, color, quantity) * 100);
   const amount = unitPrice * quantity + Math.round(SHIPPING_PRICE * 100);
   const stripe = new Stripe(config.secretKey);
   const idempotencyKey = typeof body.cartId === 'string' && /^[a-zA-Z0-9-]{16,80}$/.test(body.cartId)
@@ -65,6 +66,7 @@ export async function POST(request: Request) {
         kennzeichen: plate,
         kennzeichenart: product.label,
         groesse: product.size,
+        schriftfarbe: color === 'carbon' ? 'Carbon' : 'Schwarz',
         anzahl: String(quantity),
       },
     }, idempotencyKey ? { idempotencyKey } : undefined);

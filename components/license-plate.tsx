@@ -1,14 +1,14 @@
 import type { CSSProperties } from 'react';
-import type { PlateType } from '@/config/products';
+import type { PlateColor, PlateType } from '@/config/products';
 
-type LicensePlateProps = { value: string; type: PlateType; className?: string; style?: CSSProperties };
+type LicensePlateProps = { value: string; type: PlateType; color?: PlateColor; className?: string; style?: CSSProperties };
 const stars = Array.from({ length: 12 });
 
-export function LicensePlate({ value, type, className = '', style }: LicensePlateProps) {
+export function LicensePlate({ value, type, color = 'black', className = '', style }: LicensePlateProps) {
   const [city = 'OL', letters = 'AB', numbers = '123'] = value.trim().split(/\s+/);
   const suffix = type === 'electric' ? 'E' : type === 'historic' ? 'H' : '';
   return (
-    <div className={`license-plate ${type === 'motorcycle' ? 'is-motorcycle' : ''} ${className}`} style={style} aria-label={`Kennzeichenvorschau ${value}${suffix ? ` ${suffix}` : ''}`}>
+    <div className={`license-plate ${type === 'motorcycle' ? 'is-motorcycle' : ''} ${color === 'carbon' ? 'is-carbon' : ''} ${className}`} style={style} aria-label={`Kennzeichenvorschau ${value}${suffix ? ` ${suffix}` : ''}, Schriftfarbe ${color === 'carbon' ? 'Carbon' : 'Schwarz'}`}>
       <div className="plate-blue">
         <span className="eu-stars" aria-hidden="true">
           {stars.map((_, index) => <i key={index} style={{ '--star': index } as CSSProperties}>★</i>)}
