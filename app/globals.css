@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@font-face { font-family: 'Nummernschild'; src: url('/fonts/GL-Nummernschild-Mtl.otf') format('opentype'); font-display: swap; font-style: normal; font-weight: 400; }
+@font-face { font-family: 'Nummernschild Eng'; src: url('/fonts/GL-Nummernschild-Eng.otf') format('opentype'); font-display: swap; font-style: normal; font-weight: 400; }
+
 :root {
   --ink: #061622;
   --muted: #667784;
@@ -63,15 +66,29 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .hero-product { display: flex; flex-direction: column; align-items: center; min-width: 0; }
 .product-label { margin-bottom: 20px; padding: 6px 11px; border-radius: 20px; background: #fff; border: 1px solid var(--line); color: var(--muted); text-transform: uppercase; letter-spacing: .13em; font-size: .64rem; font-weight: 800; }
 
-.license-plate { --plate-height: 190px; isolation: isolate; position: relative; width: min(100%, 760px); aspect-ratio: 5.2 / 1; min-height: 110px; max-height: var(--plate-height); display: flex; align-items: stretch; overflow: hidden; border: clamp(5px, .7vw, 9px) solid #0c2535; border-radius: clamp(14px, 2vw, 25px); background: linear-gradient(105deg, #d7dde0 0%, #fff 13%, #f3f5f5 57%, #fff 80%, #d9dddf 100%); box-shadow: inset 0 0 0 3px #fdfefe, inset 0 0 0 6px #aeb7bd, 0 28px 55px rgb(3 21 35 / 24%), 0 5px 9px rgb(3 21 35 / 18%); transform-style: preserve-3d; transition: transform .22s ease, width .45s cubic-bezier(.2,.8,.2,1), aspect-ratio .45s; }
-.license-plate::after { content: ''; position: absolute; inset: 0; z-index: 1; opacity: .3; background-image: radial-gradient(circle at 20% 35%, #fff 0 1px, transparent 1px), radial-gradient(circle at 70% 60%, #a5b3bb 0 .6px, transparent .8px); background-size: 10px 10px, 13px 13px; pointer-events: none; }
-.plate-blue { width: 14%; min-width: 58px; position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 5%; color: white; background: linear-gradient(120deg, #0085ea, #0051ad); box-shadow: inset -2px 0 7px rgb(0 0 0 / 25%); }
-.plate-blue b { font-size: clamp(1.25rem, 3vw, 3.1rem); line-height: 1; font-weight: 650; }
+.license-plate { --plate-height: 190px; isolation: isolate; position: relative; width: min(100%, 760px); aspect-ratio: 520 / 110; min-height: 110px; max-height: var(--plate-height); padding: clamp(7px, 1.1vw, 12px) clamp(8px, 1.2vw, 13px); display: flex; align-items: stretch; overflow: hidden; border: clamp(2px, .35vw, 4px) solid #b7bec1; border-radius: clamp(9px, 1.1vw, 15px); background: linear-gradient(105deg, #d8dddf 0%, #fff 12%, #f1f4f4 55%, #fff 82%, #d4dadc 100%); box-shadow: inset 0 0 0 2px #fdfefe, inset 0 0 0 4px #98a1a5, 0 28px 55px rgb(3 21 35 / 24%), 0 5px 9px rgb(3 21 35 / 18%); transform-style: preserve-3d; transition: transform .22s ease, width .45s cubic-bezier(.2,.8,.2,1), aspect-ratio .45s; }
+.license-plate::before { content: ''; position: absolute; z-index: 3; inset: clamp(6px, .85vw, 10px); border: clamp(2px, .35vw, 4px) solid #101a20; border-radius: clamp(5px, .7vw, 9px); box-shadow: 0 1px 0 #fff, inset 0 1px 2px rgb(0 0 0 / 22%); pointer-events: none; }
+.license-plate::after { content: ''; position: absolute; inset: 0; z-index: 1; opacity: .38; background-image: radial-gradient(circle at 20% 35%, #fff 0 1px, transparent 1.2px), radial-gradient(circle at 70% 60%, #92a0a6 0 .65px, transparent .9px), linear-gradient(100deg, transparent 36%, rgb(255 255 255 / 70%) 48%, transparent 57%); background-size: 9px 9px, 12px 12px, 100% 100%; pointer-events: none; }
+.plate-blue { width: 9.4%; min-width: 42px; position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 2.6%; color: white; background: linear-gradient(120deg, #087fd9, #064ba2); box-shadow: inset -1px 0 3px rgb(0 0 0 / 25%), inset 1px 0 0 rgb(255 255 255 / 18%); }
+.plate-blue b { font-size: clamp(.9rem, 1.8vw, 1.9rem); line-height: 1; font-weight: 650; }
 .eu-stars { position: absolute; width: 54%; aspect-ratio: 1; top: 12%; left: 23%; }
 .eu-stars i { --angle: calc(var(--star) * 30deg); position: absolute; left: 50%; top: 50%; font-size: clamp(4px, .65vw, 9px); line-height: 1; color: #ffdf00; font-style: normal; transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-145%) rotate(calc(-1 * var(--angle))); }
-.plate-copy { flex: 1; padding: 0 5% 0 3.5%; display: flex; align-items: center; justify-content: center; gap: clamp(12px, 3.2vw, 42px); color: #06141e; font-family: var(--font-geist-mono), Consolas, monospace; font-size: clamp(2.1rem, 5.7vw, 6rem); font-weight: 780; line-height: .9; letter-spacing: .01em; text-transform: uppercase; text-shadow: 0 2px 0 #fff, 0 4px 4px rgb(0 0 0 / 22%); white-space: nowrap; }
+.plate-copy { position: relative; z-index: 2; flex: 1; padding: 0 4.8% 0 2.4%; display: flex; align-items: center; justify-content: center; gap: clamp(7px, 1.55vw, 21px); color: #050b0e; font-family: 'Nummernschild', var(--font-geist-mono), monospace; font-size: clamp(2.1rem, 5.4vw, 5.8rem); font-weight: 400; line-height: .9; letter-spacing: .015em; text-transform: uppercase; text-shadow: 0 2px 0 #fff, 0 4px 3px rgb(0 0 0 / 28%); white-space: nowrap; }
 .license-plate.is-carbon .plate-copy { color: #111820; background-image: repeating-linear-gradient(135deg, #080b0e 0 2px, #303940 2px 4px, #11161b 4px 6px); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 0 #fff) drop-shadow(0 3px 2px rgb(0 0 0 / 36%)); text-shadow: none; }
-.plate-suffix { margin-left: -6%; }
+.plate-suffix { margin-left: -1.5%; }
+.plate-seals { width: clamp(27px, 4.9vw, 53px); height: 72%; flex: 0 0 auto; align-self: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2%; -webkit-text-fill-color: initial; filter: none; font-family: Arial, sans-serif; text-shadow: none; }
+.plate-seals > i { position: relative; flex: 0 0 auto; aspect-ratio: 1; display: grid; place-items: center; overflow: hidden; border-radius: 50%; font-style: normal; line-height: 1; box-shadow: 0 1px 2px rgb(0 0 0 / 40%), inset 0 0 0 1px rgb(255 255 255 / 70%); }
+.hu-seal { width: 73%; background: repeating-conic-gradient(from -6deg, #111 0 2deg, transparent 2deg 27deg), radial-gradient(circle at center, #4cb5e9 0 49%, #d8f2ff 50% 57%, #45aee3 58% 100%); color: #071016; }
+.hu-seal::before { content: ''; position: absolute; top: 0; width: 42%; height: 16%; background: #0b1115; clip-path: polygon(15% 0, 85% 0, 100% 100%, 0 100%); }
+.hu-seal span { position: absolute; top: 9%; font-size: .18em; font-weight: 900; }
+.hu-seal b { font-size: .34em; }
+.hu-seal small { position: absolute; bottom: 12%; font-size: .13em; font-weight: 900; }
+.registration-seal { width: 94%; background: conic-gradient(from 15deg, #64b7dd, #e9f5f9, #88c7df, #f8fafb, #71b1d0, #e8f5fa, #64b7dd); color: #173649; }
+.registration-seal::before { content: ''; position: absolute; inset: 14%; border: 1px solid rgb(17 73 107 / 55%); border-radius: 50%; background: radial-gradient(circle, #f4fbfd 0 25%, #78bbd8 27% 34%, #e9f6fa 36% 100%); }
+.registration-seal span { position: absolute; z-index: 1; top: 11%; font-size: .12em; font-weight: 900; letter-spacing: .03em; }
+.registration-seal b { position: relative; z-index: 1; font-size: .26em; }
+.registration-seal small { position: absolute; z-index: 1; bottom: 10%; font-size: .09em; font-weight: 900; letter-spacing: .02em; }
+.plate-seals.is-compact { width: 38px; height: 64px; font-size: 2.5rem; }
 .season-mark { align-self: stretch; margin: 11px -2% 11px -4%; padding-left: 2%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-family: var(--font-geist-sans); font-size: clamp(.62rem, 1vw, 1rem); text-shadow: none; }
 .season-mark i { width: 20px; border-top: 2px solid #111; }
 .plate-shine { position: absolute; z-index: 4; top: -60%; left: -35%; width: 24%; height: 220%; background: linear-gradient(90deg, transparent, rgb(255 255 255 / 74%), transparent); transform: rotate(15deg); animation: shine 11s 2s ease-in-out infinite; pointer-events: none; }
@@ -124,8 +141,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .plate-editor-eu { position: relative; width: 14%; min-width: 49px; padding: 12px 0 8px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; background: linear-gradient(145deg, #087ee0, #004ba5); color: #fff; }
 .plate-editor-eu span { width: 25px; height: 25px; display: grid; place-items: center; border: 1px dotted #ffdf00; border-radius: 50%; color: #ffdf00; font-size: .73rem; }
 .plate-editor-eu b { font-size: 1.35rem; line-height: 1; }
-.plate-editor-fields { flex: 1; min-width: 0; padding: 11px 12px 10px; display: grid; grid-template-columns: minmax(42px, 1fr) 7px minmax(42px, .9fr) minmax(58px, 1.35fr) auto; align-items: center; gap: 4px; }
-.plate-editor-fields input { width: 100%; min-width: 0; height: 60px; padding: 0 2px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: #071720; font-family: var(--font-geist-mono), Consolas, monospace; font-size: clamp(1.45rem, 2.35vw, 2.35rem); font-weight: 850; letter-spacing: .01em; text-align: center; text-transform: uppercase; outline: none; text-shadow: 0 2px 0 #fff, 0 3px 2px rgb(0 0 0 / 22%); }
+.plate-editor-fields { flex: 1; min-width: 0; padding: 11px 12px 10px; display: grid; grid-template-columns: minmax(42px, 1fr) 38px minmax(42px, .9fr) minmax(58px, 1.35fr) auto; align-items: center; gap: 4px; }
+.plate-editor-fields input { width: 100%; min-width: 0; height: 60px; padding: 0 2px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: #071720; font-family: 'Nummernschild', var(--font-geist-mono), monospace; font-size: clamp(1.45rem, 2.35vw, 2.35rem); font-weight: 400; letter-spacing: .01em; text-align: center; text-transform: uppercase; outline: none; text-shadow: 0 2px 0 #fff, 0 3px 2px rgb(0 0 0 / 22%); }
 .plate-editor-fields input:hover { background: rgb(0 105 217 / 5%); border-radius: 5px; }
 .plate-editor-fields input:focus { border-bottom-color: var(--blue); background: rgb(255 255 255 / 55%); border-radius: 5px 5px 0 0; }
 .plate-editor-fields input::placeholder { color: #95a2aa; opacity: .55; }

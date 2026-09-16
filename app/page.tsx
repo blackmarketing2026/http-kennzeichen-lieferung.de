@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ArrowDown, ArrowRight, CarFront, Check, ChevronDown, CreditCard, LockKeyhole, PackageCheck, ShieldCheck, Sparkles } from 'lucide-react';
-import { LicensePlate } from '@/components/license-plate';
+import { LicensePlate, PlateSeals } from '@/components/license-plate';
 import { formatPrice, getUnitPrice, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
@@ -41,7 +41,7 @@ function PlateEditor({ city, letters, numbers, suffix, color, isSeason, isValid,
         <div className="plate-editor-eu"><span>✦</span><b>D</b></div>
         <div className="plate-editor-fields">
           <input aria-label="Ortskürzel" value={city} placeholder="B" maxLength={3} autoComplete="off" spellCheck={false} onChange={(event) => { onCityChange(event.target.value); if (event.target.value.replace(/[^A-Za-zÄÖÜäöü]/g, '').length >= 3) lettersRef.current?.focus(); }} />
-          <span className="plate-editor-space" aria-hidden="true" />
+          <PlateSeals compact />
           <input ref={lettersRef} aria-label="Erkennungsbuchstaben" value={letters} placeholder="AB" maxLength={2} autoComplete="off" spellCheck={false} onChange={(event) => { onLettersChange(event.target.value); if (event.target.value.replace(/[^A-Za-z]/g, '').length >= 2) numbersRef.current?.focus(); }} />
           <input ref={numbersRef} aria-label="Erkennungsnummer" value={numbers} placeholder="123" maxLength={4} inputMode="numeric" pattern="[0-9]*" autoComplete="off" onChange={(event) => onNumbersChange(event.target.value)} onKeyDown={(event) => { if (event.key === 'Backspace' && !numbers) lettersRef.current?.focus(); }} />
           {suffix && <strong className="plate-editor-suffix">{suffix}</strong>}
