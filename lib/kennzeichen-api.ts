@@ -41,6 +41,14 @@ export type ManufacturerOrderResult =
   | { ok: true; status: number; data: { id: number; deliveries: { id: number; items: { orderItemIndex: number }[] }[]; costNetValue: string }; traceId: string | null }
   | { ok: false; status: number | null; error: string; traceId: string | null; kind: 'http' | 'network' | 'disabled' };
 
+/** Unwraps the OS/network-level code from a fetch TypeError's `cause`, without stringifying arbitrary objects. */
+function describeErrorCause(cause: unknown): string | null {
+  if (!cause || typeof cause !== 'object') return null;
+  if ('code' in cause && typeof cause.code === 'string') return cause.code;
+  if (cause instanceof Error) return cause.message;
+  return null;
+}
+
 function getConfig() {
   const host = process.env.KENNZEICHEN_API_HOST?.trim();
   const clientId = process.env.KENNZEICHEN_API_CLIENT_ID?.trim();
@@ -78,7 +86,7 @@ export async function setManufacturerApiEnabled(enabled: boolean) {
 
 export async function createManufacturerOrder(
   payload: ManufacturerOrderPayload,
-  context: { orderId: string },
+  context: { orderId: string | null },
 ): Promise<ManufacturerOrderResult> {
   const config = getConfig();
   if (!config) {
@@ -136,7 +144,7 @@ export async function createManufacturerOrder(
   } catch (error) {
     clearTimeout(timeout);
     const message = error instanceof Error ? error.message : 'Unbekannter Netzwerkfehler';
-    const cause = error instanceof Error && error.cause ? String((error.cause as { code?: unknown; message?: unknown }).code ?? (error.cause as Error).message ?? error.cause) : null;
+    const cause = error instanceof Error ? describeErrorCause(error.cause) : null;
     await logManufacturerEvent({
       orderId: context.orderId,
       direction: 'error',

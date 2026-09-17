@@ -101,6 +101,17 @@ const SCHEMA_STATEMENTS = [
     value VARCHAR(191) NOT NULL,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
   ) ENGINE=InnoDB`,
+  `CREATE TABLE IF NOT EXISTS kennzeichen_api_test_orders (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    external_id VARCHAR(191) UNIQUE NOT NULL,
+    manufacturer_order_id BIGINT,
+    manufacturer_delivery_ids JSON,
+    product_variant_id INT NOT NULL,
+    plate VARCHAR(16) NOT NULL,
+    manufacturer_cost_net_value VARCHAR(64),
+    executed_by VARCHAR(191) NOT NULL DEFAULT 'admin',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+  ) ENGINE=InnoDB`,
 ];
 
 export function describeDatabaseError(error: unknown): string {

@@ -10,6 +10,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <nav className="admin-nav">
           <Link href="/admin">Bestellungen</Link>
           <Link href="/admin/logs">API-Logs</Link>
+          <Link href="/admin/integrations/kennzeichen">Kennzeichen API-Test</Link>
         </nav>
         <LogoutButton />
       </header>
