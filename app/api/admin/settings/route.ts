@@ -1,11 +1,15 @@
-import { ensureSchema, isDatabaseConfigured } from '@/lib/db';
+import { describeDatabaseError, ensureSchema, isDatabaseConfigured } from '@/lib/db';
 import { isManufacturerApiCredentialsConfigured, isManufacturerApiEnabled, setManufacturerApiEnabled } from '@/lib/kennzeichen-api';
 
 export const runtime = 'nodejs';
 
 export async function GET() {
   if (!isDatabaseConfigured()) return Response.json({ error: 'Keine Datenbank konfiguriert.' }, { status: 503 });
-  await ensureSchema();
+  try {
+    await ensureSchema();
+  } catch (error) {
+    return Response.json({ error: `Datenbankverbindung fehlgeschlagen: ${describeDatabaseError(error)}` }, { status: 502 });
+  }
   return Response.json({
     credentialsConfigured: isManufacturerApiCredentialsConfigured(),
     enabled: await isManufacturerApiEnabled(),

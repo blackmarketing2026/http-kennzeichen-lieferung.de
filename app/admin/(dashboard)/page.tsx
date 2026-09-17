@@ -1,4 +1,4 @@
-import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
+import { describeDatabaseError, ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
 import { isManufacturerApiCredentialsConfigured, isManufacturerApiEnabled } from '@/lib/kennzeichen-api';
 import { ApiToggle } from '@/components/admin/api-toggle';
 import { RetryButton } from '@/components/admin/retry-button';
@@ -37,14 +37,25 @@ type OrderListRow = {
 
 export default async function AdminOrdersPage() {
   if (!isDatabaseConfigured()) {
-    return <div className="admin-empty-state"><h1>Bestellungen</h1><p>Es ist keine Datenbank konfiguriert (DATABASE_URL / POSTGRES_URL fehlt).</p></div>;
+    return <div className="admin-empty-state"><h1>Bestellungen</h1><p>Es ist keine Datenbank konfiguriert (DATABASE_URL bzw. MYSQL_HOST/_USER/_PASSWORD/_DATABASE fehlen).</p></div>;
   }
 
-  await ensureSchema();
-  const [orders, enabled] = await Promise.all([
-    query<OrderListRow>('SELECT * FROM orders ORDER BY created_at DESC LIMIT 200'),
-    isManufacturerApiEnabled(),
-  ]);
+  let orders: { rows: OrderListRow[] };
+  let enabled: boolean;
+  try {
+    await ensureSchema();
+    [orders, enabled] = await Promise.all([
+      query<OrderListRow>('SELECT * FROM orders ORDER BY created_at DESC LIMIT 200'),
+      isManufacturerApiEnabled(),
+    ]);
+  } catch (error) {
+    return (
+      <div className="admin-empty-state">
+        <h1>Bestellungen</h1>
+        <p>Datenbankverbindung fehlgeschlagen: <code>{describeDatabaseError(error)}</code></p>
+      </div>
+    );
+  }
   const credentialsConfigured = isManufacturerApiCredentialsConfigured();
 
   return (

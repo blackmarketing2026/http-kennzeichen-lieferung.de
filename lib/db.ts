@@ -25,7 +25,7 @@ function getPool() {
   if (!config) {
     throw new Error('Keine Datenbank konfiguriert (DATABASE_URL bzw. MYSQL_HOST/_USER/_PASSWORD/_DATABASE fehlen).');
   }
-  pool = mysql.createPool({ ...config, waitForConnections: true, connectionLimit: 5 });
+  pool = mysql.createPool({ ...config, waitForConnections: true, connectionLimit: 5, connectTimeout: 8000 });
   return pool;
 }
 
@@ -102,6 +102,13 @@ const SCHEMA_STATEMENTS = [
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
   ) ENGINE=InnoDB`,
 ];
+
+export function describeDatabaseError(error: unknown): string {
+  if (error && typeof error === 'object' && 'code' in error) {
+    return String((error as { code: unknown }).code);
+  }
+  return error instanceof Error ? error.constructor.name : 'unknown';
+}
 
 export async function ensureSchema() {
   schemaReady ??= (async () => {

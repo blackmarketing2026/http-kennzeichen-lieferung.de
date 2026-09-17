@@ -1,4 +1,4 @@
-import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
+import { describeDatabaseError, ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,8 +19,18 @@ export default async function AdminLogsPage() {
     return <div className="admin-empty-state"><h1>API-Logs</h1><p>Es ist keine Datenbank konfiguriert.</p></div>;
   }
 
-  await ensureSchema();
-  const logs = await query<LogRow>('SELECT * FROM manufacturer_api_logs ORDER BY created_at DESC LIMIT 300');
+  let logs: { rows: LogRow[] };
+  try {
+    await ensureSchema();
+    logs = await query<LogRow>('SELECT * FROM manufacturer_api_logs ORDER BY created_at DESC LIMIT 300');
+  } catch (error) {
+    return (
+      <div className="admin-empty-state">
+        <h1>API-Logs</h1>
+        <p>Datenbankverbindung fehlgeschlagen: <code>{describeDatabaseError(error)}</code></p>
+      </div>
+    );
+  }
 
   return (
     <div className="admin-logs-page">
