@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { ensureSchema, isDatabaseConfigured } from '@/lib/db';
 import { CUSTOMER_SESSION_COOKIE, createCustomerSessionToken, isCustomerAuthConfigured } from '@/lib/customer-auth';
-import { consumeLoginToken } from '@/lib/customers';
+import { claimGuestOrdersByEmail, consumeLoginToken } from '@/lib/customers';
 
 export const runtime = 'nodejs';
 
@@ -18,6 +18,7 @@ export async function GET(request: Request) {
   if (!customerId) {
     return NextResponse.redirect(new URL('/konto/login?error=1', url.origin));
   }
+  await claimGuestOrdersByEmail(customerId);
 
   const sessionToken = createCustomerSessionToken(customerId);
   const response = NextResponse.redirect(new URL('/konto', url.origin));

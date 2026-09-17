@@ -52,6 +52,16 @@ export async function consumeLoginToken(rawToken: string): Promise<string | null
   return rows.rows[0]?.customer_id ?? null;
 }
 
+/** Retroactively attaches guest orders placed with this customer's email address (before they
+ * ever logged in, or logged in from a different device) to their account. Safe to call on every
+ * login: only ever touches orders that aren't linked to any account yet. */
+export async function claimGuestOrdersByEmail(customerId: string): Promise<void> {
+  const rows = await query<{ email: string }>('SELECT email FROM customers WHERE id = ?', [customerId]);
+  const email = rows.rows[0]?.email;
+  if (!email) return;
+  await query('UPDATE orders SET customer_id = ?, updated_at = NOW() WHERE customer_id IS NULL AND customer_email = ?', [customerId, email]);
+}
+
 export type CustomerOrderRow = {
   id: string;
   status: string;
