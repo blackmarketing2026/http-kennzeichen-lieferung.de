@@ -44,6 +44,18 @@ export async function query<T extends Record<string, unknown> = Record<string, u
   return { rows: [], affectedRows: header.affectedRows, insertId: header.insertId };
 }
 
+/** Runs `fn` against a single dedicated connection (not a fresh one per query), needed for
+ * connection-scoped state like LAST_INSERT_ID() across consecutive statements. */
+export async function withConnection<T>(fn: (conn: mysql.PoolConnection) => Promise<T>): Promise<T> {
+  const client = getPool();
+  const conn = await client.getConnection();
+  try {
+    return await fn(conn);
+  } finally {
+    conn.release();
+  }
+}
+
 let schemaReady: Promise<void> | null = null;
 
 const SCHEMA_STATEMENTS = [
@@ -112,7 +124,51 @@ const SCHEMA_STATEMENTS = [
     executed_by VARCHAR(191) NOT NULL DEFAULT 'admin',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
   ) ENGINE=InnoDB`,
+  `CREATE TABLE IF NOT EXISTS customers (
+    id CHAR(36) PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+  ) ENGINE=InnoDB`,
+  `CREATE TABLE IF NOT EXISTS customer_login_tokens (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    customer_id CHAR(36) NOT NULL,
+    token_hash CHAR(64) NOT NULL,
+    expires_at DATETIME NOT NULL,
+    used_at DATETIME NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_login_tokens_customer FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE
+  ) ENGINE=InnoDB`,
+  `CREATE TABLE IF NOT EXISTS invoice_counters (
+    year INT PRIMARY KEY,
+    counter INT NOT NULL DEFAULT 0
+  ) ENGINE=InnoDB`,
+  `CREATE TABLE IF NOT EXISTS invoices (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    order_id CHAR(36) NOT NULL UNIQUE,
+    invoice_number VARCHAR(64) NOT NULL UNIQUE,
+    issued_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_invoices_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+  ) ENGINE=InnoDB`,
 ];
+
+/** Additive changes to tables that already shipped without these columns. Each statement is
+ * applied independently and "already exists" failures (1060/1061/1826/1005) are swallowed so
+ * this stays idempotent across repeated deploys and across MySQL/MariaDB error codes. */
+const SCHEMA_MIGRATIONS = [
+  `ALTER TABLE orders ADD COLUMN customer_id CHAR(36) NULL`,
+  `ALTER TABLE orders ADD INDEX idx_orders_customer (customer_id)`,
+  `ALTER TABLE orders ADD CONSTRAINT fk_orders_customer FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE SET NULL`,
+  `ALTER TABLE orders ADD COLUMN confirmation_sent_at DATETIME NULL`,
+  `ALTER TABLE orders ADD COLUMN invoice_sent_at DATETIME NULL`,
+  `ALTER TABLE orders ADD COLUMN shipping_email_sent_at DATETIME NULL`,
+];
+
+const IGNORABLE_MIGRATION_ERROR_CODES = new Set([
+  'ER_DUP_FIELDNAME', // column already exists
+  'ER_DUP_KEYNAME', // index already exists
+  'ER_FK_DUP_NAME', // foreign key already exists
+  'ER_CANT_CREATE_TABLE', // some MariaDB versions report FK re-creation this way
+]);
 
 export function describeDatabaseError(error: unknown): string {
   if (error && typeof error === 'object' && 'code' in error) {
@@ -125,6 +181,14 @@ export async function ensureSchema() {
   schemaReady ??= (async () => {
     for (const statement of SCHEMA_STATEMENTS) {
       await query(statement);
+    }
+    for (const statement of SCHEMA_MIGRATIONS) {
+      try {
+        await query(statement);
+      } catch (error) {
+        const code = error && typeof error === 'object' && 'code' in error ? String((error as { code: unknown }).code) : '';
+        if (!IGNORABLE_MIGRATION_ERROR_CODES.has(code)) throw error;
+      }
     }
   })();
   return schemaReady;

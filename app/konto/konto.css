@@ -1,0 +1,32 @@
+.konto-shell { min-height: 100svh; background: #f4f7fa; color: #061622; font-family: Arial, sans-serif; }
+.konto-header { display: flex; align-items: center; gap: 24px; padding: 16px 32px; background: linear-gradient(135deg, #0069d9, #004da8); color: #fff; }
+.konto-brand { font-weight: 700; flex: 1; }
+.konto-logout-button { display: flex; align-items: center; gap: 6px; background: transparent; border: 1px solid rgba(255,255,255,.4); color: #eaf2fb; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+.konto-logout-button svg { width: 15px; height: 15px; }
+.konto-main { padding: 32px; max-width: 960px; margin: 0 auto; }
+.konto-orders-page h1 { margin: 0 0 20px; }
+
+.konto-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(6,22,34,.08); }
+.konto-table th, .konto-table td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #eef2f5; font-size: 13px; vertical-align: top; }
+.konto-table th { background: #f0f4f8; font-weight: 600; }
+.konto-empty-state { color: #6b7d89; padding: 24px; background: #fff; border-radius: 10px; }
+.konto-status { display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; background: #eef2f5; }
+.konto-status-submitted_to_manufacturer, .konto-status-shipped { background: #d5f3df; color: #12693a; }
+.konto-status-manufacturer_submission_failed, .konto-status-cancelled_by_manufacturer { background: #f3d5d5; color: #8a1f1f; }
+.konto-status-manufacturer_submission_uncertain, .konto-status-returned { background: #fbe8c6; color: #8a5a12; }
+.konto-invoice-link { color: #0069d9; font-weight: 600; text-decoration: none; }
+.konto-invoice-link:hover { text-decoration: underline; }
+.konto-muted { color: #8a99a3; font-size: 12px; }
+
+.konto-login-page { min-height: 100svh; display: flex; align-items: center; justify-content: center; background: #061622; }
+.konto-login-form { background: #fff; padding: 40px; border-radius: 14px; width: 360px; display: flex; flex-direction: column; gap: 16px; }
+.konto-login-heading { display: flex; align-items: center; gap: 10px; }
+.konto-login-heading h1 { font-size: 18px; margin: 0; }
+.konto-login-form p { margin: 0; font-size: 13px; color: #5a6c78; }
+.konto-login-form label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #334752; }
+.konto-login-form input { padding: 10px 12px; border: 1px solid #d7e1e8; border-radius: 6px; font-size: 14px; }
+.konto-login-form button { background: #0069d9; color: #fff; border: none; border-radius: 6px; padding: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.konto-login-error { color: #c0392b; font-size: 13px; margin: 0; }
+.konto-login-success { color: #12693a; font-size: 13px; margin: 0; }
+.konto-spin { animation: konto-spin 0.8s linear infinite; }
+@keyframes konto-spin { to { transform: rotate(360deg); } }

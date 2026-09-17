@@ -1,6 +1,7 @@
 import { createHmac, timingSafeEqual } from 'crypto';
 import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
 import { logEvent } from '@/lib/logger';
+import { sendShippingEmail, type OrderEmailOrder } from '@/lib/order-emails';
 
 export const runtime = 'nodejs';
 
@@ -80,6 +81,15 @@ export async function POST(request: Request) {
          WHERE (manufacturer_order_id = ? OR cart_id = ?) AND status <> 'shipped'`,
         [trackingCode, manufacturerOrderId, payload.externalId ?? null],
       );
+
+      if (trackingCode) {
+        const matched = await query<{ id: string }>(
+          `SELECT id FROM orders WHERE manufacturer_order_id = ? OR cart_id = ?`,
+          [manufacturerOrderId, payload.externalId ?? null],
+        );
+        const orderId = matched.rows[0]?.id;
+        if (orderId) await sendShippingNotification(orderId, trackingCode, new URL(request.url).origin);
+      }
     } else if (eventType === 'DELIVERY_RETURN' && deliveryId) {
       await query(
         `UPDATE orders SET status = 'returned', returned_delivery_id = ?, updated_at = NOW()
@@ -100,4 +110,14 @@ export async function POST(request: Request) {
   }
 
   return Response.json({ received: true }, { status: 202 });
+}
+
+/** Gated by shipping_email_sent_at so a re-delivered shipment webhook never re-sends the mail. */
+async function sendShippingNotification(orderId: string, trackingCode: string, origin: string) {
+  const claim = await query(`UPDATE orders SET shipping_email_sent_at = NOW() WHERE id = ? AND shipping_email_sent_at IS NULL`, [orderId]);
+  if (claim.affectedRows === 0) return;
+
+  const rows = await query<OrderEmailOrder>('SELECT * FROM orders WHERE id = ?', [orderId]);
+  const order = rows.rows[0];
+  if (order) await sendShippingEmail(order, trackingCode, origin);
 }

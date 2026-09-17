@@ -91,6 +91,7 @@ function PaymentForm({ selection }: { selection: CheckoutSelection }) {
   return (
     <form className="real-payment-form" onSubmit={handleSubmit}>
       <div className="secure-checkout-heading"><div><span>Sicherer Checkout</span><strong>Zahlungs- und Lieferdaten</strong></div><LockKeyhole /></div>
+      <p className="checkout-account-hint">Du bestellst als Gast – kein Konto nötig. Schon Kunde? <Link href="/konto/login">Melde dich an</Link>, um Bestellungen und Rechnungen später einzusehen.</p>
       <label className="checkout-email">E-Mail-Adresse<input type="email" value={email} onChange={(event) => setEmail(event.target.value)} autoComplete="email" required /></label>
       <div className="stripe-element-group"><span>Lieferadresse</span><AddressElement options={{ mode: 'shipping', allowedCountries: ['DE'], fields: { phone: 'auto' }, defaultValues: { address: { country: 'DE' } } }} /></div>
       <div className="stripe-element-group"><span>Zahlungsart</span><PaymentElement options={{ layout: 'tabs' }} /></div>

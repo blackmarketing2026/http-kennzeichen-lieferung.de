@@ -1,7 +1,9 @@
 import { randomUUID } from 'crypto';
+import { cookies } from 'next/headers';
 import Stripe from 'stripe';
 import { getUnitPrice, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
+import { CUSTOMER_SESSION_COOKIE, verifyCustomerSessionToken } from '@/lib/customer-auth';
 
 export const runtime = 'nodejs';
 
@@ -84,20 +86,23 @@ export async function POST(request: Request) {
 
     if (isDatabaseConfigured()) {
       await ensureSchema();
+      const customerToken = (await cookies()).get(CUSTOMER_SESSION_COOKIE)?.value;
+      const customerId = verifyCustomerSessionToken(customerToken);
+
       const existing = await query<{ id: string; status: string }>('SELECT id, status FROM orders WHERE cart_id = ?', [cartId]);
       const existingOrder = existing.rows[0];
       if (!existingOrder) {
         await query(
-          `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, unit_price_cents, shipping_cents, total_cents, stripe_payment_intent_id)
-           VALUES (?, ?, 'payment_pending', ?, ?, ?, ?, ?, ?, ?, ?)`,
-          [randomUUID(), cartId, plate, plateType, color, quantity, unitPrice, shippingCents, amount, paymentIntent.id],
+          `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, unit_price_cents, shipping_cents, total_cents, stripe_payment_intent_id, customer_id)
+           VALUES (?, ?, 'payment_pending', ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [randomUUID(), cartId, plate, plateType, color, quantity, unitPrice, shippingCents, amount, paymentIntent.id, customerId],
         );
       } else if (existingOrder.status === 'payment_pending') {
         await query(
           `UPDATE orders SET plate = ?, plate_type = ?, plate_color = ?, quantity = ?, unit_price_cents = ?,
-             shipping_cents = ?, total_cents = ?, stripe_payment_intent_id = ?, updated_at = NOW()
+             shipping_cents = ?, total_cents = ?, stripe_payment_intent_id = ?, customer_id = COALESCE(?, customer_id), updated_at = NOW()
            WHERE id = ?`,
-          [plate, plateType, color, quantity, unitPrice, shippingCents, amount, paymentIntent.id, existingOrder.id],
+          [plate, plateType, color, quantity, unitPrice, shippingCents, amount, paymentIntent.id, customerId, existingOrder.id],
         );
       }
     }
