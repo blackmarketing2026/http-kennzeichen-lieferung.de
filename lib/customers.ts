@@ -59,7 +59,13 @@ export async function claimGuestOrdersByEmail(customerId: string): Promise<void>
   const rows = await query<{ email: string }>('SELECT email FROM customers WHERE id = ?', [customerId]);
   const email = rows.rows[0]?.email;
   if (!email) return;
-  await query('UPDATE orders SET customer_id = ?, updated_at = NOW() WHERE customer_id IS NULL AND customer_email = ?', [customerId, email]);
+  // customers.email is normalized (trim+lowercase) at signup, but orders.customer_email comes
+  // straight from what the customer typed into the Stripe checkout form — normalize both sides
+  // so stray case or whitespace differences don't silently break the match.
+  await query(
+    'UPDATE orders SET customer_id = ?, updated_at = NOW() WHERE customer_id IS NULL AND LOWER(TRIM(customer_email)) = ?',
+    [customerId, email],
+  );
 }
 
 export type CustomerOrderRow = {
