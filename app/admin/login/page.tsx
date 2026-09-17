@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { LockKeyhole, LoaderCircle } from 'lucide-react';
+import '@/app/admin/admin.css';
 
 export default function AdminLoginPage() {
   const router = useRouter();

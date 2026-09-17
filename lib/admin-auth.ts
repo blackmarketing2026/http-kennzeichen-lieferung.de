@@ -13,6 +13,10 @@ function sign(value: string) {
   return createHmac('sha256', getSecret()).update(value).digest('hex');
 }
 
+export function isAdminAuthConfigured() {
+  return Boolean(process.env.ADMIN_PASSWORD?.trim()) && Boolean(process.env.ADMIN_SESSION_SECRET?.trim());
+}
+
 export function checkAdminPassword(password: string) {
   const expected = process.env.ADMIN_PASSWORD?.trim();
   if (!expected) return false;

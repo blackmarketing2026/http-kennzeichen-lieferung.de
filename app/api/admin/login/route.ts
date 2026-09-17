@@ -1,8 +1,12 @@
-import { ADMIN_SESSION_COOKIE, checkAdminPassword, createAdminSessionToken } from '@/lib/admin-auth';
+import { ADMIN_SESSION_COOKIE, checkAdminPassword, createAdminSessionToken, isAdminAuthConfigured } from '@/lib/admin-auth';
 
 export const runtime = 'nodejs';
 
 export async function POST(request: Request) {
+  if (!isAdminAuthConfigured()) {
+    return Response.json({ error: 'Admin-Zugang ist serverseitig nicht konfiguriert (ADMIN_PASSWORD / ADMIN_SESSION_SECRET fehlen).' }, { status: 503 });
+  }
+
   let body: { password?: string };
   try {
     body = await request.json();
