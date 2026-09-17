@@ -34,7 +34,7 @@ export async function logManufacturerEvent(entry: {
   try {
     await query(
       `INSERT INTO manufacturer_api_logs (order_id, direction, endpoint, http_status, trace_id, message, detail)
-       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [
         entry.orderId ?? null,
         entry.direction,

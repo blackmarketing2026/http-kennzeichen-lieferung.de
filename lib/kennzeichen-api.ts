@@ -60,7 +60,7 @@ export function isManufacturerApiCredentialsConfigured() {
 export async function isManufacturerApiEnabled() {
   if (!isManufacturerApiCredentialsConfigured()) return false;
   try {
-    const result = await query<{ value: string }>('SELECT value FROM admin_settings WHERE key = $1', ['kennzeichen_api_enabled']);
+    const result = await query<{ value: string }>('SELECT value FROM admin_settings WHERE setting_key = ?', ['kennzeichen_api_enabled']);
     return result.rows[0]?.value === 'true';
   } catch {
     return false;
@@ -68,10 +68,11 @@ export async function isManufacturerApiEnabled() {
 }
 
 export async function setManufacturerApiEnabled(enabled: boolean) {
+  const value = enabled ? 'true' : 'false';
   await query(
-    `INSERT INTO admin_settings (key, value, updated_at) VALUES ('kennzeichen_api_enabled', $1, now())
-     ON CONFLICT (key) DO UPDATE SET value = $1, updated_at = now()`,
-    [enabled ? 'true' : 'false'],
+    `INSERT INTO admin_settings (setting_key, value, updated_at) VALUES ('kennzeichen_api_enabled', ?, NOW())
+     ON DUPLICATE KEY UPDATE value = ?, updated_at = NOW()`,
+    [value, value],
   );
 }
 

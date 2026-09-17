@@ -69,15 +69,18 @@ export function parsePlate(plate: string) {
 export type SubmitResult = { status: 'submitted' | 'failed' | 'uncertain' | 'skipped'; message: string };
 
 export async function submitOrderToManufacturer(orderId: string): Promise<SubmitResult> {
-  const lockResult = await query<OrderRow>(
-    `UPDATE orders SET status = 'submitting_to_manufacturer', updated_at = now()
-     WHERE id = $1 AND status IN ('paid', 'manufacturer_submission_failed', 'manufacturer_submission_uncertain')
-     RETURNING *`,
+  const lockResult = await query(
+    `UPDATE orders SET status = 'submitting_to_manufacturer', updated_at = NOW()
+     WHERE id = ? AND status IN ('paid', 'manufacturer_submission_failed', 'manufacturer_submission_uncertain')`,
     [orderId],
   );
-  const order = lockResult.rows[0];
-  if (!order) {
+  if (lockResult.affectedRows === 0) {
     return { status: 'skipped', message: 'Bestellung bereits verarbeitet oder nicht im richtigen Status.' };
+  }
+  const orderRows = await query<OrderRow>(`SELECT * FROM orders WHERE id = ?`, [orderId]);
+  const order = orderRows.rows[0];
+  if (!order) {
+    return { status: 'skipped', message: 'Bestellung nicht gefunden.' };
   }
 
   const deliveryAddress = toManufacturerAddress(order.delivery_address);
@@ -86,18 +89,18 @@ export async function submitOrderToManufacturer(orderId: string): Promise<Submit
   const variant = getManufacturerVariant(order.plate_type, order.plate_color);
 
   if (!deliveryAddress || !invoiceAddress || !plateComponents || !order.customer_email) {
-    await query(`UPDATE orders SET status = 'manufacturer_submission_failed', last_error = $2, updated_at = now() WHERE id = $1`, [
-      orderId,
+    await query(`UPDATE orders SET status = 'manufacturer_submission_failed', last_error = ?, updated_at = NOW() WHERE id = ?`, [
       'Unvollständige Liefer- oder Kennzeichendaten.',
+      orderId,
     ]);
     await logManufacturerEvent({ orderId, direction: 'error', endpoint: '/orders', message: 'Unvollständige Daten, Übertragung abgebrochen' });
     return { status: 'failed', message: 'Unvollständige Liefer- oder Kennzeichendaten.' };
   }
 
   if (order.plate.replace(/\s+/g, '').length > variant.maxLength) {
-    await query(`UPDATE orders SET status = 'manufacturer_submission_failed', last_error = $2, updated_at = now() WHERE id = $1`, [
-      orderId,
+    await query(`UPDATE orders SET status = 'manufacturer_submission_failed', last_error = ?, updated_at = NOW() WHERE id = ?`, [
       'Kennzeichen überschreitet die maximale Zeichenlänge der Produktvariante.',
+      orderId,
     ]);
     return { status: 'failed', message: 'Kennzeichen überschreitet die maximale Zeichenlänge der Produktvariante.' };
   }
@@ -127,21 +130,21 @@ export async function submitOrderToManufacturer(orderId: string): Promise<Submit
 
   if (result.ok) {
     await query(
-      `UPDATE orders SET status = 'submitted_to_manufacturer', manufacturer_order_id = $2,
-         manufacturer_delivery_ids = $3, manufacturer_cost_net_value = $4, manufacturer_submitted_at = now(),
-         last_error = NULL, last_trace_id = $5, updated_at = now()
-       WHERE id = $1`,
-      [orderId, result.data.id, JSON.stringify(result.data.deliveries.map((d) => d.id)), result.data.costNetValue, result.traceId],
+      `UPDATE orders SET status = 'submitted_to_manufacturer', manufacturer_order_id = ?,
+         manufacturer_delivery_ids = ?, manufacturer_cost_net_value = ?, manufacturer_submitted_at = NOW(),
+         last_error = NULL, last_trace_id = ?, updated_at = NOW()
+       WHERE id = ?`,
+      [result.data.id, JSON.stringify(result.data.deliveries.map((d) => d.id)), result.data.costNetValue, result.traceId, orderId],
     );
     return { status: 'submitted', message: `Hersteller-Bestellung ${result.data.id} erstellt.` };
   }
 
   const status = result.kind === 'network' || result.kind === 'disabled' ? 'manufacturer_submission_uncertain' : 'manufacturer_submission_failed';
-  await query(`UPDATE orders SET status = $2, last_error = $3, last_trace_id = $4, updated_at = now() WHERE id = $1`, [
-    orderId,
+  await query(`UPDATE orders SET status = ?, last_error = ?, last_trace_id = ?, updated_at = NOW() WHERE id = ?`, [
     status,
     result.error,
     result.traceId,
+    orderId,
   ]);
   return { status: status === 'manufacturer_submission_uncertain' ? 'uncertain' : 'failed', message: result.error };
 }

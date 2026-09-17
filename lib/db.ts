@@ -1,100 +1,113 @@
-import { Pool } from 'pg';
+import mysql from 'mysql2/promise';
 
-let pool: Pool | null = null;
+let pool: mysql.Pool | null = null;
 
-function getConnectionString() {
-  return (process.env.DATABASE_URL ?? process.env.POSTGRES_URL ?? '').trim();
+function getConnectionConfig() {
+  const url = process.env.DATABASE_URL?.trim();
+  if (url) return { uri: url };
+
+  const host = process.env.MYSQL_HOST?.trim();
+  const user = process.env.MYSQL_USER?.trim();
+  const password = process.env.MYSQL_PASSWORD?.trim();
+  const database = process.env.MYSQL_DATABASE?.trim();
+  const port = Number(process.env.MYSQL_PORT ?? '3306');
+  if (!host || !user || !password || !database) return null;
+  return { host, user, password, database, port };
 }
 
 export function isDatabaseConfigured() {
-  return Boolean(getConnectionString());
+  return Boolean(getConnectionConfig());
 }
 
 function getPool() {
   if (pool) return pool;
-  const connectionString = getConnectionString();
-  if (!connectionString) {
-    throw new Error('Keine Datenbank konfiguriert (DATABASE_URL bzw. POSTGRES_URL fehlt).');
+  const config = getConnectionConfig();
+  if (!config) {
+    throw new Error('Keine Datenbank konfiguriert (DATABASE_URL bzw. MYSQL_HOST/_USER/_PASSWORD/_DATABASE fehlen).');
   }
-  pool = new Pool({
-    connectionString,
-    ssl: connectionString.includes('sslmode=disable') ? false : { rejectUnauthorized: false },
-  });
+  pool = mysql.createPool({ ...config, waitForConnections: true, connectionLimit: 5 });
   return pool;
 }
 
+export type QueryResult<T> = { rows: T[]; affectedRows: number; insertId: number };
+
 export async function query<T extends Record<string, unknown> = Record<string, unknown>>(
-  text: string,
+  sql: string,
   params: unknown[] = [],
-) {
+): Promise<QueryResult<T>> {
   const client = getPool();
-  return client.query<T>(text, params);
+  const [result] = await client.query(sql, params);
+  if (Array.isArray(result)) {
+    return { rows: result as T[], affectedRows: result.length, insertId: 0 };
+  }
+  const header = result as mysql.ResultSetHeader;
+  return { rows: [], affectedRows: header.affectedRows, insertId: header.insertId };
 }
 
 let schemaReady: Promise<void> | null = null;
 
-const SCHEMA_SQL = `
-CREATE TABLE IF NOT EXISTS orders (
-  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  cart_id text UNIQUE NOT NULL,
-  status text NOT NULL DEFAULT 'draft',
-  plate text NOT NULL,
-  plate_type text NOT NULL,
-  plate_color text NOT NULL,
-  quantity integer NOT NULL,
-  unit_price_cents integer NOT NULL,
-  shipping_cents integer NOT NULL,
-  total_cents integer NOT NULL,
-  customer_email text,
-  delivery_address jsonb,
-  invoice_address jsonb,
-  stripe_payment_intent_id text UNIQUE,
-  manufacturer_external_id text UNIQUE,
-  manufacturer_order_id bigint,
-  manufacturer_delivery_ids jsonb,
-  manufacturer_cost_net_value text,
-  manufacturer_submitted_at timestamptz,
-  tracking_code text,
-  shipped_at timestamptz,
-  returned_delivery_id bigint,
-  last_error text,
-  last_trace_id text,
-  created_at timestamptz NOT NULL DEFAULT now(),
-  updated_at timestamptz NOT NULL DEFAULT now()
-);
-
-CREATE TABLE IF NOT EXISTS manufacturer_api_logs (
-  id bigserial PRIMARY KEY,
-  order_id uuid REFERENCES orders(id) ON DELETE SET NULL,
-  direction text NOT NULL,
-  endpoint text NOT NULL,
-  http_status integer,
-  trace_id text,
-  message text,
-  detail jsonb,
-  created_at timestamptz NOT NULL DEFAULT now()
-);
-
-CREATE TABLE IF NOT EXISTS manufacturer_webhook_events (
-  id bigserial PRIMARY KEY,
-  dedupe_key text UNIQUE NOT NULL,
-  event_type text,
-  signature_valid boolean NOT NULL,
-  raw jsonb,
-  processed_at timestamptz,
-  created_at timestamptz NOT NULL DEFAULT now()
-);
-
-CREATE TABLE IF NOT EXISTS admin_settings (
-  key text PRIMARY KEY,
-  value text NOT NULL,
-  updated_at timestamptz NOT NULL DEFAULT now()
-);
-`;
+const SCHEMA_STATEMENTS = [
+  `CREATE TABLE IF NOT EXISTS orders (
+    id CHAR(36) PRIMARY KEY,
+    cart_id VARCHAR(191) UNIQUE NOT NULL,
+    status VARCHAR(64) NOT NULL DEFAULT 'draft',
+    plate VARCHAR(32) NOT NULL,
+    plate_type VARCHAR(32) NOT NULL,
+    plate_color VARCHAR(32) NOT NULL,
+    quantity INT NOT NULL,
+    unit_price_cents INT NOT NULL,
+    shipping_cents INT NOT NULL,
+    total_cents INT NOT NULL,
+    customer_email VARCHAR(255),
+    delivery_address JSON,
+    invoice_address JSON,
+    stripe_payment_intent_id VARCHAR(191) UNIQUE,
+    manufacturer_external_id VARCHAR(191) UNIQUE,
+    manufacturer_order_id BIGINT,
+    manufacturer_delivery_ids JSON,
+    manufacturer_cost_net_value VARCHAR(64),
+    manufacturer_submitted_at DATETIME NULL,
+    tracking_code VARCHAR(191),
+    shipped_at DATETIME NULL,
+    returned_delivery_id BIGINT,
+    last_error TEXT,
+    last_trace_id VARCHAR(191),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  ) ENGINE=InnoDB`,
+  `CREATE TABLE IF NOT EXISTS manufacturer_api_logs (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    order_id CHAR(36) NULL,
+    direction VARCHAR(32) NOT NULL,
+    endpoint VARCHAR(191) NOT NULL,
+    http_status INT,
+    trace_id VARCHAR(191),
+    message TEXT,
+    detail JSON,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_logs_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE SET NULL
+  ) ENGINE=InnoDB`,
+  `CREATE TABLE IF NOT EXISTS manufacturer_webhook_events (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    dedupe_key VARCHAR(191) UNIQUE NOT NULL,
+    event_type VARCHAR(64),
+    signature_valid TINYINT(1) NOT NULL,
+    raw JSON,
+    processed_at DATETIME NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+  ) ENGINE=InnoDB`,
+  `CREATE TABLE IF NOT EXISTS admin_settings (
+    setting_key VARCHAR(191) PRIMARY KEY,
+    value VARCHAR(191) NOT NULL,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  ) ENGINE=InnoDB`,
+];
 
 export async function ensureSchema() {
   schemaReady ??= (async () => {
-    await query(SCHEMA_SQL);
+    for (const statement of SCHEMA_STATEMENTS) {
+      await query(statement);
+    }
   })();
   return schemaReady;
 }

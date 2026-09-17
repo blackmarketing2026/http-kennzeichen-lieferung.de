@@ -74,14 +74,14 @@ export async function POST(request: Request) {
     address: { line1: `${street} ${houseNumber}`, city, postal_code: zipCode, country: 'DE' },
   };
 
-  const inserted = await query<{ id: string }>(
-    `INSERT INTO orders (cart_id, status, plate, plate_type, plate_color, quantity, unit_price_cents, shipping_cents, total_cents, customer_email, delivery_address, invoice_address)
-     VALUES ($1, 'paid', $2, $3, $4, $5, $6, $7, $8, $9, $10::jsonb, $10::jsonb)
-     RETURNING id`,
-    [cartId, plate, plateType, color, quantity, unitPriceCents, shippingCents, totalCents, email, JSON.stringify(address)],
+  const orderId = randomUUID();
+  const addressJson = JSON.stringify(address);
+  await query(
+    `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, unit_price_cents, shipping_cents, total_cents, customer_email, delivery_address, invoice_address)
+     VALUES (?, ?, 'paid', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [orderId, cartId, plate, plateType, color, quantity, unitPriceCents, shippingCents, totalCents, email, addressJson, addressJson],
   );
 
-  const orderId = inserted.rows[0].id;
   const result = await submitOrderToManufacturer(orderId);
 
   return Response.json({ orderId, ...result });

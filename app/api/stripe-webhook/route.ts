@@ -39,20 +39,21 @@ export async function POST(request: Request) {
   if (event.type === 'payment_intent.succeeded') {
     const paymentIntent = event.data.object as Stripe.PaymentIntent;
 
-    const orderResult = await query<{ id: string; status: string }>(
+    const shippingJson = paymentIntent.shipping ? JSON.stringify(paymentIntent.shipping) : null;
+    await query(
       `UPDATE orders SET
          status = CASE WHEN status = 'payment_pending' THEN 'paid' ELSE status END,
-         customer_email = COALESCE($2, customer_email),
-         delivery_address = COALESCE($3::jsonb, delivery_address),
-         invoice_address = COALESCE($3::jsonb, invoice_address),
-         updated_at = now()
-       WHERE stripe_payment_intent_id = $1
-       RETURNING id, status`,
-      [
-        paymentIntent.id,
-        paymentIntent.receipt_email,
-        paymentIntent.shipping ? JSON.stringify(paymentIntent.shipping) : null,
-      ],
+         customer_email = COALESCE(?, customer_email),
+         delivery_address = COALESCE(?, delivery_address),
+         invoice_address = COALESCE(?, invoice_address),
+         updated_at = NOW()
+       WHERE stripe_payment_intent_id = ?`,
+      [paymentIntent.receipt_email, shippingJson, shippingJson, paymentIntent.id],
+    );
+
+    const orderResult = await query<{ id: string; status: string }>(
+      `SELECT id, status FROM orders WHERE stripe_payment_intent_id = ?`,
+      [paymentIntent.id],
     );
 
     const order = orderResult.rows[0];

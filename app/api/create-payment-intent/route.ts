@@ -1,3 +1,4 @@
+import { randomUUID } from 'crypto';
 import Stripe from 'stripe';
 import { getUnitPrice, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
@@ -83,17 +84,22 @@ export async function POST(request: Request) {
 
     if (isDatabaseConfigured()) {
       await ensureSchema();
-      await query(
-        `INSERT INTO orders (cart_id, status, plate, plate_type, plate_color, quantity, unit_price_cents, shipping_cents, total_cents, stripe_payment_intent_id)
-         VALUES ($1, 'payment_pending', $2, $3, $4, $5, $6, $7, $8, $9)
-         ON CONFLICT (cart_id) DO UPDATE SET
-           plate = EXCLUDED.plate, plate_type = EXCLUDED.plate_type, plate_color = EXCLUDED.plate_color,
-           quantity = EXCLUDED.quantity, unit_price_cents = EXCLUDED.unit_price_cents,
-           shipping_cents = EXCLUDED.shipping_cents, total_cents = EXCLUDED.total_cents,
-           stripe_payment_intent_id = EXCLUDED.stripe_payment_intent_id, updated_at = now()
-         WHERE orders.status = 'payment_pending'`,
-        [cartId, plate, plateType, color, quantity, unitPrice, shippingCents, amount, paymentIntent.id],
-      );
+      const existing = await query<{ id: string; status: string }>('SELECT id, status FROM orders WHERE cart_id = ?', [cartId]);
+      const existingOrder = existing.rows[0];
+      if (!existingOrder) {
+        await query(
+          `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, unit_price_cents, shipping_cents, total_cents, stripe_payment_intent_id)
+           VALUES (?, ?, 'payment_pending', ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [randomUUID(), cartId, plate, plateType, color, quantity, unitPrice, shippingCents, amount, paymentIntent.id],
+        );
+      } else if (existingOrder.status === 'payment_pending') {
+        await query(
+          `UPDATE orders SET plate = ?, plate_type = ?, plate_color = ?, quantity = ?, unit_price_cents = ?,
+             shipping_cents = ?, total_cents = ?, stripe_payment_intent_id = ?, updated_at = NOW()
+           WHERE id = ?`,
+          [plate, plateType, color, quantity, unitPrice, shippingCents, amount, paymentIntent.id, existingOrder.id],
+        );
+      }
     }
 
     return Response.json({ clientSecret: paymentIntent.client_secret, publishableKey: config.publishableKey });

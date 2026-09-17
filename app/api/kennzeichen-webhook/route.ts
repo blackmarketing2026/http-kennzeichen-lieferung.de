@@ -56,15 +56,13 @@ export async function POST(request: Request) {
   const eventType = payload.type ?? payload.event ?? 'UNKNOWN';
   const dedupeKey = webhookId ?? createHmac('sha256', webhookSecret).update(rawBody).digest('hex');
 
-  const inserted = await query<{ id: string }>(
-    `INSERT INTO manufacturer_webhook_events (dedupe_key, event_type, signature_valid, raw)
-     VALUES ($1, $2, $3, $4)
-     ON CONFLICT (dedupe_key) DO NOTHING
-     RETURNING id`,
+  const inserted = await query(
+    `INSERT IGNORE INTO manufacturer_webhook_events (dedupe_key, event_type, signature_valid, raw)
+     VALUES (?, ?, ?, ?)`,
     [dedupeKey, eventType, signatureValid, JSON.stringify(payload)],
   );
 
-  if (inserted.rows.length === 0) {
+  if (inserted.affectedRows === 0) {
     // Bereits verarbeitet (mehrfache Zustellung).
     return Response.json({ received: true }, { status: 202 });
   }
@@ -78,25 +76,25 @@ export async function POST(request: Request) {
       // Nur Erreichbarkeit bestätigen.
     } else if (eventType === 'DELIVERY_SHIPMENT' && (manufacturerOrderId || payload.externalId)) {
       await query(
-        `UPDATE orders SET status = 'shipped', tracking_code = COALESCE($3, tracking_code), shipped_at = now(), updated_at = now()
-         WHERE (manufacturer_order_id = $1 OR cart_id = $2) AND status <> 'shipped'`,
-        [manufacturerOrderId, payload.externalId ?? null, trackingCode],
+        `UPDATE orders SET status = 'shipped', tracking_code = COALESCE(?, tracking_code), shipped_at = NOW(), updated_at = NOW()
+         WHERE (manufacturer_order_id = ? OR cart_id = ?) AND status <> 'shipped'`,
+        [trackingCode, manufacturerOrderId, payload.externalId ?? null],
       );
     } else if (eventType === 'DELIVERY_RETURN' && deliveryId) {
       await query(
-        `UPDATE orders SET status = 'returned', returned_delivery_id = $1, updated_at = now()
-         WHERE manufacturer_delivery_ids @> $2::jsonb`,
-        [deliveryId, JSON.stringify([deliveryId])],
+        `UPDATE orders SET status = 'returned', returned_delivery_id = ?, updated_at = NOW()
+         WHERE JSON_CONTAINS(manufacturer_delivery_ids, ?)`,
+        [deliveryId, String(deliveryId)],
       );
     } else if (eventType === 'DELIVERY_CANCELLATION' && (manufacturerOrderId || payload.externalId)) {
       await query(
-        `UPDATE orders SET status = 'cancelled_by_manufacturer', updated_at = now()
-         WHERE manufacturer_order_id = $1 OR cart_id = $2`,
+        `UPDATE orders SET status = 'cancelled_by_manufacturer', updated_at = NOW()
+         WHERE manufacturer_order_id = ? OR cart_id = ?`,
         [manufacturerOrderId, payload.externalId ?? null],
       );
     }
 
-    await query(`UPDATE manufacturer_webhook_events SET processed_at = now() WHERE id = $1`, [inserted.rows[0].id]);
+    await query(`UPDATE manufacturer_webhook_events SET processed_at = NOW() WHERE dedupe_key = ?`, [dedupeKey]);
   } catch (error) {
     logEvent('error', 'Kennzeichen-Webhook: Verarbeitung fehlgeschlagen', { webhookId, error: error instanceof Error ? error.message : 'unbekannt' });
   }
