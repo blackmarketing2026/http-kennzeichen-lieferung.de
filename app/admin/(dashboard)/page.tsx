@@ -2,6 +2,7 @@ import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
 import { isManufacturerApiCredentialsConfigured, isManufacturerApiEnabled } from '@/lib/kennzeichen-api';
 import { ApiToggle } from '@/components/admin/api-toggle';
 import { RetryButton } from '@/components/admin/retry-button';
+import { TestOrderForm } from '@/components/admin/test-order-form';
 
 export const dynamic = 'force-dynamic';
 
@@ -50,6 +51,7 @@ export default async function AdminOrdersPage() {
     <div className="admin-orders-page">
       <h1>Bestellungen</h1>
       <ApiToggle initialEnabled={enabled} credentialsConfigured={credentialsConfigured} />
+      <TestOrderForm />
       <table className="admin-table">
         <thead>
           <tr>

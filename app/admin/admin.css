@@ -17,6 +17,16 @@
 .admin-toggle-off { background: #f3d5d5; color: #8a1f1f; }
 .admin-api-toggle button:disabled { opacity: .6; cursor: not-allowed; }
 
+.admin-test-order { background: #fff; border: 1px solid #dbe6ee; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; max-width: 720px; }
+.admin-test-order summary { cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.admin-test-order summary svg { width: 16px; height: 16px; }
+.admin-test-order-form { margin-top: 16px; display: flex; flex-direction: column; gap: 16px; }
+.admin-form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+.admin-form-grid label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #5a6c78; }
+.admin-form-grid input, .admin-form-grid select { padding: 8px 10px; border: 1px solid #d7e1e8; border-radius: 6px; font-size: 13px; }
+.admin-test-order-form > button { align-self: flex-start; background: #0069d9; color: #fff; border: none; border-radius: 6px; padding: 10px 18px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+.admin-test-order-form > button:disabled { opacity: .6; cursor: not-allowed; }
+.admin-test-order-success { color: #12693a; font-weight: 600; }
 .admin-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 3px rgba(6,22,34,.08); }
 .admin-table th, .admin-table td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #eef2f5; font-size: 13px; vertical-align: top; }
 .admin-table th { background: #f0f4f8; font-weight: 600; }
