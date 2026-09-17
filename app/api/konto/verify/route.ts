@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server';
 import { ensureSchema, isDatabaseConfigured } from '@/lib/db';
 import { CUSTOMER_SESSION_COOKIE, createCustomerSessionToken, isCustomerAuthConfigured } from '@/lib/customer-auth';
 import { consumeLoginToken } from '@/lib/customers';
@@ -9,20 +10,23 @@ export async function GET(request: Request) {
   const token = url.searchParams.get('token');
 
   if (!isCustomerAuthConfigured() || !isDatabaseConfigured() || !token) {
-    return Response.redirect(new URL('/konto/login?error=1', url.origin));
+    return NextResponse.redirect(new URL('/konto/login?error=1', url.origin));
   }
 
   await ensureSchema();
   const customerId = await consumeLoginToken(token);
   if (!customerId) {
-    return Response.redirect(new URL('/konto/login?error=1', url.origin));
+    return NextResponse.redirect(new URL('/konto/login?error=1', url.origin));
   }
 
   const sessionToken = createCustomerSessionToken(customerId);
-  const response = Response.redirect(new URL('/konto', url.origin));
-  response.headers.append(
-    'Set-Cookie',
-    `${CUSTOMER_SESSION_COOKIE}=${sessionToken}; Path=/; HttpOnly; SameSite=Lax; Max-Age=2592000${process.env.NODE_ENV === 'production' ? '; Secure' : ''}`,
-  );
+  const response = NextResponse.redirect(new URL('/konto', url.origin));
+  response.cookies.set(CUSTOMER_SESSION_COOKIE, sessionToken, {
+    path: '/',
+    httpOnly: true,
+    sameSite: 'lax',
+    maxAge: 2592000,
+    secure: process.env.NODE_ENV === 'production',
+  });
   return response;
 }
