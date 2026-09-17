@@ -34,13 +34,17 @@ export async function createLoginToken(customerId: string): Promise<string> {
   return raw;
 }
 
-/** Verifies and consumes a login token; returns the customer id, or null if invalid/expired/used. */
+/** Verifies and consumes a login token; returns the customer id, or null if invalid/expired/used.
+ * Compares against a JS-side timestamp rather than SQL's NOW() — the app server (UTC) and the
+ * MySQL host can run in different timezones, and expires_at was written from JS, so mixing in
+ * the DB server's own clock here made every token look expired the moment it was created. */
 export async function consumeLoginToken(rawToken: string): Promise<string | null> {
   const hash = hashLoginToken(rawToken);
+  const now = new Date();
   const result = await query(
-    `UPDATE customer_login_tokens SET used_at = NOW()
-     WHERE token_hash = ? AND used_at IS NULL AND expires_at > NOW()`,
-    [hash],
+    `UPDATE customer_login_tokens SET used_at = ?
+     WHERE token_hash = ? AND used_at IS NULL AND expires_at > ?`,
+    [now, hash, now],
   );
   if (result.affectedRows === 0) return null;
 
