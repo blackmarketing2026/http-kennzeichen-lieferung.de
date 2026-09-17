@@ -35,6 +35,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .site-header nav a:hover::after { right: 0; }
 .header-cta { justify-self: end; }
 .header-actions { justify-self: end; display: flex; align-items: center; gap: 7px; }
+.account-link { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgb(6 22 34 / 13%); border-radius: 6px; background: rgb(255 255 255 / 72%); color: var(--ink); transition: .2s ease; }
+.account-link:hover { border-color: var(--blue); color: var(--blue); background: #fff; }
+.account-link svg { width: 20px; height: 20px; }
 .car-cart { position: relative; width: 52px; height: 44px; display: grid; place-items: center; border: 1px solid rgb(6 22 34 / 13%); border-radius: 6px; background: rgb(255 255 255 / 72%); color: var(--ink); cursor: pointer; transition: .2s ease; }
 .car-cart:hover { border-color: var(--blue); color: var(--blue); background: #fff; transform: translateY(-1px); box-shadow: 0 8px 24px rgb(6 22 34 / 9%); }
 .car-cart svg { width: 25px; height: 25px; }
@@ -376,7 +379,9 @@ footer { padding: 65px clamp(24px, 6vw, 90px); display: grid; grid-template-colu
 .footer-brand > span span { color: #1685ed; }
 .footer-brand p { margin: 8px 0 0; color: #758996; font-size: .75rem; text-transform: uppercase; letter-spacing: .19em; }
 .footer-note { color: #778b97; font-size: .72rem; line-height: 1.65; }
-footer > a { color: #b7c5ce; font-size: .8rem; }
+.footer-links { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.footer-links a { color: #b7c5ce; font-size: .8rem; text-decoration: none; }
+.footer-links a:hover { color: #fff; }
 .mobile-bar { display: none; }
 
 @media (max-width: 1100px) {
@@ -406,6 +411,7 @@ footer > a { color: #b7c5ce; font-size: .8rem; }
   .brand { width: 200px; height: 52px; }
   .brand img { width: 205px; transform: translateY(-14px); }
   .header-actions { gap: 2px; }
+  .account-link { display: none; }
   .car-cart { width: 46px; height: 42px; background: transparent; border-color: transparent; }
   .menu-button { display: block; }
   .site-header nav.nav-open { position: absolute; top: 68px; left: 0; right: 0; padding: 24px; display: flex; flex-direction: column; align-items: stretch; gap: 0; background: #fff; box-shadow: 0 20px 35px rgb(6 22 34 / 12%); }

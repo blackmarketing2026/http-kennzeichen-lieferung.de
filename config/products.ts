@@ -3,6 +3,11 @@ export type PlateColor = 'black' | 'carbon';
 
 export const SHIPPING_PRICE = 4.47;
 
+/** All prices in this file are consumer-facing gross prices (inkl. MwSt.), as required for B2C
+ * price display in Germany (PAngV). License plates are taxed at the standard rate, not the
+ * reduced one. */
+export const VAT_RATE = 0.19;
+
 export const PRODUCTS: Record<PlateType, {
   label: string;
   shortLabel: string;

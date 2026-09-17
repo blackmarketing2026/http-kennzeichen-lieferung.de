@@ -1,6 +1,6 @@
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { query, withConnection } from '@/lib/db';
-import { formatPrice, PRODUCTS, type PlateColor, type PlateType } from '@/config/products';
+import { formatPrice, PRODUCTS, VAT_RATE, type PlateColor, type PlateType } from '@/config/products';
 
 export type InvoiceOrder = {
   id: string;
@@ -130,13 +130,31 @@ export async function renderInvoicePdf(order: InvoiceOrder, invoice: InvoiceReco
     { text: 'Versand', ...columns.position },
     { text: formatPrice(order.shipping_cents / 100), ...columns.total, align: 'right' },
   ]);
-  cursorY -= 10;
+  cursorY -= 6;
+  write('Alle Preise verstehen sich inklusive gesetzlicher Umsatzsteuer.', { size: 8, color: MUTED, gap: 16 });
+  hr();
+
+  // Displayed prices are gross (inkl. MwSt.); back out the net/VAT split for the required breakdown.
+  const grossCents = order.total_cents;
+  const netCents = Math.round(grossCents / (1 + VAT_RATE));
+  const vatCents = grossCents - netCents;
+
+  writeRow([
+    { text: 'Nettobetrag', x: 320, width: 150 },
+    { text: formatPrice(netCents / 100), ...columns.total, align: 'right' },
+  ]);
+  cursorY -= 16;
+  writeRow([
+    { text: `zzgl. ${Math.round(VAT_RATE * 100)}% USt.`, x: 320, width: 150 },
+    { text: formatPrice(vatCents / 100), ...columns.total, align: 'right' },
+  ]);
+  cursorY -= 16;
   hr();
 
   writeRow(
     [
-      { text: 'Gesamtsumme', x: 320, width: 150 },
-      { text: formatPrice(order.total_cents / 100), ...columns.total, align: 'right' },
+      { text: 'Gesamtsumme (brutto)', x: 320, width: 150 },
+      { text: formatPrice(grossCents / 100), ...columns.total, align: 'right' },
     ],
     { size: 12, bold: true },
   );

@@ -2,8 +2,9 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ArrowDown, ArrowRight, CarFront, Check, ChevronDown, CreditCard, LockKeyhole, PackageCheck, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowDown, ArrowRight, CarFront, Check, ChevronDown, CreditCard, LockKeyhole, PackageCheck, ShieldCheck, Sparkles, User } from 'lucide-react';
 import { LicensePlate, PlateSeals } from '@/components/license-plate';
 import { formatPrice, getUnitPrice, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -115,8 +116,10 @@ export default function Home() {
           <a href="#konfigurator" onClick={() => setMenuOpen(false)}>Kennzeichen bestellen</a>
           <a href="#ablauf" onClick={() => setMenuOpen(false)}>So funktioniert&apos;s</a>
           <a href="#faq" onClick={() => setMenuOpen(false)}>FAQ</a>
+          <Link href="/konto/login" onClick={() => setMenuOpen(false)}>Mein Konto</Link>
         </nav>
         <div className="header-actions">
+          <Link className="account-link" href="/konto/login" aria-label="Mein Konto"><User aria-hidden="true" /></Link>
           <button className="car-cart" type="button" aria-label={`Bestellung öffnen, ${quantity} Kennzeichen`} onClick={() => setCartOpen(true)}>
             <CarFront aria-hidden="true" />
             <span className="cart-badge">{quantity}</span>
@@ -215,7 +218,7 @@ export default function Home() {
         <div className="faq-list">{FAQS.map(([question, answer], index) => <details key={question} open={index === 0}><summary>{question}<ChevronDown size={20} /></summary><p>{answer}</p></details>)}</div>
       </section>
 
-      <footer><div className="footer-brand"><span>kennzeichen-lieferung<span>.de</span></span><p>Modern. Sicher. Zuverlässig.</p></div><div className="footer-note">Grundgerüst · Rechtliche Angaben, Kontakt und finale Lieferinformationen werden vor Veröffentlichung ergänzt.</div><a href="#top" aria-label="Nach oben">Nach oben ↑</a></footer>
+      <footer><div className="footer-brand"><span>kennzeichen-lieferung<span>.de</span></span><p>Modern. Sicher. Zuverlässig.</p></div><div className="footer-note">Grundgerüst · Rechtliche Angaben, Kontakt und finale Lieferinformationen werden vor Veröffentlichung ergänzt.</div><div className="footer-links"><Link href="/konto/login">Mein Konto</Link><a href="#top" aria-label="Nach oben">Nach oben ↑</a></div></footer>
       <div className="mobile-bar"><div><span>{plateValue}{suffix && ` ${suffix}`}</span><strong>{formatPrice(total)}</strong></div><button type="button" onClick={openCheckout} disabled={!status}>Bestellen <ArrowRight size={17} /></button></div>
     </main>
   );
