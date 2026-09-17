@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import { getUnitPrice, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
+import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
 
 export const runtime = 'nodejs';
 
@@ -48,13 +49,17 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Bitte prüfe Kennzeichenart, Kombination und Anzahl.' }, { status: 400 });
   }
 
+  const cartId = typeof body.cartId === 'string' && /^[a-zA-Z0-9-]{16,80}$/.test(body.cartId) ? body.cartId : null;
+  if (!cartId) {
+    return Response.json({ error: 'Ungültige Bestelldaten.' }, { status: 400 });
+  }
+
   const product = PRODUCTS[plateType];
   const unitPrice = Math.round(getUnitPrice(plateType, color, quantity) * 100);
-  const amount = unitPrice * quantity + Math.round(SHIPPING_PRICE * 100);
+  const shippingCents = Math.round(SHIPPING_PRICE * 100);
+  const amount = unitPrice * quantity + shippingCents;
   const stripe = new Stripe(config.secretKey);
-  const idempotencyKey = typeof body.cartId === 'string' && /^[a-zA-Z0-9-]{16,80}$/.test(body.cartId)
-    ? `kennzeichen-${body.cartId}`
-    : undefined;
+  const idempotencyKey = `kennzeichen-${cartId}`;
 
   try {
     const paymentIntent = await stripe.paymentIntents.create({
@@ -68,11 +73,27 @@ export async function POST(request: Request) {
         groesse: product.size,
         schriftfarbe: color === 'carbon' ? 'Carbon' : 'Schwarz',
         anzahl: String(quantity),
+        cartId,
       },
-    }, idempotencyKey ? { idempotencyKey } : undefined);
+    }, { idempotencyKey });
 
     if (!paymentIntent.client_secret) {
       throw new Error('Stripe hat kein Client Secret zurückgegeben.');
+    }
+
+    if (isDatabaseConfigured()) {
+      await ensureSchema();
+      await query(
+        `INSERT INTO orders (cart_id, status, plate, plate_type, plate_color, quantity, unit_price_cents, shipping_cents, total_cents, stripe_payment_intent_id)
+         VALUES ($1, 'payment_pending', $2, $3, $4, $5, $6, $7, $8, $9)
+         ON CONFLICT (cart_id) DO UPDATE SET
+           plate = EXCLUDED.plate, plate_type = EXCLUDED.plate_type, plate_color = EXCLUDED.plate_color,
+           quantity = EXCLUDED.quantity, unit_price_cents = EXCLUDED.unit_price_cents,
+           shipping_cents = EXCLUDED.shipping_cents, total_cents = EXCLUDED.total_cents,
+           stripe_payment_intent_id = EXCLUDED.stripe_payment_intent_id, updated_at = now()
+         WHERE orders.status = 'payment_pending'`,
+        [cartId, plate, plateType, color, quantity, unitPrice, shippingCents, amount, paymentIntent.id],
+      );
     }
 
     return Response.json({ clientSecret: paymentIntent.client_secret, publishableKey: config.publishableKey });

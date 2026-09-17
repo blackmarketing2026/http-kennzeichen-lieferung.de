@@ -1,0 +1,105 @@
+import { createHmac, timingSafeEqual } from 'crypto';
+import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
+import { logEvent } from '@/lib/logger';
+
+export const runtime = 'nodejs';
+
+function verifySignature(rawBody: string, signature: string | null, secret: string) {
+  if (!signature) return false;
+  const expected = createHmac('sha256', secret).update(rawBody, 'utf8').digest('hex');
+  const a = Buffer.from(signature);
+  const b = Buffer.from(expected);
+  if (a.length !== b.length) return false;
+  return timingSafeEqual(a, b);
+}
+
+type ManufacturerWebhookPayload = {
+  type?: string;
+  event?: string;
+  orderId?: number;
+  order?: { id?: number };
+  deliveryId?: number;
+  delivery?: { id?: number };
+  externalId?: string;
+  trackingCode?: string;
+  tracking?: { code?: string };
+  returnedDeliveryId?: number;
+};
+
+export async function POST(request: Request) {
+  const webhookSecret = process.env.KENNZEICHEN_WEBHOOK_SECRET?.trim();
+  if (!webhookSecret) return Response.json({ error: 'Webhook nicht konfiguriert.' }, { status: 503 });
+
+  const rawBody = await request.text();
+  const signature = request.headers.get('X-Signature');
+  const webhookId = request.headers.get('X-Webhook-Id');
+  const signatureValid = verifySignature(rawBody, signature, webhookSecret);
+
+  if (!signatureValid) {
+    logEvent('warn', 'Kennzeichen-Webhook: ungültige Signatur', { webhookId });
+    return Response.json({ error: 'Ungültige Signatur.' }, { status: 401 });
+  }
+
+  let payload: ManufacturerWebhookPayload;
+  try {
+    payload = JSON.parse(rawBody);
+  } catch {
+    return Response.json({ error: 'Ungültiges JSON.' }, { status: 400 });
+  }
+
+  if (!isDatabaseConfigured()) {
+    logEvent('error', 'Kennzeichen-Webhook: keine Datenbank konfiguriert', { webhookId });
+    return Response.json({ error: 'Keine Datenbank konfiguriert.' }, { status: 503 });
+  }
+  await ensureSchema();
+
+  const eventType = payload.type ?? payload.event ?? 'UNKNOWN';
+  const dedupeKey = webhookId ?? createHmac('sha256', webhookSecret).update(rawBody).digest('hex');
+
+  const inserted = await query<{ id: string }>(
+    `INSERT INTO manufacturer_webhook_events (dedupe_key, event_type, signature_valid, raw)
+     VALUES ($1, $2, $3, $4)
+     ON CONFLICT (dedupe_key) DO NOTHING
+     RETURNING id`,
+    [dedupeKey, eventType, signatureValid, JSON.stringify(payload)],
+  );
+
+  if (inserted.rows.length === 0) {
+    // Bereits verarbeitet (mehrfache Zustellung).
+    return Response.json({ received: true }, { status: 202 });
+  }
+
+  try {
+    const manufacturerOrderId = payload.orderId ?? payload.order?.id ?? null;
+    const deliveryId = payload.deliveryId ?? payload.delivery?.id ?? null;
+    const trackingCode = payload.trackingCode ?? payload.tracking?.code ?? null;
+
+    if (eventType === 'PING') {
+      // Nur Erreichbarkeit bestätigen.
+    } else if (eventType === 'DELIVERY_SHIPMENT' && (manufacturerOrderId || payload.externalId)) {
+      await query(
+        `UPDATE orders SET status = 'shipped', tracking_code = COALESCE($3, tracking_code), shipped_at = now(), updated_at = now()
+         WHERE (manufacturer_order_id = $1 OR cart_id = $2) AND status <> 'shipped'`,
+        [manufacturerOrderId, payload.externalId ?? null, trackingCode],
+      );
+    } else if (eventType === 'DELIVERY_RETURN' && deliveryId) {
+      await query(
+        `UPDATE orders SET status = 'returned', returned_delivery_id = $1, updated_at = now()
+         WHERE manufacturer_delivery_ids @> $2::jsonb`,
+        [deliveryId, JSON.stringify([deliveryId])],
+      );
+    } else if (eventType === 'DELIVERY_CANCELLATION' && (manufacturerOrderId || payload.externalId)) {
+      await query(
+        `UPDATE orders SET status = 'cancelled_by_manufacturer', updated_at = now()
+         WHERE manufacturer_order_id = $1 OR cart_id = $2`,
+        [manufacturerOrderId, payload.externalId ?? null],
+      );
+    }
+
+    await query(`UPDATE manufacturer_webhook_events SET processed_at = now() WHERE id = $1`, [inserted.rows[0].id]);
+  } catch (error) {
+    logEvent('error', 'Kennzeichen-Webhook: Verarbeitung fehlgeschlagen', { webhookId, error: error instanceof Error ? error.message : 'unbekannt' });
+  }
+
+  return Response.json({ received: true }, { status: 202 });
+}

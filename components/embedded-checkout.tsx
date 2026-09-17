@@ -37,12 +37,25 @@ function PaymentForm({ selection }: { selection: CheckoutSelection }) {
       return;
     }
 
+    const addressElement = elements.getElement(AddressElement);
+    const addressValue = await addressElement?.getValue();
+    if (!addressValue?.complete) {
+      setMessage('Bitte prüfe deine Lieferadresse.');
+      setIsPaying(false);
+      return;
+    }
+
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       redirect: 'if_required',
       confirmParams: {
         receipt_email: email,
         payment_method_data: { billing_details: { email } },
+        shipping: {
+          name: addressValue.value.name,
+          phone: addressValue.value.phone || undefined,
+          address: { ...addressValue.value.address, line2: addressValue.value.address.line2 || undefined },
+        },
       },
     });
 
@@ -79,7 +92,7 @@ function PaymentForm({ selection }: { selection: CheckoutSelection }) {
     <form className="real-payment-form" onSubmit={handleSubmit}>
       <div className="secure-checkout-heading"><div><span>Sicherer Checkout</span><strong>Zahlungs- und Lieferdaten</strong></div><LockKeyhole /></div>
       <label className="checkout-email">E-Mail-Adresse<input type="email" value={email} onChange={(event) => setEmail(event.target.value)} autoComplete="email" required /></label>
-      <div className="stripe-element-group"><span>Lieferadresse</span><AddressElement options={{ mode: 'shipping', allowedCountries: ['DE'], defaultValues: { address: { country: 'DE' } } }} /></div>
+      <div className="stripe-element-group"><span>Lieferadresse</span><AddressElement options={{ mode: 'shipping', allowedCountries: ['DE'], fields: { phone: 'auto' }, defaultValues: { address: { country: 'DE' } } }} /></div>
       <div className="stripe-element-group"><span>Zahlungsart</span><PaymentElement options={{ layout: 'tabs' }} /></div>
       {message && <p className="checkout-error" role="alert">{message}</p>}
       <button className="stripe-pay-button" type="submit" disabled={!stripe || isPaying}>

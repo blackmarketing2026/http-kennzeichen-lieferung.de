@@ -1,0 +1,207 @@
+product_type;product_variant_name;product_variant_id;utsch_sku;supplier_id;cost_item_1;cost_item_2;cost_item_3;cost_item_4;license_plate_number_length;shipping_cost
+"EMISSION_STICKER";"Feinstaubplakette";389;"N/A";2;1.99;1.99;1.99;1.99;;0.00
+"LICENSE_PLATE";"Elektro-Kennzeichen 180x200mm - zweizeilig";181;"UU44180";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 180x200mm - zweizeilig - Carbonoptik";163;"UUC4180";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 200x200mm - zweizeilig";180;"UU44200";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 200x200mm - zweizeilig - Carbonoptik";162;"UUC4200";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 220x200mm - zweizeilig";179;"UU44220";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 220x200mm - zweizeilig - Carbonoptik";161;"UUC4220";1;3.00;2.70;2.70;2.70;7;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 240x130mm - Schrift verkleinert - zweizeilig";182;"UU44240";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 240x130mm - zweizeilig - Carbonoptik";164;"UUC4240";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 250x200mm - zweizeilig";178;"UU44250";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 250x200mm - zweizeilig - Carbonoptik";160;"UUC4250";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 255x130mm - Schrift verkleinert - zweizeilig";183;"UU44255";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 255x130mm - zweizeilig - Carbonoptik";165;"UUC4255";1;3.00;2.70;2.70;2.70;7;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 280x200mm - zweizeilig";177;"UU44280";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 280x200mm - zweizeilig - Carbonoptik";159;"UUC4280";1;3.00;2.70;2.70;2.70;7;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 340x200mm - zweizeilig";176;"UU44340";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 340x200mm - zweizeilig - Carbonoptik";158;"UUC4340";1;3.00;2.70;2.70;2.70;7;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 380x110mm - einzeilig";173;"UU44380";1;2.50;2.20;2.20;2.20;3;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 380x110mm - einzeilig - Carbonoptik";155;"UUC4380";1;3.00;2.70;2.70;2.70;3;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 400x110 mm- einzeilig";172;"UU44400";1;2.50;2.20;2.20;2.20;3;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 400x110mm - einzeilig - Carbonoptik";154;"UUC4400";1;3.00;2.70;2.70;2.70;3;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 410x110mm - einzeilig";171;"UU44410";1;2.50;2.20;2.20;2.20;4;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 410x110mm - einzeilig - Carbonoptik";153;"UUC4410";1;3.00;2.70;2.70;2.70;4;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 420x110mm - einzeilig";170;"UU44420";1;2.50;2.20;2.20;2.20;4;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 420x110mm - einzeilig - Carbonoptik";152;"UUC4420";1;3.00;2.70;2.70;2.70;4;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 460x110mm - einzeilig";169;"UU44460";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 460x110mm - einzeilig - Carbonoptik";151;"UUC4460";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 470x110mm - einzeilig";168;"UU44470";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 470x110mm - einzeilig - Carbonoptik";150;"UUC4470";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 480x110mm - einzeilig";167;"UU44480";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 480x110mm - einzeilig - Carbonoptik";149;"UUC4480";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 520x110mm - einzeilig";166;"UU44520";1;2.30;1.99;1.99;1.99;7;3.45
+"LICENSE_PLATE";"Elektro-Kennzeichen 520x110mm - einzeilig - Carbonoptik";148;"UUC4520";1;2.80;2.49;2.49;2.49;7;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 180x200mm - zweizeilig";219;"UF44180";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 180x200mm - zweizeilig - Carbonoptik";199;"UFC4180";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 200x200mm - zweizeilig";218;"UF44200";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 200x200mm - zweizeilig - Carbonoptik";198;"UFC4200";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 220x200mm - zweizeilig";217;"UF44220";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 220x200mm - zweizeilig - Carbonoptik";197;"UFC4220";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 240x130mm - zweizeilig";220;"UF44240";1;2.50;2.20;2.20;2.20;4;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 240x130mm - zweizeilig - Carbonoptik";200;"UFC4240";1;3.00;2.70;2.70;2.70;4;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 255x130mm - zweizeilig";221;"UF44255";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 255x130mm - zweizeilig - Carbonoptik";201;"UFC4255";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 280x200mm - zweizeilig";215;"UF44280";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 280x200mm - zweizeilig - Carbonoptik";195;"UFC4280";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 340x110mm - einzeilig";213;"UF44344";1;2.50;2.20;2.20;2.20;2;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 340x110mm - einzeilig - Carbonoptik";193;"UFC4344";1;3.00;2.70;2.70;2.70;2;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 340x200mm - zweizeilig";214;"UF44340";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 340x200mm - zweizeilig - Carbonoptik";194;"UFC4340";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 420x110mm - einzeilig";208;"UF44420";1;2.50;2.20;2.20;2.20;3;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 420x110mm - einzeilig - Carbonoptik";188;"UFC4420";1;3.00;2.70;2.70;2.70;3;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 460x110mm - einzeilig";207;"UF44460";1;2.50;2.20;2.20;2.20;4;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 480x110mm - einzeilig";205;"UF44480";1;2.50;2.20;2.20;2.20;4;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 480x110mm - einzeilig - Carbonoptik";185;"UFC4480";1;3.00;2.70;2.70;2.70;4;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 520x110mm - einzeilig";204;"UF44520";1;2.30;1.99;1.99;1.99;6;3.45
+"LICENSE_PLATE";"Elektro-Saison-Kennzeichen 520x110mm - einzeilig - Carbonoptik";184;"UFC4520";1;2.80;2.49;2.49;2.49;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 180x200mm - zweizeilig";61;"UD44180";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 180x200mm - zweizeilig - Carbonoptik";92;"UDC4180";1;3.00;2.70;2.70;2.70;7;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 180x200mm - zweizeilig - grün";110;"UG44180";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 200x200mm - zweizeilig";60;"UD44200";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 200x200mm - zweizeilig - Carbonoptik";91;"UDC4200";1;3.00;2.70;2.70;2.70;7;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 200x200mm - zweizeilig - grün";109;"UG44200";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 220x200mm - zweizeilig";59;"UD44220";1;2.50;2.20;2.20;2.20;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 220x200mm - zweizeilig - Carbonoptik";90;"UDC4220";1;3.00;2.70;2.70;2.70;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 220x200mm - zweizeilig - grün";108;"UG44220";1;2.50;2.20;2.20;2.20;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 240x130mm - Schrift verkleinert - zweizeilig";62;"UD44240";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 240x130mm - Schrift verkleinert - zweizeilig - Carbonoptik";93;"UDC4240";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 240x130mm - Schrift verkleinert - zweizeilig - grün";111;"UG44240";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 240x200mm - zweizeilig";58;"UD44242";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 240x200mm - zweizeilig - Carbonoptik";89;"UDC4242";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 250x200mm - zweizeilig";57;"UD44250";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 250x200mm - zweizeilig - Carbonoptik";88;"UDC4250";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 250x200mm - zweizeilig - grün";107;"UG44250";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 255x130mm - Schrift verkleinert - zweizeilig";63;"UD44255";1;2.50;2.20;2.20;2.20;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 255x130mm - Schrift verkleinert - zweizeilig - Carbonoptik";94;"UDC4255";1;3.00;2.70;2.70;2.70;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 255x130mm - Schrift verkleinert - zweizeilig - grün";112;"UG44255";1;2.50;2.20;2.20;2.20;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 260x200mm - zweizeilig";56;"UD44260";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 260x200mm - zweizeilig - Carbonoptik";87;"UDC4260";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 280x200mm - zweizeilig";55;"UD44280";1;2.50;2.20;2.20;2.20;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 280x200mm - zweizeilig - Carbonoptik";86;"UDC4280";1;3.00;2.70;2.70;2.70;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 280x200mm - zweizeilig - grün";106;"UG44280";1;2.50;2.20;2.20;2.20;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 300x200mm - zweizeilig";54;"UD44302";1;2.50;2.20;2.20;2.20;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 300x200mm - zweizeilig - Carbonoptik";85;"UDC4302";1;3.00;2.70;2.70;2.70;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 320x200mm - zweizeilig";53;"UD44322";1;2.50;2.20;2.20;2.20;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 320x200mm - zweizeilig - Carbonoptik";84;"UDC4322";1;3.00;2.70;2.70;2.70;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 340x200mm - zweizeilig";52;"UD44340";1;2.50;2.20;2.20;2.20;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 340x200mm - zweizeilig - Carbonoptik";83;"UDC4340";1;3.00;2.70;2.70;2.70;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 340x200mm - zweizeilig - grün";105;"UG44340";1;2.50;2.20;2.20;2.20;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 380x110mm - einzeilig";44;"UD44380";1;2.50;2.20;2.20;2.20;4;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 380x110mm - einzeilig - Carbonoptik";75;"UDC4380";1;3.00;2.70;2.70;2.70;4;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 380x110mm - einzeilig - grün";102;"UG44380";1;2.50;2.20;2.20;2.20;4;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 380x110mm - einzeilig - rot";314;"UR44380";1;2.50;2.20;2.20;2.20;4;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 400x110mm - einzeilig";43;"UD44400";1;2.50;2.20;2.20;2.20;4;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 400x110mm - einzeilig - Carbonoptik";74;"UDC4400";1;3.00;2.70;2.70;2.70;4;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 400x110mm - einzeilig - grün";101;"UG44400";1;2.50;2.20;2.20;2.20;4;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 410x110 mm  - einzeilig";42;"UD44410";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 410x110mm - einzeilig - Carbonoptik";72;"UDC4410";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 410x110mm - einzeilig - grün";100;"UG44410";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 420x110mm - einzeilig";41;"UD44420";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 420x110mm - einzeilig - Carbonoptik";71;"UDC4420";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 420x110mm - einzeilig - grün";99;"UG44420";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 430x110mm - einzeilig";40;"UD44430";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 430x110mm - einzeilig - Carbonoptik";70;"UDC4430";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 440x110mm - einzeilig";39;"UD44440";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 440x110mm - einzeilig - Carbonoptik";69;"UDC4440";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 460x110mm - einzeilig";38;"UD44460";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 460x110mm - einzeilig - Carbonoptik";68;"UDC4460";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 460x110mm - einzeilig - grün";98;"UG44460";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 470x110mm - einzeilig";37;"UD44470";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 470x110mm - einzeilig - Carbonoptik";67;"UDC4470";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 470x110mm - einzeilig - grün";97;"UG44470";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 480x110mm - einzeilig";36;"UD44480";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 480x110mm - einzeilig - Carbonoptik";66;"UDC4480";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 480x110mm - einzeilig - grün";96;"UG44480";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 490x110mm - einzeilig";35;"UD44490";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 490x110mm - einzeilig - Carbonoptik";65;"UDC4490";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 520x110mm - einzeilig";2;"UD44520";1;2.30;1.99;1.99;1.99;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 520x110mm - einzeilig - Carbonoptik";64;"UDC4520";1;4.00;3.50;3.50;3.50;8;3.45
+"LICENSE_PLATE";"KFZ-Kennzeichen 520x110mm - einzeilig - grün";95;"UG44520";1;2.30;1.99;1.99;1.99;8;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 180x200mm - zweizeilig";255;"UH44180";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 180x200mm - zweizeilig - Carbonoptik";237;"UHC4180";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 200x200mm - zweizeilig";254;"UH44200";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 200x200mm - zweizeilig - Carbonoptik";236;"UHC4200";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 220x200mm - zweizeilig";253;"UH44220";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 220x200mm - zweizeilig - Carbonoptik";235;"UHC4220";1;3.00;2.70;2.70;2.70;7;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 240x130mm - zweizeilig";256;"UH44240";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 240x130mm - zweizeilig - Carbonoptik";238;"UHC4240";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 250x200mm - zweizeilig";252;"UH44250";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 250x200mm - zweizeilig - Carbonoptik";234;"UHC4250";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 255x130mm - zweizeilig";257;"UH44255";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 255x130mm - zweizeilig - Carbonoptik";239;"UHC4255";1;3.00;2.70;2.70;2.70;7;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 280x200mm - zweizeilig";251;"UH44280";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 280x200mm - zweizeilig - Carbonoptik";233;"UHC4280";1;3.00;2.70;2.70;2.70;7;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 340x200mm - zweizeilig";250;"UH44340";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 340x200mm - zweizeilig - Carbonoptik";232;"UHC4340";1;3.00;2.70;2.70;2.70;7;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 380x110mm - einzeilig";247;"UH44380";1;2.50;2.20;2.20;2.20;3;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 380x110mm - einzeilig - Carbonoptik";229;"UHC4380";1;3.00;2.70;2.70;2.70;3;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 400x110mm - einzeilig";246;"UH44400";1;2.50;2.20;2.20;2.20;3;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 400x110mm - einzeilig - Carbonoptik";228;"UHC4400";1;3.00;2.70;2.70;2.70;3;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 410x110mm - einzeilig";245;"UH44410";1;2.50;2.20;2.20;2.20;4;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 410x110mm - einzeilig - Carbonoptik";227;"UHC4410";1;3.00;2.70;2.70;2.70;4;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 420x110mm - einzeilig";244;"UH44420";1;2.50;2.20;2.20;2.20;4;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 420x110mm - einzeilig - Carbonoptik";226;"UHC4420";1;3.00;2.70;2.70;2.70;4;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 460x110mm - einzeilig";243;"UH44460";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 460x110mm - einzeilig - Carbonoptik";225;"UHC4460";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 470x110mm - einzeilig";242;"UH44470";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 470x110mm - einzeilig - Carbonoptik";224;"UHC4470";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 480x110mm - einzeilig";241;"UH44480";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 480x110mm - einzeilig - Carbonoptik";223;"UHC4480";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 520x110mm - einzeilig";240;"UH44520";1;2.30;1.99;1.99;1.99;7;3.45
+"LICENSE_PLATE";"Oldtimer-Kennzeichen 520x110mm - einzeilig - Carbonoptik";222;"UHC4520";1;2.80;2.49;2.49;2.49;7;3.45
+"LICENSE_PLATE";"Oldtimer-Saison-Kennzeichen 280x200mm - zweizeilig";299;"UZ44280";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"Oldtimer-Saison-Kennzeichen 280x200mm - zweizeilig - Carbonoptik";269;"UZC4280";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"Oldtimer-Saison-Kennzeichen 520x110mm - einzeilig";276;"UZ44520";1;2.30;1.99;1.99;1.99;6;3.45
+"LICENSE_PLATE";"Oldtimer-Saison-Kennzeichen 520x110mm - einzeilig - Carbonoptik";258;"UZC4520";1;2.80;2.49;2.49;2.49;6;3.45
+"LICENSE_PLATE";"Parkplatz-Kennzeichen 520x114mm";306;"UP27610";1;2.30;1.99;1.99;1.99;9;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 180x200mm - zweizeilig";145;"US44180";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 180x200mm - zweizeilig - Carbonoptik";128;"USC4180";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 200x200mm - zweizeilig";144;"US44200";1;2.50;2.20;2.20;2.20;6;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 200x200mm - zweizeilig - Carbonoptik";127;"USC4200";1;3.00;2.70;2.70;2.70;6;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 220x200mm - zweizeilig";143;"US44220";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 220x200mm - zweizeilig - Carbonoptik";126;"USC4220";1;3.00;2.70;2.70;2.70;7;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 240x130mm - Schrift verkleinert - zweizeilig";146;"US44240";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 240x130mm - Schrift verkleinert - zweizeilig - Carbonoptik";129;"USC4240";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 250x200mm - zweizeilig";142;"US44250";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 250x200mm - zweizeilig - Carbonoptik";125;"USC4250";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 255x130mm - Schrift verkleinert - zweizeilig";147;"US44255";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 255x130mm - Schrift verkleinert - zweizeilig - Carbonoptik";130;"USC4255";1;3.00;2.70;2.70;2.70;7;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 280x200mm - zweizeilig - Carbonoptik";124;"USC4280";1;3.00;2.70;2.70;2.70;7;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 340x200mm - zweizeilig";141;"US44340";1;2.50;2.20;2.20;2.20;7;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 340x200mm - zweizeilig - Carbonoptik";123;"USC4340";1;3.00;2.70;2.70;2.70;7;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 380x110mm - einzeilig";138;"US44380";1;2.50;2.20;2.20;2.20;3;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 380x110mm - einzeilig - Carbonoptik";120;"USC4380";1;3.00;2.70;2.70;2.70;3;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 400x110mm - einzeilig";137;"US44400";1;2.50;2.20;2.20;2.20;3;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 400x110mm - einzeilig - Carbonoptik";119;"USC4400";1;3.00;2.70;2.70;2.70;3;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 410x110mm - einzeilig";136;"US44410";1;2.50;2.20;2.20;2.20;4;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 410x110mm - einzeilig - Carbonoptik";118;"USC4410";1;3.00;2.70;2.70;2.70;4;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 420x110mm - einzeilig";135;"US44420";1;2.50;2.20;2.20;2.20;4;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 420x110mm - einzeilig - Carbonoptik";117;"USC4420";1;3.00;2.70;2.70;2.70;4;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 460x110mm - einzeilig";134;"US44460";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 460x110mm - einzeilig - Carbonoptik";116;"USC4460";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 470x110mm - einzeilig";133;"US44470";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 470x110mm - einzeilig - Carbonoptik";115;"USC4470";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 480x110mm - einzeilig";132;"US44480";1;2.50;2.20;2.20;2.20;5;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 480x110mm - einzeilig - Carbonoptik";114;"USC4480";1;3.00;2.70;2.70;2.70;5;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 520x110mm - einzeilig";131;"US44520";1;2.30;1.99;1.99;1.99;7;3.45
+"LICENSE_PLATE";"Saison-Kennzeichen 520x110mm - einzeilig - Carbonoptik";113;"USC4520";1;2.80;2.49;2.49;2.49;7;3.45
+"OTHER";"Kennzeichen-Schrauben Standard";379;"0534100";1;0.85;0.85;0.85;0.85;;3.45
+"OTHER";"Kennzeichenhalter 255x130mm";380;"0181135";1;2.86;2.86;2.86;2.86;;3.45
+"OTHER";"Kennzeichenhalter 520x110mm";373;"0195673";1;1.13;1.13;1.13;1.13;;3.45
+"OTHER";"Kennzeichenhalter Erut 4/460 Schwarz 460x110mm";383;"0189460";1;1.15;1.15;1.15;1.15;;3.45
+"OTHER";"Kennzeichenhalter ERUT twinline Classic Schwarz 180x200mm";381;"0181115";1;2.86;2.86;2.86;2.86;;3.45
+"OTHER";"Kennzeichenhalter ERUT twinline Classic Schwarz 220x200mm";387;"0181125";1;2.86;2.86;2.86;2.86;;3.45
+"OTHER";"Kennzeichenhalter ERUT twinline Classic Schwarz 240x130mm";382;"0181145";1;2.86;2.86;2.86;2.86;;3.45
+"OTHER";"Kennzeichenhalter ERUT twinline Classic Schwarz 250x200mm";386;"0181155";1;2.86;2.86;2.86;2.86;;3.45
+"OTHER";"Kennzeichenhalter ERUT twinline Classic Schwarz 280x200mm";385;"0181185";1;2.86;2.86;2.86;2.86;;3.45
+"OTHER";"Kennzeichenhalter schwarz 340x200mm";384;"7010692";1;2.96;2.96;2.96;2.96;;3.45
+"OTHER";"Kennzeichenhalter Simple Fix";388;"0188100";1;1.99;1.99;1.99;1.99;;3.45
+"OTHER";"Klebeschild 100 km/h";33;"0300100";1;1.50;1.50;1.50;1.50;;3.45
+"OTHER";"Klebeschild 25km/h";23;"0300025";1;1.50;1.50;1.50;1.50;;3.45
+"OTHER";"Klebeschild 40km/h";25;"0300040";1;1.50;1.50;1.50;1.50;;3.45
+"OTHER";"Klebeschild 50km/h";28;"0300050";1;1.50;1.50;1.50;1.50;;3.45
+"OTHER";"Klebeschild 60 km/h ";29;"0300060";1;1.50;1.50;1.50;1.50;;3.45
+"OTHER";"Klebeschild 80 km/h ";32;"0300080";1;1.50;1.50;1.50;1.50;;3.45
+"OTHER";"Kombitasche 3-in-1";6;"0361575";1;10.50;10.50;10.50;10.50;;3.45
+"OTHER";"Warnweste gelb";5;"0361566";1;2.20;2.20;2.20;2.20;;3.45
