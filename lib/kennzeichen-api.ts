@@ -136,7 +136,14 @@ export async function createManufacturerOrder(
   } catch (error) {
     clearTimeout(timeout);
     const message = error instanceof Error ? error.message : 'Unbekannter Netzwerkfehler';
-    await logManufacturerEvent({ orderId: context.orderId, direction: 'error', endpoint: '/orders', message: `Transportfehler: ${message}` });
-    return { ok: false, status: null, error: message, traceId: null, kind: 'network' };
+    const cause = error instanceof Error && error.cause ? String((error.cause as { code?: unknown; message?: unknown }).code ?? (error.cause as Error).message ?? error.cause) : null;
+    await logManufacturerEvent({
+      orderId: context.orderId,
+      direction: 'error',
+      endpoint: '/orders',
+      message: `Transportfehler: ${message}${cause ? ` (${cause})` : ''}`,
+      detail: cause ? { cause } : undefined,
+    });
+    return { ok: false, status: null, error: cause ? `${message} (${cause})` : message, traceId: null, kind: 'network' };
   }
 }
