@@ -61,7 +61,12 @@ export async function POST(request: Request) {
   await ensureSchema();
 
   const eventType = payload.eventType ?? payload.type ?? payload.event ?? 'UNKNOWN';
-  const dedupeKey = webhookId ?? createHmac('sha256', webhookSecret).update(rawBody).digest('hex');
+  // Always fold in a content fingerprint, not just X-Webhook-Id alone: if the manufacturer sends
+  // a constant/non-per-event value in that header (e.g. an endpoint id rather than a delivery
+  // id), keying purely on it would make every distinct event after the first look like a
+  // duplicate and get silently dropped — which is exactly what happened here.
+  const bodyFingerprint = createHmac('sha256', webhookSecret).update(rawBody).digest('hex');
+  const dedupeKey = webhookId ? `${webhookId}:${bodyFingerprint}` : bodyFingerprint;
 
   const inserted = await query(
     `INSERT IGNORE INTO manufacturer_webhook_events (dedupe_key, event_type, signature_valid, raw)
@@ -70,6 +75,7 @@ export async function POST(request: Request) {
   );
 
   if (inserted.affectedRows === 0) {
+    logEvent('warn', 'Kennzeichen-Webhook: als Duplikat erkannt und ignoriert', { webhookId, eventType, dedupeKey });
     // Bereits verarbeitet (mehrfache Zustellung).
     return Response.json({ received: true }, { status: 202 });
   }

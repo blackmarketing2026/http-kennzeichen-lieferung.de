@@ -1,4 +1,5 @@
 import { describeDatabaseError, ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
+import { AutoRefresh } from '@/components/admin/auto-refresh';
 
 export const dynamic = 'force-dynamic';
 
@@ -48,7 +49,8 @@ export default async function AdminLogsPage() {
 
   return (
     <div className="admin-logs-page">
-      <h1>API-Logs</h1>
+      <AutoRefresh intervalMs={60000} />
+      <h1>API-Logs <span className="admin-muted">(aktualisiert automatisch alle 60 Sek.)</span></h1>
       <table className="admin-table">
         <thead>
           <tr>
@@ -85,6 +87,7 @@ export default async function AdminLogsPage() {
             <th>Event-Typ</th>
             <th>Signatur gültig</th>
             <th>Verarbeitet</th>
+            <th>Dedupe-Key</th>
             <th>Rohdaten (Payload)</th>
           </tr>
         </thead>
@@ -95,11 +98,12 @@ export default async function AdminLogsPage() {
               <td>{event.event_type ?? '–'}</td>
               <td>{event.signature_valid ? 'Ja' : 'Nein'}</td>
               <td>{event.processed_at ? new Date(event.processed_at).toLocaleString('de-DE') : '–'}</td>
+              <td><span className="admin-muted">{event.dedupe_key}</span></td>
               <td><pre style={{ whiteSpace: 'pre-wrap', margin: 0, fontSize: 11 }}>{JSON.stringify(event.raw, null, 2)}</pre></td>
             </tr>
           ))}
           {webhookEvents.rows.length === 0 && (
-            <tr><td colSpan={5} className="admin-empty-row">Noch keine eingehenden Webhooks.</td></tr>
+            <tr><td colSpan={6} className="admin-empty-row">Noch keine eingehenden Webhooks.</td></tr>
           )}
         </tbody>
       </table>
