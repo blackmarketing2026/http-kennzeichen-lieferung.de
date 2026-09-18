@@ -14,15 +14,29 @@ type LogRow = {
   created_at: string;
 };
 
+type WebhookEventRow = {
+  id: string;
+  dedupe_key: string;
+  event_type: string | null;
+  signature_valid: 0 | 1;
+  raw: unknown;
+  processed_at: string | null;
+  created_at: string;
+};
+
 export default async function AdminLogsPage() {
   if (!isDatabaseConfigured()) {
     return <div className="admin-empty-state"><h1>API-Logs</h1><p>Es ist keine Datenbank konfiguriert.</p></div>;
   }
 
   let logs: { rows: LogRow[] };
+  let webhookEvents: { rows: WebhookEventRow[] };
   try {
     await ensureSchema();
-    logs = await query<LogRow>('SELECT * FROM manufacturer_api_logs ORDER BY created_at DESC LIMIT 300');
+    [logs, webhookEvents] = await Promise.all([
+      query<LogRow>('SELECT * FROM manufacturer_api_logs ORDER BY created_at DESC LIMIT 300'),
+      query<WebhookEventRow>('SELECT * FROM manufacturer_webhook_events ORDER BY created_at DESC LIMIT 100'),
+    ]);
   } catch (error) {
     return (
       <div className="admin-empty-state">
@@ -59,6 +73,33 @@ export default async function AdminLogsPage() {
           ))}
           {logs.rows.length === 0 && (
             <tr><td colSpan={6} className="admin-empty-row">Noch keine Log-Einträge.</td></tr>
+          )}
+        </tbody>
+      </table>
+
+      <h1 style={{ marginTop: 40 }}>Eingehende Hersteller-Webhooks</h1>
+      <table className="admin-table">
+        <thead>
+          <tr>
+            <th>Zeitpunkt</th>
+            <th>Event-Typ</th>
+            <th>Signatur gültig</th>
+            <th>Verarbeitet</th>
+            <th>Rohdaten (Payload)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {webhookEvents.rows.map((event) => (
+            <tr key={event.id} className={!event.signature_valid ? 'admin-log-error' : undefined}>
+              <td>{new Date(event.created_at).toLocaleString('de-DE')}</td>
+              <td>{event.event_type ?? '–'}</td>
+              <td>{event.signature_valid ? 'Ja' : 'Nein'}</td>
+              <td>{event.processed_at ? new Date(event.processed_at).toLocaleString('de-DE') : '–'}</td>
+              <td><pre style={{ whiteSpace: 'pre-wrap', margin: 0, fontSize: 11 }}>{JSON.stringify(event.raw, null, 2)}</pre></td>
+            </tr>
+          ))}
+          {webhookEvents.rows.length === 0 && (
+            <tr><td colSpan={5} className="admin-empty-row">Noch keine eingehenden Webhooks.</td></tr>
           )}
         </tbody>
       </table>
