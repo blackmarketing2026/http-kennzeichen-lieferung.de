@@ -8,6 +8,8 @@
 .admin-logout-button svg { width: 15px; height: 15px; }
 .admin-main { padding: 32px; }
 .admin-orders-page h1, .admin-logs-page h1 { margin: 0 0 20px; }
+.admin-live-indicator { font-size: 12px; font-weight: 600; color: #12693a; margin-left: 10px; animation: admin-live-pulse 2s ease-in-out infinite; }
+@keyframes admin-live-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
 
 .admin-api-toggle { display: flex; align-items: center; justify-content: space-between; background: #fff; border: 1px solid #dbe6ee; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; max-width: 520px; }
 .admin-api-toggle strong { display: block; }

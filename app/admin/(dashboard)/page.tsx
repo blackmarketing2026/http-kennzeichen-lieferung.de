@@ -3,6 +3,7 @@ import { isManufacturerApiCredentialsConfigured, isManufacturerApiEnabled } from
 import { ApiToggle } from '@/components/admin/api-toggle';
 import { RetryButton } from '@/components/admin/retry-button';
 import { TestOrderForm } from '@/components/admin/test-order-form';
+import { AutoRefresh } from '@/components/admin/auto-refresh';
 
 export const dynamic = 'force-dynamic';
 
@@ -60,7 +61,8 @@ export default async function AdminOrdersPage() {
 
   return (
     <div className="admin-orders-page">
-      <h1>Bestellungen</h1>
+      <AutoRefresh intervalMs={15000} />
+      <h1>Bestellungen <span className="admin-muted admin-live-indicator">● Live – aktualisiert alle 15 Sek.</span></h1>
       <ApiToggle initialEnabled={enabled} credentialsConfigured={credentialsConfigured} />
       <TestOrderForm />
       <table className="admin-table">
