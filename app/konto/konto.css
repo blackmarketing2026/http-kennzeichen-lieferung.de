@@ -19,7 +19,7 @@
 .konto-muted { color: #8a99a3; font-size: 12px; }
 
 .konto-login-page { min-height: 100svh; display: flex; align-items: center; justify-content: center; background: #061622; }
-.konto-login-form { background: #fff; padding: 40px; border-radius: 14px; width: 360px; display: flex; flex-direction: column; gap: 16px; }
+.konto-login-form { background: #fff; padding: 40px; border-radius: 14px; width: min(360px, calc(100% - 32px)); display: flex; flex-direction: column; gap: 16px; }
 .konto-login-heading { display: flex; align-items: center; gap: 10px; }
 .konto-login-heading h1 { font-size: 18px; margin: 0; }
 .konto-login-form p { margin: 0; font-size: 13px; color: #5a6c78; }
@@ -29,4 +29,6 @@
 .konto-login-error { color: #c0392b; font-size: 13px; margin: 0; }
 .konto-login-success { color: #12693a; font-size: 13px; margin: 0; }
 .konto-spin { animation: konto-spin 0.8s linear infinite; }
+.konto-login-form button { gap: 8px; }
+.konto-login-form button:disabled { opacity: .65; cursor: wait; }
 @keyframes konto-spin { to { transform: rotate(360deg); } }
