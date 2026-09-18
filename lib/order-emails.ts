@@ -91,11 +91,11 @@ export async function sendShippingEmail(order: OrderEmailOrder, trackingCode: st
 
   const html = renderEmailTemplate({
     logoUrl: `${origin}/kennzeichen-lieferung-logo.png`,
-    preheader: 'Deine Bestellung ist unterwegs',
-    heading: 'Deine Bestellung ist jetzt unterwegs!',
+    preheader: 'Dein Kennzeichen ist versandfertig und wird an DHL übergeben',
+    heading: 'Dein Kennzeichen ist versandfertig!',
     bodyHtml: `
       <p>Hallo,</p>
-      <p>dein Kennzeichen <strong>${plateLabel(order)}</strong> wurde versendet und ist mit DHL unterwegs zu dir.</p>
+      <p>dein Kennzeichen <strong>${plateLabel(order)}</strong> ist versandfertig und wird an DHL übergeben.</p>
       <p>Sendungsverfolgungsnummer: <strong>${trackingCode}</strong></p>
     `,
     ctaLabel: 'Sendung bei DHL verfolgen',
@@ -107,7 +107,7 @@ export async function sendShippingEmail(order: OrderEmailOrder, trackingCode: st
     await transport.sendMail({
       from: MAIL_FROM,
       to: order.customer_email,
-      subject: 'Deine Bestellung ist unterwegs – Kennzeichen-Lieferung',
+      subject: 'Dein Kennzeichen ist versandfertig – Kennzeichen-Lieferung',
       html,
     });
   } catch (error) {
