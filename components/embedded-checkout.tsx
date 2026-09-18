@@ -7,6 +7,7 @@ import { AddressElement, Elements, PaymentElement, useElements, useStripe } from
 import { loadStripe } from '@stripe/stripe-js';
 import { ArrowLeft, CheckCircle2, LoaderCircle, LockKeyhole } from 'lucide-react';
 import { PaymentLogos } from '@/components/payment-logos';
+import { ShippingNotice } from '@/components/shipping-notice';
 import { LicensePlate } from '@/components/license-plate';
 import { formatPrice, getUnitPrice, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 
@@ -83,6 +84,7 @@ function PaymentForm({ selection }: { selection: CheckoutSelection }) {
         <p>ZAHLUNG ERFOLGREICH</p>
         <h2>Bestellung eingegangen.</h2>
         <p>Deine Zahlung wurde bestätigt. Die Bestellung ist in Stripe mit deiner Kennzeichenkombination hinterlegt.</p>
+        <ShippingNotice />
         <div><span>{selection.plate} · {selection.quantity} × {PRODUCTS[selection.plateType].label}</span><strong>{formatPrice(total)}</strong></div>
         <Link className="button" href="/">Zurück zur Startseite</Link>
       </div>

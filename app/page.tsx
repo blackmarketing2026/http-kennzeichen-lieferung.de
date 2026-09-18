@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowDown, ArrowRight, CarFront, Check, ChevronDown, CreditCard, LockKeyhole, PackageCheck, ShieldCheck, Sparkles, User } from 'lucide-react';
 import { PaymentLogos } from '@/components/payment-logos';
+import { ShippingNotice } from '@/components/shipping-notice';
 import { LicensePlate, PlateSeals } from '@/components/license-plate';
 import { formatPrice, getUnitPrice, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -15,7 +16,7 @@ const FAQS = [
   ['Ist die Bestellung eine Reservierung bei der Zulassungsstelle?', 'Nein. Du bestellst geprägte Kennzeichenschilder. Reservierung, Fahrzeugzulassung und amtliche Plaketten sind nicht enthalten.'],
   ['Welche Kennzeichenarten kann ich konfigurieren?', 'Das Grundgerüst zeigt Auto-, Motorrad-, E-, H- und Saisonkennzeichen. Das finale Sortiment und verfügbare Maße werden vor dem Shop-Start verbindlich festgelegt.'],
   ['Welche Größen gibt es?', 'Für Standard-Autokennzeichen ist aktuell 520 mm hinterlegt. Weitere ein- und zweizeilige Formate sind in der bereitgestellten Preisinformation vorgesehen.'],
-  ['Wie schnell wird versendet?', 'Eine verbindliche Produktions-, Versand- oder Zustellfrist ist noch nicht hinterlegt. Deshalb zeigen wir hier bewusst keine erfundene Lieferzeit.'],
+  ['Wie schnell wird versendet?', 'Nach deiner Bestellung werden deine Kennzeichen innerhalb von 10 Minuten gedruckt und versandfertig gemacht. DHL holt die Kennzeichen dreimal am Tag ab und übernimmt den Versand.'],
   ['Welche Zahlungsmethoden werden angeboten?', 'Im eingebetteten Stripe-Checkout werden die für diese Bestellung verfügbaren Zahlungsarten sicher direkt auf unserer Seite angezeigt.'],
 ];
 
@@ -196,6 +197,7 @@ export default function Home() {
             <div className="price-card"><div><span>{quantity} × {product.label}, {product.size}, {plateColor === 'carbon' ? 'Carbon' : 'Schwarz'}</span><strong>{formatPrice(plateSubtotal)}</strong></div><div><span>DHL-Versandpaket</span><strong>{formatPrice(SHIPPING_PRICE)}</strong></div><div className="price-total"><span>Gesamt</span><strong>{formatPrice(total)}</strong></div><small>Preise gemäß bereitgestellter Preisinformation. Steuerangaben werden vor Veröffentlichung ergänzt.</small></div>
             <button className="button button-wide" type="button" onClick={openCheckout} disabled={!status}>Jetzt bestellen <ArrowRight size={19} /></button>
             <PaymentLogos />
+            <ShippingNotice />
             <p className="scope-note"><ShieldCheck size={17} /> Geprägte Schilder – ohne Reservierung, Zulassung oder amtliche Plaketten.</p>
           </div>
         </div>
@@ -203,7 +205,7 @@ export default function Home() {
 
       <section className="process-band">
         <div className="process-sticky"><div><p className="eyebrow light"><span /> Von der Eingabe zum Versand</p><h2>Heute konfiguriert.<br />Klar geprüft.<br /><em>Bereit zum Prägen.</em></h2></div><LicensePlate value={plateValue} type={plateType} color={plateColor} className="story-plate" /></div>
-        <div className="process-cards"><article><span>01</span><h3>Hochwertige Prägung</h3><p>Deine Kombination steht im Mittelpunkt – groß, klar und vor dem nächsten Schritt kontrollierbar.</p></article><article><span>02</span><h3>Reflektierende Oberfläche</h3><p>Die digitale Vorschau vermittelt Material, Kontur und Lichtwirkung des späteren Schildes.</p></article><article><span>03</span><h3>Sorgfältig versendet</h3><p>Versandkosten werden separat und nachvollziehbar ausgewiesen. Lieferzeiten folgen nach operativer Freigabe.</p></article></div>
+        <div className="process-cards"><article><span>01</span><h3>Hochwertige Prägung</h3><p>Deine Kombination steht im Mittelpunkt – groß, klar und vor dem nächsten Schritt kontrollierbar.</p></article><article><span>02</span><h3>Reflektierende Oberfläche</h3><p>Die digitale Vorschau vermittelt Material, Kontur und Lichtwirkung des späteren Schildes.</p></article><article><span>03</span><h3>Schnell versandfertig</h3><p>Innerhalb von 10 Minuten nach deiner Bestellung gedruckt und versandfertig. DHL holt die Kennzeichen dreimal am Tag ab und verschickt sie.</p></article></div>
       </section>
 
       <section className="how-section" id="ablauf">

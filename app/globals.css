@@ -317,6 +317,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .payment-logos-list img { display: block; width: 66px; height: 42px; object-fit: contain; }
 .payment-logos-note { margin: 10px 0 0; color: var(--muted); font-size: .7rem; line-height: 1.5; }
 
+.shipping-notice { margin-top: 22px; padding: 20px; border: 1px solid #e7d68a; border-radius: 6px; background: #fffcf0; color: var(--ink); text-align: left; }
+.shipping-notice > img { display: block; width: 132px; height: auto; margin-bottom: 14px; }
+.shipping-notice h3 { margin: 0 0 8px; font-size: 1rem; font-weight: 750; letter-spacing: -.02em; }
+.shipping-notice p { margin: 0; color: #48535c; font-size: .8rem; line-height: 1.6; }
+.shipping-notice p + p { margin-top: 8px; }
+
 /* Embedded Stripe checkout */
 .real-checkout-page { min-height: 100svh; display: grid; grid-template-columns: minmax(0, .95fr) minmax(520px, 1.05fr); background: #fff; color: var(--ink); }
 .checkout-order-panel { min-height: 100svh; padding: 45px clamp(32px, 5vw, 80px); display: flex; flex-direction: column; background: radial-gradient(circle at 55% 45%, #f9fdff 0, #e7f4fd 62%, #d6ebf8 100%); }
