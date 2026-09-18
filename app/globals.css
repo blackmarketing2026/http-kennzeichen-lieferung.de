@@ -309,6 +309,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .checkout-launch li { display: flex; align-items: center; gap: 10px; color: #4d606b; font-size: .88rem; }
 .checkout-launch li svg { color: #15935a; }
 
+.payment-logos { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); }
+.payment-logos-heading { display: flex; align-items: center; gap: 7px; margin: 0 0 12px; color: var(--ink); font-size: .8rem; font-weight: 700; }
+.payment-logos-heading svg { flex-shrink: 0; color: var(--blue); }
+.payment-logos .payment-logos-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.payment-logos .payment-logos-list li { display: block; margin: 0; padding: 0; }
+.payment-logos-list img { display: block; width: 66px; height: 42px; object-fit: contain; }
+.payment-logos-note { margin: 10px 0 0; color: var(--muted); font-size: .7rem; line-height: 1.5; }
+
 /* Embedded Stripe checkout */
 .real-checkout-page { min-height: 100svh; display: grid; grid-template-columns: minmax(0, .95fr) minmax(520px, 1.05fr); background: #fff; color: var(--ink); }
 .checkout-order-panel { min-height: 100svh; padding: 45px clamp(32px, 5vw, 80px); display: flex; flex-direction: column; background: radial-gradient(circle at 55% 45%, #f9fdff 0, #e7f4fd 62%, #d6ebf8 100%); }

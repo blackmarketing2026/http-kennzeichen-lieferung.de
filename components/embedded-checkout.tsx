@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { AddressElement, Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { ArrowLeft, CheckCircle2, LoaderCircle, LockKeyhole } from 'lucide-react';
+import { PaymentLogos } from '@/components/payment-logos';
 import { LicensePlate } from '@/components/license-plate';
 import { formatPrice, getUnitPrice, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 
@@ -99,6 +100,7 @@ function PaymentForm({ selection }: { selection: CheckoutSelection }) {
       <button className="stripe-pay-button" type="submit" disabled={!stripe || isPaying}>
         {isPaying ? <><LoaderCircle className="spin" /> Zahlung wird verarbeitet</> : <><LockKeyhole /> Jetzt {formatPrice(total)} bezahlen</>}
       </button>
+      <PaymentLogos />
       <p className="stripe-secure"><LockKeyhole /> Verschlüsselte Zahlung direkt über Stripe Elements</p>
     </form>
   );
