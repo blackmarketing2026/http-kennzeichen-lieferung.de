@@ -14,13 +14,19 @@ function verifySignature(rawBody: string, signature: string | null, secret: stri
   return timingSafeEqual(a, b);
 }
 
+/** Confirmed real shape from the manufacturer (seen in manufacturer_webhook_events.raw):
+ * { "eventType": "DELIVERY_SHIPMENT", "delivery": { "id", "trackingCode" },
+ *   "order": { "id", "externalId" }, "eventTime": "..." }
+ * The type/event/top-level-externalId/trackingCode/tracking.code fields are kept as fallbacks
+ * in case other event types (e.g. PING) use a different shape. */
 type ManufacturerWebhookPayload = {
+  eventType?: string;
   type?: string;
   event?: string;
   orderId?: number;
-  order?: { id?: number };
+  order?: { id?: number; externalId?: string };
   deliveryId?: number;
-  delivery?: { id?: number };
+  delivery?: { id?: number; trackingCode?: string };
   externalId?: string;
   trackingCode?: string;
   tracking?: { code?: string };
@@ -54,7 +60,7 @@ export async function POST(request: Request) {
   }
   await ensureSchema();
 
-  const eventType = payload.type ?? payload.event ?? 'UNKNOWN';
+  const eventType = payload.eventType ?? payload.type ?? payload.event ?? 'UNKNOWN';
   const dedupeKey = webhookId ?? createHmac('sha256', webhookSecret).update(rawBody).digest('hex');
 
   const inserted = await query(
@@ -69,23 +75,24 @@ export async function POST(request: Request) {
   }
 
   try {
-    const manufacturerOrderId = payload.orderId ?? payload.order?.id ?? null;
-    const deliveryId = payload.deliveryId ?? payload.delivery?.id ?? null;
-    const trackingCode = payload.trackingCode ?? payload.tracking?.code ?? null;
+    const manufacturerOrderId = payload.order?.id ?? payload.orderId ?? null;
+    const deliveryId = payload.delivery?.id ?? payload.deliveryId ?? null;
+    const trackingCode = payload.delivery?.trackingCode ?? payload.trackingCode ?? payload.tracking?.code ?? null;
+    const externalId = payload.order?.externalId ?? payload.externalId ?? null;
 
     if (eventType === 'PING') {
       // Nur Erreichbarkeit bestätigen.
-    } else if (eventType === 'DELIVERY_SHIPMENT' && (manufacturerOrderId || payload.externalId)) {
+    } else if (eventType === 'DELIVERY_SHIPMENT' && (manufacturerOrderId || externalId)) {
       await query(
         `UPDATE orders SET status = 'shipped', tracking_code = COALESCE(?, tracking_code), shipped_at = NOW(), updated_at = NOW()
          WHERE (manufacturer_order_id = ? OR cart_id = ?) AND status <> 'shipped'`,
-        [trackingCode, manufacturerOrderId, payload.externalId ?? null],
+        [trackingCode, manufacturerOrderId, externalId],
       );
 
       if (trackingCode) {
         const matched = await query<{ id: string }>(
           `SELECT id FROM orders WHERE manufacturer_order_id = ? OR cart_id = ?`,
-          [manufacturerOrderId, payload.externalId ?? null],
+          [manufacturerOrderId, externalId],
         );
         const orderId = matched.rows[0]?.id;
         if (orderId) await sendShippingNotification(orderId, trackingCode, new URL(request.url).origin);
@@ -96,12 +103,19 @@ export async function POST(request: Request) {
          WHERE JSON_CONTAINS(manufacturer_delivery_ids, ?)`,
         [deliveryId, String(deliveryId)],
       );
-    } else if (eventType === 'DELIVERY_CANCELLATION' && (manufacturerOrderId || payload.externalId)) {
+    } else if (eventType === 'DELIVERY_CANCELLATION' && (manufacturerOrderId || externalId)) {
       await query(
         `UPDATE orders SET status = 'cancelled_by_manufacturer', updated_at = NOW()
          WHERE manufacturer_order_id = ? OR cart_id = ?`,
-        [manufacturerOrderId, payload.externalId ?? null],
+        [manufacturerOrderId, externalId],
       );
+    } else if (eventType !== 'PING') {
+      logEvent('warn', 'Kennzeichen-Webhook: unbekannter oder nicht anwendbarer Event-Typ, keine Aktion ausgeführt', {
+        webhookId,
+        eventType,
+        manufacturerOrderId,
+        externalId,
+      });
     }
 
     await query(`UPDATE manufacturer_webhook_events SET processed_at = NOW() WHERE dedupe_key = ?`, [dedupeKey]);
