@@ -69,6 +69,8 @@ const SCHEMA_STATEMENTS = [
     quantity INT NOT NULL,
     unit_price_cents INT NOT NULL,
     shipping_cents INT NOT NULL,
+    discount_cents INT NOT NULL DEFAULT 0,
+    promo_code VARCHAR(64) NULL,
     total_cents INT NOT NULL,
     customer_email VARCHAR(255),
     delivery_address JSON,
@@ -161,6 +163,8 @@ const SCHEMA_MIGRATIONS = [
   `ALTER TABLE orders ADD COLUMN confirmation_sent_at DATETIME NULL`,
   `ALTER TABLE orders ADD COLUMN invoice_sent_at DATETIME NULL`,
   `ALTER TABLE orders ADD COLUMN shipping_email_sent_at DATETIME NULL`,
+  `ALTER TABLE orders ADD COLUMN discount_cents INT NOT NULL DEFAULT 0`,
+  `ALTER TABLE orders ADD COLUMN promo_code VARCHAR(64) NULL`,
 ];
 
 const IGNORABLE_MIGRATION_ERROR_CODES = new Set([

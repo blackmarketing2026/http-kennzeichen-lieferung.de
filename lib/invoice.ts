@@ -10,6 +10,8 @@ export type InvoiceOrder = {
   quantity: number;
   unit_price_cents: number;
   shipping_cents: number;
+  discount_cents: number;
+  promo_code: string | null;
   total_cents: number;
   customer_email: string | null;
   invoice_address: {
@@ -130,7 +132,14 @@ export async function renderInvoicePdf(order: InvoiceOrder, invoice: InvoiceReco
     { text: 'Versand', ...columns.position },
     { text: formatPrice(order.shipping_cents / 100), ...columns.total, align: 'right' },
   ]);
-  cursorY -= 6;
+  cursorY -= 22;
+  if (order.discount_cents > 0) {
+    writeRow([
+      { text: order.promo_code ? `Rabatt (${order.promo_code})` : 'Rabatt', ...columns.position },
+      { text: `-${formatPrice(order.discount_cents / 100)}`, ...columns.total, align: 'right' },
+    ]);
+    cursorY -= 22;
+  }
   write('Alle Preise verstehen sich inklusive gesetzlicher Umsatzsteuer.', { size: 8, color: MUTED, gap: 16 });
   hr();
 
