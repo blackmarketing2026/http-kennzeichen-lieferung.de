@@ -32,7 +32,8 @@ export async function sendOrderConfirmationEmail(order: OrderEmailOrder, origin:
       <p>Hallo,</p>
       <p>wir haben deine Bestellung für das Kennzeichen <strong>${plateLabel(order)}</strong> erhalten.</p>
       <p>Rechnungssumme: <strong>${formatPrice(order.total_cents / 100)}</strong></p>
-      <p>Sobald deine Rechnung bereitsteht, senden wir sie dir in einer separaten E-Mail zu.</p>
+      <p>Sobald deine Rechnung fertig ist, bekommst du sie separat per E-Mail zugeschickt.</p>
+      <p>Sobald dein Kennzeichen gedruckt und versandt ist, bekommst du automatisch die Trackingnummer in einer separaten E-Mail.</p>
     `,
   });
 
