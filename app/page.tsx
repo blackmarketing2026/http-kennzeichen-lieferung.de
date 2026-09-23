@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowDown, ArrowRight, CarFront, Check, ChevronDown, Clock3, CreditCard, LockKeyhole, PackageCheck, ShieldCheck, Sparkles, User } from 'lucide-react';
 import { PaymentLogos } from '@/components/payment-logos';
 import { ShippingNotice } from '@/components/shipping-notice';
-import { LicensePlate, PlateSeals } from '@/components/license-plate';
+import { LicensePlate, LicensePlateEditor } from '@/components/license-plate';
 import { formatPrice, getUnitPrice, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { getPickupCountdown, type PickupCountdown } from '@/lib/pickup-countdown';
@@ -29,6 +29,7 @@ type PlateEditorProps = {
   numbers: string;
   suffix: string;
   color: PlateColor;
+  isMotorcycle: boolean;
   isSeason: boolean;
   isValid: boolean;
   onCityChange: (value: string) => void;
@@ -36,24 +37,11 @@ type PlateEditorProps = {
   onNumbersChange: (value: string) => void;
 };
 
-function PlateEditor({ city, letters, numbers, suffix, color, isSeason, isValid, onCityChange, onLettersChange, onNumbersChange }: PlateEditorProps) {
-  const lettersRef = useRef<HTMLInputElement>(null);
-  const numbersRef = useRef<HTMLInputElement>(null);
-
+function PlateEditor({ city, letters, numbers, suffix, color, isMotorcycle, isSeason, isValid, onCityChange, onLettersChange, onNumbersChange }: PlateEditorProps) {
+  const type: PlateType = isMotorcycle ? 'motorcycle' : isSeason ? 'season' : suffix === 'E' ? 'electric' : suffix === 'H' ? 'historic' : 'standard';
   return (
     <div className={`plate-editor-shell ${isValid ? 'is-valid' : 'is-invalid'}`}>
-      <div className="plate-editor-labels" aria-hidden="true"><span>Ort</span><span>Buchstaben</span><span>Zahlen</span></div>
-      <div className={`plate-editor ${color === 'carbon' ? 'is-carbon' : ''}`}>
-        <div className="plate-editor-eu"><span>✦</span><b>D</b></div>
-        <div className="plate-editor-fields">
-          <input aria-label="Ortskürzel" value={city} placeholder="B" maxLength={3} autoComplete="off" spellCheck={false} onChange={(event) => { onCityChange(event.target.value); if (event.target.value.replace(/[^A-Za-zÄÖÜäöü]/g, '').length >= 3) lettersRef.current?.focus(); }} />
-          <PlateSeals compact />
-          <input ref={lettersRef} aria-label="Erkennungsbuchstaben" value={letters} placeholder="AB" maxLength={2} autoComplete="off" spellCheck={false} onChange={(event) => { onLettersChange(event.target.value); if (event.target.value.replace(/[^A-Za-z]/g, '').length >= 2) numbersRef.current?.focus(); }} />
-          <input ref={numbersRef} aria-label="Erkennungsnummer" value={numbers} placeholder="123" maxLength={4} inputMode="numeric" pattern="[0-9]*" autoComplete="off" onChange={(event) => onNumbersChange(event.target.value)} onKeyDown={(event) => { if (event.key === 'Backspace' && !numbers) lettersRef.current?.focus(); }} />
-          {suffix && <strong className="plate-editor-suffix">{suffix}</strong>}
-          {isSeason && <span className="plate-editor-season"><b>04</b><i /><b>10</b></span>}
-        </div>
-      </div>
+      <LicensePlateEditor city={city} letters={letters} numbers={numbers} type={type} color={color} onCityChange={onCityChange} onLettersChange={onLettersChange} onNumbersChange={onNumbersChange} />
       <div className="plate-editor-feedback"><span className="live-dot" />{isValid ? 'Kombination ist bereit' : 'Bitte Kombination vervollständigen oder kürzen'}<em>{city.length + letters.length + numbers.length + suffix.length} Zeichen</em></div>
     </div>
   );
@@ -195,7 +183,7 @@ export default function Home() {
           <div className="config-controls">
             <div className="step-label"><b>01</b><span>Kombination eingeben</span></div>
             <p className="control-intro">Klicke direkt in das Kennzeichen und gib deine zugeteilte Kombination ein.</p>
-            <PlateEditor city={cityCode} letters={serialLetters} numbers={serialNumbers} suffix={suffix} color={plateColor} isSeason={plateType === 'season'} isValid={status} onCityChange={updateCity} onLettersChange={updateLetters} onNumbersChange={updateNumbers} />
+            <PlateEditor city={cityCode} letters={serialLetters} numbers={serialNumbers} suffix={suffix} color={plateColor} isMotorcycle={plateType === 'motorcycle'} isSeason={plateType === 'season'} isValid={status} onCityChange={updateCity} onLettersChange={updateLetters} onNumbersChange={updateNumbers} />
             <p className={`field-help ${status ? '' : 'is-error'}`}>{status ? 'Zahlen stehen immer am Ende. Die behördliche Verfügbarkeit wird nicht geprüft.' : `Die Kombination ist zu lang oder unvollständig${suffix ? ` – vor dem ${suffix} sind maximal 7 Zeichen erlaubt` : ''}.`}</p>
             <div className="step-label second"><b>02</b><span>Zusatz wählen</span></div>
             <div className="option-group addon-options" aria-label="Kennzeichenzusatz"><button type="button" className={!suffix && plateType === 'standard' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('')}><strong>–</strong><span>Ohne Zusatz</span><i /></button><button type="button" className={suffix === 'E' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('E')}><strong>E</strong><span>Elektro</span><i /></button><button type="button" className={suffix === 'H' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('H')}><strong>H</strong><span>Historisch</span><i /></button></div>

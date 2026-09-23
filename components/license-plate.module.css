@@ -1,0 +1,78 @@
+.plate.plate {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 760px);
+  min-width: 0;
+  min-height: 0;
+  max-height: none;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  filter: drop-shadow(0 2px 1px rgb(8 22 27 / 22%))
+    drop-shadow(0 15px 18px rgb(8 22 27 / 20%));
+  transition: transform 0.22s ease;
+}
+.plate.motorcycle {
+  width: min(70%, 280px);
+}
+.artwork {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.lettering {
+  font-family: 'Nummernschild', monospace;
+  font-weight: 400;
+}
+.plate.editor {
+  container-type: inline-size;
+  width: 100%;
+  margin: 10px auto 0;
+  filter: drop-shadow(0 2px 1px rgb(8 22 27 / 18%))
+    drop-shadow(0 9px 12px rgb(8 22 27 / 12%));
+}
+.plate.editor.motorcycle {
+  width: min(100%, 220px);
+}
+.input.input {
+  position: absolute;
+  z-index: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  outline: none;
+  background: transparent;
+  color: transparent;
+  caret-color: #0069d9;
+  font-family: 'Nummernschild', monospace;
+  font-size: 16px;
+  cursor: text;
+}
+.input:hover {
+  background: rgb(0 105 217 / 5%);
+}
+.input.input:focus {
+  outline: 2px solid #0069d9;
+  outline-offset: 1px;
+  background: rgb(0 105 217 / 7%);
+  color: #101412;
+  text-align: center;
+}
+.input::selection {
+  background: #0069d9;
+  color: #fff;
+}
+.editor:has(.input[data-field='0']:focus) text[data-field='0'],
+.editor:has(.input[data-field='1']:focus) text[data-field='1'],
+.editor:has(.input[data-field='2']:focus) text[data-field='2'] {
+  visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .plate.plate {
+    transition: none;
+  }
+}
