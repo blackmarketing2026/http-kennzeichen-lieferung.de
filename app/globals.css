@@ -191,6 +191,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .carbon-closeup > span { display: block; color: #627780; font-size: .7rem; font-weight: 750; letter-spacing: .05em; }
 .carbon-closeup > strong { display: block; margin-top: 5px; font-family: 'Nummernschild', monospace; font-size: 3.4rem; font-weight: 400; line-height: 1; background: url('/carbon-weave.png') center / 200px repeat; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; -webkit-text-stroke: .4px #151c22; filter: brightness(1.9) drop-shadow(0 1px 0 #e5e9eb) drop-shadow(0 2px 1px rgb(0 0 0 / 35%)); }
 .quantity-row { display: flex; align-items: center; gap: 16px; }
+.quantity-fixed { min-width: 108px; padding: 13px 16px; border-radius: 4px; background: var(--ink); color: #fff; text-align: center; font-size: .85rem; }
 .quantity-control { display: flex; border: 1px solid #bac8d0; border-radius: 4px; overflow: hidden; }
 .quantity-control button { width: 48px; height: 48px; border: 0; border-right: 1px solid #d6dfe4; background: #fff; font-weight: 800; cursor: pointer; }
 .quantity-control button:last-child { border-right: 0; }

@@ -1,4 +1,4 @@
-import { getUnitPrice, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
+import { getUnitPrice, isAvailableConfiguration, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 
 const PROMO_CODES = {
   TEST5: { totalCents: 500 },
@@ -19,6 +19,7 @@ export function getCheckoutPricing(
   quantity: 1 | 2 | 3,
   requestedCode: string | undefined,
 ): CheckoutPricing | null {
+  if (!isAvailableConfiguration(plateType, color, quantity)) return null;
   const promoCode = requestedCode?.trim().toUpperCase() || null;
   if (promoCode && !(promoCode in PROMO_CODES)) return null;
 

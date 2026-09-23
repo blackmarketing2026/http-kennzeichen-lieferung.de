@@ -1,7 +1,8 @@
 export type PlateType = 'standard' | 'motorcycle' | 'electric' | 'historic' | 'season';
 export type PlateColor = 'black' | 'carbon';
 
-export const SHIPPING_PRICE = 4.47;
+// Shipping is included in the displayed plate-package prices.
+export const SHIPPING_PRICE = 0;
 
 /** All prices in this file are consumer-facing gross prices (inkl. MwSt.), as required for B2C
  * price display in Germany (PAngV). License plates are taxed at the standard rate, not the
@@ -16,11 +17,11 @@ export const PRODUCTS: Record<PlateType, {
   prices: Record<1 | 2 | 3, number>;
   suffix?: 'E' | 'H';
 }> = {
-  standard: { label: 'Auto', shortLabel: 'Standard', size: '520 mm', format: 'long', prices: { 1: 2.77, 2: 2.62, 3: 2.56 } },
-  motorcycle: { label: 'Motorrad', shortLabel: 'Motorrad', size: 'zweizeilig', format: 'motorcycle', prices: { 1: 2.97, 2: 2.82, 3: 2.77 } },
-  electric: { label: 'E-Kennzeichen', shortLabel: 'Elektro', size: '520 mm', format: 'long', prices: { 1: 2.77, 2: 2.62, 3: 2.56 }, suffix: 'E' },
-  historic: { label: 'H-Kennzeichen', shortLabel: 'Historisch', size: '520 mm', format: 'long', prices: { 1: 2.77, 2: 2.62, 3: 2.56 }, suffix: 'H' },
-  season: { label: 'Saison', shortLabel: 'Saison', size: '520 mm', format: 'long', prices: { 1: 2.77, 2: 2.62, 3: 2.56 } },
+  standard: { label: 'Auto', shortLabel: 'Standard', size: '520 mm', format: 'long', prices: { 1: 14.95, 2: 14.95, 3: 14.95 } },
+  motorcycle: { label: 'Motorrad', shortLabel: 'Motorrad', size: 'zweizeilig', format: 'motorcycle', prices: { 1: 24.90, 2: 24.90, 3: 24.90 } },
+  electric: { label: 'E-Kennzeichen', shortLabel: 'Elektro', size: '520 mm', format: 'long', prices: { 1: 14.95, 2: 14.95, 3: 14.95 }, suffix: 'E' },
+  historic: { label: 'H-Kennzeichen', shortLabel: 'Historisch', size: '520 mm', format: 'long', prices: { 1: 14.95, 2: 14.95, 3: 14.95 }, suffix: 'H' },
+  season: { label: 'Saison', shortLabel: 'Saison', size: '520 mm', format: 'long', prices: { 1: 14.95, 2: 14.95, 3: 14.95 } },
 };
 
 export const formatPrice = (value: number) =>
@@ -34,6 +35,13 @@ const CARBON_PRICES = {
 export function getUnitPrice(plateType: PlateType, color: PlateColor, quantity: 1 | 2 | 3) {
   const product = PRODUCTS[plateType];
   return color === 'carbon' ? CARBON_PRICES[product.format][quantity] : product.prices[quantity];
+}
+
+export function isAvailableConfiguration(plateType: PlateType, color: PlateColor, quantity: number) {
+  if (!(plateType in PRODUCTS)) return false;
+  if (color !== 'black') return false;
+  if (plateType === 'motorcycle') return quantity === 1;
+  return quantity === 2;
 }
 
 export function isValidPlate(plate: string, plateType: PlateType) {

@@ -129,7 +129,7 @@ export async function renderInvoicePdf(order: InvoiceOrder, invoice: InvoiceReco
   cursorY -= 22;
 
   writeRow([
-    { text: 'Versand', ...columns.position },
+    { text: order.shipping_cents === 0 ? 'Versand (inklusive)' : 'Versand', ...columns.position },
     { text: formatPrice(order.shipping_cents / 100), ...columns.total, align: 'right' },
   ]);
   cursorY -= 22;

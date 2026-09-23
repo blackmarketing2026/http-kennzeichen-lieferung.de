@@ -223,8 +223,8 @@ export function EmbeddedCheckout({ selection }: { selection: CheckoutSelection }
         <Link className="checkout-logo" href="/"><Image src="/kennzeichen-lieferung-logo.png" alt="kennzeichen-lieferung.de" width={2172} height={724} priority /></Link>
         <div className="checkout-order-copy"><span>Deine Bestellung</span><h1>Genau dieses<br />Kennzeichen.</h1></div>
         <LicensePlate value={selection.plate} type={selection.plateType} color={selection.plateColor} className="real-checkout-plate" />
-        <div className="real-order-line"><div><strong>{selection.quantity} × {product.label}</strong><span>{selection.plate} · {product.size} · {selection.plateColor === 'carbon' ? 'Carbon' : 'Schwarz'}</span></div><strong>{formatPrice((pricing?.subtotalCents ?? Math.round(subtotal * 100)) / 100)}</strong></div>
-        <div className="real-order-line"><span>DHL-Versandpaket</span><strong>{formatPrice(SHIPPING_PRICE)}</strong></div>
+        <div className="real-order-line"><div><strong>{selection.quantity} × {product.label}</strong><span>{selection.plate} · {product.size} · Schwarz</span></div><strong>{formatPrice((pricing?.subtotalCents ?? Math.round(subtotal * 100)) / 100)}</strong></div>
+        <div className="real-order-line"><span>DHL-Versand</span><strong>Inklusive</strong></div>
         {pricing && pricing.discountCents > 0 && <div className="real-order-line real-order-discount"><span>Rabatt ({pricing.promoCode})</span><strong>−{formatPrice(pricing.discountCents / 100)}</strong></div>}
         <div className="real-order-total"><span>Gesamt</span><strong>{formatPrice(pricing ? pricing.totalCents / 100 : total)}</strong></div>
         <p className="checkout-scope">Du bestellst geprägte Schilder. Reservierung, Zulassung und amtliche Plaketten sind nicht enthalten.</p>

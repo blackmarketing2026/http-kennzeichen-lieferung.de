@@ -14,8 +14,9 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 const BASE_PLATE_TYPES = ['standard', 'motorcycle', 'season'] as const;
 const FAQS = [
   ['Ist die Bestellung eine Reservierung bei der Zulassungsstelle?', 'Nein. Du bestellst geprägte Kennzeichenschilder. Reservierung, Fahrzeugzulassung und amtliche Plaketten sind nicht enthalten.'],
-  ['Welche Kennzeichenarten kann ich konfigurieren?', 'Das Grundgerüst zeigt Auto-, Motorrad-, E-, H- und Saisonkennzeichen. Das finale Sortiment und verfügbare Maße werden vor dem Shop-Start verbindlich festgelegt.'],
+  ['Welche Kennzeichenarten kann ich konfigurieren?', 'Du kannst Auto-, Motorrad-, E-, H- und Saisonkennzeichen konfigurieren. Beim Motorrad erhältst du ein Schild, bei den anderen Varianten zwei Schilder.'],
   ['Welche Größen gibt es?', 'Für Standard-Autokennzeichen ist aktuell 520 mm hinterlegt. Weitere ein- und zweizeilige Formate sind in der bereitgestellten Preisinformation vorgesehen.'],
+  ['Was kosten die Kennzeichen?', 'Ein Motorradkennzeichen kostet 24,90 € für ein Schild. Auto-, E-, H- und Saisonkennzeichen kosten 29,90 € für zwei Schilder. Die Preise enthalten den DHL-Versand.'],
   ['Wie schnell wird versendet?', 'Wir machen deine Kennzeichen innerhalb von 10 Minuten nach deiner Bestellung versandfertig. DHL holt unsere Pakete dreimal am Tag ab: um 9, 12 und 16 Uhr. Sobald die Sendungsnummer vorliegt, erhältst du sie per E-Mail und kannst dein Paket live bei DHL verfolgen.'],
   ['Welche Zahlungsmethoden werden angeboten?', 'Im eingebetteten Stripe-Checkout werden die für diese Bestellung verfügbaren Zahlungsarten sicher direkt auf unserer Seite angezeigt.'],
 ];
@@ -62,8 +63,8 @@ export default function Home() {
   const [cityCode, setCityCode] = useState('OL');
   const [serialLetters, setSerialLetters] = useState('AB');
   const [serialNumbers, setSerialNumbers] = useState('123');
-  const [plateColor, setPlateColor] = useState<PlateColor>('black');
-  const [quantity, setQuantity] = useState<1 | 2 | 3>(2);
+  const plateColor: PlateColor = 'black';
+  const quantity: 1 | 2 = plateType === 'motorcycle' ? 1 : 2;
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
@@ -139,10 +140,10 @@ export default function Home() {
           </DialogHeader>
           <LicensePlate value={plateValue} type={plateType} color={plateColor} className="cart-plate" />
           <div className="cart-order-line">
-            <div><strong>{product.label}</strong><span>{product.size} · {plateColor === 'carbon' ? 'Carbon' : 'Schwarz'} · {quantity} {quantity === 1 ? 'Schild' : 'Schilder'}</span></div>
+            <div><strong>{product.label}</strong><span>{product.size} · Schwarz · {quantity} {quantity === 1 ? 'Schild' : 'Schilder'}</span></div>
             <strong>{formatPrice(plateSubtotal)}</strong>
           </div>
-          <div className="cart-order-line shipping"><span>DHL-Versandpaket</span><strong>{formatPrice(SHIPPING_PRICE)}</strong></div>
+          <div className="cart-order-line shipping"><span>DHL-Versand</span><strong>Inklusive</strong></div>
           <div className="cart-total"><span>Gesamt</span><strong>{formatPrice(total)}</strong></div>
           <button className="button button-wide" type="button" onClick={openCheckout}>Mit Stripe bezahlen <ArrowRight size={18} /></button>
           <PaymentLogos />
@@ -179,7 +180,6 @@ export default function Home() {
           <div className="config-preview">
             <div className="preview-meta"><span>{product.shortLabel}</span><span>{product.size}</span></div>
             <LicensePlate value={plateValue} type={plateType} color={plateColor} className="config-plate" />
-            {plateColor === 'carbon' && <div className="carbon-closeup"><span>CARBON · VERGRÖSSERTES MATERIALDETAIL</span><strong aria-hidden="true">{serialLetters || 'AB'} {serialNumbers || '123'}</strong></div>}
             <div className={`scan-status ${status ? 'is-valid' : ''}`}><span className="scan-line" /><div><Check size={16} /> Format {status ? 'erkannt' : 'prüfen'}</div><div><Check size={16} /> Kombination übernommen</div><div><Check size={16} /> Vorschau erstellt</div></div>
           </div>
           <div className="config-controls">
@@ -190,12 +190,9 @@ export default function Home() {
             <div className="step-label second"><b>02</b><span>Zusatz wählen</span></div>
             <div className="option-group addon-options" aria-label="Kennzeichenzusatz"><button type="button" className={!suffix && plateType === 'standard' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('')}><strong>–</strong><span>Ohne Zusatz</span><i /></button><button type="button" className={suffix === 'E' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('E')}><strong>E</strong><span>Elektro</span><i /></button><button type="button" className={suffix === 'H' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('H')}><strong>H</strong><span>Historisch</span><i /></button></div>
             {(plateType === 'motorcycle' || plateType === 'season') && <p className="field-help">E- und H-Zusatz sind in dieser Konfiguration nur beim Auto auswählbar.</p>}
-            <div className="step-label second"><b>03</b><span>Schriftfarbe wählen</span></div>
-            <div className="option-group color-options" aria-label="Schriftfarbe"><button type="button" className={plateColor === 'black' ? 'active' : ''} onClick={() => setPlateColor('black')}><i className="color-sample black">AB</i><span><strong>Schwarz</strong><small>Klassische Prägung</small></span></button><button type="button" className={plateColor === 'carbon' ? 'active' : ''} onClick={() => setPlateColor('carbon')}><i className="color-sample carbon">AB</i><span><strong>Carbon</strong><small>Strukturierte Optik</small></span></button></div>
-            <div className="step-label second"><b>04</b><span>Anzahl prüfen</span></div>
-            <div className="quantity-row"><div className="quantity-control" aria-label="Anzahl Kennzeichen">{([1, 2, 3] as const).map((number) => <button key={number} type="button" aria-pressed={quantity === number} onClick={() => setQuantity(number)}>{number}</button>)}</div><span>{quantity === 2 ? 'Vorne & hinten' : `${quantity} ${quantity === 1 ? 'Schild' : 'Schilder'}`}</span></div>
-            <p className="field-help"><strong>Ein drittes Kennzeichen für deinen Parkplatz?</strong> Markiere damit deinen Stellplatz – zum Beispiel im Parkhaus oder zu Hause. Wähle oben 3 Schilder, um ein zusätzliches Kennzeichen mit derselben Kombination mitzubestellen.</p>
-            <div className="price-card"><div><span>{quantity} × {product.label}, {product.size}, {plateColor === 'carbon' ? 'Carbon' : 'Schwarz'}</span><strong>{formatPrice(plateSubtotal)}</strong></div><div><span>DHL-Versandpaket</span><strong>{formatPrice(SHIPPING_PRICE)}</strong></div><div className="price-total"><span>Gesamt</span><strong>{formatPrice(total)}</strong></div><small>Preise gemäß bereitgestellter Preisinformation. Steuerangaben werden vor Veröffentlichung ergänzt.</small></div>
+            <div className="step-label second"><b>03</b><span>Lieferumfang</span></div>
+            <div className="quantity-row"><strong className="quantity-fixed">{quantity} {quantity === 1 ? 'Schild' : 'Schilder'}</strong><span>{quantity === 2 ? 'Für vorne und hinten' : 'Für dein Motorrad'}</span></div>
+            <div className="price-card"><div><span>{quantity} × {product.label}, {product.size}, Schwarz</span><strong>{formatPrice(plateSubtotal)}</strong></div><div><span>DHL-Versand</span><strong>Inklusive</strong></div><div className="price-total"><span>Gesamt</span><strong>{formatPrice(total)}</strong></div><small>Alle Preise inklusive gesetzlicher Mehrwertsteuer und Versand innerhalb Deutschlands.</small></div>
             <button className="button button-wide" type="button" onClick={openCheckout} disabled={!status}>Jetzt bestellen <ArrowRight size={19} /></button>
             <PaymentLogos />
             <ShippingNotice />
@@ -211,11 +208,11 @@ export default function Home() {
 
       <section className="how-section" id="ablauf">
         <div className="section-heading centered"><p className="eyebrow"><span /> Einfach bis zum Schluss</p><h2>Drei Schritte.<br />Ein klares Ergebnis.</h2></div>
-        <div className="steps"><article><b>1</b><div><h3>Kennzeichen eingeben</h3><p>Art, Kombination und Anzahl wählen. Du siehst jede Änderung sofort.</p></div></article><ArrowRight className="step-arrow" aria-hidden="true" /><article><b>2</b><div><h3>Auswahl prüfen</h3><p>Kombination, Ausführung, Größe, Anzahl und Gesamtpreis kontrollieren.</p></div></article><ArrowRight className="step-arrow" aria-hidden="true" /><article><b>3</b><div><h3>Sicher bezahlen</h3><p>Zahlung und Lieferadresse direkt in unserem eingebetteten Stripe-Checkout abschließen.</p></div></article></div>
+        <div className="steps"><article><b>1</b><div><h3>Kennzeichen eingeben</h3><p>Art und Kombination wählen. Du siehst jede Änderung sofort.</p></div></article><ArrowRight className="step-arrow" aria-hidden="true" /><article><b>2</b><div><h3>Auswahl prüfen</h3><p>Kombination, Ausführung, Lieferumfang und Gesamtpreis kontrollieren.</p></div></article><ArrowRight className="step-arrow" aria-hidden="true" /><article><b>3</b><div><h3>Sicher bezahlen</h3><p>Zahlung und Lieferadresse direkt in unserem eingebetteten Stripe-Checkout abschließen.</p></div></article></div>
       </section>
 
       <section className="checkout-section" id="checkout">
-        <div className="checkout-intro"><p className="eyebrow light"><span /> One-Page-Checkout</p><h2>Genau dieses<br />Kennzeichen.</h2><p>Deine Vorschau bleibt sichtbar, während du deine Bestellung abschließt.</p><LicensePlate value={plateValue} type={plateType} color={plateColor} className="checkout-plate" /><div className="checkout-summary"><span>{product.label} · {plateColor === 'carbon' ? 'Carbon' : 'Schwarz'} · {quantity} ×</span><strong>{formatPrice(total)}</strong></div></div>
+        <div className="checkout-intro"><p className="eyebrow light"><span /> One-Page-Checkout</p><h2>Genau dieses<br />Kennzeichen.</h2><p>Deine Vorschau bleibt sichtbar, während du deine Bestellung abschließt.</p><LicensePlate value={plateValue} type={plateType} color={plateColor} className="checkout-plate" /><div className="checkout-summary"><span>{product.label} · Schwarz · {quantity} ×</span><strong>{formatPrice(total)}</strong></div></div>
           <div className="checkout-form checkout-launch" aria-label="Checkout starten"><div className="form-heading"><span>Sicher bezahlen</span><em>Stripe Elements</em></div><div className="payment-placeholder"><CreditCard size={22} /><div><strong>Checkout auf unserer Seite</strong><span>Zahlungsdaten werden direkt und verschlüsselt von Stripe verarbeitet.</span></div></div><ul><li><Check size={17} /> Keine Weiterleitung zu stripe.com</li><li><Check size={17} /> Lieferadresse und Zahlung in einem Schritt</li><li><Check size={17} /> Servergeprüfter Gesamtbetrag</li></ul><button className="button button-wide" type="button" onClick={openCheckout} disabled={!status}>Zum sicheren Checkout · {formatPrice(total)}</button><small>Mit dem Klick öffnet sich unsere eigene Checkout-Seite.</small><PaymentLogos /></div>
       </section>
 

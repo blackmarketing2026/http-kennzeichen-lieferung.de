@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
 import { cookies } from 'next/headers';
 import Stripe from 'stripe';
-import { isValidPlate, PRODUCTS, type PlateColor, type PlateType } from '@/config/products';
+import { isAvailableConfiguration, isValidPlate, PRODUCTS, type PlateColor, type PlateType } from '@/config/products';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
 import { CUSTOMER_SESSION_COOKIE, verifyCustomerSessionToken } from '@/lib/customer-auth';
@@ -49,7 +49,7 @@ export async function POST(request: Request) {
   const quantity = Number(body.quantity) as 1 | 2 | 3;
   const plate = body.plate?.toUpperCase().replace(/\s+/g, ' ').trim() ?? '';
 
-  if (!PLATE_TYPES.includes(plateType) || !['black', 'carbon'].includes(color) || ![1, 2, 3].includes(quantity) || !isValidPlate(plate, plateType)) {
+  if (!PLATE_TYPES.includes(plateType) || !isAvailableConfiguration(plateType, color, quantity) || !isValidPlate(plate, plateType)) {
     return Response.json({ error: 'Bitte prüfe Kennzeichenart, Kombination und Anzahl.' }, { status: 400 });
   }
 
