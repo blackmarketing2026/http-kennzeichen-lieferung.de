@@ -8,6 +8,7 @@ import { ArrowDown, ArrowRight, CarFront, Check, ChevronDown, CreditCard, LockKe
 import { PaymentLogos } from '@/components/payment-logos';
 import { ShippingNotice } from '@/components/shipping-notice';
 import { LicensePlate, PlateSeals } from '@/components/license-plate';
+import { WithdrawalNotice } from '@/components/withdrawal-notice';
 import { formatPrice, getUnitPrice, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
@@ -187,6 +188,7 @@ export default function Home() {
             <p className="control-intro">Klicke direkt in das Kennzeichen und gib deine zugeteilte Kombination ein.</p>
             <PlateEditor city={cityCode} letters={serialLetters} numbers={serialNumbers} suffix={suffix} color={plateColor} isSeason={plateType === 'season'} isValid={status} onCityChange={updateCity} onLettersChange={updateLetters} onNumbersChange={updateNumbers} />
             <p className={`field-help ${status ? '' : 'is-error'}`}>{status ? 'Zahlen stehen immer am Ende. Die behördliche Verfügbarkeit wird nicht geprüft.' : `Die Kombination ist zu lang oder unvollständig${suffix ? ` – vor dem ${suffix} sind maximal 7 Zeichen erlaubt` : ''}.`}</p>
+            <WithdrawalNotice />
             <div className="step-label second"><b>02</b><span>Zusatz wählen</span></div>
             <div className="option-group addon-options" aria-label="Kennzeichenzusatz"><button type="button" className={!suffix && plateType === 'standard' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('')}><strong>–</strong><span>Ohne Zusatz</span><i /></button><button type="button" className={suffix === 'E' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('E')}><strong>E</strong><span>Elektro</span><i /></button><button type="button" className={suffix === 'H' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('H')}><strong>H</strong><span>Historisch</span><i /></button></div>
             {(plateType === 'motorcycle' || plateType === 'season') && <p className="field-help">E- und H-Zusatz sind in dieser Konfiguration nur beim Auto auswählbar.</p>}

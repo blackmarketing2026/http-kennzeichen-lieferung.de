@@ -11,6 +11,7 @@ import { ShippingNotice } from '@/components/shipping-notice';
 import { LicensePlate } from '@/components/license-plate';
 import { formatPrice, getUnitPrice, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import type { CheckoutPricing } from '@/lib/checkout-pricing';
+import { WithdrawalNotice } from '@/components/withdrawal-notice';
 
 type CheckoutSelection = { plate: string; plateType: PlateType; plateColor: PlateColor; quantity: 1 | 2 | 3 };
 type PaymentIntentResponse = { error?: string; clientSecret?: string; paymentIntentId?: string; publishableKey?: string; pricing?: CheckoutPricing };
@@ -142,6 +143,7 @@ function PaymentForm({ selection, pricing, onApplyPromo }: {
       <div className="stripe-element-group"><span>Lieferadresse</span><AddressElement options={{ mode: 'shipping', allowedCountries: ['DE'], fields: { phone: 'auto' }, defaultValues: { address: { country: 'DE' } } }} /></div>
       <div className="stripe-element-group"><span>Zahlungsart</span><PaymentElement options={{ layout: 'tabs' }} /></div>
       {message && <p className="checkout-error" role="alert">{message}</p>}
+      <WithdrawalNotice />
       <button className="stripe-pay-button" type="submit" disabled={!stripe || isPaying || isApplyingPromo || !promoReady}>
         {isPaying ? <><LoaderCircle className="spin" /> Zahlung wird verarbeitet</> : <><LockKeyhole /> Jetzt {formatPrice(pricing.totalCents / 100)} bezahlen</>}
       </button>

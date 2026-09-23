@@ -8,6 +8,7 @@ export function SiteLegalFooter() {
       <nav aria-label="Rechtliche Informationen">
         <Link href="/impressum">Impressum</Link>
         <Link href="/datenschutz">Datenschutz</Link>
+        <Link href="/widerruf">Widerruf</Link>
         <CookieSettingsButton />
       </nav>
     </div>

@@ -18,6 +18,7 @@
 .legal-page address { font-style: normal; }
 .legal-page section a { color: var(--blue-dark); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
 .legal-page code { padding: 2px 5px; border-radius: 3px; background: #e7f1f8; color: #24465e; font-size: .86em; }
+.legal-page .withdrawal-notice { margin: 48px 0 42px; }
 
 .cookie-dialog { position: fixed; inset: 0; width: min(640px, calc(100% - 32px)); max-height: min(90dvh, 850px); margin: auto; padding: clamp(24px, 5vw, 36px); overflow: auto; border: 1px solid #d5e4ec; border-radius: 16px; background: #fff; color: var(--ink); box-shadow: 0 30px 100px rgb(3 21 35 / 32%); }
 .cookie-dialog::backdrop { background: rgb(3 21 35 / 62%); backdrop-filter: blur(5px); }

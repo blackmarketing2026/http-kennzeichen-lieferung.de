@@ -169,6 +169,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .plate-fields.compact input { height: 48px; }
 .field-help { color: #7a8992; font-size: .75rem; margin: 9px 0; }
 .field-help.is-error { color: #b53939; font-weight: 650; }
+.withdrawal-notice { margin: 20px 0 24px; padding: 20px 22px; border: 1px solid #a8cbe5; border-left: 5px solid var(--blue); border-radius: 8px; background: #f0f8ff; color: #17394e; box-shadow: 0 8px 24px rgb(0 63 124 / 6%); }
+.withdrawal-notice p { margin: 0; font-size: .88rem; line-height: 1.65; }
+.withdrawal-notice p + p { margin-top: 11px; }
+.withdrawal-notice .withdrawal-notice-title { color: #0a3553; font-size: 1rem; font-weight: 800; line-height: 1.35; }
+.withdrawal-notice strong { color: #0a3553; }
+.withdrawal-notice a { color: #004da8; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
 .option-group { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
 .option-group button { position: relative; min-height: 62px; padding: 10px 12px; border: 1px solid #c9d5dc; border-radius: 8px; background: #fff; color: #52636e; cursor: pointer; transition: border-color .18s, box-shadow .18s, transform .18s, background .18s; }
 .option-group button:hover:not(:disabled) { border-color: #7da2bc; transform: translateY(-2px); box-shadow: 0 9px 20px rgb(6 22 34 / 8%); }
@@ -369,6 +375,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .stripe-element-group { margin-bottom: 25px; }
 .stripe-element-group > span { display: block; margin-bottom: 9px; color: #485663; font-size: .78rem; font-weight: 700; }
 .real-payment-form .stripe-pay-button { margin-top: 28px; min-height: 52px; background: var(--blue); }
+.real-payment-form .withdrawal-notice { margin: 24px 0 0; }
 .real-payment-form .stripe-pay-button:hover { background: var(--blue-dark); }
 .real-payment-form .stripe-pay-button svg { width: 18px; }
 .checkout-error { margin: 18px 0 0; padding: 12px 14px; border-radius: 5px; background: #fff0f0; color: #aa2525; font-size: .78rem; line-height: 1.5; }
