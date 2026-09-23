@@ -96,22 +96,23 @@ export async function POST(request: Request) {
       anzahl: String(quantity),
       cartId,
       rabattcode: pricing.promoCode ?? '',
+      parkplatzkennzeichen: quantity === 3 ? '1' : '0',
     };
     const intentId = existingOrder?.stripe_payment_intent_id ?? body.paymentIntentId;
     let paymentIntent: Stripe.PaymentIntent;
     if (typeof intentId === 'string') {
       const current = await stripe.paymentIntents.retrieve(intentId);
       if (current.metadata.cartId !== cartId || current.metadata.kennzeichen !== plate ||
-          current.metadata.kennzeichenart !== product.label || current.metadata.anzahl !== String(quantity) ||
+          current.metadata.kennzeichenart !== product.label ||
           current.metadata.schriftfarbe !== metadata.schriftfarbe) {
         return Response.json({ error: 'Ungültige Bestelldaten.' }, { status: 400 });
       }
       if (current.status !== 'requires_payment_method') {
-        return Response.json({ error: 'Die Zahlung wird bereits verarbeitet. Der Rabattcode kann nicht mehr geändert werden.' }, { status: 409 });
+        return Response.json({ error: 'Die Zahlung wird bereits verarbeitet. Die Bestellung kann nicht mehr geändert werden.' }, { status: 409 });
       }
-      paymentIntent = current.amount === pricing.totalCents && current.metadata.rabattcode === metadata.rabattcode
+      paymentIntent = current.amount === pricing.totalCents && current.metadata.rabattcode === metadata.rabattcode && current.metadata.anzahl === String(quantity)
         ? current
-        : await stripe.paymentIntents.update(intentId, { amount: pricing.totalCents, metadata });
+        : await stripe.paymentIntents.update(intentId, { amount: pricing.totalCents, metadata, description: `${quantity} × ${product.label} – ${plate}${quantity === 3 ? ' (inkl. Parkplatz-Kennzeichen)' : ''}` });
     } else {
       // Stripe invoices can credit this PaymentIntent only when the payment belongs to
       // the same Stripe Customer. The email and address arrive during confirmation.

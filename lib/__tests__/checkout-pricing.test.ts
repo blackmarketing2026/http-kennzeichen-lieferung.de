@@ -42,7 +42,15 @@ describe('checkout pricing', () => {
   it('rejects unavailable quantities and carbon', () => {
     expect(getCheckoutPricing('motorcycle', 'black', 2, undefined)).toBeNull();
     expect(getCheckoutPricing('standard', 'black', 1, undefined)).toBeNull();
-    expect(getCheckoutPricing('season', 'black', 3, undefined)).toBeNull();
     expect(getCheckoutPricing('standard', 'carbon', 2, undefined)).toBeNull();
+  });
+
+  it.each(['standard', 'electric', 'historic', 'season'] as const)('adds one parking plate to %s with the server-side unit price', (type) => {
+    expect(getCheckoutPricing(type, 'black', 3, undefined)).toMatchObject({ unitPriceCents: 1495, subtotalCents: 4485, shippingCents: 0, totalCents: 4485 });
+    expect(getCheckoutPricing(type, 'black', 2, undefined)?.totalCents).toBe(2990);
+  });
+
+  it('keeps an applied promotion consistent when the parking extra is added', () => {
+    expect(getCheckoutPricing('standard', 'black', 3, 'TEST5')).toMatchObject({ subtotalCents: 4485, discountCents: 3985, totalCents: 500 });
   });
 });

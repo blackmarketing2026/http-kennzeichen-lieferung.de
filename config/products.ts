@@ -41,7 +41,7 @@ export function isAvailableConfiguration(plateType: PlateType, color: PlateColor
   if (!(plateType in PRODUCTS)) return false;
   if (color !== 'black') return false;
   if (plateType === 'motorcycle') return quantity === 1;
-  return quantity === 2;
+  return quantity === 2 || quantity === 3;
 }
 
 export function isValidPlate(plate: string, plateType: PlateType) {

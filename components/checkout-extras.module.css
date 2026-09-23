@@ -1,0 +1,214 @@
+.countdown {
+  margin: 24px 0;
+  padding: 20px;
+  border: 1px solid #cbdfee;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #eff8ff, #f8fcff);
+  color: #0b2638;
+}
+.countdownHeading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #075eb3;
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+.countdownTime {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+.countdownTime strong {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.05em;
+}
+.countdownTime span {
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+.countdown p {
+  margin: 10px 0 0;
+  color: #586d7a;
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+.selectedExtra {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+  justify-content: space-between;
+  color: #335946;
+  font-size: 0.78rem;
+}
+.selectedExtra button {
+  padding: 8px 10px;
+  background: white;
+  border: 1px solid #bdd6e9;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.offerDialog.offerDialog {
+  display: block;
+  width: min(540px, calc(100vw - 28px));
+  max-width: 540px;
+  max-height: calc(100dvh - 28px);
+  padding: 0;
+  overflow-y: auto;
+  border-radius: 18px;
+  background: #fff;
+  color: #102432;
+  box-shadow: 0 24px 90px #06162240;
+}
+.close {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #ffffffa0;
+  border-radius: 50%;
+  background: #ffffffeb;
+  cursor: pointer;
+}
+.offerImage {
+  position: relative;
+}
+.offerImage img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.9;
+  object-fit: cover;
+  object-position: center 38%;
+}
+.offerImage > span {
+  position: absolute;
+  bottom: 10px;
+  left: 14px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #fff;
+  background: #061622a8;
+  font-size: 0.6rem;
+}
+.offerContent {
+  padding: 25px 30px 20px;
+}
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 12px;
+  color: #0069d9;
+  font-size: 0.69rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.offerTitle.offerTitle {
+  font-size: clamp(1.8rem, 5vw, 2.45rem);
+  line-height: 1.06;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+.offerDescription.offerDescription {
+  margin-top: 13px;
+  color: #566d7c;
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+.offerDescription strong {
+  color: #183446;
+  white-space: nowrap;
+}
+.benefits {
+  margin: 16px 0;
+  display: grid;
+  gap: 6px;
+  color: #335946;
+  font-size: 0.76rem;
+}
+.benefits span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.offerPrice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 7px 12px;
+  margin: 17px 0;
+}
+.offerPrice strong {
+  font-size: 1.75rem;
+  letter-spacing: -0.05em;
+}
+.offerPrice span {
+  color: #73808a;
+  font-size: 0.68rem;
+}
+.addButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 49px;
+  border: 0;
+  border-radius: 8px;
+  background: #0069d9;
+  color: #fff;
+  font-weight: 750;
+  cursor: pointer;
+}
+.decline {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 0;
+  border: 0;
+  background: transparent;
+  color: #566c7a;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+.mounting {
+  margin: 5px 0 0;
+  color: #82919b;
+  font-size: 0.64rem;
+  text-align: center;
+}
+.offerError {
+  color: #b02d38;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+.offerDialog button:disabled,
+.selectedExtra button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+@media (max-width: 480px) {
+  .offerContent {
+    padding: 21px 21px 16px;
+  }
+  .offerImage img {
+    aspect-ratio: 2.1;
+  }
+  .selectedExtra {
+    flex-wrap: wrap;
+  }
+}

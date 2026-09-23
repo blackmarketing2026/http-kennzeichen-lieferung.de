@@ -11,16 +11,18 @@ import { ShippingNotice } from '@/components/shipping-notice';
 import { LicensePlate } from '@/components/license-plate';
 import { formatPrice, getUnitPrice, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import type { CheckoutPricing } from '@/lib/checkout-pricing';
-import { WithdrawalNotice } from '@/components/withdrawal-notice';
+import { ShippingCountdown } from '@/components/shipping-countdown';
 import { ComplianceNotice } from '@/components/compliance-notice';
+import { ParkingUpsell } from '@/components/parking-upsell';
 
 type CheckoutSelection = { plate: string; plateType: PlateType; plateColor: PlateColor; quantity: 1 | 2 | 3 };
 type PaymentIntentResponse = { error?: string; clientSecret?: string; paymentIntentId?: string; publishableKey?: string; pricing?: CheckoutPricing };
 
-function PaymentForm({ selection, pricing, onApplyPromo }: {
+function PaymentForm({ selection, pricing, onApplyPromo, onChangeQuantity }: {
   selection: CheckoutSelection;
   pricing: CheckoutPricing;
   onApplyPromo: (code: string) => Promise<CheckoutPricing>;
+  onChangeQuantity: (quantity: 2 | 3) => Promise<CheckoutPricing>;
 }) {
   const stripe = useStripe();
   const elements = useElements();
@@ -33,9 +35,34 @@ function PaymentForm({ selection, pricing, onApplyPromo }: {
   const [promoError, setPromoError] = useState(false);
   const [isApplyingPromo, setIsApplyingPromo] = useState(false);
   const [promoReady, setPromoReady] = useState(true);
+  const [isUpdatingExtra, setIsUpdatingExtra] = useState(false);
+  const changingExtra = useRef(false);
+
+  async function changeParkingExtra(selected: boolean) {
+    if (!elements || isPaying || isApplyingPromo || changingExtra.current) return false;
+    changingExtra.current = true;
+    setIsUpdatingExtra(true);
+    setMessage('');
+    try {
+      await onChangeQuantity(selected ? 3 : 2);
+      const update = await elements.fetchUpdates();
+      if (update.error) throw new Error(update.error.message);
+      setPromoReady(true);
+      return true;
+    } catch (error) {
+      // A request may have reached Stripe even if its response was lost. Block
+      // payment until a subsequent successful update synchronizes the amount.
+      setPromoReady(false);
+      setMessage(error instanceof Error ? error.message : 'Die Bestellung konnte nicht aktualisiert werden.');
+      return false;
+    } finally {
+      changingExtra.current = false;
+      setIsUpdatingExtra(false);
+    }
+  }
 
   async function applyPromo(code: string) {
-    if (!elements || isApplyingPromo || isPaying) return;
+    if (!elements || isApplyingPromo || isPaying || changingExtra.current) return;
     setIsApplyingPromo(true);
     setPromoMessage('');
     setPromoError(false);
@@ -60,7 +87,7 @@ function PaymentForm({ selection, pricing, onApplyPromo }: {
 
   async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!stripe || !elements || isPaying || isApplyingPromo || !promoReady) return;
+    if (!stripe || !elements || isPaying || isApplyingPromo || changingExtra.current || !promoReady) return;
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
       setMessage('Bitte gib eine gültige E-Mail-Adresse ein.');
       return;
@@ -131,21 +158,22 @@ function PaymentForm({ selection, pricing, onApplyPromo }: {
     <form className="real-payment-form" onSubmit={handleSubmit}>
       <div className="secure-checkout-heading"><div><span>Sicherer Checkout</span><strong>Zahlungs- und Lieferdaten</strong></div><LockKeyhole /></div>
       <p className="checkout-account-hint">Du bestellst als Gast – kein Konto nötig. Schon Kunde? <Link href="/konto/login">Melde dich an</Link>, um Bestellungen und Rechnungen später einzusehen.</p>
+      {selection.plateType !== 'motorcycle' && <ParkingUpsell plate={selection.plate} priceCents={pricing.unitPriceCents} selected={selection.quantity === 3} busy={isUpdatingExtra} disabled={!stripe || !elements || isPaying || isApplyingPromo} onChange={changeParkingExtra} />}
       <div className="checkout-promo">
         <label htmlFor="checkout-promo-code">Rabattcode</label>
         <div className="checkout-promo-row">
           <input id="checkout-promo-code" type="text" value={promoInput} onChange={(event) => setPromoInput(event.target.value)} placeholder="Code eingeben" autoComplete="off" maxLength={64} />
-          <button type="button" onClick={() => applyPromo(promoInput)} disabled={!promoInput.trim() || isApplyingPromo || isPaying}>{isApplyingPromo ? 'Prüfe …' : 'Einlösen'}</button>
+          <button type="button" onClick={() => applyPromo(promoInput)} disabled={!promoInput.trim() || isApplyingPromo || isPaying || isUpdatingExtra}>{isApplyingPromo ? 'Prüfe …' : 'Einlösen'}</button>
         </div>
-        {pricing.promoCode && <button className="checkout-promo-remove" type="button" onClick={() => applyPromo('')} disabled={isApplyingPromo || isPaying}>Rabattcode entfernen</button>}
+        {pricing.promoCode && <button className="checkout-promo-remove" type="button" onClick={() => applyPromo('')} disabled={isApplyingPromo || isPaying || isUpdatingExtra}>Rabattcode entfernen</button>}
         {promoMessage && <output className={promoError ? 'checkout-promo-message is-error' : 'checkout-promo-message'}>{promoMessage}</output>}
       </div>
       <label className="checkout-email">E-Mail-Adresse<input type="email" value={email} onChange={(event) => setEmail(event.target.value)} autoComplete="email" required /></label>
       <div className="stripe-element-group"><span>Lieferadresse</span><AddressElement options={{ mode: 'shipping', allowedCountries: ['DE'], fields: { phone: 'auto' }, defaultValues: { address: { country: 'DE' } } }} /></div>
       <div className="stripe-element-group"><span>Zahlungsart</span><PaymentElement options={{ layout: 'tabs' }} /></div>
       {message && <p className="checkout-error" role="alert">{message}</p>}
-      <WithdrawalNotice />
-      <button className="stripe-pay-button" type="submit" disabled={!stripe || isPaying || isApplyingPromo || !promoReady}>
+      <ShippingCountdown />
+      <button className="stripe-pay-button" type="submit" disabled={!stripe || isPaying || isApplyingPromo || isUpdatingExtra || !promoReady}>
         {isPaying ? <><LoaderCircle className="spin" /> Zahlung wird verarbeitet</> : <><LockKeyhole /> Jetzt {formatPrice(pricing.totalCents / 100)} bezahlen</>}
       </button>
       <PaymentLogos />
@@ -154,7 +182,9 @@ function PaymentForm({ selection, pricing, onApplyPromo }: {
   );
 }
 
-export function EmbeddedCheckout({ selection }: { selection: CheckoutSelection }) {
+export function EmbeddedCheckout({ selection: initialSelection }: { selection: CheckoutSelection }) {
+  const [quantity, setQuantity] = useState(initialSelection.quantity);
+  const selection = { ...initialSelection, quantity };
   const [clientSecret, setClientSecret] = useState('');
   const [paymentIntentId, setPaymentIntentId] = useState('');
   const [publishableKey, setPublishableKey] = useState('');
@@ -171,7 +201,7 @@ export function EmbeddedCheckout({ selection }: { selection: CheckoutSelection }
     fetch('/api/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ plate: selection.plate, plateType: selection.plateType, color: selection.plateColor, quantity: selection.quantity, cartId: cartId.current }),
+      body: JSON.stringify({ plate: initialSelection.plate, plateType: initialSelection.plateType, color: initialSelection.plateColor, quantity: initialSelection.quantity, cartId: cartId.current }),
       signal: controller.signal,
     })
       .then(async (response) => {
@@ -187,9 +217,9 @@ export function EmbeddedCheckout({ selection }: { selection: CheckoutSelection }
         if (requestError.name !== 'AbortError') setError(requestError.message);
       });
     return () => controller.abort();
-  }, [selection.plate, selection.plateType, selection.plateColor, selection.quantity]);
+  }, [initialSelection.plate, initialSelection.plateType, initialSelection.plateColor, initialSelection.quantity]);
 
-  async function applyPromoCode(code: string): Promise<CheckoutPricing> {
+  async function updateCheckout(code: string, nextQuantity = quantity): Promise<CheckoutPricing> {
     if (!cartId.current || !paymentIntentId) throw new Error('Checkout ist noch nicht bereit.');
     const response = await fetch('/api/create-payment-intent', {
       method: 'POST',
@@ -198,7 +228,7 @@ export function EmbeddedCheckout({ selection }: { selection: CheckoutSelection }
         plate: selection.plate,
         plateType: selection.plateType,
         color: selection.plateColor,
-        quantity: selection.quantity,
+        quantity: nextQuantity,
         cartId: cartId.current,
         paymentIntentId,
         promoCode: code,
@@ -214,6 +244,7 @@ export function EmbeddedCheckout({ selection }: { selection: CheckoutSelection }
       throw new Error('Zahlungsdaten konnten nicht aktualisiert werden.');
     }
     setPricing(data.pricing);
+    setQuantity(nextQuantity);
     return data.pricing;
   }
 
@@ -226,7 +257,7 @@ export function EmbeddedCheckout({ selection }: { selection: CheckoutSelection }
         <Link className="checkout-logo" href="/"><Image src="/kennzeichen-lieferung-logo.png" alt="kennzeichen-lieferung.de" width={2172} height={724} priority /></Link>
         <div className="checkout-order-copy"><span>Deine Bestellung</span><h1>Genau dieses<br />Kennzeichen.</h1></div>
         <LicensePlate value={selection.plate} type={selection.plateType} color={selection.plateColor} className="real-checkout-plate" />
-        <div className="real-order-line"><div><strong>{selection.quantity} × {product.label}</strong><span>{selection.plate} · {product.size} · Schwarz</span></div><strong>{formatPrice((pricing?.subtotalCents ?? Math.round(subtotal * 100)) / 100)}</strong></div>
+        <div className="real-order-line"><div><strong>{selection.quantity} × {product.label}</strong><span>{selection.plate} · {product.size} · Schwarz</span>{selection.quantity === 3 && <span>Davon 1 zusätzliches Parkplatz-Kennzeichen</span>}</div><strong>{formatPrice((pricing?.subtotalCents ?? Math.round(subtotal * 100)) / 100)}</strong></div>
         <div className="real-order-line"><span>DHL-Versand</span><strong>Inklusive</strong></div>
         {pricing && pricing.discountCents > 0 && <div className="real-order-line real-order-discount"><span>Rabatt ({pricing.promoCode})</span><strong>−{formatPrice(pricing.discountCents / 100)}</strong></div>}
         <div className="real-order-total"><span>Gesamt</span><strong>{formatPrice(pricing ? pricing.totalCents / 100 : total)}</strong></div>
@@ -242,7 +273,7 @@ export function EmbeddedCheckout({ selection }: { selection: CheckoutSelection }
             locale: 'de',
             appearance: { theme: 'stripe', variables: { colorPrimary: '#0069d9', colorText: '#061622', borderRadius: '6px', fontFamily: 'Arial, sans-serif' } },
           }}>
-            <PaymentForm selection={selection} pricing={pricing} onApplyPromo={applyPromoCode} />
+            <PaymentForm selection={selection} pricing={pricing} onApplyPromo={(code) => updateCheckout(code)} onChangeQuantity={(nextQuantity) => updateCheckout(pricing.promoCode ?? '', nextQuantity)} />
           </Elements>
         ) : (
           <div className="checkout-loading"><LoaderCircle className="spin" /><strong>Sicherer Checkout wird vorbereitet</strong><span>Der Gesamtbetrag wird serverseitig geprüft.</span></div>
