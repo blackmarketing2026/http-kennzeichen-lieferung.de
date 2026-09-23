@@ -67,8 +67,8 @@ export function renderEmailTemplate(options: {
         <td align="center">
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(6,22,34,0.08);">
             <tr>
-              <td style="background-color:#004da8;background:linear-gradient(135deg,#0069d9,#004da8);padding:28px 32px;text-align:center;">
-                <img src="${logoUrl}" alt="Kennzeichen-Lieferung" height="40" style="height:40px;display:inline-block;" />
+              <td style="background-color:#004da8;background:linear-gradient(135deg,#0069d9,#004da8);padding:16px 24px;text-align:center;">
+                <img src="${logoUrl}" alt="Kennzeichen-Lieferung" width="360" height="120" style="width:360px;max-width:100%;height:auto;display:block;margin:0 auto;" />
               </td>
             </tr>
             <tr>
