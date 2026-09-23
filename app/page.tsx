@@ -236,7 +236,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer><div className="footer-brand"><span>kennzeichen-lieferung<span>.de</span></span><p>Modern. Sicher. Zuverlässig.</p></div><div className="footer-note">Grundgerüst · Rechtliche Angaben, Kontakt und finale Lieferinformationen werden vor Veröffentlichung ergänzt.</div><div className="footer-links"><Link href="/konto/login">Mein Konto</Link><a href="#top" aria-label="Nach oben">Nach oben ↑</a></div></footer>
+      <footer><div className="footer-brand"><span>kennzeichen-lieferung<span>.de</span></span><p>Modern. Sicher. Zuverlässig.</p></div><div className="footer-note">Ein Angebot von Function Concept. Angaben zum Betreiber und zur Verarbeitung Ihrer Daten finden Sie im Impressum und in der Datenschutzerklärung.</div><div className="footer-links"><Link href="/konto/login">Mein Konto</Link><a href="#top" aria-label="Nach oben">Nach oben ↑</a></div></footer>
       <div className="mobile-bar"><div><span>{plateValue}{suffix && ` ${suffix}`}</span><strong>{formatPrice(total)}</strong></div><button type="button" onClick={openCheckout} disabled={!status}>Bestellen <ArrowRight size={17} /></button></div>
     </main>
   );
