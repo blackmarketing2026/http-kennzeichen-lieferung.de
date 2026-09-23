@@ -2,8 +2,8 @@ import Stripe from 'stripe';
 import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
 import { submitOrderToManufacturer } from '@/lib/manufacturer-order';
 import { logEvent } from '@/lib/logger';
-import { ensureInvoiceForOrder, renderInvoicePdf, type InvoiceOrder } from '@/lib/invoice';
 import { sendInvoiceEmail, sendOrderConfirmationEmail, type OrderEmailOrder } from '@/lib/order-emails';
+import { ensurePaidStripeInvoice, fetchStripeInvoicePdf, type StripeInvoiceOrder } from '@/lib/stripe-invoice';
 
 export const runtime = 'nodejs';
 
@@ -64,12 +64,19 @@ export async function POST(request: Request) {
       return Response.json({ received: true });
     }
 
+    let invoiceError: unknown = null;
     if (order.status === 'paid') {
-      await sendOrderConfirmationAndInvoice(order.id, new URL(request.url).origin);
+      try {
+        await sendOrderConfirmationAndInvoice(stripe, paymentIntent, order.id, new URL(request.url).origin);
+      } catch (error) {
+        invoiceError = error;
+        logEvent('error', 'Stripe-Rechnung konnte nicht erstellt/versendet werden', { orderId: order.id, error: error instanceof Error ? error.message : 'unbekannt' });
+      }
     }
 
     const result = await submitOrderToManufacturer(order.id);
     logEvent('info', 'Stripe-Webhook verarbeitet', { orderId: order.id, paymentIntentId: paymentIntent.id, result: result.status });
+    if (invoiceError) throw invoiceError;
   }
 
   return Response.json({ received: true });
@@ -77,7 +84,7 @@ export async function POST(request: Request) {
 
 /** Sends the order-confirmation email and, right after, the invoice email — both gated by a
  * *_sent_at column so retried Stripe webhook deliveries never send either one twice. */
-async function sendOrderConfirmationAndInvoice(orderId: string, origin: string) {
+async function sendOrderConfirmationAndInvoice(stripe: Stripe, paymentIntent: Stripe.PaymentIntent, orderId: string, origin: string) {
   const confirmationClaim = await query(
     `UPDATE orders SET confirmation_sent_at = NOW() WHERE id = ? AND confirmation_sent_at IS NULL`,
     [orderId],
@@ -88,18 +95,34 @@ async function sendOrderConfirmationAndInvoice(orderId: string, origin: string) 
     if (order) await sendOrderConfirmationEmail(order, origin);
   }
 
-  const invoiceClaim = await query(`UPDATE orders SET invoice_sent_at = NOW() WHERE id = ? AND invoice_sent_at IS NULL`, [orderId]);
-  if (invoiceClaim.affectedRows > 0) {
-    try {
-      const rows = await query<InvoiceOrder & OrderEmailOrder>('SELECT * FROM orders WHERE id = ?', [orderId]);
-      const order = rows.rows[0];
-      if (order) {
-        const invoice = await ensureInvoiceForOrder(orderId);
-        const pdf = await renderInvoicePdf(order, invoice);
-        await sendInvoiceEmail(order, invoice.invoice_number, pdf, origin);
-      }
-    } catch (error) {
-      logEvent('error', 'Rechnung konnte nicht erstellt/versendet werden', { orderId, error: error instanceof Error ? error.message : 'unbekannt' });
-    }
+  const rows = await query<StripeInvoiceOrder & OrderEmailOrder & { invoice_sent_at: string | null }>(
+    'SELECT * FROM orders WHERE id = ?',
+    [orderId],
+  );
+  const order = rows.rows[0];
+  if (!order || order.invoice_sent_at) return;
+
+  const invoice = await ensurePaidStripeInvoice(stripe, order, paymentIntent);
+  const pdf = await fetchStripeInvoicePdf(invoice.invoice_pdf!);
+  const invoiceClaim = await query(
+    `UPDATE orders SET stripe_invoice_claimed_at = NOW()
+     WHERE id = ? AND invoice_sent_at IS NULL
+       AND (stripe_invoice_claimed_at IS NULL OR stripe_invoice_claimed_at < DATE_SUB(NOW(), INTERVAL 10 MINUTE))`,
+    [orderId],
+  );
+  if (invoiceClaim.affectedRows === 0) return;
+
+  try {
+    await sendInvoiceEmail(order, invoice.number!, pdf, origin);
+    await query(
+      'UPDATE orders SET invoice_sent_at = NOW(), stripe_invoice_claimed_at = NULL WHERE id = ?',
+      [orderId],
+    );
+  } catch (error) {
+    await query(
+      'UPDATE orders SET stripe_invoice_claimed_at = NULL WHERE id = ? AND invoice_sent_at IS NULL',
+      [orderId],
+    );
+    throw error;
   }
 }

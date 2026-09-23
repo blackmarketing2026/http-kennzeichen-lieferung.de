@@ -113,9 +113,16 @@ export async function POST(request: Request) {
         ? current
         : await stripe.paymentIntents.update(intentId, { amount: pricing.totalCents, metadata });
     } else {
+      // Stripe invoices can credit this PaymentIntent only when the payment belongs to
+      // the same Stripe Customer. The email and address arrive during confirmation.
+      const stripeCustomer = await stripe.customers.create(
+        { metadata: { cartId } },
+        { idempotencyKey: `kennzeichen-customer-${cartId}` },
+      );
       paymentIntent = await stripe.paymentIntents.create({
         amount: pricing.totalCents,
         currency: 'eur',
+        customer: stripeCustomer.id,
         description: `${quantity} × ${product.label} – ${plate}`,
         automatic_payment_methods: { enabled: true, allow_redirects: 'never' },
         metadata,

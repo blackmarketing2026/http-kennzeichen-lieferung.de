@@ -50,10 +50,9 @@ export async function sendOrderConfirmationEmail(order: OrderEmailOrder, origin:
 }
 
 export async function sendInvoiceEmail(order: OrderEmailOrder, invoiceNumber: string, pdf: Buffer, origin: string) {
-  if (!order.customer_email) return;
+  if (!order.customer_email) throw new Error('Bestell-E-Mail fehlt für den Rechnungsversand.');
   if (!isMailConfigured()) {
-    logEvent('warn', 'Rechnungs-E-Mail nicht versendet: SMTP nicht konfiguriert', { orderId: order.id });
-    return;
+    throw new Error('Rechnungs-E-Mail nicht versendet: SMTP nicht konfiguriert.');
   }
 
   const html = renderEmailTemplate({
@@ -62,7 +61,8 @@ export async function sendInvoiceEmail(order: OrderEmailOrder, invoiceNumber: st
     heading: 'Deine Rechnung',
     bodyHtml: `
       <p>Hallo,</p>
-      <p>anbei findest du die Rechnung <strong>${invoiceNumber}</strong> zu deiner Bestellung <strong>${plateLabel(order)}</strong>.</p>
+      <p>anbei findest du die von Stripe erstellte Rechnung <strong>${invoiceNumber}</strong> zu deiner Bestellung <strong>${plateLabel(order)}</strong>.</p>
+      <p>Deine Zahlung ist bereits eingegangen. Du musst nichts weiter bezahlen.</p>
     `,
   });
 
@@ -77,6 +77,7 @@ export async function sendInvoiceEmail(order: OrderEmailOrder, invoiceNumber: st
     });
   } catch (error) {
     logEvent('error', 'Rechnungs-E-Mail konnte nicht gesendet werden', { orderId: order.id, error: error instanceof Error ? error.message : 'unbekannt' });
+    throw error;
   }
 }
 

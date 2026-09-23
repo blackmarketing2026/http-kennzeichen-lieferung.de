@@ -84,7 +84,7 @@ export type CustomerOrderRow = {
 export async function listOrdersForCustomer(customerId: string) {
   return query<CustomerOrderRow>(
     `SELECT o.id, o.status, o.plate, o.plate_type, o.plate_color, o.quantity, o.total_cents, o.tracking_code, o.created_at,
-            (i.id IS NOT NULL) AS has_invoice
+            (o.stripe_invoice_id IS NOT NULL OR i.id IS NOT NULL) AS has_invoice
      FROM orders o
      LEFT JOIN invoices i ON i.order_id = o.id
      WHERE o.customer_id = ?

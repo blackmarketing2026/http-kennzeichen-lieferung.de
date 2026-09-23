@@ -1,8 +1,10 @@
 import { cookies } from 'next/headers';
-import { ensureSchema, isDatabaseConfigured } from '@/lib/db';
+import Stripe from 'stripe';
+import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
 import { CUSTOMER_SESSION_COOKIE, verifyCustomerSessionToken } from '@/lib/customer-auth';
 import { getCustomerOrder } from '@/lib/customers';
-import { ensureInvoiceForOrder, renderInvoicePdf, type InvoiceOrder } from '@/lib/invoice';
+import { renderInvoicePdf, type InvoiceOrder, type InvoiceRecord } from '@/lib/invoice';
+import { fetchStripeInvoicePdf } from '@/lib/stripe-invoice';
 
 export const runtime = 'nodejs';
 
@@ -15,16 +17,32 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
 
   await ensureSchema();
   const { id } = await params;
-  const order = (await getCustomerOrder(customerId, id)) as InvoiceOrder | null;
+  const order = (await getCustomerOrder(customerId, id)) as (InvoiceOrder & { stripe_invoice_id: string | null }) | null;
   if (!order) return Response.json({ error: 'Bestellung nicht gefunden.' }, { status: 404 });
 
-  const invoice = await ensureInvoiceForOrder(order.id);
-  const pdf = await renderInvoicePdf(order, invoice);
+  let pdf: Buffer;
+  let invoiceNumber: string;
+  if (order.stripe_invoice_id) {
+    const secretKey = process.env.stripe_live?.trim();
+    if (!secretKey?.startsWith('sk_')) return Response.json({ error: 'Stripe nicht konfiguriert.' }, { status: 503 });
+    const invoice = await new Stripe(secretKey).invoices.retrieve(order.stripe_invoice_id);
+    if (invoice.status !== 'paid' || !invoice.invoice_pdf || !invoice.number) {
+      return Response.json({ error: 'Rechnung noch nicht verfügbar.' }, { status: 404 });
+    }
+    pdf = await fetchStripeInvoicePdf(invoice.invoice_pdf);
+    invoiceNumber = invoice.number;
+  } else {
+    const result = await query<InvoiceRecord>('SELECT invoice_number, issued_at FROM invoices WHERE order_id = ?', [order.id]);
+    const invoice = result.rows[0];
+    if (!invoice) return Response.json({ error: 'Rechnung noch nicht verfügbar.' }, { status: 404 });
+    pdf = await renderInvoicePdf(order, invoice);
+    invoiceNumber = invoice.invoice_number;
+  }
 
   return new Response(new Uint8Array(pdf), {
     headers: {
       'Content-Type': 'application/pdf',
-      'Content-Disposition': `attachment; filename="Rechnung-${invoice.invoice_number}.pdf"`,
+      'Content-Disposition': `attachment; filename="Rechnung-${invoiceNumber}.pdf"`,
     },
   });
 }
