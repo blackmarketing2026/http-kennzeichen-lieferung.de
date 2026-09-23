@@ -6,8 +6,9 @@ export function ShippingNotice() {
       <Image src="/shipping/dhl.svg" alt="DHL" width={132} height={29} unoptimized />
       <div>
         <h3>In 10 Minuten versandfertig</h3>
-        <p>Nach deiner Bestellung werden deine Kennzeichen innerhalb von 10 Minuten gedruckt und versandfertig gemacht.</p>
-        <p>DHL holt die Kennzeichen dreimal am Tag ab und übernimmt den Versand.</p>
+        <p>Nach deiner Bestellung machen wir deine Kennzeichen innerhalb von 10 Minuten versandfertig.</p>
+        <p><strong>DHL-Abholung dreimal am Tag: um 9, 12 und 16 Uhr.</strong></p>
+        <p>Sobald die Sendungsnummer vorliegt, erhältst du sie per E-Mail und kannst dein Paket live bei DHL verfolgen.</p>
       </div>
     </section>
   );

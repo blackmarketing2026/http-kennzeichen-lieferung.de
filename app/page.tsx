@@ -16,7 +16,7 @@ const FAQS = [
   ['Ist die Bestellung eine Reservierung bei der Zulassungsstelle?', 'Nein. Du bestellst geprägte Kennzeichenschilder. Reservierung, Fahrzeugzulassung und amtliche Plaketten sind nicht enthalten.'],
   ['Welche Kennzeichenarten kann ich konfigurieren?', 'Das Grundgerüst zeigt Auto-, Motorrad-, E-, H- und Saisonkennzeichen. Das finale Sortiment und verfügbare Maße werden vor dem Shop-Start verbindlich festgelegt.'],
   ['Welche Größen gibt es?', 'Für Standard-Autokennzeichen ist aktuell 520 mm hinterlegt. Weitere ein- und zweizeilige Formate sind in der bereitgestellten Preisinformation vorgesehen.'],
-  ['Wie schnell wird versendet?', 'Nach deiner Bestellung werden deine Kennzeichen innerhalb von 10 Minuten gedruckt und versandfertig gemacht. DHL holt die Kennzeichen dreimal am Tag ab und übernimmt den Versand.'],
+  ['Wie schnell wird versendet?', 'Wir machen deine Kennzeichen innerhalb von 10 Minuten nach deiner Bestellung versandfertig. DHL holt unsere Pakete dreimal am Tag ab: um 9, 12 und 16 Uhr. Sobald die Sendungsnummer vorliegt, erhältst du sie per E-Mail und kannst dein Paket live bei DHL verfolgen.'],
   ['Welche Zahlungsmethoden werden angeboten?', 'Im eingebetteten Stripe-Checkout werden die für diese Bestellung verfügbaren Zahlungsarten sicher direkt auf unserer Seite angezeigt.'],
 ];
 
@@ -167,7 +167,7 @@ export default function Home() {
             <p id="plate-help">Ort · Buchstaben · Zahlen am Ende</p>
           </div>
         </div>
-        <div className="hero-trust" aria-label="Vorteile"><span><ShieldCheck size={18} /> Sichere Bestellführung</span><span><Sparkles size={18} /> Live-Vorschau</span><span><PackageCheck size={18} /> Transparente Kosten</span></div>
+        <div className="hero-trust" aria-label="Vorteile"><span><ShieldCheck size={18} /> Sichere Bestellführung</span><span><Sparkles size={18} /> In 10 Minuten versandfertig</span><span><PackageCheck size={18} /> DHL-Abholung: 9, 12 &amp; 16 Uhr</span></div>
       </section>
 
       <section className="config-section" id="konfigurator">
@@ -206,7 +206,7 @@ export default function Home() {
 
       <section className="process-band">
         <div className="process-sticky"><div><p className="eyebrow light"><span /> Von der Eingabe zum Versand</p><h2>Heute konfiguriert.<br />Klar geprüft.<br /><em>Bereit zum Prägen.</em></h2></div><LicensePlate value={plateValue} type={plateType} color={plateColor} className="story-plate" /></div>
-        <div className="process-cards"><article><span>01</span><h3>Hochwertige Prägung</h3><p>Deine Kombination steht im Mittelpunkt – groß, klar und vor dem nächsten Schritt kontrollierbar.</p></article><article><span>02</span><h3>Reflektierende Oberfläche</h3><p>Die digitale Vorschau vermittelt Material, Kontur und Lichtwirkung des späteren Schildes.</p></article><article><span>03</span><h3>Schnell versandfertig</h3><p>Innerhalb von 10 Minuten nach deiner Bestellung gedruckt und versandfertig. DHL holt die Kennzeichen dreimal am Tag ab und verschickt sie.</p></article></div>
+        <div className="process-cards"><article><span>01</span><h3>Hochwertige Prägung</h3><p>Deine Kombination steht im Mittelpunkt – groß, klar und vor dem nächsten Schritt kontrollierbar.</p></article><article><span>02</span><h3>Reflektierende Oberfläche</h3><p>Die digitale Vorschau vermittelt Material, Kontur und Lichtwirkung des späteren Schildes.</p></article><article><span>03</span><h3>Schnell versandfertig</h3><p>Innerhalb von 10 Minuten nach deiner Bestellung ist dein Paket versandfertig. DHL holt bei uns dreimal am Tag ab: um 9, 12 und 16 Uhr.</p></article></div>
       </section>
 
       <section className="how-section" id="ablauf">
@@ -222,6 +222,18 @@ export default function Home() {
       <section className="faq-section" id="faq">
         <div className="section-heading"><p className="eyebrow"><span /> Gut zu wissen</p><h2>Fragen vor<br />der Bestellung.</h2></div>
         <div className="faq-list">{FAQS.map(([question, answer], index) => <details key={question} open={index === 0}><summary>{question}<ChevronDown size={20} /></summary><p>{answer}</p></details>)}</div>
+      </section>
+
+      <section className="delivery-promise" aria-labelledby="delivery-promise-title">
+        <div className="delivery-promise-card">
+          <Image src="/shipping/dhl.svg" alt="DHL" width={132} height={29} unoptimized />
+          <p className="eyebrow"><span /> Schnell bei dir</p>
+          <h2 id="delivery-promise-title">Gedruckt in 10 Minuten.<br /><em>Dreimal täglich von DHL abgeholt.</em></h2>
+          <p>Nach deiner Bestellung ist dein Kennzeichen innerhalb von 10 Minuten gedruckt und versandfertig. DHL holt unsere Pakete täglich um 9, 12 und 16 Uhr ab.</p>
+          <p>Sobald die Sendungsnummer vorliegt, bekommst du sie per E-Mail. Über den DHL-Link kannst du dein Paket live verfolgen.</p>
+          <p className="delivery-promise-highlight">So schaffen wir mit normalem Versand besonders gute Voraussetzungen für eine schnelle Zustellung.</p>
+          <small>Die Zustellzeit hängt vom Versandverlauf und dem Zielort ab.</small>
+        </div>
       </section>
 
       <footer><div className="footer-brand"><span>kennzeichen-lieferung<span>.de</span></span><p>Modern. Sicher. Zuverlässig.</p></div><div className="footer-note">Grundgerüst · Rechtliche Angaben, Kontakt und finale Lieferinformationen werden vor Veröffentlichung ergänzt.</div><div className="footer-links"><Link href="/konto/login">Mein Konto</Link><a href="#top" aria-label="Nach oben">Nach oben ↑</a></div></footer>

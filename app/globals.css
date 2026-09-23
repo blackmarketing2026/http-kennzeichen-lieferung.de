@@ -388,6 +388,16 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .faq-list details[open] summary svg { transform: rotate(180deg); }
 .faq-list details p { max-width: 760px; margin: 0; padding: 0 40px 28px 5px; color: var(--muted); line-height: 1.7; }
 
+.delivery-promise { padding: clamp(70px, 9vw, 130px) clamp(20px, 8vw, 130px); background: #edf6fc; }
+.delivery-promise-card { max-width: 1050px; margin: 0 auto; padding: clamp(30px, 6vw, 76px); border: 1px solid #d7e5ed; border-radius: 12px; background: #fff; box-shadow: 0 24px 70px rgb(6 22 34 / 7%); }
+.delivery-promise-card > img { display: block; width: 132px; height: auto; margin-bottom: 42px; }
+.delivery-promise-card .eyebrow { margin-bottom: 20px; }
+.delivery-promise-card h2 { margin: 0 0 24px; font-size: clamp(2.3rem, 5vw, 4.8rem); line-height: 1; letter-spacing: -.06em; }
+.delivery-promise-card h2 em { color: var(--blue); font-style: normal; }
+.delivery-promise-card > p:not(.eyebrow) { max-width: 740px; color: #52636e; font-size: 1.05rem; line-height: 1.7; }
+.delivery-promise-card .delivery-promise-highlight { color: var(--ink); font-weight: 750; }
+.delivery-promise-card small { color: #788994; font-size: .75rem; }
+
 footer { padding: 65px clamp(24px, 6vw, 90px); display: grid; grid-template-columns: 1fr 1fr auto; gap: 45px; align-items: end; background: #041018; color: #fff; }
 .footer-brand > span { font-size: clamp(1.4rem, 2.3vw, 2.2rem); font-weight: 800; letter-spacing: -.04em; }
 .footer-brand > span span { color: #1685ed; }
