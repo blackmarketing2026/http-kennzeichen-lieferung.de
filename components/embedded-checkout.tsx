@@ -12,6 +12,7 @@ import { LicensePlate } from '@/components/license-plate';
 import { formatPrice, getUnitPrice, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import type { CheckoutPricing } from '@/lib/checkout-pricing';
 import { WithdrawalNotice } from '@/components/withdrawal-notice';
+import { ComplianceNotice } from '@/components/compliance-notice';
 
 type CheckoutSelection = { plate: string; plateType: PlateType; plateColor: PlateColor; quantity: 1 | 2 | 3 };
 type PaymentIntentResponse = { error?: string; clientSecret?: string; paymentIntentId?: string; publishableKey?: string; pricing?: CheckoutPricing };
@@ -230,6 +231,7 @@ export function EmbeddedCheckout({ selection }: { selection: CheckoutSelection }
         {pricing && pricing.discountCents > 0 && <div className="real-order-line real-order-discount"><span>Rabatt ({pricing.promoCode})</span><strong>−{formatPrice(pricing.discountCents / 100)}</strong></div>}
         <div className="real-order-total"><span>Gesamt</span><strong>{formatPrice(pricing ? pricing.totalCents / 100 : total)}</strong></div>
         <p className="checkout-scope">Du bestellst geprägte Schilder. Reservierung, Zulassung und amtliche Plaketten sind nicht enthalten.</p>
+        <ComplianceNotice variant="compact" />
       </section>
       <section className="checkout-payment-panel">
         {error ? (

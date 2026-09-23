@@ -4,13 +4,14 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ArrowDown, ArrowRight, CarFront, Check, ChevronDown, CreditCard, LockKeyhole, PackageCheck, ShieldCheck, Sparkles, User } from 'lucide-react';
+import { ArrowDown, ArrowRight, CarFront, Check, ChevronDown, Clock3, CreditCard, LockKeyhole, PackageCheck, ShieldCheck, Sparkles, User } from 'lucide-react';
 import { PaymentLogos } from '@/components/payment-logos';
 import { ShippingNotice } from '@/components/shipping-notice';
 import { LicensePlate, PlateSeals } from '@/components/license-plate';
-import { WithdrawalNotice } from '@/components/withdrawal-notice';
 import { formatPrice, getUnitPrice, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { getPickupCountdown, type PickupCountdown } from '@/lib/pickup-countdown';
+import { ComplianceNotice } from '@/components/compliance-notice';
 
 const BASE_PLATE_TYPES = ['standard', 'motorcycle', 'season'] as const;
 const FAQS = [
@@ -69,6 +70,7 @@ export default function Home() {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const [pickupCountdown, setPickupCountdown] = useState<PickupCountdown | null>(null);
   const product = PRODUCTS[plateType];
   const plateValue = `${cityCode} ${serialLetters} ${serialNumbers}`;
   const plateSubtotal = getUnitPrice(plateType, plateColor, quantity) * quantity;
@@ -97,6 +99,13 @@ export default function Home() {
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const updatePickupCountdown = () => setPickupCountdown(getPickupCountdown(new Date()));
+    updatePickupCountdown();
+    const interval = window.setInterval(updatePickupCountdown, 1000);
+    return () => window.clearInterval(interval);
   }, []);
 
   function handlePointerMove(event: React.PointerEvent<HTMLDivElement>) {
@@ -188,7 +197,6 @@ export default function Home() {
             <p className="control-intro">Klicke direkt in das Kennzeichen und gib deine zugeteilte Kombination ein.</p>
             <PlateEditor city={cityCode} letters={serialLetters} numbers={serialNumbers} suffix={suffix} color={plateColor} isSeason={plateType === 'season'} isValid={status} onCityChange={updateCity} onLettersChange={updateLetters} onNumbersChange={updateNumbers} />
             <p className={`field-help ${status ? '' : 'is-error'}`}>{status ? 'Zahlen stehen immer am Ende. Die behördliche Verfügbarkeit wird nicht geprüft.' : `Die Kombination ist zu lang oder unvollständig${suffix ? ` – vor dem ${suffix} sind maximal 7 Zeichen erlaubt` : ''}.`}</p>
-            <WithdrawalNotice />
             <div className="step-label second"><b>02</b><span>Zusatz wählen</span></div>
             <div className="option-group addon-options" aria-label="Kennzeichenzusatz"><button type="button" className={!suffix && plateType === 'standard' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('')}><strong>–</strong><span>Ohne Zusatz</span><i /></button><button type="button" className={suffix === 'E' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('E')}><strong>E</strong><span>Elektro</span><i /></button><button type="button" className={suffix === 'H' ? 'active' : ''} disabled={plateType === 'motorcycle' || plateType === 'season'} onClick={() => chooseSuffix('H')}><strong>H</strong><span>Historisch</span><i /></button></div>
             {(plateType === 'motorcycle' || plateType === 'season') && <p className="field-help">E- und H-Zusatz sind in dieser Konfiguration nur beim Auto auswählbar.</p>}
@@ -198,6 +206,7 @@ export default function Home() {
             <button className="button button-wide" type="button" onClick={openCheckout} disabled={!status}>Jetzt bestellen <ArrowRight size={19} /></button>
             <PaymentLogos />
             <ShippingNotice />
+            <ComplianceNotice />
             <p className="scope-note"><ShieldCheck size={17} /> Geprägte Schilder – ohne Reservierung, Zulassung oder amtliche Plaketten.</p>
           </div>
         </div>
@@ -210,7 +219,18 @@ export default function Home() {
 
       <section className="how-section" id="ablauf">
         <div className="section-heading centered"><p className="eyebrow"><span /> Einfach bis zum Schluss</p><h2>Drei Schritte.<br />Ein klares Ergebnis.</h2></div>
-        <div className="steps"><article><b>1</b><div><h3>Kennzeichen eingeben</h3><p>Art und Kombination wählen. Du siehst jede Änderung sofort.</p></div></article><ArrowRight className="step-arrow" aria-hidden="true" /><article><b>2</b><div><h3>Auswahl prüfen</h3><p>Kombination, Ausführung, Lieferumfang und Gesamtpreis kontrollieren.</p></div></article><ArrowRight className="step-arrow" aria-hidden="true" /><article><b>3</b><div><h3>Sicher bezahlen</h3><p>Zahlung und Lieferadresse direkt in unserem eingebetteten Stripe-Checkout abschließen.</p></div></article></div>
+        <div className="steps">
+          <article><b>01</b><div><h3>Kennzeichen eingeben</h3><p>Art und Kombination wählen. Du siehst jede Änderung sofort.</p></div></article>
+          <ArrowRight className="step-arrow" aria-hidden="true" />
+          <article><b>02</b><div><h3>Auswahl prüfen</h3><p>Kombination, Ausführung, Lieferumfang und Gesamtpreis kontrollieren.</p></div></article>
+          <ArrowRight className="step-arrow" aria-hidden="true" />
+          <article><b>03</b><div><h3>Sicher bezahlen</h3><p>Zahlung und Lieferadresse direkt in unserem eingebetteten Stripe-Checkout abschließen.</p></div></article>
+          <div className="pickup-countdown" aria-live="polite" aria-atomic="true">
+            <span><Clock3 size={16} aria-hidden="true" /> Nächste mögliche DHL-Abholung</span>
+            <strong>{pickupCountdown?.remaining ?? '--:--:--'}</strong>
+            <small>{pickupCountdown ? `${pickupCountdown.dayLabel} um ${pickupCountdown.pickupTime}` : 'Abholzeit wird berechnet'}<br />10 Min. Produktionszeit berücksichtigt</small>
+          </div>
+        </div>
       </section>
 
       <section className="checkout-section" id="checkout">
@@ -235,7 +255,12 @@ export default function Home() {
         </div>
       </section>
 
-      <footer><div className="footer-brand"><span>kennzeichen-lieferung<span>.de</span></span><p>Modern. Sicher. Zuverlässig.</p></div><div className="footer-note">Ein Angebot von Function Concept. Angaben zum Betreiber und zur Verarbeitung Ihrer Daten finden Sie im Impressum und in der Datenschutzerklärung.</div><div className="footer-links"><Link href="/konto/login">Mein Konto</Link><a href="#top" aria-label="Nach oben">Nach oben ↑</a></div></footer>
+      <footer>
+        <ComplianceNotice variant="footer" />
+        <div className="footer-brand"><span>kennzeichen-lieferung<span>.de</span></span><p>Modern. Sicher. Zuverlässig.</p></div>
+        <div className="footer-note">Ein Angebot von Function Concept. Angaben zum Betreiber und zur Verarbeitung Ihrer Daten finden Sie im Impressum und in der Datenschutzerklärung.</div>
+        <div className="footer-links"><Link href="/konto/login">Mein Konto</Link><a href="#top" aria-label="Nach oben">Nach oben ↑</a></div>
+      </footer>
       <div className="mobile-bar"><div><span>{plateValue}{suffix && ` ${suffix}`}</span><strong>{formatPrice(total)}</strong></div><button type="button" onClick={openCheckout} disabled={!status}>Bestellen <ArrowRight size={17} /></button></div>
     </main>
   );
