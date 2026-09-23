@@ -19,16 +19,34 @@
 .legal-page section a { color: var(--blue-dark); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
 .legal-page code { padding: 2px 5px; border-radius: 3px; background: #e7f1f8; color: #24465e; font-size: .86em; }
 
-.cookie-notice { position: fixed; z-index: 100; left: 50%; bottom: 20px; width: min(940px, calc(100% - 40px)); padding: 22px 24px; display: flex; align-items: center; justify-content: space-between; gap: 28px; border: 1px solid #d8e5ec; border-radius: 10px; background: #fff; color: var(--ink); box-shadow: 0 20px 70px rgb(3 21 35 / 24%); transform: translateX(-50%); }
-.cookie-notice strong { display: block; margin-bottom: 5px; font-size: 1rem; }
-.cookie-notice p { margin: 0 0 6px; color: #526571; font-size: .78rem; line-height: 1.55; }
-.cookie-notice a { color: var(--blue-dark); font-size: .78rem; font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
-.cookie-notice button { min-width: 128px; min-height: 44px; padding: 0 18px; border: 0; border-radius: 4px; background: var(--blue); color: #fff; font-weight: 750; cursor: pointer; }
-.cookie-notice button:hover { background: var(--blue-dark); }
+.cookie-dialog { position: fixed; inset: 0; width: min(640px, calc(100% - 32px)); max-height: min(90dvh, 850px); margin: auto; padding: clamp(24px, 5vw, 36px); overflow: auto; border: 1px solid #d5e4ec; border-radius: 16px; background: #fff; color: var(--ink); box-shadow: 0 30px 100px rgb(3 21 35 / 32%); }
+.cookie-dialog::backdrop { background: rgb(3 21 35 / 62%); backdrop-filter: blur(5px); }
+.cookie-dialog-kicker { color: var(--blue); font-size: .7rem; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
+.cookie-dialog h2 { margin: 10px 0 18px; font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.08; letter-spacing: -.04em; }
+.cookie-dialog-copy { margin: 0 0 16px; color: #364e5c; font-size: .96rem; line-height: 1.65; }
+.cookie-dialog-status { margin: 0 0 24px; padding: 14px 16px; border-left: 3px solid var(--blue); border-radius: 0 6px 6px 0; background: #f1f8fc; color: #476170; font-size: .8rem; line-height: 1.55; }
+.cookie-dialog-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.cookie-action { min-height: 48px; padding: 11px 16px; border: 2px solid transparent; border-radius: 6px; font: inherit; font-size: .85rem; font-weight: 800; cursor: pointer; transition: background .2s ease, border-color .2s ease; }
+.cookie-action-reject { background: #173343; color: #fff; }
+.cookie-action-reject:hover { background: #0a2432; }
+.cookie-action-accept { background: var(--blue); color: #fff; }
+.cookie-action-accept:hover { background: var(--blue-dark); }
+.cookie-action-secondary { grid-column: 1 / -1; background: #fff; border-color: #b9ceda; color: #173343; }
+.cookie-action-secondary:hover { background: #eff6fa; }
+.cookie-dialog-footnote { margin: 18px 0 0; color: #5c707c; font-size: .73rem; line-height: 1.5; }
+.cookie-dialog-footnote a { color: var(--blue-dark); font-weight: 750; text-decoration: underline; text-underline-offset: 2px; }
+.cookie-options { margin: 0 0 24px; }
+.cookie-options h3 { margin: 0 0 12px; font-size: 1rem; }
+.cookie-option { min-height: 68px; padding: 12px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid #dce7ed; cursor: pointer; }
+.cookie-option > div, .cookie-option > span:first-child { display: grid; gap: 3px; }
+.cookie-option strong { font-size: .85rem; }
+.cookie-option span span { color: #617784; font-size: .75rem; line-height: 1.4; }
+.cookie-option input { flex: 0 0 auto; width: 20px; height: 20px; margin: 0 3px; accent-color: var(--blue); cursor: pointer; }
+.cookie-required { flex: 0 0 auto; color: #32647d; font-size: .72rem; font-weight: 800; }
+.cookie-options-note { margin: 10px 0 0; color: #617784; font-size: .72rem; line-height: 1.5; }
 
 @media (max-width: 760px) {
   .site-legal-footer { padding: 24px 20px 92px; flex-direction: column; align-items: flex-start; }
   .legal-page { padding-bottom: 65px; }
-  .cookie-notice { bottom: 84px; padding: 20px; align-items: stretch; flex-direction: column; gap: 15px; }
-  .cookie-notice button { width: 100%; }
+  .cookie-dialog { padding: 22px; }
 }
