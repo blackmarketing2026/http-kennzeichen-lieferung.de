@@ -46,11 +46,16 @@ describe('checkout pricing', () => {
   });
 
   it.each(['standard', 'electric', 'historic', 'season'] as const)('adds one parking plate to %s for five euros', (type) => {
-    expect(getCheckoutPricing(type, 'black', 3, undefined)).toMatchObject({ unitPriceCents: 1495, parkingExtraPriceCents: 500, subtotalCents: 3490, shippingCents: 0, totalCents: 3490 });
+    expect(getCheckoutPricing(type, 'black', 2, undefined, { parkingPlate: true, bikeRackPlate: false })).toMatchObject({ unitPriceCents: 1495, parkingExtraPriceCents: 500, bikeRackExtraPriceCents: 0, subtotalCents: 3490, shippingCents: 0, totalCents: 3490 });
     expect(getCheckoutPricing(type, 'black', 2, undefined)?.totalCents).toBe(2990);
   });
 
+  it('adds the bicycle-rack plate independently and charges five euros for each extra', () => {
+    expect(getCheckoutPricing('standard', 'black', 2, undefined, { parkingPlate: false, bikeRackPlate: true })).toMatchObject({ subtotalCents: 3490, totalCents: 3490 });
+    expect(getCheckoutPricing('standard', 'black', 2, undefined, { parkingPlate: true, bikeRackPlate: true })).toMatchObject({ parkingExtraPriceCents: 500, bikeRackExtraPriceCents: 500, subtotalCents: 3990, totalCents: 3990 });
+  });
+
   it('keeps an applied promotion consistent when the parking extra is added', () => {
-    expect(getCheckoutPricing('standard', 'black', 3, 'TEST5')).toMatchObject({ subtotalCents: 3490, discountCents: 2990, totalCents: 500 });
+    expect(getCheckoutPricing('standard', 'black', 2, 'TEST5', { parkingPlate: true, bikeRackPlate: true })).toMatchObject({ subtotalCents: 3990, discountCents: 3490, totalCents: 500 });
   });
 });

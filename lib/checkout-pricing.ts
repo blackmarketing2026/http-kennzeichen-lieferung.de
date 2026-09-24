@@ -1,4 +1,4 @@
-import { getUnitPrice, isAvailableConfiguration, PARKING_PLATE_PRICE, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
+import { BIKE_RACK_PLATE_PRICE, getUnitPrice, isAvailableConfiguration, PARKING_PLATE_PRICE, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 
 const PROMO_CODES = {
   TEST5: { totalCents: 500 },
@@ -7,6 +7,7 @@ const PROMO_CODES = {
 export type CheckoutPricing = {
   unitPriceCents: number;
   parkingExtraPriceCents: number;
+  bikeRackExtraPriceCents: number;
   subtotalCents: number;
   shippingCents: number;
   discountCents: number;
@@ -14,20 +15,27 @@ export type CheckoutPricing = {
   promoCode: string | null;
 };
 
+export type CheckoutExtras = {
+  parkingPlate: boolean;
+  bikeRackPlate: boolean;
+};
+
 export function getCheckoutPricing(
   plateType: PlateType,
   color: PlateColor,
-  quantity: 1 | 2 | 3,
+  baseQuantity: 1 | 2,
   requestedCode: string | undefined,
+  extras: CheckoutExtras = { parkingPlate: false, bikeRackPlate: false },
 ): CheckoutPricing | null {
-  if (!isAvailableConfiguration(plateType, color, quantity)) return null;
+  if (!isAvailableConfiguration(plateType, color, baseQuantity)) return null;
+  if (plateType === 'motorcycle' && (extras.parkingPlate || extras.bikeRackPlate)) return null;
   const promoCode = requestedCode?.trim().toUpperCase() || null;
   if (promoCode && !(promoCode in PROMO_CODES)) return null;
 
-  const baseQuantity = quantity === 3 ? 2 : quantity;
   const unitPriceCents = Math.round(getUnitPrice(plateType, color, baseQuantity) * 100);
-  const parkingExtraPriceCents = quantity === 3 ? Math.round(PARKING_PLATE_PRICE * 100) : 0;
-  const subtotalCents = unitPriceCents * baseQuantity + parkingExtraPriceCents;
+  const parkingExtraPriceCents = extras.parkingPlate ? Math.round(PARKING_PLATE_PRICE * 100) : 0;
+  const bikeRackExtraPriceCents = extras.bikeRackPlate ? Math.round(BIKE_RACK_PLATE_PRICE * 100) : 0;
+  const subtotalCents = unitPriceCents * baseQuantity + parkingExtraPriceCents + bikeRackExtraPriceCents;
   const shippingCents = Math.round(SHIPPING_PRICE * 100);
   const regularTotalCents = subtotalCents + shippingCents;
   const targetTotalCents = promoCode ? PROMO_CODES[promoCode as keyof typeof PROMO_CODES].totalCents : regularTotalCents;
@@ -36,6 +44,7 @@ export function getCheckoutPricing(
   return {
     unitPriceCents,
     parkingExtraPriceCents,
+    bikeRackExtraPriceCents,
     subtotalCents,
     shippingCents,
     discountCents: regularTotalCents - targetTotalCents,

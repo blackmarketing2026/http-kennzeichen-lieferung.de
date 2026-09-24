@@ -56,6 +56,74 @@
   font-weight: 700;
   cursor: pointer;
 }
+.extraOffers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 24px 0;
+}
+.extraOffer {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 9px;
+  align-items: center;
+  padding: 13px;
+  border: 1px solid #cbdfee;
+  border-radius: 10px;
+  background: #f7fbfe;
+}
+.extraOfferSelected {
+  border-color: #9dcbb2;
+  background: #f3faf6;
+}
+.extraOfferIcon {
+  grid-row: 1 / span 2;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e5f2fd;
+  color: #0069d9;
+}
+.extraOfferSelected .extraOfferIcon {
+  background: #ddefe4;
+  color: #277248;
+}
+.extraOffer > div {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+.extraOffer strong {
+  font-size: 0.75rem;
+  line-height: 1.25;
+}
+.extraOffer div span {
+  color: #607481;
+  font-size: 0.67rem;
+}
+.extraOffer button {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px;
+  border: 1px solid #a9cce6;
+  border-radius: 6px;
+  background: #fff;
+  color: #075ea9;
+  font-size: 0.7rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+.extraOfferSelected button {
+  border-color: #b7d5c3;
+  color: #326148;
+}
 .offerDialog.offerDialog {
   display: block;
   width: min(540px, calc(100vw - 28px));
@@ -94,12 +162,6 @@
   object-position: center 38%;
 }
 .offerPlate.offerPlate {
-  position: absolute;
-  z-index: 1;
-  top: 18%;
-  left: 50%;
-  width: 35.5%;
-  transform: translateX(-50%);
   filter: drop-shadow(0 1px 1px rgb(8 22 27 / 32%))
     drop-shadow(0 4px 4px rgb(8 22 27 / 24%));
 }
@@ -220,5 +282,8 @@
   }
   .selectedExtra {
     flex-wrap: wrap;
+  }
+  .extraOffers {
+    grid-template-columns: 1fr;
   }
 }

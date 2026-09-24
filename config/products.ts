@@ -4,6 +4,7 @@ export type PlateColor = 'black' | 'carbon';
 // Shipping is included in the displayed plate-package prices.
 export const SHIPPING_PRICE = 0;
 export const PARKING_PLATE_PRICE = 5;
+export const BIKE_RACK_PLATE_PRICE = 5;
 
 /** All prices in this file are consumer-facing gross prices (inkl. MwSt.), as required for B2C
  * price display in Germany (PAngV). License plates are taxed at the standard rate, not the

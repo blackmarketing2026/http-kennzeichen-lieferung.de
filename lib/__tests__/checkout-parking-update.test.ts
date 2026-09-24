@@ -51,6 +51,23 @@ function request(quantity: number, promoCode = '') {
   });
 }
 
+function requestWithExtras(parkingPlate: boolean, bikeRackPlate: boolean) {
+  return new Request('http://localhost/api/create-payment-intent', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      plate: 'OL AB 123',
+      plateType: 'standard',
+      color: 'black',
+      quantity: 2,
+      parkingPlate,
+      bikeRackPlate,
+      cartId,
+      paymentIntentId: current.id,
+    }),
+  });
+}
+
 describe('parking extra payment updates', () => {
   afterEach(() => vi.unstubAllEnvs());
 
@@ -97,6 +114,38 @@ describe('parking extra payment updates', () => {
           anzahl: '2',
           parkplatzkennzeichen: '0',
         }),
+      }),
+    );
+  });
+
+  it('adds parking and bicycle-rack plates independently', async () => {
+    const response = await POST(requestWithExtras(true, true));
+    expect(response.status).toBe(200);
+    expect(stripe.update).toHaveBeenCalledWith(
+      current.id,
+      expect.objectContaining({
+        amount: 3990,
+        metadata: expect.objectContaining({
+          anzahl: '4',
+          parkplatzkennzeichen: '1',
+          fahrradtraegerkennzeichen: '1',
+        }),
+      }),
+    );
+  });
+
+  it('can keep the bicycle-rack plate while removing the parking plate', async () => {
+    stripe.retrieve.mockResolvedValue({
+      ...current,
+      amount: 3990,
+      metadata: { ...current.metadata, anzahl: '4', parkplatzkennzeichen: '1', fahrradtraegerkennzeichen: '1' },
+    });
+    expect((await POST(requestWithExtras(false, true))).status).toBe(200);
+    expect(stripe.update).toHaveBeenCalledWith(
+      current.id,
+      expect.objectContaining({
+        amount: 3490,
+        metadata: expect.objectContaining({ anzahl: '3', parkplatzkennzeichen: '0', fahrradtraegerkennzeichen: '1' }),
       }),
     );
   });

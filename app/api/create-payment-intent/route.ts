@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Ungültige Anfrage.' }, { status: 403 });
   }
 
-  let body: { plate?: string; plateType?: string; color?: string; quantity?: number; cartId?: string; promoCode?: unknown; paymentIntentId?: unknown };
+  let body: { plate?: string; plateType?: string; color?: string; quantity?: number; parkingPlate?: unknown; bikeRackPlate?: unknown; cartId?: string; promoCode?: unknown; paymentIntentId?: unknown };
   try {
     body = await request.json();
   } catch {
@@ -46,10 +46,22 @@ export async function POST(request: Request) {
 
   const plateType = body.plateType as PlateType;
   const color = body.color as PlateColor;
-  const quantity = Number(body.quantity) as 1 | 2 | 3;
+  const requestedQuantity = Number(body.quantity);
   const plate = body.plate?.toUpperCase().replace(/\s+/g, ' ').trim() ?? '';
 
-  if (!PLATE_TYPES.includes(plateType) || !isAvailableConfiguration(plateType, color, quantity) || !isValidPlate(plate, plateType)) {
+  const hasExplicitExtras = body.parkingPlate !== undefined || body.bikeRackPlate !== undefined;
+  if ((body.parkingPlate !== undefined && typeof body.parkingPlate !== 'boolean') ||
+      (body.bikeRackPlate !== undefined && typeof body.bikeRackPlate !== 'boolean')) {
+    return Response.json({ error: 'Ungültige Bestelldaten.' }, { status: 400 });
+  }
+  const extras = hasExplicitExtras
+    ? { parkingPlate: body.parkingPlate === true, bikeRackPlate: body.bikeRackPlate === true }
+    : { parkingPlate: requestedQuantity === 3 && plateType !== 'motorcycle', bikeRackPlate: false };
+  const baseQuantity = (hasExplicitExtras ? requestedQuantity : requestedQuantity === 3 ? 2 : requestedQuantity) as 1 | 2;
+  const quantity = baseQuantity + Number(extras.parkingPlate) + Number(extras.bikeRackPlate);
+
+  if (!PLATE_TYPES.includes(plateType) || !isAvailableConfiguration(plateType, color, baseQuantity) ||
+      (plateType === 'motorcycle' && (extras.parkingPlate || extras.bikeRackPlate)) || !isValidPlate(plate, plateType)) {
     return Response.json({ error: 'Bitte prüfe Kennzeichenart, Kombination und Anzahl.' }, { status: 400 });
   }
 
@@ -64,7 +76,7 @@ export async function POST(request: Request) {
   }
 
   const product = PRODUCTS[plateType];
-  const pricing = getCheckoutPricing(plateType, color, quantity, body.promoCode as string | undefined);
+  const pricing = getCheckoutPricing(plateType, color, baseQuantity, body.promoCode as string | undefined, extras);
   if (!pricing) {
     return Response.json({ error: 'Dieser Rabattcode ist ungültig oder nicht anwendbar.' }, { status: 400 });
   }
@@ -96,7 +108,8 @@ export async function POST(request: Request) {
       anzahl: String(quantity),
       cartId,
       rabattcode: pricing.promoCode ?? '',
-      parkplatzkennzeichen: quantity === 3 ? '1' : '0',
+      parkplatzkennzeichen: extras.parkingPlate ? '1' : '0',
+      fahrradtraegerkennzeichen: extras.bikeRackPlate ? '1' : '0',
     };
     const intentId = existingOrder?.stripe_payment_intent_id ?? body.paymentIntentId;
     let paymentIntent: Stripe.PaymentIntent;
@@ -110,9 +123,11 @@ export async function POST(request: Request) {
       if (current.status !== 'requires_payment_method') {
         return Response.json({ error: 'Die Zahlung wird bereits verarbeitet. Die Bestellung kann nicht mehr geändert werden.' }, { status: 409 });
       }
-      paymentIntent = current.amount === pricing.totalCents && current.metadata.rabattcode === metadata.rabattcode && current.metadata.anzahl === String(quantity)
+      paymentIntent = current.amount === pricing.totalCents && current.metadata.rabattcode === metadata.rabattcode &&
+          current.metadata.anzahl === String(quantity) && current.metadata.parkplatzkennzeichen === metadata.parkplatzkennzeichen &&
+          current.metadata.fahrradtraegerkennzeichen === metadata.fahrradtraegerkennzeichen
         ? current
-        : await stripe.paymentIntents.update(intentId, { amount: pricing.totalCents, metadata, description: `${quantity} × ${product.label} – ${plate}${quantity === 3 ? ' (inkl. Parkplatz-Kennzeichen)' : ''}` });
+        : await stripe.paymentIntents.update(intentId, { amount: pricing.totalCents, metadata, description: `${quantity} × ${product.label} – ${plate}${extras.parkingPlate ? ' + Parkplatz' : ''}${extras.bikeRackPlate ? ' + Fahrradträger' : ''}` });
     } else {
       // Stripe invoices can credit this PaymentIntent only when the payment belongs to
       // the same Stripe Customer. The email and address arrive during confirmation.
@@ -124,7 +139,7 @@ export async function POST(request: Request) {
         amount: pricing.totalCents,
         currency: 'eur',
         customer: stripeCustomer.id,
-        description: `${quantity} × ${product.label} – ${plate}`,
+        description: `${quantity} × ${product.label} – ${plate}${extras.parkingPlate ? ' + Parkplatz' : ''}${extras.bikeRackPlate ? ' + Fahrradträger' : ''}`,
         automatic_payment_methods: { enabled: true, allow_redirects: 'never' },
         metadata,
       }, { idempotencyKey });
@@ -140,16 +155,16 @@ export async function POST(request: Request) {
 
       if (!existingOrder) {
         await query(
-          `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, unit_price_cents, shipping_cents, discount_cents, promo_code, total_cents, stripe_payment_intent_id, customer_id)
-           VALUES (?, ?, 'payment_pending', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-          [randomUUID(), cartId, plate, plateType, color, quantity, pricing.unitPriceCents, pricing.shippingCents, pricing.discountCents, pricing.promoCode, pricing.totalCents, paymentIntent.id, customerId],
+          `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, parking_plate, bike_rack_plate, unit_price_cents, shipping_cents, discount_cents, promo_code, total_cents, stripe_payment_intent_id, customer_id)
+           VALUES (?, ?, 'payment_pending', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [randomUUID(), cartId, plate, plateType, color, quantity, extras.parkingPlate, extras.bikeRackPlate, pricing.unitPriceCents, pricing.shippingCents, pricing.discountCents, pricing.promoCode, pricing.totalCents, paymentIntent.id, customerId],
         );
       } else {
         const updated = await query(
-          `UPDATE orders SET plate = ?, plate_type = ?, plate_color = ?, quantity = ?, unit_price_cents = ?,
+          `UPDATE orders SET plate = ?, plate_type = ?, plate_color = ?, quantity = ?, parking_plate = ?, bike_rack_plate = ?, unit_price_cents = ?,
              shipping_cents = ?, discount_cents = ?, promo_code = ?, total_cents = ?, stripe_payment_intent_id = ?, customer_id = COALESCE(?, customer_id), updated_at = NOW()
            WHERE id = ? AND status = 'payment_pending'`,
-          [plate, plateType, color, quantity, pricing.unitPriceCents, pricing.shippingCents, pricing.discountCents, pricing.promoCode, pricing.totalCents, paymentIntent.id, customerId, existingOrder.id],
+          [plate, plateType, color, quantity, extras.parkingPlate, extras.bikeRackPlate, pricing.unitPriceCents, pricing.shippingCents, pricing.discountCents, pricing.promoCode, pricing.totalCents, paymentIntent.id, customerId, existingOrder.id],
         );
         if (updated.affectedRows === 0) {
           const latest = await query<{ status: string }>('SELECT status FROM orders WHERE id = ?', [existingOrder.id]);

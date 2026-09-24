@@ -1,6 +1,6 @@
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { query, withConnection } from '@/lib/db';
-import { formatPrice, PRODUCTS, VAT_RATE, type PlateColor, type PlateType } from '@/config/products';
+import { BIKE_RACK_PLATE_PRICE, formatPrice, PARKING_PLATE_PRICE, PRODUCTS, VAT_RATE, type PlateColor, type PlateType } from '@/config/products';
 
 export type InvoiceOrder = {
   id: string;
@@ -8,6 +8,8 @@ export type InvoiceOrder = {
   plate_type: PlateType;
   plate_color: PlateColor;
   quantity: number;
+  parking_plate: number;
+  bike_rack_plate: number;
   unit_price_cents: number;
   shipping_cents: number;
   discount_cents: number;
@@ -119,7 +121,12 @@ export async function renderInvoicePdf(order: InvoiceOrder, invoice: InvoiceReco
   const product = PRODUCTS[order.plate_type];
   const itemLabel = `${product.label} (${order.plate_color === 'carbon' ? 'Carbon' : 'Schwarz'}) – ${order.plate}`;
   const unitPrice = order.unit_price_cents / 100;
-  const baseQuantity = order.quantity === 3 ? 2 : order.quantity;
+  const explicitParking = Boolean(order.parking_plate);
+  const explicitBikeRack = Boolean(order.bike_rack_plate);
+  const legacyParking = !explicitParking && !explicitBikeRack && order.quantity === 3;
+  const parkingSelected = explicitParking || legacyParking;
+  const bikeRackSelected = explicitBikeRack;
+  const baseQuantity = order.quantity - Number(parkingSelected) - Number(bikeRackSelected);
   const itemTotal = (order.unit_price_cents * baseQuantity) / 100;
   writeRow([
     { text: itemLabel, ...columns.position },
@@ -129,13 +136,26 @@ export async function renderInvoicePdf(order: InvoiceOrder, invoice: InvoiceReco
   ]);
   cursorY -= 22;
 
-  if (order.quantity === 3) {
-    const parkingExtraCents = order.total_cents + order.discount_cents - order.shipping_cents - order.unit_price_cents * baseQuantity;
+  if (parkingSelected) {
+    const parkingExtraCents = legacyParking
+      ? order.total_cents + order.discount_cents - order.shipping_cents - order.unit_price_cents * baseQuantity
+      : Math.round(PARKING_PLATE_PRICE * 100);
     writeRow([
       { text: `Parkplatz-Kennzeichen – ${order.plate}`, ...columns.position },
       { text: '1', ...columns.quantity, align: 'right' },
       { text: formatPrice(parkingExtraCents / 100), ...columns.unitPrice, align: 'right' },
       { text: formatPrice(parkingExtraCents / 100), ...columns.total, align: 'right' },
+    ]);
+    cursorY -= 22;
+  }
+
+  if (bikeRackSelected) {
+    const bikeRackExtraCents = Math.round(BIKE_RACK_PLATE_PRICE * 100);
+    writeRow([
+      { text: `Fahrradträger-Kennzeichen – ${order.plate}`, ...columns.position },
+      { text: '1', ...columns.quantity, align: 'right' },
+      { text: formatPrice(bikeRackExtraCents / 100), ...columns.unitPrice, align: 'right' },
+      { text: formatPrice(bikeRackExtraCents / 100), ...columns.total, align: 'right' },
     ]);
     cursorY -= 22;
   }

@@ -8,6 +8,8 @@ export type StripeInvoiceOrder = {
   plate_type: PlateType;
   plate_color: PlateColor;
   quantity: number;
+  parking_plate?: number;
+  bike_rack_plate?: number;
   total_cents: number;
   promo_code: string | null;
   customer_email: string | null;
@@ -91,12 +93,13 @@ export async function ensurePaidStripeInvoice(stripe: Stripe, order: StripeInvoi
       const taxRateId = await includedVatRate(stripe);
       const product = PRODUCTS[order.plate_type];
       const discount = order.promo_code ? `, Rabattcode ${order.promo_code}` : '';
+      const extras = `${order.parking_plate ? ', Parkplatz-Kennzeichen' : ''}${order.bike_rack_plate ? ', Fahrradträger-Kennzeichen' : ''}`;
       await stripe.invoiceItems.create({
         customer: customerId,
         invoice: invoice.id,
         currency: 'eur',
         amount: order.total_cents,
-        description: `${order.quantity} × ${product.label}-Kennzeichen ${order.plate} inkl. DHL-Versand${discount}`,
+        description: `${order.quantity} × ${product.label}-Kennzeichen ${order.plate}${extras} inkl. DHL-Versand${discount}`,
         tax_behavior: 'inclusive',
         tax_rates: [taxRateId],
       }, { idempotencyKey: `kennzeichen-invoice-item-${order.id}` });

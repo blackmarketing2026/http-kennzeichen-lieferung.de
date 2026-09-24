@@ -9,20 +9,23 @@ import { ArrowLeft, CheckCircle2, LoaderCircle, LockKeyhole } from 'lucide-react
 import { PaymentLogos } from '@/components/payment-logos';
 import { ShippingNotice } from '@/components/shipping-notice';
 import { LicensePlate } from '@/components/license-plate';
-import { formatPrice, getUnitPrice, PARKING_PLATE_PRICE, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
-import type { CheckoutPricing } from '@/lib/checkout-pricing';
+import { BIKE_RACK_PLATE_PRICE, formatPrice, getUnitPrice, PARKING_PLATE_PRICE, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
+import type { CheckoutExtras, CheckoutPricing } from '@/lib/checkout-pricing';
 import { ShippingCountdown } from '@/components/shipping-countdown';
 import { ComplianceNotice } from '@/components/compliance-notice';
-import { ParkingUpsell } from '@/components/parking-upsell';
+import { PlateUpsell, type UpsellKind } from '@/components/parking-upsell';
+import styles from './checkout-extras.module.css';
 
 type CheckoutSelection = { plate: string; plateType: PlateType; plateColor: PlateColor; quantity: 1 | 2 | 3 };
+type ActiveSelection = Omit<CheckoutSelection, 'quantity'> & { quantity: number };
 type PaymentIntentResponse = { error?: string; clientSecret?: string; paymentIntentId?: string; publishableKey?: string; pricing?: CheckoutPricing };
 
-function PaymentForm({ selection, pricing, onApplyPromo, onChangeQuantity }: {
-  selection: CheckoutSelection;
+function PaymentForm({ selection, extras, pricing, onApplyPromo, onChangeExtra }: {
+  selection: ActiveSelection;
+  extras: CheckoutExtras;
   pricing: CheckoutPricing;
   onApplyPromo: (code: string) => Promise<CheckoutPricing>;
-  onChangeQuantity: (quantity: 2 | 3) => Promise<CheckoutPricing>;
+  onChangeExtra: (extras: CheckoutExtras) => Promise<CheckoutPricing>;
 }) {
   const stripe = useStripe();
   const elements = useElements();
@@ -38,13 +41,13 @@ function PaymentForm({ selection, pricing, onApplyPromo, onChangeQuantity }: {
   const [isUpdatingExtra, setIsUpdatingExtra] = useState(false);
   const changingExtra = useRef(false);
 
-  async function changeParkingExtra(selected: boolean) {
+  async function changeExtra(kind: UpsellKind, selected: boolean) {
     if (!elements || isPaying || isApplyingPromo || changingExtra.current) return false;
     changingExtra.current = true;
     setIsUpdatingExtra(true);
     setMessage('');
     try {
-      await onChangeQuantity(selected ? 3 : 2);
+      await onChangeExtra({ ...extras, [kind === 'parking' ? 'parkingPlate' : 'bikeRackPlate']: selected });
       const update = await elements.fetchUpdates();
       if (update.error) throw new Error(update.error.message);
       setPromoReady(true);
@@ -158,7 +161,12 @@ function PaymentForm({ selection, pricing, onApplyPromo, onChangeQuantity }: {
     <form className="real-payment-form" onSubmit={handleSubmit}>
       <div className="secure-checkout-heading"><div><span>Sicherer Checkout</span><strong>Zahlungs- und Lieferdaten</strong></div><LockKeyhole /></div>
       <p className="checkout-account-hint">Du bestellst als Gast – kein Konto nötig. Schon Kunde? <Link href="/konto/login">Melde dich an</Link>, um Bestellungen und Rechnungen später einzusehen.</p>
-      {selection.plateType !== 'motorcycle' && <ParkingUpsell plate={selection.plate} plateType={selection.plateType} plateColor={selection.plateColor} priceCents={pricing.parkingExtraPriceCents || Math.round(PARKING_PLATE_PRICE * 100)} selected={selection.quantity === 3} busy={isUpdatingExtra} disabled={!stripe || !elements || isPaying || isApplyingPromo} onChange={changeParkingExtra} />}
+      {selection.plateType !== 'motorcycle' && (
+        <div className={styles.extraOffers}>
+          <PlateUpsell kind="parking" plate={selection.plate} plateType={selection.plateType} plateColor={selection.plateColor} priceCents={Math.round(PARKING_PLATE_PRICE * 100)} selected={extras.parkingPlate} busy={isUpdatingExtra} disabled={!stripe || !elements || isPaying || isApplyingPromo} autoOpen onChange={(selected) => changeExtra('parking', selected)} />
+          <PlateUpsell kind="bikeRack" plate={selection.plate} plateType={selection.plateType} plateColor={selection.plateColor} priceCents={Math.round(BIKE_RACK_PLATE_PRICE * 100)} selected={extras.bikeRackPlate} busy={isUpdatingExtra} disabled={!stripe || !elements || isPaying || isApplyingPromo} onChange={(selected) => changeExtra('bikeRack', selected)} />
+        </div>
+      )}
       <div className="checkout-promo">
         <label htmlFor="checkout-promo-code">Rabattcode</label>
         <div className="checkout-promo-row">
@@ -183,8 +191,10 @@ function PaymentForm({ selection, pricing, onApplyPromo, onChangeQuantity }: {
 }
 
 export function EmbeddedCheckout({ selection: initialSelection }: { selection: CheckoutSelection }) {
-  const [quantity, setQuantity] = useState(initialSelection.quantity);
-  const selection = { ...initialSelection, quantity };
+  const baseQuantity = (initialSelection.plateType === 'motorcycle' ? 1 : 2) as 1 | 2;
+  const [extras, setExtras] = useState<CheckoutExtras>({ parkingPlate: initialSelection.quantity === 3, bikeRackPlate: false });
+  const quantity = baseQuantity + Number(extras.parkingPlate) + Number(extras.bikeRackPlate);
+  const selection: ActiveSelection = { ...initialSelection, quantity };
   const [clientSecret, setClientSecret] = useState('');
   const [paymentIntentId, setPaymentIntentId] = useState('');
   const [publishableKey, setPublishableKey] = useState('');
@@ -192,9 +202,9 @@ export function EmbeddedCheckout({ selection: initialSelection }: { selection: C
   const [error, setError] = useState('');
   const cartId = useRef<string | null>(null);
   const product = PRODUCTS[selection.plateType];
-  const baseQuantity = selection.quantity === 3 ? 2 : selection.quantity;
   const subtotal = getUnitPrice(selection.plateType, selection.plateColor, baseQuantity) * baseQuantity
-    + (selection.quantity === 3 ? PARKING_PLATE_PRICE : 0);
+    + (extras.parkingPlate ? PARKING_PLATE_PRICE : 0)
+    + (extras.bikeRackPlate ? BIKE_RACK_PLATE_PRICE : 0);
   const total = subtotal + SHIPPING_PRICE;
 
   useEffect(() => {
@@ -203,7 +213,7 @@ export function EmbeddedCheckout({ selection: initialSelection }: { selection: C
     fetch('/api/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ plate: initialSelection.plate, plateType: initialSelection.plateType, color: initialSelection.plateColor, quantity: initialSelection.quantity, cartId: cartId.current }),
+      body: JSON.stringify({ plate: initialSelection.plate, plateType: initialSelection.plateType, color: initialSelection.plateColor, quantity: baseQuantity, parkingPlate: initialSelection.quantity === 3, bikeRackPlate: false, cartId: cartId.current }),
       signal: controller.signal,
     })
       .then(async (response) => {
@@ -219,9 +229,9 @@ export function EmbeddedCheckout({ selection: initialSelection }: { selection: C
         if (requestError.name !== 'AbortError') setError(requestError.message);
       });
     return () => controller.abort();
-  }, [initialSelection.plate, initialSelection.plateType, initialSelection.plateColor, initialSelection.quantity]);
+  }, [baseQuantity, initialSelection.plate, initialSelection.plateType, initialSelection.plateColor, initialSelection.quantity]);
 
-  async function updateCheckout(code: string, nextQuantity = quantity): Promise<CheckoutPricing> {
+  async function updateCheckout(code: string, nextExtras = extras): Promise<CheckoutPricing> {
     if (!cartId.current || !paymentIntentId) throw new Error('Checkout ist noch nicht bereit.');
     const response = await fetch('/api/create-payment-intent', {
       method: 'POST',
@@ -230,7 +240,9 @@ export function EmbeddedCheckout({ selection: initialSelection }: { selection: C
         plate: selection.plate,
         plateType: selection.plateType,
         color: selection.plateColor,
-        quantity: nextQuantity,
+        quantity: baseQuantity,
+        parkingPlate: nextExtras.parkingPlate,
+        bikeRackPlate: nextExtras.bikeRackPlate,
         cartId: cartId.current,
         paymentIntentId,
         promoCode: code,
@@ -246,7 +258,7 @@ export function EmbeddedCheckout({ selection: initialSelection }: { selection: C
       throw new Error('Zahlungsdaten konnten nicht aktualisiert werden.');
     }
     setPricing(data.pricing);
-    setQuantity(nextQuantity);
+    setExtras(nextExtras);
     return data.pricing;
   }
 
@@ -259,7 +271,9 @@ export function EmbeddedCheckout({ selection: initialSelection }: { selection: C
         <Link className="checkout-logo" href="/"><Image src="/kennzeichen-lieferung-logo.png" alt="kennzeichen-lieferung.de" width={2172} height={724} priority /></Link>
         <div className="checkout-order-copy"><span>Deine Bestellung</span><h1>Genau dieses<br />Kennzeichen.</h1></div>
         <LicensePlate value={selection.plate} type={selection.plateType} color={selection.plateColor} className="real-checkout-plate" />
-        <div className="real-order-line"><div><strong>{selection.quantity} × {product.label}</strong><span>{selection.plate} · {product.size} · Schwarz</span>{selection.quantity === 3 && <span>Davon 1 zusätzliches Parkplatz-Kennzeichen</span>}</div><strong>{formatPrice((pricing?.subtotalCents ?? Math.round(subtotal * 100)) / 100)}</strong></div>
+        <div className="real-order-line"><div><strong>{baseQuantity} × {product.label}</strong><span>{selection.plate} · {product.size} · Schwarz</span></div><strong>{formatPrice(getUnitPrice(selection.plateType, selection.plateColor, baseQuantity) * baseQuantity)}</strong></div>
+        {extras.parkingPlate && <div className="real-order-line"><span>1 × Parkplatz-Kennzeichen</span><strong>{formatPrice(PARKING_PLATE_PRICE)}</strong></div>}
+        {extras.bikeRackPlate && <div className="real-order-line"><span>1 × Fahrradträger-Kennzeichen</span><strong>{formatPrice(BIKE_RACK_PLATE_PRICE)}</strong></div>}
         <div className="real-order-line"><span>DHL-Versand</span><strong>Inklusive</strong></div>
         {pricing && pricing.discountCents > 0 && <div className="real-order-line real-order-discount"><span>Rabatt ({pricing.promoCode})</span><strong>−{formatPrice(pricing.discountCents / 100)}</strong></div>}
         <div className="real-order-total"><span>Gesamt</span><strong>{formatPrice(pricing ? pricing.totalCents / 100 : total)}</strong></div>
@@ -275,7 +289,7 @@ export function EmbeddedCheckout({ selection: initialSelection }: { selection: C
             locale: 'de',
             appearance: { theme: 'stripe', variables: { colorPrimary: '#0069d9', colorText: '#061622', borderRadius: '6px', fontFamily: 'Arial, sans-serif' } },
           }}>
-            <PaymentForm selection={selection} pricing={pricing} onApplyPromo={(code) => updateCheckout(code)} onChangeQuantity={(nextQuantity) => updateCheckout(pricing.promoCode ?? '', nextQuantity)} />
+            <PaymentForm selection={selection} extras={extras} pricing={pricing} onApplyPromo={(code) => updateCheckout(code)} onChangeExtra={(nextExtras) => updateCheckout(pricing.promoCode ?? '', nextExtras)} />
           </Elements>
         ) : (
           <div className="checkout-loading"><LoaderCircle className="spin" /><strong>Sicherer Checkout wird vorbereitet</strong><span>Der Gesamtbetrag wird serverseitig geprüft.</span></div>

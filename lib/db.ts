@@ -67,6 +67,8 @@ const SCHEMA_STATEMENTS = [
     plate_type VARCHAR(32) NOT NULL,
     plate_color VARCHAR(32) NOT NULL,
     quantity INT NOT NULL,
+    parking_plate TINYINT(1) NOT NULL DEFAULT 0,
+    bike_rack_plate TINYINT(1) NOT NULL DEFAULT 0,
     unit_price_cents INT NOT NULL,
     shipping_cents INT NOT NULL,
     discount_cents INT NOT NULL DEFAULT 0,
@@ -171,6 +173,8 @@ const SCHEMA_MIGRATIONS = [
   `ALTER TABLE orders ADD COLUMN shipping_email_sent_at DATETIME NULL`,
   `ALTER TABLE orders ADD COLUMN discount_cents INT NOT NULL DEFAULT 0`,
   `ALTER TABLE orders ADD COLUMN promo_code VARCHAR(64) NULL`,
+  `ALTER TABLE orders ADD COLUMN parking_plate TINYINT(1) NOT NULL DEFAULT 0`,
+  `ALTER TABLE orders ADD COLUMN bike_rack_plate TINYINT(1) NOT NULL DEFAULT 0`,
 ];
 
 const IGNORABLE_MIGRATION_ERROR_CODES = new Set([
