@@ -33,9 +33,14 @@ Lies beide Dateien vollständig, bevor du Änderungen am Projekt vornimmst. Erfi
 
 ## API-Konfiguration
 
-API-Version: `2.2.0`
+API-Version: `2.2.0` (DEV und LIVE)
 
-Client-ID: `105`
+| Umgebung | Client-ID | API-Host | Portal |
+|---|---|---|---|
+| DEV (lokal) | `105` | `api.kennzeichen.dev` | kennzeichen.dev |
+| LIVE (Vercel Production, seit 24.09.2026) | `26` | `api.kennzeichen.link` (von Jens zu bestätigen) | https://dev.kennzeichen.link |
+
+Für LIVE wurde im Portal unter `/users` ein eigener API-User angelegt. Login-String und Passwort stehen ausschließlich in den Vercel-Production-Variablen.
 
 DEV-Basis-URL:
 
@@ -55,7 +60,13 @@ Vollständige DEV-URL:
 https://api.kennzeichen.dev/dropshipping-api/105/2.2.0/orders
 ```
 
-Die in älteren Linkzielen eventuell vorkommende Client-ID `84` darf nicht verwendet werden. Für dieses Projekt gilt ausschließlich Client-ID `105`.
+LIVE-Basis-URL:
+
+```text
+https://api.kennzeichen.link/dropshipping-api/26/2.2.0
+```
+
+Die in älteren Linkzielen eventuell vorkommende Client-ID `84` darf nicht verwendet werden. Es gilt: `105` = DEV, `26` = LIVE. Lokal (`.env.local`) bleibt immer DEV, damit Tests keine echten Aufträge auslösen.
 
 ## Authentifizierung
 
@@ -78,6 +89,8 @@ Zugangsdaten dürfen ausschließlich serverseitig verwendet werden.
 ## Umgebungsvariablen
 
 Nutze Umgebungsvariablen. Keine Zugangsdaten, Secrets oder Basic-Auth-Header dürfen im Quellcode, Git-Repository, Browser-Bundle oder Frontend erscheinen.
+
+Werte für DEV/lokal. In Vercel Production stattdessen `KENNZEICHEN_API_HOST=api.kennzeichen.link` und `KENNZEICHEN_API_CLIENT_ID=26` sowie die LIVE-Zugangsdaten.
 
 ```env
 KENNZEICHEN_API_HOST=api.kennzeichen.dev
@@ -240,7 +253,7 @@ Beispiel für zwei normale KFZ-Kennzeichen in 520x110 mm:
 
 ## Optionale Request-Felder
 
-Für Client-ID `105` ist der alternative Absendername `Function Concept` konfiguriert. Wenn der Shop unter diesem Namen versenden soll, darf folgender Wert verwendet werden:
+Für Client-ID `105` ist der alternative Absendername `Function Concept` konfiguriert (für LIVE-Client `26` bei Jens bestätigen). Wenn der Shop unter diesem Namen versenden soll, darf folgender Wert verwendet werden:
 
 ```json
 {
@@ -480,6 +493,16 @@ In der DEV-Umgebung erfolgt kein echter Versand. Trackingcodes werden erst in de
 
 Für Tests muss Jens beziehungsweise der Hersteller Webhook-Ereignisse manuell auslösen können. Die Anwendung muss daher auch in DEV einen erreichbaren Test-Webhook besitzen.
 
+## Webhook LIVE
+
+Im LIVE-Portal (https://dev.kennzeichen.link → Webhooks) eingetragen:
+
+- URL: `https://www.kennzeichen-lieferung.de/api/kennzeichen-webhook` (immer mit `www`, die Apex-Domain leitet per 308 um)
+- Events: `DELIVERY_SHIPMENT`, `DELIVERY_RETURN`, `DELIVERY_CANCELLATION`, `PING`
+- SignatureSecret: identisch mit `KENNZEICHEN_WEBHOOK_SECRET` in Vercel Production, niemals im Repository
+
+Schnelltest: Ein unsignierter `POST` auf die URL muss `401` liefern (`503` = Secret fehlt im Deployment). Ein mit dem Secret per HMAC-SHA256 (hex, Header `X-Signature`) signierter `PING` muss `202` liefern.
+
 ## Tests
 
 Implementiere mindestens folgende automatisierte Tests:
@@ -506,7 +529,7 @@ Implementiere mindestens folgende automatisierte Tests:
 Die Aufgabe ist erst abgeschlossen, wenn:
 
 - die API ausschließlich serverseitig aufgerufen wird
-- API-Version `2.2.0` und Client-ID `105` verwendet werden
+- API-Version `2.2.0` und Client-ID `105` (DEV) bzw. `26` (LIVE) verwendet werden
 - Produkt-IDs und SKUs aus `Produktkatalog.csv` stammen
 - keine erfundenen Produktvarianten verwendet werden
 - eine erfolgreiche Stripe-Zahlung genau einen Herstellerauftrag erzeugt
