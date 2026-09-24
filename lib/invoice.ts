@@ -119,14 +119,26 @@ export async function renderInvoicePdf(order: InvoiceOrder, invoice: InvoiceReco
   const product = PRODUCTS[order.plate_type];
   const itemLabel = `${product.label} (${order.plate_color === 'carbon' ? 'Carbon' : 'Schwarz'}) – ${order.plate}`;
   const unitPrice = order.unit_price_cents / 100;
-  const itemTotal = (order.unit_price_cents * order.quantity) / 100;
+  const baseQuantity = order.quantity === 3 ? 2 : order.quantity;
+  const itemTotal = (order.unit_price_cents * baseQuantity) / 100;
   writeRow([
     { text: itemLabel, ...columns.position },
-    { text: String(order.quantity), ...columns.quantity, align: 'right' },
+    { text: String(baseQuantity), ...columns.quantity, align: 'right' },
     { text: formatPrice(unitPrice), ...columns.unitPrice, align: 'right' },
     { text: formatPrice(itemTotal), ...columns.total, align: 'right' },
   ]);
   cursorY -= 22;
+
+  if (order.quantity === 3) {
+    const parkingExtraCents = order.total_cents + order.discount_cents - order.shipping_cents - order.unit_price_cents * baseQuantity;
+    writeRow([
+      { text: `Parkplatz-Kennzeichen – ${order.plate}`, ...columns.position },
+      { text: '1', ...columns.quantity, align: 'right' },
+      { text: formatPrice(parkingExtraCents / 100), ...columns.unitPrice, align: 'right' },
+      { text: formatPrice(parkingExtraCents / 100), ...columns.total, align: 'right' },
+    ]);
+    cursorY -= 22;
+  }
 
   writeRow([
     { text: order.shipping_cents === 0 ? 'Versand (inklusive)' : 'Versand', ...columns.position },

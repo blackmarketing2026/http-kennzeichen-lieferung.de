@@ -45,12 +45,12 @@ describe('checkout pricing', () => {
     expect(getCheckoutPricing('standard', 'carbon', 2, undefined)).toBeNull();
   });
 
-  it.each(['standard', 'electric', 'historic', 'season'] as const)('adds one parking plate to %s with the server-side unit price', (type) => {
-    expect(getCheckoutPricing(type, 'black', 3, undefined)).toMatchObject({ unitPriceCents: 1495, subtotalCents: 4485, shippingCents: 0, totalCents: 4485 });
+  it.each(['standard', 'electric', 'historic', 'season'] as const)('adds one parking plate to %s for five euros', (type) => {
+    expect(getCheckoutPricing(type, 'black', 3, undefined)).toMatchObject({ unitPriceCents: 1495, parkingExtraPriceCents: 500, subtotalCents: 3490, shippingCents: 0, totalCents: 3490 });
     expect(getCheckoutPricing(type, 'black', 2, undefined)?.totalCents).toBe(2990);
   });
 
   it('keeps an applied promotion consistent when the parking extra is added', () => {
-    expect(getCheckoutPricing('standard', 'black', 3, 'TEST5')).toMatchObject({ subtotalCents: 4485, discountCents: 3985, totalCents: 500 });
+    expect(getCheckoutPricing('standard', 'black', 3, 'TEST5')).toMatchObject({ subtotalCents: 3490, discountCents: 2990, totalCents: 500 });
   });
 });

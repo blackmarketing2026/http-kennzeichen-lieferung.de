@@ -69,7 +69,7 @@ describe('parking extra payment updates', () => {
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 4485,
+        amount: 3490,
         metadata: expect.objectContaining({
           anzahl: '3',
           parkplatzkennzeichen: '1',
@@ -78,14 +78,14 @@ describe('parking extra payment updates', () => {
     );
     expect(await response.json()).toMatchObject({
       paymentIntentId: current.id,
-      pricing: { totalCents: 4485 },
+      pricing: { totalCents: 3490, parkingExtraPriceCents: 500 },
     });
   });
 
   it('removes the extra and restores the original amount', async () => {
     stripe.retrieve.mockResolvedValue({
       ...current,
-      amount: 4485,
+      amount: 3490,
       metadata: { ...current.metadata, anzahl: '3', parkplatzkennzeichen: '1' },
     });
     expect((await POST(request(2))).status).toBe(200);

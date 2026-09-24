@@ -9,7 +9,7 @@ import { ArrowLeft, CheckCircle2, LoaderCircle, LockKeyhole } from 'lucide-react
 import { PaymentLogos } from '@/components/payment-logos';
 import { ShippingNotice } from '@/components/shipping-notice';
 import { LicensePlate } from '@/components/license-plate';
-import { formatPrice, getUnitPrice, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
+import { formatPrice, getUnitPrice, PARKING_PLATE_PRICE, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import type { CheckoutPricing } from '@/lib/checkout-pricing';
 import { ShippingCountdown } from '@/components/shipping-countdown';
 import { ComplianceNotice } from '@/components/compliance-notice';
@@ -158,7 +158,7 @@ function PaymentForm({ selection, pricing, onApplyPromo, onChangeQuantity }: {
     <form className="real-payment-form" onSubmit={handleSubmit}>
       <div className="secure-checkout-heading"><div><span>Sicherer Checkout</span><strong>Zahlungs- und Lieferdaten</strong></div><LockKeyhole /></div>
       <p className="checkout-account-hint">Du bestellst als Gast – kein Konto nötig. Schon Kunde? <Link href="/konto/login">Melde dich an</Link>, um Bestellungen und Rechnungen später einzusehen.</p>
-      {selection.plateType !== 'motorcycle' && <ParkingUpsell plate={selection.plate} priceCents={pricing.unitPriceCents} selected={selection.quantity === 3} busy={isUpdatingExtra} disabled={!stripe || !elements || isPaying || isApplyingPromo} onChange={changeParkingExtra} />}
+      {selection.plateType !== 'motorcycle' && <ParkingUpsell plate={selection.plate} priceCents={pricing.parkingExtraPriceCents || Math.round(PARKING_PLATE_PRICE * 100)} selected={selection.quantity === 3} busy={isUpdatingExtra} disabled={!stripe || !elements || isPaying || isApplyingPromo} onChange={changeParkingExtra} />}
       <div className="checkout-promo">
         <label htmlFor="checkout-promo-code">Rabattcode</label>
         <div className="checkout-promo-row">
@@ -192,7 +192,9 @@ export function EmbeddedCheckout({ selection: initialSelection }: { selection: C
   const [error, setError] = useState('');
   const cartId = useRef<string | null>(null);
   const product = PRODUCTS[selection.plateType];
-  const subtotal = getUnitPrice(selection.plateType, selection.plateColor, selection.quantity) * selection.quantity;
+  const baseQuantity = selection.quantity === 3 ? 2 : selection.quantity;
+  const subtotal = getUnitPrice(selection.plateType, selection.plateColor, baseQuantity) * baseQuantity
+    + (selection.quantity === 3 ? PARKING_PLATE_PRICE : 0);
   const total = subtotal + SHIPPING_PRICE;
 
   useEffect(() => {
