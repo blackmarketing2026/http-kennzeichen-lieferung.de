@@ -13,7 +13,7 @@ import { BIKE_RACK_PLATE_PRICE, formatPrice, getUnitPrice, PARKING_PLATE_PRICE, 
 import type { CheckoutExtras, CheckoutPricing } from '@/lib/checkout-pricing';
 import { ShippingCountdown } from '@/components/shipping-countdown';
 import { ComplianceNotice } from '@/components/compliance-notice';
-import { PlateUpsell, type UpsellKind } from '@/components/parking-upsell';
+import { ExtrasUpsellPopup, PlateUpsell, type UpsellKind } from '@/components/parking-upsell';
 import styles from './checkout-extras.module.css';
 
 type CheckoutSelection = { plate: string; plateType: PlateType; plateColor: PlateColor; quantity: 1 | 2 | 3 };
@@ -162,10 +162,13 @@ function PaymentForm({ selection, extras, pricing, onApplyPromo, onChangeExtra }
       <div className="secure-checkout-heading"><div><span>Sicherer Checkout</span><strong>Zahlungs- und Lieferdaten</strong></div><LockKeyhole /></div>
       <p className="checkout-account-hint">Du bestellst als Gast – kein Konto nötig. Schon Kunde? <Link href="/konto/login">Melde dich an</Link>, um Bestellungen und Rechnungen später einzusehen.</p>
       {selection.plateType !== 'motorcycle' && (
-        <div className={styles.extraOffers}>
-          <PlateUpsell kind="parking" plate={selection.plate} plateType={selection.plateType} plateColor={selection.plateColor} priceCents={Math.round(PARKING_PLATE_PRICE * 100)} selected={extras.parkingPlate} busy={isUpdatingExtra} disabled={!stripe || !elements || isPaying || isApplyingPromo} autoOpen onChange={(selected) => changeExtra('parking', selected)} />
-          <PlateUpsell kind="bikeRack" plate={selection.plate} plateType={selection.plateType} plateColor={selection.plateColor} priceCents={Math.round(BIKE_RACK_PLATE_PRICE * 100)} selected={extras.bikeRackPlate} busy={isUpdatingExtra} disabled={!stripe || !elements || isPaying || isApplyingPromo} onChange={(selected) => changeExtra('bikeRack', selected)} />
-        </div>
+        <>
+          <ExtrasUpsellPopup plate={selection.plate} plateType={selection.plateType} plateColor={selection.plateColor} priceCents={Math.round(PARKING_PLATE_PRICE * 100)} selected={{ parking: extras.parkingPlate, bikeRack: extras.bikeRackPlate }} busy={isUpdatingExtra} disabled={!stripe || !elements || isPaying || isApplyingPromo} onChange={changeExtra} />
+          <div className={styles.extraOffers}>
+            <PlateUpsell kind="parking" plate={selection.plate} plateType={selection.plateType} plateColor={selection.plateColor} priceCents={Math.round(PARKING_PLATE_PRICE * 100)} selected={extras.parkingPlate} busy={isUpdatingExtra} disabled={!stripe || !elements || isPaying || isApplyingPromo} onChange={(selected) => changeExtra('parking', selected)} />
+            <PlateUpsell kind="bikeRack" plate={selection.plate} plateType={selection.plateType} plateColor={selection.plateColor} priceCents={Math.round(BIKE_RACK_PLATE_PRICE * 100)} selected={extras.bikeRackPlate} busy={isUpdatingExtra} disabled={!stripe || !elements || isPaying || isApplyingPromo} onChange={(selected) => changeExtra('bikeRack', selected)} />
+          </div>
+        </>
       )}
       <div className="checkout-promo">
         <label htmlFor="checkout-promo-code">Rabattcode</label>

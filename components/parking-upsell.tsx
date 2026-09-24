@@ -23,6 +23,17 @@ type Props = {
   onChange: (selected: boolean) => Promise<boolean>;
 };
 
+type CombinedProps = {
+  plate: string;
+  plateType: PlateType;
+  plateColor: PlateColor;
+  priceCents: number;
+  selected: Record<UpsellKind, boolean>;
+  busy: boolean;
+  disabled: boolean;
+  onChange: (kind: UpsellKind, selected: boolean) => Promise<boolean>;
+};
+
 const OFFERS = {
   parking: {
     label: 'Parkplatz-Kennzeichen',
@@ -140,5 +151,67 @@ export function PlateUpsell({ kind, plate, plateType, plateColor, priceCents, se
         </DialogContent>
       </Dialog>
     </>
+  );
+}
+
+export function ExtrasUpsellPopup({ plate, plateType, plateColor, priceCents, selected, busy, disabled, onChange }: CombinedProps) {
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const key = `extras-offer:${plate}`;
+    const timeout = window.setTimeout(() => {
+      try {
+        if (sessionStorage.getItem(key)) return;
+        sessionStorage.setItem(key, 'shown');
+      } catch {
+        /* The offer also works when storage is unavailable. */
+      }
+      setOpen(true);
+    }, 600);
+    return () => window.clearTimeout(timeout);
+  }, [plate]);
+
+  async function change(kind: UpsellKind) {
+    setError(false);
+    if (!(await onChange(kind, !selected[kind]))) setError(true);
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={(value) => { if (!busy) setOpen(value); }}>
+      <DialogContent className={`${styles.offerDialog} ${styles.extrasDialog}`} showCloseButton={false}>
+        <button type="button" className={styles.close} onClick={() => setOpen(false)} disabled={busy} aria-label="Angebot schließen"><X size={20} /></button>
+        <div className={styles.extrasIntro}>
+          <p className={styles.eyebrow}><Plus size={17} /> Praktische Zusatzschilder</p>
+          <DialogTitle className={styles.extrasTitle}>Wo brauchst du dein Kennzeichen noch?</DialogTitle>
+          <DialogDescription className={styles.offerDescription}>Wähle ein oder beide Zusatzschilder mit deiner Kombination <strong>{plate}</strong>. Jeweils gemeinsam und ohne zusätzliche Versandkosten geliefert.</DialogDescription>
+        </div>
+        <div className={styles.popupChoices}>
+          {(['parking', 'bikeRack'] as const).map((kind) => {
+            const offer = OFFERS[kind];
+            const Icon = offer.Icon;
+            return (
+              <article key={kind} className={`${styles.popupChoice} ${selected[kind] ? styles.popupChoiceSelected : ''}`}>
+                <div className={styles.popupChoiceMedia}>
+                  <Image src={offer.image} alt={offer.imageAlt} width={1536} height={1024} sizes="(max-width: 700px) 86vw, 370px" priority />
+                  <LicensePlate value={plate} type={plateType} color={plateColor} className={styles.offerPlate} style={{ position: 'absolute', zIndex: 1, ...offer.plateStyle, transform: 'translateX(-50%)' }} />
+                </div>
+                <div className={styles.popupChoiceContent}>
+                  <p><Icon size={16} /> {offer.eyebrow}</p>
+                  <h3>{offer.label}</h3>
+                  <span>+ {formatPrice(priceCents / 100)}</span>
+                  <button type="button" disabled={disabled || busy} onClick={() => change(kind)}>
+                    {busy ? <LoaderCircle className="spin" size={17} /> : selected[kind] ? <Trash2 size={16} /> : <Plus size={17} />}
+                    {selected[kind] ? 'Entfernen' : 'Hinzufügen'}
+                  </button>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+        {error && <p role="alert" className={styles.offerError}>Der Zusatz konnte nicht geändert werden. Bitte versuche es erneut.</p>}
+        <button className={styles.decline} type="button" disabled={busy} onClick={() => setOpen(false)}>Auswahl schließen und mit dem Checkout fortfahren</button>
+      </DialogContent>
+    </Dialog>
   );
 }

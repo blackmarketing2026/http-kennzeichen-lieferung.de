@@ -136,6 +136,90 @@
   color: #102432;
   box-shadow: 0 24px 90px #06162240;
 }
+.extrasDialog.extrasDialog {
+  width: min(820px, calc(100vw - 28px));
+  max-width: 820px;
+  padding: 28px;
+}
+.extrasIntro {
+  padding-right: 42px;
+}
+.extrasTitle.extrasTitle {
+  font-size: clamp(1.65rem, 4vw, 2.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+.popupChoices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+.popupChoice {
+  overflow: hidden;
+  border: 1px solid #d5e2eb;
+  border-radius: 12px;
+  background: #fff;
+}
+.popupChoiceSelected {
+  border-color: #8fc4a7;
+  box-shadow: 0 0 0 2px #dcefe4;
+}
+.popupChoiceMedia {
+  position: relative;
+  overflow: hidden;
+}
+.popupChoiceMedia > img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.8;
+  object-fit: cover;
+  object-position: center 38%;
+}
+.popupChoiceContent {
+  padding: 15px;
+}
+.popupChoiceContent p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 7px;
+  color: #0069d9;
+  font-size: 0.66rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.popupChoiceContent h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+.popupChoiceContent > span {
+  display: block;
+  margin-top: 5px;
+  color: #496171;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.popupChoiceContent button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  margin-top: 13px;
+  padding: 10px;
+  border: 0;
+  border-radius: 7px;
+  background: #0069d9;
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+.popupChoiceSelected .popupChoiceContent button {
+  background: #326148;
+}
 .close {
   position: absolute;
   z-index: 2;
@@ -284,6 +368,12 @@
     flex-wrap: wrap;
   }
   .extraOffers {
+    grid-template-columns: 1fr;
+  }
+  .extrasDialog.extrasDialog {
+    padding: 22px 16px 16px;
+  }
+  .popupChoices {
     grid-template-columns: 1fr;
   }
 }
