@@ -93,6 +93,16 @@
   object-fit: cover;
   object-position: center 38%;
 }
+.offerPlate.offerPlate {
+  position: absolute;
+  z-index: 1;
+  top: 18%;
+  left: 50%;
+  width: 35.5%;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 1px 1px rgb(8 22 27 / 32%))
+    drop-shadow(0 4px 4px rgb(8 22 27 / 24%));
+}
 .offerImage > span {
   position: absolute;
   bottom: 10px;

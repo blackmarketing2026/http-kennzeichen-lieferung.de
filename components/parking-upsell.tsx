@@ -9,11 +9,14 @@ import {
   DialogDescription,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { formatPrice } from '@/config/products';
+import { LicensePlate } from '@/components/license-plate';
+import { formatPrice, type PlateColor, type PlateType } from '@/config/products';
 import styles from './checkout-extras.module.css';
 
 type Props = {
   plate: string;
+  plateType: PlateType;
+  plateColor: PlateColor;
   priceCents: number;
   selected: boolean;
   busy: boolean;
@@ -23,6 +26,8 @@ type Props = {
 
 export function ParkingUpsell({
   plate,
+  plateType,
+  plateColor,
   priceCents,
   selected,
   busy,
@@ -94,11 +99,17 @@ export function ParkingUpsell({
           <div className={styles.offerImage}>
             <Image
               src="/parking-plate.png"
-              alt="Ein Kennzeichenschild ist an der Begrenzungsmauer eines privaten Parkplatzes befestigt"
+              alt="Beispiel eines Kennzeichenschilds an der Begrenzungsmauer eines privaten Parkplatzes"
               width={1536}
               height={1024}
               sizes="(max-width: 600px) 92vw, 540px"
               priority
+            />
+            <LicensePlate
+              value={plate}
+              type={plateType}
+              color={plateColor}
+              className={styles.offerPlate}
             />
             <span>Anwendungsbeispiel</span>
           </div>

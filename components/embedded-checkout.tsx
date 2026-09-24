@@ -158,7 +158,7 @@ function PaymentForm({ selection, pricing, onApplyPromo, onChangeQuantity }: {
     <form className="real-payment-form" onSubmit={handleSubmit}>
       <div className="secure-checkout-heading"><div><span>Sicherer Checkout</span><strong>Zahlungs- und Lieferdaten</strong></div><LockKeyhole /></div>
       <p className="checkout-account-hint">Du bestellst als Gast – kein Konto nötig. Schon Kunde? <Link href="/konto/login">Melde dich an</Link>, um Bestellungen und Rechnungen später einzusehen.</p>
-      {selection.plateType !== 'motorcycle' && <ParkingUpsell plate={selection.plate} priceCents={pricing.parkingExtraPriceCents || Math.round(PARKING_PLATE_PRICE * 100)} selected={selection.quantity === 3} busy={isUpdatingExtra} disabled={!stripe || !elements || isPaying || isApplyingPromo} onChange={changeParkingExtra} />}
+      {selection.plateType !== 'motorcycle' && <ParkingUpsell plate={selection.plate} plateType={selection.plateType} plateColor={selection.plateColor} priceCents={pricing.parkingExtraPriceCents || Math.round(PARKING_PLATE_PRICE * 100)} selected={selection.quantity === 3} busy={isUpdatingExtra} disabled={!stripe || !elements || isPaying || isApplyingPromo} onChange={changeParkingExtra} />}
       <div className="checkout-promo">
         <label htmlFor="checkout-promo-code">Rabattcode</label>
         <div className="checkout-promo-row">
