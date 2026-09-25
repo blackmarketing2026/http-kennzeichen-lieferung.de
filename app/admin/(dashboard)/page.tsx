@@ -2,7 +2,7 @@ import { describeDatabaseError, ensureSchema, isDatabaseConfigured, query } from
 import { isManufacturerApiCredentialsConfigured, isManufacturerApiEnabled } from '@/lib/kennzeichen-api';
 import { ApiToggle } from '@/components/admin/api-toggle';
 import { RetryButton } from '@/components/admin/retry-button';
-import { TestOrderForm } from '@/components/admin/test-order-form';
+import { ManualOrderForm } from '@/components/admin/manual-order-form';
 import { AutoRefresh } from '@/components/admin/auto-refresh';
 
 export const dynamic = 'force-dynamic';
@@ -64,7 +64,7 @@ export default async function AdminOrdersPage() {
       <AutoRefresh intervalMs={15000} />
       <h1>Bestellungen <span className="admin-muted admin-live-indicator">● Live – aktualisiert alle 15 Sek.</span></h1>
       <ApiToggle initialEnabled={enabled} credentialsConfigured={credentialsConfigured} />
-      <TestOrderForm />
+      <ManualOrderForm />
       <table className="admin-table">
         <thead>
           <tr>
@@ -83,7 +83,7 @@ export default async function AdminOrdersPage() {
           {orders.rows.map((order) => (
             <tr key={order.id}>
               <td>{new Date(order.created_at).toLocaleString('de-DE')}</td>
-              <td>{order.plate} <span className="admin-muted">({order.plate_type} · {order.plate_color})</span></td>
+              <td>{order.plate} <span className="admin-muted">({order.plate_type} · {order.plate_color}){order.cart_id.startsWith('manual-') && ' · manuell'}</span></td>
               <td>{order.quantity}</td>
               <td>{(order.total_cents / 100).toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</td>
               <td>{order.customer_email ?? '–'}</td>

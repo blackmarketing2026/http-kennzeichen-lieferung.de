@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { LoaderCircle, FlaskConical } from 'lucide-react';
+import { LoaderCircle, Send } from 'lucide-react';
 import { PRODUCTS, type PlateColor, type PlateType } from '@/config/products';
 
 const PLATE_TYPES = Object.keys(PRODUCTS) as PlateType[];
@@ -23,23 +23,30 @@ type FormState = {
 };
 
 const DEFAULT_STATE: FormState = {
-  plate: 'HB SJ 1991',
+  plate: '',
   plateType: 'standard',
   color: 'black',
   quantity: 1,
-  firstName: 'Max',
-  lastName: 'Mustermann',
-  street: 'Musterstraße',
-  houseNumber: '1',
-  zipCode: '12345',
-  city: 'Berlin',
-  email: 'test@kennzeichen-lieferung.de',
+  firstName: '',
+  lastName: '',
+  street: '',
+  houseNumber: '',
+  zipCode: '',
+  city: '',
+  email: '',
   phone: '',
+};
+
+const SUBMIT_MESSAGES: Record<string, string> = {
+  submitted: 'Bestellung wurde an den Hersteller übertragen.',
+  failed: 'Übertragung an den Hersteller fehlgeschlagen.',
+  uncertain: 'Übertragung unklar – bitte in der Liste prüfen (z. B. API deaktiviert).',
+  skipped: 'Bestellung wurde nicht übertragen.',
 };
 
 type Result = { orderId: string; status: string; message: string } | { error: string };
 
-export function TestOrderForm() {
+export function ManualOrderForm() {
   const router = useRouter();
   const [form, setForm] = useState<FormState>(DEFAULT_STATE);
   const [loading, setLoading] = useState(false);
@@ -51,16 +58,25 @@ export function TestOrderForm() {
 
   async function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
+    const plate = form.plate.toUpperCase().replace(/\s+/g, ' ').trim();
+    const summary = `${plate} · ${PRODUCTS[form.plateType].label} · ${form.color === 'carbon' ? 'Carbon' : 'Schwarz'} · ${form.quantity}×
+${form.firstName} ${form.lastName}, ${form.street} ${form.houseNumber}, ${form.zipCode} ${form.city}`;
+    if (!window.confirm(`Diese Bestellung wird verbindlich und ohne Zahlung an den Hersteller gesendet:
+
+${summary}
+
+Fortfahren?`)) return;
     setLoading(true);
     setResult(null);
     try {
-      const response = await fetch('/api/admin/orders/test', {
+      const response = await fetch('/api/admin/orders/manual', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, confirmed: true }),
       });
       const data = await response.json() as Result;
       setResult(data);
+      if ('status' in data && data.status === 'submitted') setForm(DEFAULT_STATE);
       router.refresh();
     } catch {
       setResult({ error: 'Anfrage fehlgeschlagen.' });
@@ -71,12 +87,13 @@ export function TestOrderForm() {
 
   return (
     <details className="admin-test-order">
-      <summary><FlaskConical /> Testbestellung an Hersteller-DEV-API senden</summary>
+      <summary><Send /> Bestellung manuell an Hersteller senden (ohne Stripe)</summary>
+      <p className="admin-muted">Legt eine Bestellung ohne Zahlung an und überträgt sie sofort an den Hersteller. Es werden keine E-Mails oder Rechnungen an den Kunden verschickt.</p>
       <form className="admin-test-order-form" onSubmit={handleSubmit}>
         <div className="admin-form-grid">
           <label>
             Kennzeichen
-            <input value={form.plate} onChange={(e) => update('plate', e.target.value)} placeholder="HB SJ 1991" required />
+            <input value={form.plate} onChange={(e) => update('plate', e.target.value)} placeholder="z. B. HB SJ 1991" required />
           </label>
           <label>
             Typ
@@ -109,12 +126,12 @@ export function TestOrderForm() {
           <label>Telefon (optional)<input value={form.phone} onChange={(e) => update('phone', e.target.value)} /></label>
         </div>
         <button type="submit" disabled={loading}>
-          {loading ? <LoaderCircle className="spin" /> : 'Testbestellung senden'}
+          {loading ? <LoaderCircle className="spin" /> : 'An Hersteller senden'}
         </button>
         {result && 'error' in result && <p className="admin-login-error" role="alert">{result.error}</p>}
         {result && 'status' in result && (
           <p className={result.status === 'submitted' ? 'admin-test-order-success' : 'admin-login-error'}>
-            {result.status}: {result.message}
+            {SUBMIT_MESSAGES[result.status] ?? result.status} {result.message}
           </p>
         )}
       </form>

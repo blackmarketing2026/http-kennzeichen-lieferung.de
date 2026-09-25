@@ -7,7 +7,10 @@ export const runtime = 'nodejs';
 
 const PLATE_TYPES = Object.keys(PRODUCTS) as PlateType[];
 
-type TestOrderBody = {
+/** Admin-only: creates an order without a Stripe payment (phone orders, replacements, …) and
+ * submits it to the manufacturer right away. No customer emails or invoices are sent. */
+type ManualOrderBody = {
+  confirmed?: boolean;
   plate?: string;
   plateType?: string;
   color?: string;
@@ -27,7 +30,7 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Keine Datenbank konfiguriert.' }, { status: 503 });
   }
 
-  let body: TestOrderBody;
+  let body: ManualOrderBody;
   try {
     body = await request.json();
   } catch {
@@ -62,9 +65,13 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Bitte alle Felder korrekt ausfüllen.' }, { status: 400 });
   }
 
+  if (body.confirmed !== true) {
+    return Response.json({ error: 'Bitte bestätige, dass die Bestellung verbindlich an den Hersteller gesendet werden soll.' }, { status: 400 });
+  }
+
   await ensureSchema();
 
-  const cartId = `test-${randomUUID()}`;
+  const cartId = `manual-${randomUUID()}`;
   const unitPriceCents = Math.round(getUnitPrice(plateType, color, quantity) * 100);
   const shippingCents = Math.round(SHIPPING_PRICE * 100);
   const totalCents = unitPriceCents * quantity + shippingCents;
