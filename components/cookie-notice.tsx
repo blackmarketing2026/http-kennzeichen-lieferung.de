@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
   ALL_OPTIONAL_ALLOWED,
+  CONSENT_CHANGED_EVENT,
   CONSENT_STORAGE_KEY,
   createConsentRecord,
   NO_OPTIONAL_ALLOWED,
@@ -13,10 +14,10 @@ import {
 } from '@/lib/cookie-consent';
 
 const OPTIONAL_SERVICES: { key: OptionalService; name: string; purpose: string }[] = [
-  { key: 'googleAnalytics', name: 'Google Analytics', purpose: 'Reichweitenmessung und Verbesserung der Website' },
-  { key: 'microsoftClarity', name: 'Microsoft Clarity', purpose: 'Auswertung der Nutzung und Bedienbarkeit' },
-  { key: 'metaPixel', name: 'Meta Pixel', purpose: 'Messung von Werbekampagnen' },
-  { key: 'googleTagManager', name: 'Google Tag Manager', purpose: 'Verwaltung optionaler Analyse- und Marketing-Tags' },
+  { key: 'googleTagManager', name: 'Google Tag Manager', purpose: 'Lädt die unten gewählten Analyse- und Marketing-Dienste' },
+  { key: 'googleAnalytics', name: 'Google Analytics', purpose: 'Reichweitenmessung und Verbesserung der Website (über Google Tag Manager)' },
+  { key: 'microsoftClarity', name: 'Microsoft Clarity', purpose: 'Auswertung der Nutzung und Bedienbarkeit (über Google Tag Manager)' },
+  { key: 'metaPixel', name: 'Meta Pixel', purpose: 'Messung von Werbekampagnen (über Google Tag Manager)' },
 ];
 
 export function CookieNotice() {
@@ -65,6 +66,7 @@ export function CookieNotice() {
     } catch {
       // The choice still applies to this page view if browser storage is unavailable.
     }
+    window.dispatchEvent(new CustomEvent(CONSENT_CHANGED_EVENT, { detail: optional }));
     setPreferences(optional);
     setAdvanced(false);
     setOpen(false);
@@ -93,9 +95,8 @@ export function CookieNotice() {
         Mit „Alles erlauben“ kannst du optionalen Analyse- und Marketingfunktionen zustimmen.
       </p>
       <p className="cookie-dialog-status">
-        Derzeit sind Google Analytics, Microsoft Clarity, Meta Pixel und Google Tag Manager nicht aktiviert.
-        Deine Auswahl speichert nur deine Einstellung; es werden keine optionalen Skripte geladen.
-        Vor einer Aktivierung fragen wir erneut.
+        Optionale Dienste werden ausschließlich über den Google Tag Manager und erst nach deiner Einwilligung geladen.
+        Ohne Zustimmung werden keine Analyse- oder Marketing-Skripte ausgeführt.
       </p>
 
       {advanced && (
@@ -107,7 +108,7 @@ export function CookieNotice() {
           </div>
           {OPTIONAL_SERVICES.map((service) => (
             <label className="cookie-option" key={service.key}>
-              <span><strong>{service.name}</strong><span>{service.purpose} · derzeit nicht aktiv</span></span>
+              <span><strong>{service.name}</strong><span>{service.purpose}</span></span>
               <input
                 type="checkbox"
                 checked={preferences[service.key]}
@@ -116,7 +117,7 @@ export function CookieNotice() {
               />
             </label>
           ))}
-          <p className="cookie-options-note">Alle optionalen Funktionen sind zunächst ausgeschaltet. Eine spätere technische Aktivierung erfordert eine neue Einwilligung.</p>
+          <p className="cookie-options-note">Alle optionalen Funktionen sind zunächst ausgeschaltet. Ohne Google Tag Manager wird keiner der übrigen Dienste geladen.</p>
         </div>
       )}
 

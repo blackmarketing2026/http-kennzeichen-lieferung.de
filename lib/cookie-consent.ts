@@ -1,7 +1,9 @@
 export const CONSENT_STORAGE_KEY = 'kl_cookie_consent_v2';
 // Increment before any currently inactive tracking service is technically activated.
 // Previous choices must not silently authorize a new integration.
-export const CONSENT_VERSION = 2;
+export const CONSENT_VERSION = 3;
+/** Dispatched on window with the saved OptionalPreferences as `detail` whenever the visitor saves a choice. */
+export const CONSENT_CHANGED_EVENT = 'cookie-consent-changed';
 const CONSENT_LIFETIME_MS = 180 * 24 * 60 * 60 * 1000;
 
 export type OptionalService = 'googleAnalytics' | 'microsoftClarity' | 'metaPixel' | 'googleTagManager';

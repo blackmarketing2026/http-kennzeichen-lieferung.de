@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { CookieNotice } from '@/components/cookie-notice';
+import { GoogleTagManager } from '@/components/google-tag-manager';
 import { SiteLegalFooter } from '@/components/site-legal-footer';
 import './globals.css';
 import './legal.css';
@@ -14,5 +15,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="de"><body className={`${geistSans.variable} ${geistMono.variable}`}>{children}<SiteLegalFooter /><CookieNotice /></body></html>;
+  return <html lang="de"><body className={`${geistSans.variable} ${geistMono.variable}`}>{children}<SiteLegalFooter /><CookieNotice /><GoogleTagManager /></body></html>;
 }
