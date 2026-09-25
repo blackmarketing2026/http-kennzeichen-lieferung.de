@@ -14,6 +14,7 @@ import { getPickupCountdown, type PickupCountdown } from '@/lib/pickup-countdown
 import { ComplianceNotice } from '@/components/compliance-notice';
 
 const BASE_PLATE_TYPES = ['standard', 'motorcycle', 'season'] as const;
+const MOBILE_PLATE_TYPES = ['standard', 'motorcycle', 'electric', 'historic', 'season'] as const;
 const FAQS = [
   ['Ist die Bestellung eine Reservierung bei der Zulassungsstelle?', 'Nein. Du bestellst geprägte Kennzeichenschilder. Reservierung, Fahrzeugzulassung und amtliche Plaketten sind nicht enthalten.'],
   ['Welche Kennzeichenarten kann ich konfigurieren?', 'Du kannst Auto-, Motorrad-, E-, H- und Saisonkennzeichen konfigurieren. Beim Motorrad erhältst du ein Schild, bei den anderen Varianten zwei Schilder.'],
@@ -158,12 +159,20 @@ export default function Home() {
           <a href="#konfigurator" className="text-link">Jetzt ausprobieren <ArrowDown size={18} /></a>
         </div>
         <div className="hero-product" onPointerMove={handlePointerMove} onPointerLeave={() => setTilt({ x: 0, y: 0 })}>
-          <span className="product-label">Live-Vorschau</span>
+          <div className="mobile-config-progress" aria-label="Bestellschritte"><span className="active"><b>1</b>Kennzeichen</span><span><b>2</b>Typ</span><span><b>3</b>Bestellen</span></div>
+          <span className="product-label"><span className="live-dot" /> Live-Vorschau</span>
           <LicensePlate value={plateValue} type={plateType} color={plateColor} className="hero-plate" style={{ transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }} />
           <div className="quick-entry">
-            <label htmlFor="hero-city-input">Deine Kombination</label>
-            <div className="entry-row"><div className="plate-fields compact"><input id="hero-city-input" aria-label="Ortskürzel" value={cityCode} onChange={(event) => updateCity(event.target.value)} maxLength={3} /><input aria-label="Buchstaben" value={serialLetters} onChange={(event) => updateLetters(event.target.value)} maxLength={2} /><input aria-label="Zahlen" value={serialNumbers} onChange={(event) => updateNumbers(event.target.value)} inputMode="numeric" maxLength={4} /></div><a className="button" href="#konfigurator">Weiter <ArrowRight size={18} /></a></div>
+            <label htmlFor="hero-city-input"><span className="mobile-step-number">1</span> Deine Kombination</label>
+            <div className="entry-row"><div className="plate-fields compact"><input id="hero-city-input" aria-label="Ortskürzel" value={cityCode} onChange={(event) => updateCity(event.target.value)} maxLength={3} /><input aria-label="Buchstaben" value={serialLetters} onChange={(event) => updateLetters(event.target.value)} maxLength={2} /><input aria-label="Zahlen" value={serialNumbers} onChange={(event) => updateNumbers(event.target.value)} inputMode="numeric" maxLength={4} /></div><a className="button desktop-continue" href="#konfigurator">Weiter <ArrowRight size={18} /></a></div>
             <p id="plate-help">Ort · Buchstaben · Zahlen am Ende</p>
+            <div className="mobile-type-picker">
+              <div className="mobile-picker-heading"><span><b>2</b> Fahrzeug &amp; Typ</span><small>Bitte auswählen</small></div>
+              <div className="mobile-type-grid" aria-label="Fahrzeug und Kennzeichenart">
+                {MOBILE_PLATE_TYPES.map((type) => <button key={type} type="button" aria-pressed={plateType === type} className={plateType === type ? 'active' : ''} onClick={() => setPlateType(type)}><strong>{type === 'electric' ? 'E' : type === 'historic' ? 'H' : type === 'season' ? '04–10' : type === 'motorcycle' ? 'M' : 'A'}</strong><span>{PRODUCTS[type].label}</span><i /></button>)}
+              </div>
+              <div className="mobile-order-summary"><div><span>{quantity} {quantity === 1 ? 'Schild' : 'Schilder'} · DHL-Versand inklusive</span><strong>{formatPrice(total)}</strong></div><button className="button button-wide" type="button" onClick={openCheckout} disabled={!status}>Jetzt bestellen <ArrowRight size={19} /></button><small><LockKeyhole size={14} /> Sicher bezahlen mit Stripe</small></div>
+            </div>
           </div>
         </div>
         <div className="hero-trust" aria-label="Vorteile"><span><ShieldCheck size={18} /> Sichere Bestellführung</span><span><Sparkles size={18} /> In 10 Minuten versandfertig</span><span><PackageCheck size={18} /> DHL-Abholung: 9, 12 &amp; 16 Uhr</span></div>
