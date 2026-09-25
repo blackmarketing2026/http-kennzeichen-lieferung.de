@@ -2,7 +2,7 @@ import Stripe from 'stripe';
 import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
 import { submitOrderToManufacturer } from '@/lib/manufacturer-order';
 import { logEvent } from '@/lib/logger';
-import { sendInvoiceEmail, sendOrderConfirmationEmail, type OrderEmailOrder } from '@/lib/order-emails';
+import { sendInvoiceEmail, sendOrderConfirmationEmail, sendShopOrderNotificationEmail, type OrderEmailOrder } from '@/lib/order-emails';
 import { ensurePaidStripeInvoice, fetchStripeInvoicePdf, type StripeInvoiceOrder } from '@/lib/stripe-invoice';
 
 export const runtime = 'nodejs';
@@ -124,5 +124,13 @@ async function sendOrderConfirmationAndInvoice(stripe: Stripe, paymentIntent: St
       [orderId],
     );
     throw error;
+  }
+
+  // Sent only by the delivery that won the invoice claim, so retries never duplicate it. A failure
+  // here must not throw: Stripe would retry, but the customer invoice is already marked as sent.
+  try {
+    await sendShopOrderNotificationEmail(order, invoice.number!, pdf, origin);
+  } catch (error) {
+    logEvent('error', 'Shop-Benachrichtigung zur neuen Bestellung fehlgeschlagen', { orderId, error: error instanceof Error ? error.message : 'unbekannt' });
   }
 }

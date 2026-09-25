@@ -82,6 +82,34 @@ export async function sendInvoiceEmail(order: OrderEmailOrder, invoiceNumber: st
   }
 }
 
+/** Internal copy for the shop's own bookkeeping; override the recipient via ORDER_NOTIFICATION_EMAIL. */
+export const ORDER_NOTIFICATION_EMAIL = process.env.ORDER_NOTIFICATION_EMAIL || 'kennzeichenbestellung@function-concept.de';
+
+export async function sendShopOrderNotificationEmail(order: OrderEmailOrder, invoiceNumber: string, pdf: Buffer, origin: string) {
+  if (!isMailConfigured()) {
+    throw new Error('Shop-Benachrichtigung nicht versendet: SMTP nicht konfiguriert.');
+  }
+
+  const html = renderEmailTemplate({
+    logoUrl: `${origin}/kennzeichen-lieferung-logo.png`,
+    preheader: `Neue Bestellung ${order.plate}`,
+    heading: 'Neue Bestellung',
+    bodyHtml: `
+      <p>Kennzeichennummer: <strong>${order.plate}</strong></p>
+      <p>${plateLabel(order)} · ${formatPrice(order.total_cents / 100)} · ${order.customer_email ?? '–'}</p>
+      <p>Die Stripe-Rechnung <strong>${invoiceNumber}</strong> ist als PDF angehängt.</p>
+    `,
+  });
+
+  await getMailTransport().sendMail({
+    from: MAIL_FROM,
+    to: ORDER_NOTIFICATION_EMAIL,
+    subject: `Neue Bestellung – ${order.plate}`,
+    html,
+    attachments: [{ filename: `Rechnung-${invoiceNumber}.pdf`, content: pdf, contentType: 'application/pdf' }],
+  });
+}
+
 export async function sendShippingEmail(order: OrderEmailOrder, trackingCode: string, origin: string) {
   if (!order.customer_email) return;
   if (!isMailConfigured()) {
