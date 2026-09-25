@@ -19,7 +19,7 @@ const FAQS = [
   ['Ist die Bestellung eine Reservierung bei der Zulassungsstelle?', 'Nein. Du bestellst geprägte Kennzeichenschilder. Reservierung, Fahrzeugzulassung und amtliche Plaketten sind nicht enthalten.'],
   ['Welche Kennzeichenarten kann ich konfigurieren?', 'Du kannst Auto-, Motorrad-, E-, H- und Saisonkennzeichen konfigurieren. Beim Motorrad erhältst du ein Schild, bei den anderen Varianten zwei Schilder.'],
   ['Welche Größen gibt es?', 'Für Standard-Autokennzeichen ist aktuell 520 mm hinterlegt. Weitere ein- und zweizeilige Formate sind in der bereitgestellten Preisinformation vorgesehen.'],
-  ['Was kosten die Kennzeichen?', 'Ein Motorradkennzeichen kostet 24,90 € für ein Schild. Auto-, E-, H- und Saisonkennzeichen kosten 29,90 € für zwei Schilder. Die Preise enthalten den DHL-Versand.'],
+  ['Was kosten die Kennzeichen?', 'Ein Motorradkennzeichen kostet 24,90 € für ein Schild. Auto-, E-, H- und Saisonkennzeichen kosten 29,90 € für zwei Schilder. Der DHL-Versand innerhalb Deutschlands ist kostenlos.'],
   ['Wie schnell wird versendet?', 'Wir machen deine Kennzeichen innerhalb von 10 Minuten nach deiner Bestellung versandfertig. DHL holt unsere Pakete dreimal am Tag ab: um 9, 12 und 16 Uhr. Sobald die Sendungsnummer vorliegt, erhältst du sie per E-Mail und kannst dein Paket live bei DHL verfolgen.'],
   ['Welche Zahlungsmethoden werden angeboten?', 'Im eingebetteten Stripe-Checkout werden die für diese Bestellung verfügbaren Zahlungsarten sicher direkt auf unserer Seite angezeigt.'],
 ];
@@ -142,7 +142,7 @@ export default function Home() {
             <div><strong>{product.label}</strong><span>{product.size} · Schwarz · {quantity} {quantity === 1 ? 'Schild' : 'Schilder'}</span></div>
             <strong>{formatPrice(plateSubtotal)}</strong>
           </div>
-          <div className="cart-order-line shipping"><span>DHL-Versand</span><strong>Inklusive</strong></div>
+          <div className="cart-order-line shipping"><span>DHL-Versand</span><strong>Kostenlos</strong></div>
           <div className="cart-total"><span>Gesamt</span><strong>{formatPrice(total)}</strong></div>
           <button className="button button-wide" type="button" onClick={openCheckout}>Mit Stripe bezahlen <ArrowRight size={18} /></button>
           <PaymentLogos />
@@ -171,8 +171,10 @@ export default function Home() {
               <div className="mobile-type-grid" aria-label="Fahrzeug und Kennzeichenart">
                 {MOBILE_PLATE_TYPES.map((type) => <button key={type} type="button" aria-pressed={plateType === type} className={plateType === type ? 'active' : ''} onClick={() => setPlateType(type)}><strong>{type === 'electric' ? 'E' : type === 'historic' ? 'H' : type === 'season' ? '04–10' : type === 'motorcycle' ? 'M' : 'A'}</strong><span>{PRODUCTS[type].label}</span><i /></button>)}
               </div>
-              <div className="mobile-order-summary"><div><span>{quantity} {quantity === 1 ? 'Schild' : 'Schilder'} · DHL-Versand inklusive</span><strong>{formatPrice(total)}</strong></div><button className="button button-wide" type="button" onClick={openCheckout} disabled={!status}>Jetzt bestellen <ArrowRight size={19} /></button><small><LockKeyhole size={14} /> Sicher bezahlen mit Stripe</small></div>
+              <div className="mobile-order-summary"><div><span>{quantity} {quantity === 1 ? 'Schild' : 'Schilder'} · Kostenloser Versand</span><strong>{formatPrice(total)}</strong></div><button className="button button-wide" type="button" onClick={openCheckout} disabled={!status}>Jetzt bestellen <ArrowRight size={19} /></button></div>
             </div>
+            <div className="hero-pickup" aria-live="polite" aria-atomic="true"><div><Clock3 size={17} aria-hidden="true" /><span>Nächste DHL-Abholung</span></div><strong>{pickupCountdown?.remaining ?? '--:--:--'}</strong><small>{pickupCountdown ? `${pickupCountdown.dayLabel} um ${pickupCountdown.pickupTime}` : 'Wird berechnet'}</small></div>
+            <div className="hero-payments"><PaymentLogos /></div>
           </div>
         </div>
         <div className="hero-trust" aria-label="Vorteile"><span><ShieldCheck size={18} /> Sichere Bestellführung</span><span><Sparkles size={18} /> In 10 Minuten versandfertig</span><span><PackageCheck size={18} /> DHL-Abholung: 9, 12 &amp; 16 Uhr</span></div>
@@ -199,7 +201,7 @@ export default function Home() {
             {(plateType === 'motorcycle' || plateType === 'season') && <p className="field-help">E- und H-Zusatz sind in dieser Konfiguration nur beim Auto auswählbar.</p>}
             <div className="step-label second"><b>03</b><span>Lieferumfang</span></div>
             <div className="quantity-row"><strong className="quantity-fixed">{quantity} {quantity === 1 ? 'Schild' : 'Schilder'}</strong><span>{quantity === 2 ? 'Für vorne und hinten' : 'Für dein Motorrad'}</span></div>
-            <div className="price-card"><div><span>{quantity} × {product.label}, {product.size}, Schwarz</span><strong>{formatPrice(plateSubtotal)}</strong></div><div><span>DHL-Versand</span><strong>Inklusive</strong></div><div className="price-total"><span>Gesamt</span><strong>{formatPrice(total)}</strong></div><small>Alle Preise inklusive gesetzlicher Mehrwertsteuer und Versand innerhalb Deutschlands.</small></div>
+            <div className="price-card"><div><span>{quantity} × {product.label}, {product.size}, Schwarz</span><strong>{formatPrice(plateSubtotal)}</strong></div><div><span>DHL-Versand</span><strong>Kostenlos</strong></div><div className="price-total"><span>Gesamt</span><strong>{formatPrice(total)}</strong></div><small>Alle Preise inklusive gesetzlicher Mehrwertsteuer und kostenlosem DHL-Versand innerhalb Deutschlands.</small></div>
             <button className="button button-wide" type="button" onClick={openCheckout} disabled={!status}>Jetzt bestellen <ArrowRight size={19} /></button>
             <PaymentLogos />
             <ShippingNotice />
