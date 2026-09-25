@@ -81,19 +81,30 @@ export type CustomerOrderRow = {
   has_invoice: 0 | 1;
 };
 
+/** An account sees orders linked to it plus every order placed with its (magic-link verified)
+ * email address. The email match matters when checkout happened while the browser was still
+ * logged into a different account: create-payment-intent then links the order to that session's
+ * account, and claimGuestOrdersByEmail can't re-link it because customer_id is no longer NULL. */
+const ORDER_OWNERSHIP_CLAUSE =
+  'o.customer_id = ? OR LOWER(TRIM(o.customer_email)) = (SELECT c.email FROM customers c WHERE c.id = ?)';
+
 export async function listOrdersForCustomer(customerId: string) {
   return query<CustomerOrderRow>(
     `SELECT o.id, o.status, o.plate, o.plate_type, o.plate_color, o.quantity, o.total_cents, o.tracking_code, o.created_at,
             (o.stripe_invoice_id IS NOT NULL OR i.id IS NOT NULL) AS has_invoice
      FROM orders o
      LEFT JOIN invoices i ON i.order_id = o.id
-     WHERE o.customer_id = ?
+     WHERE ${ORDER_OWNERSHIP_CLAUSE}
      ORDER BY o.created_at DESC`,
-    [customerId],
+    [customerId, customerId],
   );
 }
 
 export async function getCustomerOrder(customerId: string, orderId: string) {
-  const result = await query('SELECT * FROM orders WHERE id = ? AND customer_id = ?', [orderId, customerId]);
+  const result = await query(`SELECT o.* FROM orders o WHERE o.id = ? AND (${ORDER_OWNERSHIP_CLAUSE})`, [
+    orderId,
+    customerId,
+    customerId,
+  ]);
   return result.rows[0] ?? null;
 }
