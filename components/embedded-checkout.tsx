@@ -20,6 +20,36 @@ type CheckoutSelection = { plate: string; plateType: PlateType; plateColor: Plat
 type ActiveSelection = Omit<CheckoutSelection, 'quantity'> & { quantity: number };
 type PaymentIntentResponse = { error?: string; clientSecret?: string; paymentIntentId?: string; publishableKey?: string; pricing?: CheckoutPricing };
 
+type PurchaseWindow = Window & {
+  dataLayer?: unknown[];
+  kl_transaction_id?: string;
+  kl_value?: number;
+  kl_currency?: string;
+};
+
+/** Exposes the completed purchase for Google tag: flat globals for the "Extract data from your
+ * page" rules (JavaScript variable kl_transaction_id / kl_value / kl_currency) plus a GA4
+ * `purchase` dataLayer event for GTM. Nothing is sent anywhere unless GTM was consented to. */
+function trackPurchase(transactionId: string, pricing: CheckoutPricing, selection: ActiveSelection) {
+  const w = window as PurchaseWindow;
+  const value = pricing.totalCents / 100;
+  w.kl_transaction_id = transactionId;
+  w.kl_value = value;
+  w.kl_currency = 'EUR';
+  w.dataLayer = w.dataLayer || [];
+  w.dataLayer.push({ ecommerce: null });
+  w.dataLayer.push({
+    event: 'purchase',
+    ecommerce: {
+      transaction_id: transactionId,
+      value,
+      currency: 'EUR',
+      shipping: pricing.shippingCents / 100,
+      items: [{ item_id: selection.plateType, item_name: PRODUCTS[selection.plateType].label, quantity: selection.quantity }],
+    },
+  });
+}
+
 function PaymentForm({ selection, extras, pricing, onApplyPromo, onChangeExtra }: {
   selection: ActiveSelection;
   extras: CheckoutExtras;
@@ -134,6 +164,7 @@ function PaymentForm({ selection, extras, pricing, onApplyPromo, onChangeExtra }
     }
 
     if (paymentIntent?.status === 'succeeded') {
+      trackPurchase(paymentIntent.id, pricing, selection);
       setSucceeded(true);
     } else if (paymentIntent?.status === 'processing') {
       setMessage('Die Zahlung wird verarbeitet. Den endgültigen Status siehst du in Kürze in deiner Bestätigung.');
