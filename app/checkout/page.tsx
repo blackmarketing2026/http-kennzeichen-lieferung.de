@@ -14,11 +14,22 @@ export default async function CheckoutPage({ searchParams }: { searchParams: Pro
   const plateType = first(params.type) as PlateType;
   const plateColor = first(params.color) as PlateColor;
   const quantity = Number(first(params.quantity)) as 1 | 2 | 3;
+  const promoCode = first(params.promo)?.slice(0, 64) ?? '';
+  const returnPath =
+    first(params.source) === 'autohaendlerpartner'
+      ? '/autohaendlerpartner'
+      : undefined;
   const isValid = PLATE_TYPES.includes(plateType) && isAvailableConfiguration(plateType, plateColor, quantity) && isValidPlate(plate, plateType);
 
   if (!isValid) {
     return <main className="invalid-checkout"><h1>Bestellung nicht vollständig.</h1><p>Bitte konfiguriere dein Kennzeichen erneut.</p><Link className="button" href="/#konfigurator">Zur Konfiguration</Link></main>;
   }
 
-  return <EmbeddedCheckout selection={{ plate, plateType, plateColor, quantity }} />;
+  return (
+    <EmbeddedCheckout
+      selection={{ plate, plateType, plateColor, quantity }}
+      initialPromoCode={promoCode}
+      returnPath={returnPath}
+    />
+  );
 }

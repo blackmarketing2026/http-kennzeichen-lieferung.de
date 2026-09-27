@@ -119,8 +119,10 @@ function PaymentForm({
   const [isPaying, setIsPaying] = useState(false);
   const [message, setMessage] = useState('');
   const [succeeded, setSucceeded] = useState(false);
-  const [promoInput, setPromoInput] = useState('');
-  const [promoMessage, setPromoMessage] = useState('');
+  const [promoInput, setPromoInput] = useState(pricing.promoCode ?? '');
+  const [promoMessage, setPromoMessage] = useState(
+    pricing.promoCode ? 'Händlercode angewendet.' : '',
+  );
   const [promoError, setPromoError] = useState(false);
   const [isApplyingPromo, setIsApplyingPromo] = useState(false);
   const [promoReady, setPromoReady] = useState(true);
@@ -457,8 +459,12 @@ function PaymentForm({
 
 export function EmbeddedCheckout({
   selection: initialSelection,
+  initialPromoCode = '',
+  returnPath,
 }: {
   selection: CheckoutSelection;
+  initialPromoCode?: string;
+  returnPath?: string;
 }) {
   const baseQuantity = (
     isSinglePlateProduct(initialSelection.plateType) ? 1 : 2
@@ -498,6 +504,7 @@ export function EmbeddedCheckout({
         parkingPlate: initialSelection.quantity === 3,
         bikeRackPlate: false,
         cartId: cartId.current,
+        promoCode: initialPromoCode || undefined,
       }),
       signal: controller.signal,
     })
@@ -529,6 +536,7 @@ export function EmbeddedCheckout({
     initialSelection.plateType,
     initialSelection.plateColor,
     initialSelection.quantity,
+    initialPromoCode,
   ]);
 
   async function updateCheckout(
@@ -583,9 +591,10 @@ export function EmbeddedCheckout({
         <Link
           className="checkout-back"
           href={
-            isAgriculturePlate(selection.plateType)
+            returnPath ??
+            (isAgriculturePlate(selection.plateType)
               ? '/landmaschinen-kennzeichen'
-              : '/'
+              : '/')
           }
         >
           <ArrowLeft /> Konfiguration ändern
