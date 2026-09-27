@@ -48,24 +48,16 @@ const PLATE_TYPES: PlateType[] = [
 ];
 const FAQS = [
   [
-    'Sind die Kennzeichen bei der Zulassungsstelle verwendbar?',
-    'Ja. Die Kennzeichenschilder sind DIN-zertifiziert und für die Siegelung bei deutschen Zulassungsstellen vorgesehen. Amtliche Plaketten werden ausschließlich von der Zulassungsstelle angebracht.',
+    'Wie schnell sind die Kennzeichen bei mir?',
+    'Durch unseren Expressdruck sind deine Kennzeichen innerhalb von 10 Minuten gedruckt und versandfertig. DHL holt dreimal täglich bei uns ab. Bestellst du rechtzeitig vor einer Abholung, kann dein Paket bereits am nächsten Werktag bei dir eintreffen. Nach der Abholung ist deine Sendung noch am selben Tag unterwegs.',
   ],
   [
-    'Sind die Kennzeichen für den TÜV zugelassen?',
-    'Ja. Die Schilder sind nach DIN 74069 gefertigt und für TÜV und Zulassungsstelle zugelassen.',
-  ],
-  [
-    'Wie schnell werden die Schilder versendet?',
-    'Deine Kennzeichen werden innerhalb von 10 Minuten nach der Bestellung druck- und versandfertig gemacht. DHL holt im Druckwerk dreimal täglich um 9, 12 und 16 Uhr ab.',
+    'Sind die Kennzeichen bei der Anmeldung in der Stadt erlaubt?',
+    'Ja. Unsere Kennzeichen sind nach DIN 74069 zertifiziert und tragen den vorgeschriebenen DIN-Norm-Stempel. Sie sind für den TÜV und die Zulassungsstelle zugelassen.',
   ],
   [
     'Bekomme ich eine Sendungsverfolgung?',
-    'Ja. Sobald DHL die Sendung übernommen hat, erhältst du deine Trackingnummer per E-Mail.',
-  ],
-  [
-    'Reserviert ihr auch mein Wunschkennzeichen?',
-    'Nein. Du bestellst hier die geprägten Schilder. Reservierung und Zulassung erfolgen separat bei deiner zuständigen Zulassungsstelle.',
+    'Ja. Sobald deine Sendung vorbereitet und die Tracking-ID erstellt wurde, bekommst du sie automatisch per E-Mail zugeschickt. Damit kannst du den Versandstatus deines Pakets live verfolgen.',
   ],
 ];
 
