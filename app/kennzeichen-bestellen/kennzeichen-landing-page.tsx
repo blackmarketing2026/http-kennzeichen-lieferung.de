@@ -62,21 +62,21 @@ const FAQS = [
 ];
 
 const DEMO_PLATES = [
-  { plate: 'OL SJ 155', type: 'Autokennzeichen' },
-  { plate: 'B AB 2026', type: 'Autokennzeichen' },
-  { plate: 'HH KL 917', type: 'Autokennzeichen' },
-  { plate: 'M TR 804', type: 'Autokennzeichen' },
-  { plate: 'K EV 321E', type: 'E-Kennzeichen' },
-  { plate: 'F LS 196H', type: 'H-Kennzeichen' },
-  { plate: 'HB MO 77', type: 'Motorrad-Kennzeichen' },
-  { plate: 'S CK 481', type: 'Autokennzeichen' },
-  { plate: 'DO XL 912', type: 'Autokennzeichen' },
-  { plate: 'D JP 608', type: 'Autokennzeichen' },
-  { plate: 'N RS 410', type: 'Motorrad-Kennzeichen' },
-  { plate: 'H VK 735', type: 'Autokennzeichen' },
-  { plate: 'L PT 202', type: 'Autokennzeichen' },
-  { plate: 'KI NM 88E', type: 'E-Kennzeichen' },
-  { plate: 'AC GT 63', type: 'Motorrad-Kennzeichen' },
+  { plate: 'OL SJ 155', type: 'Autokennzeichen', time: 'vor 3 Min.' },
+  { plate: 'B AB 2026', type: 'Autokennzeichen', time: 'vor 5 Min.' },
+  { plate: 'HH KL 917', type: 'Autokennzeichen', time: 'vor 8 Min.' },
+  { plate: 'M TR 804', type: 'Autokennzeichen', time: 'vor 12 Min.' },
+  { plate: 'K EV 321E', type: 'E-Kennzeichen', time: 'vor 16 Min.' },
+  { plate: 'F LS 196H', type: 'H-Kennzeichen', time: 'vor 21 Min.' },
+  { plate: 'HB MO 77', type: 'Motorrad-Kennzeichen', time: 'vor 27 Min.' },
+  { plate: 'S CK 481', type: 'Autokennzeichen', time: 'vor 34 Min.' },
+  { plate: 'DO XL 912', type: 'Autokennzeichen', time: 'vor 41 Min.' },
+  { plate: 'D JP 608', type: 'Autokennzeichen', time: 'vor 53 Min.' },
+  { plate: 'N RS 410', type: 'Motorrad-Kennzeichen', time: 'vor 1 Std.' },
+  { plate: 'H VK 735', type: 'Autokennzeichen', time: 'vor 2 Std.' },
+  { plate: 'L PT 202', type: 'Autokennzeichen', time: 'vor 3 Std.' },
+  { plate: 'KI NM 88E', type: 'E-Kennzeichen', time: 'vor 4 Std.' },
+  { plate: 'AC GT 63', type: 'Motorrad-Kennzeichen', time: 'vor 5 Std.' },
 ];
 
 type AnalyticsWindow = Window & { dataLayer?: unknown[] };
@@ -714,7 +714,8 @@ export function KennzeichenLandingPage() {
             <small>Beispiel-Konfiguration</small>
             <strong>{DEMO_PLATES[demoNoticeIndex].plate}</strong>
             <span>
-              {DEMO_PLATES[demoNoticeIndex].type} · So könnte deins aussehen
+              {DEMO_PLATES[demoNoticeIndex].type} ·{' '}
+              {DEMO_PLATES[demoNoticeIndex].time} konfiguriert
             </span>
           </span>
           <button
