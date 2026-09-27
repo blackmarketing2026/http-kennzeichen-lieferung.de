@@ -711,7 +711,6 @@ export function KennzeichenLandingPage() {
             <CarFront />
           </span>
           <span className={styles.demoNoticeCopy}>
-            <small>Beispiel-Konfiguration</small>
             <strong>{DEMO_PLATES[demoNoticeIndex].plate}</strong>
             <span>
               {DEMO_PLATES[demoNoticeIndex].type} ·{' '}
