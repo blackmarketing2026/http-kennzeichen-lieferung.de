@@ -321,7 +321,10 @@ function PlateArtwork({
 }
 
 export function LicensePlate({ className = '', style, ...props }: PlateProps) {
-  const label = `Kennzeichenvorschau ${props.value}${props.type === 'electric' ? ' E' : props.type === 'historic' ? ' H' : ''}${props.type === 'season' ? ', Saison April bis Oktober' : ''}, Schriftfarbe ${props.color === 'carbon' ? 'Carbon' : 'Schwarz'}`;
+  const plateValue = props.value.trim();
+  const label = plateValue
+    ? `Kennzeichenvorschau ${plateValue}${props.type === 'electric' ? ' E' : props.type === 'historic' ? ' H' : ''}${props.type === 'season' ? ', Saison April bis Oktober' : ''}, Schriftfarbe ${props.color === 'carbon' ? 'Carbon' : 'Schwarz'}`
+    : `Leere Kennzeichenvorschau, Schriftfarbe ${props.color === 'carbon' ? 'Carbon' : 'Schwarz'}`;
   return (
     <div
       className={`${styles.plate} ${props.type === 'motorcycle' ? styles.motorcycle : ''} ${className}`}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -12,6 +12,7 @@ import { formatPrice, getUnitPrice, isValidPlate, PRODUCTS, SHIPPING_PRICE, type
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { getPickupCountdown, type PickupCountdown } from '@/lib/pickup-countdown';
 import { ComplianceNotice } from '@/components/compliance-notice';
+import { CONSENT_STORAGE_KEY, parseConsentRecord } from '@/lib/cookie-consent';
 
 const BASE_PLATE_TYPES = ['standard', 'motorcycle', 'season'] as const;
 const MOBILE_PLATE_TYPES = ['standard', 'motorcycle', 'electric', 'historic', 'season'] as const;
@@ -38,6 +39,9 @@ type PlateEditorProps = {
   onNumbersChange: (value: string) => void;
 };
 
+type PlateInputField = 'city' | 'letters' | 'numbers';
+type AnalyticsWindow = Window & { dataLayer?: unknown[] };
+
 function PlateEditor({ city, letters, numbers, suffix, color, isMotorcycle, isSeason, isValid, onCityChange, onLettersChange, onNumbersChange }: PlateEditorProps) {
   const type: PlateType = isMotorcycle ? 'motorcycle' : isSeason ? 'season' : suffix === 'E' ? 'electric' : suffix === 'H' ? 'historic' : 'standard';
   return (
@@ -51,15 +55,16 @@ function PlateEditor({ city, letters, numbers, suffix, color, isMotorcycle, isSe
 export default function Home() {
   const router = useRouter();
   const [plateType, setPlateType] = useState<PlateType>('standard');
-  const [cityCode, setCityCode] = useState('OL');
-  const [serialLetters, setSerialLetters] = useState('AB');
-  const [serialNumbers, setSerialNumbers] = useState('123');
+  const [cityCode, setCityCode] = useState('');
+  const [serialLetters, setSerialLetters] = useState('');
+  const [serialNumbers, setSerialNumbers] = useState('');
   const plateColor: PlateColor = 'black';
   const quantity: 1 | 2 = plateType === 'motorcycle' ? 1 : 2;
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [pickupCountdown, setPickupCountdown] = useState<PickupCountdown | null>(null);
+  const plateInputEventSent = useRef(false);
   const product = PRODUCTS[plateType];
   const plateValue = `${cityCode} ${serialLetters} ${serialNumbers}`;
   const plateSubtotal = getUnitPrice(plateType, plateColor, quantity) * quantity;
@@ -67,15 +72,35 @@ export default function Home() {
   const status = useMemo(() => isValidPlate(plateValue, plateType), [plateValue, plateType]);
   const suffix = plateType === 'electric' ? 'E' : plateType === 'historic' ? 'H' : '';
 
+  function trackPlateInputStarted(inputField: PlateInputField) {
+    if (plateInputEventSent.current) return;
+    try {
+      const consent = parseConsentRecord(window.localStorage.getItem(CONSENT_STORAGE_KEY));
+      const analyticsWindow = window as AnalyticsWindow;
+      if (!consent?.optional.googleTagManager || !analyticsWindow.dataLayer) return;
+      analyticsWindow.dataLayer.push({
+        event: 'license_plate_input_started',
+        input_field: inputField,
+        plate_type: plateType,
+      });
+      plateInputEventSent.current = true;
+    } catch {
+      // Without consent storage or a loaded GTM container, no analytics event is queued.
+    }
+  }
+
   function updateCity(value: string) {
+    trackPlateInputStarted('city');
     setCityCode(value.toUpperCase().replace(/[^A-ZÄÖÜ]/g, '').slice(0, 3));
   }
 
   function updateLetters(value: string) {
+    trackPlateInputStarted('letters');
     setSerialLetters(value.toUpperCase().replace(/[^A-Z]/g, '').slice(0, 2));
   }
 
   function updateNumbers(value: string) {
+    trackPlateInputStarted('numbers');
     setSerialNumbers(value.replace(/\D/g, '').replace(/^0+/, '').slice(0, 4));
   }
 
@@ -164,7 +189,7 @@ export default function Home() {
           <LicensePlate value={plateValue} type={plateType} color={plateColor} className="hero-plate" style={{ transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` }} />
           <div className="quick-entry">
             <label htmlFor="hero-city-input"><span className="mobile-step-number">1</span> Deine Kombination</label>
-            <div className="entry-row"><div className="plate-fields compact"><input id="hero-city-input" aria-label="Ortskürzel" value={cityCode} onChange={(event) => updateCity(event.target.value)} maxLength={3} /><input aria-label="Buchstaben" value={serialLetters} onChange={(event) => updateLetters(event.target.value)} maxLength={2} /><input aria-label="Zahlen" value={serialNumbers} onChange={(event) => updateNumbers(event.target.value)} inputMode="numeric" maxLength={4} /></div><a className="button desktop-continue" href="#konfigurator">Weiter <ArrowRight size={18} /></a></div>
+            <div className="entry-row"><div className="plate-fields compact"><input id="hero-city-input" aria-label="Ortskürzel" placeholder="Ort" value={cityCode} onChange={(event) => updateCity(event.target.value)} maxLength={3} /><input aria-label="Buchstaben" placeholder="AB" value={serialLetters} onChange={(event) => updateLetters(event.target.value)} maxLength={2} /><input aria-label="Zahlen" placeholder="123" value={serialNumbers} onChange={(event) => updateNumbers(event.target.value)} inputMode="numeric" maxLength={4} /></div><a className="button desktop-continue" href="#konfigurator">Weiter <ArrowRight size={18} /></a></div>
             <p id="plate-help">Ort · Buchstaben · Zahlen am Ende</p>
             <div className="mobile-type-picker">
               <div className="mobile-picker-heading"><span><b>2</b> Fahrzeug &amp; Typ</span><small>Bitte auswählen</small></div>

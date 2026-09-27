@@ -75,6 +75,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .quick-entry label, .field-label { display: block; margin-bottom: 9px; color: #63737f; font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
 .entry-row { display: flex; gap: 10px; }
 .entry-row input { min-width: 0; border: 0; border-bottom: 2px solid #bdcbd4; background: transparent; color: var(--ink); font-family: var(--font-geist-mono); font-size: clamp(1.2rem, 2.4vw, 1.75rem); font-weight: 800; text-align: center; text-transform: uppercase; outline: none; }
+.entry-row input::placeholder { color: #a2afb7; opacity: 1; }
 .entry-row input:focus { border-color: var(--blue); }
 .quick-entry p { margin: 9px 0 0; color: #7f8c95; font-size: .72rem; }
 .hero-pickup { margin-top: 16px; padding: 12px 14px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3px 16px; border: 1px solid #cfe1ed; border-radius: 7px; background: #f4faff; }
