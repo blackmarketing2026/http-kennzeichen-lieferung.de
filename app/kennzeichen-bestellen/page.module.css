@@ -563,6 +563,92 @@
   font-size: 0.86rem;
 }
 
+.demoNotice {
+  position: fixed;
+  z-index: 60;
+  bottom: 22px;
+  left: 22px;
+  width: min(370px, calc(100vw - 44px));
+  padding: 14px 44px 14px 14px;
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(7, 24, 36, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 18px 55px rgba(7, 24, 36, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(24px);
+  transition:
+    opacity 260ms ease,
+    transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  backdrop-filter: blur(14px);
+}
+.demoNoticeVisible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.demoNoticeIcon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--blue-light);
+  color: var(--blue);
+}
+.demoNoticeIcon svg {
+  width: 25px;
+}
+.demoNoticeCopy {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+.demoNoticeCopy small {
+  color: var(--blue);
+  font-size: 0.57rem;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.demoNoticeCopy strong {
+  color: var(--navy);
+  font-size: 1rem;
+  letter-spacing: 0.025em;
+}
+.demoNoticeCopy > span {
+  overflow: hidden;
+  color: #647783;
+  font-size: 0.68rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.demoNotice > button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #91a0a9;
+  cursor: pointer;
+}
+.demoNotice > button:hover {
+  background: #edf3f6;
+  color: var(--navy);
+}
+.demoNotice > button svg {
+  width: 14px;
+}
+
 .quality,
 .faq {
   padding: 120px max(28px, calc((100vw - 1280px) / 2));
@@ -1238,6 +1324,12 @@
   .finalCta a {
     padding: 15px 17px;
     font-size: 0.8rem;
+  }
+  .demoNotice {
+    right: 10px;
+    bottom: 88px;
+    left: 10px;
+    width: auto;
   }
 }
 

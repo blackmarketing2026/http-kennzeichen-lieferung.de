@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import {
   ArrowRight,
   BadgeCheck,
+  CarFront,
   Check,
   CheckCircle2,
   Clock3,
@@ -19,6 +20,7 @@ import {
   Truck,
   TriangleAlert,
   UsersRound,
+  X,
 } from 'lucide-react';
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
@@ -59,6 +61,24 @@ const FAQS = [
   ],
 ];
 
+const DEMO_PLATES = [
+  { plate: 'OL SJ 155', type: 'Autokennzeichen' },
+  { plate: 'B AB 2026', type: 'Autokennzeichen' },
+  { plate: 'HH KL 917', type: 'Autokennzeichen' },
+  { plate: 'M TR 804', type: 'Autokennzeichen' },
+  { plate: 'K EV 321E', type: 'E-Kennzeichen' },
+  { plate: 'F LS 196H', type: 'H-Kennzeichen' },
+  { plate: 'HB MO 77', type: 'Motorrad-Kennzeichen' },
+  { plate: 'S CK 481', type: 'Autokennzeichen' },
+  { plate: 'DO XL 912', type: 'Autokennzeichen' },
+  { plate: 'D JP 608', type: 'Autokennzeichen' },
+  { plate: 'N RS 410', type: 'Motorrad-Kennzeichen' },
+  { plate: 'H VK 735', type: 'Autokennzeichen' },
+  { plate: 'L PT 202', type: 'Autokennzeichen' },
+  { plate: 'KI NM 88E', type: 'E-Kennzeichen' },
+  { plate: 'AC GT 63', type: 'Motorrad-Kennzeichen' },
+];
+
 type AnalyticsWindow = Window & { dataLayer?: unknown[] };
 
 function trackEvent(event: string, payload: Record<string, unknown>) {
@@ -82,6 +102,9 @@ export function KennzeichenLandingPage() {
   const [letters, setLetters] = useState('');
   const [numbers, setNumbers] = useState('');
   const [pickup, setPickup] = useState<PickupCountdown | null>(null);
+  const [demoNoticeIndex, setDemoNoticeIndex] = useState(0);
+  const [demoNoticeVisible, setDemoNoticeVisible] = useState(false);
+  const [demoNoticesDismissed, setDemoNoticesDismissed] = useState(false);
   const inputStarted = useRef(false);
   const validTracked = useRef(false);
   const quantity: 1 | 2 = plateType === 'motorcycle' ? 1 : 2;
@@ -106,6 +129,35 @@ export function KennzeichenLandingPage() {
     validTracked.current = true;
     trackEvent('license_plate_valid', { plate_type: plateType });
   }, [valid, plateType]);
+
+  useEffect(() => {
+    if (demoNoticesDismissed) return;
+
+    let showTimer = 0;
+    let hideTimer = 0;
+
+    const showNextNotice = () => {
+      setDemoNoticeIndex((current) => {
+        const offset = 1 + Math.floor(Math.random() * (DEMO_PLATES.length - 1));
+        return (current + offset) % DEMO_PLATES.length;
+      });
+      setDemoNoticeVisible(true);
+
+      hideTimer = window.setTimeout(() => {
+        setDemoNoticeVisible(false);
+        showTimer = window.setTimeout(
+          showNextNotice,
+          6000 + Math.random() * 13000,
+        );
+      }, 5000);
+    };
+
+    showTimer = window.setTimeout(showNextNotice, 3500);
+    return () => {
+      window.clearTimeout(showTimer);
+      window.clearTimeout(hideTimer);
+    };
+  }, [demoNoticesDismissed]);
 
   function startInput(field: 'city' | 'letters' | 'numbers') {
     if (inputStarted.current) return;
@@ -648,6 +700,35 @@ export function KennzeichenLandingPage() {
           Konfigurieren <ArrowRight />
         </a>
       </div>
+
+      {!demoNoticesDismissed && (
+        <aside
+          className={`${styles.demoNotice} ${demoNoticeVisible ? styles.demoNoticeVisible : ''}`}
+          aria-live="polite"
+          aria-hidden={!demoNoticeVisible}
+        >
+          <span className={styles.demoNoticeIcon}>
+            <CarFront />
+          </span>
+          <span className={styles.demoNoticeCopy}>
+            <small>Beispiel-Konfiguration</small>
+            <strong>{DEMO_PLATES[demoNoticeIndex].plate}</strong>
+            <span>
+              {DEMO_PLATES[demoNoticeIndex].type} · So könnte deins aussehen
+            </span>
+          </span>
+          <button
+            type="button"
+            aria-label="Beispiel-Konfigurationen schließen"
+            onClick={() => {
+              setDemoNoticeVisible(false);
+              setDemoNoticesDismissed(true);
+            }}
+          >
+            <X />
+          </button>
+        </aside>
+      )}
     </main>
   );
 }
