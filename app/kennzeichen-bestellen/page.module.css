@@ -443,6 +443,95 @@
   font-size: 0.92rem;
 }
 
+.buyerWarning {
+  padding: 70px max(28px, calc((100vw - 1280px) / 2));
+  display: grid;
+  grid-template-columns: auto minmax(0, 1.2fr) minmax(340px, 0.8fr);
+  align-items: center;
+  gap: clamp(26px, 4vw, 60px);
+  border-bottom: 1px solid rgba(7, 24, 36, 0.1);
+  background:
+    linear-gradient(90deg, rgba(255, 181, 71, 0.1), transparent 42%), #fffaf2;
+}
+.warningIcon {
+  width: 74px;
+  height: 74px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(198, 118, 0, 0.2);
+  border-radius: 20px;
+  background: #fff;
+  color: #c67600;
+  box-shadow: 0 14px 35px rgba(91, 57, 7, 0.08);
+}
+.warningIcon svg {
+  width: 34px;
+  height: 34px;
+}
+.warningCopy h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3.4vw, 3.7rem);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+.warningCopy h2 em {
+  color: #b56a00;
+  font-style: normal;
+}
+.warningCopy > p:last-child {
+  max-width: 720px;
+  margin: 19px 0 0;
+  color: #5d6c75;
+  font-size: 0.94rem;
+  line-height: 1.68;
+}
+.warningChecklist {
+  padding: 25px;
+  display: grid;
+  gap: 13px;
+  border: 1px solid rgba(7, 24, 36, 0.1);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 16px 42px rgba(64, 42, 8, 0.08);
+}
+.warningChecklist small {
+  margin-bottom: 3px;
+  color: #7b6544;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.warningChecklist strong {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--navy);
+  font-size: 0.82rem;
+}
+.warningChecklist strong svg {
+  flex: 0 0 auto;
+  width: 18px;
+  color: var(--green);
+}
+.warningChecklist a {
+  margin-top: 5px;
+  padding: 13px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: 8px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-align: center;
+}
+.warningChecklist a svg {
+  width: 15px;
+}
+
 .customerProof {
   width: fit-content;
   margin-top: 22px;
@@ -991,6 +1080,12 @@
   .proofBar > div:nth-child(3) {
     padding-left: 0;
   }
+  .buyerWarning {
+    grid-template-columns: auto 1fr;
+  }
+  .warningChecklist {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 820px) {
@@ -1178,6 +1273,23 @@
   }
   .proofBar > div:last-child {
     border-bottom: 0;
+  }
+  .buyerWarning {
+    padding: 64px 20px;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .warningIcon {
+    width: 62px;
+    height: 62px;
+    border-radius: 16px;
+  }
+  .warningCopy h2 {
+    font-size: clamp(2.3rem, 11vw, 3.3rem);
+  }
+  .warningChecklist {
+    grid-column: auto;
+    padding: 22px 18px;
   }
   .sectionHeading h2,
   .shippingCopy h2,

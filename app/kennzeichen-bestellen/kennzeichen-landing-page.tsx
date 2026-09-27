@@ -18,6 +18,7 @@ import {
   ShieldCheck,
   Sparkles,
   Truck,
+  TriangleAlert,
   UsersRound,
   X,
   type LucideIcon,
@@ -456,6 +457,44 @@ export function KennzeichenLandingPage() {
           <span>
             <strong>Mit Tracking</strong>Sendungsnummer per E-Mail
           </span>
+        </div>
+      </section>
+
+      <section className={styles.buyerWarning} aria-labelledby="kaufhinweis">
+        <div className={styles.warningIcon}>
+          <TriangleAlert />
+        </div>
+        <div className={styles.warningCopy}>
+          <p className={styles.kicker}>
+            <span /> Wichtig vor dem Kauf
+          </p>
+          <h2 id="kaufhinweis">
+            Vorsicht bei vermeintlich
+            <br />
+            <em>günstigeren Angeboten.</em>
+          </h2>
+          <p>
+            Nicht jedes günstige Kennzeichen ist automatisch für die
+            Zulassungsstelle geeignet. Achte vor dem Kauf darauf, dass das
+            Schild der DIN 74069 entspricht und den vorgeschriebenen
+            DIN-Norm-Stempel trägt. Reine Dekoschilder oder nicht normgerechte
+            Schilder können bei der Zulassung abgelehnt werden.
+          </p>
+        </div>
+        <div className={styles.warningChecklist}>
+          <small>Bei uns immer inklusive</small>
+          <strong>
+            <CheckCircle2 /> DIN-zertifiziert nach DIN 74069
+          </strong>
+          <strong>
+            <CheckCircle2 /> Mit DIN-Norm-Stempel
+          </strong>
+          <strong>
+            <CheckCircle2 /> Für TÜV und Zulassungsstelle
+          </strong>
+          <a href="#konfigurator">
+            Normgerechte Kennzeichen bestellen <ArrowRight />
+          </a>
         </div>
       </section>
 
