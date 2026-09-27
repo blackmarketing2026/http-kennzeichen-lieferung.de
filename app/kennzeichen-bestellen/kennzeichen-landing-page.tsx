@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import {
   ArrowRight,
   BadgeCheck,
-  BellRing,
   Check,
   CheckCircle2,
   Clock3,
@@ -20,8 +19,6 @@ import {
   Truck,
   TriangleAlert,
   UsersRound,
-  X,
-  type LucideIcon,
 } from 'lucide-react';
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
@@ -62,43 +59,6 @@ const FAQS = [
   ],
 ];
 
-const ACTIVITY_NOTICES: Array<{
-  icon: LucideIcon;
-  title: string;
-  detail: string;
-}> = [
-  {
-    icon: UsersRound,
-    title: 'Über 1.000 zufriedene Kunden',
-    detail: 'haben bereits bei uns bestellt.',
-  },
-  {
-    icon: MapPinCheck,
-    title: 'Versand nach Berlin',
-    detail: 'Bequem per DHL inklusive Tracking.',
-  },
-  {
-    icon: MapPinCheck,
-    title: 'Versand nach Hamburg',
-    detail: 'Bequem per DHL inklusive Tracking.',
-  },
-  {
-    icon: BadgeCheck,
-    title: 'Motorrad-Kennzeichen erhältlich',
-    detail: 'DIN-zertifiziert und schnell versandfertig.',
-  },
-  {
-    icon: BadgeCheck,
-    title: 'E- und H-Kennzeichen erhältlich',
-    detail: 'Direkt online konfigurieren und bestellen.',
-  },
-  {
-    icon: Truck,
-    title: 'DHL holt dreimal täglich ab',
-    detail: 'Im Druckwerk um 9, 12 und 16 Uhr.',
-  },
-];
-
 type AnalyticsWindow = Window & { dataLayer?: unknown[] };
 
 function trackEvent(event: string, payload: Record<string, unknown>) {
@@ -122,9 +82,6 @@ export function KennzeichenLandingPage() {
   const [letters, setLetters] = useState('');
   const [numbers, setNumbers] = useState('');
   const [pickup, setPickup] = useState<PickupCountdown | null>(null);
-  const [noticeIndex, setNoticeIndex] = useState(0);
-  const [noticeVisible, setNoticeVisible] = useState(false);
-  const [noticesDismissed, setNoticesDismissed] = useState(false);
   const inputStarted = useRef(false);
   const validTracked = useRef(false);
   const quantity: 1 | 2 = plateType === 'motorcycle' ? 1 : 2;
@@ -149,39 +106,6 @@ export function KennzeichenLandingPage() {
     validTracked.current = true;
     trackEvent('license_plate_valid', { plate_type: plateType });
   }, [valid, plateType]);
-
-  useEffect(() => {
-    if (noticesDismissed) return;
-
-    let timer = 0;
-    let cancelled = false;
-
-    const scheduleNotice = (delay: number) => {
-      timer = window.setTimeout(() => {
-        if (cancelled) return;
-        setNoticeIndex((current) => {
-          if (ACTIVITY_NOTICES.length < 2) return current;
-          let next = current;
-          while (next === current) {
-            next = Math.floor(Math.random() * ACTIVITY_NOTICES.length);
-          }
-          return next;
-        });
-        setNoticeVisible(true);
-
-        timer = window.setTimeout(() => {
-          setNoticeVisible(false);
-          scheduleNotice(2500 + Math.random() * 3500);
-        }, 5200);
-      }, delay);
-    };
-
-    scheduleNotice(1800);
-    return () => {
-      cancelled = true;
-      window.clearTimeout(timer);
-    };
-  }, [noticesDismissed]);
 
   function startInput(field: 'city' | 'letters' | 'numbers') {
     if (inputStarted.current) return;
@@ -724,40 +648,6 @@ export function KennzeichenLandingPage() {
           Konfigurieren <ArrowRight />
         </a>
       </div>
-
-      {!noticesDismissed &&
-        (() => {
-          const notice = ACTIVITY_NOTICES[noticeIndex];
-          const NoticeIcon = notice.icon;
-          return (
-            <aside
-              className={`${styles.activityNotice} ${noticeVisible ? styles.activityNoticeVisible : ''}`}
-              aria-live="polite"
-              aria-hidden={!noticeVisible}
-            >
-              <span className={styles.activityNoticeIcon}>
-                <NoticeIcon />
-              </span>
-              <span className={styles.activityNoticeCopy}>
-                <small>
-                  <BellRing /> Kunden-Info
-                </small>
-                <strong>{notice.title}</strong>
-                <span>{notice.detail}</span>
-              </span>
-              <button
-                type="button"
-                aria-label="Hinweise schließen"
-                onClick={() => {
-                  setNoticeVisible(false);
-                  setNoticesDismissed(true);
-                }}
-              >
-                <X />
-              </button>
-            </aside>
-          );
-        })()}
     </main>
   );
 }
