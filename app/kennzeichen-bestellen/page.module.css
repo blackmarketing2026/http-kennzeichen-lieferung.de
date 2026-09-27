@@ -934,6 +934,115 @@
   width: 17px;
 }
 
+.registrationSteps {
+  padding: 110px max(28px, calc((100vw - 1280px) / 2));
+  background:
+    radial-gradient(
+      circle at 85% 12%,
+      rgba(100, 201, 255, 0.15),
+      transparent 30%
+    ),
+    var(--navy);
+  color: #fff;
+}
+.registrationHeading {
+  max-width: 760px;
+}
+.registrationHeading .kicker {
+  color: #91a8b6;
+}
+.registrationHeading h2 {
+  margin: 0;
+  font-size: clamp(2.8rem, 5vw, 5.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+.registrationHeading h2 em {
+  color: #64c9ff;
+  font-style: normal;
+}
+.registrationHeading > p:last-child {
+  max-width: 620px;
+  margin: 24px 0 0;
+  color: #afbec7;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+.registrationGrid {
+  margin-top: 58px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.registrationGrid article {
+  position: relative;
+  min-height: 285px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.055);
+}
+.registrationGrid article:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 62px;
+  right: -28px;
+  width: 38px;
+  height: 2px;
+  background: var(--blue);
+}
+.registrationNumber {
+  position: absolute;
+  top: 22px;
+  right: 24px;
+  color: rgba(255, 255, 255, 0.32);
+  font-family: var(--font-geist-mono);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.registrationIcon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--blue);
+  color: #fff;
+}
+.registrationIcon svg {
+  width: 27px;
+}
+.registrationGrid h3 {
+  margin: auto 0 10px;
+  font-size: 1.15rem;
+}
+.registrationGrid p {
+  margin: 0;
+  color: #aebdc6;
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+.registrationCta {
+  width: fit-content;
+  margin-top: 32px;
+  padding: 16px 21px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--navy) !important;
+  font-size: 0.84rem;
+  font-weight: 850;
+}
+.registrationCta svg {
+  width: 18px;
+}
+
 .faq {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
@@ -1138,6 +1247,23 @@
     grid-template-columns: 1fr;
     gap: 42px;
   }
+  .registrationSteps {
+    padding: 80px 20px;
+  }
+  .registrationGrid {
+    grid-template-columns: 1fr;
+  }
+  .registrationGrid article {
+    min-height: 235px;
+  }
+  .registrationGrid article:not(:last-child)::after {
+    top: auto;
+    right: auto;
+    bottom: -28px;
+    left: 57px;
+    width: 2px;
+    height: 38px;
+  }
   .secondaryCta {
     grid-column: 1;
   }
@@ -1288,6 +1414,7 @@
   .sectionHeading h2,
   .shippingCopy h2,
   .included h2,
+  .registrationHeading h2,
   .finalCta h2 {
     font-size: clamp(2.45rem, 12vw, 3.7rem);
   }
@@ -1316,6 +1443,18 @@
   }
   .included ul {
     grid-template-columns: 1fr;
+  }
+  .registrationGrid {
+    margin-top: 42px;
+  }
+  .registrationGrid article {
+    min-height: 220px;
+    padding: 25px 22px;
+  }
+  .registrationCta {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
   }
   .finalCta {
     padding: 80px 18px;

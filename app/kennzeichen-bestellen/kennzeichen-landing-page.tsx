@@ -639,6 +639,66 @@ export function KennzeichenLandingPage() {
         </a>
       </section>
 
+      <section
+        className={styles.registrationSteps}
+        aria-labelledby="zulassungsbereit"
+      >
+        <div className={styles.registrationHeading}>
+          <p className={styles.kicker}>
+            <span /> In drei einfachen Schritten
+          </p>
+          <h2 id="zulassungsbereit">
+            Bereit für die
+            <br />
+            <em>Zulassungsstelle.</em>
+          </h2>
+          <p>
+            Bestelle deine DIN-zertifizierten Kennzeichen bequem online und
+            spare dir das Warten beim Schilderdienst vor Ort.
+          </p>
+        </div>
+
+        <div className={styles.registrationGrid}>
+          <article>
+            <span className={styles.registrationNumber}>01</span>
+            <span className={styles.registrationIcon}>
+              <CarFront />
+            </span>
+            <h3>Kennzeichen online bestellen</h3>
+            <p>
+              Wunschkombination eingeben, Kennzeichenart auswählen und sicher
+              online bestellen.
+            </p>
+          </article>
+          <article>
+            <span className={styles.registrationNumber}>02</span>
+            <span className={styles.registrationIcon}>
+              <PackageCheck />
+            </span>
+            <h3>Kennzeichen erhalten</h3>
+            <p>
+              Deine Schilder werden geprägt, per DHL verschickt und mit Tracking
+              direkt zu dir geliefert.
+            </p>
+          </article>
+          <article>
+            <span className={styles.registrationNumber}>03</span>
+            <span className={styles.registrationIcon}>
+              <MapPinCheck />
+            </span>
+            <h3>Zur Zulassungsstelle fahren</h3>
+            <p>
+              Nimm deine Kennzeichen und Unterlagen mit. Die amtlichen Plaketten
+              werden bei der Zulassung angebracht.
+            </p>
+          </article>
+        </div>
+
+        <a href="#konfigurator" className={styles.registrationCta}>
+          Kennzeichen jetzt konfigurieren <ArrowRight />
+        </a>
+      </section>
+
       <section className={styles.faq} id="fragen">
         <div className={styles.sectionHeading}>
           <p className={styles.kicker}>
