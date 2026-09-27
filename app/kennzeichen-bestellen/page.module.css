@@ -1034,7 +1034,6 @@
 .footerLogo img {
   width: 100%;
   height: auto;
-  filter: brightness(0) invert(1);
 }
 .footer p {
   margin: 0;
