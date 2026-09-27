@@ -1,5 +1,12 @@
-export type PlateType = 'standard' | 'motorcycle' | 'electric' | 'historic' | 'season';
-export type PlateColor = 'black' | 'carbon';
+export type PlateType =
+  | 'standard'
+  | 'motorcycle'
+  | 'electric'
+  | 'historic'
+  | 'season'
+  | 'agriculture240'
+  | 'agriculture255';
+export type PlateColor = 'black' | 'carbon' | 'green';
 
 // Shipping is included in the displayed plate-package prices.
 export const SHIPPING_PRICE = 0;
@@ -11,36 +18,113 @@ export const BIKE_RACK_PLATE_PRICE = 5;
  * reduced one. */
 export const VAT_RATE = 0.19;
 
-export const PRODUCTS: Record<PlateType, {
-  label: string;
-  shortLabel: string;
-  size: string;
-  format: 'long' | 'motorcycle';
-  prices: Record<1 | 2 | 3, number>;
-  suffix?: 'E' | 'H';
-}> = {
-  standard: { label: 'Auto', shortLabel: 'Standard', size: '520 mm', format: 'long', prices: { 1: 14.95, 2: 14.95, 3: 14.95 } },
-  motorcycle: { label: 'Motorrad', shortLabel: 'Motorrad', size: 'zweizeilig', format: 'motorcycle', prices: { 1: 24.90, 2: 24.90, 3: 24.90 } },
-  electric: { label: 'E-Kennzeichen', shortLabel: 'Elektro', size: '520 mm', format: 'long', prices: { 1: 14.95, 2: 14.95, 3: 14.95 }, suffix: 'E' },
-  historic: { label: 'H-Kennzeichen', shortLabel: 'Historisch', size: '520 mm', format: 'long', prices: { 1: 14.95, 2: 14.95, 3: 14.95 }, suffix: 'H' },
-  season: { label: 'Saison', shortLabel: 'Saison', size: '520 mm', format: 'long', prices: { 1: 14.95, 2: 14.95, 3: 14.95 } },
+export const PRODUCTS: Record<
+  PlateType,
+  {
+    label: string;
+    shortLabel: string;
+    size: string;
+    format: 'long' | 'motorcycle' | 'agriculture';
+    prices: Record<1 | 2 | 3, number>;
+    suffix?: 'E' | 'H';
+  }
+> = {
+  standard: {
+    label: 'Auto',
+    shortLabel: 'Standard',
+    size: '520 mm',
+    format: 'long',
+    prices: { 1: 14.95, 2: 14.95, 3: 14.95 },
+  },
+  motorcycle: {
+    label: 'Motorrad',
+    shortLabel: 'Motorrad',
+    size: 'zweizeilig',
+    format: 'motorcycle',
+    prices: { 1: 24.9, 2: 24.9, 3: 24.9 },
+  },
+  electric: {
+    label: 'E-Kennzeichen',
+    shortLabel: 'Elektro',
+    size: '520 mm',
+    format: 'long',
+    prices: { 1: 14.95, 2: 14.95, 3: 14.95 },
+    suffix: 'E',
+  },
+  historic: {
+    label: 'H-Kennzeichen',
+    shortLabel: 'Historisch',
+    size: '520 mm',
+    format: 'long',
+    prices: { 1: 14.95, 2: 14.95, 3: 14.95 },
+    suffix: 'H',
+  },
+  season: {
+    label: 'Saison',
+    shortLabel: 'Saison',
+    size: '520 mm',
+    format: 'long',
+    prices: { 1: 14.95, 2: 14.95, 3: 14.95 },
+  },
+  agriculture240: {
+    label: 'Landmaschinen-Kennzeichen',
+    shortLabel: '240 × 130 mm',
+    size: '240 × 130 mm',
+    format: 'agriculture',
+    prices: { 1: 24.9, 2: 24.9, 3: 24.9 },
+  },
+  agriculture255: {
+    label: 'Landmaschinen-Kennzeichen',
+    shortLabel: '255 × 130 mm',
+    size: '255 × 130 mm',
+    format: 'agriculture',
+    prices: { 1: 24.9, 2: 24.9, 3: 24.9 },
+  },
 };
 
 export const formatPrice = (value: number) =>
-  new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(value);
+  new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(
+    value,
+  );
+
+export const isAgriculturePlate = (plateType: PlateType) =>
+  plateType === 'agriculture240' || plateType === 'agriculture255';
+
+export const isSinglePlateProduct = (plateType: PlateType) =>
+  plateType === 'motorcycle' || isAgriculturePlate(plateType);
+
+export const plateColorLabel = (color: PlateColor) =>
+  color === 'green' ? 'Grün' : color === 'carbon' ? 'Carbon' : 'Schwarz';
 
 const CARBON_PRICES = {
   long: { 1: 3.27, 2: 3.12, 3: 3.06 },
   motorcycle: { 1: 3.47, 2: 3.32, 3: 3.27 },
-} satisfies Record<'long' | 'motorcycle', Record<1 | 2 | 3, number>>;
+  agriculture: { 1: 3.47, 2: 3.32, 3: 3.27 },
+} satisfies Record<
+  'long' | 'motorcycle' | 'agriculture',
+  Record<1 | 2 | 3, number>
+>;
 
-export function getUnitPrice(plateType: PlateType, color: PlateColor, quantity: 1 | 2 | 3) {
+export function getUnitPrice(
+  plateType: PlateType,
+  color: PlateColor,
+  quantity: 1 | 2 | 3,
+) {
   const product = PRODUCTS[plateType];
-  return color === 'carbon' ? CARBON_PRICES[product.format][quantity] : product.prices[quantity];
+  return color === 'carbon'
+    ? CARBON_PRICES[product.format][quantity]
+    : product.prices[quantity];
 }
 
-export function isAvailableConfiguration(plateType: PlateType, color: PlateColor, quantity: number) {
+export function isAvailableConfiguration(
+  plateType: PlateType,
+  color: PlateColor,
+  quantity: number,
+) {
   if (!(plateType in PRODUCTS)) return false;
+  if (isAgriculturePlate(plateType)) {
+    return (color === 'black' || color === 'green') && quantity === 1;
+  }
   if (color !== 'black') return false;
   if (plateType === 'motorcycle') return quantity === 1;
   return quantity === 2 || quantity === 3;
@@ -51,6 +135,10 @@ export function isValidPlate(plate: string, plateType: PlateType) {
   if (!match) return false;
   const [, city, letters, numbers] = match;
   if (plateType === 'motorcycle') return letters.length + numbers.length <= 5;
+  if (plateType === 'agriculture240')
+    return city.length + letters.length + numbers.length <= 6;
+  if (plateType === 'agriculture255')
+    return city.length + letters.length + numbers.length <= 8;
   const maximum = plateType === 'standard' ? 8 : 7;
   return city.length + letters.length + numbers.length <= maximum;
 }

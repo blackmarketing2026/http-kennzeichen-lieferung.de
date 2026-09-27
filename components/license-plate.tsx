@@ -24,11 +24,55 @@ type Field = {
 function geometry(value: string, type: PlateType) {
   const [city = '', letters = '', numbers = ''] = value.split(' ');
   const motorcycle = type === 'motorcycle';
+  const agriculture = type === 'agriculture240' || type === 'agriculture255';
   const suffix = type === 'electric' ? 'E' : type === 'historic' ? 'H' : '';
-  const width = motorcycle ? 180 : 520;
-  const height = motorcycle ? 200 : 110;
+  const width =
+    type === 'agriculture240'
+      ? 240
+      : type === 'agriculture255'
+        ? 255
+        : motorcycle
+          ? 180
+          : 520;
+  const height = agriculture ? 130 : motorcycle ? 200 : 110;
   let fields: Field[];
-  if (motorcycle) {
+  if (agriculture) {
+    const contentLeft = 43;
+    const contentWidth = width - contentLeft - 8;
+    const bottomWidth = Math.min(
+      contentWidth,
+      Math.max(120, (letters.length + numbers.length) * 24 + 12),
+    );
+    const letterWidth =
+      (bottomWidth * Math.max(letters.length, 1)) /
+      (Math.max(letters.length, 1) + Math.max(numbers.length, 1));
+    fields = [
+      {
+        value: city,
+        x: contentLeft,
+        y: 7,
+        width: contentWidth,
+        height: 53,
+        fontSize: 69,
+      },
+      {
+        value: letters,
+        x: contentLeft + (contentWidth - bottomWidth) / 2,
+        y: 67,
+        width: letterWidth - 3,
+        height: 54,
+        fontSize: 68,
+      },
+      {
+        value: numbers,
+        x: contentLeft + (contentWidth - bottomWidth) / 2 + letterWidth + 3,
+        y: 67,
+        width: bottomWidth - letterWidth - 3,
+        height: 54,
+        fontSize: 68,
+      },
+    ];
+  } else if (motorcycle) {
     const bottomWidth = Math.min(
       156,
       Math.max(106, (letters.length + numbers.length) * 27 + 8),
@@ -81,7 +125,7 @@ function geometry(value: string, type: PlateType) {
       return field;
     });
   }
-  return { width, height, motorcycle, fields };
+  return { width, height, motorcycle, agriculture, fields };
 }
 
 function PlateArtwork({
@@ -91,11 +135,17 @@ function PlateArtwork({
   label,
 }: PlateProps & { label?: string }) {
   const id = useId().replace(/:/g, '');
-  const { width: w, height: h, motorcycle, fields } = geometry(value, type);
+  const {
+    width: w,
+    height: h,
+    motorcycle,
+    agriculture,
+    fields,
+  } = geometry(value, type);
   const ref = (name: string) => `url(#${id}-${name})`;
-  const bandWidth = motorcycle ? 40 : 44;
+  const bandWidth = agriculture ? 32 : motorcycle ? 40 : 44;
   const starX = 7 + bandWidth / 2;
-  const starY = motorcycle ? 29 : 32;
+  const starY = agriculture ? 25 : motorcycle ? 29 : 32;
   return (
     <svg
       className={styles.artwork}
@@ -215,25 +265,27 @@ function PlateArtwork({
           x="7"
           y="7"
           width={bandWidth}
-          height={motorcycle ? 87 : 96}
+          height={agriculture ? 116 : motorcycle ? 87 : 96}
           fill={ref('blue')}
         />
         <g fill="#ffdd00">
           {Array.from({ length: 12 }, (_, index) => {
             const angle = (index * Math.PI) / 6;
+            const x = Number((starX + Math.sin(angle) * 12.5).toFixed(4));
+            const y = Number((starY - Math.cos(angle) * 12.5).toFixed(4));
             return (
               <use
                 key={index}
                 href={`#${id}-star`}
-                x={starX + Math.sin(angle) * 12.5}
-                y={starY - Math.cos(angle) * 12.5}
+                x={x}
+                y={y}
               />
             );
           })}
         </g>
         <text
           x={starX}
-          y={motorcycle ? 78 : 88}
+          y={agriculture ? 111 : motorcycle ? 78 : 88}
           textAnchor="middle"
           fill="#fff"
           fontFamily="Arial, sans-serif"
@@ -275,7 +327,11 @@ function PlateArtwork({
       />
       <g
         className={styles.lettering}
-        fill={ref(color === 'carbon' ? 'carbon' : 'ink')}
+        fill={
+          color === 'green'
+            ? '#08783e'
+            : ref(color === 'carbon' ? 'carbon' : 'ink')
+        }
         filter={ref('emboss')}
       >
         {fields.map((field, index) => (
@@ -323,11 +379,13 @@ function PlateArtwork({
 export function LicensePlate({ className = '', style, ...props }: PlateProps) {
   const plateValue = props.value.trim();
   const label = plateValue
-    ? `Kennzeichenvorschau ${plateValue}${props.type === 'electric' ? ' E' : props.type === 'historic' ? ' H' : ''}${props.type === 'season' ? ', Saison April bis Oktober' : ''}, Schriftfarbe ${props.color === 'carbon' ? 'Carbon' : 'Schwarz'}`
-    : `Leere Kennzeichenvorschau, Schriftfarbe ${props.color === 'carbon' ? 'Carbon' : 'Schwarz'}`;
+    ? `Kennzeichenvorschau ${plateValue}${props.type === 'electric' ? ' E' : props.type === 'historic' ? ' H' : ''}${props.type === 'season' ? ', Saison April bis Oktober' : ''}, Schriftfarbe ${props.color === 'green' ? 'Grün' : props.color === 'carbon' ? 'Carbon' : 'Schwarz'}`
+    : `Leere Kennzeichenvorschau, Schriftfarbe ${props.color === 'green' ? 'Grün' : props.color === 'carbon' ? 'Carbon' : 'Schwarz'}`;
+  const agriculture =
+    props.type === 'agriculture240' || props.type === 'agriculture255';
   return (
     <div
-      className={`${styles.plate} ${props.type === 'motorcycle' ? styles.motorcycle : ''} ${className}`}
+      className={`${styles.plate} ${props.type === 'motorcycle' ? styles.motorcycle : ''} ${agriculture ? styles.agriculture : ''} ${className}`}
       style={style}
     >
       <PlateArtwork {...props} label={label} />
@@ -358,12 +416,15 @@ export function LicensePlateEditor({
 }: EditorProps) {
   const refs = useRef<(HTMLInputElement | null)[]>([]);
   const value = `${city} ${letters} ${numbers}`;
-  const { width, height, fields, motorcycle } = geometry(value, type);
+  const { width, height, fields, motorcycle, agriculture } = geometry(
+    value,
+    type,
+  );
   const changes = [onCityChange, onLettersChange, onNumbersChange];
   const labels = ['Ortskürzel', 'Erkennungsbuchstaben', 'Erkennungsnummer'];
   return (
     <div
-      className={`${styles.plate} ${styles.editor} ${motorcycle ? styles.motorcycle : ''}`}
+      className={`${styles.plate} ${styles.editor} ${motorcycle ? styles.motorcycle : ''} ${agriculture ? styles.agriculture : ''}`}
     >
       <PlateArtwork value={value} type={type} color={color} />
       {fields.map((field, index) => (

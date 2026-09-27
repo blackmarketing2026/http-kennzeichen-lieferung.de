@@ -12,6 +12,20 @@ describe('checkout pricing', () => {
     });
   });
 
+  it.each([
+    ['agriculture240', 'black'],
+    ['agriculture240', 'green'],
+    ['agriculture255', 'black'],
+    ['agriculture255', 'green'],
+  ] as const)('charges 24.90 for one %s plate in %s', (type, color) => {
+    expect(getCheckoutPricing(type, color, 1, undefined)).toMatchObject({
+      unitPriceCents: 2490,
+      subtotalCents: 2490,
+      shippingCents: 0,
+      totalCents: 2490,
+    });
+  });
+
   it.each(['standard', 'electric', 'historic', 'season'] as const)('charges 29.90 for two %s plates', (type) => {
     expect(getCheckoutPricing(type, 'black', 2, undefined)).toMatchObject({
       unitPriceCents: 1495,
@@ -43,6 +57,18 @@ describe('checkout pricing', () => {
     expect(getCheckoutPricing('motorcycle', 'black', 2, undefined)).toBeNull();
     expect(getCheckoutPricing('standard', 'black', 1, undefined)).toBeNull();
     expect(getCheckoutPricing('standard', 'carbon', 2, undefined)).toBeNull();
+    expect(getCheckoutPricing('standard', 'green', 2, undefined)).toBeNull();
+    expect(getCheckoutPricing('agriculture240', 'green', 2, undefined)).toBeNull();
+    expect(getCheckoutPricing('agriculture240', 'carbon', 1, undefined)).toBeNull();
+  });
+
+  it('rejects extras for a land-machine plate', () => {
+    expect(
+      getCheckoutPricing('agriculture255', 'green', 1, undefined, {
+        parkingPlate: true,
+        bikeRackPlate: false,
+      }),
+    ).toBeNull();
   });
 
   it.each(['standard', 'electric', 'historic', 'season'] as const)('adds one parking plate to %s for five euros', (type) => {

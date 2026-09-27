@@ -1,6 +1,17 @@
-import { getMailTransport, isMailConfigured, MAIL_FROM, renderEmailTemplate } from '@/lib/mail';
+import {
+  getMailTransport,
+  isMailConfigured,
+  MAIL_FROM,
+  renderEmailTemplate,
+} from '@/lib/mail';
 import { logEvent } from '@/lib/logger';
-import { formatPrice, PRODUCTS, type PlateColor, type PlateType } from '@/config/products';
+import {
+  formatPrice,
+  plateColorLabel,
+  PRODUCTS,
+  type PlateColor,
+  type PlateType,
+} from '@/config/products';
 
 export type OrderEmailOrder = {
   id: string;
@@ -14,13 +25,20 @@ export type OrderEmailOrder = {
 
 function plateLabel(order: OrderEmailOrder) {
   const product = PRODUCTS[order.plate_type];
-  return `${order.plate} (${product.label}, ${order.plate_color === 'carbon' ? 'Carbon' : 'Schwarz'}, ${order.quantity}×)`;
+  return `${order.plate} (${product.label}, ${plateColorLabel(order.plate_color)}, ${order.quantity}×)`;
 }
 
-export async function sendOrderConfirmationEmail(order: OrderEmailOrder, origin: string) {
+export async function sendOrderConfirmationEmail(
+  order: OrderEmailOrder,
+  origin: string,
+) {
   if (!order.customer_email) return;
   if (!isMailConfigured()) {
-    logEvent('warn', 'Bestellbestätigung nicht versendet: SMTP nicht konfiguriert', { orderId: order.id });
+    logEvent(
+      'warn',
+      'Bestellbestätigung nicht versendet: SMTP nicht konfiguriert',
+      { orderId: order.id },
+    );
     return;
   }
 
@@ -46,14 +64,25 @@ export async function sendOrderConfirmationEmail(order: OrderEmailOrder, origin:
       html,
     });
   } catch (error) {
-    logEvent('error', 'Bestellbestätigung konnte nicht gesendet werden', { orderId: order.id, error: error instanceof Error ? error.message : 'unbekannt' });
+    logEvent('error', 'Bestellbestätigung konnte nicht gesendet werden', {
+      orderId: order.id,
+      error: error instanceof Error ? error.message : 'unbekannt',
+    });
   }
 }
 
-export async function sendInvoiceEmail(order: OrderEmailOrder, invoiceNumber: string, pdf: Buffer, origin: string) {
-  if (!order.customer_email) throw new Error('Bestell-E-Mail fehlt für den Rechnungsversand.');
+export async function sendInvoiceEmail(
+  order: OrderEmailOrder,
+  invoiceNumber: string,
+  pdf: Buffer,
+  origin: string,
+) {
+  if (!order.customer_email)
+    throw new Error('Bestell-E-Mail fehlt für den Rechnungsversand.');
   if (!isMailConfigured()) {
-    throw new Error('Rechnungs-E-Mail nicht versendet: SMTP nicht konfiguriert.');
+    throw new Error(
+      'Rechnungs-E-Mail nicht versendet: SMTP nicht konfiguriert.',
+    );
   }
 
   const html = renderEmailTemplate({
@@ -74,20 +103,38 @@ export async function sendInvoiceEmail(order: OrderEmailOrder, invoiceNumber: st
       to: order.customer_email,
       subject: `Rechnung ${invoiceNumber} – Kennzeichen-Lieferung`,
       html,
-      attachments: [{ filename: `Rechnung-${invoiceNumber}.pdf`, content: pdf, contentType: 'application/pdf' }],
+      attachments: [
+        {
+          filename: `Rechnung-${invoiceNumber}.pdf`,
+          content: pdf,
+          contentType: 'application/pdf',
+        },
+      ],
     });
   } catch (error) {
-    logEvent('error', 'Rechnungs-E-Mail konnte nicht gesendet werden', { orderId: order.id, error: error instanceof Error ? error.message : 'unbekannt' });
+    logEvent('error', 'Rechnungs-E-Mail konnte nicht gesendet werden', {
+      orderId: order.id,
+      error: error instanceof Error ? error.message : 'unbekannt',
+    });
     throw error;
   }
 }
 
 /** Internal copy for the shop's own bookkeeping; override the recipient via ORDER_NOTIFICATION_EMAIL. */
-export const ORDER_NOTIFICATION_EMAIL = process.env.ORDER_NOTIFICATION_EMAIL || 'kennzeichenbestellung@function-concept.de';
+export const ORDER_NOTIFICATION_EMAIL =
+  process.env.ORDER_NOTIFICATION_EMAIL ||
+  'kennzeichenbestellung@function-concept.de';
 
-export async function sendShopOrderNotificationEmail(order: OrderEmailOrder, invoiceNumber: string, pdf: Buffer, origin: string) {
+export async function sendShopOrderNotificationEmail(
+  order: OrderEmailOrder,
+  invoiceNumber: string,
+  pdf: Buffer,
+  origin: string,
+) {
   if (!isMailConfigured()) {
-    throw new Error('Shop-Benachrichtigung nicht versendet: SMTP nicht konfiguriert.');
+    throw new Error(
+      'Shop-Benachrichtigung nicht versendet: SMTP nicht konfiguriert.',
+    );
   }
 
   const html = renderEmailTemplate({
@@ -106,14 +153,28 @@ export async function sendShopOrderNotificationEmail(order: OrderEmailOrder, inv
     to: ORDER_NOTIFICATION_EMAIL,
     subject: `Neue Bestellung – ${order.plate}`,
     html,
-    attachments: [{ filename: `Rechnung-${invoiceNumber}.pdf`, content: pdf, contentType: 'application/pdf' }],
+    attachments: [
+      {
+        filename: `Rechnung-${invoiceNumber}.pdf`,
+        content: pdf,
+        contentType: 'application/pdf',
+      },
+    ],
   });
 }
 
-export async function sendShippingEmail(order: OrderEmailOrder, trackingCode: string, origin: string) {
+export async function sendShippingEmail(
+  order: OrderEmailOrder,
+  trackingCode: string,
+  origin: string,
+) {
   if (!order.customer_email) return;
   if (!isMailConfigured()) {
-    logEvent('warn', 'Versand-E-Mail nicht versendet: SMTP nicht konfiguriert', { orderId: order.id });
+    logEvent(
+      'warn',
+      'Versand-E-Mail nicht versendet: SMTP nicht konfiguriert',
+      { orderId: order.id },
+    );
     return;
   }
 
@@ -141,6 +202,9 @@ export async function sendShippingEmail(order: OrderEmailOrder, trackingCode: st
       html,
     });
   } catch (error) {
-    logEvent('error', 'Versand-E-Mail konnte nicht gesendet werden', { orderId: order.id, error: error instanceof Error ? error.message : 'unbekannt' });
+    logEvent('error', 'Versand-E-Mail konnte nicht gesendet werden', {
+      orderId: order.id,
+      error: error instanceof Error ? error.message : 'unbekannt',
+    });
   }
 }

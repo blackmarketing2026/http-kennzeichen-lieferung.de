@@ -46,6 +46,19 @@ describe('manufacturer product mapping', () => {
     expect(isValidPlate(tooLong, 'standard')).toBe(false);
     expect('ABCD123456'.length).toBeGreaterThan(variant.maxLength);
   });
+
+  it('maps the small black and green land-machine formats to the catalog', () => {
+    expect(getManufacturerVariant('agriculture240', 'black').productVariantId).toBe(62);
+    expect(getManufacturerVariant('agriculture240', 'green').productVariantId).toBe(111);
+    expect(getManufacturerVariant('agriculture255', 'black').productVariantId).toBe(63);
+    expect(getManufacturerVariant('agriculture255', 'green').productVariantId).toBe(112);
+  });
+
+  it('applies the catalog length limits to both small formats', () => {
+    expect(isValidPlate('OL A 12', 'agriculture240')).toBe(true);
+    expect(isValidPlate('OL AB 123', 'agriculture240')).toBe(false);
+    expect(isValidPlate('OL AB 1234', 'agriculture255')).toBe(true);
+  });
 });
 
 describe('parsePlate', () => {

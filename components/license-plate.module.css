@@ -17,6 +17,9 @@
 .plate.motorcycle {
   width: min(70%, 280px);
 }
+.plate.agriculture {
+  width: min(78%, 360px);
+}
 .artwork {
   display: block;
   width: 100%;
@@ -36,6 +39,9 @@
 }
 .plate.editor.motorcycle {
   width: min(100%, 220px);
+}
+.plate.editor.agriculture {
+  width: min(100%, 320px);
 }
 .input.input {
   position: absolute;

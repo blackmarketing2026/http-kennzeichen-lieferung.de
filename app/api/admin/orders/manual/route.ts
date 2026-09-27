@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { getUnitPrice, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
+import { getUnitPrice, isAvailableConfiguration, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
 import { submitOrderToManufacturer } from '@/lib/manufacturer-order';
 
@@ -51,8 +51,8 @@ export async function POST(request: Request) {
 
   if (
     !PLATE_TYPES.includes(plateType) ||
-    !['black', 'carbon'].includes(color) ||
     ![1, 2, 3].includes(quantity) ||
+    !isAvailableConfiguration(plateType, color, quantity) ||
     !isValidPlate(plate, plateType) ||
     !/^\S+@\S+\.\S+$/.test(email) ||
     !firstName ||

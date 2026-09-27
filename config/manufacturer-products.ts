@@ -5,34 +5,125 @@ import type { PlateColor, PlateType } from '@/config/products';
  * Werte 1:1 aus der CSV übernommen (Zeilen KFZ-/Elektro-/Oldtimer-/Saison-Kennzeichen
  * 520x110mm einzeilig sowie KFZ-Kennzeichen 180x200mm zweizeilig für Motorrad).
  */
-export const MANUFACTURER_VARIANTS: Record<PlateType, Record<PlateColor, {
+type ManufacturerVariant = {
   productVariantId: number;
   sku: string;
   name: string;
   maxLength: number;
-}>> = {
+};
+
+export const MANUFACTURER_VARIANTS: Record<
+  PlateType,
+  Partial<Record<PlateColor, ManufacturerVariant>>
+> = {
   standard: {
-    black: { productVariantId: 2, sku: 'UD44520', name: 'KFZ-Kennzeichen 520x110mm - einzeilig', maxLength: 8 },
-    carbon: { productVariantId: 64, sku: 'UDC4520', name: 'KFZ-Kennzeichen 520x110mm - einzeilig - Carbonoptik', maxLength: 8 },
+    black: {
+      productVariantId: 2,
+      sku: 'UD44520',
+      name: 'KFZ-Kennzeichen 520x110mm - einzeilig',
+      maxLength: 8,
+    },
+    carbon: {
+      productVariantId: 64,
+      sku: 'UDC4520',
+      name: 'KFZ-Kennzeichen 520x110mm - einzeilig - Carbonoptik',
+      maxLength: 8,
+    },
   },
   motorcycle: {
-    black: { productVariantId: 61, sku: 'UD44180', name: 'KFZ-Kennzeichen 180x200mm - zweizeilig', maxLength: 7 },
-    carbon: { productVariantId: 92, sku: 'UDC4180', name: 'KFZ-Kennzeichen 180x200mm - zweizeilig - Carbonoptik', maxLength: 7 },
+    black: {
+      productVariantId: 61,
+      sku: 'UD44180',
+      name: 'KFZ-Kennzeichen 180x200mm - zweizeilig',
+      maxLength: 7,
+    },
+    carbon: {
+      productVariantId: 92,
+      sku: 'UDC4180',
+      name: 'KFZ-Kennzeichen 180x200mm - zweizeilig - Carbonoptik',
+      maxLength: 7,
+    },
   },
   electric: {
-    black: { productVariantId: 166, sku: 'UU44520', name: 'Elektro-Kennzeichen 520x110mm - einzeilig', maxLength: 7 },
-    carbon: { productVariantId: 148, sku: 'UUC4520', name: 'Elektro-Kennzeichen 520x110mm - einzeilig - Carbonoptik', maxLength: 7 },
+    black: {
+      productVariantId: 166,
+      sku: 'UU44520',
+      name: 'Elektro-Kennzeichen 520x110mm - einzeilig',
+      maxLength: 7,
+    },
+    carbon: {
+      productVariantId: 148,
+      sku: 'UUC4520',
+      name: 'Elektro-Kennzeichen 520x110mm - einzeilig - Carbonoptik',
+      maxLength: 7,
+    },
   },
   historic: {
-    black: { productVariantId: 240, sku: 'UH44520', name: 'Oldtimer-Kennzeichen 520x110mm - einzeilig', maxLength: 7 },
-    carbon: { productVariantId: 222, sku: 'UHC4520', name: 'Oldtimer-Kennzeichen 520x110mm - einzeilig - Carbonoptik', maxLength: 7 },
+    black: {
+      productVariantId: 240,
+      sku: 'UH44520',
+      name: 'Oldtimer-Kennzeichen 520x110mm - einzeilig',
+      maxLength: 7,
+    },
+    carbon: {
+      productVariantId: 222,
+      sku: 'UHC4520',
+      name: 'Oldtimer-Kennzeichen 520x110mm - einzeilig - Carbonoptik',
+      maxLength: 7,
+    },
   },
   season: {
-    black: { productVariantId: 131, sku: 'US44520', name: 'Saison-Kennzeichen 520x110mm - einzeilig', maxLength: 7 },
-    carbon: { productVariantId: 113, sku: 'USC4520', name: 'Saison-Kennzeichen 520x110mm - einzeilig - Carbonoptik', maxLength: 7 },
+    black: {
+      productVariantId: 131,
+      sku: 'US44520',
+      name: 'Saison-Kennzeichen 520x110mm - einzeilig',
+      maxLength: 7,
+    },
+    carbon: {
+      productVariantId: 113,
+      sku: 'USC4520',
+      name: 'Saison-Kennzeichen 520x110mm - einzeilig - Carbonoptik',
+      maxLength: 7,
+    },
+  },
+  agriculture240: {
+    black: {
+      productVariantId: 62,
+      sku: 'UD44240',
+      name: 'KFZ-Kennzeichen 240x130mm - Schrift verkleinert - zweizeilig',
+      maxLength: 6,
+    },
+    green: {
+      productVariantId: 111,
+      sku: 'UG44240',
+      name: 'KFZ-Kennzeichen 240x130mm - Schrift verkleinert - zweizeilig - grün',
+      maxLength: 6,
+    },
+  },
+  agriculture255: {
+    black: {
+      productVariantId: 63,
+      sku: 'UD44255',
+      name: 'KFZ-Kennzeichen 255x130mm - Schrift verkleinert - zweizeilig',
+      maxLength: 8,
+    },
+    green: {
+      productVariantId: 112,
+      sku: 'UG44255',
+      name: 'KFZ-Kennzeichen 255x130mm - Schrift verkleinert - zweizeilig - grün',
+      maxLength: 8,
+    },
   },
 };
 
-export function getManufacturerVariant(plateType: PlateType, color: PlateColor) {
-  return MANUFACTURER_VARIANTS[plateType][color];
+export function getManufacturerVariant(
+  plateType: PlateType,
+  color: PlateColor,
+) {
+  const variant = MANUFACTURER_VARIANTS[plateType][color];
+  if (!variant)
+    throw new Error(
+      `Keine Herstellervariante für ${plateType}/${color} konfiguriert.`,
+    );
+  return variant;
 }
