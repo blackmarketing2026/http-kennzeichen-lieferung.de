@@ -23,7 +23,7 @@ import { LicensePlate } from '@/components/license-plate';
 import {
   BIKE_RACK_PLATE_PRICE,
   formatPrice,
-  getUnitPrice,
+  getPackagePrice,
   isAgriculturePlate,
   isSinglePlateProduct,
   PARKING_PLATE_PRICE,
@@ -484,8 +484,7 @@ export function EmbeddedCheckout({
   const cartId = useRef<string | null>(null);
   const product = PRODUCTS[selection.plateType];
   const subtotal =
-    getUnitPrice(selection.plateType, selection.plateColor, baseQuantity) *
-      baseQuantity +
+    getPackagePrice(selection.plateType, selection.plateColor, baseQuantity) +
     (extras.parkingPlate ? PARKING_PLATE_PRICE : 0) +
     (extras.bikeRackPlate ? BIKE_RACK_PLATE_PRICE : 0);
   const total = subtotal + SHIPPING_PRICE;
@@ -634,11 +633,11 @@ export function EmbeddedCheckout({
           </div>
           <strong>
             {formatPrice(
-              getUnitPrice(
+              getPackagePrice(
                 selection.plateType,
                 selection.plateColor,
                 baseQuantity,
-              ) * baseQuantity,
+              ),
             )}
           </strong>
         </div>
@@ -658,10 +657,10 @@ export function EmbeddedCheckout({
           <span>DHL-Versand</span>
           <strong>Inklusive</strong>
         </div>
-        {pricing && pricing.discountCents > 0 && (
+        {pricing && pricing.discountCents > pricing.packageDiscountCents && (
           <div className="real-order-line real-order-discount">
             <span>Rabatt ({pricing.promoCode})</span>
-            <strong>−{formatPrice(pricing.discountCents / 100)}</strong>
+            <strong>−{formatPrice((pricing.discountCents - pricing.packageDiscountCents) / 100)}</strong>
           </div>
         )}
         <div className="real-order-total">

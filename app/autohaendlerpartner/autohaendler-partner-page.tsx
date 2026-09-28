@@ -22,7 +22,7 @@ import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
 import {
   formatPrice,
-  getUnitPrice,
+  getPackagePrice,
   isSinglePlateProduct,
   isValidPlate,
   PRODUCTS,
@@ -76,8 +76,7 @@ export function AutohaendlerPartnerPage() {
     [plateValue, plateType],
   );
   const quantity: 1 | 2 = isSinglePlateProduct(plateType) ? 1 : 2;
-  const total =
-    getUnitPrice(plateType, 'black', quantity) * quantity + SHIPPING_PRICE;
+  const total = getPackagePrice(plateType, 'black', quantity) + SHIPPING_PRICE;
 
   useEffect(() => {
     const update = () => setPickup(getPickupCountdown(new Date()));

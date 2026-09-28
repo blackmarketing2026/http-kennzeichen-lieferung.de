@@ -1,5 +1,6 @@
 import {
   BIKE_RACK_PLATE_PRICE,
+  getPackageDiscountCents,
   getUnitPrice,
   isAvailableConfiguration,
   isSinglePlateProduct,
@@ -15,6 +16,7 @@ const PROMO_CODES = {
 
 export type CheckoutPricing = {
   unitPriceCents: number;
+  packageDiscountCents: number;
   parkingExtraPriceCents: number;
   bikeRackExtraPriceCents: number;
   subtotalCents: number;
@@ -59,7 +61,12 @@ export function getCheckoutPricing(
     parkingExtraPriceCents +
     bikeRackExtraPriceCents;
   const shippingCents = Math.round(SHIPPING_PRICE * 100);
-  const regularTotalCents = subtotalCents + shippingCents;
+  const packageDiscountCents = getPackageDiscountCents(
+    plateType,
+    color,
+    baseQuantity,
+  );
+  const regularTotalCents = subtotalCents + shippingCents - packageDiscountCents;
   const targetTotalCents = promoCode
     ? PROMO_CODES[promoCode as keyof typeof PROMO_CODES].totalCents
     : regularTotalCents;
@@ -67,11 +74,12 @@ export function getCheckoutPricing(
 
   return {
     unitPriceCents,
+    packageDiscountCents,
     parkingExtraPriceCents,
     bikeRackExtraPriceCents,
     subtotalCents,
     shippingCents,
-    discountCents: regularTotalCents - targetTotalCents,
+    discountCents: subtotalCents + shippingCents - targetTotalCents,
     totalCents: targetTotalCents,
     promoCode,
   };

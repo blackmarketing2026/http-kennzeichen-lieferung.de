@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { getUnitPrice, isAvailableConfiguration, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
+import { getPackageDiscountCents, getUnitPrice, isAvailableConfiguration, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
 import { submitOrderToManufacturer } from '@/lib/manufacturer-order';
 
@@ -74,7 +74,8 @@ export async function POST(request: Request) {
   const cartId = `manual-${randomUUID()}`;
   const unitPriceCents = Math.round(getUnitPrice(plateType, color, quantity) * 100);
   const shippingCents = Math.round(SHIPPING_PRICE * 100);
-  const totalCents = unitPriceCents * quantity + shippingCents;
+  const discountCents = getPackageDiscountCents(plateType, color, quantity);
+  const totalCents = unitPriceCents * quantity + shippingCents - discountCents;
   const address = {
     name: `${firstName} ${lastName}`,
     phone: body.phone?.trim() || null,
@@ -84,9 +85,9 @@ export async function POST(request: Request) {
   const orderId = randomUUID();
   const addressJson = JSON.stringify(address);
   await query(
-    `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, unit_price_cents, shipping_cents, total_cents, customer_email, delivery_address, invoice_address)
-     VALUES (?, ?, 'paid', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    [orderId, cartId, plate, plateType, color, quantity, unitPriceCents, shippingCents, totalCents, email, addressJson, addressJson],
+    `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, unit_price_cents, shipping_cents, discount_cents, total_cents, customer_email, delivery_address, invoice_address)
+     VALUES (?, ?, 'paid', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [orderId, cartId, plate, plateType, color, quantity, unitPriceCents, shippingCents, discountCents, totalCents, email, addressJson, addressJson],
   );
 
   const result = await submitOrderToManufacturer(orderId);

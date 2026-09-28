@@ -23,7 +23,7 @@ import { ShippingNotice } from '@/components/shipping-notice';
 import { LicensePlate, LicensePlateEditor } from '@/components/license-plate';
 import {
   formatPrice,
-  getUnitPrice,
+  getPackagePrice,
   isValidPlate,
   PRODUCTS,
   SHIPPING_PRICE,
@@ -67,7 +67,7 @@ const FAQS = [
   ],
   [
     'Was kosten die Kennzeichen?',
-    'Auto-, E-, H-, Saison- und Motorradkennzeichen kosten 14,99 € pro Schild. Der DHL-Versand innerhalb Deutschlands ist kostenlos.',
+    'Zwei Auto-, E-, H- oder Saisonkennzeichen kosten zusammen 14,99 €. Ein Motorradkennzeichen kostet ebenfalls 14,99 €. Der DHL-Versand innerhalb Deutschlands ist kostenlos.',
   ],
   [
     'Wie schnell wird versendet?',
@@ -162,8 +162,7 @@ export default function Home() {
   const plateInputEventSent = useRef(false);
   const product = PRODUCTS[plateType];
   const plateValue = `${cityCode} ${serialLetters} ${serialNumbers}`;
-  const plateSubtotal =
-    getUnitPrice(plateType, plateColor, quantity) * quantity;
+  const plateSubtotal = getPackagePrice(plateType, plateColor, quantity);
   const total = plateSubtotal + SHIPPING_PRICE;
   const status = useMemo(
     () => isValidPlate(plateValue, plateType),

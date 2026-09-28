@@ -116,6 +116,28 @@ export function getUnitPrice(
     : product.prices[quantity];
 }
 
+/** The offer includes the second car plate in the 14.99 € package price. */
+export function getPackageDiscountCents(
+  plateType: PlateType,
+  color: PlateColor,
+  quantity: 1 | 2 | 3,
+) {
+  return color === 'black' && PRODUCTS[plateType].format === 'long' && quantity >= 2
+    ? Math.round(getUnitPrice(plateType, color, quantity) * 100)
+    : 0;
+}
+
+export function getPackagePrice(
+  plateType: PlateType,
+  color: PlateColor,
+  quantity: 1 | 2 | 3,
+) {
+  return (
+    Math.round(getUnitPrice(plateType, color, quantity) * 100) * quantity -
+    getPackageDiscountCents(plateType, color, quantity)
+  ) / 100;
+}
+
 export function isAvailableConfiguration(
   plateType: PlateType,
   color: PlateColor,

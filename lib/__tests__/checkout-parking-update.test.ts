@@ -23,7 +23,7 @@ const cartId = 'parking-checkout-test-1234';
 const current = {
   id: 'pi_test123',
   client_secret: 'pi_test123_secret_test',
-  amount: 2990,
+  amount: 1499,
   status: 'requires_payment_method',
   metadata: {
     cartId,
@@ -86,7 +86,7 @@ describe('parking extra payment updates', () => {
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 3490,
+        amount: 1999,
         metadata: expect.objectContaining({
           anzahl: '3',
           parkplatzkennzeichen: '1',
@@ -95,21 +95,21 @@ describe('parking extra payment updates', () => {
     );
     expect(await response.json()).toMatchObject({
       paymentIntentId: current.id,
-      pricing: { totalCents: 3490, parkingExtraPriceCents: 500 },
+      pricing: { totalCents: 1999, parkingExtraPriceCents: 500 },
     });
   });
 
   it('removes the extra and restores the original amount', async () => {
     stripe.retrieve.mockResolvedValue({
       ...current,
-      amount: 3490,
+      amount: 1999,
       metadata: { ...current.metadata, anzahl: '3', parkplatzkennzeichen: '1' },
     });
     expect((await POST(request(2))).status).toBe(200);
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 2990,
+        amount: 1499,
         metadata: expect.objectContaining({
           anzahl: '2',
           parkplatzkennzeichen: '0',
@@ -124,7 +124,7 @@ describe('parking extra payment updates', () => {
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 3990,
+        amount: 2499,
         metadata: expect.objectContaining({
           anzahl: '4',
           parkplatzkennzeichen: '1',
@@ -137,14 +137,14 @@ describe('parking extra payment updates', () => {
   it('can keep the bicycle-rack plate while removing the parking plate', async () => {
     stripe.retrieve.mockResolvedValue({
       ...current,
-      amount: 3990,
+      amount: 2499,
       metadata: { ...current.metadata, anzahl: '4', parkplatzkennzeichen: '1', fahrradtraegerkennzeichen: '1' },
     });
     expect((await POST(requestWithExtras(false, true))).status).toBe(200);
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 3490,
+        amount: 1999,
         metadata: expect.objectContaining({ anzahl: '3', parkplatzkennzeichen: '0', fahrradtraegerkennzeichen: '1' }),
       }),
     );

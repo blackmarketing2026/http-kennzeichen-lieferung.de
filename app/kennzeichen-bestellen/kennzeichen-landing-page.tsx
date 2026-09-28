@@ -26,7 +26,7 @@ import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
 import {
   formatPrice,
-  getUnitPrice,
+  getPackagePrice,
   isValidPlate,
   PRODUCTS,
   SHIPPING_PRICE,
@@ -113,8 +113,7 @@ export function KennzeichenLandingPage() {
     () => isValidPlate(plateValue, plateType),
     [plateValue, plateType],
   );
-  const total =
-    getUnitPrice(plateType, 'black', quantity) * quantity + SHIPPING_PRICE;
+  const total = getPackagePrice(plateType, 'black', quantity) + SHIPPING_PRICE;
   const product = PRODUCTS[plateType];
 
   useEffect(() => {
@@ -248,9 +247,8 @@ export function KennzeichenLandingPage() {
             <em>Heute versandfertig.</em>
           </h1>
           <p className={styles.lead}>
-            Auto- und Motorradkennzeichen ab{' '}
-            <strong>14,99 € pro Schild</strong> – inklusive DHL-Versand und
-            Tracking.
+            Zwei Auto- oder ein Motorradkennzeichen für{' '}
+            <strong>14,99 €</strong> – inklusive DHL-Versand und Tracking.
           </p>
           <ul className={styles.heroChecks}>
             <li>
