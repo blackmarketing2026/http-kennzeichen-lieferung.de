@@ -19,8 +19,6 @@ import {
   Sparkles,
   Truck,
   TriangleAlert,
-  UsersRound,
-  X,
 } from 'lucide-react';
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
@@ -32,10 +30,6 @@ import {
   type PlateType,
 } from '@/config/products';
 import { CONSENT_STORAGE_KEY, parseConsentRecord } from '@/lib/cookie-consent';
-import {
-  getPickupCountdown,
-  type PickupCountdown,
-} from '@/lib/pickup-countdown';
 import styles from './page.module.css';
 
 const PLATE_TYPES: PlateType[] = [
@@ -47,8 +41,8 @@ const PLATE_TYPES: PlateType[] = [
 ];
 const FAQS = [
   [
-    'Wie schnell sind die Kennzeichen bei mir?',
-    'Durch unseren Expressdruck sind deine Kennzeichen innerhalb von 10 Minuten gedruckt und versandfertig. DHL holt dreimal täglich bei uns ab. Bestellst du rechtzeitig vor einer Abholung, kann dein Paket bereits am nächsten Werktag bei dir eintreffen. Nach der Abholung ist deine Sendung noch am selben Tag unterwegs.',
+    'Wie schnell kommen meine Kennzeichen an?',
+    'Deine Kennzeichen werden innerhalb von 10 Minuten geprägt und versandfertig gemacht. DHL holt an Werktagen dreimal täglich ab. Die tatsächliche Zustellung hängt vom Transport durch DHL ab; den aktuellen Status kannst du über die Sendungsverfolgung prüfen.',
   ],
   [
     'Sind die Kennzeichen bei der Anmeldung in der Stadt erlaubt?',
@@ -56,26 +50,8 @@ const FAQS = [
   ],
   [
     'Bekomme ich eine Sendungsverfolgung?',
-    'Ja. Sobald deine Sendung vorbereitet und die Tracking-ID erstellt wurde, bekommst du sie automatisch per E-Mail zugeschickt. Damit kannst du den Versandstatus deines Pakets live verfolgen.',
+    'Ja. Sobald die Sendungsnummer vorliegt, bekommst du sie per E-Mail. Über den Link kannst du den Status prüfen, sobald DHL die Sendung erfasst hat.',
   ],
-];
-
-const DEMO_PLATES = [
-  { plate: 'OL SJ 155', type: 'Autokennzeichen', time: 'vor 3 Min.' },
-  { plate: 'B AB 2026', type: 'Autokennzeichen', time: 'vor 5 Min.' },
-  { plate: 'HH KL 917', type: 'Autokennzeichen', time: 'vor 8 Min.' },
-  { plate: 'M TR 804', type: 'Autokennzeichen', time: 'vor 12 Min.' },
-  { plate: 'K EV 321E', type: 'E-Kennzeichen', time: 'vor 16 Min.' },
-  { plate: 'F LS 196H', type: 'H-Kennzeichen', time: 'vor 21 Min.' },
-  { plate: 'HB MO 77', type: 'Motorrad-Kennzeichen', time: 'vor 27 Min.' },
-  { plate: 'S CK 481', type: 'Autokennzeichen', time: 'vor 34 Min.' },
-  { plate: 'DO XL 912', type: 'Autokennzeichen', time: 'vor 41 Min.' },
-  { plate: 'D JP 608', type: 'Autokennzeichen', time: 'vor 53 Min.' },
-  { plate: 'N RS 410', type: 'Motorrad-Kennzeichen', time: 'vor 1 Std.' },
-  { plate: 'H VK 735', type: 'Autokennzeichen', time: 'vor 2 Std.' },
-  { plate: 'L PT 202', type: 'Autokennzeichen', time: 'vor 3 Std.' },
-  { plate: 'KI NM 88E', type: 'E-Kennzeichen', time: 'vor 4 Std.' },
-  { plate: 'AC GT 63', type: 'Motorrad-Kennzeichen', time: 'vor 5 Std.' },
 ];
 
 type AnalyticsWindow = Window & { dataLayer?: unknown[] };
@@ -100,10 +76,6 @@ export function KennzeichenLandingPage() {
   const [city, setCity] = useState('');
   const [letters, setLetters] = useState('');
   const [numbers, setNumbers] = useState('');
-  const [pickup, setPickup] = useState<PickupCountdown | null>(null);
-  const [demoNoticeIndex, setDemoNoticeIndex] = useState(0);
-  const [demoNoticeVisible, setDemoNoticeVisible] = useState(false);
-  const [demoNoticesDismissed, setDemoNoticesDismissed] = useState(false);
   const inputStarted = useRef(false);
   const validTracked = useRef(false);
   const quantity: 1 | 2 = plateType === 'motorcycle' ? 1 : 2;
@@ -116,46 +88,10 @@ export function KennzeichenLandingPage() {
   const product = PRODUCTS[plateType];
 
   useEffect(() => {
-    const update = () => setPickup(getPickupCountdown(new Date()));
-    update();
-    const interval = window.setInterval(update, 1000);
-    return () => window.clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
     if (!valid || validTracked.current) return;
     validTracked.current = true;
     trackEvent('license_plate_valid', { plate_type: plateType });
   }, [valid, plateType]);
-
-  useEffect(() => {
-    if (demoNoticesDismissed) return;
-
-    let showTimer = 0;
-    let hideTimer = 0;
-
-    const showNextNotice = () => {
-      setDemoNoticeIndex((current) => {
-        const offset = 1 + Math.floor(Math.random() * (DEMO_PLATES.length - 1));
-        return (current + offset) % DEMO_PLATES.length;
-      });
-      setDemoNoticeVisible(true);
-
-      hideTimer = window.setTimeout(() => {
-        setDemoNoticeVisible(false);
-        showTimer = window.setTimeout(
-          showNextNotice,
-          6000 + Math.random() * 13000,
-        );
-      }, 5000);
-    };
-
-    showTimer = window.setTimeout(showNextNotice, 3500);
-    return () => {
-      window.clearTimeout(showTimer);
-      window.clearTimeout(hideTimer);
-    };
-  }, [demoNoticesDismissed]);
 
   function startInput(field: 'city' | 'letters' | 'numbers') {
     if (inputStarted.current) return;
@@ -231,55 +167,47 @@ export function KennzeichenLandingPage() {
           <a href="#fragen">FAQ</a>
         </nav>
         <a className={styles.headerCta} href="#konfigurator">
-          Jetzt bestellen
+          Kennzeichen konfigurieren
         </a>
       </header>
 
       <section className={styles.hero} id="bestellen">
         <div className={styles.heroCopy}>
           <p className={styles.kicker}>
-            <span /> DIN-zertifiziert & schnell versendet
+            <span /> DIN-zertifiziert & schnell geprägt
           </p>
           <h1>
-            Deine Kennzeichen.
+            Dein Kennzeichen.
             <br />
-            <em>Heute versandfertig.</em>
+            <em>In 10 Minuten geprägt und versandfertig.</em>
           </h1>
           <p className={styles.lead}>
-            Zwei Autokennzeichen oder ein Motorradkennzeichen –{' '}
-            <strong>inklusive DHL-Versand und Tracking.</strong>
+            Kennzeichen online konfigurieren, sicher bestellen und bequem
+            liefern lassen. DHL holt an Werktagen dreimal täglich bei unserem
+            Druckwerk ab.
           </p>
           <ul className={styles.heroChecks}>
             <li>
-              <BadgeCheck /> DIN-zertifiziert nach DIN 74069
+              <Clock3 /> In 10 Minuten geprägt und versandfertig
             </li>
             <li>
-              <ShieldCheck /> Für TÜV und Zulassungsstelle zugelassen
+              <Truck /> Dreimal täglich DHL-Abholung an Werktagen
             </li>
             <li>
-              <Clock3 /> In 10 Minuten druck- und versandfertig
+              <MapPinCheck /> Sendungsverfolgung per E-Mail
             </li>
           </ul>
-          <div className={styles.customerProof}>
-            <UsersRound />
-            <span>
-              <strong>Über 1.000 zufriedene Kunden</strong>
-              haben bereits bei uns bestellt
-            </span>
-          </div>
-          <div className={styles.deliveryPulse}>
+          <a className={styles.heroCta} href="#konfigurator">
+            Kennzeichen konfigurieren <ArrowRight />
+          </a>
+          <div className={styles.deliveryInfo}>
             <span className={styles.deliveryIcon}>
               <Truck />
             </span>
             <div>
-              <small>Nächste DHL-Abholung</small>
-              <strong>
-                {pickup
-                  ? `${pickup.dayLabel} um ${pickup.pickupTime}`
-                  : 'Wird berechnet'}
-              </strong>
+              <small>Fertigung und Übergabe</small>
+              <strong>DHL-Abholung dreimal täglich an Werktagen</strong>
             </div>
-            <time>{pickup?.remaining ?? '--:--:--'}</time>
           </div>
         </div>
 
@@ -391,7 +319,7 @@ export function KennzeichenLandingPage() {
           >
             {valid ? (
               <>
-                Weiter zum Checkout <ArrowRight />
+                Weiter zur Bestellübersicht <ArrowRight />
               </>
             ) : (
               'Kennzeichen eingeben'
@@ -410,13 +338,13 @@ export function KennzeichenLandingPage() {
         <div>
           <Factory />
           <span>
-            <strong>10 Minuten</strong>Bis zur Versandbereitschaft
+            <strong>10 Minuten</strong>Geprägt und versandfertig
           </span>
         </div>
         <div>
           <PackageCheck />
           <span>
-            <strong>3× täglich</strong>DHL-Abholung im Druckwerk
+            <strong>3× an Werktagen</strong>DHL-Abholung im Druckwerk
           </span>
         </div>
         <div>
@@ -428,7 +356,7 @@ export function KennzeichenLandingPage() {
         <div>
           <MapPinCheck />
           <span>
-            <strong>Mit Tracking</strong>Sendungsnummer per E-Mail
+            <strong>Mit Tracking</strong>Sendungsverfolgung per E-Mail
           </span>
         </div>
       </section>
@@ -540,30 +468,31 @@ export function KennzeichenLandingPage() {
           <div className={styles.clockFace}>
             <strong>10</strong>
             <span>
-              Minuten bis
+              Minuten
+              <br />
+              geprägt &amp;
               <br />
               versandfertig
             </span>
           </div>
-          <div className={styles.pickupTimes}>
-            <span>09:00</span>
-            <span>12:00</span>
-            <span>16:00</span>
+          <div className={styles.pickupLabel}>
+            <span>DHL-Abholung: 3× an Werktagen</span>
           </div>
         </div>
         <div className={styles.shippingCopy}>
           <p className={styles.kicker}>
-            <span /> Drei Chancen pro Werktag
+            <span /> Fertigung und DHL-Versand
           </p>
           <h2>
-            Bestellt. Geprägt.
+            Schnell gefertigt.
             <br />
-            <em>Von DHL abgeholt.</em>
+            <em>Mit DHL auf dem Weg zu dir.</em>
           </h2>
           <p>
-            Direkt nach der Bestellung geht dein Auftrag ins Druckwerk.
-            Innerhalb von 10 Minuten sind die Kennzeichen druck- und
-            versandfertig.
+            Nach deiner Bestellung werden deine Kennzeichen geprägt und für den
+            Versand vorbereitet. DHL holt an Werktagen dreimal täglich ab.
+            Sobald deine Sendung auf dem Weg ist, kannst du ihren Status über
+            die Sendungsverfolgung prüfen.
           </p>
           <ol>
             <li>
@@ -576,17 +505,15 @@ export function KennzeichenLandingPage() {
             <li>
               <b>2</b>
               <div>
-                <strong>Innerhalb von 10 Minuten gefertigt</strong>
-                <span>Deine Schilder werden geprägt und verpackt.</span>
+                <strong>In 10 Minuten geprägt und versandfertig</strong>
+                <span>Deine Schilder werden geprägt und für DHL vorbereitet.</span>
               </div>
             </li>
             <li>
               <b>3</b>
               <div>
-                <strong>Dreimal täglich an DHL</strong>
-                <span>
-                  Abholung um 9, 12 und 16 Uhr; Trackingnummer per E-Mail.
-                </span>
+                <strong>An DHL übergeben</strong>
+                <span>DHL holt an Werktagen dreimal täglich ab. Den Sendungsstatus kannst du über den Link in deiner E-Mail prüfen.</span>
               </div>
             </li>
           </ol>
@@ -675,8 +602,8 @@ export function KennzeichenLandingPage() {
             </span>
             <h3>Kennzeichen erhalten</h3>
             <p>
-              Deine Schilder werden geprägt, per DHL verschickt und mit Tracking
-              direkt zu dir geliefert.
+              Nach der Übergabe an DHL kannst du den Transport verfolgen. Die
+              Zustellung übernimmt DHL.
             </p>
           </article>
           <article>
@@ -723,7 +650,7 @@ export function KennzeichenLandingPage() {
 
       <section className={styles.finalCta}>
         <BadgeCheck />
-        <p>DIN-zertifiziert · in 10 Minuten versandfertig</p>
+        <p>DIN-zertifiziert · in 10 Minuten geprägt und versandfertig</p>
         <h2>
           Dein Kennzeichen wartet
           <br />
@@ -744,7 +671,7 @@ export function KennzeichenLandingPage() {
             height={724}
           />
         </Link>
-        <p>DIN-zertifizierte Kennzeichen. Schnell geprägt. Sicher geliefert.</p>
+        <p>DIN-zertifizierte Kennzeichen. In 10 Minuten geprägt und versandfertig.</p>
       </footer>
 
       <div className={styles.mobileBar}>
@@ -759,34 +686,6 @@ export function KennzeichenLandingPage() {
         </a>
       </div>
 
-      {!demoNoticesDismissed && (
-        <aside
-          className={`${styles.demoNotice} ${demoNoticeVisible ? styles.demoNoticeVisible : ''}`}
-          aria-live="polite"
-          aria-hidden={!demoNoticeVisible}
-        >
-          <span className={styles.demoNoticeIcon}>
-            <CarFront />
-          </span>
-          <span className={styles.demoNoticeCopy}>
-            <strong>{DEMO_PLATES[demoNoticeIndex].plate}</strong>
-            <span>
-              {DEMO_PLATES[demoNoticeIndex].type} ·{' '}
-              {DEMO_PLATES[demoNoticeIndex].time} konfiguriert
-            </span>
-          </span>
-          <button
-            type="button"
-            aria-label="Beispiel-Konfigurationen schließen"
-            onClick={() => {
-              setDemoNoticeVisible(false);
-              setDemoNoticesDismissed(true);
-            }}
-          >
-            <X />
-          </button>
-        </aside>
-      )}
     </main>
   );
 }

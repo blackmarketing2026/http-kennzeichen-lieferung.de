@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -29,10 +29,6 @@ import {
   SHIPPING_PRICE,
   type PlateType,
 } from '@/config/products';
-import {
-  getPickupCountdown,
-  type PickupCountdown,
-} from '@/lib/pickup-countdown';
 import styles from './page.module.css';
 
 const DEALER_TYPES: PlateType[] = [
@@ -50,11 +46,11 @@ const FAQS = [
   ],
   [
     'Wie schnell werden die Kennzeichen produziert?',
-    'Der Auftrag geht nach der Bestellung direkt in die Fertigung. Die Kennzeichen sind innerhalb von 10 Minuten druck- und versandfertig.',
+    'Der Auftrag geht nach der Bestellung direkt in die Fertigung. Die Kennzeichen sind innerhalb von 10 Minuten geprägt und versandfertig.',
   ],
   [
     'Wann holt DHL die Sendungen ab?',
-    'DHL holt werktäglich dreimal im Druckwerk ab: um 9, 12 und 16 Uhr. Der Live-Countdown zeigt dir die nächste mögliche Abholung.',
+    'DHL holt die versandfertigen Sendungen an Werktagen dreimal täglich im Druckwerk ab. Die tatsächliche Zustellung hängt vom Transport durch DHL ab.',
   ],
   [
     'Sind die Kennzeichen für die Zulassungsstelle geeignet?',
@@ -69,7 +65,6 @@ export function AutohaendlerPartnerPage() {
   const [letters, setLetters] = useState('');
   const [numbers, setNumbers] = useState('');
   const [promoCode, setPromoCode] = useState('');
-  const [pickup, setPickup] = useState<PickupCountdown | null>(null);
   const plateValue = `${city} ${letters} ${numbers}`;
   const valid = useMemo(
     () => isValidPlate(plateValue, plateType),
@@ -77,13 +72,6 @@ export function AutohaendlerPartnerPage() {
   );
   const quantity: 1 | 2 = isSinglePlateProduct(plateType) ? 1 : 2;
   const total = getPackagePrice(plateType, 'black', quantity) + SHIPPING_PRICE;
-
-  useEffect(() => {
-    const update = () => setPickup(getPickupCountdown(new Date()));
-    update();
-    const interval = window.setInterval(update, 1000);
-    return () => window.clearInterval(interval);
-  }, []);
 
   function updateCity(value: string) {
     setCity(
@@ -159,26 +147,21 @@ export function AutohaendlerPartnerPage() {
               <Check /> Persönliche Partnerkonditionen
             </span>
             <span>
-              <Check /> In 10 Minuten versandfertig
+              <Check /> In 10 Minuten geprägt und versandfertig
             </span>
             <span>
               <Check /> Kein Händlerkonto erforderlich
             </span>
           </div>
 
-          <div className={styles.heroCountdown} aria-live="polite">
+          <div className={styles.heroCountdown}>
             <span className={styles.countdownIcon}>
               <Truck />
             </span>
             <div>
-              <small>Nächste DHL-Abholung</small>
-              <strong>
-                {pickup
-                  ? `${pickup.dayLabel} um ${pickup.pickupTime}`
-                  : 'Wird berechnet'}
-              </strong>
+              <small>Fertigung und Versand</small>
+              <strong>DHL-Abholung dreimal täglich an Werktagen</strong>
             </div>
-            <time>{pickup?.remaining ?? '--:--:--'}</time>
           </div>
         </div>
 
@@ -342,7 +325,7 @@ export function AutohaendlerPartnerPage() {
         <div>
           <PackageCheck />
           <span>
-            <strong>DHL mit Tracking</strong>dreimal täglich abgeholt
+            <strong>DHL mit Tracking</strong>dreimal täglich an Werktagen abgeholt
           </span>
         </div>
         <div>
@@ -364,30 +347,25 @@ export function AutohaendlerPartnerPage() {
             <em>Jeden Werktag.</em>
           </h2>
           <p>
-            Bestellungen gehen sofort ins Druckwerk und sind innerhalb von 10
-            Minuten versandfertig. Der Countdown zeigt dir die nächste mögliche
-            Übergabe an DHL.
+            Nach der Bestellung werden die Kennzeichen innerhalb von 10 Minuten
+            geprägt und versandfertig gemacht. DHL holt an Werktagen dreimal
+            täglich ab.
           </p>
         </div>
         <div className={styles.shippingPanel}>
           <div className={styles.bigCountdown}>
-            <small>Nächste Abholung in</small>
-            <time>{pickup?.remaining ?? '--:--:--'}</time>
-            <strong>
-              {pickup
-                ? `${pickup.dayLabel} · ${pickup.pickupTime} Uhr`
-                : 'Wird berechnet'}
-            </strong>
+            <small>Übergabe an DHL</small>
+            <strong>Dreimal täglich an Werktagen</strong>
           </div>
           <div className={styles.pickupTimes}>
             <span>
-              <b>09:00</b>Frühe Tour
+              <b>10 Min.</b>Geprägt und versandfertig
             </span>
             <span>
-              <b>12:00</b>Mittagstour
+              <b>3×</b>DHL-Abholung an Werktagen
             </span>
             <span>
-              <b>16:00</b>Nachmittagstour
+              <b>Tracking</b>Sendungsverfolgung per E-Mail
             </span>
           </div>
         </div>
@@ -462,13 +440,13 @@ export function AutohaendlerPartnerPage() {
             height={724}
           />
         </Link>
-        <p>DIN-zertifiziert. Schnell produziert. Planbar geliefert.</p>
+        <p>DIN-zertifiziert. Schnell geprägt. Mit DHL versendet.</p>
       </footer>
 
       <div className={styles.mobileBar}>
         <div>
-          <span>Nächste DHL-Abholung</span>
-          <strong>{pickup?.remaining ?? '--:--:--'}</strong>
+          <span>DHL-Abholung</span>
+          <strong>3× an Werktagen</strong>
         </div>
         <a href="#bestellen">
           Bestellen <ArrowRight />

@@ -14,28 +14,10 @@
   font-size: 0.78rem;
   font-weight: 750;
 }
-.countdownTime {
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px 18px;
-}
-.countdownTime strong {
-  font-family: var(--font-geist-mono), monospace;
-  font-size: clamp(1.7rem, 4vw, 2.3rem);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.05em;
-}
-.countdownTime span {
-  font-size: 0.82rem;
-  font-weight: 650;
-}
 .countdown p {
   margin: 10px 0 0;
   color: #586d7a;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   line-height: 1.6;
 }
 .selectedExtra {

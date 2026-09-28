@@ -30,7 +30,7 @@
   height: 88px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 250px 1fr 180px;
+  grid-template-columns: 250px 1fr 230px;
   align-items: center;
   gap: 30px;
   border-bottom: 1px solid var(--line);
@@ -117,9 +117,9 @@
 .heroCopy h1 {
   margin: 0;
   max-width: 700px;
-  font-size: clamp(3.4rem, 5.7vw, 6.7rem);
-  line-height: 0.92;
-  letter-spacing: -0.065em;
+  font-size: clamp(3rem, 4.2vw, 5.2rem);
+  line-height: 0.99;
+  letter-spacing: -0.055em;
   font-weight: 780;
 }
 .heroCopy h1 em {
@@ -158,12 +158,30 @@
   color: var(--green);
 }
 
-.deliveryPulse {
+.heroCta {
+  width: fit-content;
+  margin-top: 25px;
+  padding: 15px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: var(--blue);
+  color: #fff !important;
+  font-size: 0.9rem;
+  font-weight: 800;
+  box-shadow: 0 12px 25px rgba(8, 120, 220, 0.2);
+}
+.heroCta svg {
+  width: 17px;
+}
+
+.deliveryInfo {
   max-width: 560px;
-  margin-top: 30px;
+  margin-top: 20px;
   padding: 14px 17px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: 13px;
   border: 1px solid #bfe0f5;
@@ -183,24 +201,19 @@
 .deliveryIcon svg {
   width: 23px;
 }
-.deliveryPulse div {
+.deliveryInfo div {
   display: grid;
   gap: 3px;
 }
-.deliveryPulse small {
+.deliveryInfo small {
   color: #71838e;
   font-size: 0.67rem;
   font-weight: 750;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.deliveryPulse strong {
+.deliveryInfo strong {
   font-size: 0.94rem;
-}
-.deliveryPulse time {
-  font-family: var(--font-geist-mono);
-  font-size: 1.08rem;
-  font-weight: 800;
 }
 
 .orderCard {
@@ -532,123 +545,6 @@
   width: 15px;
 }
 
-.customerProof {
-  width: fit-content;
-  margin-top: 22px;
-  padding: 11px 15px 11px 12px;
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  border: 1px solid rgba(14, 72, 110, 0.14);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.74);
-  box-shadow: 0 8px 24px rgba(7, 24, 36, 0.06);
-}
-.customerProof > svg {
-  width: 28px;
-  height: 28px;
-  padding: 5px;
-  border-radius: 50%;
-  background: var(--blue);
-  color: #fff;
-}
-.customerProof span {
-  display: grid;
-  gap: 1px;
-  color: #657985;
-  font-size: 0.72rem;
-}
-.customerProof strong {
-  color: var(--navy);
-  font-size: 0.86rem;
-}
-
-.demoNotice {
-  position: fixed;
-  z-index: 60;
-  bottom: 22px;
-  left: 22px;
-  width: min(370px, calc(100vw - 44px));
-  padding: 14px 44px 14px 14px;
-  display: grid;
-  grid-template-columns: 46px 1fr;
-  align-items: center;
-  gap: 12px;
-  border: 1px solid rgba(7, 24, 36, 0.1);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 18px 55px rgba(7, 24, 36, 0.2);
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(24px);
-  transition:
-    opacity 260ms ease,
-    transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
-  backdrop-filter: blur(14px);
-}
-.demoNoticeVisible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-.demoNoticeIcon {
-  width: 46px;
-  height: 46px;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  background: var(--blue-light);
-  color: var(--blue);
-}
-.demoNoticeIcon svg {
-  width: 25px;
-}
-.demoNoticeCopy {
-  min-width: 0;
-  display: grid;
-  gap: 2px;
-}
-.demoNoticeCopy small {
-  color: var(--blue);
-  font-size: 0.57rem;
-  font-weight: 850;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-.demoNoticeCopy strong {
-  color: var(--navy);
-  font-size: 1rem;
-  letter-spacing: 0.025em;
-}
-.demoNoticeCopy > span {
-  overflow: hidden;
-  color: #647783;
-  font-size: 0.68rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.demoNotice > button {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 28px;
-  height: 28px;
-  display: grid;
-  place-items: center;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  color: #91a0a9;
-  cursor: pointer;
-}
-.demoNotice > button:hover {
-  background: #edf3f6;
-  color: var(--navy);
-}
-.demoNotice > button svg {
-  width: 14px;
-}
-
 .quality,
 .faq {
   padding: 120px max(28px, calc((100vw - 1280px) / 2));
@@ -815,14 +711,14 @@
   line-height: 1.35;
   text-transform: uppercase;
 }
-.pickupTimes {
+.pickupLabel {
   position: absolute;
   right: 32px;
   bottom: 30px;
   display: flex;
   gap: 7px;
 }
-.pickupTimes span {
+.pickupLabel span {
   padding: 7px 9px;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.1);
@@ -1154,14 +1050,15 @@
 
 @media (max-width: 1120px) {
   .header {
-    grid-template-columns: 220px 1fr 160px;
+    grid-template-columns: 220px 1fr 220px;
   }
   .hero {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     padding-top: 56px;
   }
   .heroCopy {
     max-width: 840px;
+    min-width: 0;
   }
   .orderCard {
     max-width: 800px;
@@ -1215,7 +1112,7 @@
   .heroCopy h1 {
     font-size: clamp(3rem, 13vw, 5rem);
   }
-  .deliveryPulse {
+  .deliveryInfo {
     max-width: none;
   }
   .orderCard {
@@ -1328,7 +1225,7 @@
     grid-template-columns: 1fr;
   }
   .heroCopy h1 {
-    font-size: clamp(2.9rem, 15vw, 4.4rem);
+    font-size: clamp(2.1rem, 9vw, 3rem);
   }
   .lead {
     margin-top: 22px;
@@ -1338,15 +1235,8 @@
     align-items: flex-start;
     font-size: 0.82rem;
   }
-  .deliveryPulse {
+  .deliveryInfo {
     grid-template-columns: auto 1fr;
-  }
-  .customerProof {
-    width: 100%;
-  }
-  .deliveryPulse time {
-    grid-column: 2;
-    font-size: 0.92rem;
   }
   .cardTopline {
     align-items: flex-start;
@@ -1437,7 +1327,7 @@
   .clockFace strong {
     font-size: 4.8rem;
   }
-  .pickupTimes {
+  .pickupLabel {
     right: 20px;
     bottom: 20px;
   }
@@ -1462,12 +1352,6 @@
   .finalCta a {
     padding: 15px 17px;
     font-size: 0.8rem;
-  }
-  .demoNotice {
-    right: 10px;
-    bottom: 88px;
-    left: 10px;
-    width: auto;
   }
 }
 

@@ -139,7 +139,7 @@
   margin-top: 29px;
   padding: 14px 16px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: 12px;
   border: 1px solid var(--line);
@@ -171,12 +171,6 @@
 }
 .heroCountdown strong {
   font-size: 0.84rem;
-}
-.heroCountdown time {
-  color: var(--blue);
-  font-family: var(--font-geist-mono);
-  font-size: 1rem;
-  font-weight: 800;
 }
 .orderCard {
   padding: 24px;
@@ -494,16 +488,10 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-.bigCountdown time {
-  margin: 9px 0;
-  color: #61c9ff;
-  font-family: var(--font-geist-mono);
-  font-size: clamp(2.8rem, 6vw, 5.2rem);
-  font-weight: 800;
-  letter-spacing: -0.06em;
-}
 .bigCountdown strong {
-  font-size: 0.87rem;
+  margin-top: 9px;
+  color: #61c9ff;
+  font-size: clamp(1.2rem, 2.4vw, 1.8rem);
 }
 .pickupTimes {
   margin-top: 13px;
@@ -807,9 +795,6 @@
   }
   .heroCountdown {
     grid-template-columns: auto 1fr;
-  }
-  .heroCountdown time {
-    grid-column: 2;
   }
   .orderCard {
     padding: 18px 15px;

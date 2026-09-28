@@ -37,10 +37,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import {
-  getPickupCountdown,
-  type PickupCountdown,
-} from '@/lib/pickup-countdown';
 import { ComplianceNotice } from '@/components/compliance-notice';
 import { CONSENT_STORAGE_KEY, parseConsentRecord } from '@/lib/cookie-consent';
 
@@ -71,7 +67,7 @@ const FAQS = [
   ],
   [
     'Wie schnell wird versendet?',
-    'Wir machen deine Kennzeichen innerhalb von 10 Minuten nach deiner Bestellung versandfertig. DHL holt unsere Pakete dreimal am Tag ab: um 9, 12 und 16 Uhr. Sobald die Sendungsnummer vorliegt, erhältst du sie per E-Mail und kannst dein Paket live bei DHL verfolgen.',
+    'Deine Kennzeichen werden innerhalb von 10 Minuten geprägt und versandfertig gemacht. DHL holt an Werktagen dreimal täglich ab. Die tatsächliche Zustellung hängt vom Transport durch DHL ab; den Status kannst du über die Sendungsverfolgung prüfen.',
   ],
   [
     'Welche Zahlungsmethoden werden angeboten?',
@@ -157,8 +153,6 @@ export default function Home() {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const [pickupCountdown, setPickupCountdown] =
-    useState<PickupCountdown | null>(null);
   const plateInputEventSent = useRef(false);
   const product = PRODUCTS[plateType];
   const plateValue = `${cityCode} ${serialLetters} ${serialNumbers}`;
@@ -235,14 +229,6 @@ export default function Home() {
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  useEffect(() => {
-    const updatePickupCountdown = () =>
-      setPickupCountdown(getPickupCountdown(new Date()));
-    updatePickupCountdown();
-    const interval = window.setInterval(updatePickupCountdown, 1000);
-    return () => window.clearInterval(interval);
   }, []);
 
   function handlePointerMove(event: React.PointerEvent<HTMLDivElement>) {
@@ -503,7 +489,7 @@ export default function Home() {
                   <strong>Für die Zulassungsstelle geeignet</strong>
                   <span>
                     Dein Auftrag geht sofort in die Druckmaschine – in 10
-                    Minuten gedruckt und versandfertig.
+                    Minuten geprägt und versandfertig.
                   </span>
                 </div>
               </div>
@@ -525,17 +511,12 @@ export default function Home() {
                 </button>
               </div>
             </div>
-            <div className="hero-pickup" aria-live="polite" aria-atomic="true">
+            <div className="hero-pickup">
               <div>
                 <Clock3 size={17} aria-hidden="true" />
-                <span>Nächste DHL-Abholung</span>
+                <span>Fertigung und DHL</span>
               </div>
-              <strong>{pickupCountdown?.remaining ?? '--:--:--'}</strong>
-              <small>
-                {pickupCountdown
-                  ? `${pickupCountdown.dayLabel} um ${pickupCountdown.pickupTime}`
-                  : 'Wird berechnet'}
-              </small>
+              <strong>DHL-Abholung dreimal täglich an Werktagen</strong>
             </div>
             <div className="hero-payments">
               <PaymentLogos />
@@ -551,7 +532,7 @@ export default function Home() {
             <Sparkles size={18} /> Sofort in die Druckmaschine
           </span>
           <span>
-            <Clock3 size={18} /> In 10 Minuten druck- und versandfertig
+            <Clock3 size={18} /> In 10 Minuten geprägt und versandfertig
           </span>
         </div>
       </section>
@@ -788,9 +769,8 @@ export default function Home() {
             <span>03</span>
             <h3>Schnell versandfertig</h3>
             <p>
-              Innerhalb von 10 Minuten nach deiner Bestellung ist dein Paket
-              versandfertig. DHL holt bei uns dreimal am Tag ab: um 9, 12 und 16
-              Uhr.
+              Deine Kennzeichen werden innerhalb von 10 Minuten geprägt und
+              versandfertig. DHL holt an Werktagen dreimal täglich ab.
             </p>
           </article>
         </div>
@@ -837,23 +817,11 @@ export default function Home() {
               </p>
             </div>
           </article>
-          <div
-            className="pickup-countdown"
-            aria-live="polite"
-            aria-atomic="true"
-          >
+          <div className="pickup-countdown">
             <span>
-              <Clock3 size={16} aria-hidden="true" /> Nächste mögliche
-              DHL-Abholung
+              <Clock3 size={16} aria-hidden="true" /> Übergabe an DHL
             </span>
-            <strong>{pickupCountdown?.remaining ?? '--:--:--'}</strong>
-            <small>
-              {pickupCountdown
-                ? `${pickupCountdown.dayLabel} um ${pickupCountdown.pickupTime}`
-                : 'Abholzeit wird berechnet'}
-              <br />
-              10 Min. Produktionszeit berücksichtigt
-            </small>
+            <strong>DHL-Abholung dreimal täglich an Werktagen</strong>
           </div>
         </div>
       </section>
@@ -967,22 +935,21 @@ export default function Home() {
             <span /> Schnell bei dir
           </p>
           <h2 id="delivery-promise-title">
-            Gedruckt in 10 Minuten.
+            Geprägt und versandfertig in 10 Minuten.
             <br />
-            <em>Dreimal täglich von DHL abgeholt.</em>
+            <em>DHL-Abholung dreimal täglich an Werktagen.</em>
           </h2>
           <p>
             Nach deiner Bestellung ist dein Kennzeichen innerhalb von 10 Minuten
-            gedruckt und versandfertig. DHL holt unsere Pakete täglich um 9, 12
-            und 16 Uhr ab.
+            geprägt und versandfertig. DHL holt an Werktagen dreimal täglich ab.
           </p>
           <p>
             Sobald die Sendungsnummer vorliegt, bekommst du sie per E-Mail. Über
             den DHL-Link kannst du dein Paket live verfolgen.
           </p>
           <p className="delivery-promise-highlight">
-            So schaffen wir mit normalem Versand besonders gute Voraussetzungen
-            für eine schnelle Zustellung.
+            Sobald DHL die Sendung übernommen hat, kannst du ihren Transport
+            über die Sendungsverfolgung prüfen.
           </p>
           <small>
             Die Zustellzeit hängt vom Versandverlauf und dem Zielort ab.

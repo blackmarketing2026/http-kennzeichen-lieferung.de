@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -31,10 +31,6 @@ import {
   type PlateColor,
   type PlateType,
 } from '@/config/products';
-import {
-  getPickupCountdown,
-  type PickupCountdown,
-} from '@/lib/pickup-countdown';
 import styles from './page.module.css';
 
 const FORMATS: Array<{
@@ -61,7 +57,7 @@ const FAQS = [
   ],
   [
     'Wie schnell wird mein Kennzeichen versendet?',
-    'Nach der Bestellung wird dein Kennzeichen innerhalb von 10 Minuten druck- und versandfertig gemacht. DHL holt im Druckwerk dreimal werktäglich um 9, 12 und 16 Uhr ab.',
+    'Nach der Bestellung wird dein Kennzeichen innerhalb von 10 Minuten geprägt und versandfertig gemacht. DHL holt an Werktagen dreimal täglich im Druckwerk ab. Die Zustellung hängt vom Transport durch DHL ab.',
   ],
   [
     'Bekomme ich eine Sendungsverfolgung?',
@@ -80,7 +76,6 @@ export function LandmaschinenLandingPage() {
   const [city, setCity] = useState('');
   const [letters, setLetters] = useState('');
   const [numbers, setNumbers] = useState('');
-  const [pickup, setPickup] = useState<PickupCountdown | null>(null);
   const plateValue = `${city} ${letters} ${numbers}`;
   const valid = useMemo(
     () => isValidPlate(plateValue, plateType),
@@ -88,13 +83,6 @@ export function LandmaschinenLandingPage() {
   );
   const total = getUnitPrice(plateType, plateColor, 1) + SHIPPING_PRICE;
   const product = PRODUCTS[plateType];
-
-  useEffect(() => {
-    const update = () => setPickup(getPickupCountdown(new Date()));
-    update();
-    const interval = window.setInterval(update, 1000);
-    return () => window.clearInterval(interval);
-  }, []);
 
   function updateCity(value: string) {
     setCity(
@@ -173,7 +161,7 @@ export function LandmaschinenLandingPage() {
               <Factory /> Sofort nach Bestellung in die Fertigung
             </li>
             <li>
-              <Truck /> Dreimal täglich DHL-Abholung mit Tracking
+              <Truck /> Dreimal täglich DHL-Abholung an Werktagen mit Tracking
             </li>
           </ul>
           <div className={styles.customerProof}>
@@ -334,7 +322,7 @@ export function LandmaschinenLandingPage() {
         <div>
           <PackageCheck />
           <span>
-            <strong>3× täglich</strong>DHL-Abholung
+            <strong>3× an Werktagen</strong>DHL-Abholung
           </span>
         </div>
         <div>
@@ -439,7 +427,7 @@ export function LandmaschinenLandingPage() {
           </h2>
           <p>
             Nach deiner Bestellung geht der Auftrag sofort ins Druckwerk. Dein
-            Kennzeichen ist innerhalb von 10 Minuten druck- und versandfertig.
+            Kennzeichen ist innerhalb von 10 Minuten geprägt und versandfertig.
           </p>
         </div>
         <ol>
@@ -460,20 +448,15 @@ export function LandmaschinenLandingPage() {
           <li>
             <b>3</b>
             <span>
-              <strong>Dreimal täglich an DHL</strong>Abholung um 9, 12 und 16
-              Uhr
+              <strong>An DHL übergeben</strong>DHL-Abholung dreimal täglich an
+              Werktagen
             </span>
           </li>
         </ol>
         <div className={styles.pickupCard}>
           <Truck />
-          <span>Nächste DHL-Abholung</span>
-          <strong>
-            {pickup
-              ? `${pickup.dayLabel} um ${pickup.pickupTime}`
-              : 'Wird berechnet'}
-          </strong>
-          <time>{pickup?.remaining ?? '--:--:--'}</time>
+          <span>DHL-Abholung</span>
+          <strong>Dreimal täglich an Werktagen</strong>
         </div>
       </section>
 
@@ -495,7 +478,7 @@ export function LandmaschinenLandingPage() {
             <b>02</b>
             <PackageCheck />
             <h3>Kennzeichen erhalten</h3>
-            <p>Per DHL inklusive Tracking zu dir geliefert.</p>
+            <p>DHL übernimmt den Transport. Den Status verfolgst du per Tracking.</p>
           </article>
           <article>
             <b>03</b>
@@ -552,7 +535,7 @@ export function LandmaschinenLandingPage() {
             height={724}
           />
         </Link>
-        <p>DIN-zertifizierte Kennzeichen. Schnell geprägt. Sicher geliefert.</p>
+        <p>DIN-zertifizierte Kennzeichen. In 10 Minuten geprägt und versandfertig.</p>
       </footer>
 
       <div className={styles.mobileBar}>
