@@ -41,6 +41,7 @@ import {
   PlateUpsell,
   type UpsellKind,
 } from '@/components/parking-upsell';
+import { readAttribution } from '@/lib/attribution';
 import styles from './checkout-extras.module.css';
 
 type CheckoutSelection = {
@@ -504,6 +505,7 @@ export function EmbeddedCheckout({
         bikeRackPlate: false,
         cartId: cartId.current,
         promoCode: initialPromoCode || undefined,
+        attribution: readAttribution(),
       }),
       signal: controller.signal,
     })

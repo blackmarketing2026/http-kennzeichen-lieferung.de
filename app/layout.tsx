@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { AttributionCapture } from '@/components/attribution-capture';
 import { CookieNotice } from '@/components/cookie-notice';
 import { GoogleTagManager } from '@/components/google-tag-manager';
 import { OfferBanner } from '@/components/offer-banner';
@@ -16,5 +17,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="de"><body className={`${geistSans.variable} ${geistMono.variable}`}><OfferBanner />{children}<SiteLegalFooter /><CookieNotice /><GoogleTagManager /></body></html>;
+  return <html lang="de"><body className={`${geistSans.variable} ${geistMono.variable}`}><AttributionCapture /><OfferBanner />{children}<SiteLegalFooter /><CookieNotice /><GoogleTagManager /></body></html>;
 }

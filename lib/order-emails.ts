@@ -5,6 +5,7 @@ import {
   renderEmailTemplate,
 } from '@/lib/mail';
 import { logEvent } from '@/lib/logger';
+import { CAMPAIGN_KEYS, type Attribution } from '@/lib/attribution';
 import {
   formatPrice,
   plateColorLabel,
@@ -160,6 +161,86 @@ export async function sendShopOrderNotificationEmail(
         contentType: 'application/pdf',
       },
     ],
+  });
+}
+
+/** Recipient(s) of the "Checkout gestartet" hint; comma-separated list allowed. */
+export const CHECKOUT_NOTIFICATION_EMAIL =
+  process.env.CHECKOUT_NOTIFICATION_EMAIL || ORDER_NOTIFICATION_EMAIL;
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+export type CheckoutStartedDetails = {
+  plate: string;
+  plateType: PlateType;
+  plateColor: PlateColor;
+  quantity: number;
+  totalCents: number;
+  promoCode: string | null;
+  cartId: string;
+  paymentIntentId: string;
+  attribution: Attribution;
+  startedAt: Date;
+};
+
+/** Internal hint that someone opened the checkout with a configured plate (paid or not). */
+export async function sendCheckoutStartedEmail(
+  details: CheckoutStartedDetails,
+  origin: string,
+) {
+  if (!isMailConfigured()) {
+    logEvent('warn', 'Checkout-Hinweis nicht versendet: SMTP nicht konfiguriert', {
+      cartId: details.cartId,
+    });
+    return;
+  }
+
+  const timestamp = new Intl.DateTimeFormat('de-DE', {
+    timeZone: 'Europe/Berlin',
+    dateStyle: 'medium',
+    timeStyle: 'medium',
+  }).format(details.startedAt);
+  const product = PRODUCTS[details.plateType];
+  const campaignRows = CAMPAIGN_KEYS.filter((key) => details.attribution[key]);
+  const row = (label: string, value: string) =>
+    `<tr><td style="padding:4px 12px 4px 0;color:#667784;">${escapeHtml(label)}</td><td style="padding:4px 0;"><strong>${escapeHtml(value)}</strong></td></tr>`;
+
+  const html = renderEmailTemplate({
+    logoUrl: `${origin}/kennzeichen-lieferung-logo.png`,
+    preheader: `Checkout gestartet: ${details.plate}`,
+    heading: 'Checkout gestartet',
+    bodyHtml: `
+      <p>Kennzeichen: <strong>${escapeHtml(details.plate)}</strong></p>
+      <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:14px;margin:0 0 16px;">
+        ${row('Zeitpunkt', timestamp)}
+        ${row('Art', product.label)}
+        ${row('Schriftfarbe', plateColorLabel(details.plateColor))}
+        ${row('Anzahl', String(details.quantity))}
+        ${row('Betrag', formatPrice(details.totalCents / 100))}
+        ${details.promoCode ? row('Rabattcode', details.promoCode) : ''}
+      </table>
+      <p style="margin:0 0 4px;"><strong>Herkunft</strong></p>
+      <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:14px;margin:0 0 16px;">
+        ${campaignRows.length ? campaignRows.map((key) => row(key, details.attribution[key]!)).join('') : row('UTM', 'keine – direkt oder organisch')}
+        ${row('Referrer', details.attribution.referrer ?? '–')}
+        ${row('Landingpage', details.attribution.landing_page ?? '–')}
+      </table>
+      <p style="font-size:12px;color:#667784;">Warenkorb ${escapeHtml(details.cartId)} · Stripe ${escapeHtml(details.paymentIntentId)}</p>
+    `,
+  });
+
+  await getMailTransport().sendMail({
+    from: MAIL_FROM,
+    to: CHECKOUT_NOTIFICATION_EMAIL,
+    subject: `Checkout gestartet – ${details.plate}`,
+    html,
   });
 }
 

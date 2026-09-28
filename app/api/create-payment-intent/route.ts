@@ -1,5 +1,6 @@
 import { randomUUID } from 'crypto';
 import { cookies } from 'next/headers';
+import { after } from 'next/server';
 import Stripe from 'stripe';
 import {
   isAvailableConfiguration,
@@ -10,12 +11,15 @@ import {
   type PlateColor,
   type PlateType,
 } from '@/config/products';
+import { sanitizeAttribution } from '@/lib/attribution';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
 import {
   CUSTOMER_SESSION_COOKIE,
   verifyCustomerSessionToken,
 } from '@/lib/customer-auth';
+import { logEvent } from '@/lib/logger';
+import { sendCheckoutStartedEmail } from '@/lib/order-emails';
 
 export const runtime = 'nodejs';
 
@@ -61,6 +65,7 @@ export async function POST(request: Request) {
     cartId?: string;
     promoCode?: unknown;
     paymentIntentId?: unknown;
+    attribution?: unknown;
   };
   try {
     body = await request.json();
@@ -325,6 +330,31 @@ export async function POST(request: Request) {
           }
         }
       }
+    }
+
+    // A freshly created PaymentIntent means a new checkout visit; later calls only adjust it.
+    if (typeof intentId !== 'string') {
+      const details = {
+        plate,
+        plateType,
+        plateColor: color,
+        quantity,
+        totalCents: pricing.totalCents,
+        promoCode: pricing.promoCode,
+        cartId,
+        paymentIntentId: paymentIntent.id,
+        attribution: sanitizeAttribution(body.attribution),
+        startedAt: new Date(),
+      };
+      const origin = new URL(request.url).origin;
+      after(() =>
+        sendCheckoutStartedEmail(details, origin).catch((error) =>
+          logEvent('warn', 'Checkout-Hinweis konnte nicht gesendet werden', {
+            cartId,
+            error: error instanceof Error ? error.message : 'unbekannt',
+          }),
+        ),
+      );
     }
 
     return Response.json({
