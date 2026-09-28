@@ -17,6 +17,7 @@
 }
 
 :root {
+  --offer-banner-height: 44px;
   --ink: #061622;
   --muted: #667784;
   --blue: #0069d9;
@@ -41,6 +42,46 @@ body {
   font-family: var(--font-geist-sans), Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
+}
+.offer-banner {
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  min-height: var(--offer-banner-height);
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #071824;
+  color: #fff;
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+.offer-banner-label {
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #ffb547;
+  color: #071824;
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.offer-banner strong {
+  color: #ffce7a;
+  white-space: nowrap;
+}
+.offer-banner-mobile-message {
+  display: none;
+}
+.offer-banner a {
+  color: #fff;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
 }
 button,
 input {
@@ -71,7 +112,7 @@ summary:focus-visible {
 .site-header {
   position: fixed;
   z-index: 50;
-  top: 0;
+  top: var(--offer-banner-height);
   left: 0;
   width: 100%;
   height: 88px;
@@ -2482,6 +2523,26 @@ footer {
 }
 
 @media (max-width: 760px) {
+  :root {
+    --offer-banner-height: 64px;
+  }
+  .offer-banner {
+    min-height: var(--offer-banner-height);
+    padding: 7px 12px;
+    gap: 3px 8px;
+    flex-wrap: wrap;
+    font-size: 0.72rem;
+    line-height: 1.25;
+  }
+  .offer-banner-label {
+    display: none;
+  }
+  .offer-banner-message {
+    display: none;
+  }
+  .offer-banner-mobile-message {
+    display: inline;
+  }
   body {
     padding-bottom: 82px;
     background: #f3f8fb;
