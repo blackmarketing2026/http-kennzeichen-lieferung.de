@@ -67,7 +67,7 @@ const FAQS = [
   ],
   [
     'Was kosten die Kennzeichen?',
-    'Ein Motorradkennzeichen kostet 24,90 € für ein Schild. Auto-, E-, H- und Saisonkennzeichen kosten 29,90 € für zwei Schilder. Der DHL-Versand innerhalb Deutschlands ist kostenlos.',
+    'Auto-, E-, H-, Saison- und Motorradkennzeichen kosten 14,99 € pro Schild. Der DHL-Versand innerhalb Deutschlands ist kostenlos.',
   ],
   [
     'Wie schnell wird versendet?',

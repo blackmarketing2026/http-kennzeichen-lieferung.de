@@ -248,8 +248,9 @@ export function KennzeichenLandingPage() {
             <em>Heute versandfertig.</em>
           </h1>
           <p className={styles.lead}>
-            Zwei hochwertige Autokennzeichen für <strong>29,90 €</strong> –
-            inklusive DHL-Versand und Tracking.
+            Auto- und Motorradkennzeichen ab{' '}
+            <strong>14,99 € pro Schild</strong> – inklusive DHL-Versand und
+            Tracking.
           </p>
           <ul className={styles.heroChecks}>
             <li>
@@ -602,16 +603,17 @@ export function KennzeichenLandingPage() {
             <span /> Ein Preis. Klarer Lieferumfang.
           </p>
           <h2>
-            Alles drin für
+            Dein Paket für
             <br />
-            <em>29,90 €.</em>
+            <em>{formatPrice(total)}.</em>
           </h2>
         </div>
         <ul>
           <li>
             <CheckCircle2 />
             <span>
-              <strong>Zwei Autokennzeichen</strong>für vorne und hinten
+              <strong>{quantity === 1 ? 'Ein Kennzeichen' : 'Zwei Kennzeichen'}</strong>
+              {plateType === 'motorcycle' ? 'für dein Motorrad' : 'für dein Fahrzeug'}
             </span>
           </li>
           <li>
@@ -732,9 +734,9 @@ export function KennzeichenLandingPage() {
           auf deine Kombination.
         </h2>
         <a href="#konfigurator">
-          Jetzt für 29,90 € bestellen <ArrowRight />
+          Jetzt für {formatPrice(total)} bestellen <ArrowRight />
         </a>
-        <small>2 Schilder · DHL-Versand inklusive · Tracking per E-Mail</small>
+        <small>{quantity} {quantity === 1 ? 'Schild' : 'Schilder'} · DHL-Versand inklusive · Tracking per E-Mail</small>
       </section>
 
       <footer className={styles.footer}>

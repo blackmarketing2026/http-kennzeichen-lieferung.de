@@ -34,21 +34,21 @@ export const PRODUCTS: Record<
     shortLabel: 'Standard',
     size: '520 mm',
     format: 'long',
-    prices: { 1: 14.95, 2: 14.95, 3: 14.95 },
+    prices: { 1: 14.99, 2: 14.99, 3: 14.99 },
   },
   motorcycle: {
     label: 'Motorrad',
     shortLabel: 'Motorrad',
     size: 'zweizeilig',
     format: 'motorcycle',
-    prices: { 1: 24.9, 2: 24.9, 3: 24.9 },
+    prices: { 1: 14.99, 2: 14.99, 3: 14.99 },
   },
   electric: {
     label: 'E-Kennzeichen',
     shortLabel: 'Elektro',
     size: '520 mm',
     format: 'long',
-    prices: { 1: 14.95, 2: 14.95, 3: 14.95 },
+    prices: { 1: 14.99, 2: 14.99, 3: 14.99 },
     suffix: 'E',
   },
   historic: {
@@ -56,7 +56,7 @@ export const PRODUCTS: Record<
     shortLabel: 'Historisch',
     size: '520 mm',
     format: 'long',
-    prices: { 1: 14.95, 2: 14.95, 3: 14.95 },
+    prices: { 1: 14.99, 2: 14.99, 3: 14.99 },
     suffix: 'H',
   },
   season: {
@@ -64,7 +64,7 @@ export const PRODUCTS: Record<
     shortLabel: 'Saison',
     size: '520 mm',
     format: 'long',
-    prices: { 1: 14.95, 2: 14.95, 3: 14.95 },
+    prices: { 1: 14.99, 2: 14.99, 3: 14.99 },
   },
   agriculture240: {
     label: 'Landmaschinen-Kennzeichen',
