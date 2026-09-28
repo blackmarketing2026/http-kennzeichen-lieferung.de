@@ -25,7 +25,6 @@ import {
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
 import {
-  formatPrice,
   getPackagePrice,
   isValidPlate,
   PRODUCTS,
@@ -247,8 +246,8 @@ export function KennzeichenLandingPage() {
             <em>Heute versandfertig.</em>
           </h1>
           <p className={styles.lead}>
-            Zwei Auto- oder ein Motorradkennzeichen für{' '}
-            <strong>14,99 €</strong> – inklusive DHL-Versand und Tracking.
+            Zwei Autokennzeichen oder ein Motorradkennzeichen –{' '}
+            <strong>inklusive DHL-Versand und Tracking.</strong>
           </p>
           <ul className={styles.heroChecks}>
             <li>
@@ -288,8 +287,7 @@ export function KennzeichenLandingPage() {
           <div className={styles.cardTopline}>
             <span>Direkt konfigurieren</span>
             <strong>
-              {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} ·{' '}
-              {formatPrice(total)}
+              {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} · inkl. Versand
             </strong>
           </div>
           <LicensePlate
@@ -378,7 +376,7 @@ export function KennzeichenLandingPage() {
               <span>
                 {quantity} × {product.label}, {product.size}
               </span>
-              <strong>{formatPrice(total)}</strong>
+              <strong>Preis im Checkout</strong>
             </div>
             <div>
               <span>DHL-Versand mit Tracking</span>
@@ -393,14 +391,14 @@ export function KennzeichenLandingPage() {
           >
             {valid ? (
               <>
-                Für {formatPrice(total)} bestellen <ArrowRight />
+                Weiter zum Checkout <ArrowRight />
               </>
             ) : (
               'Kennzeichen eingeben'
             )}
           </button>
           <p className={styles.checkoutNote}>
-            <LockKeyhole /> Sicherer Checkout · kein Konto nötig
+            <LockKeyhole /> Preis und Zahlung im nächsten Schritt · kein Konto nötig
           </p>
           <div className={styles.paymentWrap}>
             <PaymentLogos />
@@ -523,8 +521,8 @@ export function KennzeichenLandingPage() {
             <LockKeyhole />
             <h3>Sicher bestellt</h3>
             <p>
-              Transparenter Gesamtpreis und verschlüsselte Zahlung über Stripe –
-              ohne Pflichtkonto.
+              Den Gesamtpreis siehst du im Checkout vor der verschlüsselten
+              Zahlung über Stripe – ohne Pflichtkonto.
             </p>
           </article>
         </div>
@@ -598,12 +596,12 @@ export function KennzeichenLandingPage() {
       <section className={styles.included}>
         <div>
           <p className={styles.kicker}>
-            <span /> Ein Preis. Klarer Lieferumfang.
+            <span /> Dein Paket. Klarer Lieferumfang.
           </p>
           <h2>
-            Dein Paket für
+            Alles dabei.
             <br />
-            <em>{formatPrice(total)}.</em>
+            <em>Direkt zu dir.</em>
           </h2>
         </div>
         <ul>
@@ -732,7 +730,7 @@ export function KennzeichenLandingPage() {
           auf deine Kombination.
         </h2>
         <a href="#konfigurator">
-          Jetzt für {formatPrice(total)} bestellen <ArrowRight />
+          Jetzt Kennzeichen konfigurieren <ArrowRight />
         </a>
         <small>{quantity} {quantity === 1 ? 'Schild' : 'Schilder'} · DHL-Versand inklusive · Tracking per E-Mail</small>
       </section>
@@ -754,7 +752,7 @@ export function KennzeichenLandingPage() {
           <span>
             {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} inkl. Versand
           </span>
-          <strong>{formatPrice(total)}</strong>
+          <strong>Preis im Checkout</strong>
         </div>
         <a href="#konfigurator">
           Konfigurieren <ArrowRight />
