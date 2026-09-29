@@ -3,13 +3,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { Clock3 } from 'lucide-react';
 
-type Pickup = { pickupAt: string; pickupTime: string; dayOffset: number };
+type Pickup = { pickupAt: string; pickupTime: string; dayOffset: number; estimatedDeliveryDate: string };
 
 export function ShippingCountdown() {
   const [pickup, setPickup] = useState<Pickup | null>(null);
   const [now, setNow] = useState(0);
   const [refresh, setRefresh] = useState(0);
   const refreshing = useRef(false);
+  const berlinDay = useRef('');
 
   useEffect(() => {
     let active = true;
@@ -25,6 +26,12 @@ export function ShippingCountdown() {
     const timer = window.setInterval(() => {
       const current = Date.now();
       setNow(current);
+      const today = new Date(current).toLocaleDateString('sv-SE', { timeZone: 'Europe/Berlin' });
+      if (berlinDay.current && berlinDay.current !== today && !refreshing.current) {
+        refreshing.current = true;
+        setRefresh((count) => count + 1);
+      }
+      berlinDay.current = today;
       if (pickup && current >= Date.parse(pickup.pickupAt) && !refreshing.current) {
         refreshing.current = true;
         setRefresh((count) => count + 1);
@@ -34,7 +41,16 @@ export function ShippingCountdown() {
   }, [pickup]);
 
   const target = pickup ? Date.parse(pickup.pickupAt) : 0;
-  if (!pickup || !now || now >= target) return <p className="shipping-pickup-note"><Clock3 size={16} aria-hidden="true" /> DHL-Abholung an Werktagen</p>;
+  const estimate = pickup?.estimatedDeliveryDate
+    ? new Intl.DateTimeFormat('de-DE', {
+      timeZone: 'Europe/Berlin', weekday: 'long', day: '2-digit', month: 'long',
+    }).format(new Date(`${pickup.estimatedDeliveryDate}T12:00:00Z`))
+    : null;
+  const estimateNote = estimate && <p className="shipping-estimate-note">Bei Bestellung und Zahlung heute: <strong>Voraussichtliche Lieferung {estimate} (in 2 Werktagen).</strong></p>;
+  if (!pickup || !now || now >= target) return <>
+    {estimateNote}
+    <p className="shipping-pickup-note"><Clock3 size={16} aria-hidden="true" /> DHL-Abholung an Werktagen</p>
+  </>;
 
   const remaining = Math.ceil((target - now) / 1000);
   const hours = Math.floor(remaining / 3600);
@@ -44,5 +60,8 @@ export function ShippingCountdown() {
   const date = new Intl.DateTimeFormat('de-DE', {
     timeZone: 'Europe/Berlin', weekday: 'short', day: '2-digit', month: '2-digit',
   }).format(new Date(target));
-  return <p className="shipping-pickup-note"><Clock3 size={16} aria-hidden="true" /> Nächste geplante DHL-Abholung: {date}, {pickup.pickupTime} Uhr · <strong>Noch {time}</strong></p>;
+  return <>
+    {estimateNote}
+    <p className="shipping-pickup-note"><Clock3 size={16} aria-hidden="true" /> Nächste geplante DHL-Abholung: {date}, {pickup.pickupTime} Uhr · <strong>Noch {time}</strong></p>
+  </>;
 }

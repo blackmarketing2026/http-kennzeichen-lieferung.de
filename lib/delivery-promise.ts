@@ -54,6 +54,29 @@ export function deliveryStartDate(orderedAt: Date, paidAt: Date): string {
   return nextDate(berlinDate(orderedAt > paidAt ? orderedAt : paidAt));
 }
 
+/** A non-binding storefront estimate for an order paid today, separate from the saved 1–4 day promise. */
+export function estimatedDeliveryDate(now: Date, origin: GermanState, originRegion = 'BASE'): string {
+  if (!validHolidayRegion(origin, originRegion)) throw new Error('Feiertagsregion fehlt.');
+  const holidays = originRegion === 'BASE' ? new Holidays('DE', origin) : new Holidays('DE', origin, originRegion);
+  const holidayCache = new Map<number, Set<string>>();
+  let day = berlinDate(now);
+  let counted = 0;
+  while (counted < 2) {
+    day = nextDate(day);
+    const year = Number(day.slice(0, 4));
+    let dates = holidayCache.get(year);
+    if (!dates) {
+      dates = new Set(holidays.getHolidays(year)
+        .filter((holiday) => holiday.type === 'public')
+        .map((holiday) => holiday.date.slice(0, 10)));
+      holidayCache.set(year, dates);
+    }
+    const weekday = new Date(`${day}T12:00:00Z`).getUTCDay();
+    if (weekday !== 0 && weekday !== 6 && !dates.has(day)) counted++;
+  }
+  return day;
+}
+
 export function deliveryDates(orderedAt: Date, paidAt: Date, origin: GermanState, destination: GermanState, originRegion = 'BASE', destinationRegion = 'BASE') {
   const start = deliveryStartDate(orderedAt, paidAt);
   if (!validHolidayRegion(origin, originRegion) || !validHolidayRegion(destination, destinationRegion)) throw new Error('Feiertagsregion fehlt.');

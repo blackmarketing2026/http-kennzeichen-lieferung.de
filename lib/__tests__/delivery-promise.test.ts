@@ -1,5 +1,19 @@
 import { describe, expect, it } from 'vitest';
-import { configuredShippingRegion, configuredShippingState, deliveryDates, deliveryStartDate } from '@/lib/delivery-promise';
+import { configuredShippingRegion, configuredShippingState, deliveryDates, deliveryStartDate, estimatedDeliveryDate } from '@/lib/delivery-promise';
+
+describe('voraussichtliche Lieferung', () => {
+  it('zeigt zwei Werktage nach dem 29. September den 1. Oktober', () => {
+    expect(estimatedDeliveryDate(new Date('2026-09-29T12:00:00Z'), 'NW')).toBe('2026-10-01');
+  });
+
+  it('überspringt das Wochenende', () => {
+    expect(estimatedDeliveryDate(new Date('2026-10-01T12:00:00Z'), 'NW')).toBe('2026-10-05');
+  });
+
+  it('überspringt gesetzliche Feiertage am Versandort', () => {
+    expect(estimatedDeliveryDate(new Date('2026-12-23T12:00:00Z'), 'NW')).toBe('2026-12-28');
+  });
+});
 
 describe('zugesagte Lieferfrist', () => {
   it('nutzt das hinterlegte Versandbundesland', () => {

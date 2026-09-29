@@ -2159,6 +2159,8 @@ summary:focus-visible {
 .delivery-summary > p:first-child { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 7px; }
 .delivery-summary svg { flex: 0 0 auto; color: #0878dc; }
 .delivery-summary a { color: #075b9f; font-weight: 750; text-decoration: underline; text-underline-offset: 3px; }
+.delivery-summary .shipping-estimate-note { margin-top: 5px; color: #24465e; font-size: .75rem; }
+.shipping-estimate-note strong { font-weight: 750; }
 .delivery-summary .shipping-pickup-note { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin-top: 5px; color: #526a78; font-size: .73rem; }
 .shipping-pickup-note strong { color: #173343; font-variant-numeric: tabular-nums; }
 .guarantee-page ul { padding-left: 1.35rem; color: #475d69; line-height: 1.7; }
