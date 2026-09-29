@@ -44,6 +44,47 @@
   gap: 10px;
   margin: 24px 0;
 }
+.optionalExtras {
+  margin: 30px 0 18px;
+  padding: 20px;
+  border: 1px solid #dbe7ee;
+  border-radius: 10px;
+  background: #f7fbfe;
+}
+.optionalExtras strong {
+  color: #173449;
+  font-size: 0.88rem;
+}
+.optionalExtras p {
+  margin: 6px 0 16px;
+  color: #607481;
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+.extrasTrigger {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #a9cce6;
+  border-radius: 7px;
+  background: #fff;
+  color: #075ea9;
+  font-size: 0.78rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+.extrasTrigger:hover {
+  border-color: #0069d9;
+  background: #eff8ff;
+}
+.extrasTrigger:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
 .extraOffer {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -124,7 +165,7 @@
   padding: 28px;
 }
 .extrasIntro {
-  padding-right: 42px;
+  padding-right: 54px;
 }
 .extrasTitle.extrasTitle {
   font-size: clamp(1.65rem, 4vw, 2.25rem);
@@ -209,12 +250,21 @@
   right: 12px;
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border: 1px solid #ffffffa0;
+  width: 44px;
+  height: 44px;
+  border: 2px solid #fff;
   border-radius: 50%;
-  background: #ffffffeb;
+  background: #c62828;
+  color: #fff;
   cursor: pointer;
+  box-shadow: 0 3px 12px #06162240;
+}
+.close:hover {
+  background: #a91e1e;
+}
+.close:focus-visible {
+  outline: 3px solid #0069d9;
+  outline-offset: 2px;
 }
 .offerImage {
   position: relative;

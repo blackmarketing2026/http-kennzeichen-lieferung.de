@@ -39,7 +39,6 @@ import { ShippingCountdown } from '@/components/shipping-countdown';
 import { ComplianceNotice } from '@/components/compliance-notice';
 import {
   ExtrasUpsellPopup,
-  PlateUpsell,
   type UpsellKind,
 } from '@/components/parking-upsell';
 import { readAttribution } from '@/lib/attribution';
@@ -305,13 +304,42 @@ function PaymentForm({
         </div>
         <LockKeyhole />
       </div>
+      <label className="checkout-email">
+        E-Mail-Adresse
+        <input
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          autoComplete="email"
+          required
+        />
+      </label>
+      <div className="stripe-element-group">
+        <span>Lieferadresse</span>
+        <AddressElement
+          options={{
+            mode: 'shipping',
+            allowedCountries: ['DE'],
+            fields: { phone: 'auto' },
+            defaultValues: { address: { country: 'DE' } },
+          }}
+        />
+      </div>
+      <div className="stripe-element-group">
+        <span>Zahlungsart</span>
+        <PaymentElement options={{ layout: 'tabs' }} />
+      </div>
       <p className="checkout-account-hint">
         Du bestellst als Gast – kein Konto nötig. Schon Kunde?{' '}
         <Link href="/konto/login">Melde dich an</Link>, um Bestellungen und
         Rechnungen später einzusehen.
       </p>
       {!isSinglePlateProduct(selection.plateType) && (
-        <>
+        <section className={styles.optionalExtras} aria-label="Zusatzkennzeichen">
+          <div>
+            <strong>Zusatzkennzeichen (optional)</strong>
+            <p>Für Parkplatz oder Fahrradträger. Nur hinzufügen, wenn du ein weiteres Schild brauchst.</p>
+          </div>
           <ExtrasUpsellPopup
             plate={selection.plate}
             plateType={selection.plateType}
@@ -325,31 +353,7 @@ function PaymentForm({
             disabled={!stripe || !elements || isPaying || isApplyingPromo}
             onChange={changeExtra}
           />
-          <div className={styles.extraOffers}>
-            <PlateUpsell
-              kind="parking"
-              plate={selection.plate}
-              plateType={selection.plateType}
-              plateColor={selection.plateColor}
-              priceCents={Math.round(PARKING_PLATE_PRICE * 100)}
-              selected={extras.parkingPlate}
-              busy={isUpdatingExtra}
-              disabled={!stripe || !elements || isPaying || isApplyingPromo}
-              onChange={(selected) => changeExtra('parking', selected)}
-            />
-            <PlateUpsell
-              kind="bikeRack"
-              plate={selection.plate}
-              plateType={selection.plateType}
-              plateColor={selection.plateColor}
-              priceCents={Math.round(BIKE_RACK_PLATE_PRICE * 100)}
-              selected={extras.bikeRackPlate}
-              busy={isUpdatingExtra}
-              disabled={!stripe || !elements || isPaying || isApplyingPromo}
-              onChange={(selected) => changeExtra('bikeRack', selected)}
-            />
-          </div>
-        </>
+        </section>
       )}
       <div className="checkout-promo">
         <label htmlFor="checkout-promo-code">Rabattcode</label>
@@ -397,31 +401,6 @@ function PaymentForm({
             {promoMessage}
           </output>
         )}
-      </div>
-      <label className="checkout-email">
-        E-Mail-Adresse
-        <input
-          type="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          autoComplete="email"
-          required
-        />
-      </label>
-      <div className="stripe-element-group">
-        <span>Lieferadresse</span>
-        <AddressElement
-          options={{
-            mode: 'shipping',
-            allowedCountries: ['DE'],
-            fields: { phone: 'auto' },
-            defaultValues: { address: { country: 'DE' } },
-          }}
-        />
-      </div>
-      <div className="stripe-element-group">
-        <span>Zahlungsart</span>
-        <PaymentElement options={{ layout: 'tabs' }} />
       </div>
       {message && (
         <p className="checkout-error" role="alert">
@@ -605,18 +584,18 @@ export function EmbeddedCheckout({
     () => (publishableKey ? loadStripe(publishableKey) : null),
     [publishableKey],
   );
+  const backHref =
+    returnPath ??
+    (isAgriculturePlate(selection.plateType)
+      ? '/landmaschinen-kennzeichen#konfigurator'
+      : '/#konfigurator');
 
   return (
     <main className="real-checkout-page">
       <section className="checkout-order-panel">
         <Link
           className="checkout-back"
-          href={
-            returnPath ??
-            (isAgriculturePlate(selection.plateType)
-              ? '/landmaschinen-kennzeichen'
-              : '/')
-          }
+          href={backHref}
         >
           <ArrowLeft /> Konfiguration ändern
         </Link>
@@ -698,6 +677,11 @@ export function EmbeddedCheckout({
         <ComplianceNotice variant="compact" />
       </section>
       <section className="checkout-payment-panel">
+        <div className="checkout-mobile-summary">
+          <Link href={backHref}><ArrowLeft /> Konfiguration ändern</Link>
+          <span>{selection.plate} · {baseQuantity} × {product.label}</span>
+          <strong>{formatPrice(pricing ? pricing.totalCents / 100 : total)} inkl. DHL-Versand</strong>
+        </div>
         {error ? (
           <div className="checkout-load-error">
             <h2>Checkout nicht verfügbar</h2>

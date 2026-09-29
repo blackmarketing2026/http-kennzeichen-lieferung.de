@@ -157,20 +157,7 @@ export function PlateUpsell({ kind, plate, plateType, plateColor, priceCents, se
 export function ExtrasUpsellPopup({ plate, plateType, plateColor, priceCents, selected, busy, disabled, onChange }: CombinedProps) {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(false);
-
-  useEffect(() => {
-    const key = `extras-offer:${plate}`;
-    const timeout = window.setTimeout(() => {
-      try {
-        if (sessionStorage.getItem(key)) return;
-        sessionStorage.setItem(key, 'shown');
-      } catch {
-        /* The offer also works when storage is unavailable. */
-      }
-      setOpen(true);
-    }, 600);
-    return () => window.clearTimeout(timeout);
-  }, [plate]);
+  const selectedCount = Number(selected.parking) + Number(selected.bikeRack);
 
   async function change(kind: UpsellKind) {
     setError(false);
@@ -178,9 +165,21 @@ export function ExtrasUpsellPopup({ plate, plateType, plateColor, priceCents, se
   }
 
   return (
-    <Dialog open={open} onOpenChange={(value) => { if (!busy) setOpen(value); }}>
+    <>
+    <button
+      className={styles.extrasTrigger}
+      type="button"
+      disabled={disabled || busy}
+      onClick={() => setOpen(true)}
+    >
+      <Plus size={18} />
+      {selectedCount
+        ? `Zusatzschilder bearbeiten (${selectedCount})`
+        : 'Parkplatz- oder Fahrradträger-Kennzeichen hinzufügen'}
+    </button>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className={`${styles.offerDialog} ${styles.extrasDialog}`} showCloseButton={false}>
-        <button type="button" className={styles.close} onClick={() => setOpen(false)} disabled={busy} aria-label="Angebot schließen"><X size={20} /></button>
+        <button type="button" className={styles.close} onClick={() => setOpen(false)} aria-label="Angebot schließen"><X size={24} strokeWidth={3} /></button>
         <div className={styles.extrasIntro}>
           <p className={styles.eyebrow}><Plus size={17} /> Praktische Zusatzschilder</p>
           <DialogTitle className={styles.extrasTitle}>Wo brauchst du dein Kennzeichen noch?</DialogTitle>
@@ -213,5 +212,6 @@ export function ExtrasUpsellPopup({ plate, plateType, plateColor, priceCents, se
         <button className={styles.decline} type="button" disabled={busy} onClick={() => setOpen(false)}>Auswahl schließen und mit dem Checkout fortfahren</button>
       </DialogContent>
     </Dialog>
+    </>
   );
 }
