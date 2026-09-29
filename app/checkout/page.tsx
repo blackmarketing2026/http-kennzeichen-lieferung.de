@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { EmbeddedCheckout } from '@/components/embedded-checkout';
+import { CHECKOUT_UPSELLS_ENABLED } from '@/config/checkout-features';
 import { isAvailableConfiguration, isValidPlate, PRODUCTS, type PlateColor, type PlateType } from '@/config/products';
 import { checkoutReturnPath, isCheckoutSource } from '@/lib/checkout-draft';
 
@@ -20,7 +21,7 @@ export default async function CheckoutPage({ searchParams }: { searchParams: Pro
   const returnPath = isCheckoutSource(source)
     ? checkoutReturnPath(source)
     : undefined;
-  const isValid = PLATE_TYPES.includes(plateType) && isAvailableConfiguration(plateType, plateColor, quantity) && isValidPlate(plate, plateType);
+  const isValid = PLATE_TYPES.includes(plateType) && isAvailableConfiguration(plateType, plateColor, quantity) && isValidPlate(plate, plateType) && (CHECKOUT_UPSELLS_ENABLED || quantity !== 3);
 
   if (!isValid) {
     return <main className="invalid-checkout"><h1>Bestellung nicht vollständig.</h1><p>Bitte konfiguriere dein Kennzeichen erneut.</p><Link className="button" href="/#konfigurator">Zur Konfiguration</Link></main>;

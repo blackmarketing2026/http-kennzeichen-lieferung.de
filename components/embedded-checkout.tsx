@@ -21,6 +21,7 @@ import {
 import { PaymentLogos } from '@/components/payment-logos';
 import { ShippingNotice } from '@/components/shipping-notice';
 import { LicensePlate } from '@/components/license-plate';
+import { CHECKOUT_UPSELLS_ENABLED } from '@/config/checkout-features';
 import {
   BIKE_RACK_PLATE_PRICE,
   formatPrice,
@@ -297,13 +298,12 @@ function PaymentForm({
 
   return (
     <form className="real-payment-form" onSubmit={handleSubmit}>
-      <div className="secure-checkout-heading">
-        <div>
-          <span>Sicherer Checkout</span>
-          <strong>Zahlungs- und Lieferdaten</strong>
+      <section className="checkout-flow-step">
+        <div className="checkout-step-heading">
+          <span>Schritt 3 von 5</span>
+          <h2>Adresse</h2>
+          <p>Wohin dürfen wir deine Kennzeichen schicken?</p>
         </div>
-        <LockKeyhole />
-      </div>
       <label className="checkout-email">
         E-Mail-Adresse
         <input
@@ -325,6 +325,13 @@ function PaymentForm({
           }}
         />
       </div>
+      </section>
+      <section className="checkout-flow-step">
+        <div className="checkout-step-heading">
+          <span>Schritt 4 von 5</span>
+          <h2>Zahlung &amp; Details</h2>
+          <p>Wähle deine Zahlungsart und löse bei Bedarf einen Rabattcode ein.</p>
+        </div>
       <div className="stripe-element-group">
         <span>Zahlungsart</span>
         <PaymentElement options={{ layout: 'tabs' }} />
@@ -345,7 +352,7 @@ function PaymentForm({
         <Link href="/konto/login">Melde dich an</Link>, um Bestellungen und
         Rechnungen später einzusehen.
       </p>
-      {!isSinglePlateProduct(selection.plateType) && (
+      {CHECKOUT_UPSELLS_ENABLED && !isSinglePlateProduct(selection.plateType) && (
         <section className={styles.optionalExtras} aria-label="Zusatzkennzeichen">
           <div>
             <strong>Zusatzkennzeichen (optional)</strong>
@@ -413,12 +420,22 @@ function PaymentForm({
           </output>
         )}
       </div>
+      </section>
+      <section className="checkout-flow-step checkout-final-step">
+        <div className="checkout-step-heading">
+          <span>Schritt 5 von 5</span>
+          <h2>Prüfen &amp; bezahlen</h2>
+        </div>
       {message && (
         <p className="checkout-error" role="alert">
           {message}
         </p>
       )}
       <ShippingCountdown />
+      <div className="checkout-final-total">
+        <span>Gesamtbetrag inkl. DHL-Versand</span>
+        <strong>{formatPrice(pricing.totalCents / 100)}</strong>
+      </div>
       <button
         className="stripe-pay-button"
         type="submit"
@@ -445,6 +462,7 @@ function PaymentForm({
       <p className="stripe-secure">
         <LockKeyhole /> Verschlüsselte Zahlung direkt über Stripe Elements
       </p>
+      </section>
     </form>
   );
 }
@@ -619,20 +637,12 @@ export function EmbeddedCheckout({
             priority
           />
         </Link>
-        <div className="checkout-order-copy">
-          <span>Deine Bestellung</span>
-          <h1>
-            Genau dieses
-            <br />
-            Kennzeichen.
-          </h1>
-        </div>
-        <LicensePlate
-          value={selection.plate}
-          type={selection.plateType}
-          color={selection.plateColor}
-          className="real-checkout-plate"
-        />
+        <div className="checkout-flow-step">
+          <div className="checkout-order-copy">
+            <span>Schritt 1 von 5</span>
+            <h1>Kennzeichen</h1>
+            <p>Prüfe deine Kombination und Ausführung.</p>
+          </div>
         <div className="real-order-line">
           <div>
             <strong>
@@ -653,6 +663,18 @@ export function EmbeddedCheckout({
             )}
           </strong>
         </div>
+        </div>
+        <div className="checkout-flow-step">
+          <div className="checkout-step-heading">
+            <span>Schritt 2 von 5</span>
+            <h2>Vorschau</h2>
+          </div>
+          <LicensePlate
+            value={selection.plate}
+            type={selection.plateType}
+            color={selection.plateColor}
+            className="real-checkout-plate"
+          />
         {extras.parkingPlate && (
           <div className="real-order-line">
             <span>1 × Parkplatz-Kennzeichen</span>
@@ -686,13 +708,9 @@ export function EmbeddedCheckout({
           Plaketten sind nicht enthalten.
         </p>
         <ComplianceNotice variant="compact" />
+        </div>
       </section>
       <section className="checkout-payment-panel">
-        <div className="checkout-mobile-summary">
-          <Link href={backHref}><ArrowLeft /> Konfiguration ändern</Link>
-          <span>{selection.plate} · {baseQuantity} × {product.label}</span>
-          <strong>{formatPrice(pricing ? pricing.totalCents / 100 : total)} inkl. DHL-Versand</strong>
-        </div>
         {error ? (
           <div className="checkout-load-error">
             <h2>Checkout nicht verfügbar</h2>

@@ -1852,28 +1852,26 @@ summary:focus-visible {
 /* Embedded Stripe checkout */
 .real-checkout-page {
   min-height: 100svh;
+  width: min(calc(100% - 40px), 860px);
+  margin: 0 auto;
+  padding: 30px 0 100px;
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(520px, 1.05fr);
-  background: #fff;
+  grid-template-columns: 1fr;
+  align-content: start;
+  gap: 18px;
   color: var(--ink);
 }
 .checkout-order-panel {
-  min-height: 100svh;
-  padding: 45px clamp(32px, 5vw, 80px);
-  display: flex;
-  flex-direction: column;
-  background: radial-gradient(
-    circle at 55% 45%,
-    #f9fdff 0,
-    #e7f4fd 62%,
-    #d6ebf8 100%
-  );
+  padding: 28px clamp(24px, 5vw, 48px);
+  border: 1px solid #dbe7ee;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 12px 36px rgb(6 22 34 / 5%);
 }
 .checkout-back {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  align-self: flex-start;
   color: #506470;
   font-size: 0.78rem;
   font-weight: 700;
@@ -1882,9 +1880,10 @@ summary:focus-visible {
   width: 17px;
 }
 .checkout-logo {
+  display: block;
   width: 230px;
   height: 58px;
-  margin-top: 28px;
+  margin: 18px 0 8px;
   overflow: hidden;
 }
 .checkout-logo img {
@@ -1893,7 +1892,7 @@ summary:focus-visible {
   transform: translateY(-16px);
 }
 .checkout-order-copy {
-  margin: auto 0 35px;
+  margin: 0 0 16px;
 }
 .checkout-order-copy > span {
   color: var(--blue);
@@ -1903,16 +1902,49 @@ summary:focus-visible {
   text-transform: uppercase;
 }
 .checkout-order-copy h1 {
-  margin: 12px 0 0;
-  font-size: clamp(2.8rem, 4.6vw, 5.2rem);
-  line-height: 0.95;
-  letter-spacing: -0.06em;
+  margin: 8px 0 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+.checkout-order-copy p,
+.checkout-step-heading p {
+  margin: 8px 0 0;
+  color: #607481;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+.checkout-flow-step {
+  padding: 28px 0;
+  border-top: 1px solid #e3eaf0;
+}
+.checkout-order-panel .checkout-flow-step:first-of-type,
+.real-payment-form .checkout-flow-step:first-child {
+  border-top: 0;
+}
+.checkout-step-heading {
+  margin-bottom: 20px;
+}
+.checkout-step-heading > span {
+  color: var(--blue);
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.checkout-step-heading h2 {
+  margin: 8px 0 0;
+  font-size: clamp(1.55rem, 3vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
 }
 .real-checkout-plate {
-  width: min(100%, 620px);
+  display: block;
+  width: min(100%, 580px);
+  margin: 0 auto 14px;
 }
 .real-order-line {
-  width: min(100%, 620px);
+  width: 100%;
   padding: 18px 0;
   display: flex;
   justify-content: space-between;
@@ -1935,7 +1967,7 @@ summary:focus-visible {
   color: #128056;
 }
 .real-order-total {
-  width: min(100%, 620px);
+  width: 100%;
   padding: 22px 0;
   display: flex;
   align-items: baseline;
@@ -1946,7 +1978,7 @@ summary:focus-visible {
   font-size: 1.8rem;
 }
 .checkout-scope {
-  width: min(100%, 620px);
+  width: 100%;
   margin: 8px 0 0;
   padding-top: 18px;
   border-top: 1px solid rgb(6 22 34 / 13%);
@@ -1955,22 +1987,39 @@ summary:focus-visible {
   line-height: 1.6;
 }
 .compliance-notice-compact {
-  width: min(100%, 620px);
+  width: 100%;
   background: rgb(255 255 255 / 55%);
 }
 .checkout-payment-panel {
-  min-height: 100svh;
-  padding: clamp(45px, 7vw, 100px) clamp(30px, 7vw, 110px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 0 clamp(24px, 5vw, 48px);
+  border: 1px solid #dbe7ee;
+  border-radius: 18px;
   background: #fff;
-}
-.checkout-mobile-summary {
-  display: none;
+  box-shadow: 0 12px 36px rgb(6 22 34 / 5%);
 }
 .real-payment-form {
-  width: min(100%, 520px);
+  width: 100%;
+}
+.checkout-payment-panel > .checkout-loading,
+.checkout-payment-panel > .checkout-load-error,
+.checkout-payment-panel > .real-payment-success {
+  margin: 30px auto;
+}
+.checkout-final-total {
+  padding: 18px 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  border-top: 1px solid #dbe7ee;
+  border-bottom: 1px solid #dbe7ee;
+}
+.checkout-final-total span {
+  color: #506470;
+  font-size: 0.84rem;
+}
+.checkout-final-total strong {
+  font-size: 1.6rem;
 }
 .secure-checkout-heading {
   margin-bottom: 32px;
@@ -2491,52 +2540,14 @@ footer {
     grid-template-columns: 1fr;
   }
   .real-checkout-page {
-    grid-template-columns: 1fr;
+    width: min(calc(100% - 24px), 860px);
+    padding: 12px 0 90px;
   }
   .checkout-order-panel {
-    min-height: auto;
-    padding-bottom: 70px;
+    padding: 20px 24px;
   }
   .checkout-payment-panel {
-    order: -1;
-    min-height: auto;
-    padding: 28px 24px 70px;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-  }
-  .checkout-mobile-summary {
-    margin-bottom: 26px;
-    padding: 16px;
-    display: grid;
-    gap: 6px;
-    border: 1px solid #dbe7ee;
-    border-radius: 10px;
-    background: #f7fbfe;
-  }
-  .checkout-mobile-summary a {
-    margin-bottom: 8px;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    color: #075ea9;
-    font-size: 0.75rem;
-    font-weight: 750;
-    text-decoration: none;
-  }
-  .checkout-mobile-summary a svg {
-    width: 16px;
-  }
-  .checkout-mobile-summary span {
-    color: #607481;
-    font-size: 0.78rem;
-  }
-  .checkout-mobile-summary strong {
-    color: #173449;
-    font-size: 1rem;
-  }
-  .checkout-order-copy {
-    margin: 70px 0 35px;
+    padding: 0 24px;
   }
 }
 
@@ -3103,7 +3114,7 @@ footer {
     padding: 55px 24px 35px;
   }
   .checkout-order-panel {
-    padding: 25px 20px 55px;
+    padding: 18px 20px;
   }
   .checkout-logo {
     width: 200px;
@@ -3113,13 +3124,16 @@ footer {
     transform: translateY(-14px);
   }
   .checkout-order-copy {
-    margin: 50px 0 28px;
+    margin: 0 0 16px;
   }
   .checkout-order-copy h1 {
-    font-size: 3rem;
+    font-size: 2rem;
   }
   .checkout-payment-panel {
-    padding: 20px 20px 80px;
+    padding: 0 20px;
+  }
+  .checkout-flow-step {
+    padding: 22px 0;
   }
   .secure-checkout-heading div strong {
     font-size: 1.45rem;
