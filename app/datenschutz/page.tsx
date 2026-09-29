@@ -14,7 +14,7 @@ export default function DatenschutzPage() {
         <p className="legal-kicker">Rechtliches</p>
         <h1>Datenschutzerklärung</h1>
         <p className="legal-intro">Hier erfahren Sie, welche Daten beim Besuch dieser Website, bei einer Bestellung und bei der Nutzung des Kundenkontos verarbeitet werden.</p>
-        <p className="legal-updated">Stand: 23. September 2026</p>
+        <p className="legal-updated">Stand: 29. September 2026</p>
 
         <section>
           <h2>1. Verantwortlicher</h2>
@@ -51,6 +51,11 @@ export default function DatenschutzPage() {
         <section>
           <h2>5. Kundenkonto und Kontakt</h2>
           <p>Für das freiwillige Kundenkonto verarbeiten wir Ihre E-Mail-Adresse, einen zeitlich begrenzten Anmeldelink, eine Sitzung sowie die Ihrem Konto zugeordneten Bestellungen und Rechnungen. Der Anmeldelink ist 15 Minuten gültig. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Bei einer Kontaktaufnahme per E-Mail verarbeiten wir Ihre Angaben zur Bearbeitung der Anfrage (Art. 6 Abs. 1 lit. b oder lit. f DSGVO). Die Daten werden gelöscht, sobald der Zweck entfällt und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
+        </section>
+
+        <section>
+          <h2>Anträge zur Liefergarantie</h2>
+          <p>Bei einem Antrag auf die freiwillige Liefergarantie verarbeiten wir die Bestellnummer, E-Mail-Adresse, das Datum des Ersatzkaufs, Ihre Nachricht und den hochgeladenen Kaufbeleg. Wir gleichen die Angaben mit der Bestellung ab und prüfen den Anspruch manuell (Art. 6 Abs. 1 lit. b DSGVO). Belege werden in der nicht öffentlich zugänglichen Datenbank gespeichert und können nur durch angemeldete Mitarbeiter im Administrationsbereich abgerufen werden. Wir löschen Antragsdaten, sobald sie für die Prüfung und etwaige gesetzliche Nachweispflichten nicht mehr erforderlich sind.</p>
         </section>
 
         <section>

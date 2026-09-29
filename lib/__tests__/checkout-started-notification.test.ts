@@ -45,7 +45,7 @@ const cartId = 'checkout-started-test-1234';
 const intent = {
   id: 'pi_started123',
   client_secret: 'pi_started123_secret',
-  amount: 1499,
+  amount: 1990,
   status: 'requires_payment_method',
   metadata: {
     cartId,
@@ -91,6 +91,7 @@ beforeEach(() => {
   stripe.customers.create.mockResolvedValue({ id: 'cus_1' });
   stripe.paymentIntents.create.mockResolvedValue(intent);
   stripe.paymentIntents.retrieve.mockResolvedValue(intent);
+  stripe.paymentIntents.update.mockResolvedValue(intent);
 });
 
 describe('Checkout started notification', () => {

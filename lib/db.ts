@@ -91,6 +91,16 @@ const SCHEMA_STATEMENTS = [
     returned_delivery_id BIGINT,
     last_error TEXT,
     last_trace_id VARCHAR(191),
+    ordered_at_utc DATETIME NULL,
+    paid_at_utc DATETIME NULL,
+    delivery_start_date DATE NULL,
+    delivery_deadline_date DATE NULL,
+    delivery_promise_text VARCHAR(255) NULL,
+    guarantee_terms_version VARCHAR(64) NULL,
+    shipping_origin_state CHAR(2) NULL,
+    shipping_origin_holiday_region VARCHAR(12) NULL,
+    delivery_state CHAR(2) NULL,
+    delivery_holiday_region VARCHAR(12) NULL,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
   ) ENGINE=InnoDB`,
@@ -156,6 +166,20 @@ const SCHEMA_STATEMENTS = [
     issued_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_invoices_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
   ) ENGINE=InnoDB`,
+  `CREATE TABLE IF NOT EXISTS delivery_guarantee_claims (
+    id CHAR(36) PRIMARY KEY,
+    order_id CHAR(36) NOT NULL,
+    applicant_email VARCHAR(255) NOT NULL,
+    replacement_purchased_on DATE NOT NULL,
+    message TEXT NULL,
+    receipt_filename VARCHAR(255) NOT NULL,
+    receipt_mime VARCHAR(64) NOT NULL,
+    receipt_data MEDIUMBLOB NOT NULL,
+    status VARCHAR(32) NOT NULL DEFAULT 'pending',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_guarantee_claims_created (created_at),
+    CONSTRAINT fk_guarantee_claims_order FOREIGN KEY (order_id) REFERENCES orders(id)
+  ) ENGINE=InnoDB`,
 ];
 
 /** Additive changes to tables that already shipped without these columns. Each statement is
@@ -175,6 +199,16 @@ const SCHEMA_MIGRATIONS = [
   `ALTER TABLE orders ADD COLUMN promo_code VARCHAR(64) NULL`,
   `ALTER TABLE orders ADD COLUMN parking_plate TINYINT(1) NOT NULL DEFAULT 0`,
   `ALTER TABLE orders ADD COLUMN bike_rack_plate TINYINT(1) NOT NULL DEFAULT 0`,
+  `ALTER TABLE orders ADD COLUMN ordered_at_utc DATETIME NULL`,
+  `ALTER TABLE orders ADD COLUMN paid_at_utc DATETIME NULL`,
+  `ALTER TABLE orders ADD COLUMN delivery_start_date DATE NULL`,
+  `ALTER TABLE orders ADD COLUMN delivery_deadline_date DATE NULL`,
+  `ALTER TABLE orders ADD COLUMN delivery_promise_text VARCHAR(255) NULL`,
+  `ALTER TABLE orders ADD COLUMN guarantee_terms_version VARCHAR(64) NULL`,
+  `ALTER TABLE orders ADD COLUMN shipping_origin_state CHAR(2) NULL`,
+  `ALTER TABLE orders ADD COLUMN shipping_origin_holiday_region VARCHAR(12) NULL`,
+  `ALTER TABLE orders ADD COLUMN delivery_state CHAR(2) NULL`,
+  `ALTER TABLE orders ADD COLUMN delivery_holiday_region VARCHAR(12) NULL`,
 ];
 
 const IGNORABLE_MIGRATION_ERROR_CODES = new Set([
@@ -217,7 +251,8 @@ export async function ensureCheckoutSchema() {
       `SELECT id, cart_id, status, stripe_payment_intent_id, plate, plate_type,
               plate_color, quantity, parking_plate, bike_rack_plate, unit_price_cents,
               shipping_cents, discount_cents, promo_code, total_cents, customer_id,
-              updated_at FROM orders LIMIT 0`,
+              ordered_at_utc, delivery_promise_text, guarantee_terms_version,
+              shipping_origin_state, shipping_origin_holiday_region, delivery_holiday_region, updated_at FROM orders LIMIT 0`,
     );
   } catch (error) {
     const code = describeDatabaseError(error);

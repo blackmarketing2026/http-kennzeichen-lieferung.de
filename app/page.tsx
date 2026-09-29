@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { PaymentLogos } from '@/components/payment-logos';
 import { ShippingNotice } from '@/components/shipping-notice';
+import { DeliveryGuarantee } from '@/components/delivery-guarantee';
 import { LicensePlate, LicensePlateEditor } from '@/components/license-plate';
 import {
   formatPrice,
@@ -371,6 +372,7 @@ export default function Home() {
             <span>Gesamt</span>
             <strong>{formatPrice(total)}</strong>
           </div>
+          <DeliveryGuarantee />
           <button
             className="button button-wide"
             type="button"
@@ -729,6 +731,7 @@ export default function Home() {
                 kostenlosem DHL-Versand innerhalb Deutschlands.
               </small>
             </div>
+            <DeliveryGuarantee />
             <button
               className="button button-wide"
               type="button"

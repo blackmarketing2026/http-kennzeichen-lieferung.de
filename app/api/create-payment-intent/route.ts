@@ -20,6 +20,7 @@ import {
 } from '@/lib/customer-auth';
 import { logEvent } from '@/lib/logger';
 import { sendCheckoutStartedEmail } from '@/lib/order-emails';
+import { configuredShippingRegion, configuredShippingState, DELIVERY_PROMISE_TEXT, GUARANTEE_TERMS_VERSION } from '@/lib/delivery-promise';
 
 export const runtime = 'nodejs';
 
@@ -277,8 +278,8 @@ export async function POST(request: Request) {
       if (!existingOrder) {
         try {
           await query(
-            `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, parking_plate, bike_rack_plate, unit_price_cents, shipping_cents, discount_cents, promo_code, total_cents, stripe_payment_intent_id, customer_id)
-             VALUES (?, ?, 'payment_pending', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, parking_plate, bike_rack_plate, unit_price_cents, shipping_cents, discount_cents, promo_code, total_cents, stripe_payment_intent_id, customer_id, ordered_at_utc, delivery_promise_text, guarantee_terms_version, shipping_origin_state, shipping_origin_holiday_region)
+             VALUES (?, ?, 'payment_pending', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, UTC_TIMESTAMP(), ?, ?, ?, ?)`,
             [
               randomUUID(),
               cartId,
@@ -295,6 +296,10 @@ export async function POST(request: Request) {
               pricing.totalCents,
               paymentIntent.id,
               customerId,
+              DELIVERY_PROMISE_TEXT,
+              GUARANTEE_TERMS_VERSION,
+              configuredShippingState(),
+              configuredShippingRegion(configuredShippingState()),
             ],
           );
           createdOrder = true;

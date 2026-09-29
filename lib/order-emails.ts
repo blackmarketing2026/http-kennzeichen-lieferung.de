@@ -5,6 +5,7 @@ import {
   renderEmailTemplate,
 } from '@/lib/mail';
 import { logEvent } from '@/lib/logger';
+import { DELIVERY_EXPLANATION, DELIVERY_PROMISE_TEXT } from '@/lib/delivery-promise';
 import { CAMPAIGN_KEYS, type Attribution } from '@/lib/attribution';
 import {
   formatPrice,
@@ -22,6 +23,8 @@ export type OrderEmailOrder = {
   quantity: number;
   total_cents: number;
   customer_email: string | null;
+  delivery_promise_text?: string | null;
+  delivery_deadline_date?: string | Date | null;
 };
 
 function plateLabel(order: OrderEmailOrder) {
@@ -51,6 +54,10 @@ export async function sendOrderConfirmationEmail(
       <p>Hallo,</p>
       <p>wir haben deine Bestellung für das Kennzeichen <strong>${plateLabel(order)}</strong> erhalten.</p>
       <p>Rechnungssumme: <strong>${formatPrice(order.total_cents / 100)}</strong></p>
+      <p>Bestellnummer: <strong>${order.id}</strong></p>
+      <p><strong>${order.delivery_promise_text ?? DELIVERY_PROMISE_TEXT}</strong></p>
+      ${order.delivery_deadline_date ? `<p>Spätestens zugesagtes Lieferdatum: <strong>${new Intl.DateTimeFormat('de-DE', { timeZone: 'UTC', day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(`${order.delivery_deadline_date instanceof Date ? order.delivery_deadline_date.toISOString().slice(0, 10) : String(order.delivery_deadline_date).slice(0, 10)}T12:00:00Z`))}</strong></p>` : ''}
+      <p>${DELIVERY_EXPLANATION} <a href="${origin}/liefergarantie">Bedingungen der Liefergarantie ansehen</a>.</p>
       <p>Sobald deine Rechnung fertig ist, bekommst du sie separat per E-Mail zugeschickt.</p>
       <p>Sobald dein Kennzeichen gedruckt und versandt ist, bekommst du automatisch die Trackingnummer in einer separaten E-Mail.</p>
     `,

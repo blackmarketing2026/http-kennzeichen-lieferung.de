@@ -4,6 +4,7 @@ import { submitOrderToManufacturer } from '@/lib/manufacturer-order';
 import { logEvent } from '@/lib/logger';
 import { sendInvoiceEmail, sendOrderConfirmationEmail, sendShopOrderNotificationEmail, type OrderEmailOrder } from '@/lib/order-emails';
 import { ensurePaidStripeInvoice, fetchStripeInvoicePdf, type StripeInvoiceOrder } from '@/lib/stripe-invoice';
+import { deliveryDates, deliveryStartDate, validGermanState, validHolidayRegion } from '@/lib/delivery-promise';
 
 export const runtime = 'nodejs';
 
@@ -41,6 +42,29 @@ export async function POST(request: Request) {
   if (event.type === 'payment_intent.succeeded') {
     const paymentIntent = event.data.object as Stripe.PaymentIntent;
 
+    const promiseRow = (await query<{
+      ordered_at_iso: string | null;
+      paid_at_iso: string | null;
+      shipping_origin_state: string | null;
+      shipping_origin_holiday_region: string | null;
+      delivery_state: string | null;
+      delivery_holiday_region: string | null;
+    }>(`SELECT DATE_FORMAT(ordered_at_utc, '%Y-%m-%dT%H:%i:%sZ') AS ordered_at_iso,
+              DATE_FORMAT(paid_at_utc, '%Y-%m-%dT%H:%i:%sZ') AS paid_at_iso,
+              shipping_origin_state, shipping_origin_holiday_region, delivery_state, delivery_holiday_region
+         FROM orders WHERE stripe_payment_intent_id = ?`, [paymentIntent.id])).rows[0];
+    const paidAt = promiseRow?.paid_at_iso ? new Date(promiseRow.paid_at_iso) : new Date(event.created * 1000);
+    const orderedAt = promiseRow?.ordered_at_iso ? new Date(promiseRow.ordered_at_iso) : null;
+    const shippingState = paymentIntent.shipping?.address?.state?.toUpperCase() ?? null;
+    const destination = validGermanState(shippingState) && shippingState === promiseRow?.delivery_state ? shippingState : null;
+    const origin = validGermanState(promiseRow?.shipping_origin_state) ? promiseRow.shipping_origin_state : null;
+    const originRegion = origin && validHolidayRegion(origin, promiseRow?.shipping_origin_holiday_region) ? promiseRow.shipping_origin_holiday_region : null;
+    const destinationRegion = destination && validHolidayRegion(destination, promiseRow?.delivery_holiday_region) ? promiseRow.delivery_holiday_region : null;
+    const dates = orderedAt && origin && destination && originRegion && destinationRegion
+      ? deliveryDates(orderedAt, paidAt, origin, destination, originRegion, destinationRegion) : null;
+    const start = orderedAt ? deliveryStartDate(orderedAt, paidAt) : null;
+    const paidAtSql = paidAt.toISOString().slice(0, 19).replace('T', ' ');
+
     const shippingJson = paymentIntent.shipping ? JSON.stringify(paymentIntent.shipping) : null;
     await query(
       `UPDATE orders SET
@@ -48,9 +72,13 @@ export async function POST(request: Request) {
          customer_email = COALESCE(?, customer_email),
          delivery_address = COALESCE(?, delivery_address),
          invoice_address = COALESCE(?, invoice_address),
+         paid_at_utc = COALESCE(paid_at_utc, ?),
+         delivery_state = COALESCE(delivery_state, ?),
+         delivery_start_date = COALESCE(delivery_start_date, ?),
+         delivery_deadline_date = COALESCE(delivery_deadline_date, ?),
          updated_at = NOW()
        WHERE stripe_payment_intent_id = ?`,
-      [paymentIntent.receipt_email, shippingJson, shippingJson, paymentIntent.id],
+      [paymentIntent.receipt_email, shippingJson, shippingJson, paidAtSql, destination, start, dates?.deadline ?? null, paymentIntent.id],
     );
 
     const orderResult = await query<{ id: string; status: string }>(

@@ -20,6 +20,8 @@ import {
 } from 'lucide-react';
 import { PaymentLogos } from '@/components/payment-logos';
 import { ShippingNotice } from '@/components/shipping-notice';
+import { DeliveryGuarantee } from '@/components/delivery-guarantee';
+import { GERMAN_STATES, HOLIDAY_REGIONS, type GermanState } from '@/lib/delivery-promise';
 import { LicensePlate } from '@/components/license-plate';
 import { CHECKOUT_UPSELLS_ENABLED } from '@/config/checkout-features';
 import {
@@ -106,18 +108,24 @@ function PaymentForm({
   selection,
   extras,
   pricing,
+  getCartId,
+  paymentIntentId,
   onApplyPromo,
   onChangeExtra,
 }: {
   selection: ActiveSelection;
   extras: CheckoutExtras;
   pricing: CheckoutPricing;
+  getCartId: () => string;
+  paymentIntentId: string;
   onApplyPromo: (code: string) => Promise<CheckoutPricing>;
   onChangeExtra: (extras: CheckoutExtras) => Promise<CheckoutPricing>;
 }) {
   const stripe = useStripe();
   const elements = useElements();
   const [email, setEmail] = useState('');
+  const [deliveryState, setDeliveryState] = useState<GermanState | ''>('');
+  const [holidayRegion, setHolidayRegion] = useState('');
   const [isPaying, setIsPaying] = useState(false);
   const [message, setMessage] = useState('');
   const [succeeded, setSucceeded] = useState(false);
@@ -228,6 +236,28 @@ function PaymentForm({
       setIsPaying(false);
       return;
     }
+    if (!deliveryState) {
+      setMessage('Bitte wähle das Bundesland deiner Lieferadresse.');
+      setIsPaying(false);
+      return;
+    }
+    const region = HOLIDAY_REGIONS[deliveryState] ? holidayRegion : 'BASE';
+    if (!region) {
+      setMessage('Bitte wähle die Feiertagsregion deiner Lieferadresse.');
+      setIsPaying(false);
+      return;
+    }
+    try {
+      const saved = await fetch('/api/checkout-delivery-region', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cartId: getCartId(), paymentIntentId, deliveryState, region }),
+      });
+      if (!saved.ok) throw new Error('Die Lieferregion konnte nicht gespeichert werden. Bitte versuche es erneut.');
+    } catch (cause) {
+      setMessage(cause instanceof Error ? cause.message : 'Die Lieferregion konnte nicht gespeichert werden.');
+      setIsPaying(false);
+      return;
+    }
 
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
@@ -240,6 +270,7 @@ function PaymentForm({
           phone: addressValue.value.phone || undefined,
           address: {
             ...addressValue.value.address,
+            state: deliveryState,
             line2: addressValue.value.address.line2 || undefined,
           },
         },
@@ -325,6 +356,18 @@ function PaymentForm({
           }}
         />
       </div>
+      <label className="checkout-email">Bundesland der Lieferadresse
+        <select value={deliveryState} onChange={(event) => { setDeliveryState(event.target.value as GermanState | ''); setHolidayRegion(''); }} required>
+          <option value="">Bitte auswählen</option>
+          {Object.entries(GERMAN_STATES).map(([code, name]) => <option key={code} value={code}>{name}</option>)}
+        </select>
+      </label>
+      {deliveryState && HOLIDAY_REGIONS[deliveryState] && <label className="checkout-email">Feiertagsregion der Lieferadresse
+        <select value={holidayRegion} onChange={(event) => setHolidayRegion(event.target.value)} required>
+          <option value="">Bitte auswählen</option>
+          {Object.entries(HOLIDAY_REGIONS[deliveryState]).map(([code, name]) => <option key={code} value={code}>{name}</option>)}
+        </select>
+      </label>}
       </section>
       <section className="checkout-flow-step">
         <div className="checkout-step-heading">
@@ -708,6 +751,7 @@ export function EmbeddedCheckout({
           Plaketten sind nicht enthalten.
         </p>
         <ComplianceNotice variant="compact" />
+        <DeliveryGuarantee />
         </div>
       </section>
       <section className="checkout-payment-panel">
@@ -750,6 +794,8 @@ export function EmbeddedCheckout({
               selection={selection}
               extras={extras}
               pricing={pricing}
+              getCartId={() => cartId.current ?? ''}
+              paymentIntentId={paymentIntentId}
               onApplyPromo={(code) => updateCheckout(code)}
               onChangeExtra={(nextExtras) =>
                 updateCheckout(pricing.promoCode ?? '', nextExtras)

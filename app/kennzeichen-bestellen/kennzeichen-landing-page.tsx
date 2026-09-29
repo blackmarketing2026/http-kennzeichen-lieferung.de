@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
+import { DeliveryGuarantee } from '@/components/delivery-guarantee';
 import {
   formatPrice,
   getPackagePrice,
@@ -341,6 +342,7 @@ export function KennzeichenLandingPage() {
               <strong>Inklusive</strong>
             </div>
           </div>
+          <DeliveryGuarantee />
           <button
             className={styles.orderButton}
             type="button"

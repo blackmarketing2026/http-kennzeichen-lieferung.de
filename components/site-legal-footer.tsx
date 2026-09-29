@@ -9,6 +9,7 @@ export function SiteLegalFooter() {
         <Link href="/impressum">Impressum</Link>
         <Link href="/datenschutz">Datenschutz</Link>
         <Link href="/widerruf">Widerruf</Link>
+        <Link href="/liefergarantie">Liefergarantie</Link>
         <CookieSettingsButton />
       </nav>
     </div>
