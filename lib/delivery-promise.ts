@@ -1,4 +1,5 @@
 import Holidays from 'date-holidays';
+import { SHIPPING_ORIGIN } from '@/config/shipping-origin';
 
 export const DELIVERY_PROMISE_TEXT = 'Lieferung innerhalb Deutschlands: 1–4 Werktage nach Bestellung und erfolgreicher Zahlung.';
 export const DELIVERY_EXPLANATION = 'Die Lieferfrist beginnt am Tag nach Eingang der Bestellung und erfolgreicher Zahlung. Als Werktage zählen Montag bis Freitag, ausgenommen gesetzliche Feiertage.';
@@ -28,15 +29,11 @@ export function validGermanState(value: string | null | undefined): value is Ger
 }
 
 export function configuredShippingState(): GermanState | null {
-  const value = process.env.SHIPPING_ORIGIN_STATE?.trim().toUpperCase();
-  return validGermanState(value) ? value : null;
+  return SHIPPING_ORIGIN.state;
 }
 
 export function configuredShippingRegion(state: GermanState | null): string | null {
-  if (!state) return null;
-  const region = process.env.SHIPPING_ORIGIN_HOLIDAY_REGION?.trim().toUpperCase() || 'BASE';
-  if (HOLIDAY_REGIONS[state] && !process.env.SHIPPING_ORIGIN_HOLIDAY_REGION?.trim()) return null;
-  return validHolidayRegion(state, region) ? region : null;
+  return state === SHIPPING_ORIGIN.state ? SHIPPING_ORIGIN.holidayRegion : null;
 }
 
 export function berlinDate(date: Date): string {

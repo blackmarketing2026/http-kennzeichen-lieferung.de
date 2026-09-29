@@ -1,19 +1,11 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { configuredPickupTimes, getPickupCountdown } from '@/lib/pickup-countdown';
 
 const times = [540, 720, 960];
 
 describe('next planned DHL pickup', () => {
-  afterEach(() => vi.unstubAllEnvs());
-
-  it('shows no countdown without confirmed pickup times', () => {
-    vi.stubEnv('DHL_PICKUP_HOURS', '');
-    expect(configuredPickupTimes()).toBeNull();
-  });
-
-  it('accepts exact half-hour pickup times', () => {
-    vi.stubEnv('DHL_PICKUP_HOURS', '09:00,12:30,16:00');
-    expect(configuredPickupTimes()).toEqual([540, 750, 960]);
+  it('uses the pickup times already held in the project', () => {
+    expect(configuredPickupTimes()).toEqual([540, 720, 960]);
   });
 
   it('uses the next configured pickup without an artificial order deadline', () => {

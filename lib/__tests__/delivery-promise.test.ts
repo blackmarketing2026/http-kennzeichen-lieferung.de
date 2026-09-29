@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { deliveryDates, deliveryStartDate } from '@/lib/delivery-promise';
+import { configuredShippingRegion, configuredShippingState, deliveryDates, deliveryStartDate } from '@/lib/delivery-promise';
 
 describe('zugesagte Lieferfrist', () => {
+  it('nutzt das hinterlegte Versandbundesland', () => {
+    expect(configuredShippingState()).toBe('NW');
+    expect(configuredShippingRegion(configuredShippingState())).toBe('BASE');
+  });
   it('zählt nach einer Freitagsbestellung erst ab Montag und vier Werktage', () => {
     expect(deliveryDates(new Date('2026-09-25T20:30:00Z'), new Date('2026-09-25T20:31:00Z'), 'BE', 'BE'))
       .toEqual({ start: '2026-09-26', deadline: '2026-10-01' });

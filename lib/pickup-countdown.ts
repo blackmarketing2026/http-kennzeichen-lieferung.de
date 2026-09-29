@@ -1,4 +1,5 @@
 import Holidays from 'date-holidays';
+import { SHIPPING_ORIGIN } from '@/config/shipping-origin';
 import { type GermanState, validHolidayRegion } from '@/lib/delivery-promise';
 
 const formatter = new Intl.DateTimeFormat('en-GB', {
@@ -23,14 +24,7 @@ function berlinWallTimeToDate(year: number, month: number, day: number, hour: nu
 }
 
 export function configuredPickupTimes(): number[] | null {
-  const raw = process.env.DHL_PICKUP_HOURS?.trim();
-  if (!raw) return null;
-  const times = raw.split(',').map((value) => {
-    const match = /^([01]\d|2[0-3]):([0-5]\d)$/.exec(value.trim());
-    return match ? Number(match[1]) * 60 + Number(match[2]) : NaN;
-  });
-  return times.length > 0 && times.length <= 8 && times.every(Number.isInteger)
-    ? [...new Set(times)].sort((a, b) => a - b) : null;
+  return [...SHIPPING_ORIGIN.pickupTimes];
 }
 
 /** Planned pickup at the configured printing location, independent of whether a new order can still catch it. */
