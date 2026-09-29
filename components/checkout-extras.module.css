@@ -6,6 +6,23 @@
   background: linear-gradient(135deg, #eff8ff, #f8fcff);
   color: #0b2638;
 }
+.paymentNotice {
+  margin: 0 0 24px;
+  padding: 16px 18px;
+  border-left: 4px solid #0069d9;
+  border-radius: 8px;
+  background: #f3f8fc;
+  color: #173449;
+}
+.paymentNotice strong {
+  font-size: 0.82rem;
+}
+.paymentNotice p {
+  margin: 7px 0 0;
+  color: #4f6573;
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
 .countdownHeading {
   display: flex;
   align-items: center;

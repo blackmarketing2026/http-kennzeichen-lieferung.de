@@ -9,9 +9,9 @@ export function ShippingCountdown() {
         <span>Fertigung und DHL-Abholung</span>
       </div>
       <p>
-        In 10 Minuten geprägt und versandfertig. DHL-Abholung dreimal täglich
-        an Werktagen. Die tatsächliche Zustellung hängt vom Transport durch DHL
-        ab.
+        Innerhalb von 10 Minuten nach der Bestellung geprägt und versandfertig
+        (außer an Sonn- und Feiertagen). DHL-Abholung dreimal täglich an
+        Werktagen. Die tatsächliche Zustellung hängt vom Transport durch DHL ab.
       </p>
     </aside>
   );
