@@ -207,3 +207,21 @@ export async function ensureSchema() {
   })();
   return schemaReady;
 }
+
+/** The checkout only needs the orders table. Avoid running every schema migration
+ * before the payment form can load when the deployed table is already current. */
+export async function ensureCheckoutSchema() {
+  if (schemaReady) return schemaReady;
+  try {
+    await query(
+      `SELECT id, cart_id, status, stripe_payment_intent_id, plate, plate_type,
+              plate_color, quantity, parking_plate, bike_rack_plate, unit_price_cents,
+              shipping_cents, discount_cents, promo_code, total_cents, customer_id,
+              updated_at FROM orders LIMIT 0`,
+    );
+  } catch (error) {
+    const code = describeDatabaseError(error);
+    if (code !== 'ER_NO_SUCH_TABLE' && code !== 'ER_BAD_FIELD_ERROR') throw error;
+    await ensureSchema();
+  }
+}

@@ -13,7 +13,7 @@ import {
 } from '@/config/products';
 import { sanitizeAttribution } from '@/lib/attribution';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
-import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
+import { ensureCheckoutSchema, isDatabaseConfigured, query } from '@/lib/db';
 import {
   CUSTOMER_SESSION_COOKIE,
   verifyCustomerSessionToken,
@@ -159,7 +159,7 @@ export async function POST(request: Request) {
 
   try {
     const databaseReady = isDatabaseConfigured();
-    if (databaseReady) await ensureSchema();
+    if (databaseReady) await ensureCheckoutSchema();
     const existingOrder = databaseReady
       ? (
           await query<{
@@ -267,6 +267,7 @@ export async function POST(request: Request) {
       throw new Error('Stripe hat kein Client Secret zurückgegeben.');
     }
 
+    let createdOrder = false;
     if (databaseReady) {
       const customerToken = (await cookies()).get(
         CUSTOMER_SESSION_COOKIE,
@@ -274,27 +275,47 @@ export async function POST(request: Request) {
       const customerId = verifyCustomerSessionToken(customerToken);
 
       if (!existingOrder) {
-        await query(
-          `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, parking_plate, bike_rack_plate, unit_price_cents, shipping_cents, discount_cents, promo_code, total_cents, stripe_payment_intent_id, customer_id)
-           VALUES (?, ?, 'payment_pending', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-          [
-            randomUUID(),
-            cartId,
-            plate,
-            plateType,
-            color,
-            quantity,
-            extras.parkingPlate,
-            extras.bikeRackPlate,
-            pricing.unitPriceCents,
-            pricing.shippingCents,
-            pricing.discountCents,
-            pricing.promoCode,
-            pricing.totalCents,
-            paymentIntent.id,
-            customerId,
-          ],
-        );
+        try {
+          await query(
+            `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, parking_plate, bike_rack_plate, unit_price_cents, shipping_cents, discount_cents, promo_code, total_cents, stripe_payment_intent_id, customer_id)
+             VALUES (?, ?, 'payment_pending', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [
+              randomUUID(),
+              cartId,
+              plate,
+              plateType,
+              color,
+              quantity,
+              extras.parkingPlate,
+              extras.bikeRackPlate,
+              pricing.unitPriceCents,
+              pricing.shippingCents,
+              pricing.discountCents,
+              pricing.promoCode,
+              pricing.totalCents,
+              paymentIntent.id,
+              customerId,
+            ],
+          );
+          createdOrder = true;
+        } catch (error) {
+          // A timed-out mobile request may still finish while the customer retries.
+          // Both requests use the same cart and Stripe idempotency key.
+          if (!(error && typeof error === 'object' && 'code' in error && error.code === 'ER_DUP_ENTRY')) throw error;
+          const retryOrder = (
+            await query<{
+              status: string;
+              stripe_payment_intent_id: string | null;
+            }>(
+              'SELECT status, stripe_payment_intent_id FROM orders WHERE cart_id = ?',
+              [cartId],
+            )
+          ).rows[0];
+          if (
+            retryOrder?.status !== 'payment_pending' ||
+            retryOrder.stripe_payment_intent_id !== paymentIntent.id
+          ) throw error;
+        }
       } else {
         const updated = await query(
           `UPDATE orders SET plate = ?, plate_type = ?, plate_color = ?, quantity = ?, parking_plate = ?, bike_rack_plate = ?, unit_price_cents = ?,
@@ -333,7 +354,7 @@ export async function POST(request: Request) {
     }
 
     // A freshly created PaymentIntent means a new checkout visit; later calls only adjust it.
-    if (typeof intentId !== 'string') {
+    if (typeof intentId !== 'string' && (!databaseReady || createdOrder)) {
       const details = {
         plate,
         plateType,

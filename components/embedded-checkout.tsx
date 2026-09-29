@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { preconnect } from 'react-dom';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -467,6 +468,7 @@ export function EmbeddedCheckout({
   initialPromoCode?: string;
   returnPath?: string;
 }) {
+  preconnect('https://js.stripe.com', { crossOrigin: 'anonymous' });
   const baseQuantity = (
     isSinglePlateProduct(initialSelection.plateType) ? 1 : 2
   ) as 1 | 2;
@@ -482,6 +484,7 @@ export function EmbeddedCheckout({
   const [publishableKey, setPublishableKey] = useState('');
   const [pricing, setPricing] = useState<CheckoutPricing | null>(null);
   const [error, setError] = useState('');
+  const [requestAttempt, setRequestAttempt] = useState(0);
   const cartId = useRef<string | null>(null);
   const product = PRODUCTS[selection.plateType];
   const subtotal =
@@ -492,6 +495,12 @@ export function EmbeddedCheckout({
 
   useEffect(() => {
     const controller = new AbortController();
+    let active = true;
+    let timedOut = false;
+    const timeout = window.setTimeout(() => {
+      timedOut = true;
+      controller.abort();
+    }, 20000);
     cartId.current ??= crypto.randomUUID();
     fetch('/api/create-payment-intent', {
       method: 'POST',
@@ -528,9 +537,19 @@ export function EmbeddedCheckout({
         setPricing(data.pricing);
       })
       .catch((requestError) => {
-        if (requestError.name !== 'AbortError') setError(requestError.message);
-      });
-    return () => controller.abort();
+        if (!active) return;
+        if (timedOut) {
+          setError('Die Verbindung dauert zu lange. Bitte versuche es erneut.');
+        } else if (requestError.name !== 'AbortError') {
+          setError(requestError.message);
+        }
+      })
+      .finally(() => window.clearTimeout(timeout));
+    return () => {
+      active = false;
+      window.clearTimeout(timeout);
+      controller.abort();
+    };
   }, [
     baseQuantity,
     initialSelection.plate,
@@ -538,6 +557,7 @@ export function EmbeddedCheckout({
     initialSelection.plateColor,
     initialSelection.quantity,
     initialPromoCode,
+    requestAttempt,
   ]);
 
   async function updateCheckout(
@@ -682,6 +702,16 @@ export function EmbeddedCheckout({
           <div className="checkout-load-error">
             <h2>Checkout nicht verfügbar</h2>
             <p>{error}</p>
+            <button
+              className="button"
+              type="button"
+              onClick={() => {
+                setError('');
+                setRequestAttempt((attempt) => attempt + 1);
+              }}
+            >
+              Erneut versuchen
+            </button>
             <Link className="button" href="/">
               Zurück zur Konfiguration
             </Link>
