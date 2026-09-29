@@ -247,6 +247,10 @@ export function KennzeichenLandingPage() {
               {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} · inkl. Versand
             </strong>
           </div>
+          <div className={styles.livePreviewLabel}>
+            <span className={styles.livePreviewDot} aria-hidden="true" />
+            Live-Vorschau deiner Kombination
+          </div>
           <LicensePlate
             value={plateValue}
             type={plateType}
@@ -342,6 +346,7 @@ export function KennzeichenLandingPage() {
               <strong>Inklusive</strong>
             </div>
           </div>
+          <p className={styles.livePriceNote}>Der Preis zeigt immer deine aktuelle Auswahl.</p>
           <DeliveryGuarantee />
           <button
             className={styles.orderButton}

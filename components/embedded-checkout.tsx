@@ -475,7 +475,7 @@ function PaymentForm({
       )}
       <div className="checkout-final-total">
         <span>Gesamtbetrag inkl. DHL-Versand</span>
-        <strong>{formatPrice(pricing.totalCents / 100)}</strong>
+        <strong className="checkout-live-price" key={pricing.totalCents}>{formatPrice(pricing.totalCents / 100)}</strong>
       </div>
       <button
         className="stripe-pay-button"
@@ -710,6 +710,7 @@ export function EmbeddedCheckout({
             <span>Schritt 2 von 5</span>
             <h2>Vorschau</h2>
           </div>
+          <p className="checkout-live-label"><span aria-hidden="true" /> Live-Vorschau deiner Konfiguration</p>
           <LicensePlate
             value={selection.plate}
             type={selection.plateType}
@@ -740,7 +741,7 @@ export function EmbeddedCheckout({
         )}
         <div className="real-order-total">
           <span>Gesamt</span>
-          <strong>
+          <strong className="checkout-live-price" key={pricing?.totalCents ?? total}>
             {formatPrice(pricing ? pricing.totalCents / 100 : total)}
           </strong>
         </div>

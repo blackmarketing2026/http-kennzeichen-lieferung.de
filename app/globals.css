@@ -1943,6 +1943,33 @@ summary:focus-visible {
   width: min(100%, 580px);
   margin: 0 auto 14px;
 }
+.checkout-live-label {
+  width: fit-content;
+  margin: -7px 0 14px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 100px;
+  background: #e9f5fc;
+  color: #075b9f;
+  font-size: .7rem;
+  font-weight: 800;
+}
+.checkout-live-label span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #16865c;
+}
+@keyframes checkout-price-update {
+  from { transform: translateY(4px); opacity: .65; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.checkout-live-price { display: inline-block; animation: checkout-price-update .3s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .checkout-live-price { animation: none; }
+}
 .real-order-line {
   width: 100%;
   padding: 18px 0;
