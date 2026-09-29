@@ -34,21 +34,21 @@ export const PRODUCTS: Record<
     shortLabel: 'Standard',
     size: '520 mm',
     format: 'long',
-    prices: { 1: 14.9, 2: 14.9, 3: 14.9 },
+    prices: { 1: 19.9, 2: 19.9, 3: 19.9 },
   },
   motorcycle: {
     label: 'Motorrad',
     shortLabel: 'Motorrad',
     size: 'zweizeilig',
     format: 'motorcycle',
-    prices: { 1: 14.9, 2: 14.9, 3: 14.9 },
+    prices: { 1: 19.9, 2: 19.9, 3: 19.9 },
   },
   electric: {
     label: 'E-Kennzeichen',
     shortLabel: 'Elektro',
     size: '520 mm',
     format: 'long',
-    prices: { 1: 14.9, 2: 14.9, 3: 14.9 },
+    prices: { 1: 19.9, 2: 19.9, 3: 19.9 },
     suffix: 'E',
   },
   historic: {
@@ -56,7 +56,7 @@ export const PRODUCTS: Record<
     shortLabel: 'Historisch',
     size: '520 mm',
     format: 'long',
-    prices: { 1: 14.9, 2: 14.9, 3: 14.9 },
+    prices: { 1: 19.9, 2: 19.9, 3: 19.9 },
     suffix: 'H',
   },
   season: {
@@ -64,7 +64,7 @@ export const PRODUCTS: Record<
     shortLabel: 'Saison',
     size: '520 mm',
     format: 'long',
-    prices: { 1: 14.9, 2: 14.9, 3: 14.9 },
+    prices: { 1: 19.9, 2: 19.9, 3: 19.9 },
   },
   agriculture240: {
     label: 'Landmaschinen-Kennzeichen',
@@ -116,7 +116,7 @@ export function getUnitPrice(
     : product.prices[quantity];
 }
 
-/** The offer includes the second car plate in the 14.90 € package price. */
+/** The offer includes the second car plate in the 19.90 € package price. */
 export function getPackageDiscountCents(
   plateType: PlateType,
   color: PlateColor,

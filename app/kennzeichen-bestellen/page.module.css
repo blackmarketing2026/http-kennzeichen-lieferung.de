@@ -150,11 +150,6 @@
   font-size: 0.78rem;
   font-weight: 850;
 }
-.heroOffer del,
-.summaryPrice del {
-  color: #788891;
-  font-weight: 500;
-}
 .heroOffer strong {
   color: var(--navy);
   font-size: 1.35rem;
@@ -392,10 +387,6 @@
   color: var(--blue);
   font-size: 1rem;
   white-space: nowrap;
-}
-.summaryPrice del {
-  margin-right: 4px;
-  font-size: 0.75rem;
 }
 .orderButton {
   width: 100%;

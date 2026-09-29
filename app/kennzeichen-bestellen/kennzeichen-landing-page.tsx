@@ -185,7 +185,6 @@ export function KennzeichenLandingPage() {
           </h1>
           <p className={styles.heroOffer}>
             <span>Jetzt im Angebot</span>
-            <del>14,99 €</del>
             <strong>{offerPrice}</strong>
             <small>inkl. DHL-Versand</small>
           </p>
@@ -313,7 +312,7 @@ export function KennzeichenLandingPage() {
                 {quantity} × {product.label}, {product.size}
               </span>
               <strong className={styles.summaryPrice}>
-                <del>14,99 €</del> {offerPrice}
+                {offerPrice}
               </strong>
             </div>
             <div>
