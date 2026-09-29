@@ -803,6 +803,47 @@
   line-height: 1.5;
 }
 
+.customerReference {
+  padding: 96px max(28px, calc((100vw - 1280px) / 2));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+  align-items: center;
+  gap: clamp(44px, 8vw, 120px);
+  background: #fff;
+}
+.customerReferenceCopy h2 {
+  max-width: 720px;
+  margin: 0;
+  font-size: clamp(2.6rem, 4.8vw, 5.3rem);
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+}
+.customerReferenceCopy > p:last-child {
+  max-width: 570px;
+  margin: 28px 0 0;
+  color: #566c79;
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+.customerReferencePhoto {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #eff7fc;
+  box-shadow: 0 24px 60px rgba(7, 24, 36, 0.12);
+}
+.customerReferencePhoto img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.customerReferencePhoto figcaption {
+  padding: 14px 20px;
+  color: #566c79;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
 .included {
   padding: 100px max(28px, calc((100vw - 1280px) / 2));
   display: grid;
@@ -1181,6 +1222,14 @@
   .shippingVisual {
     min-height: 440px;
   }
+  .customerReference {
+    padding: 80px 20px;
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .customerReferencePhoto {
+    width: min(100%, 420px);
+  }
   .included {
     padding: 80px 20px;
     grid-template-columns: 1fr;
@@ -1361,6 +1410,9 @@
     top: 23px;
     left: 23px;
     width: 112px;
+  }
+  .customerReferenceCopy h2 {
+    font-size: clamp(2.45rem, 12vw, 3.7rem);
   }
   .clockFace {
     width: 210px;

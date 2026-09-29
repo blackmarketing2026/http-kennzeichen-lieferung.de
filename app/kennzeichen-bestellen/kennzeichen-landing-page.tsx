@@ -552,6 +552,31 @@ export function KennzeichenLandingPage() {
         </div>
       </section>
 
+      <section className={styles.customerReference} aria-labelledby="kundenreferenz-titel">
+        <div className={styles.customerReferenceCopy}>
+          <p className={styles.kicker}>
+            <span /> Kundenreferenz
+          </p>
+          <h2 id="kundenreferenz-titel">Bestellung am nächsten Tag erhalten.</h2>
+          <p>
+            Frisch geprägt, sicher verpackt und schon am nächsten Tag beim
+            Kunden: Dieses Foto zeigt eine einzelne Bestellung nach der
+            Zustellung. Die zugesagte Lieferzeit innerhalb Deutschlands beträgt
+            1–4 Werktage nach Bestellung und erfolgreicher Zahlung.
+          </p>
+        </div>
+        <figure className={styles.customerReferencePhoto}>
+          <Image
+            src="/references/kennzeichen-kundenfoto-naechster-tag.jpg"
+            alt="Kundenfoto eines gelieferten Kennzeichens auf der Versandverpackung"
+            width={1080}
+            height={1920}
+            sizes="(max-width: 820px) 100vw, 420px"
+          />
+          <figcaption>Foto einer Kundenbestellung</figcaption>
+        </figure>
+      </section>
+
       <section className={styles.included}>
         <div>
           <p className={styles.kicker}>
