@@ -23,6 +23,7 @@ import {
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
 import {
+  formatPrice,
   getPackagePrice,
   isValidPlate,
   PRODUCTS,
@@ -85,6 +86,7 @@ export function KennzeichenLandingPage() {
     [plateValue, plateType],
   );
   const total = getPackagePrice(plateType, 'black', quantity) + SHIPPING_PRICE;
+  const offerPrice = formatPrice(total);
   const product = PRODUCTS[plateType];
 
   useEffect(() => {
@@ -181,6 +183,12 @@ export function KennzeichenLandingPage() {
             <br />
             <em>In 10 Minuten geprägt und versandfertig.</em>
           </h1>
+          <p className={styles.heroOffer}>
+            <span>Jetzt im Angebot</span>
+            <del>14,99 €</del>
+            <strong>{offerPrice}</strong>
+            <small>inkl. DHL-Versand</small>
+          </p>
           <p className={styles.lead}>
             Kennzeichen online konfigurieren, sicher bestellen und bequem
             liefern lassen. DHL holt an Werktagen dreimal täglich bei unserem
@@ -304,7 +312,9 @@ export function KennzeichenLandingPage() {
               <span>
                 {quantity} × {product.label}, {product.size}
               </span>
-              <strong>Preis im Checkout</strong>
+              <strong className={styles.summaryPrice}>
+                <del>14,99 €</del> {offerPrice}
+              </strong>
             </div>
             <div>
               <span>DHL-Versand mit Tracking</span>
@@ -326,7 +336,7 @@ export function KennzeichenLandingPage() {
             )}
           </button>
           <p className={styles.checkoutNote}>
-            <LockKeyhole /> Preis und Zahlung im nächsten Schritt · kein Konto nötig
+            <LockKeyhole /> {offerPrice} inkl. Versand · Zahlung im nächsten Schritt · kein Konto nötig
           </p>
           <div className={styles.paymentWrap}>
             <PaymentLogos />
@@ -530,6 +540,7 @@ export function KennzeichenLandingPage() {
             <br />
             <em>Direkt zu dir.</em>
           </h2>
+          <p className={styles.includedPrice}>Jetzt im Angebot für {offerPrice} inkl. DHL-Versand</p>
         </div>
         <ul>
           <li>
@@ -656,6 +667,7 @@ export function KennzeichenLandingPage() {
           <br />
           auf deine Kombination.
         </h2>
+        <p className={styles.finalPrice}>Jetzt im Angebot: {offerPrice} inkl. DHL-Versand</p>
         <a href="#konfigurator">
           Jetzt Kennzeichen konfigurieren <ArrowRight />
         </a>
@@ -679,7 +691,7 @@ export function KennzeichenLandingPage() {
           <span>
             {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} inkl. Versand
           </span>
-          <strong>Preis im Checkout</strong>
+          <strong>Jetzt {offerPrice}</strong>
         </div>
         <a href="#konfigurator">
           Konfigurieren <ArrowRight />

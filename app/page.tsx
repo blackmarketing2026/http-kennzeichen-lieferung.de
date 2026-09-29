@@ -63,7 +63,7 @@ const FAQS = [
   ],
   [
     'Was kosten die Kennzeichen?',
-    'Zwei Auto-, E-, H- oder Saisonkennzeichen kosten zusammen 14,99 €. Ein Motorradkennzeichen kostet ebenfalls 14,99 €. Der DHL-Versand innerhalb Deutschlands ist kostenlos.',
+    'Zwei Auto-, E-, H- oder Saisonkennzeichen kosten zusammen 14,90 €. Ein Motorradkennzeichen kostet ebenfalls 14,90 €. Der DHL-Versand innerhalb Deutschlands ist kostenlos.',
   ],
   [
     'Wie schnell wird versendet?',
