@@ -31,6 +31,7 @@ import {
   type PlateType,
 } from '@/config/products';
 import { CONSENT_STORAGE_KEY, parseConsentRecord } from '@/lib/cookie-consent';
+import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
 import styles from './page.module.css';
 
 const PLATE_TYPES: PlateType[] = [
@@ -90,6 +91,19 @@ export function KennzeichenLandingPage() {
   const product = PRODUCTS[plateType];
 
   useEffect(() => {
+    const timer = window.setTimeout(() => {
+      const draft = readCheckoutDraft('kennzeichen-bestellen');
+      if (!draft) return;
+      const [savedCity, savedLetters, savedNumbers] = draft.plate.split(' ');
+      setPlateType(draft.plateType);
+      setCity(savedCity);
+      setLetters(savedLetters);
+      setNumbers(savedNumbers);
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     if (!valid || validTracked.current) return;
     validTracked.current = true;
     trackEvent('license_plate_valid', { plate_type: plateType });
@@ -132,6 +146,12 @@ export function KennzeichenLandingPage() {
 
   function checkout() {
     if (!valid) return;
+    saveCheckoutDraft('kennzeichen-bestellen', {
+      plate: plateValue,
+      plateType,
+      plateColor: 'black',
+      quantity,
+    });
     trackEvent('begin_checkout', {
       currency: 'EUR',
       value: total,
@@ -143,6 +163,7 @@ export function KennzeichenLandingPage() {
       type: plateType,
       quantity: String(quantity),
       color: 'black',
+      source: 'kennzeichen-bestellen',
     });
     router.push(`/checkout?${params.toString()}`);
   }

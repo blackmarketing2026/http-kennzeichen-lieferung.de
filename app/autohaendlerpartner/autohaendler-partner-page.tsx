@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
+import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
 import {
   formatPrice,
   getPackagePrice,
@@ -73,6 +74,20 @@ export function AutohaendlerPartnerPage() {
   const quantity: 1 | 2 = isSinglePlateProduct(plateType) ? 1 : 2;
   const total = getPackagePrice(plateType, 'black', quantity) + SHIPPING_PRICE;
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      const draft = readCheckoutDraft('autohaendlerpartner');
+      if (!draft) return;
+      const [savedCity, savedLetters, savedNumbers] = draft.plate.split(' ');
+      setPlateType(draft.plateType);
+      setCity(savedCity);
+      setLetters(savedLetters);
+      setNumbers(savedNumbers);
+      setPromoCode(draft.promoCode ?? '');
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   function updateCity(value: string) {
     setCity(
       value
@@ -97,6 +112,13 @@ export function AutohaendlerPartnerPage() {
 
   function checkout() {
     if (!valid) return;
+    saveCheckoutDraft('autohaendlerpartner', {
+      plate: plateValue,
+      plateType,
+      plateColor: 'black',
+      quantity,
+      promoCode,
+    });
     const params = new URLSearchParams({
       plate: plateValue,
       type: plateType,

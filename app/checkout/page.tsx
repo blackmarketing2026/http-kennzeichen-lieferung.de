@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { EmbeddedCheckout } from '@/components/embedded-checkout';
 import { isAvailableConfiguration, isValidPlate, PRODUCTS, type PlateColor, type PlateType } from '@/config/products';
+import { checkoutReturnPath, isCheckoutSource } from '@/lib/checkout-draft';
 
 const PLATE_TYPES = Object.keys(PRODUCTS) as PlateType[];
 
@@ -15,10 +16,10 @@ export default async function CheckoutPage({ searchParams }: { searchParams: Pro
   const plateColor = first(params.color) as PlateColor;
   const quantity = Number(first(params.quantity)) as 1 | 2 | 3;
   const promoCode = first(params.promo)?.slice(0, 64) ?? '';
-  const returnPath =
-    first(params.source) === 'autohaendlerpartner'
-      ? '/autohaendlerpartner'
-      : undefined;
+  const source = first(params.source);
+  const returnPath = isCheckoutSource(source)
+    ? checkoutReturnPath(source)
+    : undefined;
   const isValid = PLATE_TYPES.includes(plateType) && isAvailableConfiguration(plateType, plateColor, quantity) && isValidPlate(plate, plateType);
 
   if (!isValid) {

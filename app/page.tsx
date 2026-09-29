@@ -39,6 +39,7 @@ import {
 } from '@/components/ui/dialog';
 import { ComplianceNotice } from '@/components/compliance-notice';
 import { CONSENT_STORAGE_KEY, parseConsentRecord } from '@/lib/cookie-consent';
+import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
 
 const BASE_PLATE_TYPES = ['standard', 'motorcycle', 'season'] as const;
 const MOBILE_PLATE_TYPES = [
@@ -165,6 +166,19 @@ export default function Home() {
   const suffix =
     plateType === 'electric' ? 'E' : plateType === 'historic' ? 'H' : '';
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      const draft = readCheckoutDraft('home');
+      if (!draft) return;
+      const [city, letters, numbers] = draft.plate.split(' ');
+      setPlateType(draft.plateType);
+      setCityCode(city);
+      setSerialLetters(letters);
+      setSerialNumbers(numbers);
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   function trackPlateInputStarted(inputField: PlateInputField) {
     if (plateInputEventSent.current) return;
     try {
@@ -242,12 +256,19 @@ export default function Home() {
 
   function openCheckout() {
     if (!status) return;
+    saveCheckoutDraft('home', {
+      plate: plateValue,
+      plateType,
+      plateColor,
+      quantity,
+    });
     setCartOpen(false);
     const params = new URLSearchParams({
       plate: plateValue,
       type: plateType,
       quantity: String(quantity),
       color: plateColor,
+      source: 'home',
     });
     router.push(`/checkout?${params.toString()}`);
   }

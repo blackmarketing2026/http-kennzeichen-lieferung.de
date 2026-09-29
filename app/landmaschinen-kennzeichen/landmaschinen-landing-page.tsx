@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
+import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
 import {
   formatPrice,
   getUnitPrice,
@@ -84,6 +85,20 @@ export function LandmaschinenLandingPage() {
   const total = getUnitPrice(plateType, plateColor, 1) + SHIPPING_PRICE;
   const product = PRODUCTS[plateType];
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      const draft = readCheckoutDraft('landmaschinen-kennzeichen');
+      if (!draft) return;
+      const [savedCity, savedLetters, savedNumbers] = draft.plate.split(' ');
+      setPlateType(draft.plateType as typeof plateType);
+      setPlateColor(draft.plateColor as typeof plateColor);
+      setCity(savedCity);
+      setLetters(savedLetters);
+      setNumbers(savedNumbers);
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   function updateCity(value: string) {
     setCity(
       value
@@ -108,11 +123,18 @@ export function LandmaschinenLandingPage() {
 
   function checkout() {
     if (!valid) return;
+    saveCheckoutDraft('landmaschinen-kennzeichen', {
+      plate: plateValue,
+      plateType,
+      plateColor,
+      quantity: 1,
+    });
     const params = new URLSearchParams({
       plate: plateValue,
       type: plateType,
       quantity: '1',
       color: plateColor,
+      source: 'landmaschinen-kennzeichen',
     });
     router.push(`/checkout?${params.toString()}`);
   }
