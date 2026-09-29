@@ -38,7 +38,6 @@ import {
   type PlateType,
 } from '@/config/products';
 import type { CheckoutExtras, CheckoutPricing } from '@/lib/checkout-pricing';
-import { ShippingCountdown } from '@/components/shipping-countdown';
 import { ComplianceNotice } from '@/components/compliance-notice';
 import {
   ExtrasUpsellPopup,
@@ -474,7 +473,6 @@ function PaymentForm({
           {message}
         </p>
       )}
-      <ShippingCountdown />
       <div className="checkout-final-total">
         <span>Gesamtbetrag inkl. DHL-Versand</span>
         <strong>{formatPrice(pricing.totalCents / 100)}</strong>

@@ -1,11 +1,3 @@
-.countdown {
-  margin: 24px 0;
-  padding: 20px;
-  border: 1px solid #cbdfee;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #eff8ff, #f8fcff);
-  color: #0b2638;
-}
 .paymentNotice {
   margin: 0 0 24px;
   padding: 16px 18px;
@@ -22,20 +14,6 @@
   color: #4f6573;
   font-size: 0.76rem;
   line-height: 1.55;
-}
-.countdownHeading {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  color: #075eb3;
-  font-size: 0.78rem;
-  font-weight: 750;
-}
-.countdown p {
-  margin: 10px 0 0;
-  color: #586d7a;
-  font-size: 0.78rem;
-  line-height: 1.6;
 }
 .selectedExtra {
   display: flex;

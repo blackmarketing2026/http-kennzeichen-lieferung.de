@@ -2154,14 +2154,13 @@ summary:focus-visible {
   box-shadow: 0 0 0 3px rgb(0 105 217 / 12%);
 }
 
-.delivery-guarantee { margin: 20px 0; color: #173343; font-size: .86rem; line-height: 1.55; }
-.delivery-guarantee-time { margin: 0 0 5px; }
-.delivery-guarantee-explanation { margin: 0 0 12px; color: #506673; font-size: .78rem; }
-.delivery-guarantee-box { display: flex; gap: 12px; padding: 16px; border: 1px solid #c7dce8; border-radius: 12px; background: #f1f8fc; }
-.delivery-guarantee-box > svg { flex: 0 0 auto; color: #0878dc; }
-.delivery-guarantee-box strong { display: block; margin-bottom: 4px; font-size: .9rem; }
-.delivery-guarantee-box p { margin: 0 0 7px; }
-.delivery-guarantee-box a { color: #075b9f; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.delivery-summary { margin: 15px 0 18px; color: #24465e; font-size: .78rem; line-height: 1.5; }
+.delivery-summary p { margin: 0; }
+.delivery-summary > p:first-child { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 7px; }
+.delivery-summary svg { flex: 0 0 auto; color: #0878dc; }
+.delivery-summary a { color: #075b9f; font-weight: 750; text-decoration: underline; text-underline-offset: 3px; }
+.delivery-summary .shipping-pickup-note { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin-top: 5px; color: #526a78; font-size: .73rem; }
+.shipping-pickup-note strong { color: #173343; font-variant-numeric: tabular-nums; }
 .guarantee-page ul { padding-left: 1.35rem; color: #475d69; line-height: 1.7; }
 .guarantee-page li + li { margin-top: 10px; }
 .guarantee-rights { margin: 28px 0; padding: 20px; border-left: 4px solid #0878dc; border-radius: 8px; background: #eaf5fc; color: #24465e; line-height: 1.65; font-weight: 650; }
@@ -2177,7 +2176,7 @@ summary:focus-visible {
 .guarantee-admin-list article { padding: 20px; border: 1px solid #c9dce8; border-radius: 10px; background: #fff; overflow-wrap: anywhere; }
 .guarantee-admin-list h2 { margin: 0 0 10px; }
 .guarantee-admin-list p { line-height: 1.7; }
-@media (max-width: 600px) { .delivery-guarantee-box { padding: 13px; gap: 9px; } .guarantee-form button { width: 100%; } }
+@media (max-width: 600px) { .guarantee-form button { width: 100%; } }
 .stripe-element-group {
   margin-bottom: 25px;
 }

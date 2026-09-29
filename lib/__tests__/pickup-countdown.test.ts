@@ -1,36 +1,38 @@
-import { describe, expect, it } from 'vitest';
-import { getPickupCountdown } from '@/lib/pickup-countdown';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { configuredPickupTimes, getPickupCountdown } from '@/lib/pickup-countdown';
 
-describe('getPickupCountdown', () => {
-  it('uses the next pickup when production still fits', () => {
-    expect(getPickupCountdown(new Date('2026-09-23T06:00:00Z'))).toEqual({
-      dayLabel: 'Heute',
-      pickupTime: '09:00 Uhr',
-      remaining: '01:00:00',
-    });
+const times = [540, 720, 960];
+
+describe('next planned DHL pickup', () => {
+  afterEach(() => vi.unstubAllEnvs());
+
+  it('shows no countdown without confirmed pickup times', () => {
+    vi.stubEnv('DHL_PICKUP_HOURS', '');
+    expect(configuredPickupTimes()).toBeNull();
   });
 
-  it('skips a pickup when less than ten production minutes remain', () => {
-    expect(getPickupCountdown(new Date('2026-09-23T06:55:00Z'))).toEqual({
-      dayLabel: 'Heute',
-      pickupTime: '12:00 Uhr',
-      remaining: '03:05:00',
-    });
+  it('accepts exact half-hour pickup times', () => {
+    vi.stubEnv('DHL_PICKUP_HOURS', '09:00,12:30,16:00');
+    expect(configuredPickupTimes()).toEqual([540, 750, 960]);
   });
 
-  it('selects the following morning after the last pickup', () => {
-    expect(getPickupCountdown(new Date('2026-09-23T14:10:00Z'))).toEqual({
-      dayLabel: 'Morgen',
-      pickupTime: '09:00 Uhr',
-      remaining: '16:50:00',
-    });
+  it('uses the next configured pickup without an artificial order deadline', () => {
+    expect(getPickupCountdown(new Date('2026-09-23T06:55:00Z'), times, 'BE', 'BASE'))
+      .toMatchObject({ pickupAt: '2026-09-23T07:00:00.000Z', pickupTime: '09:00', dayOffset: 0 });
   });
 
-  it('accounts for the daylight-saving time change in Germany', () => {
-    expect(getPickupCountdown(new Date('2026-10-24T14:00:00Z'))).toEqual({
-      dayLabel: 'Morgen',
-      pickupTime: '09:00 Uhr',
-      remaining: '18:00:00',
-    });
+  it('moves after the last pickup to the next business day', () => {
+    expect(getPickupCountdown(new Date('2026-09-25T14:10:00Z'), times, 'BE', 'BASE'))
+      .toMatchObject({ pickupAt: '2026-09-28T07:00:00.000Z', pickupTime: '09:00', dayOffset: 3 });
+  });
+
+  it('skips a public holiday at the printing location', () => {
+    expect(getPickupCountdown(new Date('2028-08-07T15:00:00Z'), times, 'BY', 'A'))
+      .toMatchObject({ pickupAt: '2028-08-09T07:00:00.000Z', pickupTime: '09:00', dayOffset: 2 });
+  });
+
+  it('accounts for the daylight saving switch on a weekend', () => {
+    expect(getPickupCountdown(new Date('2026-10-24T14:00:00Z'), times, 'BE', 'BASE'))
+      .toMatchObject({ pickupAt: '2026-10-26T08:00:00.000Z', pickupTime: '09:00', dayOffset: 2 });
   });
 });
