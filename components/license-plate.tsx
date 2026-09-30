@@ -10,6 +10,8 @@ type PlateProps = {
   color?: PlateColor;
   className?: string;
   style?: CSSProperties;
+  seasonStartMonth?: number;
+  seasonEndMonth?: number;
 };
 type Field = {
   value: string;
@@ -133,6 +135,8 @@ function PlateArtwork({
   type,
   color = 'black',
   label,
+  seasonStartMonth = 4,
+  seasonEndMonth = 10,
 }: PlateProps & { label?: string }) {
   const id = useId().replace(/:/g, '');
   const {
@@ -357,11 +361,11 @@ function PlateArtwork({
         {type === 'season' && (
           <g fontSize="27" textAnchor="middle">
             <text x="479" y="47">
-              04
+              {String(seasonStartMonth).padStart(2, '0')}
             </text>
             <path d="M464 55H494" stroke="#111" strokeWidth="1.7" />
             <text x="479" y="81">
-              10
+              {String(seasonEndMonth).padStart(2, '0')}
             </text>
           </g>
         )}
@@ -379,7 +383,7 @@ function PlateArtwork({
 export function LicensePlate({ className = '', style, ...props }: PlateProps) {
   const plateValue = props.value.trim();
   const label = plateValue
-    ? `Kennzeichenvorschau ${plateValue}${props.type === 'electric' ? ' E' : props.type === 'historic' ? ' H' : ''}${props.type === 'season' ? ', Saison April bis Oktober' : ''}, Schriftfarbe ${props.color === 'green' ? 'Grün' : props.color === 'carbon' ? 'Carbon' : 'Schwarz'}`
+    ? `Kennzeichenvorschau ${plateValue}${props.type === 'electric' ? ' E' : props.type === 'historic' ? ' H' : ''}${props.type === 'season' ? `, Saison ${String(props.seasonStartMonth ?? 4).padStart(2, '0')} bis ${String(props.seasonEndMonth ?? 10).padStart(2, '0')}` : ''}, Schriftfarbe ${props.color === 'green' ? 'Grün' : props.color === 'carbon' ? 'Carbon' : 'Schwarz'}`
     : `Leere Kennzeichenvorschau, Schriftfarbe ${props.color === 'green' ? 'Grün' : props.color === 'carbon' ? 'Carbon' : 'Schwarz'}`;
   const agriculture =
     props.type === 'agriculture240' || props.type === 'agriculture255';

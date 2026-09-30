@@ -65,6 +65,8 @@ const SCHEMA_STATEMENTS = [
     status VARCHAR(64) NOT NULL DEFAULT 'draft',
     plate VARCHAR(32) NOT NULL,
     plate_type VARCHAR(32) NOT NULL,
+    season_start_month TINYINT NULL,
+    season_end_month TINYINT NULL,
     plate_color VARCHAR(32) NOT NULL,
     quantity INT NOT NULL,
     parking_plate TINYINT(1) NOT NULL DEFAULT 0,
@@ -199,6 +201,8 @@ const SCHEMA_MIGRATIONS = [
   `ALTER TABLE orders ADD COLUMN promo_code VARCHAR(64) NULL`,
   `ALTER TABLE orders ADD COLUMN parking_plate TINYINT(1) NOT NULL DEFAULT 0`,
   `ALTER TABLE orders ADD COLUMN bike_rack_plate TINYINT(1) NOT NULL DEFAULT 0`,
+  `ALTER TABLE orders ADD COLUMN season_start_month TINYINT NULL`,
+  `ALTER TABLE orders ADD COLUMN season_end_month TINYINT NULL`,
   `ALTER TABLE orders ADD COLUMN ordered_at_utc DATETIME NULL`,
   `ALTER TABLE orders ADD COLUMN paid_at_utc DATETIME NULL`,
   `ALTER TABLE orders ADD COLUMN delivery_start_date DATE NULL`,
@@ -249,7 +253,7 @@ export async function ensureCheckoutSchema() {
   try {
     await query(
       `SELECT id, cart_id, status, stripe_payment_intent_id, plate, plate_type,
-              plate_color, quantity, parking_plate, bike_rack_plate, unit_price_cents,
+              plate_color, quantity, parking_plate, bike_rack_plate, season_start_month, season_end_month, unit_price_cents,
               shipping_cents, discount_cents, promo_code, total_cents, customer_id,
               ordered_at_utc, delivery_promise_text, guarantee_terms_version,
               shipping_origin_state, shipping_origin_holiday_region, delivery_holiday_region, updated_at FROM orders LIMIT 0`,

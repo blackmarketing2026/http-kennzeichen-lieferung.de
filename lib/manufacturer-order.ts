@@ -3,6 +3,7 @@ import { createManufacturerOrder, type ManufacturerAddress, type ManufacturerOrd
 import { getManufacturerVariant } from '@/config/manufacturer-products';
 import { logManufacturerEvent } from '@/lib/logger';
 import type { PlateColor, PlateType } from '@/config/products';
+import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, isValidSeasonPeriod } from '@/lib/season-period';
 
 export type OrderRow = {
   id: string;
@@ -10,6 +11,8 @@ export type OrderRow = {
   status: string;
   plate: string;
   plate_type: PlateType;
+  season_start_month: number | null;
+  season_end_month: number | null;
   plate_color: PlateColor;
   quantity: number;
   total_cents: number;
@@ -106,6 +109,12 @@ export async function submitOrderToManufacturer(orderId: string): Promise<Submit
   }
 
   const isSeason = order.plate_type === 'season';
+  const seasonStartMonth = order.season_start_month ?? DEFAULT_SEASON_START_MONTH;
+  const seasonEndMonth = order.season_end_month ?? DEFAULT_SEASON_END_MONTH;
+  if (isSeason && !isValidSeasonPeriod(seasonStartMonth, seasonEndMonth)) {
+    await query(`UPDATE orders SET status = 'manufacturer_submission_failed', last_error = ?, updated_at = NOW() WHERE id = ?`, ['Ungültiger Saisonzeitraum.', orderId]);
+    return { status: 'failed', message: 'Ungültiger Saisonzeitraum.' };
+  }
   const payload: ManufacturerOrderPayload = {
     externalId: order.cart_id,
     email: order.customer_email,
@@ -120,7 +129,7 @@ export async function submitOrderToManufacturer(orderId: string): Promise<Submit
         customization: {
           productType: 'LICENSE_PLATE',
           licensePlateNumberComponents: { usageType: 'EURO', ...plateComponents },
-          ...(isSeason ? { seasonStartMonth: 4, seasonEndMonth: 10 } : {}),
+          ...(isSeason ? { seasonStartMonth, seasonEndMonth } : {}),
         },
       },
     ],

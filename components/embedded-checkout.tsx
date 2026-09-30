@@ -45,12 +45,15 @@ import {
 } from '@/components/parking-upsell';
 import { readAttribution } from '@/lib/attribution';
 import styles from './checkout-extras.module.css';
+import { formatSeasonMonth } from '@/lib/season-period';
 
 type CheckoutSelection = {
   plate: string;
   plateType: PlateType;
   plateColor: PlateColor;
   quantity: 1 | 2 | 3;
+  seasonStartMonth?: number;
+  seasonEndMonth?: number;
 };
 type ActiveSelection = Omit<CheckoutSelection, 'quantity'> & {
   quantity: number;
@@ -557,6 +560,8 @@ export function EmbeddedCheckout({
       body: JSON.stringify({
         plate: initialSelection.plate,
         plateType: initialSelection.plateType,
+        seasonStartMonth: initialSelection.seasonStartMonth,
+        seasonEndMonth: initialSelection.seasonEndMonth,
         color: initialSelection.plateColor,
         quantity: baseQuantity,
         parkingPlate: initialSelection.quantity === 3,
@@ -603,6 +608,8 @@ export function EmbeddedCheckout({
     baseQuantity,
     initialSelection.plate,
     initialSelection.plateType,
+    initialSelection.seasonStartMonth,
+    initialSelection.seasonEndMonth,
     initialSelection.plateColor,
     initialSelection.quantity,
     initialPromoCode,
@@ -621,6 +628,8 @@ export function EmbeddedCheckout({
       body: JSON.stringify({
         plate: selection.plate,
         plateType: selection.plateType,
+        seasonStartMonth: selection.seasonStartMonth,
+        seasonEndMonth: selection.seasonEndMonth,
         color: selection.plateColor,
         quantity: baseQuantity,
         parkingPlate: nextExtras.parkingPlate,
@@ -692,6 +701,7 @@ export function EmbeddedCheckout({
             <span>
               {selection.plate} · {product.size} ·{' '}
               {plateColorLabel(selection.plateColor)}
+              {selection.plateType === 'season' && ` · ${formatSeasonMonth(selection.seasonStartMonth ?? 4)}–${formatSeasonMonth(selection.seasonEndMonth ?? 10)}`}
             </span>
           </div>
           <strong>
@@ -714,6 +724,8 @@ export function EmbeddedCheckout({
           <LicensePlate
             value={selection.plate}
             type={selection.plateType}
+            seasonStartMonth={selection.seasonStartMonth}
+            seasonEndMonth={selection.seasonEndMonth}
             color={selection.plateColor}
             className="real-checkout-plate"
           />

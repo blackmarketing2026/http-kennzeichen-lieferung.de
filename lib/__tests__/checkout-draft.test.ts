@@ -69,4 +69,21 @@ describe('checkout draft', () => {
     values.set('kennzeichen-checkout-draft:home', '{invalid');
     expect(readCheckoutDraft('home')).toBeNull();
   });
+
+  it('restores the selected season and rejects an invalid saved period', () => {
+    const values = useSessionStorage();
+    const draft = {
+      plate: 'B AB 123',
+      plateType: 'season' as const,
+      plateColor: 'black' as const,
+      quantity: 2 as const,
+      seasonStartMonth: 3,
+      seasonEndMonth: 9,
+    };
+    saveCheckoutDraft('kennzeichen-bestellen', draft);
+    expect(readCheckoutDraft('kennzeichen-bestellen')).toMatchObject({ seasonStartMonth: 3, seasonEndMonth: 9 });
+
+    values.set('kennzeichen-checkout-draft:kennzeichen-bestellen', JSON.stringify({ ...draft, seasonEndMonth: 2 }));
+    expect(readCheckoutDraft('kennzeichen-bestellen')).toBeNull();
+  });
 });

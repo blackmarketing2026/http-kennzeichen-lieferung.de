@@ -4,6 +4,7 @@ import {
   type PlateColor,
   type PlateType,
 } from '@/config/products';
+import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, isValidSeasonPeriod } from '@/lib/season-period';
 
 export type CheckoutSource =
   | 'home'
@@ -17,6 +18,8 @@ export type CheckoutDraft = {
   plateColor: PlateColor;
   quantity: 1 | 2 | 3;
   promoCode?: string;
+  seasonStartMonth?: number;
+  seasonEndMonth?: number;
 };
 
 const STORAGE_PREFIX = 'kennzeichen-checkout-draft:';
@@ -74,6 +77,7 @@ export function readCheckoutDraft(source: CheckoutSource): CheckoutDraft | null 
         value.quantity,
       ) ||
       !isValidPlate(value.plate, value.plateType as PlateType)
+      || (value.plateType === 'season' && !isValidSeasonPeriod(value.seasonStartMonth ?? DEFAULT_SEASON_START_MONTH, value.seasonEndMonth ?? DEFAULT_SEASON_END_MONTH))
     ) return null;
     return {
       plate: value.plate,
@@ -82,6 +86,8 @@ export function readCheckoutDraft(source: CheckoutSource): CheckoutDraft | null 
       quantity: value.quantity,
       promoCode:
         typeof value.promoCode === 'string' ? value.promoCode.slice(0, 64) : undefined,
+      seasonStartMonth: value.plateType === 'season' ? (value.seasonStartMonth ?? DEFAULT_SEASON_START_MONTH) as number : undefined,
+      seasonEndMonth: value.plateType === 'season' ? (value.seasonEndMonth ?? DEFAULT_SEASON_END_MONTH) as number : undefined,
     };
   } catch {
     return null;

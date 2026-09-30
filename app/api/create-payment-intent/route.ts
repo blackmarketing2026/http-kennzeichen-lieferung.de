@@ -21,6 +21,7 @@ import {
 import { logEvent } from '@/lib/logger';
 import { sendCheckoutStartedEmail } from '@/lib/order-emails';
 import { configuredShippingRegion, configuredShippingState, DELIVERY_PROMISE_TEXT, GUARANTEE_TERMS_VERSION } from '@/lib/delivery-promise';
+import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, isValidSeasonPeriod } from '@/lib/season-period';
 
 export const runtime = 'nodejs';
 
@@ -59,6 +60,8 @@ export async function POST(request: Request) {
   let body: {
     plate?: string;
     plateType?: string;
+    seasonStartMonth?: number;
+    seasonEndMonth?: number;
     color?: string;
     quantity?: number;
     parkingPlate?: unknown;
@@ -78,6 +81,8 @@ export async function POST(request: Request) {
   const color = body.color as PlateColor;
   const requestedQuantity = Number(body.quantity);
   const plate = body.plate?.toUpperCase().replace(/\s+/g, ' ').trim() ?? '';
+  const seasonStartMonth = body.seasonStartMonth ?? DEFAULT_SEASON_START_MONTH;
+  const seasonEndMonth = body.seasonEndMonth ?? DEFAULT_SEASON_END_MONTH;
 
   const hasExplicitExtras =
     body.parkingPlate !== undefined || body.bikeRackPlate !== undefined;
@@ -114,7 +119,8 @@ export async function POST(request: Request) {
     !isAvailableConfiguration(plateType, color, baseQuantity) ||
     (isSinglePlateProduct(plateType) &&
       (extras.parkingPlate || extras.bikeRackPlate)) ||
-    !isValidPlate(plate, plateType)
+    !isValidPlate(plate, plateType) ||
+    (plateType === 'season' && !isValidSeasonPeriod(seasonStartMonth, seasonEndMonth))
   ) {
     return Response.json(
       { error: 'Bitte prüfe Kennzeichenart, Kombination und Anzahl.' },
@@ -201,6 +207,7 @@ export async function POST(request: Request) {
       rabattcode: pricing.promoCode ?? '',
       parkplatzkennzeichen: extras.parkingPlate ? '1' : '0',
       fahrradtraegerkennzeichen: extras.bikeRackPlate ? '1' : '0',
+      ...(plateType === 'season' ? { saisonVon: String(seasonStartMonth), saisonBis: String(seasonEndMonth) } : {}),
     };
     const intentId =
       existingOrder?.stripe_payment_intent_id ?? body.paymentIntentId;
@@ -211,7 +218,9 @@ export async function POST(request: Request) {
         current.metadata.cartId !== cartId ||
         current.metadata.kennzeichen !== plate ||
         current.metadata.kennzeichenart !== product.label ||
-        current.metadata.schriftfarbe !== metadata.schriftfarbe
+        current.metadata.schriftfarbe !== metadata.schriftfarbe ||
+        (plateType === 'season' && ((current.metadata.saisonVon ?? String(DEFAULT_SEASON_START_MONTH)) !== String(seasonStartMonth) ||
+          (current.metadata.saisonBis ?? String(DEFAULT_SEASON_END_MONTH)) !== String(seasonEndMonth)))
       ) {
         return Response.json(
           { error: 'Ungültige Bestelldaten.' },
@@ -278,8 +287,8 @@ export async function POST(request: Request) {
       if (!existingOrder) {
         try {
           await query(
-            `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, parking_plate, bike_rack_plate, unit_price_cents, shipping_cents, discount_cents, promo_code, total_cents, stripe_payment_intent_id, customer_id, ordered_at_utc, delivery_promise_text, guarantee_terms_version, shipping_origin_state, shipping_origin_holiday_region)
-             VALUES (?, ?, 'payment_pending', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, UTC_TIMESTAMP(), ?, ?, ?, ?)`,
+            `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, parking_plate, bike_rack_plate, season_start_month, season_end_month, unit_price_cents, shipping_cents, discount_cents, promo_code, total_cents, stripe_payment_intent_id, customer_id, ordered_at_utc, delivery_promise_text, guarantee_terms_version, shipping_origin_state, shipping_origin_holiday_region)
+             VALUES (?, ?, 'payment_pending', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, UTC_TIMESTAMP(), ?, ?, ?, ?)`,
             [
               randomUUID(),
               cartId,
@@ -289,6 +298,8 @@ export async function POST(request: Request) {
               quantity,
               extras.parkingPlate,
               extras.bikeRackPlate,
+              plateType === 'season' ? seasonStartMonth : null,
+              plateType === 'season' ? seasonEndMonth : null,
               pricing.unitPriceCents,
               pricing.shippingCents,
               pricing.discountCents,
@@ -323,7 +334,7 @@ export async function POST(request: Request) {
         }
       } else {
         const updated = await query(
-          `UPDATE orders SET plate = ?, plate_type = ?, plate_color = ?, quantity = ?, parking_plate = ?, bike_rack_plate = ?, unit_price_cents = ?,
+          `UPDATE orders SET plate = ?, plate_type = ?, plate_color = ?, quantity = ?, parking_plate = ?, bike_rack_plate = ?, season_start_month = ?, season_end_month = ?, unit_price_cents = ?,
              shipping_cents = ?, discount_cents = ?, promo_code = ?, total_cents = ?, stripe_payment_intent_id = ?, customer_id = COALESCE(?, customer_id), updated_at = NOW()
            WHERE id = ? AND status = 'payment_pending'`,
           [
@@ -333,6 +344,8 @@ export async function POST(request: Request) {
             quantity,
             extras.parkingPlate,
             extras.bikeRackPlate,
+            plateType === 'season' ? seasonStartMonth : null,
+            plateType === 'season' ? seasonEndMonth : null,
             pricing.unitPriceCents,
             pricing.shippingCents,
             pricing.discountCents,

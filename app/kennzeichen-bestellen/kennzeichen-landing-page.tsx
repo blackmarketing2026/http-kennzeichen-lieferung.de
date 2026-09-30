@@ -33,6 +33,7 @@ import {
 } from '@/config/products';
 import { CONSENT_STORAGE_KEY, parseConsentRecord } from '@/lib/cookie-consent';
 import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
+import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, formatSeasonMonth, isValidSeasonPeriod } from '@/lib/season-period';
 import styles from './page.module.css';
 
 const PLATE_TYPES: PlateType[] = [
@@ -79,6 +80,8 @@ export function KennzeichenLandingPage() {
   const [city, setCity] = useState('');
   const [letters, setLetters] = useState('');
   const [numbers, setNumbers] = useState('');
+  const [seasonStartMonth, setSeasonStartMonth] = useState(DEFAULT_SEASON_START_MONTH);
+  const [seasonEndMonth, setSeasonEndMonth] = useState(DEFAULT_SEASON_END_MONTH);
   const inputStarted = useRef(false);
   const validTracked = useRef(false);
   const quantity: 1 | 2 = plateType === 'motorcycle' ? 1 : 2;
@@ -87,6 +90,7 @@ export function KennzeichenLandingPage() {
     () => isValidPlate(plateValue, plateType),
     [plateValue, plateType],
   );
+  const validSeason = plateType !== 'season' || isValidSeasonPeriod(seasonStartMonth, seasonEndMonth);
   const total = getPackagePrice(plateType, 'black', quantity) + SHIPPING_PRICE;
   const offerPrice = formatPrice(total);
   const product = PRODUCTS[plateType];
@@ -100,6 +104,8 @@ export function KennzeichenLandingPage() {
       setCity(savedCity);
       setLetters(savedLetters);
       setNumbers(savedNumbers);
+      setSeasonStartMonth(draft.seasonStartMonth ?? DEFAULT_SEASON_START_MONTH);
+      setSeasonEndMonth(draft.seasonEndMonth ?? DEFAULT_SEASON_END_MONTH);
     }, 0);
     return () => window.clearTimeout(timer);
   }, []);
@@ -146,12 +152,13 @@ export function KennzeichenLandingPage() {
   }
 
   function checkout() {
-    if (!valid) return;
+    if (!valid || !validSeason) return;
     saveCheckoutDraft('kennzeichen-bestellen', {
       plate: plateValue,
       plateType,
       plateColor: 'black',
       quantity,
+      ...(plateType === 'season' ? { seasonStartMonth, seasonEndMonth } : {}),
     });
     trackEvent('begin_checkout', {
       currency: 'EUR',
@@ -165,6 +172,7 @@ export function KennzeichenLandingPage() {
       quantity: String(quantity),
       color: 'black',
       source: 'kennzeichen-bestellen',
+      ...(plateType === 'season' ? { seasonStartMonth: String(seasonStartMonth), seasonEndMonth: String(seasonEndMonth) } : {}),
     });
     router.push(`/checkout?${params.toString()}`);
   }
@@ -255,6 +263,8 @@ export function KennzeichenLandingPage() {
             value={plateValue}
             type={plateType}
             color="black"
+            seasonStartMonth={seasonStartMonth}
+            seasonEndMonth={seasonEndMonth}
             className={styles.plate}
           />
 
@@ -324,13 +334,38 @@ export function KennzeichenLandingPage() {
                       : type === 'historic'
                         ? 'H'
                         : type === 'season'
-                          ? '04–10'
+                          ? `${formatSeasonMonth(seasonStartMonth)}–${formatSeasonMonth(seasonEndMonth)}`
                           : 'Moto'}
                 </span>
                 <small>{PRODUCTS[type].shortLabel}</small>
               </button>
             ))}
           </div>
+
+          {plateType === 'season' && (
+            <div className={styles.seasonFields}>
+              <span>Saisonzeitraum</span>
+              <div>
+                <label>
+                  Von
+                  <select value={seasonStartMonth} onChange={(event) => setSeasonStartMonth(Number(event.target.value))}>
+                    {Array.from({ length: 12 }, (_, index) => index + 1).map((month) => (
+                      <option key={month} value={month}>{formatSeasonMonth(month)}</option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  Bis
+                  <select value={seasonEndMonth} onChange={(event) => setSeasonEndMonth(Number(event.target.value))}>
+                    {Array.from({ length: 12 }, (_, index) => index + 1).map((month) => (
+                      <option key={month} value={month}>{formatSeasonMonth(month)}</option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+              {!validSeason && <small role="alert">Bitte wähle 2 bis 11 aufeinanderfolgende Monate innerhalb eines Jahres.</small>}
+            </div>
+          )}
 
           <div className={styles.summary}>
             <div>
@@ -352,7 +387,7 @@ export function KennzeichenLandingPage() {
             className={styles.orderButton}
             type="button"
             onClick={checkout}
-            disabled={!valid}
+            disabled={!valid || !validSeason}
           >
             {valid ? (
               <>
