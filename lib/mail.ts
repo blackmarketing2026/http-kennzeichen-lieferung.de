@@ -30,7 +30,7 @@ export function getMailTransport() {
   });
 }
 
-export const MAIL_FROM = '"Kennzeichen-Lieferung" <bestellung@kennzeichen-lieferung.de>';
+export const MAIL_FROM = '"Kennzeichen-Lieferung" <kunden@kennzeichen-lieferung.de>';
 
 export function renderEmailTemplate(options: {
   logoUrl: string;

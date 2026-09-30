@@ -159,7 +159,7 @@ export async function renderInvoicePdf(
   };
 
   write('Kennzeichen-Lieferung', { size: 20, bold: true, gap: 18 });
-  write('kennzeichen-lieferung.de · bestellung@kennzeichen-lieferung.de', {
+  write('kennzeichen-lieferung.de · kunden@kennzeichen-lieferung.de', {
     size: 9,
     color: MUTED,
     gap: 28,
