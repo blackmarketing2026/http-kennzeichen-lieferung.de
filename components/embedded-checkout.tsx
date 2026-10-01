@@ -39,7 +39,6 @@ import {
   type PlateType,
 } from '@/config/products';
 import type { CheckoutExtras, CheckoutPricing } from '@/lib/checkout-pricing';
-import { ComplianceNotice } from '@/components/compliance-notice';
 import {
   ExtrasUpsellPopup,
   type UpsellKind,
@@ -784,7 +783,6 @@ export function EmbeddedCheckout({
           Du bestellst geprägte Schilder. Reservierung, Zulassung und amtliche
           Plaketten sind nicht enthalten.
         </p>
-        <ComplianceNotice variant="compact" />
         <DeliveryGuarantee />
         </div>
       </section>
