@@ -2,9 +2,12 @@ import Image from 'next/image';
 import { LockKeyhole } from 'lucide-react';
 
 const PAYMENT_LOGOS = [
-  ['google_pay', 'Google Pay'],
   ['amazon-pay', 'Amazon Pay'],
   ['apple_pay', 'Apple Pay'],
+  ['google_pay', 'Google Pay'],
+  ['paypal', 'PayPal'],
+  ['revolut-pay', 'Revolut Pay'],
+  ['klarna-mark', 'Klarna'],
   ['visa', 'Visa'],
   ['american_express', 'American Express'],
   ['maestro', 'Maestro'],
@@ -20,7 +23,7 @@ export function PaymentLogos() {
           <li key={file}><Image src={`/payments/${file}.svg`} alt={name} width={66} height={42} unoptimized /></li>
         ))}
       </ul>
-      <p className="payment-logos-note">Die für dich verfügbaren Zahlungsarten werden im Checkout angezeigt.</p>
+      <p className="payment-logos-note">Die für deine Bestellung verfügbaren Zahlungsarten werden im Checkout angezeigt.</p>
     </div>
   );
 }

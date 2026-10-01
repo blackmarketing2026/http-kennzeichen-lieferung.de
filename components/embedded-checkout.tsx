@@ -265,6 +265,7 @@ function PaymentForm({
       elements,
       redirect: 'if_required',
       confirmParams: {
+        return_url: `${window.location.origin}/checkout/zahlung`,
         receipt_email: email,
         payment_method_data: { billing_details: { email } },
         shipping: {
@@ -381,17 +382,6 @@ function PaymentForm({
         <span>Zahlungsart</span>
         <PaymentElement options={{ layout: 'tabs' }} />
       </div>
-      <aside className={styles.paymentNotice} aria-label="Hinweis zu Zahlung und Fertigung">
-        <strong>Warum kein PayPal?</strong>
-        <p>
-          Wir bieten PayPal nicht an, weil unser Bestellablauf auf den
-          garantierten Kennzeichendruck innerhalb von 10 Minuten ausgelegt ist.
-          Dein Kennzeichen ist innerhalb von 10 Minuten nach der Bestellung
-          geprägt und versandfertig – außer an Sonn- und Feiertagen. Dadurch
-          ist eine schnellere Zustellung als bei herkömmlicher Abwicklung
-          möglich; die tatsächliche Lieferzeit hängt von DHL ab.
-        </p>
-      </aside>
       <p className="checkout-account-hint">
         Du bestellst als Gast – kein Konto nötig. Schon Kunde?{' '}
         <Link href="/konto/login">Melde dich an</Link>, um Bestellungen und

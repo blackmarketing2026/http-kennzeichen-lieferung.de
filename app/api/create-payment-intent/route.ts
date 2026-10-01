@@ -265,7 +265,6 @@ export async function POST(request: Request) {
           description: `${quantity} × ${product.label} – ${plate}${extras.parkingPlate ? ' + Parkplatz' : ''}${extras.bikeRackPlate ? ' + Fahrradträger' : ''}`,
           automatic_payment_methods: {
             enabled: true,
-            allow_redirects: 'never',
           },
           metadata,
         },

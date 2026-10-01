@@ -2279,6 +2279,29 @@ summary:focus-visible {
   width: min(100%, 520px);
   text-align: center;
 }
+.payment-return-page {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 40px 24px;
+}
+.payment-return-page .real-payment-success {
+  margin: 0 auto;
+}
+.payment-return-page.is-processing .real-payment-success > span,
+.payment-return-page.is-processing .real-payment-success > p:first-of-type {
+  color: #8b5b04;
+}
+.payment-return-page.is-processing .real-payment-success > span {
+  background: #fff4d8;
+}
+.payment-return-page.is-unconfirmed .real-payment-success > span,
+.payment-return-page.is-unconfirmed .real-payment-success > p:first-of-type {
+  color: #ad3434;
+}
+.payment-return-page.is-unconfirmed .real-payment-success > span {
+  background: #fdeaea;
+}
 .real-payment-success > span {
   width: 78px;
   height: 78px;
@@ -2300,6 +2323,7 @@ summary:focus-visible {
   font-weight: 850;
   letter-spacing: 0.14em;
 }
+.real-payment-success h1,
 .real-payment-success h2 {
   font-size: 2.6rem;
   letter-spacing: -0.05em;
@@ -3198,6 +3222,7 @@ footer {
   .secure-checkout-heading div strong {
     font-size: 1.45rem;
   }
+  .real-payment-success h1,
   .real-payment-success h2 {
     font-size: 2.2rem;
   }
