@@ -279,7 +279,7 @@ export function KennzeichenLandingPage() {
                 aria-label="Ortskürzel"
                 value={city}
                 onChange={(event) => updateCity(event.target.value)}
-                placeholder="B"
+                placeholder="H"
                 maxLength={3}
                 autoComplete="off"
               />
@@ -301,7 +301,7 @@ export function KennzeichenLandingPage() {
                 aria-label="Erkennungsnummer"
                 value={numbers}
                 onChange={(event) => updateNumbers(event.target.value)}
-                placeholder="1234"
+                placeholder="123"
                 maxLength={4}
                 inputMode="numeric"
                 autoComplete="off"
