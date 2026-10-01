@@ -110,9 +110,9 @@ function geometry(value: string, type: PlateType) {
     ];
     const unit = Math.min(
       48,
-      (available - 37) / weights.reduce((sum, count) => sum + count, 0),
+      (available - 46) / weights.reduce((sum, count) => sum + count, 0),
     );
-    const total = weights.reduce((sum, count) => sum + count * unit, 0) + 37;
+    const total = weights.reduce((sum, count) => sum + count * unit, 0) + 46;
     let x = 57 + (available - total) / 2;
     fields = [city, letters, numbers + suffix].map((text, index) => {
       const field = {
@@ -123,7 +123,7 @@ function geometry(value: string, type: PlateType) {
         height: 87,
         fontSize: 101,
       };
-      x += field.width + (index === 0 ? 27 : 10);
+      x += field.width + (index === 0 ? 36 : 10);
       return field;
     });
   }
@@ -150,7 +150,7 @@ function PlateArtwork({
   const bandWidth = agriculture ? 32 : motorcycle ? 40 : 44;
   const starX = 7 + bandWidth / 2;
   const starY = agriculture ? 25 : motorcycle ? 29 : 32;
-  const stickerX = fields[0].x + fields[0].width + 13.5;
+  const stickerX = fields[0].x + fields[0].width + 18;
   return (
     <svg
       className={styles.artwork}
@@ -187,16 +187,18 @@ function PlateArtwork({
           <stop offset=".6" stopColor="#111412" />
           <stop offset="1" stopColor="#020403" />
         </linearGradient>
-        <radialGradient id={`${id}-inspection-sticker`} cx=".35" cy=".28" r=".8">
-          <stop stopColor="#f4f7d7" />
-          <stop offset=".7" stopColor="#a5c569" />
-          <stop offset="1" stopColor="#557d41" />
+        <radialGradient id={`${id}-inspection-sticker`} cx=".32" cy=".22" r=".85">
+          <stop stopColor="#fff87a" />
+          <stop offset=".72" stopColor="#f5df2b" />
+          <stop offset="1" stopColor="#d5b900" />
         </radialGradient>
-        <radialGradient id={`${id}-registration-sticker`} cx=".35" cy=".25" r=".8">
-          <stop stopColor="#f7fbfd" />
-          <stop offset=".72" stopColor="#c9dce6" />
-          <stop offset="1" stopColor="#6e8ea1" />
-        </radialGradient>
+        <linearGradient id={`${id}-registration-sticker`} x1="0" y1="0" x2="1" y2="1">
+          <stop stopColor="#333638" />
+          <stop offset=".18" stopColor="#f5f5f1" />
+          <stop offset=".42" stopColor="#8b9291" />
+          <stop offset=".7" stopColor="#f9f9f4" />
+          <stop offset="1" stopColor="#45494a" />
+        </linearGradient>
         <pattern
           id={`${id}-grain`}
           width="2.3"
@@ -312,28 +314,51 @@ function PlateArtwork({
       </g>
       {!motorcycle && !agriculture && (
         <g aria-hidden="true">
-          <g transform={`translate(${stickerX} 32)`}>
-            <circle r="11" fill="#a9afa8" stroke="#525a52" strokeWidth=".65" />
-            <circle r="9.7" fill={ref('inspection-sticker')} stroke="#e7edcb" strokeWidth=".6" />
-            {Array.from({ length: 12 }, (_, index) => (
-              <path
-                key={index}
-                d="M0 -8.6V-6.9"
-                transform={`rotate(${index * 30})`}
-                stroke="#345e35"
-                strokeWidth=".75"
-              />
+          <g transform={`translate(${stickerX} 31)`}>
+            <circle cy=".6" r="15.9" fill="#8a8d88" opacity=".55" />
+            <circle r="15.3" fill="#171918" stroke="#e3e5de" strokeWidth=".45" />
+            <circle r="13.8" fill={ref('inspection-sticker')} stroke="#252725" strokeWidth=".5" />
+            {Array.from({ length: 12 }, (_, index) => {
+              const angle = (index * Math.PI) / 6;
+              const month = index === 0 ? 12 : 12 - index;
+              return (
+                <g key={month}>
+                  <path d="M0 -13.5V-11.5" transform={`rotate(${index * 30})`} stroke="#161716" strokeWidth="1.1" />
+                  <text
+                    x={Math.sin(angle) * 10.1}
+                    y={-Math.cos(angle) * 10.1 + 1.25}
+                    textAnchor="middle"
+                    fill="#171817"
+                    fontFamily="Arial, sans-serif"
+                    fontSize="3.7"
+                    fontWeight="800"
+                  >
+                    {month}
+                  </text>
+                </g>
+              );
+            })}
+            {Array.from({ length: 4 }, (_, index) => (
+              <path key={index} d="M0 -5.8L-2 -8H2Z" transform={`rotate(${index * 90})`} fill="#181a18" />
             ))}
-            <circle r="6.1" fill="#dceaa9" stroke="#658a50" strokeWidth=".55" />
-            <text y="1.75" textAnchor="middle" fill="#315b35" fontFamily="Arial, sans-serif" fontSize="5.8" fontWeight="700">HU</text>
+            <circle r="5.8" fill="#f8e445" stroke="#191a18" strokeWidth="1.35" />
+            <text y="2.2" textAnchor="middle" fill="#161715" fontFamily="Arial, sans-serif" fontSize="6.8" fontWeight="900">HU</text>
           </g>
-          <g transform={`translate(${stickerX} 76)`}>
-            <circle r="11" fill="#a9afb1" stroke="#4f6068" strokeWidth=".7" />
-            <circle r="9.7" fill={ref('registration-sticker')} stroke="#f7fbfb" strokeWidth=".65" />
-            <circle r="7.4" fill="none" stroke="#497187" strokeWidth=".8" />
-            <text y="-4" textAnchor="middle" fill="#3d6377" fontFamily="Arial, sans-serif" fontSize="3.1" fontWeight="700" letterSpacing=".3">ZULASSUNG</text>
-            <path d="M-4 -1H4V3.5L0 6-4 3.5Z" fill="#c4d2d4" stroke="#496c78" strokeWidth=".6" />
-            <path d="M0 0V4M-2 2H2" stroke="#496c78" strokeWidth=".65" />
+          <g transform={`translate(${stickerX} 78)`}>
+            <circle cy=".7" r="15.9" fill="#777d7e" opacity=".5" />
+            <circle r="15.3" fill="#202323" stroke="#eef0ed" strokeWidth=".4" />
+            <circle r="13.8" fill={ref('registration-sticker')} stroke="#343737" strokeWidth=".75" />
+            <circle r="11.8" fill="#dedfdb" stroke="#303433" strokeWidth=".75" />
+            <text y="-9.8" textAnchor="middle" fill="#222524" fontFamily="Arial, sans-serif" fontSize="2.65" fontWeight="900" letterSpacing=".2">ZULASSUNG</text>
+            <text y="12.1" textAnchor="middle" fill="#222524" fontFamily="Arial, sans-serif" fontSize="2.65" fontWeight="900" letterSpacing=".35">BEHÖRDE</text>
+            <path d="M-8.7 -1.2l.5 1.2 1.3.1-1 .8.4 1.2-1.2-.7-1.1.7.3-1.2-1-.8 1.3-.1ZM8.7-1.2l.5 1.2 1.3.1-1 .8.4 1.2-1.2-.7-1.1.7.3-1.2-1-.8 1.3-.1Z" fill="#272b2a" />
+            <path d="M-7.2-7.2H7.2V2.3C7.2 5.9 3.3 8.1 0 9.2-3.3 8.1-7.2 5.9-7.2 2.3Z" fill="#c72027" stroke="#262929" strokeWidth=".8" />
+            <path
+              d="M-5 2.7c-.6-1.4-.1-3.2 1.2-4.1L-5-3.5l-1.2.1-.5-1.1 1.1-1.5 1.3-.4 1.5 1.1.8 2c1.7-.9 3.1-.8 4.5-.2 1.4.6 2.4 1.6 2.8 2.9.6-.7.7-1.6.2-2.6 1.9 1.5 1.6 3.8-.2 4.7l-1.2.3.4 2.2 1.3 1.8-1.5.3-2.1-2.8-.7-1.7-2.2.2-1.8 3.9-1.8.1 1.3-4.3-1.2-1.2-1.1 1.6-1.3-.3Z"
+              fill="#f7f8f3"
+              stroke="#672027"
+              strokeWidth=".38"
+            />
           </g>
         </g>
       )}
