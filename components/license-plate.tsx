@@ -150,6 +150,7 @@ function PlateArtwork({
   const bandWidth = agriculture ? 32 : motorcycle ? 40 : 44;
   const starX = 7 + bandWidth / 2;
   const starY = agriculture ? 25 : motorcycle ? 29 : 32;
+  const stickerX = fields[0].x + fields[0].width + 13.5;
   return (
     <svg
       className={styles.artwork}
@@ -186,6 +187,16 @@ function PlateArtwork({
           <stop offset=".6" stopColor="#111412" />
           <stop offset="1" stopColor="#020403" />
         </linearGradient>
+        <radialGradient id={`${id}-inspection-sticker`} cx=".35" cy=".28" r=".8">
+          <stop stopColor="#f4f7d7" />
+          <stop offset=".7" stopColor="#a5c569" />
+          <stop offset="1" stopColor="#557d41" />
+        </radialGradient>
+        <radialGradient id={`${id}-registration-sticker`} cx=".35" cy=".25" r=".8">
+          <stop stopColor="#f7fbfd" />
+          <stop offset=".72" stopColor="#c9dce6" />
+          <stop offset="1" stopColor="#6e8ea1" />
+        </radialGradient>
         <pattern
           id={`${id}-grain`}
           width="2.3"
@@ -299,6 +310,33 @@ function PlateArtwork({
           D
         </text>
       </g>
+      {!motorcycle && !agriculture && (
+        <g aria-hidden="true">
+          <g transform={`translate(${stickerX} 32)`}>
+            <circle r="11" fill="#a9afa8" stroke="#525a52" strokeWidth=".65" />
+            <circle r="9.7" fill={ref('inspection-sticker')} stroke="#e7edcb" strokeWidth=".6" />
+            {Array.from({ length: 12 }, (_, index) => (
+              <path
+                key={index}
+                d="M0 -8.6V-6.9"
+                transform={`rotate(${index * 30})`}
+                stroke="#345e35"
+                strokeWidth=".75"
+              />
+            ))}
+            <circle r="6.1" fill="#dceaa9" stroke="#658a50" strokeWidth=".55" />
+            <text y="1.75" textAnchor="middle" fill="#315b35" fontFamily="Arial, sans-serif" fontSize="5.8" fontWeight="700">HU</text>
+          </g>
+          <g transform={`translate(${stickerX} 76)`}>
+            <circle r="11" fill="#a9afb1" stroke="#4f6068" strokeWidth=".7" />
+            <circle r="9.7" fill={ref('registration-sticker')} stroke="#f7fbfb" strokeWidth=".65" />
+            <circle r="7.4" fill="none" stroke="#497187" strokeWidth=".8" />
+            <text y="-4" textAnchor="middle" fill="#3d6377" fontFamily="Arial, sans-serif" fontSize="3.1" fontWeight="700" letterSpacing=".3">ZULASSUNG</text>
+            <path d="M-4 -1H4V3.5L0 6-4 3.5Z" fill="#c4d2d4" stroke="#496c78" strokeWidth=".6" />
+            <path d="M0 0V4M-2 2H2" stroke="#496c78" strokeWidth=".65" />
+          </g>
+        </g>
+      )}
       <rect
         x="5.4"
         y="5.4"
@@ -383,7 +421,7 @@ function PlateArtwork({
 export function LicensePlate({ className = '', style, ...props }: PlateProps) {
   const plateValue = props.value.trim();
   const label = plateValue
-    ? `Kennzeichenvorschau ${plateValue}${props.type === 'electric' ? ' E' : props.type === 'historic' ? ' H' : ''}${props.type === 'season' ? `, Saison ${String(props.seasonStartMonth ?? 4).padStart(2, '0')} bis ${String(props.seasonEndMonth ?? 10).padStart(2, '0')}` : ''}, Schriftfarbe ${props.color === 'green' ? 'Grün' : props.color === 'carbon' ? 'Carbon' : 'Schwarz'}`
+    ? `Kennzeichenvorschau ${plateValue}${props.type === 'electric' ? ' E' : props.type === 'historic' ? ' H' : ''}${props.type === 'season' ? `, Saison ${String(props.seasonStartMonth ?? 4).padStart(2, '0')} bis ${String(props.seasonEndMonth ?? 10).padStart(2, '0')}` : ''}, Schriftfarbe ${props.color === 'green' ? 'Grün' : props.color === 'carbon' ? 'Carbon' : 'Schwarz'}. Plaketten sind nur eine Illustration.`
     : `Leere Kennzeichenvorschau, Schriftfarbe ${props.color === 'green' ? 'Grün' : props.color === 'carbon' ? 'Carbon' : 'Schwarz'}`;
   const agriculture =
     props.type === 'agriculture240' || props.type === 'agriculture255';

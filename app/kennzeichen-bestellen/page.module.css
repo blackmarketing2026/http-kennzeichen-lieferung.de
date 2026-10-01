@@ -289,7 +289,13 @@
 }
 .plate {
   width: 100%;
-  margin: 0 auto 24px;
+  margin: 0 auto 6px;
+}
+.previewNote {
+  margin: 0 0 20px;
+  color: #71838e;
+  font-size: 0.68rem;
+  line-height: 1.4;
 }
 
 .fields {

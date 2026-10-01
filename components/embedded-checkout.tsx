@@ -729,6 +729,9 @@ export function EmbeddedCheckout({
             color={selection.plateColor}
             className="real-checkout-plate"
           />
+          {selection.plateType !== 'motorcycle' && !isAgriculturePlate(selection.plateType) && (
+            <p className="checkout-preview-note">Plaketten dienen nur der Vorschau und sind nicht im Lieferumfang.</p>
+          )}
         {extras.parkingPlate && (
           <div className="real-order-line">
             <span>1 × Parkplatz-Kennzeichen</span>

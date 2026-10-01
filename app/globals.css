@@ -1943,6 +1943,13 @@ summary:focus-visible {
   width: min(100%, 580px);
   margin: 0 auto 14px;
 }
+.checkout-preview-note {
+  margin: -5px 0 18px;
+  color: #71838e;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  text-align: center;
+}
 .checkout-live-label {
   width: fit-content;
   margin: -7px 0 14px;

@@ -267,6 +267,7 @@ export function KennzeichenLandingPage() {
             seasonEndMonth={seasonEndMonth}
             className={styles.plate}
           />
+          {plateType !== 'motorcycle' && <p className={styles.previewNote}>Plaketten dienen nur der Vorschau und sind nicht im Lieferumfang.</p>}
 
           <div className={styles.fields}>
             <label>
