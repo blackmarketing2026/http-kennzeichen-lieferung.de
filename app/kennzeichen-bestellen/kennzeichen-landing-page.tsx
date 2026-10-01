@@ -392,14 +392,14 @@ export function KennzeichenLandingPage() {
           >
             {valid ? (
               <>
-                Weiter zur Bestellübersicht <ArrowRight />
+                Weiter zur Lieferadresse <ArrowRight />
               </>
             ) : (
               'Kennzeichen eingeben'
             )}
           </button>
           <p className={styles.checkoutNote}>
-            <LockKeyhole /> {offerPrice} inkl. Versand · Zahlung im nächsten Schritt · kein Konto nötig
+            <LockKeyhole /> {offerPrice} inkl. Versand · Adresse und Zahlung folgen · kein Konto nötig
           </p>
           <div className={styles.paymentWrap}>
             <PaymentLogos />

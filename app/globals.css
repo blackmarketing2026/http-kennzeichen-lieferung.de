@@ -2368,6 +2368,57 @@ summary:focus-visible {
   width: min(100%, 520px);
   text-align: center;
 }
+
+/* Three-step checkout: address and payment stay beside the live order total. */
+.real-checkout-page {
+  width: min(calc(100% - 40px), 1120px);
+  grid-template-columns: minmax(0, 1fr) minmax(290px, 350px);
+  gap: 18px 24px;
+  padding-top: 20px;
+}
+.checkout-header, .checkout-progress { grid-column: 1 / -1; }
+.checkout-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #dbe7ee; }
+.checkout-header .checkout-logo { margin: 0; }
+.checkout-header > span { display: inline-flex; align-items: center; gap: 7px; color: #456271; font-size: .78rem; font-weight: 750; }
+.checkout-progress { width: min(100%, 560px); margin: 4px auto 10px; display: grid; grid-template-columns: repeat(3, 1fr); }
+.checkout-progress > span { position: relative; display: grid; justify-items: center; gap: 7px; color: #81939e; font-size: .72rem; font-weight: 750; text-align: center; }
+.checkout-progress > span:not(:last-child)::after { content: ''; position: absolute; top: 15px; left: calc(50% + 20px); width: calc(100% - 40px); height: 1px; background: #cbdbe5; }
+.checkout-progress b { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid #cbdbe5; border-radius: 50%; background: #fff; font-size: .78rem; }
+.checkout-progress .is-complete, .checkout-progress .is-current { color: var(--blue); }
+.checkout-progress .is-complete b, .checkout-progress .is-current b { border-color: var(--blue); background: var(--blue); color: #fff; }
+.checkout-order-panel { grid-column: 2; grid-row: 3; align-self: start; position: sticky; top: 20px; padding: 10px 22px 18px; border-radius: 12px; }
+.checkout-payment-panel { grid-column: 1; grid-row: 3; align-self: start; padding: 0 30px; border-radius: 12px; }
+.checkout-order-copy { margin-bottom: 0; }
+.checkout-order-copy h1 { font-size: 1.22rem; line-height: 1.25; }
+.checkout-order-panel .checkout-flow-step { padding: 17px 0; }
+.checkout-order-panel .checkout-preview-block { border-top: 0; padding-top: 0; }
+.checkout-order-panel .checkout-step-heading { display: none; }
+.checkout-order-panel .checkout-live-label { margin: 5px 0 10px; }
+.checkout-order-panel .real-checkout-plate { width: min(100%, 280px); }
+.checkout-order-panel .real-order-line { padding: 11px 0; }
+.checkout-order-panel .real-order-total { padding: 16px 0; }
+.checkout-order-panel .real-order-total strong { font-size: 1.45rem; }
+.checkout-order-panel .delivery-summary { margin-bottom: 0; padding: 12px; border-radius: 8px; background: #eaf5fc; }
+.real-payment-form .checkout-flow-step:first-child { border-top: 0; }
+.checkout-flow-step[hidden] { display: none; }
+.checkout-address-review { margin-bottom: 20px; padding: 15px; border: 1px solid #d8e5ed; border-radius: 8px; background: #f5f9fc; }
+.checkout-address-review > div, .checkout-shipping-method { display: flex; justify-content: space-between; gap: 14px; }
+.checkout-address-review button { padding: 0; border: 0; background: transparent; color: var(--blue); font: inherit; font-size: .77rem; font-weight: 750; text-decoration: underline; cursor: pointer; }
+.checkout-address-review p { margin: 10px 0 0; color: #4b6270; font-size: .8rem; line-height: 1.5; }
+.checkout-shipping-method { margin-bottom: 26px; padding: 14px; border: 1px solid #d8e5ed; border-radius: 8px; color: #4b6270; font-size: .8rem; }
+.checkout-shipping-method strong { color: #16805a; }
+.checkout-continue { width: 100%; min-height: 52px; margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 9px; border: 0; border-radius: 7px; background: var(--blue); color: white; font: inherit; font-weight: 800; cursor: pointer; }
+.checkout-continue:hover { background: var(--blue-dark); }
+.checkout-continue:disabled { opacity: .5; cursor: wait; }
+@media (max-width: 760px) {
+  .real-checkout-page { width: min(calc(100% - 24px), 620px); grid-template-columns: 1fr; gap: 14px; }
+  .checkout-header, .checkout-progress, .checkout-order-panel, .checkout-payment-panel { grid-column: 1; }
+  .checkout-header { grid-row: 1; }
+  .checkout-progress { grid-row: 2; }
+  .checkout-order-panel { grid-row: 3; position: static; }
+  .checkout-payment-panel { grid-row: 4; padding: 0 20px; }
+  .checkout-order-panel .checkout-preview-block { display: block; }
+}
 .payment-return-page {
   min-height: 100svh;
   display: grid;
