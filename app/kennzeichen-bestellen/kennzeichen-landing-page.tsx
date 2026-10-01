@@ -209,9 +209,9 @@ export function KennzeichenLandingPage() {
             <span /> DIN-zertifiziert & schnell geprägt
           </p>
           <h1>
-            Dein Kennzeichen.
+            Kennzeichen bestellen.
             <br />
-            <em>In 10 Minuten geprägt und versandfertig.</em>
+            <em>Schnell geprägt, sicher geliefert.</em>
           </h1>
           <p className={styles.heroOffer}>
             <span>Jetzt im Angebot</span>
@@ -219,9 +219,9 @@ export function KennzeichenLandingPage() {
             <small>inkl. DHL-Versand</small>
           </p>
           <p className={styles.lead}>
-            Kennzeichen online konfigurieren, sicher bestellen und bequem
-            liefern lassen. DHL holt an Werktagen dreimal täglich bei unserem
-            Druckwerk ab.
+            Wähle deine Kombination, gib deine Lieferadresse ein und bezahle
+            sicher online. Deine DIN-zertifizierten Schilder werden in 10
+            Minuten geprägt und für den DHL-Versand vorbereitet.
           </p>
           <ul className={styles.heroChecks}>
             <li>
@@ -232,6 +232,9 @@ export function KennzeichenLandingPage() {
             </li>
             <li>
               <MapPinCheck /> Sendungsverfolgung per E-Mail
+            </li>
+            <li>
+              <ShieldCheck /> Unsere Liefergarantie ist inklusive
             </li>
           </ul>
           <a className={styles.heroCta} href="#konfigurator">
@@ -250,7 +253,7 @@ export function KennzeichenLandingPage() {
 
         <div className={styles.orderCard} id="konfigurator">
           <div className={styles.cardTopline}>
-            <span>Direkt konfigurieren</span>
+            <span>Schritt 1: Kennzeichen wählen</span>
             <strong>
               {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} · inkl. Versand
             </strong>
@@ -405,6 +408,17 @@ export function KennzeichenLandingPage() {
             <PaymentLogos />
           </div>
         </div>
+      </section>
+
+      <section className={styles.orderProcess} aria-labelledby="bestellablauf">
+        <p className={styles.kicker}><span /> So läuft deine Bestellung</p>
+        <h2 id="bestellablauf">In drei Schritten zu deinen Kennzeichen</h2>
+        <div className={styles.orderProcessGrid}>
+          <article><b>01</b><strong>Kennzeichen wählen</strong><p>Kombination und Kennzeichenart eingeben. Du siehst dein Schild und den Endpreis direkt in der Vorschau.</p></article>
+          <article><b>02</b><strong>Lieferadresse eingeben</strong><p>Trage die Adresse ein, prüfe deine Bestellung und ergänze bei Bedarf Zubehör.</p></article>
+          <article><b>03</b><strong>Sicher bezahlen</strong><p>Wähle deine Zahlungsart. Wir prägen dein Kennzeichen und versenden es mit DHL und Sendungsverfolgung.</p></article>
+        </div>
+        <Link href="/liefergarantie">Mehr über unsere Liefergarantie erfahren <ArrowRight size={17} /></Link>
       </section>
 
       <section className={styles.proofBar} aria-label="Produktvorteile">

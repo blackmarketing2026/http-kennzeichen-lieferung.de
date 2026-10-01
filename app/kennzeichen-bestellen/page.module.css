@@ -1514,3 +1514,55 @@
     transition: none !important;
   }
 }
+
+/* The first screen follows the same three checkout stages as the order flow. */
+.hero {
+  min-height: 0;
+  padding-top: 54px;
+  padding-bottom: 72px;
+  grid-template-columns: minmax(0, .88fr) minmax(510px, 1.12fr);
+  gap: clamp(32px, 5vw, 76px);
+  align-items: start;
+  background: linear-gradient(145deg, #f3f8fc 0%, #fff 74%);
+}
+.heroCopy { padding-top: 15px; }
+.heroCopy h1 { font-size: clamp(2.65rem, 4vw, 4.2rem); line-height: 1.04; }
+.heroOffer { margin-top: 25px; }
+.lead { margin: 22px 0; font-size: 1rem; }
+.heroChecks { gap: 9px; }
+.heroChecks li { font-size: .85rem; }
+.heroCta { display: none; }
+.deliveryInfo { margin-top: 25px; }
+.orderCard { display: flex; flex-direction: column; max-width: 630px; padding: 25px; border-radius: 15px; box-shadow: 0 18px 48px rgba(7, 35, 54, .11); }
+.cardTopline { order: -3; margin-bottom: 16px; }
+.typeGrid { order: -2; margin-bottom: 20px; }
+.seasonFields { order: -1; margin: -6px 0 16px; }
+.typeGrid button { min-height: 56px; }
+.orderCard .plate { max-width: 520px; }
+.orderCard .summary { margin-top: 16px; }
+.orderProcess { padding: 64px max(28px, calc((100vw - 1180px) / 2)) 70px; background: #fff; text-align: center; }
+.orderProcess > .kicker { justify-content: center; margin-bottom: 12px; }
+.orderProcess h2 { margin: 0; font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -.04em; }
+.orderProcessGrid { margin-top: 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: left; }
+.orderProcessGrid article { min-height: 175px; padding: 22px; display: flex; flex-direction: column; border: 1px solid #dce9f2; border-radius: 12px; background: #f4f9fd; }
+.orderProcessGrid b { width: 28px; height: 28px; margin-bottom: 18px; display: grid; place-items: center; border-radius: 50%; background: var(--blue); color: #fff; font-size: .73rem; }
+.orderProcessGrid strong { font-size: .95rem; }
+.orderProcessGrid p { margin: 8px 0 0; color: #5b7080; font-size: .78rem; line-height: 1.55; }
+.orderProcess > a { width: fit-content; margin: 22px auto 0; display: flex; align-items: center; gap: 7px; color: var(--blue); font-size: .82rem; font-weight: 800; }
+@media (max-width: 1120px) {
+  .hero { grid-template-columns: 1fr; }
+  .heroCopy { padding-top: 0; }
+  .orderCard { max-width: 740px; }
+}
+@media (max-width: 820px) {
+  .hero { padding: 32px 16px 48px; gap: 28px; }
+  .heroCopy h1 { font-size: clamp(2.4rem, 8vw, 4rem); }
+  .orderProcess { padding: 55px 20px; }
+  .orderProcessGrid { grid-template-columns: 1fr; }
+  .orderProcessGrid article { min-height: 0; }
+}
+@media (max-width: 560px) {
+  .orderCard { padding: 18px 15px; }
+  .typeGrid { grid-template-columns: repeat(3, 1fr); }
+  .heroCopy h1 { font-size: clamp(2.2rem, 9vw, 3rem); }
+}
