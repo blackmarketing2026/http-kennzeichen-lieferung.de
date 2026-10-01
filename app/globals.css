@@ -1633,6 +1633,95 @@ summary:focus-visible {
   line-height: 1.3;
 }
 
+.klarna-feature {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(115deg, #ffe1ed 0%, #ffbdd7 55%, #ffa8cd 100%);
+  color: #0b051d;
+}
+.klarna-feature-inner {
+  width: min(100%, 1440px);
+  min-height: 540px;
+  margin: 0 auto;
+  padding: clamp(74px, 8vw, 125px) clamp(24px, 8vw, 130px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.65fr);
+  align-items: center;
+  gap: 5vw;
+}
+.klarna-feature-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+.klarna-feature-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 1.6rem;
+  font-weight: 850;
+  letter-spacing: -0.055em;
+}
+.klarna-feature-brand img {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgb(72 5 42 / 10%);
+}
+.klarna-feature h2 {
+  margin: 28px 0 18px;
+  font-size: clamp(2.8rem, 5.1vw, 5.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.065em;
+}
+.klarna-feature p {
+  margin: 0;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+}
+.klarna-feature-button {
+  width: fit-content;
+  min-height: 58px;
+  margin-top: 34px;
+  padding: 0 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border-radius: 8px;
+  background: #0b051d;
+  color: #fff;
+  font-weight: 750;
+  text-decoration: none;
+  transition: transform 180ms ease, background 180ms ease;
+}
+.klarna-feature-button:hover {
+  transform: translateY(-2px);
+  background: #322441;
+}
+.klarna-feature-button:focus-visible {
+  outline: 3px solid #0b051d;
+  outline-offset: 4px;
+}
+.klarna-feature-art {
+  width: min(29vw, 390px);
+  aspect-ratio: 1;
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  transform: rotate(-9deg);
+  border: 1px solid rgb(11 5 29 / 13%);
+  border-radius: 34px;
+  background: rgb(255 255 255 / 26%);
+  box-shadow: 0 30px 70px rgb(96 13 59 / 13%);
+}
+.klarna-feature-art span {
+  font-size: clamp(11rem, 22vw, 20rem);
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -0.13em;
+}
+
 .checkout-section {
   padding: clamp(80px, 9vw, 140px) clamp(24px, 8vw, 130px);
   display: grid;
@@ -3088,6 +3177,18 @@ footer {
   .checkout-section {
     grid-template-columns: 1fr;
     padding: 85px 20px;
+  }
+  .klarna-feature-inner {
+    min-height: 0;
+    padding: 76px 24px 84px;
+    grid-template-columns: 1fr;
+  }
+  .klarna-feature h2 {
+    max-width: 620px;
+    font-size: clamp(2.6rem, 9vw, 4.5rem);
+  }
+  .klarna-feature-art {
+    display: none;
   }
   .checkout-intro {
     position: relative;

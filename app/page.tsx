@@ -850,6 +850,33 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="klarna-feature" aria-labelledby="klarna-feature-title">
+        <div className="klarna-feature-inner">
+          <div className="klarna-feature-copy">
+            <div className="klarna-feature-brand">
+              <Image
+                src="/payments/klarna-mark.svg"
+                alt=""
+                width={56}
+                height={56}
+                unoptimized
+              />
+              <span>Klarna</span>
+            </div>
+            <h2 id="klarna-feature-title">
+              Kennzeichen jetzt bestellen und später bezahlen
+            </h2>
+            <p>Wähle Klarna als Zahlungsart im Checkout.</p>
+            <a className="klarna-feature-button" href="#hero-city-input">
+              Jetzt konfigurieren <ArrowRight size={20} aria-hidden="true" />
+            </a>
+          </div>
+          <div className="klarna-feature-art" aria-hidden="true">
+            <span>K.</span>
+          </div>
+        </div>
+      </section>
+
       <section className="checkout-section" id="checkout">
         <div className="checkout-intro">
           <p className="eyebrow light">
