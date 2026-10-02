@@ -448,6 +448,30 @@ export function KennzeichenLandingPage() {
         </div>
       </section>
 
+      <section className={styles.klarnaBanner} aria-labelledby="klarna-bestellen-title">
+        <div className={styles.klarnaBannerInner}>
+          <div className={styles.klarnaBrand}>
+            <Image
+              src="/payments/klarna-mark.svg"
+              alt=""
+              width={48}
+              height={48}
+              unoptimized
+            />
+            <span>Klarna</span>
+          </div>
+          <div className={styles.klarnaCopy}>
+            <h2 id="klarna-bestellen-title">
+              Kennzeichen jetzt konfigurieren, bestellen und später bezahlen.
+            </h2>
+            <p>Wähle Klarna als Zahlungsart im Checkout.</p>
+          </div>
+          <a className={styles.klarnaButton} href="#konfigurator">
+            Jetzt konfigurieren <ArrowRight size={18} aria-hidden="true" />
+          </a>
+        </div>
+      </section>
+
       <section className={styles.buyerWarning} aria-labelledby="kaufhinweis">
         <div className={styles.warningIcon}>
           <TriangleAlert />
