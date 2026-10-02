@@ -2697,6 +2697,9 @@ footer {
 .footer-links a:hover {
   color: #fff;
 }
+.footer-links .footer-din-link { display: inline-flex; padding: 8px; border-radius: 7px; background: #fff; transition: box-shadow .2s ease; }
+.footer-links .footer-din-link:hover { box-shadow: 0 0 0 2px #71bdff; }
+.footer-din-link img { display: block; width: 82px; height: auto; }
 .mobile-bar {
   display: none;
 }
