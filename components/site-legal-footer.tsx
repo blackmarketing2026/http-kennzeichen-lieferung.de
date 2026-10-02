@@ -10,6 +10,7 @@ export function SiteLegalFooter() {
         <Link href="/datenschutz">Datenschutz</Link>
         <Link href="/widerruf">Widerruf</Link>
         <Link href="/liefergarantie">Liefergarantie</Link>
+        <Link href="/din-74069">DIN 74069</Link>
         <CookieSettingsButton />
       </nav>
     </div>

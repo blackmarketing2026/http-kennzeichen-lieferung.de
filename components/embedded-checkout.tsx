@@ -45,6 +45,7 @@ import {
 } from '@/components/parking-upsell';
 import { readAttribution } from '@/lib/attribution';
 import styles from './checkout-extras.module.css';
+import { DinCertificationLink } from '@/components/din-certification-link';
 import { formatSeasonMonth } from '@/lib/season-period';
 
 type CheckoutSelection = {
@@ -783,6 +784,7 @@ export function EmbeddedCheckout({
           Du bestellst geprägte Schilder. Reservierung, Zulassung und amtliche
           Plaketten sind nicht enthalten.
         </p>
+        <DinCertificationLink />
         <DeliveryGuarantee />
         </div>
       </section>

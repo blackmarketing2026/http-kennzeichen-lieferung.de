@@ -39,6 +39,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { ComplianceNotice } from '@/components/compliance-notice';
+import { DinCertificationLink } from '@/components/din-certification-link';
 import { CONSENT_STORAGE_KEY, parseConsentRecord } from '@/lib/cookie-consent';
 import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
 
@@ -942,6 +943,7 @@ export default function Home() {
             Zum sicheren Checkout · {formatPrice(total)}
           </button>
           <small>Mit dem Klick öffnet sich unsere eigene Checkout-Seite.</small>
+          <DinCertificationLink />
           <PaymentLogos />
         </div>
       </section>
@@ -1022,6 +1024,7 @@ export default function Home() {
           Datenschutzerklärung.
         </div>
         <div className="footer-links">
+          <Link href="/din-74069">DIN 74069</Link>
           <Link href="/konto/login">Mein Konto</Link>
           <a href="#top" aria-label="Nach oben">
             Nach oben ↑

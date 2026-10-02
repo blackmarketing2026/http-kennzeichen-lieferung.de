@@ -1759,6 +1759,13 @@ summary:focus-visible {
   color: #fff;
   font-size: 1.4rem;
 }
+.din-certification-link { margin: 24px 0; padding: 12px 14px; display: flex; align-items: center; gap: 14px; border: 1px solid #d5e1e9; border-radius: 9px; background: #f7fbfd; color: #173343; text-decoration: none; transition: border-color .2s ease, background .2s ease; }
+.din-certification-link:hover { border-color: var(--blue); background: #edf7fe; }
+.din-certification-link:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.din-certification-link img { width: 82px; height: auto; flex: 0 0 auto; }
+.din-certification-link span { display: grid; gap: 3px; }
+.din-certification-link strong { font-size: .81rem; line-height: 1.35; }
+.din-certification-link small { color: #526b79; font-size: .7rem; line-height: 1.4; }
 .checkout-form {
   padding: clamp(28px, 4vw, 55px);
   border-radius: 10px;
