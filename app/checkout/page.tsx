@@ -17,6 +17,7 @@ export default async function CheckoutPage({ searchParams }: { searchParams: Pro
   const plateType = first(params.type) as PlateType;
   const plateColor = first(params.color) as PlateColor;
   const quantity = Number(first(params.quantity)) as 1 | 2 | 3;
+  const bikeRackPlate = first(params.bikeRackPlate) === '1';
   const promoCode = first(params.promo)?.slice(0, 64) ?? '';
   const source = first(params.source);
   const seasonStartMonth = params.seasonStartMonth === undefined ? DEFAULT_SEASON_START_MONTH : Number(first(params.seasonStartMonth));
@@ -32,7 +33,7 @@ export default async function CheckoutPage({ searchParams }: { searchParams: Pro
 
   return (
     <EmbeddedCheckout
-      selection={{ plate, plateType, plateColor, quantity, ...(plateType === 'season' ? { seasonStartMonth, seasonEndMonth } : {}) }}
+      selection={{ plate, plateType, plateColor, quantity, bikeRackPlate, ...(plateType === 'season' ? { seasonStartMonth, seasonEndMonth } : {}) }}
       initialPromoCode={promoCode}
       returnPath={returnPath}
     />

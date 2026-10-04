@@ -17,6 +17,7 @@ export type CheckoutDraft = {
   plateType: PlateType;
   plateColor: PlateColor;
   quantity: 1 | 2 | 3;
+  bikeRackPlate?: boolean;
   promoCode?: string;
   seasonStartMonth?: number;
   seasonEndMonth?: number;
@@ -69,7 +70,7 @@ export function readCheckoutDraft(source: CheckoutSource): CheckoutDraft | null 
       !allowedTypes.includes(value.plateType as PlateType) ||
       (source === 'landmaschinen-kennzeichen'
         ? value.plateColor !== 'black' && value.plateColor !== 'green'
-        : value.plateColor !== 'black') ||
+        : value.plateColor !== 'black' && value.plateColor !== 'carbon') ||
       (value.quantity !== 1 && value.quantity !== 2 && value.quantity !== 3) ||
       !isAvailableConfiguration(
         value.plateType as PlateType,
@@ -84,6 +85,7 @@ export function readCheckoutDraft(source: CheckoutSource): CheckoutDraft | null 
       plateType: value.plateType as PlateType,
       plateColor: value.plateColor as PlateColor,
       quantity: value.quantity,
+      bikeRackPlate: value.bikeRackPlate === true,
       promoCode:
         typeof value.promoCode === 'string' ? value.promoCode.slice(0, 64) : undefined,
       seasonStartMonth: value.plateType === 'season' ? (value.seasonStartMonth ?? DEFAULT_SEASON_START_MONTH) as number : undefined,

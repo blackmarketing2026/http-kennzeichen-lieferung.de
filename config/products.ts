@@ -8,10 +8,12 @@ export type PlateType =
   | 'agriculture255';
 export type PlateColor = 'black' | 'carbon' | 'green';
 
-// Shipping is included in the displayed plate-package prices.
-export const SHIPPING_PRICE = 0;
+export const SHIPPING_PRICE = 3.9;
+export const FREE_SHIPPING_THRESHOLD = 19;
 export const PARKING_PLATE_PRICE = 5;
-export const BIKE_RACK_PLATE_PRICE = 5;
+export const BIKE_RACK_PLATE_PRICE = 4.9;
+export const CARBON_SURCHARGE = 5;
+export const EMISSION_STICKER_PRICE = 5.9;
 
 /** All prices in this file are consumer-facing gross prices (inkl. MwSt.), as required for B2C
  * price display in Germany (PAngV). License plates are taxed at the standard rate, not the
@@ -34,7 +36,7 @@ export const PRODUCTS: Record<
     shortLabel: 'Standard',
     size: '520 mm',
     format: 'long',
-    prices: { 1: 19.9, 2: 19.9, 3: 19.9 },
+    prices: { 1: 6.9, 2: 6.9, 3: 6.9 },
   },
   motorcycle: {
     label: 'Motorrad',
@@ -111,19 +113,17 @@ export function getUnitPrice(
   quantity: 1 | 2 | 3,
 ) {
   const product = PRODUCTS[plateType];
-  return color === 'carbon'
-    ? CARBON_PRICES[product.format][quantity]
-    : product.prices[quantity];
+  if (product.format === 'long') return product.prices[quantity] + (color === 'carbon' ? CARBON_SURCHARGE : 0);
+  return color === 'carbon' ? CARBON_PRICES[product.format][quantity] : product.prices[quantity];
 }
 
-/** The offer includes the second car plate in the 19.90 € package price. */
 export function getPackageDiscountCents(
   plateType: PlateType,
   color: PlateColor,
   quantity: 1 | 2 | 3,
 ) {
-  return color === 'black' && PRODUCTS[plateType].format === 'long' && quantity >= 2
-    ? Math.round(getUnitPrice(plateType, color, quantity) * 100)
+  return plateType !== 'standard' && PRODUCTS[plateType].format === 'long' && quantity >= 2
+    ? Math.round(PRODUCTS[plateType].prices[quantity] * 100)
     : 0;
 }
 
@@ -147,9 +147,9 @@ export function isAvailableConfiguration(
   if (isAgriculturePlate(plateType)) {
     return (color === 'black' || color === 'green') && quantity === 1;
   }
-  if (color !== 'black') return false;
+  if (color !== 'black' && !(color === 'carbon' && PRODUCTS[plateType].format === 'long')) return false;
   if (plateType === 'motorcycle') return quantity === 1;
-  return quantity === 2 || quantity === 3;
+  return quantity === 1 || quantity === 2 || quantity === 3;
 }
 
 export function isValidPlate(plate: string, plateType: PlateType) {

@@ -25,14 +25,16 @@ import { PaymentLogos } from '@/components/payment-logos';
 import { DeliveryGuarantee } from '@/components/delivery-guarantee';
 import {
   formatPrice,
-  getPackagePrice,
+  FREE_SHIPPING_THRESHOLD,
   isValidPlate,
   PRODUCTS,
   SHIPPING_PRICE,
+  type PlateColor,
   type PlateType,
 } from '@/config/products';
 import { CONSENT_STORAGE_KEY, parseConsentRecord } from '@/lib/cookie-consent';
 import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
+import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, formatSeasonMonth, isValidSeasonPeriod } from '@/lib/season-period';
 import styles from './page.module.css';
 
@@ -77,6 +79,9 @@ function trackEvent(event: string, payload: Record<string, unknown>) {
 export function KennzeichenLandingPage() {
   const router = useRouter();
   const [plateType, setPlateType] = useState<PlateType>('standard');
+  const [carQuantity, setCarQuantity] = useState<1 | 2>(2);
+  const [plateColor, setPlateColor] = useState<PlateColor>('black');
+  const [bikeRackPlate, setBikeRackPlate] = useState(false);
   const [city, setCity] = useState('');
   const [letters, setLetters] = useState('');
   const [numbers, setNumbers] = useState('');
@@ -84,15 +89,17 @@ export function KennzeichenLandingPage() {
   const [seasonEndMonth, setSeasonEndMonth] = useState(DEFAULT_SEASON_END_MONTH);
   const inputStarted = useRef(false);
   const validTracked = useRef(false);
-  const quantity: 1 | 2 = plateType === 'motorcycle' ? 1 : 2;
+  const quantity: 1 | 2 = plateType === 'motorcycle' ? 1 : carQuantity;
   const plateValue = `${city} ${letters} ${numbers}`;
   const valid = useMemo(
     () => isValidPlate(plateValue, plateType),
     [plateValue, plateType],
   );
   const validSeason = plateType !== 'season' || isValidSeasonPeriod(seasonStartMonth, seasonEndMonth);
-  const total = getPackagePrice(plateType, 'black', quantity) + SHIPPING_PRICE;
-  const offerPrice = formatPrice(total);
+  const pricing = getCheckoutPricing(plateType, plateColor, quantity, undefined, { parkingPlate: false, bikeRackPlate: plateType !== 'motorcycle' && bikeRackPlate });
+  const subtotal = ((pricing?.subtotalCents ?? 0) - (pricing?.packageDiscountCents ?? 0)) / 100;
+  const total = (pricing?.totalCents ?? 0) / 100;
+  const shippingRemaining = Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
   const product = PRODUCTS[plateType];
 
   useEffect(() => {
@@ -101,6 +108,9 @@ export function KennzeichenLandingPage() {
       if (!draft) return;
       const [savedCity, savedLetters, savedNumbers] = draft.plate.split(' ');
       setPlateType(draft.plateType);
+      setCarQuantity(draft.quantity === 1 ? 1 : 2);
+      setPlateColor(draft.plateColor);
+      setBikeRackPlate(draft.bikeRackPlate === true);
       setCity(savedCity);
       setLetters(savedLetters);
       setNumbers(savedNumbers);
@@ -156,8 +166,9 @@ export function KennzeichenLandingPage() {
     saveCheckoutDraft('kennzeichen-bestellen', {
       plate: plateValue,
       plateType,
-      plateColor: 'black',
+      plateColor,
       quantity,
+      bikeRackPlate: plateType !== 'motorcycle' && bikeRackPlate,
       ...(plateType === 'season' ? { seasonStartMonth, seasonEndMonth } : {}),
     });
     trackEvent('begin_checkout', {
@@ -170,7 +181,8 @@ export function KennzeichenLandingPage() {
       plate: plateValue,
       type: plateType,
       quantity: String(quantity),
-      color: 'black',
+      color: plateColor,
+      ...(bikeRackPlate && plateType !== 'motorcycle' ? { bikeRackPlate: '1' } : {}),
       source: 'kennzeichen-bestellen',
       ...(plateType === 'season' ? { seasonStartMonth: String(seasonStartMonth), seasonEndMonth: String(seasonEndMonth) } : {}),
     });
@@ -214,9 +226,9 @@ export function KennzeichenLandingPage() {
             <em>Schnell geprägt, sicher geliefert.</em>
           </h1>
           <p className={styles.heroOffer}>
-            <span>Jetzt im Angebot</span>
-            <strong>{offerPrice}</strong>
-            <small>inkl. DHL-Versand</small>
+            <span>Kennzeichen ab</span>
+            <strong>6,90 €</strong>
+            <small>pro Schild · inkl. 19 % MwSt.</small>
           </p>
           <p className={styles.lead}>
             Wähle deine Kombination, gib deine Lieferadresse ein und bezahle
@@ -255,7 +267,7 @@ export function KennzeichenLandingPage() {
           <div className={styles.cardTopline}>
             <span>Schritt 1: Kennzeichen wählen</span>
             <strong>
-              {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} · inkl. Versand
+              {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} · {formatPrice(total)} gesamt
             </strong>
           </div>
           <div className={styles.livePreviewLabel}>
@@ -265,12 +277,12 @@ export function KennzeichenLandingPage() {
           <LicensePlate
             value={plateValue}
             type={plateType}
-            color="black"
+            color={plateColor}
             seasonStartMonth={seasonStartMonth}
             seasonEndMonth={seasonEndMonth}
             className={styles.plate}
           />
-          {plateType !== 'motorcycle' && <p className={styles.previewNote}>Plaketten dienen nur der Vorschau und sind nicht im Lieferumfang.</p>}
+          {plateType !== 'motorcycle' && <p className={styles.previewNote}>Amtliche Siegel dienen nur der Vorschau und sind nicht im Lieferumfang.</p>}
 
           <div className={styles.fields}>
             <label>
@@ -308,6 +320,23 @@ export function KennzeichenLandingPage() {
               />
             </label>
           </div>
+
+          {plateType !== 'motorcycle' && (
+            <div className={styles.quantityChoice}>
+              <span>Menge</span>
+              <div>
+                {([1, 2] as const).map((count) => (
+                  <button key={count} type="button" aria-pressed={carQuantity === count} onClick={() => setCarQuantity(count)}>{count} {count === 1 ? 'Schild' : 'Schilder'}</button>
+                ))}
+              </div>
+            </div>
+          )}
+          {plateType !== 'motorcycle' && (
+            <div className={styles.finishChoice} aria-label="Ausführung">
+              <button type="button" aria-pressed={plateColor === 'black'} onClick={() => setPlateColor('black')}>Standard</button>
+              <button type="button" aria-pressed={plateColor === 'carbon'} onClick={() => setPlateColor('carbon')}>Carbon-Optik <b>Beliebt</b><small>+5,00 € pro Schild</small></button>
+            </div>
+          )}
           <p
             className={`${styles.validation} ${valid ? styles.valid : ''}`}
             aria-live="polite"
@@ -373,20 +402,23 @@ export function KennzeichenLandingPage() {
 
           <div className={styles.summary}>
             <div>
-              <span>
-                {quantity} × {product.label}, {product.size}
+              <span className={styles.platePrice}>
+                {quantity} {quantity === 1 ? 'Schild' : 'Schilder'}: {formatPrice((quantity * (pricing?.unitPriceCents ?? 0) - (pricing?.packageDiscountCents ?? 0)) / 100)}
               </span>
               <strong className={styles.summaryPrice}>
-                {offerPrice}
+                Gesamt: {formatPrice(total)}
               </strong>
             </div>
             <div>
               <span>DHL-Versand mit Tracking</span>
-              <strong>Inklusive</strong>
+              <strong>{pricing?.shippingCents === 0 ? 'Kostenlos' : formatPrice(SHIPPING_PRICE)}</strong>
             </div>
+            {bikeRackPlate && plateType !== 'motorcycle' && <div><span>3. Schild für Fahrradträger</span><strong>{formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100)}</strong></div>}
           </div>
-          <p className={styles.livePriceNote}>Der Preis zeigt immer deine aktuelle Auswahl.</p>
+          <p className={styles.livePriceNote}>inkl. MwSt., zzgl. 3,90 € Versand – versandkostenfrei ab 19 €</p>
+          <p className={styles.shippingProgress} aria-live="polite">{shippingRemaining > 0 ? `Noch ${formatPrice(shippingRemaining)} bis zum kostenlosen Versand` : 'Versandkostenfrei ✓'}</p>
           <DeliveryGuarantee />
+          {plateType !== 'motorcycle' && <label className={styles.extraCheck}><input type="checkbox" checked={bikeRackPlate} onChange={(event) => setBikeRackPlate(event.target.checked)} /><span>3. Schild für Fahrradträger (gleiche Kombination) <strong>+{formatPrice(4.9 + (plateColor === 'carbon' ? 5 : 0))}</strong></span></label>}
           <button
             className={styles.orderButton}
             type="button"
@@ -402,7 +434,7 @@ export function KennzeichenLandingPage() {
             )}
           </button>
           <p className={styles.checkoutNote}>
-            <LockKeyhole /> {offerPrice} inkl. Versand · Adresse und Zahlung folgen · kein Konto nötig
+            <LockKeyhole /> {formatPrice(total)} inkl. MwSt. und Versand · Adresse und Zahlung folgen · kein Konto nötig
           </p>
           <div className={styles.paymentWrap}>
             <PaymentLogos />
@@ -666,7 +698,7 @@ export function KennzeichenLandingPage() {
             <br />
             <em>Direkt zu dir.</em>
           </h2>
-          <p className={styles.includedPrice}>Jetzt im Angebot für {offerPrice} inkl. DHL-Versand</p>
+          <p className={styles.includedPrice}>Kennzeichen ab 6,90 € pro Schild · inkl. MwSt.</p>
         </div>
         <ul>
           <li>
@@ -686,7 +718,7 @@ export function KennzeichenLandingPage() {
           <li>
             <CheckCircle2 />
             <span>
-              <strong>DHL-Versand inklusive</strong>mit Trackingnummer
+              <strong>DHL-Versand mit Tracking</strong>3,90 € pro Bestellung, kostenlos ab 19 € Warenwert
             </span>
           </li>
           <li>
@@ -793,11 +825,11 @@ export function KennzeichenLandingPage() {
           <br />
           auf deine Kombination.
         </h2>
-        <p className={styles.finalPrice}>Jetzt im Angebot: {offerPrice} inkl. DHL-Versand</p>
+        <p className={styles.finalPrice}>Kennzeichen ab 6,90 € pro Schild</p>
         <a href="#konfigurator">
           Jetzt Kennzeichen konfigurieren <ArrowRight />
         </a>
-        <small>{quantity} {quantity === 1 ? 'Schild' : 'Schilder'} · DHL-Versand inklusive · Tracking per E-Mail</small>
+        <small>inkl. 19 % MwSt. · 3,90 € Versand, kostenlos ab 19 € Warenwert · Tracking per E-Mail</small>
       </section>
 
       <footer className={styles.footer}>
@@ -815,9 +847,9 @@ export function KennzeichenLandingPage() {
       <div className={styles.mobileBar}>
         <div>
           <span>
-            {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} inkl. Versand
+            {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} · Gesamt inkl. Versand
           </span>
-          <strong>Jetzt {offerPrice}</strong>
+          <strong>Jetzt {formatPrice(total)}</strong>
         </div>
         <a href="#konfigurator">
           Konfigurieren <ArrowRight />

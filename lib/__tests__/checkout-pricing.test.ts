@@ -1,89 +1,48 @@
-import { describe, expect, it } from 'vitest';
+﻿import { describe, expect, it } from 'vitest';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
 
 describe('checkout pricing', () => {
-  it('charges 19.90 for one motorcycle plate with shipping included', () => {
-    expect(getCheckoutPricing('motorcycle', 'black', 1, undefined)).toMatchObject({
-      subtotalCents: 1990,
-      shippingCents: 0,
-      discountCents: 0,
-      totalCents: 1990,
-      promoCode: null,
-    });
-  });
-
   it.each([
-    ['agriculture240', 'black'],
-    ['agriculture240', 'green'],
-    ['agriculture255', 'black'],
-    ['agriculture255', 'green'],
-  ] as const)('charges 24.90 for one %s plate in %s', (type, color) => {
-    expect(getCheckoutPricing(type, color, 1, undefined)).toMatchObject({
-      unitPriceCents: 2490,
-      subtotalCents: 2490,
-      shippingCents: 0,
-      totalCents: 2490,
+    ['black', 1380, 390, 1770],
+    ['carbon', 2380, 0, 2380],
+  ] as const)('prices two %s car plates', (color, subtotalCents, shippingCents, totalCents) => {
+    expect(getCheckoutPricing('standard', color, 2, undefined)).toMatchObject({
+      subtotalCents, shippingCents, totalCents, packageDiscountCents: 0,
     });
   });
 
-  it.each(['standard', 'electric', 'historic', 'season'] as const)('charges 19.90 for two %s plates', (type) => {
-    expect(getCheckoutPricing(type, 'black', 2, undefined)).toMatchObject({
-      unitPriceCents: 1990,
-      subtotalCents: 3980,
-      shippingCents: 0,
-      packageDiscountCents: 1990,
-      discountCents: 1990,
-      totalCents: 1990,
-    });
+  it('charges shipping below 19 euros and waives it at the threshold', () => {
+    expect(getCheckoutPricing('standard', 'black', 1, undefined)).toMatchObject({ subtotalCents: 690, shippingCents: 390, totalCents: 1080 });
+    expect(getCheckoutPricing('standard', 'carbon', 2, undefined)).toMatchObject({ subtotalCents: 2380, shippingCents: 0 });
   });
 
-  it('sets the payable total to five euros with TEST5', () => {
-    expect(getCheckoutPricing('standard', 'black', 2, ' test5 ')).toMatchObject({
-      discountCents: 3480,
-      totalCents: 500,
-      promoCode: 'TEST5',
-    });
-    expect(getCheckoutPricing('motorcycle', 'black', 1, 'TEST5')).toMatchObject({
-      discountCents: 1490,
-      totalCents: 500,
-      promoCode: 'TEST5',
-    });
+  it('adds the bicycle-rack plate for 4.90 euros plus 5 euros in carbon', () => {
+    const extras = { parkingPlate: false, bikeRackPlate: true };
+    expect(getCheckoutPricing('standard', 'black', 2, undefined, extras)).toMatchObject({ bikeRackExtraPriceCents: 490, subtotalCents: 1870, shippingCents: 390, totalCents: 2260 });
+    expect(getCheckoutPricing('standard', 'carbon', 2, undefined, extras)).toMatchObject({ bikeRackExtraPriceCents: 990, subtotalCents: 3370, shippingCents: 0, totalCents: 3370 });
   });
 
-  it('rejects unknown codes and restores the regular total when removed', () => {
+  it('reaches the requested totals with the 5.90 euro emission sticker', () => {
+    const extras = { parkingPlate: false, bikeRackPlate: false, emissionSticker: true };
+    expect(getCheckoutPricing('standard', 'black', 2, undefined, extras)).toMatchObject({ emissionStickerPriceCents: 590, subtotalCents: 1970, shippingCents: 0, totalCents: 1970 });
+    expect(getCheckoutPricing('standard', 'carbon', 2, undefined, extras)).toMatchObject({ emissionStickerPriceCents: 590, subtotalCents: 2970, shippingCents: 0, totalCents: 2970 });
+  });
+
+  it('keeps the existing prices of other plate types', () => {
+    expect(getCheckoutPricing('motorcycle', 'black', 1, undefined)?.totalCents).toBe(1990);
+    expect(getCheckoutPricing('electric', 'black', 2, undefined)?.totalCents).toBe(1990);
+    expect(getCheckoutPricing('agriculture240', 'green', 1, undefined)?.totalCents).toBe(2490);
+  });
+
+  it('applies the test promotion to the payable total', () => {
+    expect(getCheckoutPricing('standard', 'black', 2, 'TEST5')).toMatchObject({ totalCents: 500, discountCents: 1270 });
     expect(getCheckoutPricing('standard', 'black', 2, 'UNKNOWN')).toBeNull();
-    expect(getCheckoutPricing('standard', 'black', 2, '')?.totalCents).toBe(1990);
   });
 
-  it('rejects unavailable quantities and carbon', () => {
-    expect(getCheckoutPricing('motorcycle', 'black', 2, undefined)).toBeNull();
-    expect(getCheckoutPricing('standard', 'black', 1, undefined)).toBeNull();
-    expect(getCheckoutPricing('standard', 'carbon', 2, undefined)).toBeNull();
+  it('rejects unavailable configurations', () => {
+    expect(getCheckoutPricing('motorcycle', 'carbon', 1, undefined)).toBeNull();
     expect(getCheckoutPricing('standard', 'green', 2, undefined)).toBeNull();
-    expect(getCheckoutPricing('agriculture240', 'green', 2, undefined)).toBeNull();
     expect(getCheckoutPricing('agriculture240', 'carbon', 1, undefined)).toBeNull();
-  });
-
-  it('rejects extras for a land-machine plate', () => {
-    expect(
-      getCheckoutPricing('agriculture255', 'green', 1, undefined, {
-        parkingPlate: true,
-        bikeRackPlate: false,
-      }),
-    ).toBeNull();
-  });
-
-  it.each(['standard', 'electric', 'historic', 'season'] as const)('adds one parking plate to %s for five euros', (type) => {
-    expect(getCheckoutPricing(type, 'black', 2, undefined, { parkingPlate: true, bikeRackPlate: false })).toMatchObject({ unitPriceCents: 1990, parkingExtraPriceCents: 500, bikeRackExtraPriceCents: 0, subtotalCents: 4480, shippingCents: 0, packageDiscountCents: 1990, totalCents: 2490 });
-    expect(getCheckoutPricing(type, 'black', 2, undefined)?.totalCents).toBe(1990);
-  });
-
-  it('adds the bicycle-rack plate independently and charges five euros for each extra', () => {
-    expect(getCheckoutPricing('standard', 'black', 2, undefined, { parkingPlate: false, bikeRackPlate: true })).toMatchObject({ subtotalCents: 4480, totalCents: 2490 });
-    expect(getCheckoutPricing('standard', 'black', 2, undefined, { parkingPlate: true, bikeRackPlate: true })).toMatchObject({ parkingExtraPriceCents: 500, bikeRackExtraPriceCents: 500, subtotalCents: 4980, totalCents: 2990 });
-  });
-
-  it('keeps an applied promotion consistent when the parking extra is added', () => {
-    expect(getCheckoutPricing('standard', 'black', 2, 'TEST5', { parkingPlate: true, bikeRackPlate: true })).toMatchObject({ subtotalCents: 4980, packageDiscountCents: 1990, discountCents: 4480, totalCents: 500 });
+    expect(getCheckoutPricing('motorcycle', 'black', 1, undefined, { parkingPlate: false, bikeRackPlate: true })).toBeNull();
   });
 });

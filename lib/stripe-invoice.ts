@@ -99,7 +99,7 @@ export async function ensurePaidStripeInvoice(stripe: Stripe, order: StripeInvoi
         invoice: invoice.id,
         currency: 'eur',
         amount: order.total_cents,
-        description: `${order.quantity} × ${product.label}-Kennzeichen ${order.plate}${extras} inkl. DHL-Versand${discount}`,
+        description: `${order.quantity} × ${product.label}-Kennzeichen ${order.plate}${extras}, DHL-Versand${discount}`,
         tax_behavior: 'inclusive',
         tax_rates: [taxRateId],
       }, { idempotencyKey: `kennzeichen-invoice-item-${order.id}` });

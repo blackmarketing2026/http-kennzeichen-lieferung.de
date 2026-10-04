@@ -12,8 +12,8 @@ const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
 const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Kennzeichen online bestellen | kennzeichen-lieferung.de',
-  description: 'Wunschkennzeichen live konfigurieren, Ausführung wählen und transparente Kosten prüfen.',
+  title: 'Kennzeichen ab 6,90 € bestellen | kennzeichen-lieferung.de',
+  description: 'Autokennzeichen ab 6,90 € pro Schild. Carbon-Optik und Zubehör wählbar. Alle Preise inkl. MwSt.; Versand 3,90 €, kostenlos ab 19 € Warenwert.',
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

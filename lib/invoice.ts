@@ -2,6 +2,7 @@ import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { query, withConnection } from '@/lib/db';
 import {
   BIKE_RACK_PLATE_PRICE,
+  CARBON_SURCHARGE,
   formatPrice,
   PARKING_PLATE_PRICE,
   plateColorLabel,
@@ -252,7 +253,7 @@ export async function renderInvoicePdf(
   }
 
   if (bikeRackSelected) {
-    const bikeRackExtraCents = Math.round(BIKE_RACK_PLATE_PRICE * 100);
+    const bikeRackExtraCents = Math.round((BIKE_RACK_PLATE_PRICE + (order.plate_color === 'carbon' ? CARBON_SURCHARGE : 0)) * 100);
     writeRow([
       {
         text: `Fahrradträger-Kennzeichen – ${order.plate}`,

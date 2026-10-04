@@ -27,6 +27,8 @@ import { LicensePlate } from '@/components/license-plate';
 import { CHECKOUT_UPSELLS_ENABLED } from '@/config/checkout-features';
 import {
   BIKE_RACK_PLATE_PRICE,
+  CARBON_SURCHARGE,
+  FREE_SHIPPING_THRESHOLD,
   formatPrice,
   getPackagePrice,
   isAgriculturePlate,
@@ -53,6 +55,7 @@ type CheckoutSelection = {
   plateType: PlateType;
   plateColor: PlateColor;
   quantity: 1 | 2 | 3;
+  bikeRackPlate?: boolean;
   seasonStartMonth?: number;
   seasonEndMonth?: number;
 };
@@ -541,11 +544,11 @@ export function EmbeddedCheckout({
 }) {
   preconnect('https://js.stripe.com', { crossOrigin: 'anonymous' });
   const baseQuantity = (
-    isSinglePlateProduct(initialSelection.plateType) ? 1 : 2
+    initialSelection.quantity === 3 ? 2 : initialSelection.quantity
   ) as 1 | 2;
   const [extras, setExtras] = useState<CheckoutExtras>({
     parkingPlate: initialSelection.quantity === 3,
-    bikeRackPlate: false,
+    bikeRackPlate: initialSelection.bikeRackPlate === true,
   });
   const quantity =
     baseQuantity + Number(extras.parkingPlate) + Number(extras.bikeRackPlate);
@@ -562,8 +565,8 @@ export function EmbeddedCheckout({
   const subtotal =
     getPackagePrice(selection.plateType, selection.plateColor, baseQuantity) +
     (extras.parkingPlate ? PARKING_PLATE_PRICE : 0) +
-    (extras.bikeRackPlate ? BIKE_RACK_PLATE_PRICE : 0);
-  const total = subtotal + SHIPPING_PRICE;
+    (extras.bikeRackPlate ? BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0) : 0);
+  const total = subtotal + (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_PRICE);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -585,7 +588,7 @@ export function EmbeddedCheckout({
         color: initialSelection.plateColor,
         quantity: baseQuantity,
         parkingPlate: initialSelection.quantity === 3,
-        bikeRackPlate: false,
+        bikeRackPlate: initialSelection.bikeRackPlate === true,
         cartId: cartId.current,
         promoCode: initialPromoCode || undefined,
         attribution: readAttribution(),
@@ -632,6 +635,7 @@ export function EmbeddedCheckout({
     initialSelection.seasonEndMonth,
     initialSelection.plateColor,
     initialSelection.quantity,
+    initialSelection.bikeRackPlate,
     initialPromoCode,
     requestAttempt,
   ]);
@@ -750,7 +754,7 @@ export function EmbeddedCheckout({
             className="real-checkout-plate"
           />
           {selection.plateType !== 'motorcycle' && !isAgriculturePlate(selection.plateType) && (
-            <p className="checkout-preview-note">Plaketten dienen nur der Vorschau und sind nicht im Lieferumfang.</p>
+            <p className="checkout-preview-note">Amtliche Siegel dienen nur der Vorschau und sind nicht im Lieferumfang.</p>
           )}
         {extras.parkingPlate && (
           <div className="real-order-line">
@@ -761,12 +765,12 @@ export function EmbeddedCheckout({
         {extras.bikeRackPlate && (
           <div className="real-order-line">
             <span>1 × Fahrradträger-Kennzeichen</span>
-            <strong>{formatPrice(BIKE_RACK_PLATE_PRICE)}</strong>
+            <strong>{formatPrice(BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0))}</strong>
           </div>
         )}
         <div className="real-order-line">
           <span>DHL-Versand</span>
-          <strong>Inklusive</strong>
+          <strong>{pricing?.shippingCents === 0 || (!pricing && subtotal >= FREE_SHIPPING_THRESHOLD) ? 'Kostenlos' : formatPrice(SHIPPING_PRICE)}</strong>
         </div>
         {pricing && pricing.discountCents > pricing.packageDiscountCents && (
           <div className="real-order-line real-order-discount">

@@ -1,5 +1,8 @@
 import {
   BIKE_RACK_PLATE_PRICE,
+  CARBON_SURCHARGE,
+  EMISSION_STICKER_PRICE,
+  FREE_SHIPPING_THRESHOLD,
   getPackageDiscountCents,
   getUnitPrice,
   isAvailableConfiguration,
@@ -19,6 +22,7 @@ export type CheckoutPricing = {
   packageDiscountCents: number;
   parkingExtraPriceCents: number;
   bikeRackExtraPriceCents: number;
+  emissionStickerPriceCents: number;
   subtotalCents: number;
   shippingCents: number;
   discountCents: number;
@@ -29,6 +33,7 @@ export type CheckoutPricing = {
 export type CheckoutExtras = {
   parkingPlate: boolean;
   bikeRackPlate: boolean;
+  emissionSticker?: boolean;
 };
 
 export function getCheckoutPricing(
@@ -54,18 +59,24 @@ export function getCheckoutPricing(
     ? Math.round(PARKING_PLATE_PRICE * 100)
     : 0;
   const bikeRackExtraPriceCents = extras.bikeRackPlate
-    ? Math.round(BIKE_RACK_PLATE_PRICE * 100)
+    ? Math.round((BIKE_RACK_PLATE_PRICE + (color === 'carbon' ? CARBON_SURCHARGE : 0)) * 100)
+    : 0;
+  const emissionStickerPriceCents = extras.emissionSticker
+    ? Math.round(EMISSION_STICKER_PRICE * 100)
     : 0;
   const subtotalCents =
     unitPriceCents * baseQuantity +
     parkingExtraPriceCents +
-    bikeRackExtraPriceCents;
-  const shippingCents = Math.round(SHIPPING_PRICE * 100);
+    bikeRackExtraPriceCents +
+    emissionStickerPriceCents;
   const packageDiscountCents = getPackageDiscountCents(
     plateType,
     color,
     baseQuantity,
   );
+  const shippingCents = subtotalCents - packageDiscountCents >= Math.round(FREE_SHIPPING_THRESHOLD * 100)
+    ? 0
+    : Math.round(SHIPPING_PRICE * 100);
   const regularTotalCents = subtotalCents + shippingCents - packageDiscountCents;
   const targetTotalCents = promoCode
     ? PROMO_CODES[promoCode as keyof typeof PROMO_CODES].totalCents
@@ -77,6 +88,7 @@ export function getCheckoutPricing(
     packageDiscountCents,
     parkingExtraPriceCents,
     bikeRackExtraPriceCents,
+    emissionStickerPriceCents,
     subtotalCents,
     shippingCents,
     discountCents: subtotalCents + shippingCents - targetTotalCents,

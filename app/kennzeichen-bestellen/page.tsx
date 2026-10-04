@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { KennzeichenLandingPage } from './kennzeichen-landing-page';
 
 export const metadata: Metadata = {
-  title: 'KFZ-Kennzeichen online bestellen | DIN-zertifiziert',
+  title: 'Kennzeichen ab 6,90 € bestellen | DIN-zertifiziert',
   description:
-    'Kennzeichen jetzt im Angebot für 19,90 € inklusive DHL-Versand. In 10 Minuten geprägt und versandfertig; Sendungsverfolgung per E-Mail.',
+    'Autokennzeichen ab 6,90 € pro Schild, Carbon-Optik für 5,00 € Aufpreis. Alle Preise inkl. 19 % MwSt. Versand 3,90 €, kostenlos ab 19 € Warenwert.',
   alternates: { canonical: '/kennzeichen-bestellen' },
 };
 

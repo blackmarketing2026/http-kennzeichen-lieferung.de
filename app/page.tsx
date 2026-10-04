@@ -25,6 +25,7 @@ import { LicensePlate, LicensePlateEditor } from '@/components/license-plate';
 import {
   formatPrice,
   getPackagePrice,
+  FREE_SHIPPING_THRESHOLD,
   isValidPlate,
   PRODUCTS,
   SHIPPING_PRICE,
@@ -66,7 +67,7 @@ const FAQS = [
   ],
   [
     'Was kosten die Kennzeichen?',
-    'Zwei Auto-, E-, H- oder Saisonkennzeichen kosten zusammen 19,90 €. Ein Motorradkennzeichen kostet ebenfalls 19,90 €. Der DHL-Versand innerhalb Deutschlands ist kostenlos.',
+    'Autokennzeichen kosten 6,90 € pro Schild, zwei zusammen 13,80 €. Ein Motorradkennzeichen kostet 19,90 €. Der Versand kostet 3,90 € pro Bestellung und ist ab 19 € Warenwert kostenlos.',
   ],
   [
     'Wie schnell wird versendet?',
@@ -160,7 +161,8 @@ export default function Home() {
   const product = PRODUCTS[plateType];
   const plateValue = `${cityCode} ${serialLetters} ${serialNumbers}`;
   const plateSubtotal = getPackagePrice(plateType, plateColor, quantity);
-  const total = plateSubtotal + SHIPPING_PRICE;
+  const shippingPrice = plateSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_PRICE;
+  const total = plateSubtotal + shippingPrice;
   const status = useMemo(
     () => isValidPlate(plateValue, plateType),
     [plateValue, plateType],
@@ -367,7 +369,7 @@ export default function Home() {
           </div>
           <div className="cart-order-line shipping">
             <span>DHL-Versand</span>
-            <strong>Kostenlos</strong>
+            <strong>{shippingPrice === 0 ? 'Kostenlos' : formatPrice(shippingPrice)}</strong>
           </div>
           <div className="cart-total">
             <span>Gesamt</span>
@@ -521,7 +523,7 @@ export default function Home() {
                 <div>
                   <span>
                     {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} ·
-                    Kostenloser Versand
+                    {shippingPrice === 0 ? 'Kostenloser Versand' : `${formatPrice(shippingPrice)} Versand`}
                   </span>
                   <strong>{formatPrice(total)}</strong>
                 </div>
@@ -721,7 +723,7 @@ export default function Home() {
               </div>
               <div>
                 <span>DHL-Versand</span>
-                <strong>Kostenlos</strong>
+                <strong>{shippingPrice === 0 ? 'Kostenlos' : formatPrice(shippingPrice)}</strong>
               </div>
               <div className="price-total">
                 <span>Gesamt</span>
@@ -729,7 +731,7 @@ export default function Home() {
               </div>
               <small>
                 Alle Preise inklusive gesetzlicher Mehrwertsteuer und
-                kostenlosem DHL-Versand innerhalb Deutschlands.
+                DHL-Versand für 3,90 € pro Bestellung, kostenlos ab 19 € Warenwert.
               </small>
             </div>
             <DeliveryGuarantee />
