@@ -46,6 +46,7 @@ import {
   type UpsellKind,
 } from '@/components/parking-upsell';
 import { readAttribution } from '@/lib/attribution';
+import { trackKennzeichenGtmEvent } from '@/lib/kennzeichen-gtm-events';
 import styles from './checkout-extras.module.css';
 import { DinCertificationLink } from '@/components/din-certification-link';
 import { formatSeasonMonth } from '@/lib/season-period';
@@ -119,6 +120,7 @@ function PaymentForm({
   onApplyPromo,
   onChangeExtra,
   onStepChange,
+  trackKennzeichenFunnel,
 }: {
   selection: ActiveSelection;
   extras: CheckoutExtras;
@@ -128,6 +130,7 @@ function PaymentForm({
   onApplyPromo: (code: string) => Promise<CheckoutPricing>;
   onChangeExtra: (extras: CheckoutExtras) => Promise<CheckoutPricing>;
   onStepChange: (step: 'address' | 'payment') => void;
+  trackKennzeichenFunnel: boolean;
 }) {
   const stripe = useStripe();
   const elements = useElements();
@@ -183,6 +186,7 @@ function PaymentForm({
     });
     setStep('payment');
     onStepChange('payment');
+    if (trackKennzeichenFunnel) trackKennzeichenGtmEvent('kennzeichen_adresse');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -265,6 +269,13 @@ function PaymentForm({
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
       setMessage('Bitte gib eine gültige E-Mail-Adresse ein.');
       return;
+    }
+
+    if (trackKennzeichenFunnel) {
+      trackKennzeichenGtmEvent('kennzeichen_zahlen', {
+        currency: 'EUR',
+        value: pricing.totalCents / 100,
+      });
     }
 
     setIsPaying(true);
@@ -839,6 +850,7 @@ export function EmbeddedCheckout({
                 updateCheckout(pricing.promoCode ?? '', nextExtras)
               }
               onStepChange={setCheckoutStep}
+              trackKennzeichenFunnel={returnPath?.startsWith('/kennzeichen-bestellen') === true}
             />
           </Elements>
         ) : (

@@ -35,6 +35,7 @@ import {
 import { CONSENT_STORAGE_KEY, parseConsentRecord } from '@/lib/cookie-consent';
 import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
+import { trackKennzeichenGtmEvent } from '@/lib/kennzeichen-gtm-events';
 import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, formatSeasonMonth, isValidSeasonPeriod } from '@/lib/season-period';
 import styles from './page.module.css';
 
@@ -177,6 +178,7 @@ export function KennzeichenLandingPage() {
       landing_page: 'kennzeichen-bestellen',
       items: [{ item_id: plateType, item_name: product.label, quantity }],
     });
+    trackKennzeichenGtmEvent('kennzeichen_eingabe');
     const params = new URLSearchParams({
       plate: plateValue,
       type: plateType,
