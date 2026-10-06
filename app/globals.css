@@ -2283,17 +2283,6 @@ summary:focus-visible {
   border-color: var(--blue);
   box-shadow: 0 0 0 3px rgb(0 105 217 / 12%);
 }
-.checkout-reminder-consent {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin: -8px 0 24px;
-  color: #485663;
-  font-size: .78rem;
-  line-height: 1.5;
-  cursor: pointer;
-}
-.checkout-reminder-consent input { flex: 0 0 auto; margin: 2px 0 0; accent-color: var(--blue); }
 
 .delivery-summary { margin: 15px 0 18px; color: #24465e; font-size: .78rem; line-height: 1.5; }
 .delivery-summary p { margin: 0; }

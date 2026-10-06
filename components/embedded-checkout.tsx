@@ -135,7 +135,6 @@ function PaymentForm({
   const stripe = useStripe();
   const elements = useElements();
   const [email, setEmail] = useState('');
-  const [reminderConsent, setReminderConsent] = useState(false);
   const [step, setStep] = useState<'address' | 'payment'>('address');
   const [shippingAddress, setShippingAddress] = useState<{
     name: string;
@@ -193,7 +192,7 @@ function PaymentForm({
           cartId: getCartId(),
           paymentIntentId,
           email,
-          reminderConsent,
+          reminderConsent: false,
           address: {
             name: addressValue.value.name,
             line1: address.line1,
@@ -410,14 +409,6 @@ function PaymentForm({
           autoComplete="email"
           required
         />
-      </label>
-      <label className="checkout-reminder-consent">
-        <input
-          type="checkbox"
-          checked={reminderConsent}
-          onChange={(event) => setReminderConsent(event.target.checked)}
-        />
-        <span>Ich möchte eine einmalige E-Mail zur Fortsetzung meiner Bestellung erhalten, falls ich nicht bezahle. Die Einwilligung ist freiwillig und jederzeit per E-Mail an support@function-concept.de widerrufbar.</span>
       </label>
       <div className="stripe-element-group">
         <span>Lieferadresse</span>
