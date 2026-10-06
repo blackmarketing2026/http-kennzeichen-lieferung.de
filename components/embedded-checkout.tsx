@@ -184,6 +184,25 @@ function PaymentForm({
         state: deliveryState,
       },
     });
+    try {
+      await fetch('/api/checkout-address-added', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          cartId: getCartId(),
+          paymentIntentId,
+          address: {
+            name: addressValue.value.name,
+            line1: address.line1,
+            city: address.city,
+            postalCode: address.postal_code,
+            country: address.country,
+          },
+        }),
+      });
+    } catch {
+      // The internal hint must not prevent the customer from paying.
+    }
     setStep('payment');
     onStepChange('payment');
     if (trackKennzeichenFunnel) trackKennzeichenGtmEvent('kennzeichen_adresse');

@@ -251,6 +251,34 @@ export async function sendCheckoutStartedEmail(
   });
 }
 
+/** One follow-up when the customer completes the address step before payment. */
+export async function sendCheckoutAddressAddedEmail(
+  details: { plate: string; cartId: string; paymentIntentId: string },
+  origin: string,
+) {
+  if (!isMailConfigured()) {
+    throw new Error('SMTP nicht konfiguriert');
+  }
+
+  const html = renderEmailTemplate({
+    logoUrl: `${origin}/kennzeichen-lieferung-logo.png`,
+    preheader: 'Update: Lieferadresse hinzugefügt, aber noch nicht bezahlt',
+    heading: 'Checkout gestartet',
+    bodyHtml: `
+      <p><strong>Update: Lieferadresse hinzugefügt, aber noch nicht bezahlt</strong></p>
+      <p>Kennzeichen: <strong>${escapeHtml(details.plate)}</strong></p>
+      <p style="font-size:12px;color:#667784;">Warenkorb ${escapeHtml(details.cartId)} · Stripe ${escapeHtml(details.paymentIntentId)}</p>
+    `,
+  });
+
+  await getMailTransport().sendMail({
+    from: MAIL_FROM,
+    to: CHECKOUT_NOTIFICATION_EMAIL,
+    subject: `Checkout gestartet – ${details.plate}`,
+    html,
+  });
+}
+
 export async function sendShippingEmail(
   order: OrderEmailOrder,
   trackingCode: string,

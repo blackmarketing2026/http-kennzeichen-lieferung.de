@@ -103,6 +103,7 @@ const SCHEMA_STATEMENTS = [
     shipping_origin_holiday_region VARCHAR(12) NULL,
     delivery_state CHAR(2) NULL,
     delivery_holiday_region VARCHAR(12) NULL,
+    address_notification_sent_at DATETIME NULL,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
   ) ENGINE=InnoDB`,
@@ -213,6 +214,7 @@ const SCHEMA_MIGRATIONS = [
   `ALTER TABLE orders ADD COLUMN shipping_origin_holiday_region VARCHAR(12) NULL`,
   `ALTER TABLE orders ADD COLUMN delivery_state CHAR(2) NULL`,
   `ALTER TABLE orders ADD COLUMN delivery_holiday_region VARCHAR(12) NULL`,
+  `ALTER TABLE orders ADD COLUMN address_notification_sent_at DATETIME NULL`,
 ];
 
 const IGNORABLE_MIGRATION_ERROR_CODES = new Set([
@@ -256,7 +258,8 @@ export async function ensureCheckoutSchema() {
               plate_color, quantity, parking_plate, bike_rack_plate, season_start_month, season_end_month, unit_price_cents,
               shipping_cents, discount_cents, promo_code, total_cents, customer_id,
               ordered_at_utc, delivery_promise_text, guarantee_terms_version,
-              shipping_origin_state, shipping_origin_holiday_region, delivery_holiday_region, updated_at FROM orders LIMIT 0`,
+              shipping_origin_state, shipping_origin_holiday_region, delivery_holiday_region,
+              address_notification_sent_at, updated_at FROM orders LIMIT 0`,
     );
   } catch (error) {
     const code = describeDatabaseError(error);
