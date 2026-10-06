@@ -29,11 +29,11 @@ const paymentIntentId = 'pi_3UNRdJLhTyQobetctJpW2yOt';
 function request(address: unknown = {
   name: 'Musterfrau', line1: 'Hauptstraße 1', city: 'Berlin',
   postalCode: '10115', country: 'DE',
-}) {
+}, reminderConsent = false) {
   return new Request('https://shop.example.com/api/checkout-address-added', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', origin: 'https://shop.example.com', host: 'shop.example.com' },
-    body: JSON.stringify({ cartId, paymentIntentId, address }),
+    body: JSON.stringify({ cartId, paymentIntentId, address, email: 'kunde@example.com', reminderConsent }),
   });
 }
 
@@ -73,5 +73,20 @@ describe('checkout address notification', () => {
   it('rejects an incomplete address before claiming the notification', async () => {
     expect((await POST(request({ name: 'Musterfrau' }))).status).toBe(400);
     expect(query).not.toHaveBeenCalled();
+  });
+
+  it('schedules a reminder only after explicit consent', async () => {
+    await POST(request(undefined, true));
+    expect(query).toHaveBeenCalledWith(
+      expect.stringContaining('INTERVAL 5 MINUTE'),
+      expect.arrayContaining(['kunde@example.com', true]),
+    );
+
+    vi.mocked(query).mockClear();
+    await POST(request());
+    expect(query).toHaveBeenCalledWith(
+      expect.stringContaining('reminder_due_at = CASE'),
+      expect.arrayContaining([null, false]),
+    );
   });
 });

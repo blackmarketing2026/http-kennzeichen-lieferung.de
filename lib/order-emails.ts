@@ -279,6 +279,47 @@ export async function sendCheckoutAddressAddedEmail(
   });
 }
 
+export async function sendAbandonedCheckoutReminderEmail(
+  details: {
+    email: string;
+    firstName: string;
+    city: string;
+    plate: string;
+    resumeUrl: string;
+  },
+  origin: string,
+) {
+  if (!isMailConfigured()) throw new Error('SMTP nicht konfiguriert');
+
+  const plate = escapeHtml(details.plate);
+  const firstName = escapeHtml(details.firstName);
+  const city = escapeHtml(details.city);
+  const html = renderEmailTemplate({
+    logoUrl: `${origin}/kennzeichen-lieferung-logo.png`,
+    preheader: `Deine Bestellung für ${details.plate} wartet noch auf dich`,
+    heading: `Dein Kennzeichen ${plate} fehlt noch?`,
+    bodyHtml: `
+      <p>Hallo ${firstName},</p>
+      <p><strong>Dein Kennzeichen ${plate} fehlt noch an deinem Fahrzeug?</strong></p>
+      <p>Du hast deine Bestellung begonnen, aber noch nicht abgeschlossen. Mit wenigen Klicks kannst du das jetzt erledigen.</p>
+      <p>Sobald deine Bestellung bezahlt und für die Produktion freigegeben ist, ist <strong>${plate} in nur 10 Minuten fertig gedruckt.</strong></p>
+      <p>📦 <strong>DHL holt dreimal täglich bei uns ab.</strong> So kann dein Paket bei einer der nächsten Abholungen seine Reise nach <strong>${city}</strong> starten.</p>
+      <p>Mach jetzt den nächsten Schritt – damit deine Kennzeichen bald bei dir ankommen:</p>
+      <p>Viele Grüße<br />Dein Team von Kennzeichen-Lieferung.de</p>
+      <p style="font-size:12px;color:#667784;">Du erhältst diese einmalige Erinnerung, weil du im Checkout zugestimmt hast. Wenn du keine weiteren Nachrichten hierzu möchtest, antworte einfach auf diese E-Mail.</p>
+    `,
+    ctaLabel: `Bestellung für ${plate} abschließen`,
+    ctaUrl: details.resumeUrl,
+  });
+
+  await getMailTransport().sendMail({
+    from: MAIL_FROM,
+    to: details.email,
+    subject: `${details.plate} – in 10 Minuten gedruckt 🚗`,
+    html,
+  });
+}
+
 export async function sendShippingEmail(
   order: OrderEmailOrder,
   trackingCode: string,

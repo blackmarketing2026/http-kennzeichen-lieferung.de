@@ -14,7 +14,7 @@ export default function DatenschutzPage() {
         <p className="legal-kicker">Rechtliches</p>
         <h1>Datenschutzerklärung</h1>
         <p className="legal-intro">Hier erfahren Sie, welche Daten beim Besuch dieser Website, bei einer Bestellung und bei der Nutzung des Kundenkontos verarbeitet werden.</p>
-        <p className="legal-updated">Stand: 29. September 2026</p>
+        <p className="legal-updated">Stand: 6. Oktober 2026</p>
 
         <section>
           <h2>1. Verantwortlicher</h2>
@@ -51,6 +51,11 @@ export default function DatenschutzPage() {
         <section>
           <h2>5. Kundenkonto und Kontakt</h2>
           <p>Für das freiwillige Kundenkonto verarbeiten wir Ihre E-Mail-Adresse, einen zeitlich begrenzten Anmeldelink, eine Sitzung sowie die Ihrem Konto zugeordneten Bestellungen und Rechnungen. Der Anmeldelink ist 15 Minuten gültig. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO. Bei einer Kontaktaufnahme per E-Mail verarbeiten wir Ihre Angaben zur Bearbeitung der Anfrage (Art. 6 Abs. 1 lit. b oder lit. f DSGVO). Die Daten werden gelöscht, sobald der Zweck entfällt und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
+        </section>
+
+        <section>
+          <h2>Erinnerung an eine begonnene Bestellung</h2>
+          <p>Wenn Sie im Checkout freiwillig in eine einmalige Erinnerungs-E-Mail einwilligen und eine Lieferadresse eingeben, speichern wir dafür Ihre E-Mail-Adresse, Ihren Vornamen, Ihren Lieferort, die Kennzeichenkombination und den Zeitpunkt der Einwilligung. Wird die Bestellung nicht bezahlt, senden wir frühestens fünf Minuten später eine E-Mail mit einem Link zum Checkout. Bei erfolgreicher Zahlung entfällt die Erinnerung. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Sie können die Einwilligung jederzeit mit Wirkung für die Zukunft über <a href="mailto:support@function-concept.de">support@function-concept.de</a> widerrufen.</p>
         </section>
 
         <section>

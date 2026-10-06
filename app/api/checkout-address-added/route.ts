@@ -26,6 +26,9 @@ export async function POST(request: Request) {
   if (
     typeof data.cartId !== 'string' || !/^[a-zA-Z0-9-]{16,80}$/.test(data.cartId) ||
     typeof data.paymentIntentId !== 'string' || !/^pi_[a-zA-Z0-9]+$/.test(data.paymentIntentId) ||
+    typeof data.reminderConsent !== 'boolean' ||
+    (data.reminderConsent &&
+      (typeof data.email !== 'string' || data.email.length > 255 || !/^\S+@\S+\.\S+$/.test(data.email))) ||
     !address || typeof address !== 'object' ||
     !['name', 'line1', 'city', 'postalCode', 'country'].every((key) => {
       const value = (address as Record<string, unknown>)[key];
@@ -39,6 +42,21 @@ export async function POST(request: Request) {
   }
 
   await ensureCheckoutSchema();
+  const addressData = address as Record<string, string>;
+  const firstName = addressData.name.trim().split(/\s+/)[0].slice(0, 100);
+  const reminderEmail = data.reminderConsent ? (data.email as string).trim().toLowerCase() : null;
+  await query(
+    `UPDATE orders SET reminder_email = ?, reminder_first_name = ?, reminder_city = ?,
+       reminder_consent_at = CASE WHEN ? THEN COALESCE(reminder_consent_at, UTC_TIMESTAMP()) ELSE NULL END,
+       reminder_due_at = CASE WHEN ? THEN COALESCE(reminder_due_at, DATE_ADD(UTC_TIMESTAMP(), INTERVAL 5 MINUTE)) ELSE NULL END,
+       reminder_claimed_at = CASE WHEN ? THEN reminder_claimed_at ELSE NULL END
+     WHERE cart_id = ? AND stripe_payment_intent_id = ? AND status = 'payment_pending'
+       AND reminder_sent_at IS NULL`,
+    [reminderEmail, data.reminderConsent ? firstName : null,
+      data.reminderConsent ? addressData.city.trim() : null,
+      data.reminderConsent, data.reminderConsent, data.reminderConsent,
+      data.cartId, data.paymentIntentId],
+  );
   const claimed = await query(
     `UPDATE orders SET address_notification_sent_at = UTC_TIMESTAMP()
      WHERE cart_id = ? AND stripe_payment_intent_id = ?

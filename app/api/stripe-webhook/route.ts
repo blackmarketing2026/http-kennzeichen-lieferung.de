@@ -76,6 +76,11 @@ export async function POST(request: Request) {
          delivery_state = COALESCE(delivery_state, ?),
          delivery_start_date = COALESCE(delivery_start_date, ?),
          delivery_deadline_date = COALESCE(delivery_deadline_date, ?),
+         reminder_email = NULL,
+         reminder_first_name = NULL,
+         reminder_city = NULL,
+         reminder_consent_at = NULL,
+         reminder_due_at = NULL,
          updated_at = NOW()
        WHERE stripe_payment_intent_id = ?`,
       [paymentIntent.receipt_email, shippingJson, shippingJson, paidAtSql, destination, start, dates?.deadline ?? null, paymentIntent.id],
