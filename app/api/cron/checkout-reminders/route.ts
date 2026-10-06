@@ -51,6 +51,9 @@ export async function GET(request: Request) {
       headers: { 'WWW-Authenticate': 'Basic realm="Checkout reminders"' },
     });
   }
+  if (process.env.CHECKOUT_REMINDERS_ENABLED !== 'true') {
+    return Response.json({ disabled: true, checked: 0, sent: 0 });
+  }
   const stripeKey = process.env.stripe_live?.trim();
   if (!stripeKey?.startsWith('sk_') || !isDatabaseConfigured()) {
     return Response.json({ error: 'Checkout nicht konfiguriert.' }, { status: 503 });

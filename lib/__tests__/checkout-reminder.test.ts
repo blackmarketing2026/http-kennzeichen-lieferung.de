@@ -43,6 +43,7 @@ function request(authorization = 'Bearer test-secret') {
 beforeEach(() => {
   vi.stubEnv('CRON_SECRET', 'test-secret');
   vi.stubEnv('stripe_live', 'sk_test_x');
+  vi.stubEnv('CHECKOUT_REMINDERS_ENABLED', 'true');
   sendMail.mockReset().mockResolvedValue({});
   vi.mocked(getMailTransport).mockReturnValue({ sendMail } as unknown as ReturnType<typeof getMailTransport>);
   stripe.retrieve.mockReset().mockResolvedValue({ status: 'requires_payment_method' });
@@ -73,6 +74,14 @@ describe('abandoned checkout reminder', () => {
     stripe.retrieve.mockResolvedValue({ status: 'succeeded' });
     const response = await GET(request());
     expect(await response.json()).toEqual({ checked: 1, sent: 0 });
+    expect(sendMail).not.toHaveBeenCalled();
+  });
+
+  it('does nothing unless reminders are explicitly enabled', async () => {
+    vi.stubEnv('CHECKOUT_REMINDERS_ENABLED', '');
+    const response = await GET(request());
+    expect(await response.json()).toEqual({ disabled: true, checked: 0, sent: 0 });
+    expect(query).not.toHaveBeenCalled();
     expect(sendMail).not.toHaveBeenCalled();
   });
 
