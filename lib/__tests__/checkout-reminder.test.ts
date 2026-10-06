@@ -24,6 +24,7 @@ vi.mock('@/lib/logger', () => ({ logEvent: vi.fn() }));
 import { GET } from '@/app/api/cron/checkout-reminders/route';
 import { query } from '@/lib/db';
 import { getMailTransport } from '@/lib/mail';
+import { sendAbandonedCheckoutReminderEmail } from '@/lib/order-emails';
 
 const sendMail = vi.fn();
 const order = {
@@ -79,5 +80,18 @@ describe('abandoned checkout reminder', () => {
   it('rejects unauthenticated calls', async () => {
     expect((await GET(request('Bearer wrong'))).status).toBe(401);
     expect(query).not.toHaveBeenCalled();
+  });
+
+  it('marks a manual preview as a test', async () => {
+    await sendAbandonedCheckoutReminderEmail({
+      email: 'kennzeichenbestellung@function-concept.de',
+      firstName: 'Test', city: 'Berlin', plate: 'B AB 123',
+      resumeUrl: 'https://www.kennzeichen-lieferung.de/checkout',
+      test: true,
+    }, 'https://www.kennzeichen-lieferung.de');
+    expect(sendMail).toHaveBeenCalledWith(expect.objectContaining({
+      subject: '[TEST] B AB 123 – in 10 Minuten gedruckt 🚗',
+      html: expect.stringContaining('TESTNACHRICHT – keine echte Bestellung.'),
+    }));
   });
 });
