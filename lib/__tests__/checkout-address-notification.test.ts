@@ -50,7 +50,7 @@ beforeEach(() => {
 });
 
 describe('checkout address notification', () => {
-  it('emails the shop once with the original subject after the address step', async () => {
+  it('emails the shop once with a distinct subject after the address step', async () => {
     const response = await POST(request());
     expect(response.status).toBe(200);
     await Promise.all(afterCallbacks.splice(0).map((callback) => callback()));
@@ -58,7 +58,7 @@ describe('checkout address notification', () => {
     expect(sendMail).toHaveBeenCalledOnce();
     expect(sendMail).toHaveBeenCalledWith(expect.objectContaining({
       to: 'kennzeichenbestellung@function-concept.de',
-      subject: 'Checkout gestartet – OL AB 123',
+      subject: 'Lieferadresse hinzugefügt – OL AB 123',
       html: expect.stringContaining('Update: Lieferadresse hinzugefügt, aber noch nicht bezahlt'),
     }));
   });

@@ -274,7 +274,7 @@ export async function sendCheckoutAddressAddedEmail(
   await getMailTransport().sendMail({
     from: MAIL_FROM,
     to: CHECKOUT_NOTIFICATION_EMAIL,
-    subject: `Checkout gestartet – ${details.plate}`,
+    subject: `Lieferadresse hinzugefügt – ${details.plate}`,
     html,
   });
 }
