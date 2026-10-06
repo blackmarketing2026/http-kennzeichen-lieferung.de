@@ -286,7 +286,6 @@ export async function sendAbandonedCheckoutReminderEmail(
     city: string;
     plate: string;
     resumeUrl: string;
-    test?: boolean;
   },
   origin: string,
 ) {
@@ -300,7 +299,6 @@ export async function sendAbandonedCheckoutReminderEmail(
     preheader: `Deine Bestellung für ${details.plate} wartet noch auf dich`,
     heading: `Dein Kennzeichen ${plate} fehlt noch?`,
     bodyHtml: `
-      ${details.test ? '<p style="padding:10px 12px;background:#fff4d6;border-radius:6px;"><strong>TESTNACHRICHT – keine echte Bestellung.</strong></p>' : ''}
       <p>Hallo ${firstName},</p>
       <p><strong>Dein Kennzeichen ${plate} fehlt noch an deinem Fahrzeug?</strong></p>
       <p>Du hast deine Bestellung begonnen, aber noch nicht abgeschlossen. Mit wenigen Klicks kannst du das jetzt erledigen.</p>
@@ -317,7 +315,7 @@ export async function sendAbandonedCheckoutReminderEmail(
   await getMailTransport().sendMail({
     from: MAIL_FROM,
     to: details.email,
-    subject: `${details.test ? '[TEST] ' : ''}${details.plate} – in 10 Minuten gedruckt 🚗`,
+    subject: `${details.plate} – in 10 Minuten gedruckt 🚗`,
     html,
   });
 }
