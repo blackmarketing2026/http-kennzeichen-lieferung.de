@@ -7,7 +7,7 @@ import { HerbstCountdown } from '@/components/herbst-countdown';
 export function OfferBanner() {
   const pathname = usePathname();
 
-  if (pathname?.startsWith('/admin') || pathname?.startsWith('/konto')) {
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/konto') || pathname?.startsWith('/checkout')) {
     return null;
   }
 

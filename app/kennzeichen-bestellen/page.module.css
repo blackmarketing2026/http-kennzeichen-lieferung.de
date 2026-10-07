@@ -62,6 +62,19 @@
   border-radius: 9px; background: #effaf5; color: #11694a;
   font-weight: 700;
 }
+.offerOrderSummary {
+  margin-top: 16px; padding: 20px; border: 2px solid #168359;
+  border-radius: 13px; background: #f3fbf6;
+}
+.offerOrderSummaryHeading {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  color: #071824; font-size: 1.1rem; font-weight: 800;
+}
+.offerOrderSummaryHeading strong { color: #11694a; font-size: 1.8rem; white-space: nowrap; }
+.offerOrderSummary ul { margin: 14px 0 10px; padding-left: 20px; line-height: 1.6; }
+.offerOrderSummary li::marker { color: #168359; }
+.offerOrderSummary small { display: block; color: #526a78; }
+.offerOrderSummary a { display: inline-block; margin-top: 12px; color: #075b9f; font-weight: 800; text-decoration: underline; }
 .carbonUpgrade { display: flex; align-items: center; gap: 10px; padding: 14px; border: 1px solid #0878dc; border-radius: 10px; background: #f0f8ff; cursor: pointer; font-weight: 800; }
 .carbonUpgrade input { width: 18px; height: 18px; accent-color: #0878dc; }
 @media (max-width: 820px) {

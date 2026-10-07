@@ -41,7 +41,7 @@ import {
   type PlateType,
 } from '@/config/products';
 import type { CheckoutExtras, CheckoutPricing } from '@/lib/checkout-pricing';
-import { type OfferProfile } from '@/lib/pricing';
+import { getHerbstPackage, type OfferProfile } from '@/lib/pricing';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import {
   ExtrasUpsellPopup,
@@ -607,6 +607,12 @@ export function EmbeddedCheckout({
     ? getCheckoutPricing(selection.plateType, selection.plateColor, baseQuantity, undefined, extras, offer)
     : null;
   const offerBreakdown = offer === 'herbst' ? pricing ?? offerEstimate : null;
+  const herbstPackage = offer === 'herbst'
+    ? getHerbstPackage(selection.plateType, selection.plateColor, baseQuantity, extras.bikeRackPlate, extras.parkingPlate)
+    : null;
+  const herbstPackageName = herbstPackage === 'basis' ? 'Basis'
+    : herbstPackage === 'complete' ? 'Komplett-Set'
+    : herbstPackage === 'premium' ? 'Premium-Set' : null;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -759,9 +765,15 @@ export function EmbeddedCheckout({
         <div className="checkout-flow-step">
           <div className="checkout-order-copy">
             <span>Deine Bestellung</span>
-            <h1>Kennzeichen im Überblick</h1>
+            <h1>{herbstPackage ? 'Dein Paket im Überblick' : 'Kennzeichen im Überblick'}</h1>
           </div>
-        <div className="real-order-line">
+        {herbstPackage ? <div className="checkout-package-line">
+          <div>
+            <strong>{herbstPackageName}</strong>
+            <span>{selection.plate} · {herbstPackage === 'basis' ? '2' : '3'} {selection.plateColor === 'carbon' ? 'Carbon-' : 'Standard-'}Kennzeichen</span>
+          </div>
+          <strong>{formatPrice(((offerBreakdown?.subtotalCents ?? 0) + (offerBreakdown?.shippingCents ?? 0)) / 100)}</strong>
+        </div> : <div className="real-order-line">
           <div>
             <strong>
               {baseQuantity} × {product.label}
@@ -781,7 +793,7 @@ export function EmbeddedCheckout({
               ),
             )}
           </strong>
-        </div>
+        </div>}
         </div>
         <div className="checkout-flow-step checkout-preview-block">
           <div className="checkout-step-heading">
@@ -799,22 +811,32 @@ export function EmbeddedCheckout({
           {selection.plateType !== 'motorcycle' && !isAgriculturePlate(selection.plateType) && (
             <p className="checkout-preview-note">Amtliche Siegel dienen nur der Vorschau und sind nicht im Lieferumfang.</p>
           )}
-        {extras.parkingPlate && (
+        {herbstPackage && <div className="checkout-package-includes">
+          <strong>Im Paket enthalten</strong>
+          <ul>
+            <li>{baseQuantity} Kennzeichen für dein Fahrzeug · {plateColorLabel(selection.plateColor)}</li>
+            {extras.bikeRackPlate && <li>1 Fahrradträger-Kennzeichen · {plateColorLabel(selection.plateColor)}</li>}
+            <li>{herbstPackage === 'basis' ? 'DHL-Versand inklusive' : 'DHL-Versand kostenfrei'}</li>
+            {extras.bikeRackPlate && <li>Checkliste für die Zulassung per E-Mail</li>}
+          </ul>
+          <small>Ein Paketpreis inkl. 19 % MwSt. und Versand</small>
+        </div>}
+        {!herbstPackage && extras.parkingPlate && (
           <div className="real-order-line">
             <span>1 × Parkplatz-Kennzeichen</span>
             <strong>{formatPrice(PARKING_PLATE_PRICE)}</strong>
           </div>
         )}
-        {extras.bikeRackPlate && (
+        {!herbstPackage && extras.bikeRackPlate && (
           <div className="real-order-line">
             <span>1 × Fahrradträger-Kennzeichen</span>
             <strong>{formatPrice(offerBreakdown ? offerBreakdown.bikeRackExtraPriceCents / 100 : BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0))}</strong>
           </div>
         )}
-        <div className="real-order-line">
+        {!herbstPackage && <div className="real-order-line">
           <span>DHL-Versand</span>
           <strong>{pricing?.shippingCents === 0 || (!pricing && (offerEstimate ? offerEstimate.shippingCents === 0 : subtotal >= FREE_SHIPPING_THRESHOLD)) ? 'Kostenlos' : formatPrice(SHIPPING_PRICE)}</strong>
-        </div>
+        </div>}
         {pricing && pricing.discountCents > pricing.packageDiscountCents && (
           <div className="real-order-line real-order-discount">
             <span>Rabatt ({pricing.promoCode})</span>

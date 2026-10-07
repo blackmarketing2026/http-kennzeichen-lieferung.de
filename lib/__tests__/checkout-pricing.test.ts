@@ -1,6 +1,6 @@
 ﻿import { describe, expect, it } from 'vitest';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
-import { HERBST_PRICING, herbstIndividualComparisonCents, herbstSetPriceCents, normalizeOffer } from '@/lib/pricing';
+import { HERBST_PRICING, getHerbstPackage, herbstIndividualComparisonCents, herbstSetPriceCents, normalizeOffer } from '@/lib/pricing';
 
 describe('checkout pricing', () => {
   it.each([
@@ -52,6 +52,14 @@ describe('Herbst pricing', () => {
   const october = new Date('2026-10-31T22:59:59.000Z');
   const november = new Date('2026-10-31T23:00:00.000Z');
   const extras = (bikeRackPlate: boolean) => ({ parkingPlate: false, bikeRackPlate });
+
+  it('recognizes only the three advertised packages for the checkout summary', () => {
+    expect(getHerbstPackage('standard', 'black', 2, false)).toBe('basis');
+    expect(getHerbstPackage('standard', 'black', 2, true)).toBe('complete');
+    expect(getHerbstPackage('standard', 'carbon', 2, true)).toBe('premium');
+    expect(getHerbstPackage('standard', 'carbon', 2, false)).toBeNull();
+    expect(getHerbstPackage('electric', 'black', 2, true)).toBeNull();
+  });
 
   it.each([
     ['black', 1, false, 1180], ['carbon', 1, false, 1680],

@@ -36,7 +36,7 @@ import {
 import { CONSENT_STORAGE_KEY, parseConsentRecord } from '@/lib/cookie-consent';
 import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
-import { HERBST_PRICING, herbstIndividualComparisonCents, herbstSetPriceCents, type OfferProfile } from '@/lib/pricing';
+import { HERBST_PRICING, getHerbstPackage, herbstIndividualComparisonCents, herbstSetPriceCents, type OfferProfile } from '@/lib/pricing';
 import { trackKennzeichenGtmEvent } from '@/lib/kennzeichen-gtm-events';
 import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, formatSeasonMonth, isValidSeasonPeriod } from '@/lib/season-period';
 import styles from './page.module.css';
@@ -109,12 +109,11 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
   const shippingRemaining = isHerbst ? 0 : Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
   const product = PRODUCTS[plateType];
   const totalPlates = quantity + Number(bikeRackPlate && plateType !== 'motorcycle');
-  const selectedPackage = plateType !== 'standard' ? 'Individuell'
-    : totalPlates === 3 ? plateColor === 'carbon' ? 'Premium-Set' : 'Komplett-Set'
-    : quantity === 2 && !bikeRackPlate && plateColor === 'black' ? 'Basis' : 'Einzelbestellung';
-  const selectedOffer = selectedPackage === 'Basis' ? 'basis'
-    : selectedPackage === 'Komplett-Set' ? 'complete'
-    : selectedPackage === 'Premium-Set' ? 'premium' : null;
+  const selectedOffer = isHerbst ? getHerbstPackage(plateType, plateColor, quantity, bikeRackPlate) : null;
+  const selectedPackage = selectedOffer === 'basis' ? 'Basis'
+    : selectedOffer === 'complete' ? 'Komplett-Set'
+    : selectedOffer === 'premium' ? 'Premium-Set'
+    : plateType !== 'standard' ? 'Individuell' : 'Einzelbestellung';
   const configuratorHref = isHerbst && !offerConfiguratorOpen ? '#angebote' : '#konfigurator';
 
   useEffect(() => {
@@ -339,7 +338,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
               {isHerbst ? totalPlates : quantity} {(isHerbst ? totalPlates : quantity) === 1 ? 'Schild' : 'Schilder'} · {formatPrice(total)} gesamt
             </strong>
           </div>
-          {isHerbst && <p className={styles.offerSelectionSummary} aria-live="polite">✓ Deine Auswahl: <strong>{selectedPackage}</strong> · {totalPlates} Kennzeichen · {formatPrice(total)}</p>}
+          {isHerbst && <p className={styles.offerSelectionSummary} aria-live="polite">✓ Deine Auswahl: <strong>{selectedPackage}</strong></p>}
           <div className={styles.livePreviewLabel}>
             <span className={styles.livePreviewDot} aria-hidden="true" />
             Live-Vorschau deiner Kombination
@@ -391,7 +390,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             </label>
           </div>
 
-          {plateType !== 'motorcycle' && (
+          {plateType !== 'motorcycle' && !selectedOffer && (
             <div className={styles.quantityChoice}>
               <span>Menge</span>
               <div>
@@ -401,7 +400,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
               </div>
             </div>
           )}
-          {plateType !== 'motorcycle' && (
+          {plateType !== 'motorcycle' && !selectedOffer && (
             <div className={styles.finishChoice} aria-label="Ausführung">
               <button type="button" aria-pressed={plateColor === 'black'} onClick={() => setPlateColor('black')}>Standard</button>
               <button type="button" aria-pressed={plateColor === 'carbon'} onClick={() => setPlateColor('carbon')}>Carbon-Optik <b>Beliebt</b><small>+5,00 € pro Schild</small></button>
@@ -470,7 +469,19 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             </div>
           )}
 
-          <div className={styles.summary}>
+          {selectedOffer ? <div className={styles.offerOrderSummary} aria-live="polite">
+            <div className={styles.offerOrderSummaryHeading}>
+              <span>{selectedPackage}</span>
+              <strong>{formatPrice(total)}</strong>
+            </div>
+            <ul>
+              <li>{totalPlates} {plateColor === 'carbon' ? 'Carbon-Kennzeichen' : 'Standard-Kennzeichen'}{bikeRackPlate ? ' inkl. Fahrradträger-Schild' : ''}</li>
+              <li>{pricing?.shippingCents === 0 ? 'DHL-Versand inklusive' : `DHL-Versand inkl. ${formatPrice((pricing?.shippingCents ?? 0) / 100)}`}</li>
+              {bikeRackPlate && <li>Checkliste für die Zulassung gratis per E-Mail</li>}
+            </ul>
+            <small>Endpreis inkl. 19 % MwSt. und Versand</small>
+            <a href="#angebote">Anderes Paket wählen</a>
+          </div> : <div className={styles.summary}>
             <div>
               <span className={styles.platePrice}>
                 {quantity} {quantity === 1 ? 'Schild' : 'Schilder'}: {formatPrice((quantity * (pricing?.unitPriceCents ?? 0) - (pricing?.packageDiscountCents ?? 0)) / 100)}
@@ -484,15 +495,15 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
               <strong>{pricing?.shippingCents === 0 ? 'Kostenlos' : formatPrice(SHIPPING_PRICE)}</strong>
             </div>
             {bikeRackPlate && plateType !== 'motorcycle' && <div><span>3. Schild für Fahrradträger</span><strong>{formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100)}</strong></div>}
-          </div>
-          <p className={styles.livePriceNote}>{isHerbst ? 'inkl. 19 % MwSt. und Versand · ab 3 Schildern versandkostenfrei' : 'inkl. MwSt., zzgl. 3,90 € Versand – versandkostenfrei ab 19 €'}</p>
-          <p className={styles.shippingProgress} aria-live="polite">{isHerbst ? pricing?.shippingCents === 0 ? 'Versandkostenfrei ✓' : `${formatPrice(HERBST_PRICING.shippingCents / 100)} Versand` : shippingRemaining > 0 ? `Noch ${formatPrice(shippingRemaining)} bis zum kostenlosen Versand` : 'Versandkostenfrei ✓'}</p>
+          </div>}
+          {!selectedOffer && <p className={styles.livePriceNote}>{isHerbst ? 'inkl. 19 % MwSt. und Versand · ab 3 Schildern versandkostenfrei' : 'inkl. MwSt., zzgl. 3,90 € Versand – versandkostenfrei ab 19 €'}</p>}
+          {!selectedOffer && <p className={styles.shippingProgress} aria-live="polite">{isHerbst ? pricing?.shippingCents === 0 ? 'Versandkostenfrei ✓' : `${formatPrice(HERBST_PRICING.shippingCents / 100)} Versand` : shippingRemaining > 0 ? `Noch ${formatPrice(shippingRemaining)} bis zum kostenlosen Versand` : 'Versandkostenfrei ✓'}</p>}
           <DeliveryGuarantee label={isHerbst ? 'Pünktlich-Garantie' : undefined} />
-          {isHerbst && plateType === 'standard' && quantity === 2 && bikeRackPlate && <label className={styles.carbonUpgrade}>
-            <input type="checkbox" checked={plateColor === 'carbon'} onChange={(event) => setPlateColor(event.target.checked ? 'carbon' : 'black')} />
+          {selectedOffer === 'complete' && <label className={styles.carbonUpgrade}>
+            <input type="checkbox" checked={false} onChange={() => setPlateColor('carbon')} />
             <span>Auf Carbon upgraden: +{formatPrice((herbstSetPriceCents('carbon', offerNow) - herbstSetPriceCents('black', offerNow)) / 100)} (statt +{formatPrice(3 * (HERBST_PRICING.carbonPlateCents - HERBST_PRICING.standardPlateCents) / 100)} einzeln)</span>
           </label>}
-          {plateType !== 'motorcycle' && <label className={styles.extraCheck}><input type="checkbox" checked={bikeRackPlate} onChange={(event) => setBikeRackPlate(event.target.checked)} /><span>3. Schild für Fahrradträger (gleiche Kombination) <strong>+{isHerbst ? formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100) : formatPrice(4.9 + (plateColor === 'carbon' ? 5 : 0))}</strong></span></label>}
+          {plateType !== 'motorcycle' && !selectedOffer && <label className={styles.extraCheck}><input type="checkbox" checked={bikeRackPlate} onChange={(event) => setBikeRackPlate(event.target.checked)} /><span>3. Schild für Fahrradträger (gleiche Kombination) <strong>+{isHerbst ? formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100) : formatPrice(4.9 + (plateColor === 'carbon' ? 5 : 0))}</strong></span></label>}
           {isHerbst && <p className={styles.offerCountdown}><HerbstCountdown compact /></p>}
           <button
             className={styles.orderButton}

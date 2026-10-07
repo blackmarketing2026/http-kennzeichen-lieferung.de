@@ -2082,6 +2082,20 @@ summary:focus-visible {
   border-bottom: 1px solid rgb(6 22 34 / 13%);
   font-size: 0.82rem;
 }
+.checkout-package-line {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  padding: 16px; border: 1px solid #b5dac5; border-radius: 10px;
+  background: #f2faf5;
+}
+.checkout-package-line div { display: grid; gap: 5px; }
+.checkout-package-line div strong { color: #11694a; font-size: 1rem; }
+.checkout-package-line div span { color: #526a78; font-size: .78rem; line-height: 1.4; }
+.checkout-package-line > strong { color: #11694a; font-size: 1.2rem; white-space: nowrap; }
+.checkout-package-includes { padding: 14px 0; border-bottom: 1px solid rgb(6 22 34 / 13%); }
+.checkout-package-includes > strong { font-size: .82rem; }
+.checkout-package-includes ul { margin: 9px 0; padding-left: 18px; color: #334752; font-size: .78rem; line-height: 1.6; }
+.checkout-package-includes li::marker { color: #168359; }
+.checkout-package-includes small { color: #627681; font-size: .73rem; }
 .real-order-line div strong,
 .real-order-line div span {
   display: block;

@@ -1,6 +1,7 @@
 import type { PlateColor, PlateType } from '@/config/products';
 
 export type OfferProfile = 'standard' | 'herbst';
+export type HerbstPackage = 'basis' | 'complete' | 'premium';
 
 export const HERBST_PRICING = {
   standardPlateCents: 790,
@@ -22,8 +23,16 @@ export function normalizeOffer(value: unknown): OfferProfile {
   return value === 'herbst' ? 'herbst' : 'standard';
 }
 
-export function isHerbstPackageEligible(plateType: PlateType, bikeRackPlate: boolean) {
-  return plateType === 'standard' && bikeRackPlate;
+export function getHerbstPackage(
+  plateType: PlateType,
+  color: PlateColor,
+  baseQuantity: number,
+  bikeRackPlate: boolean,
+  parkingPlate = false,
+): HerbstPackage | null {
+  if (plateType !== 'standard' || (color !== 'black' && color !== 'carbon') || baseQuantity !== 2 || parkingPlate) return null;
+  if (bikeRackPlate) return color === 'carbon' ? 'premium' : 'complete';
+  return color === 'black' ? 'basis' : null;
 }
 
 export function herbstSetPriceCents(color: PlateColor, now: Date = new Date()) {
