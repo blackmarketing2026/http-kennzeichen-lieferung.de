@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { EmbeddedCheckout } from '@/components/embedded-checkout';
 import { CHECKOUT_UPSELLS_ENABLED } from '@/config/checkout-features';
@@ -7,6 +8,11 @@ import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, isValidSeasonPeri
 import { normalizeOffer } from '@/lib/pricing';
 
 const PLATE_TYPES = Object.keys(PRODUCTS) as PlateType[];
+
+export const metadata: Metadata = {
+  title: 'Bestellung abschließen | kennzeichen-lieferung.de',
+  description: 'Prüfe deine Kennzeichen-Bestellung und gib deine Lieferadresse ein.',
+};
 
 function first(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
