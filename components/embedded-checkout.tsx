@@ -41,6 +41,8 @@ import {
   type PlateType,
 } from '@/config/products';
 import type { CheckoutExtras, CheckoutPricing } from '@/lib/checkout-pricing';
+import { type OfferProfile } from '@/lib/pricing';
+import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import {
   ExtrasUpsellPopup,
   type UpsellKind,
@@ -569,10 +571,12 @@ export function EmbeddedCheckout({
   selection: initialSelection,
   initialPromoCode = '',
   returnPath,
+  offer = 'standard',
 }: {
   selection: CheckoutSelection;
   initialPromoCode?: string;
   returnPath?: string;
+  offer?: OfferProfile;
 }) {
   preconnect('https://js.stripe.com', { crossOrigin: 'anonymous' });
   const baseQuantity = (
@@ -599,6 +603,10 @@ export function EmbeddedCheckout({
     (extras.parkingPlate ? PARKING_PLATE_PRICE : 0) +
     (extras.bikeRackPlate ? BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0) : 0);
   const total = subtotal + (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_PRICE);
+  const offerEstimate = offer === 'herbst'
+    ? getCheckoutPricing(selection.plateType, selection.plateColor, baseQuantity, undefined, extras, offer)
+    : null;
+  const offerBreakdown = offer === 'herbst' ? pricing ?? offerEstimate : null;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -623,6 +631,7 @@ export function EmbeddedCheckout({
         bikeRackPlate: initialSelection.bikeRackPlate === true,
         cartId: cartId.current,
         promoCode: initialPromoCode || undefined,
+        offer,
         attribution: readAttribution(),
       }),
       signal: controller.signal,
@@ -669,6 +678,7 @@ export function EmbeddedCheckout({
     initialSelection.quantity,
     initialSelection.bikeRackPlate,
     initialPromoCode,
+    offer,
     requestAttempt,
   ]);
 
@@ -693,6 +703,7 @@ export function EmbeddedCheckout({
         cartId: cartId.current,
         paymentIntentId,
         promoCode: code,
+        offer,
       }),
     });
     const data = (await response.json()) as PaymentIntentResponse;
@@ -763,7 +774,7 @@ export function EmbeddedCheckout({
           </div>
           <strong>
             {formatPrice(
-              getPackagePrice(
+              offerBreakdown ? (offerBreakdown.unitPriceCents * baseQuantity - offerBreakdown.packageDiscountCents) / 100 : getPackagePrice(
                 selection.plateType,
                 selection.plateColor,
                 baseQuantity,
@@ -797,12 +808,12 @@ export function EmbeddedCheckout({
         {extras.bikeRackPlate && (
           <div className="real-order-line">
             <span>1 × Fahrradträger-Kennzeichen</span>
-            <strong>{formatPrice(BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0))}</strong>
+            <strong>{formatPrice(offerBreakdown ? offerBreakdown.bikeRackExtraPriceCents / 100 : BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0))}</strong>
           </div>
         )}
         <div className="real-order-line">
           <span>DHL-Versand</span>
-          <strong>{pricing?.shippingCents === 0 || (!pricing && subtotal >= FREE_SHIPPING_THRESHOLD) ? 'Kostenlos' : formatPrice(SHIPPING_PRICE)}</strong>
+          <strong>{pricing?.shippingCents === 0 || (!pricing && (offerEstimate ? offerEstimate.shippingCents === 0 : subtotal >= FREE_SHIPPING_THRESHOLD)) ? 'Kostenlos' : formatPrice(SHIPPING_PRICE)}</strong>
         </div>
         {pricing && pricing.discountCents > pricing.packageDiscountCents && (
           <div className="real-order-line real-order-discount">
@@ -812,8 +823,8 @@ export function EmbeddedCheckout({
         )}
         <div className="real-order-total">
           <span>Gesamt</span>
-          <strong className="checkout-live-price" key={pricing?.totalCents ?? total}>
-            {formatPrice(pricing ? pricing.totalCents / 100 : total)}
+          <strong className="checkout-live-price" key={pricing?.totalCents ?? offerEstimate?.totalCents ?? total}>
+            {formatPrice(pricing ? pricing.totalCents / 100 : offerEstimate ? offerEstimate.totalCents / 100 : total)}
           </strong>
         </div>
         <p className="checkout-scope">
@@ -821,7 +832,7 @@ export function EmbeddedCheckout({
           Plaketten sind nicht enthalten.
         </p>
         <DinCertificationLink />
-        <DeliveryGuarantee />
+        <DeliveryGuarantee label={offer === 'herbst' ? 'Pünktlich-Garantie' : undefined} />
         </div>
       </section>
       <section className="checkout-payment-panel">

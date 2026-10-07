@@ -9,6 +9,7 @@ import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, isValidSeasonPeri
 export type CheckoutSource =
   | 'home'
   | 'kennzeichen-bestellen'
+  | 'kennzeichen-bestellen-herbstangebot'
   | 'autohaendlerpartner'
   | 'landmaschinen-kennzeichen';
 
@@ -43,6 +44,7 @@ export function isCheckoutSource(value: unknown): value is CheckoutSource {
   return (
     value === 'home' ||
     value === 'kennzeichen-bestellen' ||
+    value === 'kennzeichen-bestellen-herbstangebot' ||
     value === 'autohaendlerpartner' ||
     value === 'landmaschinen-kennzeichen'
   );

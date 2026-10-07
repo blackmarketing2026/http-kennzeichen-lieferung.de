@@ -13,6 +13,7 @@ import {
 } from '@/config/products';
 import { sanitizeAttribution } from '@/lib/attribution';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
+import { normalizeOffer } from '@/lib/pricing';
 import { ensureCheckoutSchema, isDatabaseConfigured, query } from '@/lib/db';
 import {
   CUSTOMER_SESSION_COOKIE,
@@ -70,6 +71,7 @@ export async function POST(request: Request) {
     promoCode?: unknown;
     paymentIntentId?: unknown;
     attribution?: unknown;
+    offer?: unknown;
   };
   try {
     body = await request.json();
@@ -78,6 +80,7 @@ export async function POST(request: Request) {
   }
 
   const plateType = body.plateType as PlateType;
+  const offer = normalizeOffer(body.offer);
   const color = body.color as PlateColor;
   const requestedQuantity = Number(body.quantity);
   const plate = body.plate?.toUpperCase().replace(/\s+/g, ' ').trim() ?? '';
@@ -153,6 +156,7 @@ export async function POST(request: Request) {
     baseQuantity,
     body.promoCode as string | undefined,
     extras,
+    offer,
   );
   if (!pricing) {
     return Response.json(
@@ -205,6 +209,7 @@ export async function POST(request: Request) {
       anzahl: String(quantity),
       cartId,
       rabattcode: pricing.promoCode ?? '',
+      offer,
       parkplatzkennzeichen: extras.parkingPlate ? '1' : '0',
       fahrradtraegerkennzeichen: extras.bikeRackPlate ? '1' : '0',
       ...(plateType === 'season' ? { saisonVon: String(seasonStartMonth), saisonBis: String(seasonEndMonth) } : {}),
@@ -239,6 +244,7 @@ export async function POST(request: Request) {
       paymentIntent =
         current.amount === pricing.totalCents &&
         current.metadata.rabattcode === metadata.rabattcode &&
+        (current.metadata.offer ?? 'standard') === metadata.offer &&
         current.metadata.anzahl === String(quantity) &&
         current.metadata.parkplatzkennzeichen ===
           metadata.parkplatzkennzeichen &&
@@ -286,8 +292,8 @@ export async function POST(request: Request) {
       if (!existingOrder) {
         try {
           await query(
-            `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, parking_plate, bike_rack_plate, season_start_month, season_end_month, unit_price_cents, shipping_cents, discount_cents, promo_code, total_cents, stripe_payment_intent_id, customer_id, ordered_at_utc, delivery_promise_text, guarantee_terms_version, shipping_origin_state, shipping_origin_holiday_region)
-             VALUES (?, ?, 'payment_pending', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, UTC_TIMESTAMP(), ?, ?, ?, ?)`,
+            `INSERT INTO orders (id, cart_id, status, plate, plate_type, plate_color, quantity, parking_plate, bike_rack_plate, season_start_month, season_end_month, unit_price_cents, shipping_cents, discount_cents, promo_code, total_cents, offer_profile, stripe_payment_intent_id, customer_id, ordered_at_utc, delivery_promise_text, guarantee_terms_version, shipping_origin_state, shipping_origin_holiday_region)
+             VALUES (?, ?, 'payment_pending', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, UTC_TIMESTAMP(), ?, ?, ?, ?)`,
             [
               randomUUID(),
               cartId,
@@ -304,6 +310,7 @@ export async function POST(request: Request) {
               pricing.discountCents,
               pricing.promoCode,
               pricing.totalCents,
+              offer,
               paymentIntent.id,
               customerId,
               DELIVERY_PROMISE_TEXT,
@@ -334,7 +341,7 @@ export async function POST(request: Request) {
       } else {
         const updated = await query(
           `UPDATE orders SET plate = ?, plate_type = ?, plate_color = ?, quantity = ?, parking_plate = ?, bike_rack_plate = ?, season_start_month = ?, season_end_month = ?, unit_price_cents = ?,
-             shipping_cents = ?, discount_cents = ?, promo_code = ?, total_cents = ?, stripe_payment_intent_id = ?, customer_id = COALESCE(?, customer_id), updated_at = NOW()
+             shipping_cents = ?, discount_cents = ?, promo_code = ?, total_cents = ?, offer_profile = ?, stripe_payment_intent_id = ?, customer_id = COALESCE(?, customer_id), updated_at = NOW()
            WHERE id = ? AND status = 'payment_pending'`,
           [
             plate,
@@ -350,6 +357,7 @@ export async function POST(request: Request) {
             pricing.discountCents,
             pricing.promoCode,
             pricing.totalCents,
+            offer,
             paymentIntent.id,
             customerId,
             existingOrder.id,

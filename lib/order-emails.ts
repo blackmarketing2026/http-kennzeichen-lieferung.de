@@ -22,6 +22,8 @@ export type OrderEmailOrder = {
   plate_color: PlateColor;
   quantity: number;
   total_cents: number;
+  offer_profile?: string | null;
+  bike_rack_plate?: number | boolean;
   customer_email: string | null;
   delivery_promise_text?: string | null;
   delivery_deadline_date?: string | Date | null;
@@ -55,9 +57,10 @@ export async function sendOrderConfirmationEmail(
       <p>wir haben deine Bestellung für das Kennzeichen <strong>${plateLabel(order)}</strong> erhalten.</p>
       <p>Rechnungssumme: <strong>${formatPrice(order.total_cents / 100)}</strong></p>
       <p>Bestellnummer: <strong>${order.id}</strong></p>
+      ${order.offer_profile === 'herbst' && order.plate_type === 'standard' && Boolean(order.bike_rack_plate) && order.quantity === 3 ? `<p>Deine kostenlose <a href="${origin}/downloads/checkliste-zulassung.pdf">Checkliste für die Zulassung herunterladen</a>.</p>` : ''}
       <p><strong>${order.delivery_promise_text ?? DELIVERY_PROMISE_TEXT}</strong></p>
       ${order.delivery_deadline_date ? `<p>Spätestens zugesagtes Lieferdatum: <strong>${new Intl.DateTimeFormat('de-DE', { timeZone: 'UTC', day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(`${order.delivery_deadline_date instanceof Date ? order.delivery_deadline_date.toISOString().slice(0, 10) : String(order.delivery_deadline_date).slice(0, 10)}T12:00:00Z`))}</strong></p>` : ''}
-      <p>${DELIVERY_EXPLANATION} <a href="${origin}/liefergarantie">Bedingungen der Liefergarantie ansehen</a>.</p>
+      <p>${DELIVERY_EXPLANATION} <a href="${origin}/liefergarantie">Bedingungen der ${order.offer_profile === 'herbst' ? 'Pünktlich-Garantie' : 'Liefergarantie'} ansehen</a>.</p>
       <p>Sobald deine Rechnung fertig ist, bekommst du sie separat per E-Mail zugeschickt.</p>
       <p>Sobald dein Kennzeichen gedruckt und versandt ist, bekommst du automatisch die Trackingnummer in einer separaten E-Mail.</p>
     `,
