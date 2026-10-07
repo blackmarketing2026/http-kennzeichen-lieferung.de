@@ -28,11 +28,40 @@
   display: flex; flex-direction: column; gap: 12px; box-shadow: 0 8px 30px #0718240a;
 }
 .offerPackageCard:hover, .offerPackageCard:focus-visible { border-color: #0878dc; box-shadow: 0 12px 32px #0878dc24; }
+.offerPackageSelected, .offerPackageSelected:hover, .offerPackageSelected:focus-visible {
+  border: 3px solid #168359;
+  background: #effaf5;
+  box-shadow: 0 12px 34px #16835930;
+}
 .offerPackageCard strong { font-size: 1.45rem; }
 .offerPackageCard b { font-size: 2rem; color: #0878dc; }
 .offerPackageCard small { font-size: .9rem; }
+.offerPackageChoice {
+  margin-top: auto; padding: 10px 12px; border-radius: 9px;
+  background: #e8f4ff; color: #075d9e; font-weight: 800; text-align: center;
+}
+.offerPackageSelected .offerPackageChoice { background: #168359; color: #fff; }
 .offerPackagePopular { border: 2px solid #0878dc; min-height: 330px; background: #f0f8ff; }
 .offerPackagePopular em { align-self: flex-start; padding: 5px 12px; border-radius: 20px; color: #fff; background: #0878dc; font-style: normal; font-weight: 800; }
+.offerPackagePopular.offerPackageSelected { border: 3px solid #168359; background: #effaf5; }
+.offerConfiguratorPrompt {
+  width: 100%; max-width: 630px; padding: 48px 36px; border: 2px dashed #9abbd2;
+  border-radius: 15px; background: #fff; text-align: center;
+  box-shadow: 0 18px 48px rgba(7, 35, 54, .08);
+}
+.offerConfiguratorPrompt > span { color: #0878dc; font-weight: 800; }
+.offerConfiguratorPrompt h2 { margin: 18px 0 10px; font-size: clamp(1.6rem, 3vw, 2.3rem); }
+.offerConfiguratorPrompt p { color: #536571; line-height: 1.55; }
+.offerConfiguratorPrompt a {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
+  padding: 13px 18px; border-radius: 8px; background: #0878dc; color: #fff;
+  font-weight: 800;
+}
+.offerSelectionSummary {
+  order: -2; margin: 0 0 18px; padding: 12px 14px;
+  border-radius: 9px; background: #effaf5; color: #11694a;
+  font-weight: 700;
+}
 .carbonUpgrade { display: flex; align-items: center; gap: 10px; padding: 14px; border: 1px solid #0878dc; border-radius: 10px; background: #f0f8ff; cursor: pointer; font-weight: 800; }
 .carbonUpgrade input { width: 18px; height: 18px; accent-color: #0878dc; }
 @media (max-width: 820px) {

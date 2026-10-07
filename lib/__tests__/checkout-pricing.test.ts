@@ -49,44 +49,44 @@ describe('checkout pricing', () => {
 });
 
 describe('Herbst pricing', () => {
-  const november = new Date('2026-11-30T22:59:59.000Z');
-  const december = new Date('2026-11-30T23:00:00.000Z');
+  const october = new Date('2026-10-31T22:59:59.000Z');
+  const november = new Date('2026-10-31T23:00:00.000Z');
   const extras = (bikeRackPlate: boolean) => ({ parkingPlate: false, bikeRackPlate });
 
   it.each([
     ['black', 1, false, 1180], ['carbon', 1, false, 1680],
     ['black', 2, false, 1970], ['carbon', 2, false, 2970],
     ['black', 2, true, 2190], ['carbon', 2, true, 3490],
-  ] as const)('prices %s × %i with bicycle rack %s in November', (color, quantity, rack, totalCents) => {
-    expect(getCheckoutPricing('standard', color, quantity, undefined, extras(rack), 'herbst', november))
+  ] as const)('prices %s × %i with bicycle rack %s in October', (color, quantity, rack, totalCents) => {
+    expect(getCheckoutPricing('standard', color, quantity, undefined, extras(rack), 'herbst', october))
       .toMatchObject({ totalCents, shippingCents: rack ? 0 : HERBST_PRICING.shippingCents });
   });
 
   it('switches at midnight Berlin time and leaves the basis unchanged', () => {
-    expect(getCheckoutPricing('standard', 'black', 2, undefined, extras(true), 'herbst', december)?.totalCents).toBe(2390);
-    expect(getCheckoutPricing('standard', 'carbon', 2, undefined, extras(true), 'herbst', december)?.totalCents).toBe(3790);
-    expect(getCheckoutPricing('standard', 'black', 2, undefined, extras(false), 'herbst', december)?.totalCents).toBe(1970);
-    expect(getCheckoutPricing('standard', 'black', 2, undefined, extras(true), 'herbst', new Date(december.getTime() - 1))?.totalCents).toBe(2190);
+    expect(getCheckoutPricing('standard', 'black', 2, undefined, extras(true), 'herbst', november)?.totalCents).toBe(2390);
+    expect(getCheckoutPricing('standard', 'carbon', 2, undefined, extras(true), 'herbst', november)?.totalCents).toBe(3790);
+    expect(getCheckoutPricing('standard', 'black', 2, undefined, extras(false), 'herbst', november)?.totalCents).toBe(1970);
+    expect(getCheckoutPricing('standard', 'black', 2, undefined, extras(true), 'herbst', new Date(november.getTime() - 1))?.totalCents).toBe(2190);
   });
 
   it('charges shipping for a single base plate plus a bicycle-rack plate', () => {
-    expect(getCheckoutPricing('standard', 'black', 1, undefined, extras(true), 'herbst', november))
+    expect(getCheckoutPricing('standard', 'black', 1, undefined, extras(true), 'herbst', october))
       .toMatchObject({ subtotalCents: 1580, shippingCents: 390, totalCents: 1970 });
-    expect(getCheckoutPricing('standard', 'carbon', 1, undefined, extras(true), 'herbst', november))
+    expect(getCheckoutPricing('standard', 'carbon', 1, undefined, extras(true), 'herbst', october))
       .toMatchObject({ subtotalCents: 2580, shippingCents: 390, totalCents: 2970 });
   });
 
   it('derives comparison prices, savings, and carbon upgrade from configuration', () => {
     expect(herbstIndividualComparisonCents('black')).toBe(2760);
     expect(herbstIndividualComparisonCents('carbon')).toBe(4260);
-    expect(herbstIndividualComparisonCents('black') - herbstSetPriceCents('black', november)).toBe(570);
-    expect(herbstIndividualComparisonCents('carbon') - herbstSetPriceCents('carbon', november)).toBe(770);
-    expect(herbstSetPriceCents('carbon', november) - herbstSetPriceCents('black', november)).toBe(1300);
+    expect(herbstIndividualComparisonCents('black') - herbstSetPriceCents('black', october)).toBe(570);
+    expect(herbstIndividualComparisonCents('carbon') - herbstSetPriceCents('carbon', october)).toBe(770);
+    expect(herbstSetPriceCents('carbon', october) - herbstSetPriceCents('black', october)).toBe(1300);
   });
 
   it('keeps standard and invalid profiles at standard prices', () => {
     expect(normalizeOffer('wrong')).toBe('standard');
-    for (const now of [november, december]) {
+    for (const now of [october, november]) {
       expect(getCheckoutPricing('standard', 'black', 2, undefined, extras(true), 'standard', now)?.totalCents).toBe(2260);
       expect(getCheckoutPricing('standard', 'black', 2, undefined, extras(true), 'wrong', now)?.totalCents).toBe(2260);
       expect(getCheckoutPricing('electric', 'black', 2, undefined, extras(false), 'herbst', now)?.totalCents).toBe(1990);

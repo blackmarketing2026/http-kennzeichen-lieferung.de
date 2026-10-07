@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { HERBST_PRICING } from '@/lib/pricing';
+import { formatPrice } from '@/config/products';
 
 export function HerbstCountdown({ compact = false }: { compact?: boolean }) {
   const [remaining, setRemaining] = useState<number | null>(null);
@@ -19,6 +20,6 @@ export function HerbstCountdown({ compact = false }: { compact?: boolean }) {
   const minutes = Math.floor(remaining / 60_000) % 60;
   return <span role="timer" aria-live="off">
     Herbst-Preise nur noch {days} T {String(hours).padStart(2, '0')} Std {String(minutes).padStart(2, '0')} Min
-    {!compact && <> · Ab 1. Dezember: Komplett-Set 23,90 € · Premium-Set 37,90 €</>}
+    {!compact && <> · Ab 1. November: Komplett-Set {formatPrice(HERBST_PRICING.completeAfterOfferCents / 100)} · Premium-Set {formatPrice(HERBST_PRICING.premiumAfterOfferCents / 100)}</>}
   </span>;
 }

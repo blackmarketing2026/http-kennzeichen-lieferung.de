@@ -87,6 +87,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
   const [carQuantity, setCarQuantity] = useState<1 | 2>(1);
   const [plateColor, setPlateColor] = useState<PlateColor>('black');
   const [bikeRackPlate, setBikeRackPlate] = useState(false);
+  const [offerConfiguratorOpen, setOfferConfiguratorOpen] = useState(!isHerbst);
   const [offerNow, setOfferNow] = useState(() => new Date());
   const [city, setCity] = useState('');
   const [letters, setLetters] = useState('');
@@ -111,6 +112,10 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
   const selectedPackage = plateType !== 'standard' ? 'Individuell'
     : totalPlates === 3 ? plateColor === 'carbon' ? 'Premium-Set' : 'Komplett-Set'
     : quantity === 2 && !bikeRackPlate && plateColor === 'black' ? 'Basis' : 'Einzelbestellung';
+  const selectedOffer = selectedPackage === 'Basis' ? 'basis'
+    : selectedPackage === 'Komplett-Set' ? 'complete'
+    : selectedPackage === 'Premium-Set' ? 'premium' : null;
+  const configuratorHref = isHerbst && !offerConfiguratorOpen ? '#angebote' : '#konfigurator';
 
   useEffect(() => {
     if (!isHerbst) return;
@@ -122,6 +127,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
     const timer = window.setTimeout(() => {
       const draft = readCheckoutDraft(source);
       if (!draft) return;
+      if (isHerbst) setOfferConfiguratorOpen(true);
       const [savedCity, savedLetters, savedNumbers] = draft.plate.split(' ');
       setPlateType(draft.plateType);
       setCarQuantity(draft.quantity === 1 ? 1 : 2);
@@ -134,13 +140,14 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
       setSeasonEndMonth(draft.seasonEndMonth ?? DEFAULT_SEASON_END_MONTH);
     }, 0);
     return () => window.clearTimeout(timer);
-  }, [source]);
+  }, [source, isHerbst]);
 
   function selectPackage(kind: 'basis' | 'complete' | 'premium') {
     setPlateType('standard');
     setCarQuantity(2);
     setPlateColor(kind === 'premium' ? 'carbon' : 'black');
     setBikeRackPlate(kind !== 'basis');
+    setOfferConfiguratorOpen(true);
     window.requestAnimationFrame(() => document.getElementById('konfigurator')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   }
 
@@ -236,7 +243,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           <a href="#versand">Versand</a>
           <a href="#fragen">FAQ</a>
         </nav>
-        <a className={styles.headerCta} href="#konfigurator">
+        <a className={styles.headerCta} href={configuratorHref}>
           Kennzeichen konfigurieren
         </a>
       </header>
@@ -246,25 +253,28 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         <h2 id="offer-packages-title">Wähle dein Kennzeichen-Paket</h2>
         <p className={styles.offerCountdown}><HerbstCountdown /></p>
         <div className={styles.offerPackageGrid}>
-          <button type="button" className={styles.offerPackageCard} onClick={() => selectPackage('basis')}>
+          <button type="button" className={`${styles.offerPackageCard} ${offerConfiguratorOpen && selectedOffer === 'basis' ? styles.offerPackageSelected : ''}`} aria-pressed={offerConfiguratorOpen && selectedOffer === 'basis'} onClick={() => selectPackage('basis')}>
             <strong>Basis</strong><span>2 Kennzeichen</span>
             <b>{formatPrice((2 * HERBST_PRICING.standardPlateCents + HERBST_PRICING.shippingCents) / 100)}</b>
             <small>inkl. {formatPrice(HERBST_PRICING.shippingCents / 100)} Versand</small>
             <span>✓ Pünktlich-Garantie</span>
+            <span className={styles.offerPackageChoice}>{offerConfiguratorOpen && selectedOffer === 'basis' ? '✓ Ausgewählt' : 'Angebot auswählen →'}</span>
           </button>
-          <button type="button" className={`${styles.offerPackageCard} ${styles.offerPackagePopular}`} onClick={() => selectPackage('complete')}>
+          <button type="button" className={`${styles.offerPackageCard} ${styles.offerPackagePopular} ${offerConfiguratorOpen && selectedOffer === 'complete' ? styles.offerPackageSelected : ''}`} aria-pressed={offerConfiguratorOpen && selectedOffer === 'complete'} onClick={() => selectPackage('complete')}>
             <em>Beliebt</em><strong>Komplett-Set</strong><span>3 Kennzeichen inkl. Fahrradträger</span>
             <small>Einzeln {formatPrice(herbstIndividualComparisonCents('black') / 100)} → im Set</small>
             <b>{formatPrice(herbstSetPriceCents('black', offerNow) / 100)}</b>
             <span>Du sparst {formatPrice((herbstIndividualComparisonCents('black') - herbstSetPriceCents('black', offerNow)) / 100)}</span>
             <span>✓ Versandkostenfrei · Gratis: Checkliste für die Zulassung · Pünktlich-Garantie</span>
+            <span className={styles.offerPackageChoice}>{offerConfiguratorOpen && selectedOffer === 'complete' ? '✓ Ausgewählt' : 'Angebot auswählen →'}</span>
           </button>
-          <button type="button" className={styles.offerPackageCard} onClick={() => selectPackage('premium')}>
+          <button type="button" className={`${styles.offerPackageCard} ${offerConfiguratorOpen && selectedOffer === 'premium' ? styles.offerPackageSelected : ''}`} aria-pressed={offerConfiguratorOpen && selectedOffer === 'premium'} onClick={() => selectPackage('premium')}>
             <strong>Premium-Set</strong><span>3 Carbon-Kennzeichen inkl. Fahrradträger</span>
             <small>Einzeln {formatPrice(herbstIndividualComparisonCents('carbon') / 100)} → im Set</small>
             <b>{formatPrice(herbstSetPriceCents('carbon', offerNow) / 100)}</b>
             <span>Du sparst {formatPrice((herbstIndividualComparisonCents('carbon') - herbstSetPriceCents('carbon', offerNow)) / 100)}</span>
             <span>✓ Versandkostenfrei · Gratis-Checkliste · Pünktlich-Garantie</span>
+            <span className={styles.offerPackageChoice}>{offerConfiguratorOpen && selectedOffer === 'premium' ? '✓ Ausgewählt' : 'Angebot auswählen →'}</span>
           </button>
         </div>
       </section>}
@@ -303,7 +313,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
               <ShieldCheck /> Unsere {isHerbst ? 'Pünktlich-Garantie' : 'Liefergarantie'} ist inklusive
             </li>
           </ul>
-          <a className={styles.heroCta} href="#konfigurator">
+          <a className={styles.heroCta} href={configuratorHref}>
             Kennzeichen konfigurieren <ArrowRight />
           </a>
           <div className={styles.deliveryInfo}>
@@ -317,13 +327,19 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           </div>
         </div>
 
-        <div className={styles.orderCard} id="konfigurator">
+        {isHerbst && !offerConfiguratorOpen ? <div className={styles.offerConfiguratorPrompt} id="konfigurator">
+          <span>Schritt 1 von 2</span>
+          <h2>Wähle zuerst dein Angebot</h2>
+          <p>Danach öffnet sich hier dein Konfigurator mit der passenden Anzahl und Ausführung.</p>
+          <a href="#angebote">Angebote auswählen <ArrowRight size={18} /></a>
+        </div> : <div className={styles.orderCard} id="konfigurator">
           <div className={styles.cardTopline}>
             <span>Schritt 1: Kennzeichen wählen</span>
             <strong>
               {isHerbst ? totalPlates : quantity} {(isHerbst ? totalPlates : quantity) === 1 ? 'Schild' : 'Schilder'} · {formatPrice(total)} gesamt
             </strong>
           </div>
+          {isHerbst && <p className={styles.offerSelectionSummary} aria-live="polite">✓ Deine Auswahl: <strong>{selectedPackage}</strong> · {totalPlates} Kennzeichen · {formatPrice(total)}</p>}
           <div className={styles.livePreviewLabel}>
             <span className={styles.livePreviewDot} aria-hidden="true" />
             Live-Vorschau deiner Kombination
@@ -498,7 +514,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           <div className={styles.paymentWrap}>
             <PaymentLogos />
           </div>
-        </div>
+        </div>}
       </section>
 
       <section className={styles.orderProcess} aria-labelledby="bestellablauf">
@@ -557,7 +573,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             </h2>
             <p>Wähle Klarna als Zahlungsart im Checkout.</p>
           </div>
-          <a className={styles.klarnaButton} href="#konfigurator">
+          <a className={styles.klarnaButton} href={configuratorHref}>
             Jetzt konfigurieren <ArrowRight size={18} aria-hidden="true" />
           </a>
         </div>
@@ -595,7 +611,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           <strong>
             <CheckCircle2 /> Für TÜV und Zulassungsstelle
           </strong>
-          <a href="#konfigurator">
+          <a href={configuratorHref}>
             Normgerechte Kennzeichen bestellen <ArrowRight />
           </a>
         </div>
@@ -787,7 +803,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             </span>
           </li>
         </ul>
-        <a href="#konfigurator" className={styles.secondaryCta}>
+        <a href={configuratorHref} className={styles.secondaryCta}>
           Kennzeichen konfigurieren <ArrowRight />
         </a>
       </section>
@@ -847,7 +863,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           </article>
         </div>
 
-        <a href="#konfigurator" className={styles.registrationCta}>
+        <a href={configuratorHref} className={styles.registrationCta}>
           Kennzeichen jetzt konfigurieren <ArrowRight />
         </a>
       </section>
@@ -885,7 +901,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           auf deine Kombination.
         </h2>
         <p className={styles.finalPrice}>{isHerbst ? `3 Kennzeichen im Komplett-Set für ${formatPrice(herbstSetPriceCents('black', offerNow) / 100)}` : 'Kennzeichen ab 6,90 € pro Schild'}</p>
-        <a href="#konfigurator">
+        <a href={configuratorHref}>
           Jetzt Kennzeichen konfigurieren <ArrowRight />
         </a>
         <small>{isHerbst ? 'inkl. 19 % MwSt. · ab 3 Schildern versandkostenfrei · Tracking per E-Mail' : 'inkl. 19 % MwSt. · 3,90 € Versand, kostenlos ab 19 € Warenwert · Tracking per E-Mail'}</small>
@@ -903,7 +919,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         <p>DIN-zertifizierte Kennzeichen. In 10 Minuten geprägt und versandfertig.</p>
       </footer>
 
-      <div className={styles.mobileBar}>
+      {(!isHerbst || offerConfiguratorOpen) && <div className={styles.mobileBar}>
         <div>
           <span>
             {isHerbst ? selectedPackage : `${quantity} ${quantity === 1 ? 'Schild' : 'Schilder'}`} · Gesamt inkl. Versand
@@ -915,7 +931,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         </button> : <a href="#konfigurator">
           Konfigurieren <ArrowRight />
         </a>}
-      </div>
+      </div>}
 
     </main>
   );
