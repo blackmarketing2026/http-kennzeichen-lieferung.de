@@ -48,6 +48,27 @@ export async function sendOrderConfirmationEmail(
     return;
   }
 
+  const includesChecklist = order.offer_profile === 'herbst' &&
+    order.plate_type === 'standard' && Boolean(order.bike_rack_plate) && order.quantity === 3;
+  const checklistUrl = `${origin}/downloads/checkliste-zulassung.pdf`;
+  let checklistPdf: Buffer | null = null;
+  if (includesChecklist) {
+    try {
+      const response = await fetch(checklistUrl, { signal: AbortSignal.timeout(10000) });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const bytes = Buffer.from(await response.arrayBuffer());
+      if (bytes.length > 5_000_000 || bytes.subarray(0, 5).toString() !== '%PDF-') {
+        throw new Error('Ungültige Checklisten-PDF');
+      }
+      checklistPdf = bytes;
+    } catch (error) {
+      logEvent('warn', 'Checklisten-PDF konnte nicht angehängt werden', {
+        orderId: order.id,
+        error: error instanceof Error ? error.message : 'unbekannt',
+      });
+    }
+  }
+
   const html = renderEmailTemplate({
     logoUrl: `${origin}/kennzeichen-lieferung-logo.png`,
     preheader: 'Vielen Dank für deine Bestellung',
@@ -57,7 +78,7 @@ export async function sendOrderConfirmationEmail(
       <p>wir haben deine Bestellung für das Kennzeichen <strong>${plateLabel(order)}</strong> erhalten.</p>
       <p>Rechnungssumme: <strong>${formatPrice(order.total_cents / 100)}</strong></p>
       <p>Bestellnummer: <strong>${order.id}</strong></p>
-      ${order.offer_profile === 'herbst' && order.plate_type === 'standard' && Boolean(order.bike_rack_plate) && order.quantity === 3 ? `<p>Deine kostenlose <a href="${origin}/downloads/checkliste-zulassung.pdf">Checkliste für die Zulassung herunterladen</a>.</p>` : ''}
+      ${includesChecklist ? `<p>Deine kostenlose <a href="${checklistUrl}">Checkliste für die Zulassung herunterladen</a>${checklistPdf ? ' – sie ist auch als PDF angehängt' : ''}.</p>` : ''}
       <p><strong>${order.delivery_promise_text ?? DELIVERY_PROMISE_TEXT}</strong></p>
       ${order.delivery_deadline_date ? `<p>Spätestens zugesagtes Lieferdatum: <strong>${new Intl.DateTimeFormat('de-DE', { timeZone: 'UTC', day: '2-digit', month: '2-digit', year: 'numeric' }).format(new Date(`${order.delivery_deadline_date instanceof Date ? order.delivery_deadline_date.toISOString().slice(0, 10) : String(order.delivery_deadline_date).slice(0, 10)}T12:00:00Z`))}</strong></p>` : ''}
       <p>${DELIVERY_EXPLANATION} <a href="${origin}/liefergarantie">Bedingungen der ${order.offer_profile === 'herbst' ? 'Pünktlich-Garantie' : 'Liefergarantie'} ansehen</a>.</p>
@@ -73,6 +94,11 @@ export async function sendOrderConfirmationEmail(
       to: order.customer_email,
       subject: 'Deine Bestellung bei Kennzeichen-Lieferung',
       html,
+      ...(checklistPdf ? { attachments: [{
+        filename: 'Kfz-Zulassung-Dokumente-Checkliste.pdf',
+        content: checklistPdf,
+        contentType: 'application/pdf',
+      }] } : {}),
     });
   } catch (error) {
     logEvent('error', 'Bestellbestätigung konnte nicht gesendet werden', {
