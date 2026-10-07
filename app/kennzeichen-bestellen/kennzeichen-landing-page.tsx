@@ -80,7 +80,7 @@ function trackEvent(event: string, payload: Record<string, unknown>) {
 export function KennzeichenLandingPage() {
   const router = useRouter();
   const [plateType, setPlateType] = useState<PlateType>('standard');
-  const [carQuantity, setCarQuantity] = useState<1 | 2>(2);
+  const [carQuantity, setCarQuantity] = useState<1 | 2>(1);
   const [plateColor, setPlateColor] = useState<PlateColor>('black');
   const [bikeRackPlate, setBikeRackPlate] = useState(false);
   const [city, setCity] = useState('');
