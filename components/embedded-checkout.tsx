@@ -11,7 +11,7 @@ import {
   useElements,
   useStripe,
 } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe, type StripeElements } from '@stripe/stripe-js';
 import {
   ArrowLeft,
   ArrowRight,
@@ -41,8 +41,9 @@ import {
   type PlateType,
 } from '@/config/products';
 import type { CheckoutExtras, CheckoutPricing } from '@/lib/checkout-pricing';
-import { getHerbstPackage, type OfferProfile } from '@/lib/pricing';
+import { getHerbstPackage, type HerbstPackage, type OfferProfile } from '@/lib/pricing';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
+import { saveCheckoutDraft } from '@/lib/checkout-draft';
 import {
   ExtrasUpsellPopup,
   type UpsellKind,
@@ -65,6 +66,11 @@ type CheckoutSelection = {
 type ActiveSelection = Omit<CheckoutSelection, 'quantity'> & {
   quantity: number;
 };
+const HERBST_PACKAGE_OPTIONS: { id: HerbstPackage; label: string; color: PlateColor; bikeRackPlate: boolean; description: string }[] = [
+  { id: 'basis', label: 'Basis', color: 'black', bikeRackPlate: false, description: '2 Standard-Kennzeichen' },
+  { id: 'complete', label: 'Komplett-Set', color: 'black', bikeRackPlate: true, description: '2 Standard-Kennzeichen + Fahrradträger' },
+  { id: 'premium', label: 'Premium-Set', color: 'carbon', bikeRackPlate: true, description: '2 Carbon-Kennzeichen + Fahrradträger' },
+];
 type PaymentIntentResponse = {
   error?: string;
   clientSecret?: string;
@@ -122,6 +128,10 @@ function PaymentForm({
   onApplyPromo,
   onChangeExtra,
   onStepChange,
+  onElementsChange,
+  onFormBusyChange,
+  isUpdatingPackage,
+  checkoutSyncReady,
   trackKennzeichenFunnel,
 }: {
   selection: ActiveSelection;
@@ -132,6 +142,10 @@ function PaymentForm({
   onApplyPromo: (code: string) => Promise<CheckoutPricing>;
   onChangeExtra: (extras: CheckoutExtras) => Promise<CheckoutPricing>;
   onStepChange: (step: 'address' | 'payment') => void;
+  onElementsChange: (elements: StripeElements | null) => void;
+  onFormBusyChange: (busy: boolean) => void;
+  isUpdatingPackage: boolean;
+  checkoutSyncReady: boolean;
   trackKennzeichenFunnel: boolean;
 }) {
   const stripe = useStripe();
@@ -158,8 +172,22 @@ function PaymentForm({
   const [isUpdatingExtra, setIsUpdatingExtra] = useState(false);
   const changingExtra = useRef(false);
 
+  useEffect(() => {
+    onElementsChange(elements);
+    return () => onElementsChange(null);
+  }, [elements, onElementsChange]);
+
+  useEffect(() => {
+    onFormBusyChange(isPaying || isApplyingPromo || isUpdatingExtra);
+    return () => onFormBusyChange(false);
+  }, [isPaying, isApplyingPromo, isUpdatingExtra, onFormBusyChange]);
+
   async function continueToPayment() {
     setMessage('');
+    if (isUpdatingPackage || !checkoutSyncReady) {
+      setMessage('Bitte warte, bis dein Paket und der Zahlbetrag aktualisiert wurden.');
+      return;
+    }
     if (!/^\S+@\S+\.\S+$/.test(email)) {
       setMessage('Bitte gib eine gültige E-Mail-Adresse ein.');
       return;
@@ -214,7 +242,7 @@ function PaymentForm({
   }
 
   async function changeExtra(kind: UpsellKind, selected: boolean) {
-    if (!elements || isPaying || isApplyingPromo || changingExtra.current)
+    if (!elements || isPaying || isApplyingPromo || isUpdatingPackage || !checkoutSyncReady || changingExtra.current)
       return false;
     changingExtra.current = true;
     setIsUpdatingExtra(true);
@@ -245,7 +273,7 @@ function PaymentForm({
   }
 
   async function applyPromo(code: string) {
-    if (!elements || isApplyingPromo || isPaying || changingExtra.current)
+    if (!elements || isApplyingPromo || isPaying || isUpdatingPackage || !checkoutSyncReady || changingExtra.current)
       return;
     setIsApplyingPromo(true);
     setPromoMessage('');
@@ -286,7 +314,7 @@ function PaymentForm({
       isPaying ||
       isApplyingPromo ||
       changingExtra.current ||
-      !promoReady || step !== 'payment' || !shippingAddress
+      !promoReady || isUpdatingPackage || !checkoutSyncReady || step !== 'payment' || !shippingAddress
     )
       return;
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
@@ -445,13 +473,13 @@ function PaymentForm({
             priceCents={Math.round(PARKING_PLATE_PRICE * 100)}
             selected={{ parking: extras.parkingPlate, bikeRack: extras.bikeRackPlate }}
             busy={isUpdatingExtra}
-            disabled={!stripe || !elements || isPaying || isApplyingPromo}
+            disabled={!stripe || !elements || isPaying || isApplyingPromo || isUpdatingPackage || !checkoutSyncReady}
             onChange={changeExtra}
           />
         </section>
       )}
       {message && step === 'address' && <p className="checkout-error" role="alert">{message}</p>}
-      <button className="checkout-continue" type="button" onClick={continueToPayment} disabled={!elements || isUpdatingExtra || isApplyingPromo}>
+      <button className="checkout-continue" type="button" onClick={continueToPayment} disabled={!elements || isUpdatingExtra || isApplyingPromo || isUpdatingPackage || !checkoutSyncReady}>
         Weiter zur Zahlung <ArrowRight size={18} />
       </button>
       </section>
@@ -494,7 +522,7 @@ function PaymentForm({
               !promoInput.trim() ||
               isApplyingPromo ||
               isPaying ||
-              isUpdatingExtra
+              isUpdatingExtra || isUpdatingPackage || !checkoutSyncReady
             }
           >
             {isApplyingPromo ? 'Prüfe …' : 'Einlösen'}
@@ -505,7 +533,7 @@ function PaymentForm({
             className="checkout-promo-remove"
             type="button"
             onClick={() => applyPromo('')}
-            disabled={isApplyingPromo || isPaying || isUpdatingExtra}
+            disabled={isApplyingPromo || isPaying || isUpdatingExtra || isUpdatingPackage || !checkoutSyncReady}
           >
             Rabattcode entfernen
           </button>
@@ -544,7 +572,9 @@ function PaymentForm({
           isPaying ||
           isApplyingPromo ||
           isUpdatingExtra ||
-          !promoReady
+          !promoReady ||
+          isUpdatingPackage ||
+          !checkoutSyncReady
         }
       >
         {isPaying ? (
@@ -586,9 +616,10 @@ export function EmbeddedCheckout({
     parkingPlate: initialSelection.quantity === 3,
     bikeRackPlate: initialSelection.bikeRackPlate === true,
   });
+  const [selectedColor, setSelectedColor] = useState<PlateColor>(initialSelection.plateColor);
   const quantity =
     baseQuantity + Number(extras.parkingPlate) + Number(extras.bikeRackPlate);
-  const selection: ActiveSelection = { ...initialSelection, quantity };
+  const selection: ActiveSelection = { ...initialSelection, plateColor: selectedColor, quantity };
   const [clientSecret, setClientSecret] = useState('');
   const [paymentIntentId, setPaymentIntentId] = useState('');
   const [publishableKey, setPublishableKey] = useState('');
@@ -596,6 +627,12 @@ export function EmbeddedCheckout({
   const [error, setError] = useState('');
   const [checkoutStep, setCheckoutStep] = useState<'address' | 'payment'>('address');
   const [requestAttempt, setRequestAttempt] = useState(0);
+  const [paymentElements, setPaymentElements] = useState<StripeElements | null>(null);
+  const [formBusy, setFormBusy] = useState(false);
+  const [isUpdatingPackage, setIsUpdatingPackage] = useState(false);
+  const [checkoutSyncReady, setCheckoutSyncReady] = useState(true);
+  const [packageError, setPackageError] = useState('');
+  const [packagePickerOpen, setPackagePickerOpen] = useState(false);
   const cartId = useRef<string | null>(null);
   const product = PRODUCTS[selection.plateType];
   const subtotal =
@@ -691,6 +728,7 @@ export function EmbeddedCheckout({
   async function updateCheckout(
     code: string,
     nextExtras = extras,
+    nextColor = selectedColor,
   ): Promise<CheckoutPricing> {
     if (!cartId.current || !paymentIntentId)
       throw new Error('Checkout ist noch nicht bereit.');
@@ -702,7 +740,7 @@ export function EmbeddedCheckout({
         plateType: selection.plateType,
         seasonStartMonth: selection.seasonStartMonth,
         seasonEndMonth: selection.seasonEndMonth,
-        color: selection.plateColor,
+        color: nextColor,
         quantity: baseQuantity,
         parkingPlate: nextExtras.parkingPlate,
         bikeRackPlate: nextExtras.bikeRackPlate,
@@ -729,7 +767,39 @@ export function EmbeddedCheckout({
     }
     setPricing(data.pricing);
     setExtras(nextExtras);
+    setSelectedColor(nextColor);
     return data.pricing;
+  }
+
+  async function changePackage(nextPackage: HerbstPackage) {
+    if (!pricing || !paymentElements || isUpdatingPackage || formBusy || (nextPackage === herbstPackage && checkoutSyncReady)) return;
+    const option = HERBST_PACKAGE_OPTIONS.find((item) => item.id === nextPackage);
+    if (!option) return;
+    const nextExtras = { ...extras, parkingPlate: false, bikeRackPlate: option.bikeRackPlate };
+    setIsUpdatingPackage(true);
+    setPackageError('');
+    let intentUpdated = false;
+    try {
+      await updateCheckout(pricing.promoCode ?? '', nextExtras, option.color);
+      intentUpdated = true;
+      const update = await paymentElements.fetchUpdates();
+      if (update.error) throw new Error('Der Zahlbetrag konnte nicht synchronisiert werden. Bitte wähle das Paket erneut.');
+      setCheckoutSyncReady(true);
+      setPackagePickerOpen(false);
+      saveCheckoutDraft('kennzeichen-bestellen-herbstangebot', {
+        plate: selection.plate,
+        plateType: selection.plateType,
+        plateColor: option.color,
+        quantity: baseQuantity,
+        bikeRackPlate: option.bikeRackPlate,
+        promoCode: pricing.promoCode ?? undefined,
+      });
+    } catch (cause) {
+      if (intentUpdated) setCheckoutSyncReady(false);
+      setPackageError(cause instanceof Error ? cause.message : 'Das Paket konnte nicht aktualisiert werden.');
+    } finally {
+      setIsUpdatingPackage(false);
+    }
   }
 
   const stripePromise = useMemo(
@@ -770,7 +840,7 @@ export function EmbeddedCheckout({
         {herbstPackage ? <div className="checkout-package-line">
           <div>
             <strong>{herbstPackageName}</strong>
-            <span>{selection.plate} · {herbstPackage === 'basis' ? '2' : '3'} {selection.plateColor === 'carbon' ? 'Carbon-' : 'Standard-'}Kennzeichen</span>
+            <span>{selection.plate} · 2 {selection.plateColor === 'carbon' ? 'Carbon-' : 'Standard-'}Kennzeichen{extras.bikeRackPlate && ' + Fahrradträger-Schild'}</span>
           </div>
           <strong>{formatPrice(((offerBreakdown?.subtotalCents ?? 0) + (offerBreakdown?.shippingCents ?? 0)) / 100)}</strong>
         </div> : <div className="real-order-line">
@@ -793,6 +863,22 @@ export function EmbeddedCheckout({
               ),
             )}
           </strong>
+        </div>}
+        {herbstPackage && <div className="checkout-package-change">
+          <button type="button" className="checkout-package-toggle" aria-expanded={packagePickerOpen} aria-controls="checkout-package-options" onClick={() => setPackagePickerOpen((open) => !open)}>
+            {packagePickerOpen ? 'Paketauswahl schließen' : 'Paket ändern'}
+          </button>
+          {packagePickerOpen && <div id="checkout-package-options" className="checkout-package-options" aria-label="Paket auswählen">
+            {HERBST_PACKAGE_OPTIONS.map((option) => {
+              const optionPricing = getCheckoutPricing('standard', option.color, 2, undefined, { parkingPlate: false, bikeRackPlate: option.bikeRackPlate }, 'herbst');
+              return <button key={option.id} type="button" aria-pressed={herbstPackage === option.id} disabled={!paymentElements || isUpdatingPackage || formBusy} onClick={() => changePackage(option.id)}>
+                <span><strong>{option.label}</strong><small>{option.description}</small></span>
+                <b>{optionPricing ? formatPrice(optionPricing.totalCents / 100) : ''}</b>
+              </button>;
+            })}
+          </div>}
+          {isUpdatingPackage && <output className="checkout-package-message"><LoaderCircle className="spin" size={15} /> Paket und Zahlbetrag werden aktualisiert …</output>}
+          {packageError && <p className="checkout-package-error" role="alert">{packageError}</p>}
         </div>}
         </div>
         <div className="checkout-flow-step checkout-preview-block">
@@ -904,6 +990,10 @@ export function EmbeddedCheckout({
                 updateCheckout(pricing.promoCode ?? '', nextExtras)
               }
               onStepChange={setCheckoutStep}
+              onElementsChange={setPaymentElements}
+              onFormBusyChange={setFormBusy}
+              isUpdatingPackage={isUpdatingPackage}
+              checkoutSyncReady={checkoutSyncReady}
               trackKennzeichenFunnel={returnPath?.startsWith('/kennzeichen-bestellen') === true}
             />
           </Elements>

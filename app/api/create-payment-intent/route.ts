@@ -223,7 +223,8 @@ export async function POST(request: Request) {
         current.metadata.cartId !== cartId ||
         current.metadata.kennzeichen !== plate ||
         current.metadata.kennzeichenart !== product.label ||
-        current.metadata.schriftfarbe !== metadata.schriftfarbe ||
+        (current.metadata.offer ?? 'standard') !== offer ||
+        (current.metadata.schriftfarbe !== metadata.schriftfarbe && offer !== 'herbst') ||
         (plateType === 'season' && ((current.metadata.saisonVon ?? String(DEFAULT_SEASON_START_MONTH)) !== String(seasonStartMonth) ||
           (current.metadata.saisonBis ?? String(DEFAULT_SEASON_END_MONTH)) !== String(seasonEndMonth)))
       ) {
@@ -243,6 +244,7 @@ export async function POST(request: Request) {
       }
       paymentIntent =
         current.amount === pricing.totalCents &&
+        current.metadata.schriftfarbe === metadata.schriftfarbe &&
         current.metadata.rabattcode === metadata.rabattcode &&
         (current.metadata.offer ?? 'standard') === metadata.offer &&
         current.metadata.anzahl === String(quantity) &&

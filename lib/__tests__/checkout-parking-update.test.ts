@@ -68,8 +68,26 @@ function requestWithExtras(parkingPlate: boolean, bikeRackPlate: boolean) {
   });
 }
 
-describe('parking extra payment updates', () => {
-  afterEach(() => vi.unstubAllEnvs());
+function requestWithHerbstPackage(color: 'black' | 'carbon', bikeRackPlate: boolean, offer = 'herbst') {
+  return new Request('http://localhost/api/create-payment-intent', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      plate: 'OL AB 123',
+      plateType: 'standard',
+      color,
+      quantity: 2,
+      parkingPlate: false,
+      bikeRackPlate,
+      cartId,
+      paymentIntentId: current.id,
+      offer,
+    }),
+  });
+}
+
+describe('checkout payment updates', () => {
+  afterEach(() => { vi.unstubAllEnvs(); vi.useRealTimers(); });
 
   beforeEach(() => {
     vi.stubEnv('stripe_api', 'pk_test_mock');
@@ -184,5 +202,27 @@ describe('parking extra payment updates', () => {
   it('rejects arbitrary quantities before accessing Stripe', async () => {
     expect((await POST(request(4))).status).toBe(400);
     expect(stripe.retrieve).not.toHaveBeenCalled();
+  });
+
+  it('updates the same autumn checkout from Basis to Premium including color and amount', async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-10-08T12:00:00+02:00'));
+    stripe.retrieve.mockResolvedValue({
+      ...current,
+      amount: 1970,
+      metadata: { ...current.metadata, offer: 'herbst', parkplatzkennzeichen: '0', fahrradtraegerkennzeichen: '0' },
+    });
+    const response = await POST(requestWithHerbstPackage('carbon', true));
+    expect(response.status).toBe(200);
+    expect(stripe.update).toHaveBeenCalledWith(current.id, expect.objectContaining({
+      amount: 3490,
+      metadata: expect.objectContaining({ schriftfarbe: 'Carbon', anzahl: '3', fahrradtraegerkennzeichen: '1' }),
+    }));
+    expect(await response.json()).toMatchObject({ paymentIntentId: current.id, pricing: { totalCents: 3490 } });
+  });
+
+  it('rejects a color change on a standard checkout', async () => {
+    expect((await POST(requestWithHerbstPackage('carbon', false, 'standard'))).status).toBe(400);
+    expect(stripe.update).not.toHaveBeenCalled();
   });
 });
