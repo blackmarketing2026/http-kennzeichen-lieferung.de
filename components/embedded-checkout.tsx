@@ -68,8 +68,8 @@ type ActiveSelection = Omit<CheckoutSelection, 'quantity'> & {
 };
 const HERBST_PACKAGE_OPTIONS: { id: HerbstPackage; label: string; color: PlateColor; bikeRackPlate: boolean; description: string }[] = [
   { id: 'basis', label: 'Basis', color: 'black', bikeRackPlate: false, description: '2 Standard-Kennzeichen' },
-  { id: 'complete', label: 'Komplett-Set', color: 'black', bikeRackPlate: true, description: '2 Standard-Kennzeichen + Fahrradträger' },
-  { id: 'premium', label: 'Premium-Set', color: 'carbon', bikeRackPlate: true, description: '2 Carbon-Kennzeichen + Fahrradträger' },
+  { id: 'complete', label: 'Komplett-Set', color: 'black', bikeRackPlate: true, description: '2 Standard-Kennzeichen + 1 zusätzliches Kennzeichen für Fahrradträger oder Parkplatz' },
+  { id: 'premium', label: 'Premium-Set', color: 'carbon', bikeRackPlate: true, description: '2 Carbon-Kennzeichen + 1 zusätzliches Kennzeichen für Fahrradträger oder Parkplatz' },
 ];
 type PaymentIntentResponse = {
   error?: string;
@@ -465,7 +465,7 @@ function PaymentForm({
       </label>}
       {CHECKOUT_UPSELLS_ENABLED && !isSinglePlateProduct(selection.plateType) && (
         <section className={styles.optionalExtras} aria-label="Zusatzkennzeichen">
-          <div><strong>Passendes Zubehör (optional)</strong><p>Ein weiteres Schild für Parkplatz oder Fahrradträger.</p></div>
+          <div><strong>Passendes Zubehör (optional)</strong><p>Ein weiteres Kennzeichen für Parkplatz oder Fahrradträger.</p></div>
           <ExtrasUpsellPopup
             plate={selection.plate}
             plateType={selection.plateType}
@@ -840,7 +840,7 @@ export function EmbeddedCheckout({
         {herbstPackage ? <div className="checkout-package-line">
           <div>
             <strong>{herbstPackageName}</strong>
-            <span>{selection.plate} · 2 {selection.plateColor === 'carbon' ? 'Carbon-' : 'Standard-'}Kennzeichen{extras.bikeRackPlate && ' + Fahrradträger-Schild'}</span>
+            <span>{selection.plate} · 2 {selection.plateColor === 'carbon' ? 'Carbon-' : 'Standard-'}Kennzeichen{extras.bikeRackPlate && ' + 1 Kennzeichen für Fahrradträger oder Parkplatz'}</span>
           </div>
           <strong>{formatPrice(((offerBreakdown?.subtotalCents ?? 0) + (offerBreakdown?.shippingCents ?? 0)) / 100)}</strong>
         </div> : <div className="real-order-line">
@@ -903,7 +903,7 @@ export function EmbeddedCheckout({
           <strong>Im Paket enthalten</strong>
           <ul>
             <li>{baseQuantity} Kennzeichen für dein Fahrzeug · {plateColorLabel(selection.plateColor)}</li>
-            {extras.bikeRackPlate && <li>1 Fahrradträger-Kennzeichen · {plateColorLabel(selection.plateColor)}</li>}
+            {extras.bikeRackPlate && <li>1 zusätzliches Kennzeichen für Fahrradträger oder Parkplatz · {plateColorLabel(selection.plateColor)}</li>}
             <li>{herbstPackage === 'basis' ? 'DHL-Versand inklusive' : 'DHL-Versand kostenfrei'}</li>
             {extras.bikeRackPlate && <li>Checkliste für die Zulassung per E-Mail</li>}
           </ul>

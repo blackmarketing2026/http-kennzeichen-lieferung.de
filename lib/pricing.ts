@@ -17,7 +17,7 @@ export const HERBST_PRICING = {
 } as const;
 
 export const HERBST_DESCRIPTION =
-  '3 DIN-Kennzeichen inkl. Fahrradträger-Schild für 21,90 €, versandkostenfrei. In 10 Minuten geprägt. Pünktlich-Garantie: nicht in 4 Werktagen da = Geld zurück.';
+  '3 DIN-Kennzeichen für 21,90 €, davon eines für Fahrradträger oder Parkplatz. Versandkostenfrei, in 10 Minuten geprägt. Pünktlich-Garantie: nicht in 4 Werktagen da = Geld zurück.';
 
 export function normalizeOffer(value: unknown): OfferProfile {
   return value === 'herbst' ? 'herbst' : 'standard';

@@ -263,7 +263,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             sicher online. Deine DIN-zertifizierten Schilder werden in 10
             Minuten geprägt und für den DHL-Versand vorbereitet.
           </p>}
-          {isHerbst ? <p className={styles.heroOffer}><span>Komplett-Set</span><strong>{formatPrice(herbstSetPriceCents('black', offerNow) / 100)}</strong><small>3 Schilder inkl. Fahrradträger · inkl. MwSt. und Versand</small></p> : <p className={styles.heroOffer}>
+          {isHerbst ? <p className={styles.heroOffer}><span>Komplett-Set</span><strong>{formatPrice(herbstSetPriceCents('black', offerNow) / 100)}</strong><small>3 Kennzeichen, eines für Fahrradträger oder Parkplatz · inkl. MwSt. und Versand</small></p> : <p className={styles.heroOffer}>
             <span>Kennzeichen ab</span>
             <strong>6,90 €</strong>
             <small>pro Schild · inkl. 19 % MwSt.</small>
@@ -300,7 +300,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             <span className={styles.offerPackageChoice}>{offerConfiguratorOpen && selectedOffer === 'basis' ? '✓ Ausgewählt' : 'Angebot auswählen →'}</span>
           </button>
           <button type="button" className={`${styles.offerPackageCard} ${styles.offerPackagePopular} ${offerConfiguratorOpen && selectedOffer === 'complete' ? styles.offerPackageSelected : ''}`} aria-pressed={offerConfiguratorOpen && selectedOffer === 'complete'} onClick={() => selectPackage('complete')}>
-            <em>Meistgewählt</em><strong>Komplett-Set</strong><span>2 Standard-Kennzeichen + 1 Fahrradträger-Schild</span>
+            <em>Meistgewählt</em><strong>Komplett-Set</strong><span>2 Standard-Kennzeichen + 1 zusätzliches Kennzeichen für Fahrradträger oder Parkplatz</span>
             <small>Einzeln {formatPrice(herbstIndividualComparisonCents('black') / 100)} → im Set</small>
             <b>{formatPrice(herbstSetPriceCents('black', offerNow) / 100)}</b>
             <span>Du sparst {formatPrice((herbstIndividualComparisonCents('black') - herbstSetPriceCents('black', offerNow)) / 100)}</span>
@@ -308,7 +308,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             <span className={styles.offerPackageChoice}>{offerConfiguratorOpen && selectedOffer === 'complete' ? '✓ Ausgewählt' : 'Angebot auswählen →'}</span>
           </button>
           <button type="button" className={`${styles.offerPackageCard} ${offerConfiguratorOpen && selectedOffer === 'premium' ? styles.offerPackageSelected : ''}`} aria-pressed={offerConfiguratorOpen && selectedOffer === 'premium'} onClick={() => selectPackage('premium')}>
-            <strong>Premium-Set</strong><span>2 Carbon-Kennzeichen + 1 Fahrradträger-Schild</span>
+            <strong>Premium-Set</strong><span>2 Carbon-Kennzeichen + 1 zusätzliches Kennzeichen für Fahrradträger oder Parkplatz</span>
             <small>Einzeln {formatPrice(herbstIndividualComparisonCents('carbon') / 100)} → im Set</small>
             <b>{formatPrice(herbstSetPriceCents('carbon', offerNow) / 100)}</b>
             <span>Du sparst {formatPrice((herbstIndividualComparisonCents('carbon') - herbstSetPriceCents('carbon', offerNow)) / 100)}</span>
@@ -462,7 +462,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
               <strong>{formatPrice(total)}</strong>
             </div>
             <ul>
-              <li>{totalPlates} {plateColor === 'carbon' ? 'Carbon-Kennzeichen' : 'Standard-Kennzeichen'}{bikeRackPlate ? ' inkl. Fahrradträger-Schild' : ''}</li>
+              <li>{bikeRackPlate ? `2 ${plateColor === 'carbon' ? 'Carbon-Kennzeichen' : 'Standard-Kennzeichen'} + 1 zusätzliches Kennzeichen für Fahrradträger oder Parkplatz` : `${totalPlates} ${plateColor === 'carbon' ? 'Carbon-Kennzeichen' : 'Standard-Kennzeichen'}`}</li>
               <li>{pricing?.shippingCents === 0 ? 'DHL-Versand inklusive' : `DHL-Versand inkl. ${formatPrice((pricing?.shippingCents ?? 0) / 100)}`}</li>
               {bikeRackPlate && <li>Checkliste für die Zulassung gratis per E-Mail</li>}
             </ul>
@@ -481,7 +481,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
               <span>DHL-Versand mit Tracking</span>
               <strong>{pricing?.shippingCents === 0 ? 'Kostenlos' : formatPrice(SHIPPING_PRICE)}</strong>
             </div>
-            {bikeRackPlate && plateType !== 'motorcycle' && <div><span>3. Schild für Fahrradträger</span><strong>{formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100)}</strong></div>}
+            {bikeRackPlate && plateType !== 'motorcycle' && <div><span>Zusätzliches Kennzeichen für Fahrradträger</span><strong>{formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100)}</strong></div>}
           </div>}
           {!selectedOffer && <p className={styles.livePriceNote}>{isHerbst ? 'inkl. 19 % MwSt. und Versand · ab 3 Schildern versandkostenfrei' : 'inkl. MwSt., zzgl. 3,90 € Versand – versandkostenfrei ab 19 €'}</p>}
           {!selectedOffer && <p className={styles.shippingProgress} aria-live="polite">{isHerbst ? pricing?.shippingCents === 0 ? 'Versandkostenfrei ✓' : `${formatPrice(HERBST_PRICING.shippingCents / 100)} Versand` : shippingRemaining > 0 ? `Noch ${formatPrice(shippingRemaining)} bis zum kostenlosen Versand` : 'Versandkostenfrei ✓'}</p>}
@@ -490,7 +490,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             <input type="checkbox" checked={false} onChange={() => setPlateColor('carbon')} />
             <span>Auf Carbon upgraden: +{formatPrice((herbstSetPriceCents('carbon', offerNow) - herbstSetPriceCents('black', offerNow)) / 100)} (statt +{formatPrice(3 * (HERBST_PRICING.carbonPlateCents - HERBST_PRICING.standardPlateCents) / 100)} einzeln)</span>
           </label>}
-          {plateType !== 'motorcycle' && !selectedOffer && <label className={styles.extraCheck}><input type="checkbox" checked={bikeRackPlate} onChange={(event) => setBikeRackPlate(event.target.checked)} /><span>3. Schild für Fahrradträger (gleiche Kombination) <strong>+{isHerbst ? formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100) : formatPrice(4.9 + (plateColor === 'carbon' ? 5 : 0))}</strong></span></label>}
+          {plateType !== 'motorcycle' && !selectedOffer && <label className={styles.extraCheck}><input type="checkbox" checked={bikeRackPlate} onChange={(event) => setBikeRackPlate(event.target.checked)} /><span>Zusätzliches Kennzeichen für Fahrradträger (gleiche Kombination) <strong>+{isHerbst ? formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100) : formatPrice(4.9 + (plateColor === 'carbon' ? 5 : 0))}</strong></span></label>}
           {isHerbst && <p className={styles.offerCountdown}><HerbstCountdown compact /></p>}
           <button
             className={styles.orderButton}
