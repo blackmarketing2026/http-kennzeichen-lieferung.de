@@ -865,18 +865,20 @@ export function EmbeddedCheckout({
           </strong>
         </div>}
         {herbstPackage && <div className="checkout-package-change">
-          <button type="button" className="checkout-package-toggle" aria-expanded={packagePickerOpen} aria-controls="checkout-package-options" onClick={() => setPackagePickerOpen((open) => !open)}>
+          <button type="button" className={styles.packageToggle} aria-expanded={packagePickerOpen} aria-controls="checkout-package-options" onClick={() => setPackagePickerOpen((open) => !open)}>
             {packagePickerOpen ? 'Paketauswahl schließen' : 'Paket ändern'}
+            <ArrowRight size={16} aria-hidden="true" />
           </button>
-          {packagePickerOpen && <div id="checkout-package-options" className="checkout-package-options" aria-label="Paket auswählen">
+          {packagePickerOpen && <fieldset id="checkout-package-options" className={styles.packageOptions}>
+            <legend>Wähle dein Paket</legend>
             {HERBST_PACKAGE_OPTIONS.map((option) => {
               const optionPricing = getCheckoutPricing('standard', option.color, 2, undefined, { parkingPlate: false, bikeRackPlate: option.bikeRackPlate }, 'herbst');
-              return <button key={option.id} type="button" aria-pressed={herbstPackage === option.id} disabled={!paymentElements || isUpdatingPackage || formBusy} onClick={() => changePackage(option.id)}>
-                <span><strong>{option.label}</strong><small>{option.description}</small></span>
-                <b>{optionPricing ? formatPrice(optionPricing.totalCents / 100) : ''}</b>
+              return <button key={option.id} type="button" className={`${styles.packageOption} ${herbstPackage === option.id ? styles.packageOptionSelected : ''}`} aria-pressed={herbstPackage === option.id} disabled={!paymentElements || isUpdatingPackage || formBusy} onClick={() => changePackage(option.id)}>
+                <span className={styles.packageOptionText}><strong>{option.label}</strong><small>{option.description}</small></span>
+                <span className={styles.packageOptionPrice}><b>{optionPricing ? formatPrice(optionPricing.totalCents / 100) : ''}</b>{herbstPackage === option.id && <CheckCircle2 size={16} aria-label="Ausgewählt" />}</span>
               </button>;
             })}
-          </div>}
+          </fieldset>}
           {isUpdatingPackage && <output className="checkout-package-message"><LoaderCircle className="spin" size={15} /> Paket und Zahlbetrag werden aktualisiert …</output>}
           {packageError && <p className="checkout-package-error" role="alert">{packageError}</p>}
         </div>}

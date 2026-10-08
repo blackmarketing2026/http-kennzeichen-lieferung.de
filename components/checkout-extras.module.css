@@ -6,6 +6,73 @@
   background: #f3f8fc;
   color: #173449;
 }
+.packageToggle {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 1px solid #94bfe1;
+  border-radius: 8px;
+  background: #eef7ff;
+  color: #075d9e;
+  font: inherit;
+  font-size: .8rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+.packageToggle:hover { border-color: #0878dc; background: #e4f2ff; }
+.packageToggle[aria-expanded='true'] svg { transform: rotate(90deg); }
+.packageOptions {
+  min-width: 0;
+  margin: 13px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 9px;
+  border: 0;
+}
+.packageOptions legend {
+  margin-bottom: 8px;
+  padding: 0;
+  color: #526a78;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.packageOptions .packageOption {
+  width: 100%;
+  min-height: 66px;
+  padding: 11px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid #cbdce7;
+  border-radius: 10px;
+  background: #fff;
+  color: #102a3c;
+  box-shadow: 0 2px 7px #0718240b;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.packageOptions .packageOption:hover { border-color: #0878dc; background: #f1f8ff; }
+.packageOptions .packageOptionSelected,
+.packageOptions .packageOptionSelected:hover {
+  border: 2px solid #168359;
+  background: #effaf5;
+}
+.packageOptions .packageOption:focus-visible,
+.packageToggle:focus-visible { outline: 3px solid #0878dc; outline-offset: 2px; }
+.packageOptions .packageOption:disabled { opacity: .55; cursor: wait; }
+.packageOptionText { min-width: 0; display: grid; gap: 4px; }
+.packageOptionText strong { font-size: .8rem; line-height: 1.2; }
+.packageOptionText small { color: #5b7180; font-size: .69rem; line-height: 1.35; }
+.packageOptionPrice { flex: none; display: grid; justify-items: end; gap: 3px; color: #11694a; }
+.packageOptionPrice b { white-space: nowrap; font-size: .82rem; }
 .paymentNotice strong {
   font-size: 0.82rem;
 }
