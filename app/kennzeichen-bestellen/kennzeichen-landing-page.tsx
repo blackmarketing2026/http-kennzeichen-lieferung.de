@@ -238,6 +238,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           />
         </Link>
         <nav className={styles.nav} aria-label="Seitennavigation">
+          {isHerbst && <a href="#angebote">Pakete</a>}
           <a href="#qualitaet">Qualität</a>
           <a href="#versand">Versand</a>
           <a href="#fragen">FAQ</a>
@@ -247,91 +248,77 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         </a>
       </header>
 
+      <section className={`${styles.hero} ${isHerbst ? styles.herbstHero : ''}`} id="bestellen">
+        <div className={styles.heroCopy}>
+          <p className={styles.kicker}>
+            <span /> {isHerbst ? 'Herbst-Angebot · DIN-zertifiziert' : 'DIN-zertifiziert & schnell geprägt'}
+          </p>
+          {isHerbst ? <h1>Kennzeichen online bestellen. <em>Bereit für deine Zulassung.</em></h1> : <h1>
+            Kennzeichen bestellen.
+            <br />
+            <em>Schnell geprägt, sicher geliefert.</em>
+          </h1>}
+          {isHerbst ? <p className={styles.lead}>Wähle dein Paket, gib deine Kombination ein und lass dir deine DIN-zertifizierten Kennzeichen bequem nach Hause liefern.</p> : <p className={styles.lead}>
+            Wähle deine Kombination, gib deine Lieferadresse ein und bezahle
+            sicher online. Deine DIN-zertifizierten Schilder werden in 10
+            Minuten geprägt und für den DHL-Versand vorbereitet.
+          </p>}
+          {isHerbst ? <p className={styles.heroOffer}><span>Komplett-Set</span><strong>{formatPrice(herbstSetPriceCents('black', offerNow) / 100)}</strong><small>3 Schilder inkl. Fahrradträger · inkl. MwSt. und Versand</small></p> : <p className={styles.heroOffer}>
+            <span>Kennzeichen ab</span>
+            <strong>6,90 €</strong>
+            <small>pro Schild · inkl. 19 % MwSt.</small>
+          </p>}
+          <ul className={styles.heroChecks}>
+            <li><BadgeCheck /> DIN 74069 · für die Zulassungsstelle</li>
+            <li><Clock3 /> In 10 Minuten geprägt und versandfertig</li>
+            <li><Truck /> DHL-Abholung dreimal täglich an Werktagen</li>
+            <li><ShieldCheck /> {isHerbst ? 'Pünktlich-Garantie inklusive' : 'Liefergarantie inklusive'}</li>
+          </ul>
+          {isHerbst && <a className={styles.heroCta} href="#angebote">Pakete ansehen <ArrowRight /></a>}
+          {!isHerbst && <div className={styles.deliveryInfo}>
+            <span className={styles.deliveryIcon}><Truck /></span>
+            <div><small>Fertigung und Übergabe</small><strong>DHL-Abholung dreimal täglich an Werktagen</strong></div>
+          </div>}
+        </div>
+
+        {isHerbst && <figure className={styles.herbstVisual}>
+          <Image src="/herbst-hero-auto.webp" alt="Dunkelblaues Auto mit deutschem Kennzeichen im Herbst" width={1672} height={941} sizes="(max-width: 820px) 100vw, 48vw" priority />
+          <figcaption><BadgeCheck size={18} /> DIN-zertifizierte Kennzeichen für dein Fahrzeug</figcaption>
+        </figure>}
+
       {isHerbst && <section className={styles.offerPackages} id="angebote" aria-labelledby="offer-packages-title">
-        <p className={styles.kicker}><span /> Herbst-Angebot</p>
-        <h2 id="offer-packages-title">Wähle dein Kennzeichen-Paket</h2>
-        <p className={styles.offerCountdown}><HerbstCountdown /></p>
+        <div className={styles.offerPackagesHeading}>
+          <div><p className={styles.kicker}><span /> Dein Angebot</p><h2 id="offer-packages-title">Welches Paket passt zu dir?</h2></div>
+          <p className={styles.offerCountdown}><HerbstCountdown /></p>
+        </div>
         <div className={styles.offerPackageGrid}>
           <button type="button" className={`${styles.offerPackageCard} ${offerConfiguratorOpen && selectedOffer === 'basis' ? styles.offerPackageSelected : ''}`} aria-pressed={offerConfiguratorOpen && selectedOffer === 'basis'} onClick={() => selectPackage('basis')}>
-            <strong>Basis</strong><span>2 Kennzeichen</span>
+            <strong>Basis</strong><span>2 Standard-Kennzeichen für dein Auto</span>
             <b>{formatPrice((2 * HERBST_PRICING.standardPlateCents + HERBST_PRICING.shippingCents) / 100)}</b>
             <small>inkl. {formatPrice(HERBST_PRICING.shippingCents / 100)} Versand</small>
-            <span>✓ Pünktlich-Garantie</span>
+            <span>✓ DIN-zertifiziert · Pünktlich-Garantie</span>
             <span className={styles.offerPackageChoice}>{offerConfiguratorOpen && selectedOffer === 'basis' ? '✓ Ausgewählt' : 'Angebot auswählen →'}</span>
           </button>
           <button type="button" className={`${styles.offerPackageCard} ${styles.offerPackagePopular} ${offerConfiguratorOpen && selectedOffer === 'complete' ? styles.offerPackageSelected : ''}`} aria-pressed={offerConfiguratorOpen && selectedOffer === 'complete'} onClick={() => selectPackage('complete')}>
-            <em>Beliebt</em><strong>Komplett-Set</strong><span>3 Kennzeichen inkl. Fahrradträger</span>
+            <em>Meistgewählt</em><strong>Komplett-Set</strong><span>2 Standard-Kennzeichen + 1 Fahrradträger-Schild</span>
             <small>Einzeln {formatPrice(herbstIndividualComparisonCents('black') / 100)} → im Set</small>
             <b>{formatPrice(herbstSetPriceCents('black', offerNow) / 100)}</b>
             <span>Du sparst {formatPrice((herbstIndividualComparisonCents('black') - herbstSetPriceCents('black', offerNow)) / 100)}</span>
-            <span>✓ Versandkostenfrei · Gratis: Checkliste für die Zulassung · Pünktlich-Garantie</span>
+            <span>✓ Kostenloser Versand · Zulassungs-Checkliste · Pünktlich-Garantie</span>
             <span className={styles.offerPackageChoice}>{offerConfiguratorOpen && selectedOffer === 'complete' ? '✓ Ausgewählt' : 'Angebot auswählen →'}</span>
           </button>
           <button type="button" className={`${styles.offerPackageCard} ${offerConfiguratorOpen && selectedOffer === 'premium' ? styles.offerPackageSelected : ''}`} aria-pressed={offerConfiguratorOpen && selectedOffer === 'premium'} onClick={() => selectPackage('premium')}>
-            <strong>Premium-Set</strong><span>3 Carbon-Kennzeichen inkl. Fahrradträger</span>
+            <strong>Premium-Set</strong><span>2 Carbon-Kennzeichen + 1 Fahrradträger-Schild</span>
             <small>Einzeln {formatPrice(herbstIndividualComparisonCents('carbon') / 100)} → im Set</small>
             <b>{formatPrice(herbstSetPriceCents('carbon', offerNow) / 100)}</b>
             <span>Du sparst {formatPrice((herbstIndividualComparisonCents('carbon') - herbstSetPriceCents('carbon', offerNow)) / 100)}</span>
-            <span>✓ Versandkostenfrei · Gratis-Checkliste · Pünktlich-Garantie</span>
+            <span>✓ Kostenloser Versand · Zulassungs-Checkliste · Pünktlich-Garantie</span>
             <span className={styles.offerPackageChoice}>{offerConfiguratorOpen && selectedOffer === 'premium' ? '✓ Ausgewählt' : 'Angebot auswählen →'}</span>
           </button>
         </div>
       </section>}
 
-      <section className={styles.hero} id="bestellen">
-        <div className={styles.heroCopy}>
-          <p className={styles.kicker}>
-            <span /> DIN-zertifiziert & schnell geprägt
-          </p>
-          {isHerbst ? <h1>Kennzeichen pünktlich zur Zulassung – oder Geld zurück.</h1> : <h1>
-            Kennzeichen bestellen.
-            <br />
-            <em>Schnell geprägt, sicher geliefert.</em>
-          </h1>}
-          {isHerbst ? <p className={styles.heroOffer}><strong>3 Kennzeichen für {formatPrice(herbstSetPriceCents('black', offerNow) / 100)}</strong><small>inkl. Fahrradträger-Schild · versandkostenfrei</small></p> : <p className={styles.heroOffer}>
-            <span>Kennzeichen ab</span>
-            <strong>6,90 €</strong>
-            <small>pro Schild · inkl. 19 % MwSt.</small>
-          </p>}
-          {isHerbst ? <p className={styles.lead}>DIN-zertifiziert · in 10 Minuten geprägt · 3× täglich DHL-Abholung</p> : <p className={styles.lead}>
-            Wähle deine Kombination, gib deine Lieferadresse ein und bezahle
-            sicher online. Deine DIN-zertifizierten Schilder werden in 10
-            Minuten geprägt und für den DHL-Versand vorbereitet.
-          </p>}
-          <ul className={styles.heroChecks}>
-            <li>
-              <Clock3 /> In 10 Minuten geprägt und versandfertig
-            </li>
-            <li>
-              <Truck /> Dreimal täglich DHL-Abholung an Werktagen
-            </li>
-            <li>
-              <MapPinCheck /> Sendungsverfolgung per E-Mail
-            </li>
-            <li>
-              <ShieldCheck /> Unsere {isHerbst ? 'Pünktlich-Garantie' : 'Liefergarantie'} ist inklusive
-            </li>
-          </ul>
-          <a className={styles.heroCta} href={configuratorHref}>
-            Kennzeichen konfigurieren <ArrowRight />
-          </a>
-          <div className={styles.deliveryInfo}>
-            <span className={styles.deliveryIcon}>
-              <Truck />
-            </span>
-            <div>
-              <small>Fertigung und Übergabe</small>
-              <strong>DHL-Abholung dreimal täglich an Werktagen</strong>
-            </div>
-          </div>
-        </div>
-
-        {isHerbst && !offerConfiguratorOpen ? <div className={styles.offerConfiguratorPrompt} id="konfigurator">
-          <span>Schritt 1 von 2</span>
-          <h2>Wähle zuerst dein Angebot</h2>
-          <p>Danach öffnet sich hier dein Konfigurator mit der passenden Anzahl und Ausführung.</p>
-          <a href="#angebote">Angebote auswählen <ArrowRight size={18} /></a>
-        </div> : <div className={styles.orderCard} id="konfigurator">
+        {(!isHerbst || offerConfiguratorOpen) && <div className={styles.orderCard} id="konfigurator">
           <div className={styles.cardTopline}>
             <span>Schritt 1: Kennzeichen wählen</span>
             <strong>
@@ -528,17 +515,6 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         </div>}
       </section>
 
-      <section className={styles.orderProcess} aria-labelledby="bestellablauf">
-        <p className={styles.kicker}><span /> So läuft deine Bestellung</p>
-        <h2 id="bestellablauf">In drei Schritten zu deinen Kennzeichen</h2>
-        <div className={styles.orderProcessGrid}>
-          <article><b>01</b><strong>Kennzeichen wählen</strong><p>Kombination und Kennzeichenart eingeben. Du siehst dein Schild und den Endpreis direkt in der Vorschau.</p></article>
-          <article><b>02</b><strong>Lieferadresse eingeben</strong><p>Trage die Adresse ein, prüfe deine Bestellung und ergänze bei Bedarf Zubehör.</p></article>
-          <article><b>03</b><strong>Sicher bezahlen</strong><p>Wähle deine Zahlungsart. Wir prägen dein Kennzeichen und versenden es mit DHL und Sendungsverfolgung.</p></article>
-        </div>
-        <Link href="/liefergarantie">Mehr über unsere {isHerbst ? 'Pünktlich-Garantie' : 'Liefergarantie'} erfahren <ArrowRight size={17} /></Link>
-      </section>
-
       <section className={styles.proofBar} aria-label="Produktvorteile">
         <div>
           <Factory />
@@ -566,7 +542,42 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         </div>
       </section>
 
-      <section className={styles.klarnaBanner} aria-labelledby="klarna-bestellen-title">
+      <section className={styles.customerReference} aria-labelledby="kundenreferenz-titel">
+        <div className={styles.customerReferenceCopy}>
+          <p className={styles.kicker}>
+            <span /> Kundenreferenz
+          </p>
+          <h2 id="kundenreferenz-titel">So kommt deine Bestellung an.</h2>
+          <p>
+            Ein echtes Kundenfoto nach der Zustellung: Das Kennzeichen kommt
+            sicher verpackt bei dir an. Die Lieferzeit innerhalb Deutschlands
+            beträgt 1–4 Werktage nach Bestellung und erfolgreicher Zahlung.
+          </p>
+        </div>
+        <figure className={styles.customerReferencePhoto}>
+          <Image
+            src="/references/kennzeichen-kundenfoto-naechster-tag.jpg"
+            alt="Kundenfoto eines gelieferten Kennzeichens auf der Versandverpackung"
+            width={1080}
+            height={1920}
+            sizes="(max-width: 820px) 100vw, 420px"
+          />
+          <figcaption>Foto einer Kundenbestellung</figcaption>
+        </figure>
+      </section>
+
+      <section className={styles.orderProcess} aria-labelledby="bestellablauf">
+        <p className={styles.kicker}><span /> So läuft deine Bestellung</p>
+        <h2 id="bestellablauf">In drei Schritten zu deinen Kennzeichen</h2>
+        <div className={styles.orderProcessGrid}>
+          <article><b>01</b><strong>Kennzeichen wählen</strong><p>Kombination und Kennzeichenart eingeben. Du siehst dein Schild und den Endpreis direkt in der Vorschau.</p></article>
+          <article><b>02</b><strong>Lieferadresse eingeben</strong><p>Trage die Adresse ein, prüfe deine Bestellung und ergänze bei Bedarf Zubehör.</p></article>
+          <article><b>03</b><strong>Sicher bezahlen</strong><p>Wähle deine Zahlungsart. Wir prägen dein Kennzeichen und versenden es mit DHL und Sendungsverfolgung.</p></article>
+        </div>
+        <Link href="/liefergarantie">Mehr über unsere {isHerbst ? 'Pünktlich-Garantie' : 'Liefergarantie'} erfahren <ArrowRight size={17} /></Link>
+      </section>
+
+      {!isHerbst && <section className={styles.klarnaBanner} aria-labelledby="klarna-bestellen-title">
         <div className={styles.klarnaBannerInner}>
           <div className={styles.klarnaBrand}>
             <Image
@@ -588,9 +599,9 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             Jetzt konfigurieren <ArrowRight size={18} aria-hidden="true" />
           </a>
         </div>
-      </section>
+      </section>}
 
-      <section className={styles.buyerWarning} aria-labelledby="kaufhinweis">
+      {!isHerbst && <section className={styles.buyerWarning} aria-labelledby="kaufhinweis">
         <div className={styles.warningIcon}>
           <TriangleAlert />
         </div>
@@ -626,7 +637,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             Normgerechte Kennzeichen bestellen <ArrowRight />
           </a>
         </div>
-      </section>
+      </section>}
 
       <section className={styles.quality} id="qualitaet">
         <div className={styles.sectionHeading}>
@@ -639,8 +650,9 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             was es verspricht.
           </h2>
           <p>
-            Deine Kennzeichen werden für den echten Einsatz gefertigt – nicht
-            als Dekoschild und nicht als unverbindliche Vorschau.
+            {isHerbst
+              ? 'DIN-zertifiziert nach DIN 74069: Deine Kennzeichen sind für die Zulassungsstelle vorgesehen. Die Kombination prüfst du vor der Bestellung in der Vorschau.'
+              : 'Deine Kennzeichen werden für den echten Einsatz gefertigt – nicht als Dekoschild und nicht als unverbindliche Vorschau.'}
           </p>
         </div>
         <div className={styles.qualityGrid}>
@@ -749,32 +761,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         </div>
       </section>
 
-      <section className={styles.customerReference} aria-labelledby="kundenreferenz-titel">
-        <div className={styles.customerReferenceCopy}>
-          <p className={styles.kicker}>
-            <span /> Kundenreferenz
-          </p>
-          <h2 id="kundenreferenz-titel">Bestellung am nächsten Tag erhalten.</h2>
-          <p>
-            Frisch geprägt, sicher verpackt und schon am nächsten Tag beim
-            Kunden: Dieses Foto zeigt eine einzelne Bestellung nach der
-            Zustellung. Die zugesagte Lieferzeit innerhalb Deutschlands beträgt
-            1–4 Werktage nach Bestellung und erfolgreicher Zahlung.
-          </p>
-        </div>
-        <figure className={styles.customerReferencePhoto}>
-          <Image
-            src="/references/kennzeichen-kundenfoto-naechster-tag.jpg"
-            alt="Kundenfoto eines gelieferten Kennzeichens auf der Versandverpackung"
-            width={1080}
-            height={1920}
-            sizes="(max-width: 820px) 100vw, 420px"
-          />
-          <figcaption>Foto einer Kundenbestellung</figcaption>
-        </figure>
-      </section>
-
-      <section className={styles.included}>
+      {!isHerbst && <section className={styles.included}>
         <div>
           <p className={styles.kicker}>
             <span /> Dein Paket. Klarer Lieferumfang.
@@ -817,9 +804,9 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         <a href={configuratorHref} className={styles.secondaryCta}>
           Kennzeichen konfigurieren <ArrowRight />
         </a>
-      </section>
+      </section>}
 
-      <section
+      {!isHerbst && <section
         className={styles.registrationSteps}
         aria-labelledby="zulassungsbereit"
       >
@@ -877,7 +864,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         <a href={configuratorHref} className={styles.registrationCta}>
           Kennzeichen jetzt konfigurieren <ArrowRight />
         </a>
-      </section>
+      </section>}
 
       <section className={styles.faq} id="fragen">
         <div className={styles.sectionHeading}>
