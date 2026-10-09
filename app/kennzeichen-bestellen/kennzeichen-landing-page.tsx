@@ -67,9 +67,12 @@ const FAQS = [
 ];
 
 function ReviewPlaceholder() {
-  return <div className={styles.reviewPlaceholder} aria-label="Platz für Google-Bewertungen">
-    <span aria-hidden="true">{Array.from({ length: 5 }, (_, index) => <Star key={index} className={GOOGLE_REVIEW_RATING !== null && index < GOOGLE_REVIEW_RATING ? styles.reviewStarFilled : ''} />)}</span>
-    <small>Google: {GOOGLE_REVIEW_RATING === null ? '—' : GOOGLE_REVIEW_RATING.toLocaleString('de-DE')} von 5 · {GOOGLE_REVIEW_COUNT === null ? '—' : GOOGLE_REVIEW_COUNT.toLocaleString('de-DE')} Bewertungen</small>
+  const rating = GOOGLE_REVIEW_RATING;
+  const count = GOOGLE_REVIEW_COUNT;
+  if (rating === null || count === null) return null;
+  return <div className={styles.reviewPlaceholder} aria-label="Google-Bewertungen">
+    <span aria-hidden="true">{Array.from({ length: 5 }, (_, index) => <Star key={index} className={index < rating ? styles.reviewStarFilled : ''} />)}</span>
+    <small>{rating.toLocaleString('de-DE')} von 5 · {count.toLocaleString('de-DE')} Google-Bewertungen</small>
   </div>;
 }
 
@@ -911,7 +914,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         <small>{isHerbst ? 'inkl. 19 % MwSt. · ab 3 Schildern versandkostenfrei · Tracking per E-Mail' : 'inkl. 19 % MwSt. · 3,90 € Versand, kostenlos ab 19 € Warenwert · Tracking per E-Mail'}</small>
       </section>
 
-      {isHerbst && <section className={styles.lowerReviews} aria-label="Google-Bewertungen">
+      {isHerbst && GOOGLE_REVIEW_RATING !== null && GOOGLE_REVIEW_COUNT !== null && <section className={styles.lowerReviews} aria-label="Google-Bewertungen">
         <h2>Erfahrungen unserer Kunden</h2>
         <ReviewPlaceholder />
       </section>}
