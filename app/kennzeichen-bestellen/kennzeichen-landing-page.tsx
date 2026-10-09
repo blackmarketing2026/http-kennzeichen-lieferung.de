@@ -40,7 +40,7 @@ import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import { HERBST_PRICING, getHerbstPackage, herbstSetPriceCents, type OfferProfile } from '@/lib/pricing';
 import { trackKennzeichenGtmEvent } from '@/lib/kennzeichen-gtm-events';
 import { showHerbstSameDayShipping } from '@/lib/herbst-shipping';
-import { GOOGLE_REVIEW_COUNT, GOOGLE_REVIEW_RATING, HERBST_SHIPPING_CUTOFF_HOUR } from '@/lib/config';
+import { GOOGLE_REVIEW_COUNT, GOOGLE_REVIEW_RATING, HERBST_SHIPPING_CUTOFF_TIME } from '@/lib/config';
 import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, formatSeasonMonth, isValidSeasonPeriod } from '@/lib/season-period';
 import styles from './page.module.css';
 
@@ -282,7 +282,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             <li><Truck /> DHL-Abholung dreimal täglich an Werktagen</li>
             <li><ShieldCheck /> {isHerbst ? 'Pünktlich-Garantie inklusive' : 'Liefergarantie inklusive'}</li>
           </ul>
-          {showShippingCutoff && <p className={styles.shippingCutoff}><Truck size={18} /> Bis {HERBST_SHIPPING_CUTOFF_HOUR} Uhr bestellt – heute versendet.</p>}
+          {showShippingCutoff && <p className={styles.shippingCutoff}><Truck size={18} /> Bis {HERBST_SHIPPING_CUTOFF_TIME} Uhr bestellt – heute noch versendet.</p>}
           {!isHerbst && <div className={styles.deliveryInfo}>
             <span className={styles.deliveryIcon}><Truck /></span>
             <div><small>Fertigung und Übergabe</small><strong>DHL-Abholung dreimal täglich an Werktagen</strong></div>
@@ -487,7 +487,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           </label>}
           {plateType !== 'motorcycle' && !selectedOffer && <label className={styles.extraCheck}><input type="checkbox" checked={bikeRackPlate} onChange={(event) => setBikeRackPlate(event.target.checked)} /><span>Zusätzliches Kennzeichen für Fahrradträger (gleiche Kombination) <strong>+{isHerbst ? formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100) : formatPrice(4.9 + (plateColor === 'carbon' ? 5 : 0))}</strong></span></label>}
           {isHerbst && <p className={styles.offerCountdown}><HerbstCountdown compact /></p>}
-          {showShippingCutoff && <p className={styles.shippingCutoff}><Truck size={17} /> Bis {HERBST_SHIPPING_CUTOFF_HOUR} Uhr bestellt – heute versendet.</p>}
+          {showShippingCutoff && <p className={styles.shippingCutoff}><Truck size={17} /> Bis {HERBST_SHIPPING_CUTOFF_TIME} Uhr bestellt – heute noch versendet.</p>}
           <button
             className={styles.orderButton}
             type="button"
