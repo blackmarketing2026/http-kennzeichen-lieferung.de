@@ -1799,6 +1799,17 @@
 .inlinePackageGrid em { width: fit-content; padding: 2px 5px; border-radius: 5px; background: #0878dc; color: #fff; font-size: .61rem; font-style: normal; font-weight: 800; }
 .packageUpsell { margin-top: 9px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px; border-radius: 9px; background: #e8f4ff; font-size: .74rem; font-weight: 750; }
 .packageUpsell button { flex: none; padding: 8px; border: 0; border-radius: 7px; background: #0878dc; color: #fff; font: inherit; cursor: pointer; }
+.motorcyclePackages { margin: 12px 0 16px; }
+.motorcycleFinishChoice { display: flex; gap: 7px; margin-bottom: 9px; }
+.motorcycleFinishChoice button { flex: 1; padding: 9px; border: 1px solid #cbdbe5; border-radius: 8px; background: #fff; color: #173244; font: inherit; font-size: .75rem; font-weight: 800; cursor: pointer; }
+.motorcycleFinishChoice button[aria-pressed='true'] { border: 2px solid #168359; background: #effaf5; }
+.motorcyclePackageGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+.motorcyclePackageGrid button { min-height: 86px; padding: 10px; display: flex; flex-direction: column; justify-content: center; gap: 3px; border: 1px solid #cbdbe5; border-radius: 9px; background: #fff; color: #173244; text-align: left; cursor: pointer; }
+.motorcyclePackageGrid button[aria-pressed='true'] { border: 2px solid #168359; background: #effaf5; }
+.motorcyclePackageGrid strong { font-size: .78rem; }
+.motorcyclePackageGrid span, .motorcyclePackageGrid small { font-size: .7rem; }
+.motorcyclePackageGrid em { width: fit-content; padding: 2px 5px; border-radius: 5px; background: #0878dc; color: #fff; font-size: .61rem; font-style: normal; font-weight: 800; }
+.motorcycleSpareNote { margin: 10px 0 0; color: #526773; font-size: .72rem; line-height: 1.5; }
 .shippingCutoff { display: flex; align-items: center; gap: 7px; color: #11694a; font-size: .78rem; font-weight: 800; }
 .reviewPlaceholder { margin: 12px 0; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: #5b7080; }
 .reviewPlaceholder > span { display: inline-flex; gap: 2px; color: #b3c0c8; }
@@ -1860,4 +1871,6 @@
   .inlinePackageGrid { grid-template-columns: 1fr; }
   .inlinePackageGrid button { min-height: 0; padding: 10px 12px; }
   .packageUpsell { align-items: stretch; flex-direction: column; }
+  .motorcyclePackageGrid { grid-template-columns: 1fr; }
+  .motorcyclePackageGrid button { min-height: 0; }
 }

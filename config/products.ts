@@ -15,6 +15,20 @@ export const BIKE_RACK_PLATE_PRICE = 4.9;
 export const CARBON_SURCHARGE = 5;
 export const EMISSION_STICKER_PRICE = 5.9;
 
+export const MOTORCYCLE_PACKAGES = {
+  motorrad_1: { label: '1 Motorrad-Schild', color: 'black', quantity: 1, priceCents: 1490 },
+  motorrad_2: { label: '1 Schild + Ersatzschild', color: 'black', quantity: 2, priceCents: 1890 },
+  motorrad_carbon_1: { label: '1 Carbon-Schild', color: 'carbon', quantity: 1, priceCents: 1990 },
+  motorrad_carbon_2: { label: 'Carbon + Carbon-Ersatzschild', color: 'carbon', quantity: 2, priceCents: 2590 },
+} as const;
+export type MotorcyclePackage = keyof typeof MOTORCYCLE_PACKAGES;
+
+export function getMotorcyclePackage(color: PlateColor, quantity: number): MotorcyclePackage | null {
+  if (color === 'black') return quantity === 1 ? 'motorrad_1' : quantity === 2 ? 'motorrad_2' : null;
+  if (color === 'carbon') return quantity === 1 ? 'motorrad_carbon_1' : quantity === 2 ? 'motorrad_carbon_2' : null;
+  return null;
+}
+
 /** All prices in this file are consumer-facing gross prices (inkl. MwSt.), as required for B2C
  * price display in Germany (PAngV). License plates are taxed at the standard rate, not the
  * reduced one. */
@@ -41,9 +55,13 @@ export const PRODUCTS: Record<
   motorcycle: {
     label: 'Motorrad',
     shortLabel: 'Motorrad',
-    size: 'zweizeilig',
+    size: '180 × 200 mm, zweizeilig',
     format: 'motorcycle',
-    prices: { 1: 19.9, 2: 19.9, 3: 19.9 },
+    prices: {
+      1: MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100,
+      2: MOTORCYCLE_PACKAGES.motorrad_2.priceCents / 200,
+      3: MOTORCYCLE_PACKAGES.motorrad_2.priceCents / 200,
+    },
   },
   electric: {
     label: 'E-Kennzeichen',
@@ -113,6 +131,10 @@ export function getUnitPrice(
   quantity: 1 | 2 | 3,
 ) {
   const product = PRODUCTS[plateType];
+  if (plateType === 'motorcycle') {
+    const packageId = getMotorcyclePackage(color, quantity);
+    return packageId ? MOTORCYCLE_PACKAGES[packageId].priceCents / (quantity * 100) : 0;
+  }
   if (product.format === 'long') return product.prices[quantity] + (color === 'carbon' ? CARBON_SURCHARGE : 0);
   return color === 'carbon' ? CARBON_PRICES[product.format][quantity] : product.prices[quantity];
 }
@@ -147,8 +169,8 @@ export function isAvailableConfiguration(
   if (isAgriculturePlate(plateType)) {
     return (color === 'black' || color === 'green') && quantity === 1;
   }
+  if (plateType === 'motorcycle') return getMotorcyclePackage(color, quantity) !== null;
   if (color !== 'black' && !(color === 'carbon' && PRODUCTS[plateType].format === 'long')) return false;
-  if (plateType === 'motorcycle') return quantity === 1;
   return quantity === 1 || quantity === 2 || quantity === 3;
 }
 

@@ -29,10 +29,13 @@ import {
   formatPrice,
   FREE_SHIPPING_THRESHOLD,
   isValidPlate,
+  getMotorcyclePackage,
+  MOTORCYCLE_PACKAGES,
   PRODUCTS,
   SHIPPING_PRICE,
   type PlateColor,
   type PlateType,
+  type MotorcyclePackage,
 } from '@/config/products';
 import { CONSENT_STORAGE_KEY, parseConsentRecord } from '@/lib/cookie-consent';
 import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
@@ -98,6 +101,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
   const router = useRouter();
   const [plateType, setPlateType] = useState<PlateType>('standard');
   const [carQuantity, setCarQuantity] = useState<1 | 2>(isHerbst ? 2 : 1);
+  const [motorcycleQuantity, setMotorcycleQuantity] = useState<1 | 2>(1);
   const [plateColor, setPlateColor] = useState<PlateColor>('black');
   const [bikeRackPlate, setBikeRackPlate] = useState(false);
   const [offerNow, setOfferNow] = useState(() => new Date());
@@ -108,7 +112,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
   const [seasonEndMonth, setSeasonEndMonth] = useState(DEFAULT_SEASON_END_MONTH);
   const inputStarted = useRef(false);
   const validTracked = useRef(false);
-  const quantity: 1 | 2 = plateType === 'motorcycle' ? 1 : carQuantity;
+  const quantity: 1 | 2 = plateType === 'motorcycle' ? motorcycleQuantity : carQuantity;
   const plateValue = `${city} ${letters} ${numbers}`;
   const valid = useMemo(
     () => isValidPlate(plateValue, plateType),
@@ -122,9 +126,15 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
   const product = PRODUCTS[plateType];
   const totalPlates = quantity + Number(bikeRackPlate && plateType !== 'motorcycle');
   const selectedOffer = isHerbst ? getHerbstPackage(plateType, plateColor, quantity, bikeRackPlate) : null;
+  const motorcyclePackage = plateType === 'motorcycle' ? getMotorcyclePackage(plateColor, quantity) : null;
+  const motorcycleUpgradeCents = MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents;
+  const motorcycleCarbonUpgradeCents = quantity === 2
+    ? MOTORCYCLE_PACKAGES.motorrad_carbon_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_2.priceCents
+    : MOTORCYCLE_PACKAGES.motorrad_carbon_1.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents;
   const selectedPackage = selectedOffer === 'basis' ? 'Basis'
     : selectedOffer === 'complete' ? 'Komplett-Set'
     : selectedOffer === 'premium' ? 'Premium-Set'
+    : motorcyclePackage ? MOTORCYCLE_PACKAGES[motorcyclePackage].label
     : plateType !== 'standard' ? 'Individuell' : 'Einzelbestellung';
   const configuratorHref = '#konfigurator';
   const showShippingCutoff = isHerbst && showHerbstSameDayShipping(offerNow);
@@ -142,6 +152,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
       const [savedCity, savedLetters, savedNumbers] = draft.plate.split(' ');
       setPlateType(draft.plateType);
       setCarQuantity(draft.quantity === 1 ? 1 : 2);
+      setMotorcycleQuantity(draft.plateType === 'motorcycle' && draft.quantity === 2 ? 2 : 1);
       setPlateColor(draft.plateColor);
       setBikeRackPlate(draft.bikeRackPlate === true);
       setCity(savedCity);
@@ -159,6 +170,23 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
     setPlateColor(kind === 'premium' ? 'carbon' : 'black');
     setBikeRackPlate(kind !== 'basis');
     if (!isHerbst) window.requestAnimationFrame(() => document.getElementById('konfigurator')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  }
+
+  function selectMotorcyclePackage(id: MotorcyclePackage) {
+    const motorcycle = MOTORCYCLE_PACKAGES[id];
+    setPlateType('motorcycle');
+    setPlateColor(motorcycle.color);
+    setMotorcycleQuantity(motorcycle.quantity);
+    setBikeRackPlate(false);
+  }
+
+  function selectPlateType(type: PlateType) {
+    if (type === 'motorcycle' && plateType !== 'motorcycle') {
+      setMotorcycleQuantity(1);
+      setPlateColor('black');
+      setBikeRackPlate(false);
+    }
+    setPlateType(type);
   }
 
   useEffect(() => {
@@ -274,7 +302,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             sicher online. Deine DIN-zertifizierten Schilder werden in 10
             Minuten geprägt und für den DHL-Versand vorbereitet.
           </p>}
-          {isHerbst ? <p className={styles.heroOffer}><span>Kennzeichen ab</span><strong>19,70 €</strong><small>2 Schilder · inkl. MwSt. und Versand</small></p> : <p className={styles.heroOffer}>
+          {isHerbst ? plateType === 'motorcycle' ? <p className={styles.heroOffer}><span>Motorrad-Kennzeichen ab</span><strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong><small>inkl. MwSt. und Versand</small></p> : <p className={styles.heroOffer}><span>Kennzeichen ab</span><strong>19,70 €</strong><small>2 Schilder · inkl. MwSt. und Versand</small></p> : <p className={styles.heroOffer}>
             <span>Kennzeichen ab</span>
             <strong>6,90 €</strong>
             <small>pro Schild · inkl. 19 % MwSt.</small>
@@ -318,7 +346,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             className={styles.plate}
           />
           {plateType !== 'motorcycle' && <p className={styles.previewNote}>Amtliche Siegel dienen nur der Vorschau und sind nicht im Lieferumfang.</p>}
-          {isHerbst && <div className={styles.inlinePackages} id="angebote" aria-label="Paket wählen">
+          {isHerbst && plateType !== 'motorcycle' && <div className={styles.inlinePackages} id="angebote" aria-label="Paket wählen">
             <span className={styles.inlinePackagesTitle}>Dein Paket</span>
             <div className={styles.inlinePackageGrid}>
               <button type="button" aria-pressed={selectedOffer === 'basis'} onClick={() => selectPackage('basis')}>
@@ -335,6 +363,29 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
               <span>Für nur {formatPrice((herbstSetPriceCents('black', offerNow) - (2 * HERBST_PRICING.standardPlateCents + HERBST_PRICING.shippingCents)) / 100)} mehr: 3. Schild + Versand gratis</span>
               <button type="button" onClick={() => selectPackage('complete')}>Zum 3er-Set wechseln</button>
             </div>}
+          </div>}
+
+          {plateType === 'motorcycle' && <div className={styles.motorcyclePackages} id={isHerbst ? 'angebote' : 'motorrad-pakete'}>
+            <span className={styles.inlinePackagesTitle}>Motorrad-Paket wählen</span>
+            <div className={styles.motorcycleFinishChoice} aria-label="Motorrad-Ausführung">
+              <button type="button" aria-pressed={plateColor === 'black'} onClick={() => setPlateColor('black')}>Standard</button>
+              <button type="button" aria-pressed={plateColor === 'carbon'} onClick={() => setPlateColor('carbon')}>Carbon (+{formatPrice(motorcycleCarbonUpgradeCents / 100)})</button>
+            </div>
+            <div className={styles.motorcyclePackageGrid} aria-label="Motorrad-Pakete">
+              {(Object.entries(MOTORCYCLE_PACKAGES) as [MotorcyclePackage, typeof MOTORCYCLE_PACKAGES[MotorcyclePackage]][]).map(([id, motorcycle]) => (
+                <button key={id} type="button" aria-pressed={motorcyclePackage === id} onClick={() => selectMotorcyclePackage(id)}>
+                  {id === 'motorrad_2' && <em>Meistgewählt</em>}
+                  <strong>{motorcycle.label}</strong>
+                  <span>{formatPrice(motorcycle.priceCents / 100)} · versandkostenfrei</span>
+                  {id === 'motorrad_2' && <small>nur {formatPrice(motorcycleUpgradeCents / 100)} mehr</small>}
+                </button>
+              ))}
+            </div>
+            {valid && motorcyclePackage === 'motorrad_1' && <div className={styles.packageUpsell}>
+              <span>Für nur {formatPrice(motorcycleUpgradeCents / 100)} mehr: Ersatzschild dazu – falls dein Schild verbiegt oder beschädigt wird.</span>
+              <button type="button" onClick={() => selectMotorcyclePackage('motorrad_2')}>Ersatzschild hinzufügen</button>
+            </div>}
+            <p className={styles.motorcycleSpareNote}>Das Ersatzschild trägt dieselbe Kombination. Wird dein Schild verbogen oder beschädigt, lässt du das Ersatzschild einfach bei der Zulassungsstelle stempeln – ohne neu zu bestellen.</p>
           </div>}
 
 
@@ -411,7 +462,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
                 type="button"
                 className={plateType === type ? styles.selectedType : ''}
                 aria-pressed={plateType === type}
-                onClick={() => setPlateType(type)}
+                onClick={() => selectPlateType(type)}
               >
                 <span>
                   {type === 'standard'
@@ -481,7 +532,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             </div>
             {bikeRackPlate && plateType !== 'motorcycle' && <div><span>Zusätzliches Kennzeichen für Fahrradträger</span><strong>{formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100)}</strong></div>}
           </div>}
-          {!selectedOffer && <p className={styles.livePriceNote}>{isHerbst ? 'inkl. 19 % MwSt. und Versand · ab 3 Schildern versandkostenfrei' : 'inkl. MwSt., zzgl. 3,90 € Versand – versandkostenfrei ab 19 €'}</p>}
+          {!selectedOffer && <p className={styles.livePriceNote}>{plateType === 'motorcycle' ? 'inkl. 19 % MwSt. · DHL-Versand kostenlos' : isHerbst ? 'inkl. 19 % MwSt. und Versand · ab 3 Schildern versandkostenfrei' : 'inkl. MwSt., zzgl. 3,90 € Versand – versandkostenfrei ab 19 €'}</p>}
           {!selectedOffer && <p className={styles.shippingProgress} aria-live="polite">{isHerbst ? pricing?.shippingCents === 0 ? 'Versandkostenfrei ✓' : `${formatPrice(HERBST_PRICING.shippingCents / 100)} Versand` : shippingRemaining > 0 ? `Noch ${formatPrice(shippingRemaining)} bis zum kostenlosen Versand` : 'Versandkostenfrei ✓'}</p>}
           <DeliveryGuarantee label={isHerbst ? 'Pünktlich-Garantie' : undefined} />
           {selectedOffer === 'complete' && <label className={styles.carbonUpgrade}>

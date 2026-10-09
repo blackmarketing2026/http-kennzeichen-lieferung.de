@@ -25,13 +25,17 @@ import { LicensePlate, LicensePlateEditor } from '@/components/license-plate';
 import {
   formatPrice,
   getPackagePrice,
+  getMotorcyclePackage,
+  MOTORCYCLE_PACKAGES,
   FREE_SHIPPING_THRESHOLD,
   isValidPlate,
   PRODUCTS,
   SHIPPING_PRICE,
   type PlateColor,
   type PlateType,
+  type MotorcyclePackage,
 } from '@/config/products';
+import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import {
   Dialog,
   DialogContent,
@@ -59,7 +63,7 @@ const FAQS = [
   ],
   [
     'Welche Kennzeichenarten kann ich konfigurieren?',
-    'Du kannst Auto-, Motorrad-, E-, H- und Saisonkennzeichen konfigurieren. Beim Motorrad erhältst du ein Schild, bei den anderen Varianten zwei Schilder.',
+    'Du kannst Auto-, Motorrad-, E-, H- und Saisonkennzeichen konfigurieren. Beim Motorrad wählst du ein Schild oder ein zweites, gleich geprägtes Ersatzschild.',
   ],
   [
     'Welche Größen gibt es?',
@@ -67,7 +71,7 @@ const FAQS = [
   ],
   [
     'Was kosten die Kennzeichen?',
-    'Autokennzeichen kosten 6,90 € pro Schild, zwei zusammen 13,80 €. Ein Motorradkennzeichen kostet 19,90 €. Der Versand kostet 3,90 € pro Bestellung und ist ab 19 € Warenwert kostenlos.',
+    `Autokennzeichen kosten 6,90 € pro Schild, zwei zusammen 13,80 €. Ein Motorradkennzeichen kostet ab ${formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)} inklusive Versand. Für andere Kennzeichen kostet der Versand 3,90 € pro Bestellung und ist ab 19 € Warenwert kostenlos.`,
   ],
   [
     'Wie schnell wird versendet?',
@@ -152,17 +156,21 @@ export default function Home() {
   const [cityCode, setCityCode] = useState('');
   const [serialLetters, setSerialLetters] = useState('');
   const [serialNumbers, setSerialNumbers] = useState('');
-  const plateColor: PlateColor = 'black';
-  const quantity: 1 | 2 = plateType === 'motorcycle' ? 1 : 2;
+  const [motorcycleColor, setMotorcycleColor] = useState<PlateColor>('black');
+  const [motorcycleQuantity, setMotorcycleQuantity] = useState<1 | 2>(1);
+  const plateColor: PlateColor = plateType === 'motorcycle' ? motorcycleColor : 'black';
+  const quantity: 1 | 2 = plateType === 'motorcycle' ? motorcycleQuantity : 2;
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const plateInputEventSent = useRef(false);
   const product = PRODUCTS[plateType];
   const plateValue = `${cityCode} ${serialLetters} ${serialNumbers}`;
-  const plateSubtotal = getPackagePrice(plateType, plateColor, quantity);
-  const shippingPrice = plateSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_PRICE;
-  const total = plateSubtotal + shippingPrice;
+  const motorcyclePricing = plateType === 'motorcycle' ? getCheckoutPricing('motorcycle', plateColor, quantity, undefined) : null;
+  const motorcyclePackage = plateType === 'motorcycle' ? getMotorcyclePackage(plateColor, quantity) : null;
+  const plateSubtotal = motorcyclePricing ? motorcyclePricing.subtotalCents / 100 : getPackagePrice(plateType, plateColor, quantity);
+  const shippingPrice = motorcyclePricing ? motorcyclePricing.shippingCents / 100 : plateSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_PRICE;
+  const total = motorcyclePricing ? motorcyclePricing.totalCents / 100 : plateSubtotal + shippingPrice;
   const status = useMemo(
     () => isValidPlate(plateValue, plateType),
     [plateValue, plateType],
@@ -176,6 +184,7 @@ export default function Home() {
       if (!draft) return;
       const [city, letters, numbers] = draft.plate.split(' ');
       setPlateType(draft.plateType);
+      if (draft.plateType === 'motorcycle') { setMotorcycleColor(draft.plateColor); setMotorcycleQuantity(draft.quantity === 2 ? 2 : 1); }
       setCityCode(city);
       setSerialLetters(letters);
       setSerialNumbers(numbers);
@@ -236,6 +245,17 @@ export default function Home() {
           ? 'historic'
           : 'standard',
     );
+  }
+
+  function chooseMotorcyclePackage(id: MotorcyclePackage) {
+    const selected = MOTORCYCLE_PACKAGES[id];
+    setMotorcycleColor(selected.color);
+    setMotorcycleQuantity(selected.quantity);
+  }
+
+  function chooseType(type: PlateType) {
+    if (type === 'motorcycle' && plateType !== 'motorcycle') { setMotorcycleColor('black'); setMotorcycleQuantity(1); }
+    setPlateType(type);
   }
 
   useEffect(() => {
@@ -491,7 +511,7 @@ export default function Home() {
                     type="button"
                     aria-pressed={plateType === type}
                     className={plateType === type ? 'active' : ''}
-                    onClick={() => setPlateType(type)}
+                    onClick={() => chooseType(type)}
                   >
                     <strong>
                       {type === 'electric'
@@ -599,7 +619,7 @@ export default function Home() {
                   ? 'active'
                   : ''
               }
-              onClick={() => setPlateType(type)}
+              onClick={() => chooseType(type)}
             >
               {PRODUCTS[type].label}
             </button>
@@ -711,13 +731,28 @@ export default function Home() {
                 {quantity} {quantity === 1 ? 'Schild' : 'Schilder'}
               </strong>
               <span>
-                {quantity === 2 ? 'Für vorne und hinten' : 'Für dein Motorrad'}
+                {plateType === 'motorcycle' ? quantity === 2 ? 'Ein Schild + Ersatzschild bei Beschädigung' : 'Für dein Motorrad' : 'Für vorne und hinten'}
               </span>
             </div>
+            {plateType === 'motorcycle' && <div className="home-motorcycle-options">
+              <div className="home-motorcycle-finish" aria-label="Motorrad-Ausführung">
+                <button type="button" aria-pressed={plateColor === 'black'} onClick={() => setMotorcycleColor('black')}>Standard</button>
+                <button type="button" aria-pressed={plateColor === 'carbon'} onClick={() => setMotorcycleColor('carbon')}>Carbon (+{formatPrice((quantity === 2 ? MOTORCYCLE_PACKAGES.motorrad_carbon_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_2.priceCents : MOTORCYCLE_PACKAGES.motorrad_carbon_1.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents) / 100)})</button>
+              </div>
+              <div className="home-motorcycle-packages" aria-label="Motorrad-Pakete">
+                {(Object.entries(MOTORCYCLE_PACKAGES) as [MotorcyclePackage, typeof MOTORCYCLE_PACKAGES[MotorcyclePackage]][]).map(([id, option]) => <button key={id} type="button" aria-pressed={motorcyclePackage === id} onClick={() => chooseMotorcyclePackage(id)}>
+                  {id === 'motorrad_2' && <em>Meistgewählt</em>}
+                  <strong>{option.label}</strong><span>{formatPrice(option.priceCents / 100)} · versandkostenfrei</span>
+                  {id === 'motorrad_2' && <small>nur {formatPrice((MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents) / 100)} mehr</small>}
+                </button>)}
+              </div>
+              {status && motorcyclePackage === 'motorrad_1' && <div className="home-motorcycle-upsell">Für nur {formatPrice((MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents) / 100)} mehr: Ersatzschild dazu – falls dein Schild verbiegt oder beschädigt wird. <button type="button" onClick={() => chooseMotorcyclePackage('motorrad_2')}>Ersatzschild hinzufügen</button></div>}
+              <p>Das Ersatzschild trägt dieselbe Kombination. Wird dein Schild verbogen oder beschädigt, lässt du das Ersatzschild einfach bei der Zulassungsstelle stempeln – ohne neu zu bestellen.</p>
+            </div>}
             <div className="price-card">
               <div>
                 <span>
-                  {quantity} × {product.label}, {product.size}, Schwarz
+                  {plateType === 'motorcycle' && motorcyclePackage ? MOTORCYCLE_PACKAGES[motorcyclePackage].label : `${quantity} × ${product.label}`}, {product.size}, {plateColor === 'carbon' ? 'Carbon' : 'Schwarz'}
                 </span>
                 <strong>{formatPrice(plateSubtotal)}</strong>
               </div>
@@ -730,8 +765,8 @@ export default function Home() {
                 <strong>{formatPrice(total)}</strong>
               </div>
               <small>
-                Alle Preise inklusive gesetzlicher Mehrwertsteuer und
-                DHL-Versand für 3,90 € pro Bestellung, kostenlos ab 19 € Warenwert.
+                Alle Preise inklusive gesetzlicher Mehrwertsteuer und{' '}
+                {plateType === 'motorcycle' ? 'kostenlosem DHL-Versand beim Motorrad.' : 'DHL-Versand für 3,90 € pro Bestellung, kostenlos ab 19 € Warenwert.'}
               </small>
             </div>
             <DeliveryGuarantee />

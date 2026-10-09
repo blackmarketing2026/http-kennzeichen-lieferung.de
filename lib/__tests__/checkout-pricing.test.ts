@@ -30,7 +30,7 @@ describe('checkout pricing', () => {
   });
 
   it('keeps the existing prices of other plate types', () => {
-    expect(getCheckoutPricing('motorcycle', 'black', 1, undefined)?.totalCents).toBe(1990);
+    expect(getCheckoutPricing('motorcycle', 'black', 1, undefined)?.totalCents).toBe(1490);
     expect(getCheckoutPricing('electric', 'black', 2, undefined)?.totalCents).toBe(1990);
     expect(getCheckoutPricing('agriculture240', 'green', 1, undefined)?.totalCents).toBe(2490);
   });
@@ -41,7 +41,7 @@ describe('checkout pricing', () => {
   });
 
   it('rejects unavailable configurations', () => {
-    expect(getCheckoutPricing('motorcycle', 'carbon', 1, undefined)).toBeNull();
+    expect(getCheckoutPricing('motorcycle', 'carbon', 3 as 1, undefined)).toBeNull();
     expect(getCheckoutPricing('standard', 'green', 2, undefined)).toBeNull();
     expect(getCheckoutPricing('agriculture240', 'carbon', 1, undefined)).toBeNull();
     expect(getCheckoutPricing('motorcycle', 'black', 1, undefined, { parkingPlate: false, bikeRackPlate: true })).toBeNull();
@@ -100,7 +100,24 @@ describe('Herbst pricing', () => {
       expect(getCheckoutPricing('electric', 'black', 2, undefined, extras(false), 'herbst', now)?.totalCents).toBe(1990);
       expect(getCheckoutPricing('historic', 'black', 2, undefined, extras(false), 'herbst', now)?.totalCents).toBe(1990);
       expect(getCheckoutPricing('season', 'black', 2, undefined, extras(false), 'herbst', now)?.totalCents).toBe(1990);
-      expect(getCheckoutPricing('motorcycle', 'black', 1, undefined, extras(false), 'herbst', now)?.totalCents).toBe(1990);
+      expect(getCheckoutPricing('motorcycle', 'black', 1, undefined, extras(false), 'herbst', now)?.totalCents).toBe(1490);
     }
+  });
+});
+
+describe('Motorcycle packages', () => {
+  it.each([
+    ['black', 1, 1490], ['black', 2, 1890],
+    ['carbon', 1, 1990], ['carbon', 2, 2590],
+  ] as const)('derives %s × %i on the server', (color, quantity, totalCents) => {
+    expect(getCheckoutPricing('motorcycle', color, quantity, undefined)).toMatchObject({
+      totalCents, subtotalCents: totalCents, shippingCents: 0,
+      unitPriceCents: totalCents / quantity,
+    });
+  });
+
+  it('rejects unavailable motorcycle combinations and unrelated extras', () => {
+    expect(getCheckoutPricing('motorcycle', 'green', 1, undefined)).toBeNull();
+    expect(getCheckoutPricing('motorcycle', 'black', 2, undefined, { parkingPlate: false, bikeRackPlate: true })).toBeNull();
   });
 });

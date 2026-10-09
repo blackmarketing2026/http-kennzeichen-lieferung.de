@@ -10,6 +10,7 @@ export type CheckoutSource =
   | 'home'
   | 'kennzeichen-bestellen'
   | 'kennzeichen-bestellen-herbstangebot'
+  | 'motorradkennzeichen-bestellen'
   | 'autohaendlerpartner'
   | 'landmaschinen-kennzeichen';
 
@@ -45,6 +46,7 @@ export function isCheckoutSource(value: unknown): value is CheckoutSource {
     value === 'home' ||
     value === 'kennzeichen-bestellen' ||
     value === 'kennzeichen-bestellen-herbstangebot' ||
+    value === 'motorradkennzeichen-bestellen' ||
     value === 'autohaendlerpartner' ||
     value === 'landmaschinen-kennzeichen'
   );

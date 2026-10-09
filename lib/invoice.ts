@@ -209,7 +209,9 @@ export async function renderInvoicePdf(
   hr();
 
   const product = PRODUCTS[order.plate_type];
-  const itemLabel = `${product.label} (${plateColorLabel(order.plate_color)}) – ${order.plate}`;
+  const itemLabel = order.plate_type === 'motorcycle' && order.quantity === 2
+    ? `Motorrad + Ersatzschild (${plateColorLabel(order.plate_color)}) – ${order.plate}`
+    : `${product.label} (${plateColorLabel(order.plate_color)}) – ${order.plate}`;
   const unitPrice = order.unit_price_cents / 100;
   const explicitParking = Boolean(order.parking_plate);
   const explicitBikeRack = Boolean(order.bike_rack_plate);

@@ -4,10 +4,12 @@ import {
   EMISSION_STICKER_PRICE,
   FREE_SHIPPING_THRESHOLD,
   getPackageDiscountCents,
+  getMotorcyclePackage,
   getUnitPrice,
   isAvailableConfiguration,
   isSinglePlateProduct,
   PARKING_PLATE_PRICE,
+  MOTORCYCLE_PACKAGES,
   SHIPPING_PRICE,
   type PlateColor,
   type PlateType,
@@ -54,6 +56,22 @@ export function getCheckoutPricing(
     return null;
   const promoCode = requestedCode?.trim().toUpperCase() || null;
   if (promoCode && !(promoCode in PROMO_CODES)) return null;
+
+  if (plateType === 'motorcycle') {
+    const packageId = getMotorcyclePackage(color, baseQuantity);
+    if (!packageId) return null;
+    const subtotalCents = MOTORCYCLE_PACKAGES[packageId].priceCents;
+    const emissionStickerPriceCents = extras.emissionSticker ? Math.round(EMISSION_STICKER_PRICE * 100) : 0;
+    const regularTotalCents = subtotalCents + emissionStickerPriceCents;
+    const totalCents = promoCode ? PROMO_CODES[promoCode as keyof typeof PROMO_CODES].totalCents : regularTotalCents;
+    if (totalCents > regularTotalCents) return null;
+    return {
+      unitPriceCents: subtotalCents / baseQuantity, packageDiscountCents: 0,
+      parkingExtraPriceCents: 0, bikeRackExtraPriceCents: 0, emissionStickerPriceCents,
+      subtotalCents: regularTotalCents, shippingCents: 0,
+      discountCents: regularTotalCents - totalCents, totalCents, promoCode,
+    };
+  }
 
   if (normalizeOffer(offer) === 'herbst' && plateType === 'standard' && !extras.parkingPlate) {
     const unitPriceCents = color === 'carbon' ? HERBST_PRICING.carbonPlateCents : HERBST_PRICING.standardPlateCents;

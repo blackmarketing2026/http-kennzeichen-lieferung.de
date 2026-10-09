@@ -2518,6 +2518,19 @@ summary:focus-visible {
 .evb-partner-block h2 { margin: 8px 0 !important; font-size: 1.3rem !important; letter-spacing: -.02em !important; }
 .evb-partner-block p { margin: 0 0 16px; color: #435d6c; font-size: .9rem; line-height: 1.5; }
 .evb-partner-block a { display: inline-block; padding: 11px 14px; border-radius: 7px; background: #0878dc; color: #fff; font-weight: 800; text-decoration: none; }
+.home-motorcycle-options { margin: 14px 0; display: grid; gap: 9px; }
+.home-motorcycle-finish { display: flex; gap: 8px; }
+.home-motorcycle-finish button { flex: 1; padding: 10px; border: 1px solid #cbdbe5; border-radius: 8px; background: #fff; color: #102a3c; font: inherit; font-size: .78rem; font-weight: 800; cursor: pointer; }
+.home-motorcycle-finish button[aria-pressed='true'], .home-motorcycle-packages button[aria-pressed='true'] { border: 2px solid #168359; background: #effaf5; }
+.home-motorcycle-packages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.home-motorcycle-packages button { padding: 10px; display: grid; gap: 3px; border: 1px solid #cbdbe5; border-radius: 8px; background: #fff; color: #102a3c; font: inherit; text-align: left; cursor: pointer; }
+.home-motorcycle-packages strong { font-size: .78rem; }
+.home-motorcycle-packages span, .home-motorcycle-packages small { font-size: .68rem; }
+.home-motorcycle-packages em { width: fit-content; padding: 2px 5px; border-radius: 4px; background: #0878dc; color: #fff; font-size: .61rem; font-style: normal; font-weight: 800; }
+.home-motorcycle-upsell { padding: 11px; border-radius: 8px; background: #e8f4ff; font-size: .73rem; font-weight: 750; }
+.home-motorcycle-upsell button { margin-top: 7px; padding: 8px; border: 0; border-radius: 6px; background: #0878dc; color: #fff; font: inherit; cursor: pointer; }
+.home-motorcycle-options > p { margin: 0; color: #526773; font-size: .73rem; line-height: 1.5; }
+@media (max-width: 560px) { .home-motorcycle-packages { grid-template-columns: 1fr; } }
 .invalid-checkout {
   min-height: 100svh;
   padding: 30px;

@@ -21,6 +21,7 @@ import {
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
 import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
+import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import {
   formatPrice,
   getPackagePrice,
@@ -72,7 +73,8 @@ export function AutohaendlerPartnerPage() {
     [plateValue, plateType],
   );
   const quantity: 1 | 2 = isSinglePlateProduct(plateType) ? 1 : 2;
-  const total = getPackagePrice(plateType, 'black', quantity) + SHIPPING_PRICE;
+  const motorcyclePricing = plateType === 'motorcycle' ? getCheckoutPricing('motorcycle', 'black', 1, undefined) : null;
+  const total = motorcyclePricing ? motorcyclePricing.totalCents / 100 : getPackagePrice(plateType, 'black', quantity) + SHIPPING_PRICE;
 
   useEffect(() => {
     const timer = window.setTimeout(() => {

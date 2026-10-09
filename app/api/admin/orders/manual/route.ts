@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto';
+import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import { FREE_SHIPPING_THRESHOLD, getPackageDiscountCents, getUnitPrice, isAvailableConfiguration, isValidPlate, PRODUCTS, SHIPPING_PRICE, type PlateColor, type PlateType } from '@/config/products';
 import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
 import { submitOrderToManufacturer } from '@/lib/manufacturer-order';
@@ -75,7 +76,8 @@ export async function POST(request: Request) {
   const unitPriceCents = Math.round(getUnitPrice(plateType, color, quantity) * 100);
   const discountCents = getPackageDiscountCents(plateType, color, quantity);
   const merchandiseCents = unitPriceCents * quantity - discountCents;
-  const shippingCents = merchandiseCents >= Math.round(FREE_SHIPPING_THRESHOLD * 100) ? 0 : Math.round(SHIPPING_PRICE * 100);
+  const motorcyclePricing = plateType === 'motorcycle' ? getCheckoutPricing('motorcycle', color, quantity as 1 | 2, undefined) : null;
+  const shippingCents = motorcyclePricing ? motorcyclePricing.shippingCents : merchandiseCents >= Math.round(FREE_SHIPPING_THRESHOLD * 100) ? 0 : Math.round(SHIPPING_PRICE * 100);
   const totalCents = unitPriceCents * quantity + shippingCents - discountCents;
   const address = {
     name: `${firstName} ${lastName}`,

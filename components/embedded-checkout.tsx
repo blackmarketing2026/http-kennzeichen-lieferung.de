@@ -32,6 +32,8 @@ import {
   FREE_SHIPPING_THRESHOLD,
   formatPrice,
   getPackagePrice,
+  getMotorcyclePackage,
+  MOTORCYCLE_PACKAGES,
   isAgriculturePlate,
   isSinglePlateProduct,
   PARKING_PLATE_PRICE,
@@ -643,11 +645,12 @@ export function EmbeddedCheckout({
     getPackagePrice(selection.plateType, selection.plateColor, baseQuantity) +
     (extras.parkingPlate ? PARKING_PLATE_PRICE : 0) +
     (extras.bikeRackPlate ? BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0) : 0);
-  const total = subtotal + (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_PRICE);
-  const offerEstimate = offer === 'herbst'
+  const offerEstimate = offer === 'herbst' || selection.plateType === 'motorcycle'
     ? getCheckoutPricing(selection.plateType, selection.plateColor, baseQuantity, undefined, extras, offer)
     : null;
-  const offerBreakdown = offer === 'herbst' ? pricing ?? offerEstimate : null;
+  const total = offerEstimate ? offerEstimate.totalCents / 100 : subtotal + (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_PRICE);
+  const offerBreakdown = offer === 'herbst' || selection.plateType === 'motorcycle' ? pricing ?? offerEstimate : null;
+  const motorcyclePackage = selection.plateType === 'motorcycle' ? getMotorcyclePackage(selection.plateColor, baseQuantity) : null;
   const herbstPackage = offer === 'herbst'
     ? getHerbstPackage(selection.plateType, selection.plateColor, baseQuantity, extras.bikeRackPlate, extras.parkingPlate)
     : null;
@@ -850,7 +853,7 @@ export function EmbeddedCheckout({
         </div> : <div className="real-order-line">
           <div>
             <strong>
-              {baseQuantity} × {product.label}
+              {motorcyclePackage ? MOTORCYCLE_PACKAGES[motorcyclePackage].label : `${baseQuantity} × ${product.label}`}
             </strong>
             <span>
               {selection.plate} · {product.size} ·{' '}
@@ -868,6 +871,7 @@ export function EmbeddedCheckout({
             )}
           </strong>
         </div>}
+        {motorcyclePackage && baseQuantity === 2 && <p className="checkout-preview-note">Das Ersatzschild trägt dieselbe Kombination. Bei Beschädigung lässt du es bei der Zulassungsstelle stempeln.</p>}
         {herbstPackage && <div className="checkout-package-change">
           <button type="button" className={styles.packageToggle} aria-expanded={packagePickerOpen} aria-controls="checkout-package-options" onClick={() => setPackagePickerOpen((open) => !open)}>
             {packagePickerOpen ? 'Paketauswahl schließen' : 'Paket ändern'}
