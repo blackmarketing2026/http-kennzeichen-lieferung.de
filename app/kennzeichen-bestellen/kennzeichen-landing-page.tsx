@@ -517,7 +517,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           <p className={styles.kicker}><span /> Preisvergleich</p>
           <h2 id="local-comparison-title">Schilderdienst vor Ort oder bequem nach Hause?</h2>
         </div>
-        <p><strong>Schilderdienst vor Ort:</strong> oft 20–30 € + Wartezeit.</p>
+        <p><strong>Schilderdienst vor Ort:</strong> oft 30–50 € für Standardschilder ohne Carbon-Optik, plus Wartezeit.</p>
         <p><strong>Bei uns:</strong> 3 Kennzeichen {formatPrice(herbstSetPriceCents('black', offerNow) / 100)}, versandkostenfrei, bequem nach Hause.</p>
       </section>}
 
