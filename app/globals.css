@@ -2513,6 +2513,11 @@ summary:focus-visible {
 .real-payment-success .button {
   width: 100%;
 }
+.evb-partner-block { margin: 28px 0; padding: 20px; border: 1px solid #c9dce8; border-radius: 12px; background: #f3f8fc; text-align: left; }
+.evb-partner-block small { display: block; color: #526773; font-size: .7rem; font-weight: 800; }
+.evb-partner-block h2 { margin: 8px 0 !important; font-size: 1.3rem !important; letter-spacing: -.02em !important; }
+.evb-partner-block p { margin: 0 0 16px; color: #435d6c; font-size: .9rem; line-height: 1.5; }
+.evb-partner-block a { display: inline-block; padding: 11px 14px; border-radius: 7px; background: #0878dc; color: #fff; font-weight: 800; text-decoration: none; }
 .invalid-checkout {
   min-height: 100svh;
   padding: 30px;

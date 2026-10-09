@@ -10,6 +10,7 @@ vi.mock('@/lib/logger', () => ({ logEvent: vi.fn() }));
 
 import { getMailTransport } from '@/lib/mail';
 import { sendOrderConfirmationEmail, type OrderEmailOrder } from '@/lib/order-emails';
+import { EVB_PARTNER_URL } from '@/lib/config';
 
 const sendMail = vi.fn();
 const order: OrderEmailOrder = {
@@ -63,5 +64,16 @@ describe('Herbst checklist in order confirmation', () => {
 
     expect(sendMail.mock.calls[0][0].html).toContain(checklistUrl);
     expect(sendMail.mock.calls[0][0].attachments).toBeUndefined();
+  });
+
+  it('includes the marked eVB partner link only for Herbst orders', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('download failed')));
+    await sendOrderConfirmationEmail(order, 'https://shop.example.com');
+    expect(sendMail.mock.calls[0][0].html).toContain('Anzeige');
+    expect(sendMail.mock.calls[0][0].html).toContain(EVB_PARTNER_URL);
+    expect(sendMail.mock.calls[0][0].html).toContain('rel="sponsored noopener noreferrer"');
+    sendMail.mockClear();
+    await sendOrderConfirmationEmail({ ...order, offer_profile: 'standard' }, 'https://shop.example.com');
+    expect(sendMail.mock.calls[0][0].html).not.toContain(EVB_PARTNER_URL);
   });
 });

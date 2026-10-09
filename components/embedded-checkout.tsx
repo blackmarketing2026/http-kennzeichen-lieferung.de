@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { PaymentLogos } from '@/components/payment-logos';
 import { ShippingNotice } from '@/components/shipping-notice';
+import { EvbPartnerBlock } from '@/components/evb-partner-block';
 import { DeliveryGuarantee } from '@/components/delivery-guarantee';
 import { GERMAN_STATES, HOLIDAY_REGIONS, type GermanState } from '@/lib/delivery-promise';
 import { LicensePlate } from '@/components/license-plate';
@@ -121,6 +122,7 @@ function trackPurchase(
 
 function PaymentForm({
   selection,
+  offer,
   extras,
   pricing,
   getCartId,
@@ -135,6 +137,7 @@ function PaymentForm({
   trackKennzeichenFunnel,
 }: {
   selection: ActiveSelection;
+  offer: OfferProfile;
   extras: CheckoutExtras;
   pricing: CheckoutPricing;
   getCartId: () => string;
@@ -415,6 +418,7 @@ function PaymentForm({
           </span>
           <strong>{formatPrice(pricing.totalCents / 100)}</strong>
         </div>
+        {offer === 'herbst' && <EvbPartnerBlock />}
         <Link className="button" href="/">
           Zurück zur Startseite
         </Link>
@@ -982,6 +986,7 @@ export function EmbeddedCheckout({
             }}
           >
             <PaymentForm
+              offer={offer}
               selection={selection}
               extras={extras}
               pricing={pricing}

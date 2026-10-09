@@ -7,6 +7,7 @@ import {
 import { logEvent } from '@/lib/logger';
 import { DELIVERY_EXPLANATION, DELIVERY_PROMISE_TEXT } from '@/lib/delivery-promise';
 import { CAMPAIGN_KEYS, type Attribution } from '@/lib/attribution';
+import { EVB_PARTNER_URL } from '@/lib/config';
 import {
   formatPrice,
   plateColorLabel,
@@ -84,6 +85,12 @@ export async function sendOrderConfirmationEmail(
       <p>${DELIVERY_EXPLANATION} <a href="${origin}/liefergarantie">Bedingungen der ${order.offer_profile === 'herbst' ? 'Pünktlich-Garantie' : 'Liefergarantie'} ansehen</a>.</p>
       <p>Sobald deine Rechnung fertig ist, bekommst du sie separat per E-Mail zugeschickt.</p>
       <p>Sobald dein Kennzeichen gedruckt und versandt ist, bekommst du automatisch die Trackingnummer in einer separaten E-Mail.</p>
+      ${order.offer_profile === 'herbst' ? `<div style="margin:24px 0;padding:20px;border:1px solid #c9dce8;border-radius:10px;background:#f3f8fc">
+        <small style="display:block;color:#536b7b">Anzeige</small>
+        <h2 style="margin:8px 0">Nächster Schritt: deine eVB-Nummer</h2>
+        <p>Für die Zulassung brauchst du eine eVB-Nummer. Vergleiche jetzt Kfz-Versicherungen und erhalte deine eVB direkt nach Abschluss.</p>
+        <a href="${EVB_PARTNER_URL}" target="_blank" rel="sponsored noopener noreferrer" style="display:inline-block;padding:12px 16px;border-radius:6px;background:#0878dc;color:#fff;text-decoration:none">Kfz-Versicherung vergleichen</a>
+      </div>` : ''}
     `,
   });
 

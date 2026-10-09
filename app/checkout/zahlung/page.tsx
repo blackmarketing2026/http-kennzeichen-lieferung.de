@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { CheckCircle2, Clock3, CircleAlert } from 'lucide-react';
 import Stripe from 'stripe';
+import { EvbPartnerBlock } from '@/components/evb-partner-block';
 
 export const runtime = 'nodejs';
 
@@ -14,11 +15,15 @@ export default async function PaymentReturnPage({
   const clientSecret = typeof params.payment_intent_client_secret === 'string' ? params.payment_intent_client_secret : '';
   const secretKey = process.env.stripe_live?.trim();
   let status: Stripe.PaymentIntent.Status | null = null;
+  let isHerbstOrder = false;
 
   if (paymentIntentId.startsWith('pi_') && clientSecret.startsWith(`${paymentIntentId}_secret_`) && secretKey?.startsWith('sk_')) {
     try {
       const intent = await new Stripe(secretKey).paymentIntents.retrieve(paymentIntentId);
-      if (intent.client_secret === clientSecret) status = intent.status;
+      if (intent.client_secret === clientSecret) {
+        status = intent.status;
+        isHerbstOrder = intent.metadata.offer === 'herbst';
+      }
     } catch {
       // Keep the generic message if Stripe cannot verify the return parameters.
     }
@@ -42,6 +47,7 @@ export default async function PaymentReturnPage({
               : 'Wir konnten die Zahlung nicht bestätigen. Bitte prüfe die Zahlungsart oder beginne die Bestellung erneut.'}
         </p>
         <Link className="button" href="/">Zur Startseite</Link>
+        {succeeded && isHerbstOrder && <EvbPartnerBlock />}
       </section>
     </main>
   );

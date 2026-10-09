@@ -3,7 +3,8 @@ import { CONSENT_STORAGE_KEY, parseConsentRecord } from '@/lib/cookie-consent';
 export type KennzeichenGtmEvent =
   | 'kennzeichen_eingabe'
   | 'kennzeichen_adresse'
-  | 'kennzeichen_zahlen';
+  | 'kennzeichen_zahlen'
+  | 'evb_click';
 
 /** Custom GTM events for the /kennzeichen-bestellen checkout funnel. */
 export function trackKennzeichenGtmEvent(
