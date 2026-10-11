@@ -55,4 +55,10 @@ describe('purchase GTM event', () => {
     expect(emitPurchaseEvent({ ...purchase, valueCents: 0 })).toBe(false);
     expect(dataLayer).toEqual([]);
   });
+
+  it('reports the Stripe total including both add-ons as purchase value', () => {
+    const { dataLayer } = browser(true);
+    expect(emitPurchaseEvent({ ...purchase, valueCents: 3240, shippingCents: 0 })).toBe(true);
+    expect(dataLayer[1]).toMatchObject({ event: 'purchase', ecommerce: { value: 32.4, currency: 'EUR' } });
+  });
 });

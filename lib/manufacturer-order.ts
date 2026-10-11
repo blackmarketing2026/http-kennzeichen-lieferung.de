@@ -1,6 +1,7 @@
 import { query } from '@/lib/db';
 import { createManufacturerOrder, type ManufacturerAddress, type ManufacturerOrderPayload } from '@/lib/kennzeichen-api';
 import { getManufacturerVariant } from '@/config/manufacturer-products';
+import { ADDONS, parseStoredAddons } from '@/config/addons';
 import { logManufacturerEvent } from '@/lib/logger';
 import type { PlateColor, PlateType } from '@/config/products';
 import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, isValidSeasonPeriod } from '@/lib/season-period';
@@ -20,6 +21,7 @@ export type OrderRow = {
   delivery_address: StripeShippingAddress | null;
   invoice_address: StripeShippingAddress | null;
   stripe_payment_intent_id: string | null;
+  selected_addons?: unknown;
 };
 
 type StripeShippingAddress = {
@@ -132,6 +134,13 @@ export async function submitOrderToManufacturer(orderId: string): Promise<Submit
           ...(isSeason ? { seasonStartMonth, seasonEndMonth } : {}),
         },
       },
+      ...parseStoredAddons(order.selected_addons).flatMap((id) => ADDONS[id].manufacturerItems.map((item) => ({
+        productVariantId: item.productVariantId,
+        name: item.name,
+        sku: item.sku,
+        quantity: item.quantity,
+        customization: { productType: 'OTHER' as const },
+      }))),
     ],
   };
 

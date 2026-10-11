@@ -28,14 +28,14 @@ const payment = {
   shipping: null,
 } as Stripe.PaymentIntent;
 
-function mockStripe() {
+function mockStripe(total = 500) {
   const draft = {
     id: 'in_123', customer: 'cus_123', metadata: { orderId: order.id },
     status: 'draft', lines: { data: [] }, total: 0,
   };
-  const open = { ...draft, status: 'open', total: 500 };
+  const open = { ...draft, status: 'open', total };
   const paid = {
-    ...open, status: 'paid', amount_paid: 500, number: 'RE-TEST-123',
+    ...open, status: 'paid', amount_paid: total, number: 'RE-TEST-123',
     invoice_pdf: 'https://pay.stripe.com/invoice/acct/test/pdf',
   };
   const stripe = {
@@ -80,6 +80,20 @@ describe('Stripe invoice for paid checkout', () => {
     expect(stripe.invoices.create).not.toHaveBeenCalled();
     expect(stripe.invoiceItems.create).not.toHaveBeenCalled();
     expect(stripe.invoices.attachPayment).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    [[], 1960, []],
+    [['holderScrews'], 2750, [790]],
+    [['warningVest'], 2450, [490]],
+    [['holderScrews', 'warningVest'], 3240, [790, 490]],
+  ] as const)('creates separate Stripe invoice lines for add-ons %j', async (addOns, total, addonAmounts) => {
+    const stripe = mockStripe(total);
+    await ensurePaidStripeInvoice(stripe as unknown as Stripe, {
+      ...order, total_cents: total, promo_code: null, selected_addons: JSON.stringify(addOns),
+    }, { ...payment, amount_received: total });
+    const amounts = stripe.invoiceItems.create.mock.calls.map((call) => call[0].amount);
+    expect(amounts).toEqual([1960, ...addonAmounts]);
   });
 
   it('rejects a payment whose captured amount differs from the order', async () => {

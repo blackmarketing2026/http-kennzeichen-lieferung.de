@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import { ADDONS, addonTotalCents, parseStoredAddons } from '@/config/addons';
 import { PRODUCTS, VAT_RATE, type PlateColor, type PlateType } from '@/config/products';
 import { query } from '@/lib/db';
 
@@ -14,6 +15,7 @@ export type StripeInvoiceOrder = {
   promo_code: string | null;
   customer_email: string | null;
   stripe_invoice_id: string | null;
+  selected_addons?: unknown;
 };
 
 function customerIdFromPayment(paymentIntent: Stripe.PaymentIntent) {
@@ -89,20 +91,31 @@ export async function ensurePaidStripeInvoice(stripe: Stripe, order: StripeInvoi
   }
 
   if (invoice.status === 'draft') {
-    if (invoice.lines.data.length === 0) {
-      const taxRateId = await includedVatRate(stripe);
-      const product = PRODUCTS[order.plate_type];
-      const discount = order.promo_code ? `, Rabattcode ${order.promo_code}` : '';
-      const extras = `${order.parking_plate ? ', Parkplatz-Kennzeichen' : ''}${order.bike_rack_plate ? ', Fahrradträger-Kennzeichen' : ''}`;
+    const selectedAddons = parseStoredAddons(order.selected_addons);
+    const taxRateId = await includedVatRate(stripe);
+    const product = PRODUCTS[order.plate_type];
+    const discount = order.promo_code ? `, Rabattcode ${order.promo_code}` : '';
+    const extras = `${order.parking_plate ? ', Parkplatz-Kennzeichen' : ''}${order.bike_rack_plate ? ', Fahrradträger-Kennzeichen' : ''}`;
+    const baseDescription = `${order.quantity} × ${product.label}-Kennzeichen ${order.plate}${extras}, DHL-Versand${discount}`;
+    if (!invoice.lines.data.some((line) => line.description === baseDescription)) {
       await stripe.invoiceItems.create({
         customer: customerId,
         invoice: invoice.id,
         currency: 'eur',
-        amount: order.total_cents,
-        description: `${order.quantity} × ${product.label}-Kennzeichen ${order.plate}${extras}, DHL-Versand${discount}`,
+        amount: order.total_cents - addonTotalCents(selectedAddons),
+        description: baseDescription,
         tax_behavior: 'inclusive',
         tax_rates: [taxRateId],
       }, { idempotencyKey: `kennzeichen-invoice-item-${order.id}` });
+    }
+    for (const id of selectedAddons) {
+      const addon = ADDONS[id];
+      if (invoice.lines.data.some((line) => line.description === addon.name)) continue;
+      await stripe.invoiceItems.create({
+        customer: customerId, invoice: invoice.id, currency: 'eur',
+        amount: addon.priceCents, description: addon.name,
+        tax_behavior: 'inclusive', tax_rates: [taxRateId],
+      }, { idempotencyKey: `kennzeichen-invoice-addon-${order.id}-${id}` });
     }
     invoice = await stripe.invoices.finalizeInvoice(invoice.id, { auto_advance: false }, { idempotencyKey: `kennzeichen-invoice-finalize-${order.id}` });
   }

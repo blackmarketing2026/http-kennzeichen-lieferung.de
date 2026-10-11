@@ -1,4 +1,5 @@
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
+import { ADDONS, addonTotalCents, parseStoredAddons } from '@/config/addons';
 import { query, withConnection } from '@/lib/db';
 import {
   BIKE_RACK_PLATE_PRICE,
@@ -25,6 +26,7 @@ export type InvoiceOrder = {
   discount_cents: number;
   promo_code: string | null;
   total_cents: number;
+  selected_addons?: unknown;
   customer_email: string | null;
   invoice_address: {
     name?: string | null;
@@ -213,6 +215,7 @@ export async function renderInvoicePdf(
     ? `Motorrad + Ersatzschild (${plateColorLabel(order.plate_color)}) – ${order.plate}`
     : `${product.label} (${plateColorLabel(order.plate_color)}) – ${order.plate}`;
   const unitPrice = order.unit_price_cents / 100;
+  const selectedAddons = parseStoredAddons(order.selected_addons);
   const explicitParking = Boolean(order.parking_plate);
   const explicitBikeRack = Boolean(order.bike_rack_plate);
   const legacyParking =
@@ -234,6 +237,7 @@ export async function renderInvoicePdf(
     const parkingExtraCents = legacyParking
       ? order.total_cents +
         order.discount_cents -
+        addonTotalCents(selectedAddons) -
         order.shipping_cents -
         order.unit_price_cents * baseQuantity
       : order.plate_type === 'standard' && order.unit_price_cents >= (order.plate_color === 'carbon' ? 1460 : 980)
@@ -275,6 +279,17 @@ export async function renderInvoicePdf(
         ...columns.total,
         align: 'right',
       },
+    ]);
+    cursorY -= 22;
+  }
+
+  for (const id of selectedAddons) {
+    const addon = ADDONS[id];
+    writeRow([
+      { text: addon.name, ...columns.position },
+      { text: '1', ...columns.quantity, align: 'right' },
+      { text: formatPrice(addon.priceCents / 100), ...columns.unitPrice, align: 'right' },
+      { text: formatPrice(addon.priceCents / 100), ...columns.total, align: 'right' },
     ]);
     cursorY -= 22;
   }

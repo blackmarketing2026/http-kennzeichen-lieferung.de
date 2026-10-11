@@ -4,6 +4,7 @@ import Stripe from 'stripe';
 import { EvbPartnerBlock } from '@/components/evb-partner-block';
 import { PurchaseTracker } from '@/components/purchase-tracker';
 import type { PurchaseEvent } from '@/lib/purchase-event';
+import { ADDONS, parseStoredAddons, type AddonId } from '@/config/addons';
 
 export const runtime = 'nodejs';
 
@@ -19,6 +20,7 @@ export default async function PaymentReturnPage({
   let status: Stripe.PaymentIntent.Status | null = null;
   let isHerbstOrder = false;
   let purchase: PurchaseEvent | null = null;
+  let selectedAddons: AddonId[] = [];
 
   if (paymentIntentId.startsWith('pi_') && clientSecret.startsWith(`${paymentIntentId}_secret_`) && secretKey?.startsWith('sk_')) {
     try {
@@ -26,6 +28,7 @@ export default async function PaymentReturnPage({
       if (intent.client_secret === clientSecret) {
         status = intent.status;
         isHerbstOrder = intent.metadata.offer === 'herbst';
+        selectedAddons = parseStoredAddons(intent.metadata.add_ons);
         if (intent.status === 'succeeded' && intent.amount_received > 0) {
           purchase = {
             transactionId: intent.id,
@@ -61,6 +64,7 @@ export default async function PaymentReturnPage({
               ? 'Sobald die Zahlung bestätigt ist, erhältst du deine Bestellbestätigung per E-Mail.'
               : 'Wir konnten die Zahlung nicht bestätigen. Bitte prüfe die Zahlungsart oder beginne die Bestellung erneut.'}
         </p>
+        {succeeded && selectedAddons.map((id) => <p key={id}>{ADDONS[id].name} – {(ADDONS[id].priceCents / 100).toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</p>)}
         <Link className="button" href="/">Zur Startseite</Link>
         {succeeded && isHerbstOrder && <EvbPartnerBlock />}
       </section>

@@ -76,4 +76,11 @@ describe('Herbst checklist in order confirmation', () => {
     await sendOrderConfirmationEmail({ ...order, offer_profile: 'standard' }, 'https://shop.example.com');
     expect(sendMail.mock.calls[0][0].html).not.toContain(EVB_PARTNER_URL);
   });
+
+  it('lists selected add-ons in the confirmation email', async () => {
+    await sendOrderConfirmationEmail({ ...order, offer_profile: 'standard', selected_addons: ['holderScrews', 'warningVest'] }, 'https://shop.example.com');
+    const html = sendMail.mock.calls[0][0].html;
+    expect(html).toContain('Kennzeichenhalter + Schrauben: 7,90');
+    expect(html).toContain('Warnweste gelb: 4,90');
+  });
 });

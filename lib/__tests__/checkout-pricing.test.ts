@@ -64,6 +64,23 @@ describe('current license plate prices', () => {
       .toMatchObject({ totalCents: 2920, shippingCents: 0 });
   });
 
+  it.each([
+    [[], 1960],
+    [['holderScrews'], 2750],
+    [['warningVest'], 2450],
+    [['holderScrews', 'warningVest'], 3240],
+  ] as const)('prices checkout add-ons %j separately from the plates', (addOns, totalCents) => {
+    expect(getCheckoutPricing('standard', 'black', 2, undefined, {
+      parkingPlate: false, bikeRackPlate: false, addOns: [...addOns],
+    })).toMatchObject({ totalCents, addonPriceCents: totalCents - 1960 });
+  });
+
+  it('keeps paid add-ons on top of a fixed-price promotion', () => {
+    expect(getCheckoutPricing('standard', 'black', 2, 'TEST5', {
+      parkingPlate: false, bikeRackPlate: false, addOns: ['holderScrews'],
+    })).toMatchObject({ totalCents: 1290, addonPriceCents: 790 });
+  });
+
   it('applies promotions and rejects unsupported configurations', () => {
     expect(getCheckoutPricing('standard', 'black', 2, 'TEST5'))
       .toMatchObject({ totalCents: 500, discountCents: 1460 });

@@ -8,6 +8,7 @@ import { logEvent } from '@/lib/logger';
 import { DELIVERY_EXPLANATION, DELIVERY_PROMISE_TEXT } from '@/lib/delivery-promise';
 import { CAMPAIGN_KEYS, type Attribution } from '@/lib/attribution';
 import { EVB_PARTNER_URL } from '@/lib/config';
+import { ADDONS, parseStoredAddons } from '@/config/addons';
 import {
   formatPrice,
   plateColorLabel,
@@ -25,6 +26,7 @@ export type OrderEmailOrder = {
   total_cents: number;
   offer_profile?: string | null;
   bike_rack_plate?: number | boolean;
+  selected_addons?: unknown;
   customer_email: string | null;
   delivery_promise_text?: string | null;
   delivery_deadline_date?: string | Date | null;
@@ -52,6 +54,7 @@ export async function sendOrderConfirmationEmail(
   const includesChecklist = order.offer_profile === 'herbst' &&
     order.plate_type === 'standard' && Boolean(order.bike_rack_plate) && order.quantity === 3;
   const checklistUrl = `${origin}/downloads/checkliste-zulassung.pdf`;
+  const addonLines = parseStoredAddons(order.selected_addons).map((id) => `<li>${ADDONS[id].name}: ${formatPrice(ADDONS[id].priceCents / 100)}</li>`).join('');
   let checklistPdf: Buffer | null = null;
   if (includesChecklist) {
     try {
@@ -78,6 +81,7 @@ export async function sendOrderConfirmationEmail(
       <p>Hallo,</p>
       <p>wir haben deine Bestellung für das Kennzeichen <strong>${plateLabel(order)}</strong> erhalten.</p>
       <p>Rechnungssumme: <strong>${formatPrice(order.total_cents / 100)}</strong></p>
+      ${addonLines ? `<p>Dazugewählte Zusatzprodukte:</p><ul>${addonLines}</ul>` : ''}
       <p>Bestellnummer: <strong>${order.id}</strong></p>
       ${includesChecklist ? `<p>Deine kostenlose <a href="${checklistUrl}">Checkliste für die Zulassung herunterladen</a>${checklistPdf ? ' – sie ist auch als PDF angehängt' : ''}.</p>` : ''}
       <p><strong>${order.delivery_promise_text ?? DELIVERY_PROMISE_TEXT}</strong></p>

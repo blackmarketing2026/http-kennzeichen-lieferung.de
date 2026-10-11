@@ -20,6 +20,7 @@ import {
   LockKeyhole,
 } from 'lucide-react';
 import { PaymentLogos } from '@/components/payment-logos';
+import { ADDONS, ADDON_IDS, isAddonAvailable, type AddonId } from '@/config/addons';
 import { PurchaseTracker } from '@/components/purchase-tracker';
 import { ShippingNotice } from '@/components/shipping-notice';
 import { EvbPartnerBlock } from '@/components/evb-partner-block';
@@ -188,17 +189,14 @@ function PaymentForm({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  async function changeExtra(kind: UpsellKind, selected: boolean) {
+  async function changeExtras(nextExtras: CheckoutExtras) {
     if (!elements || isPaying || isApplyingPromo || isUpdatingPackage || !checkoutSyncReady || changingExtra.current)
       return false;
     changingExtra.current = true;
     setIsUpdatingExtra(true);
     setMessage('');
     try {
-      await onChangeExtra({
-        ...extras,
-        [kind === 'parking' ? 'parkingPlate' : 'bikeRackPlate']: selected,
-      });
+      await onChangeExtra(nextExtras);
       const update = await elements.fetchUpdates();
       if (update.error) throw new Error(update.error.message);
       setPromoReady(true);
@@ -217,6 +215,17 @@ function PaymentForm({
       changingExtra.current = false;
       setIsUpdatingExtra(false);
     }
+  }
+
+  async function changeExtra(kind: UpsellKind, selected: boolean) {
+    return changeExtras({ ...extras, [kind === 'parking' ? 'parkingPlate' : 'bikeRackPlate']: selected });
+  }
+
+  async function changeAddon(id: AddonId, selected: boolean) {
+    return changeExtras({ ...extras, addOns: selected
+      ? [...(extras.addOns ?? []), id]
+      : (extras.addOns ?? []).filter((current) => current !== id),
+    });
   }
 
   async function applyPromo(code: string) {
@@ -371,6 +380,7 @@ function PaymentForm({
           </span>
           <strong>{formatPrice(pricing.totalCents / 100)}</strong>
         </div>
+        {(extras.addOns ?? []).map((id) => <p key={id}>{ADDONS[id].name} – {formatPrice(ADDONS[id].priceCents / 100)}</p>)}
         {offer === 'herbst' && <EvbPartnerBlock />}
         <Link className="button" href="/">
           Zurück zur Startseite
@@ -435,6 +445,17 @@ function PaymentForm({
           />
         </section>
       )}
+      <section className={styles.optionalExtras} aria-label="Zusatzprodukte">
+        <div><strong>Zusatzprodukte (optional)</strong><p>Wähle nur aus, was du zu deiner Bestellung hinzufügen möchtest.</p></div>
+        {ADDON_IDS.filter((id) => isAddonAvailable(id, selection.plateType)).map((id) => (
+          <label key={id} className={styles.addonChoice}>
+            <input type="checkbox" checked={extras.addOns?.includes(id) ?? false}
+              disabled={!stripe || !elements || isPaying || isUpdatingExtra || isApplyingPromo || isUpdatingPackage || !checkoutSyncReady}
+              onChange={(event) => { void changeAddon(id, event.target.checked); }} />
+            <span>{ADDONS[id].name} – {formatPrice(ADDONS[id].priceCents / 100)}</span>
+          </label>
+        ))}
+      </section>
       {message && step === 'address' && <p className="checkout-error" role="alert">{message}</p>}
       <button className="checkout-continue" type="button" onClick={continueToPayment} disabled={!elements || isUpdatingExtra || isApplyingPromo || isUpdatingPackage || !checkoutSyncReady}>
         Weiter zur Zahlung <ArrowRight size={18} />
@@ -572,6 +593,7 @@ export function EmbeddedCheckout({
   const [extras, setExtras] = useState<CheckoutExtras>({
     parkingPlate: initialSelection.parkingPlate === true || initialSelection.quantity === 3,
     bikeRackPlate: initialSelection.bikeRackPlate === true,
+    addOns: [],
   });
   const [selectedColor, setSelectedColor] = useState<PlateColor>(initialSelection.plateColor);
   const quantity =
@@ -585,16 +607,17 @@ export function EmbeddedCheckout({
   const [checkoutStep, setCheckoutStep] = useState<'address' | 'payment'>('address');
   const [requestAttempt, setRequestAttempt] = useState(0);
   const isUpdatingPackage = false;
-  const checkoutSyncReady = true;
+  const [isUpdatingSelection, setIsUpdatingSelection] = useState(false);
+  const checkoutSyncReady = !isUpdatingSelection;
   const cartId = useRef<string | null>(null);
   const product = PRODUCTS[selection.plateType];
   const subtotal =
     getPackagePrice(selection.plateType, selection.plateColor, baseQuantity) +
     (extras.parkingPlate ? PARKING_PLATE_PRICE : 0) +
     (extras.bikeRackPlate ? BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0) : 0);
-  const offerEstimate = getCheckoutPricing(selection.plateType, selection.plateColor, baseQuantity, undefined, extras, offer);
+  const offerEstimate = getCheckoutPricing(selection.plateType, selection.plateColor, baseQuantity, pricing?.promoCode || initialPromoCode || undefined, extras, offer);
   const total = offerEstimate ? offerEstimate.totalCents / 100 : subtotal;
-  const offerBreakdown = pricing ?? offerEstimate;
+  const offerBreakdown = isUpdatingSelection ? offerEstimate : pricing ?? offerEstimate;
   const motorcyclePackage = selection.plateType === 'motorcycle' ? getMotorcyclePackage(selection.plateColor, baseQuantity) : null;
 
   useEffect(() => {
@@ -618,6 +641,7 @@ export function EmbeddedCheckout({
         quantity: baseQuantity,
         parkingPlate: initialSelection.parkingPlate === true || initialSelection.quantity === 3,
         bikeRackPlate: initialSelection.bikeRackPlate === true,
+        addOns: [],
         cartId: cartId.current,
         promoCode: initialPromoCode || undefined,
         offer,
@@ -676,46 +700,56 @@ export function EmbeddedCheckout({
     code: string,
     nextExtras = extras,
     nextColor = selectedColor,
+    optimistic = false,
   ): Promise<CheckoutPricing> {
     if (!cartId.current || !paymentIntentId)
       throw new Error('Checkout ist noch nicht bereit.');
-    const response = await fetch('/api/create-payment-intent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        plate: selection.plate,
-        plateType: selection.plateType,
-        seasonStartMonth: selection.seasonStartMonth,
-        seasonEndMonth: selection.seasonEndMonth,
-        color: nextColor,
-        quantity: baseQuantity,
-        parkingPlate: nextExtras.parkingPlate,
-        bikeRackPlate: nextExtras.bikeRackPlate,
-        cartId: cartId.current,
-        paymentIntentId,
-        promoCode: code,
-        offer,
-      }),
-    });
-    const data = (await response.json()) as PaymentIntentResponse;
-    if (!response.ok) {
-      const requestError = new Error(
-        data.error ?? 'Rabattcode konnte nicht geprüft werden.',
-      ) as Error & { status: number };
-      requestError.status = response.status;
-      throw requestError;
+    if (optimistic) { setExtras(nextExtras); setIsUpdatingSelection(true); }
+    try {
+      const response = await fetch('/api/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          plate: selection.plate,
+          plateType: selection.plateType,
+          seasonStartMonth: selection.seasonStartMonth,
+          seasonEndMonth: selection.seasonEndMonth,
+          color: nextColor,
+          quantity: baseQuantity,
+          parkingPlate: nextExtras.parkingPlate,
+          bikeRackPlate: nextExtras.bikeRackPlate,
+          addOns: nextExtras.addOns ?? [],
+          cartId: cartId.current,
+          paymentIntentId,
+          promoCode: code,
+          offer,
+        }),
+      });
+      const data = (await response.json()) as PaymentIntentResponse;
+      if (!response.ok) {
+        const requestError = new Error(
+          data.error ?? 'Rabattcode konnte nicht geprüft werden.',
+        ) as Error & { status: number };
+        requestError.status = response.status;
+        throw requestError;
+      }
+      if (
+        !data.pricing ||
+        data.paymentIntentId !== paymentIntentId ||
+        data.clientSecret !== clientSecret
+      ) {
+        throw new Error('Zahlungsdaten konnten nicht aktualisiert werden.');
+      }
+      setPricing(data.pricing);
+      setExtras(nextExtras);
+      setSelectedColor(nextColor);
+      return data.pricing;
+    } catch (error) {
+      if (optimistic) setExtras(extras);
+      throw error;
+    } finally {
+      if (optimistic) setIsUpdatingSelection(false);
     }
-    if (
-      !data.pricing ||
-      data.paymentIntentId !== paymentIntentId ||
-      data.clientSecret !== clientSecret
-    ) {
-      throw new Error('Zahlungsdaten konnten nicht aktualisiert werden.');
-    }
-    setPricing(data.pricing);
-    setExtras(nextExtras);
-    setSelectedColor(nextColor);
-    return data.pricing;
   }
 
   const stripePromise = useMemo(
@@ -804,6 +838,9 @@ export function EmbeddedCheckout({
             <strong>{formatPrice(offerBreakdown ? offerBreakdown.bikeRackExtraPriceCents / 100 : BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0))}</strong>
           </div>
         )}
+        {(extras.addOns ?? []).map((id) => <div className="real-order-line" key={id}>
+          <span>{ADDONS[id].name}</span><strong>{formatPrice(ADDONS[id].priceCents / 100)}</strong>
+        </div>)}
         <div className="real-order-line">
           <span>DHL-Versand</span>
           <strong>{(pricing?.shippingCents ?? offerEstimate?.shippingCents ?? 0) > 0 ? formatPrice((pricing?.shippingCents ?? offerEstimate?.shippingCents ?? 0) / 100) : 'Kostenlos'}</strong>
@@ -816,8 +853,8 @@ export function EmbeddedCheckout({
         )}
         <div className="real-order-total">
           <span>Gesamt</span>
-          <strong className="checkout-live-price" key={pricing?.totalCents ?? offerEstimate?.totalCents ?? total}>
-            {formatPrice(pricing ? pricing.totalCents / 100 : offerEstimate ? offerEstimate.totalCents / 100 : total)}
+          <strong className="checkout-live-price" key={offerBreakdown?.totalCents ?? total}>
+            {formatPrice(offerBreakdown ? offerBreakdown.totalCents / 100 : total)}
           </strong>
         </div>
         <p className="checkout-scope">
@@ -868,12 +905,12 @@ export function EmbeddedCheckout({
               offer={offer}
               selection={selection}
               extras={extras}
-              pricing={pricing}
+              pricing={offerBreakdown ?? pricing}
               getCartId={() => cartId.current ?? ''}
               paymentIntentId={paymentIntentId}
               onApplyPromo={(code) => updateCheckout(code)}
               onChangeExtra={(nextExtras) =>
-                updateCheckout(pricing.promoCode ?? '', nextExtras)
+                updateCheckout(pricing.promoCode ?? '', nextExtras, selectedColor, true)
               }
               onStepChange={setCheckoutStep}
               isUpdatingPackage={isUpdatingPackage}

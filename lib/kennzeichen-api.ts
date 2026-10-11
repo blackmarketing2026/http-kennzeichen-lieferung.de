@@ -20,7 +20,7 @@ export type ManufacturerOrderItem = {
   name: string;
   sku: string;
   quantity: number;
-  customization: {
+  customization: { productType: 'OTHER' } | {
     productType: 'LICENSE_PLATE';
     licensePlateNumberComponents: { usageType: 'EURO'; city: string; middle: string; end: string };
     seasonStartMonth?: number;

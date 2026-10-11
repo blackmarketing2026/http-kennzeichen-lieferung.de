@@ -13,6 +13,7 @@ import {
   type PlateColor,
   type PlateType,
 } from '@/config/products';
+import { addonTotalCents, isAddonAvailable, type AddonId } from '@/config/addons';
 
 const PROMO_CODES = {
   TEST5: { totalCents: 500 },
@@ -24,6 +25,7 @@ export type CheckoutPricing = {
   parkingExtraPriceCents: number;
   bikeRackExtraPriceCents: number;
   emissionStickerPriceCents: number;
+  addonPriceCents: number;
   subtotalCents: number;
   shippingCents: number;
   discountCents: number;
@@ -35,6 +37,7 @@ export type CheckoutExtras = {
   parkingPlate: boolean;
   bikeRackPlate: boolean;
   emissionSticker?: boolean;
+  addOns?: AddonId[];
 };
 
 export function getCheckoutPricing(
@@ -52,8 +55,10 @@ export function getCheckoutPricing(
     (extras.parkingPlate || extras.bikeRackPlate)
   )
     return null;
+  if ((extras.addOns ?? []).some((id) => !isAddonAvailable(id, plateType)) || new Set(extras.addOns ?? []).size !== (extras.addOns ?? []).length) return null;
   const promoCode = requestedCode?.trim().toUpperCase() || null;
   if (promoCode && !(promoCode in PROMO_CODES)) return null;
+  const addonPriceCents = addonTotalCents(extras.addOns ?? []);
 
   if (plateType === 'motorcycle') {
     const packageId = getMotorcyclePackage(color, baseQuantity);
@@ -61,13 +66,13 @@ export function getCheckoutPricing(
     const subtotalCents = MOTORCYCLE_PACKAGES[packageId].priceCents;
     const emissionStickerPriceCents = extras.emissionSticker ? Math.round(EMISSION_STICKER_PRICE * 100) : 0;
     const shippingCents = baseQuantity === 1 ? SINGLE_PLATE_SHIPPING_CENTS : 0;
-    const regularTotalCents = subtotalCents + emissionStickerPriceCents + shippingCents;
-    const totalCents = promoCode ? PROMO_CODES[promoCode as keyof typeof PROMO_CODES].totalCents : regularTotalCents;
+    const regularTotalCents = subtotalCents + emissionStickerPriceCents + shippingCents + addonPriceCents;
+    const totalCents = promoCode ? PROMO_CODES[promoCode as keyof typeof PROMO_CODES].totalCents + addonPriceCents : regularTotalCents;
     if (totalCents > regularTotalCents) return null;
     return {
       unitPriceCents: subtotalCents / baseQuantity, packageDiscountCents: 0,
       parkingExtraPriceCents: 0, bikeRackExtraPriceCents: 0, emissionStickerPriceCents,
-      subtotalCents: subtotalCents + emissionStickerPriceCents, shippingCents,
+      subtotalCents: subtotalCents + emissionStickerPriceCents + addonPriceCents, addonPriceCents, shippingCents,
       discountCents: regularTotalCents - totalCents, totalCents, promoCode,
     };
   }
@@ -96,9 +101,9 @@ export function getCheckoutPricing(
   );
   const shippingCents = !isSinglePlateProduct(plateType) && baseQuantity + Number(extras.parkingPlate) + Number(extras.bikeRackPlate) === 1
     ? SINGLE_PLATE_SHIPPING_CENTS : 0;
-  const regularTotalCents = subtotalCents + shippingCents - packageDiscountCents;
+  const regularTotalCents = subtotalCents + shippingCents - packageDiscountCents + addonPriceCents;
   const targetTotalCents = promoCode
-    ? PROMO_CODES[promoCode as keyof typeof PROMO_CODES].totalCents
+    ? PROMO_CODES[promoCode as keyof typeof PROMO_CODES].totalCents + addonPriceCents
     : regularTotalCents;
   if (targetTotalCents > regularTotalCents) return null;
 
@@ -108,9 +113,10 @@ export function getCheckoutPricing(
     parkingExtraPriceCents,
     bikeRackExtraPriceCents,
     emissionStickerPriceCents,
-    subtotalCents,
+    addonPriceCents,
+    subtotalCents: subtotalCents + addonPriceCents,
     shippingCents,
-    discountCents: subtotalCents + shippingCents - targetTotalCents,
+    discountCents: subtotalCents + addonPriceCents + shippingCents - targetTotalCents,
     totalCents: targetTotalCents,
     promoCode,
   };

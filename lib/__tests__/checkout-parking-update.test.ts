@@ -68,6 +68,14 @@ function requestWithExtras(parkingPlate: boolean, bikeRackPlate: boolean) {
   });
 }
 
+function requestWithAddons(addOns: string[]) {
+  return new Request('http://localhost/api/create-payment-intent', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ plate: 'OL AB 123', plateType: 'standard', color: 'black', quantity: 2,
+      parkingPlate: false, bikeRackPlate: false, addOns, cartId, paymentIntentId: current.id }),
+  });
+}
+
 function requestWithHerbstPackage(color: 'black' | 'carbon', bikeRackPlate: boolean, offer = 'herbst') {
   return new Request('http://localhost/api/create-payment-intent', {
     method: 'POST',
@@ -115,6 +123,26 @@ describe('checkout payment updates', () => {
       paymentIntentId: current.id,
       pricing: { totalCents: 2940, parkingExtraPriceCents: 980 },
     });
+  });
+
+  it.each([
+    [[], 1960],
+    [['holderScrews'], 2750],
+    [['warningVest'], 2450],
+    [['holderScrews', 'warningVest'], 3240],
+  ] as const)('updates a test-mode Stripe intent for add-ons %j', async (addOns, amount) => {
+    const response = await POST(requestWithAddons([...addOns]));
+    expect(response.status).toBe(200);
+    expect(stripe.update).toHaveBeenCalledWith(current.id, expect.objectContaining({
+      amount, metadata: expect.objectContaining({ add_ons: JSON.stringify(addOns) }),
+    }));
+    expect(await response.json()).toMatchObject({ pricing: { totalCents: amount } });
+  });
+
+  it('rejects duplicate or unknown add-ons before Stripe', async () => {
+    expect((await POST(requestWithAddons(['holderScrews', 'holderScrews']))).status).toBe(400);
+    expect((await POST(requestWithAddons(['unknown']))).status).toBe(400);
+    expect(stripe.retrieve).not.toHaveBeenCalled();
   });
 
   it('removes the extra and restores the original amount', async () => {
