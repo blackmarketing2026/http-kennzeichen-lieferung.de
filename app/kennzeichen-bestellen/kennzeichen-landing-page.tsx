@@ -102,6 +102,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
   const [carQuantity, setCarQuantity] = useState<1 | 2>(isHerbst ? 2 : 1);
   const [motorcycleQuantity, setMotorcycleQuantity] = useState<1 | 2>(1);
   const [plateColor, setPlateColor] = useState<PlateColor>('black');
+  const [parkingPlate, setParkingPlate] = useState(false);
   const [bikeRackPlate, setBikeRackPlate] = useState(false);
   const [offerNow, setOfferNow] = useState(() => new Date());
   const [city, setCity] = useState('');
@@ -118,12 +119,12 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
     [plateValue, plateType],
   );
   const validSeason = plateType !== 'season' || isValidSeasonPeriod(seasonStartMonth, seasonEndMonth);
-  const pricing = getCheckoutPricing(plateType, plateColor, quantity, undefined, { parkingPlate: false, bikeRackPlate: plateType !== 'motorcycle' && bikeRackPlate }, offer, offerNow);
+  const pricing = getCheckoutPricing(plateType, plateColor, quantity, undefined, { parkingPlate: isHerbst && plateType === 'standard' && parkingPlate, bikeRackPlate: plateType !== 'motorcycle' && bikeRackPlate }, offer, offerNow);
   const subtotal = ((pricing?.subtotalCents ?? 0) - (pricing?.packageDiscountCents ?? 0)) / 100;
   const total = (pricing?.totalCents ?? 0) / 100;
   const shippingRemaining = plateType === 'standard' || plateType === 'motorcycle' ? 0 : Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
   const product = PRODUCTS[plateType];
-  const totalPlates = quantity + Number(bikeRackPlate && plateType !== 'motorcycle');
+  const totalPlates = quantity + Number(isHerbst && plateType === 'standard' && parkingPlate) + Number(bikeRackPlate && plateType !== 'motorcycle');
   const motorcyclePackage = plateType === 'motorcycle' ? getMotorcyclePackage(plateColor, quantity) : null;
   const motorcycleUpgradeCents = MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents;
   const motorcycleCarbonUpgradeCents = quantity === 2
@@ -147,6 +148,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
       setCarQuantity(draft.quantity === 1 ? 1 : 2);
       setMotorcycleQuantity(draft.plateType === 'motorcycle' && draft.quantity === 2 ? 2 : 1);
       setPlateColor(draft.plateColor);
+      setParkingPlate(isHerbst && draft.plateType === 'standard' && draft.parkingPlate === true);
       setBikeRackPlate(draft.bikeRackPlate === true);
       setCity(savedCity);
       setLetters(savedLetters);
@@ -169,8 +171,10 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
     if (type === 'motorcycle' && plateType !== 'motorcycle') {
       setMotorcycleQuantity(1);
       setPlateColor('black');
+      setParkingPlate(false);
       setBikeRackPlate(false);
     }
+    if (type !== 'standard') setParkingPlate(false);
     setPlateType(type);
   }
 
@@ -222,6 +226,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
       plateType,
       plateColor,
       quantity,
+      parkingPlate: isHerbst && plateType === 'standard' && parkingPlate,
       bikeRackPlate: plateType !== 'motorcycle' && bikeRackPlate,
       ...(plateType === 'season' ? { seasonStartMonth, seasonEndMonth } : {}),
     });
@@ -229,7 +234,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
       currency: 'EUR',
       value: total,
       landing_page: source,
-      items: [{ item_id: plateType, item_name: product.label, quantity }],
+      items: [{ item_id: plateType, item_name: product.label, quantity: totalPlates }],
     });
     trackKennzeichenGtmEvent('kennzeichen_eingabe');
     const params = new URLSearchParams({
@@ -237,6 +242,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
       type: plateType,
       quantity: String(quantity),
       color: plateColor,
+      ...(isHerbst && plateType === 'standard' && parkingPlate ? { parkingPlate: '1' } : {}),
       ...(bikeRackPlate && plateType !== 'motorcycle' ? { bikeRackPlate: '1' } : {}),
       source,
       ...(isHerbst ? { offer: 'herbst' } : {}),
@@ -484,12 +490,14 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
               <span>DHL-Versand mit Tracking</span>
               <strong>{pricing?.shippingCents === 0 ? 'Kostenlos' : formatPrice(SHIPPING_PRICE)}</strong>
             </div>
-            {bikeRackPlate && plateType !== 'motorcycle' && <div><span>{plateType === 'standard' ? `${carQuantity + 1}. Autokennzeichen` : 'Zusätzliches Kennzeichen für Fahrradträger'}</span><strong>{formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100)}</strong></div>}
+            {parkingPlate && isHerbst && plateType === 'standard' && <div><span>Parkplatz-Kennzeichen</span><strong>{formatPrice((pricing?.parkingExtraPriceCents ?? 0) / 100)}</strong></div>}
+            {bikeRackPlate && plateType !== 'motorcycle' && <div><span>Fahrradträger-Kennzeichen</span><strong>{formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100)}</strong></div>}
           </div>
           <p className={styles.livePriceNote}>{plateType === 'standard' || plateType === 'motorcycle' ? 'inkl. 19 % MwSt. · DHL-Versand kostenlos' : 'inkl. MwSt., zzgl. 3,90 € Versand – versandkostenfrei ab 19 €'}</p>
           <p className={styles.shippingProgress} aria-live="polite">{shippingRemaining > 0 ? `Noch ${formatPrice(shippingRemaining)} bis zum kostenlosen Versand` : 'Versandkostenfrei ✓'}</p>
           <DeliveryGuarantee label={isHerbst ? 'Pünktlich-Garantie' : undefined} />
-          {plateType !== 'motorcycle' && <label className={styles.extraCheck}><input type="checkbox" checked={bikeRackPlate} onChange={(event) => setBikeRackPlate(event.target.checked)} /><span>{plateType === 'standard' ? `${carQuantity + 1}. Autokennzeichen (gleiche Kombination, z. B. für Fahrradträger)` : 'Zusätzliches Kennzeichen für Fahrradträger (gleiche Kombination)'} <strong>+{formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100)}</strong></span></label>}
+          {isHerbst && plateType === 'standard' && <label className={styles.extraCheck}><input type="checkbox" checked={parkingPlate} onChange={(event) => setParkingPlate(event.target.checked)} /><span>Parkplatz-Kennzeichen hinzufügen (gleiche Kombination) <strong>+{formatPrice((pricing?.unitPriceCents ?? 0) / 100)}</strong></span></label>}
+          {plateType !== 'motorcycle' && <label className={styles.extraCheck}><input type="checkbox" checked={bikeRackPlate} onChange={(event) => setBikeRackPlate(event.target.checked)} /><span>Fahrradträger-Kennzeichen hinzufügen (gleiche Kombination) <strong>+{formatPrice(((plateType === 'standard' ? pricing?.unitPriceCents : pricing?.bikeRackExtraPriceCents) ?? 0) / 100)}</strong></span></label>}
           {showShippingCutoff && <p className={styles.shippingCutoff}><Truck size={17} /> Bis {HERBST_SHIPPING_CUTOFF_TIME} Uhr bestellt – heute noch versendet.</p>}
           <button
             className={styles.orderButton}
@@ -519,8 +527,8 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         <p className={styles.kicker}><span /> Unsere Preise</p>
         <h2 id="price-overview-title">Kennzeichen zum festen Stückpreis</h2>
         <div className={styles.priceOverviewGrid}>
-          <div><h3>Autokennzeichen</h3><p>1 Schild <strong>9,80 €</strong></p><p>2 Schilder <strong>19,60 €</strong></p><p>3 Schilder <strong>29,40 €</strong></p></div>
-          <div><h3>Autokennzeichen Carbon</h3><p>1 Schild <strong>14,60 €</strong></p><p>2 Schilder <strong>29,20 €</strong></p><p>3 Schilder <strong>43,80 €</strong></p></div>
+          <div><h3>Autokennzeichen</h3><p>1 Schild <strong>9,80 €</strong></p><p>2 Schilder <strong>19,60 €</strong></p><p>3 Schilder <strong>29,40 €</strong></p><p>4 Schilder <strong>39,20 €</strong></p></div>
+          <div><h3>Autokennzeichen Carbon</h3><p>1 Schild <strong>14,60 €</strong></p><p>2 Schilder <strong>29,20 €</strong></p><p>3 Schilder <strong>43,80 €</strong></p><p>4 Schilder <strong>58,40 €</strong></p></div>
           <div><h3>Motorrad-Kennzeichen</h3><p>Standard <strong>9,80 €</strong></p><p>Carbon <strong>14,60 €</strong></p></div>
         </div>
         <small>Alle Preise inklusive 19 % Mehrwertsteuer und DHL-Versand.</small>

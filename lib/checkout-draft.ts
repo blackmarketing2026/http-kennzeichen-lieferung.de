@@ -19,6 +19,7 @@ export type CheckoutDraft = {
   plateType: PlateType;
   plateColor: PlateColor;
   quantity: 1 | 2 | 3;
+  parkingPlate?: boolean;
   bikeRackPlate?: boolean;
   promoCode?: string;
   seasonStartMonth?: number;
@@ -89,6 +90,7 @@ export function readCheckoutDraft(source: CheckoutSource): CheckoutDraft | null 
       plateType: value.plateType as PlateType,
       plateColor: value.plateColor as PlateColor,
       quantity: value.quantity,
+      parkingPlate: value.parkingPlate === true,
       bikeRackPlate: value.bikeRackPlate === true,
       promoCode:
         typeof value.promoCode === 'string' ? value.promoCode.slice(0, 64) : undefined,

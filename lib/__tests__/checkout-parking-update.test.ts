@@ -104,7 +104,7 @@ describe('checkout payment updates', () => {
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 2460,
+        amount: 2940,
         metadata: expect.objectContaining({
           anzahl: '3',
           parkplatzkennzeichen: '1',
@@ -113,14 +113,14 @@ describe('checkout payment updates', () => {
     );
     expect(await response.json()).toMatchObject({
       paymentIntentId: current.id,
-      pricing: { totalCents: 2460, parkingExtraPriceCents: 500 },
+      pricing: { totalCents: 2940, parkingExtraPriceCents: 980 },
     });
   });
 
   it('removes the extra and restores the original amount', async () => {
     stripe.retrieve.mockResolvedValue({
       ...current,
-      amount: 2270,
+      amount: 2940,
       metadata: { ...current.metadata, anzahl: '3', parkplatzkennzeichen: '1' },
     });
     expect((await POST(request(2))).status).toBe(200);
@@ -142,7 +142,7 @@ describe('checkout payment updates', () => {
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 3440,
+        amount: 3920,
         metadata: expect.objectContaining({
           anzahl: '4',
           parkplatzkennzeichen: '1',
@@ -155,7 +155,7 @@ describe('checkout payment updates', () => {
   it('can keep the bicycle-rack plate while removing the parking plate', async () => {
     stripe.retrieve.mockResolvedValue({
       ...current,
-      amount: 2370,
+      amount: 3920,
       metadata: { ...current.metadata, anzahl: '4', parkplatzkennzeichen: '1', fahrradtraegerkennzeichen: '1' },
     });
     expect((await POST(requestWithExtras(false, true))).status).toBe(200);

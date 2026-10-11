@@ -61,6 +61,7 @@ type CheckoutSelection = {
   plateType: PlateType;
   plateColor: PlateColor;
   quantity: 1 | 2 | 3;
+  parkingPlate?: boolean;
   bikeRackPlate?: boolean;
   seasonStartMonth?: number;
   seasonEndMonth?: number;
@@ -599,7 +600,7 @@ export function EmbeddedCheckout({
     initialSelection.quantity === 3 ? 2 : initialSelection.quantity
   ) as 1 | 2;
   const [extras, setExtras] = useState<CheckoutExtras>({
-    parkingPlate: initialSelection.quantity === 3,
+    parkingPlate: initialSelection.parkingPlate === true || initialSelection.quantity === 3,
     bikeRackPlate: initialSelection.bikeRackPlate === true,
   });
   const [selectedColor, setSelectedColor] = useState<PlateColor>(initialSelection.plateColor);
@@ -645,7 +646,7 @@ export function EmbeddedCheckout({
         seasonEndMonth: initialSelection.seasonEndMonth,
         color: initialSelection.plateColor,
         quantity: baseQuantity,
-        parkingPlate: initialSelection.quantity === 3,
+        parkingPlate: initialSelection.parkingPlate === true || initialSelection.quantity === 3,
         bikeRackPlate: initialSelection.bikeRackPlate === true,
         cartId: cartId.current,
         promoCode: initialPromoCode || undefined,
@@ -694,6 +695,7 @@ export function EmbeddedCheckout({
     initialSelection.seasonEndMonth,
     initialSelection.plateColor,
     initialSelection.quantity,
+    initialSelection.parkingPlate,
     initialSelection.bikeRackPlate,
     initialPromoCode,
     offer,

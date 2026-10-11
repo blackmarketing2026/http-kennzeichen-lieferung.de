@@ -236,7 +236,8 @@ export async function renderInvoicePdf(
         order.discount_cents -
         order.shipping_cents -
         order.unit_price_cents * baseQuantity
-      : Math.round(PARKING_PLATE_PRICE * 100);
+      : order.plate_type === 'standard' && order.unit_price_cents >= (order.plate_color === 'carbon' ? 1460 : 980)
+        ? order.unit_price_cents : Math.round(PARKING_PLATE_PRICE * 100);
     writeRow([
       { text: `Parkplatz-Kennzeichen – ${order.plate}`, ...columns.position },
       { text: '1', ...columns.quantity, align: 'right' },
@@ -255,7 +256,9 @@ export async function renderInvoicePdf(
   }
 
   if (bikeRackSelected) {
-    const bikeRackExtraCents = Math.round((BIKE_RACK_PLATE_PRICE + (order.plate_color === 'carbon' ? CARBON_SURCHARGE : 0)) * 100);
+    const bikeRackExtraCents = order.plate_type === 'standard' && order.unit_price_cents >= (order.plate_color === 'carbon' ? 1460 : 980)
+      ? order.unit_price_cents
+      : Math.round((BIKE_RACK_PLATE_PRICE + (order.plate_color === 'carbon' ? CARBON_SURCHARGE : 0)) * 100);
     writeRow([
       {
         text: `Fahrradträger-Kennzeichen – ${order.plate}`,

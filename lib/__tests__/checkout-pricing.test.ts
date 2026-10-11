@@ -17,6 +17,20 @@ describe('current license plate prices', () => {
   });
 
   it.each([
+    ['black', false, false, 1960],
+    ['black', true, false, 2940],
+    ['black', false, true, 2940],
+    ['black', true, true, 3920],
+    ['carbon', false, false, 2920],
+    ['carbon', true, false, 4380],
+    ['carbon', false, true, 4380],
+    ['carbon', true, true, 5840],
+  ] as const)('prices two %s plates plus parking %s and bicycle rack %s', (color, parkingPlate, bikeRackPlate, totalCents) => {
+    expect(getCheckoutPricing('standard', color, 2, undefined, { parkingPlate, bikeRackPlate }, 'herbst'))
+      .toMatchObject({ totalCents, shippingCents: 0 });
+  });
+
+  it.each([
     ['black', 1, 980], ['carbon', 1, 1460],
     ['black', 2, 1960], ['carbon', 2, 2920],
   ] as const)('charges %s for %i motorcycle plates', (color, quantity, totalCents) => {

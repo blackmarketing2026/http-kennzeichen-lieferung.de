@@ -76,7 +76,7 @@ export function getCheckoutPricing(
     getUnitPrice(plateType, color, baseQuantity) * 100,
   );
   const parkingExtraPriceCents = extras.parkingPlate
-    ? Math.round(PARKING_PLATE_PRICE * 100)
+    ? plateType === 'standard' ? unitPriceCents : Math.round(PARKING_PLATE_PRICE * 100)
     : 0;
   const bikeRackExtraPriceCents = extras.bikeRackPlate
     ? plateType === 'standard' ? unitPriceCents : Math.round((BIKE_RACK_PLATE_PRICE + (color === 'carbon' ? CARBON_SURCHARGE : 0)) * 100)

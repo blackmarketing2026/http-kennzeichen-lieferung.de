@@ -70,6 +70,17 @@ describe('checkout draft', () => {
     expect(readCheckoutDraft('home')).toBeNull();
   });
 
+  it('restores both autumn add-on plates', () => {
+    useSessionStorage();
+    saveCheckoutDraft('kennzeichen-bestellen-herbstangebot', {
+      plate: 'B AB 123', plateType: 'standard', plateColor: 'carbon', quantity: 2,
+      parkingPlate: true, bikeRackPlate: true,
+    });
+    expect(readCheckoutDraft('kennzeichen-bestellen-herbstangebot')).toMatchObject({
+      quantity: 2, parkingPlate: true, bikeRackPlate: true,
+    });
+  });
+
   it('restores the selected season and rejects an invalid saved period', () => {
     const values = useSessionStorage();
     const draft = {
