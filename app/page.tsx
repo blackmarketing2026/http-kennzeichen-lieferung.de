@@ -1064,7 +1064,7 @@ export default function Home() {
           <Link className="footer-din-link" href="/din-74069" aria-label="Mehr über Kennzeichen nach DIN 74069 erfahren">
             <Image
               src="/din-geprueft-2m-186997-18.webp"
-              alt="DIN GEPRÜFT, Registernummer 2M 186997 18"
+              alt="DIN GEPRÜFT, Registernummer der Kennzeichenplatine 2M 186997 18"
               width={974}
               height={1030}
             />

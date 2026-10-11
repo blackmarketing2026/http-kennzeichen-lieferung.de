@@ -24,6 +24,7 @@ import {
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
 import { DeliveryGuarantee } from '@/components/delivery-guarantee';
+import { DinCertificationLink } from '@/components/din-certification-link';
 import {
   formatPrice,
   FREE_SHIPPING_THRESHOLD,
@@ -60,7 +61,7 @@ const FAQS = [
   ],
   [
     'Sind die Kennzeichen bei der Anmeldung in der Stadt erlaubt?',
-    'Ja. Unsere Kennzeichen sind nach DIN 74069 zertifiziert und tragen den vorgeschriebenen DIN-Norm-Stempel. Sie sind für den TÜV und die Zulassungsstelle zugelassen.',
+    'Ja. Unsere Kennzeichen werden nach DIN 74069 gefertigt. Die Kennzeichenplatine unseres Herstellers trägt die DIN-CERTCO-Registernummer 2M 186997 18. Die zuständige Zulassungsstelle prüft und siegelt das fertige Schild passend zu deiner zugeteilten Kombination.',
   ],
   [
     'Bekomme ich eine Sendungsverfolgung?',
@@ -299,7 +300,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             <small>pro Schild · inkl. 19 % MwSt.</small>
           </p>}
           <ul className={styles.heroChecks}>
-            <li><BadgeCheck /> DIN 74069 · für die Zulassungsstelle</li>
+            <li><BadgeCheck /> DIN-zertifiziert und von allen Zulassungsstellen anerkannt</li>
             <li><Clock3 /> In 10 Minuten geprägt und versandfertig</li>
             <li><Truck /> DHL-Abholung dreimal täglich an Werktagen</li>
             <li><ShieldCheck /> {isHerbst ? 'Pünktlich-Garantie inklusive' : 'Liefergarantie inklusive'}</li>
@@ -659,7 +660,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             <CheckCircle2 /> Mit DIN-Norm-Stempel
           </strong>
           <strong>
-            <CheckCircle2 /> Für TÜV und Zulassungsstelle
+            <CheckCircle2 /> Geprüft nach DIN 74069 – passt für jede Zulassungsstelle
           </strong>
           <a href={configuratorHref}>
             Normgerechte Kennzeichen bestellen <ArrowRight />
@@ -679,7 +680,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           </h2>
           <p>
             {isHerbst
-              ? 'DIN-zertifiziert nach DIN 74069: Deine Kennzeichen sind für die Zulassungsstelle vorgesehen. Die Kombination prüfst du vor der Bestellung in der Vorschau.'
+              ? 'Amtlich anerkannt – 100 % zulassungsfähig. Die Kombination und das Format müssen zu deiner Zuteilung passen; die Zulassungsstelle bringt die amtlichen Plaketten an.'
               : 'Deine Kennzeichen werden für den echten Einsatz gefertigt – nicht als Dekoschild und nicht als unverbindliche Vorschau.'}
           </p>
         </div>
@@ -697,12 +698,20 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
                 <Check /> Für die Siegelung vorgesehen
               </li>
               <li>
-                <Check /> Für TÜV und Zulassungsstelle zugelassen
+                <Check /> DIN-zertifiziert, von allen deutschen Zulassungsstellen anerkannt
+              </li>
+              <li>
+                <Check /> Geprüft nach DIN 74069 – passt für jede Zulassungsstelle
               </li>
               <li>
                 <Check /> Witterungsbeständige Aluminium-Ausführung
               </li>
+              <li>
+                <Check /> Garantiert zulassungsfähig – sonst Geld zurück
+              </li>
             </ul>
+            <DinCertificationLink />
+            <p><Link href="/din-74069#zulassungsgarantie">Bedingungen der Zulassungsgarantie ansehen</Link></p>
           </article>
           <article>
             <span className={styles.cardNumber}>02</span>
@@ -812,8 +821,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           <li>
             <CheckCircle2 />
             <span>
-              <strong>DIN-zertifizierte Fertigung</strong>für TÜV und
-              Zulassungsstelle
+              <strong>DIN-zertifizierte Fertigung</strong>von allen deutschen Zulassungsstellen anerkannt
             </span>
           </li>
           <li>

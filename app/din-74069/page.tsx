@@ -19,12 +19,12 @@ export default function Din74069Page() {
         <div className="din-page-seal">
           <Image
             src="/din-geprueft-2m-186997-18.webp"
-            alt="DIN GEPRÜFT, Registernummer 2M 186997 18"
+            alt="DIN GEPRÜFT, Registernummer der Kennzeichenplatine 2M 186997 18"
             width={974}
             height={1030}
             priority
           />
-          <p>DIN-Prüf- und Überwachungszeichen mit der Registernummer unseres Herstellers</p>
+          <p>DIN-Prüf- und Überwachungszeichen mit der Registernummer der Kennzeichenplatine</p>
         </div>
 
         <section>
@@ -36,19 +36,25 @@ export default function Din74069Page() {
         <section>
           <h2>Was bedeutet das DIN-Prüfzeichen?</h2>
           <p>Das DIN-Prüf- und Überwachungszeichen wird von DIN CERTCO nach bestandener Prüfung zusammen mit einer zugehörigen Registernummer vergeben.</p>
-          <p>Die Kennzeichnung auf dem Schild stellt den Bezug zur entsprechenden Zertifizierung her.</p>
+          <p>Die angegebene Registernummer kennzeichnet die geprüfte Kennzeichenplatine.</p>
         </section>
 
         <section>
           <h2>Angaben zu unserem Hersteller</h2>
-          <p><strong>Prüfgrundlage:</strong> DIN 74069<br /><strong>Registernummer unseres Herstellers:</strong> 2M 186997 18</p>
-          <p>Die Zertifizierung bezieht sich auf die im Herstellerzertifikat aufgeführten Kennzeichenschilder und Ausführungen. Unser Shop vertreibt diese Produkte.</p>
+          <p><strong>Prüfgrundlage:</strong> DIN 74069<br /><strong>DIN-CERTCO-Registernummer der Kennzeichenplatine:</strong> 2M 186997 18</p>
+          <p>Die Zertifizierung bezieht sich auf die Kennzeichenplatine. Unser Shop vertreibt daraus gefertigte Kennzeichenschilder.</p>
         </section>
 
         <section>
           <h2>Kann ich die Kennzeichen für die Zulassung verwenden?</h2>
           <p>Die Normkonformität ist eine Voraussetzung für die Verwendung als amtliches Kennzeichenschild. Zusätzlich müssen beispielsweise Kennzeichenkombination und Schildgröße zu deiner Zulassung passen.</p>
           <p>Deine Bestellung umfasst die Herstellung und Lieferung der Schilder. Die Reservierung deiner Wunschkombination und die Fahrzeugzulassung erledigst du separat bei der zuständigen Zulassungsstelle.</p>
+        </section>
+
+        <section id="zulassungsgarantie">
+          <h2>Garantiert zulassungsfähig – sonst Geld zurück</h2>
+          <p>Lehnt die Zulassungsstelle ein bei uns gekauftes Kennzeichenschild wegen fehlender DIN-Konformität des Schildes ab, erstatten wir dir gegen einen entsprechenden Nachweis den Kaufpreis des betroffenen Schildes.</p>
+          <p>Die Garantie setzt voraus, dass Kombination, Schildformat und Kennzeichenart der behördlichen Zuteilung entsprechen. Sie ersetzt weder die Reservierung noch die Fahrzeugzulassung oder die amtliche Siegelung.</p>
         </section>
 
         <section>

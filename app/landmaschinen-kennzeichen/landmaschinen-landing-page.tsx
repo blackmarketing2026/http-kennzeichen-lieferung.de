@@ -177,7 +177,7 @@ export function LandmaschinenLandingPage() {
           </p>
           <ul>
             <li>
-              <BadgeCheck /> Für TÜV und Zulassungsstelle geeignet
+              <BadgeCheck /> Geprüft nach DIN 74069 – für die Zulassungsstelle
             </li>
             <li>
               <Factory /> Sofort nach Bestellung in die Fertigung

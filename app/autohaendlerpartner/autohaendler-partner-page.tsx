@@ -56,7 +56,7 @@ const FAQS = [
   ],
   [
     'Sind die Kennzeichen für die Zulassungsstelle geeignet?',
-    'Ja. Die Kennzeichen sind nach DIN 74069 gefertigt und für TÜV und Zulassungsstelle geeignet. Amtliche Plaketten bringt ausschließlich die Zulassungsstelle an.',
+    'Ja. Die Kennzeichen sind nach DIN 74069 gefertigt. Die Kennzeichenplatine unseres Herstellers trägt die DIN-CERTCO-Registernummer 2M 186997 18. Amtliche Plaketten bringt ausschließlich die Zulassungsstelle an.',
   ],
 ];
 
@@ -343,7 +343,7 @@ export function AutohaendlerPartnerPage() {
         <div>
           <BadgeCheck />
           <span>
-            <strong>DIN-zertifiziert</strong>für TÜV und Zulassungsstelle
+            <strong>DIN-zertifiziert</strong>von deutschen Zulassungsstellen anerkannt
           </span>
         </div>
         <div>
