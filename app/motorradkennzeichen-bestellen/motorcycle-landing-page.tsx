@@ -72,7 +72,7 @@ export function MotorcycleLandingPage() {
         <p className={styles.kicker}>DIN 74069 · 180 × 200 mm</p>
         <h1>Motorrad-Kennzeichen bestellen. <em>Passend zu deiner Fahrt.</em></h1>
         <p className={styles.lead}>Deine Kombination auf einem zweizeiligen Motorrad-Schild. Wähle Standard oder Carbon-Optik und bei Bedarf ein Ersatzschild mit derselben Kombination.</p>
-        <p className={styles.price}>Ab <strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong> · versandkostenfrei</p>
+        <p className={styles.price}>Ab <strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong> · Versand kostenlos</p>
         <ul>
           <li><BadgeCheck size={18} /> DIN-zertifiziert für die Zulassungsstelle</li>
           <li><Truck size={18} /> DHL-Versand mit Sendungsverfolgung</li>
@@ -95,7 +95,7 @@ export function MotorcycleLandingPage() {
         <div className={styles.packages} aria-label="Motorrad-Pakete">
           {packageEntries.map(([id, selected]) => <button key={id} type="button" aria-pressed={packageId === id} onClick={() => choosePackage(id)}>
             {id === 'motorrad_2' && <em>Meistgewählt</em>}
-            <strong>{selected.label}</strong><span>{formatPrice(selected.priceCents / 100)} · Versand gratis</span>
+            <strong>{selected.label}</strong><span>{formatPrice(selected.priceCents / 100)} · Versand kostenlos</span>
             {id === 'motorrad_2' && <small>nur {formatPrice(extraCents / 100)} mehr</small>}
           </button>)}
         </div>

@@ -28,7 +28,6 @@ import {
   getUnitPrice,
   isValidPlate,
   PRODUCTS,
-  SHIPPING_PRICE,
   type PlateColor,
   type PlateType,
 } from '@/config/products';
@@ -82,7 +81,7 @@ export function LandmaschinenLandingPage() {
     () => isValidPlate(plateValue, plateType),
     [plateValue, plateType],
   );
-  const total = getUnitPrice(plateType, plateColor, 1) + SHIPPING_PRICE;
+  const total = getUnitPrice(plateType, plateColor, 1);
   const product = PRODUCTS[plateType];
 
   useEffect(() => {
@@ -326,7 +325,7 @@ export function LandmaschinenLandingPage() {
             )}
           </button>
           <p className={styles.secureNote}>
-            <LockKeyhole /> Sicherer Checkout · DHL-Versand inklusive
+            <LockKeyhole /> Sicherer Checkout · Versand kostenlos
           </p>
           <div className={styles.payments}>
             <PaymentLogos />
@@ -545,7 +544,7 @@ export function LandmaschinenLandingPage() {
         <a href="#konfigurator">
           Jetzt für {formatPrice(total)} bestellen <ArrowRight />
         </a>
-        <small>1 Schild · DHL-Versand inklusive · Tracking per E-Mail</small>
+        <small>1 Schild · Versand kostenlos · Tracking per E-Mail</small>
       </section>
 
       <footer className={styles.footer}>

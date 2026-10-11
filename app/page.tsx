@@ -27,10 +27,8 @@ import {
   getPackagePrice,
   getMotorcyclePackage,
   MOTORCYCLE_PACKAGES,
-  FREE_SHIPPING_THRESHOLD,
   isValidPlate,
   PRODUCTS,
-  SHIPPING_PRICE,
   type PlateColor,
   type PlateType,
   type MotorcyclePackage,
@@ -71,7 +69,7 @@ const FAQS = [
   ],
   [
     'Was kosten die Kennzeichen?',
-    `Autokennzeichen kosten 9,80 € pro Schild, zwei zusammen 19,60 € und drei 29,40 €. Carbon kostet 14,60 € pro Schild. Ein Motorradkennzeichen kostet ab ${formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)} inklusive Versand. Für andere Kennzeichen kostet der Versand 3,90 € pro Bestellung und ist ab 19 € Warenwert kostenlos.`,
+    `Autokennzeichen kosten 9,80 € pro Schild, zwei zusammen 19,60 € und drei 29,40 €. Carbon kostet 14,60 € pro Schild. Ein Motorradkennzeichen kostet ab ${formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}. Versand kostenlos für alle Kennzeichenarten.`,
   ],
   [
     'Wie schnell wird versendet?',
@@ -169,7 +167,7 @@ export default function Home() {
   const motorcyclePricing = plateType === 'motorcycle' ? getCheckoutPricing('motorcycle', plateColor, quantity, undefined) : null;
   const motorcyclePackage = plateType === 'motorcycle' ? getMotorcyclePackage(plateColor, quantity) : null;
   const plateSubtotal = motorcyclePricing ? motorcyclePricing.subtotalCents / 100 : getPackagePrice(plateType, plateColor, quantity);
-  const shippingPrice = plateType === 'standard' ? 0 : motorcyclePricing ? motorcyclePricing.shippingCents / 100 : plateSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_PRICE;
+  const shippingPrice = 0;
   const total = motorcyclePricing ? motorcyclePricing.totalCents / 100 : plateSubtotal + shippingPrice;
   const status = useMemo(
     () => isValidPlate(plateValue, plateType),
@@ -543,7 +541,7 @@ export default function Home() {
                 <div>
                   <span>
                     {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} ·
-                    {shippingPrice === 0 ? 'Kostenloser Versand' : `${formatPrice(shippingPrice)} Versand`}
+                    Versand kostenlos
                   </span>
                   <strong>{formatPrice(total)}</strong>
                 </div>
@@ -742,7 +740,7 @@ export default function Home() {
               <div className="home-motorcycle-packages" aria-label="Motorrad-Pakete">
                 {(Object.entries(MOTORCYCLE_PACKAGES) as [MotorcyclePackage, typeof MOTORCYCLE_PACKAGES[MotorcyclePackage]][]).map(([id, option]) => <button key={id} type="button" aria-pressed={motorcyclePackage === id} onClick={() => chooseMotorcyclePackage(id)}>
                   {id === 'motorrad_2' && <em>Meistgewählt</em>}
-                  <strong>{option.label}</strong><span>{formatPrice(option.priceCents / 100)} · versandkostenfrei</span>
+                  <strong>{option.label}</strong><span>{formatPrice(option.priceCents / 100)} · Versand kostenlos</span>
                   {id === 'motorrad_2' && <small>nur {formatPrice((MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents) / 100)} mehr</small>}
                 </button>)}
               </div>
@@ -766,7 +764,7 @@ export default function Home() {
               </div>
               <small>
                 Alle Preise inklusive gesetzlicher Mehrwertsteuer und{' '}
-                {plateType === 'motorcycle' || plateType === 'standard' ? 'kostenlosem DHL-Versand.' : 'DHL-Versand für 3,90 € pro Bestellung, kostenlos ab 19 € Warenwert.'}
+                Versand kostenlos.
               </small>
             </div>
             <DeliveryGuarantee />

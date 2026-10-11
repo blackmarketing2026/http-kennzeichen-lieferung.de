@@ -2,7 +2,6 @@ import {
   BIKE_RACK_PLATE_PRICE,
   CARBON_SURCHARGE,
   EMISSION_STICKER_PRICE,
-  FREE_SHIPPING_THRESHOLD,
   getPackageDiscountCents,
   getMotorcyclePackage,
   getUnitPrice,
@@ -10,7 +9,6 @@ import {
   isSinglePlateProduct,
   PARKING_PLATE_PRICE,
   MOTORCYCLE_PACKAGES,
-  SHIPPING_PRICE,
   type PlateColor,
   type PlateType,
 } from '@/config/products';
@@ -94,9 +92,7 @@ export function getCheckoutPricing(
     color,
     baseQuantity,
   );
-  const shippingCents = plateType === 'standard' || subtotalCents - packageDiscountCents >= Math.round(FREE_SHIPPING_THRESHOLD * 100)
-    ? 0
-    : Math.round(SHIPPING_PRICE * 100);
+  const shippingCents = 0;
   const regularTotalCents = subtotalCents + shippingCents - packageDiscountCents;
   const targetTotalCents = promoCode
     ? PROMO_CODES[promoCode as keyof typeof PROMO_CODES].totalCents

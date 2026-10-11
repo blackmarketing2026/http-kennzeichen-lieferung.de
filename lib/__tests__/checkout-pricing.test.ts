@@ -45,6 +45,18 @@ describe('current license plate prices', () => {
     expect(getCheckoutPricing('agriculture240', 'green', 1, undefined)?.totalCents).toBe(2490);
   });
 
+  it.each([
+    ['standard', 'black', 1],
+    ['electric', 'black', 1],
+    ['historic', 'black', 1],
+    ['season', 'black', 1],
+    ['motorcycle', 'black', 1],
+    ['agriculture240', 'green', 1],
+    ['agriculture255', 'green', 1],
+  ] as const)('ships %s plates for free', (plateType, color, quantity) => {
+    expect(getCheckoutPricing(plateType, color, quantity, undefined)?.shippingCents).toBe(0);
+  });
+
   it('applies promotions and rejects unsupported configurations', () => {
     expect(getCheckoutPricing('standard', 'black', 2, 'TEST5'))
       .toMatchObject({ totalCents: 500, discountCents: 1460 });

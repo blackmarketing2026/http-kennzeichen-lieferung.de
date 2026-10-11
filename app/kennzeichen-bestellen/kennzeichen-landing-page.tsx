@@ -27,12 +27,10 @@ import { DeliveryGuarantee } from '@/components/delivery-guarantee';
 import { DinCertificationLink } from '@/components/din-certification-link';
 import {
   formatPrice,
-  FREE_SHIPPING_THRESHOLD,
   isValidPlate,
   getMotorcyclePackage,
   MOTORCYCLE_PACKAGES,
   PRODUCTS,
-  SHIPPING_PRICE,
   type PlateColor,
   type PlateType,
   type MotorcyclePackage,
@@ -121,9 +119,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
   );
   const validSeason = plateType !== 'season' || isValidSeasonPeriod(seasonStartMonth, seasonEndMonth);
   const pricing = getCheckoutPricing(plateType, plateColor, quantity, undefined, { parkingPlate: isHerbst && plateType === 'standard' && parkingPlate, bikeRackPlate: plateType !== 'motorcycle' && bikeRackPlate }, offer, offerNow);
-  const subtotal = ((pricing?.subtotalCents ?? 0) - (pricing?.packageDiscountCents ?? 0)) / 100;
   const total = (pricing?.totalCents ?? 0) / 100;
-  const shippingRemaining = plateType === 'standard' || plateType === 'motorcycle' ? 0 : Math.max(0, FREE_SHIPPING_THRESHOLD - subtotal);
   const product = PRODUCTS[plateType];
   const totalPlates = quantity + Number(isHerbst && plateType === 'standard' && parkingPlate) + Number(bikeRackPlate && plateType !== 'motorcycle');
   const motorcyclePackage = plateType === 'motorcycle' ? getMotorcyclePackage(plateColor, quantity) : null;
@@ -349,7 +345,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
                 <button key={id} type="button" aria-pressed={motorcyclePackage === id} onClick={() => selectMotorcyclePackage(id)}>
                   {id === 'motorrad_2' && <em>Meistgewählt</em>}
                   <strong>{motorcycle.label}</strong>
-                  <span>{formatPrice(motorcycle.priceCents / 100)} · versandkostenfrei</span>
+                  <span>{formatPrice(motorcycle.priceCents / 100)} · Versand kostenlos</span>
                   {id === 'motorrad_2' && <small>nur {formatPrice(motorcycleUpgradeCents / 100)} mehr</small>}
                 </button>
               ))}
@@ -489,13 +485,13 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             </div>
             <div>
               <span>DHL-Versand mit Tracking</span>
-              <strong>{pricing?.shippingCents === 0 ? 'Kostenlos' : formatPrice(SHIPPING_PRICE)}</strong>
+              <strong>Kostenlos</strong>
             </div>
             {parkingPlate && isHerbst && plateType === 'standard' && <div><span>Parkplatz-Kennzeichen</span><strong>{formatPrice((pricing?.parkingExtraPriceCents ?? 0) / 100)}</strong></div>}
             {bikeRackPlate && plateType !== 'motorcycle' && <div><span>Fahrradträger-Kennzeichen</span><strong>{formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100)}</strong></div>}
           </div>
-          <p className={styles.livePriceNote}>{plateType === 'standard' || plateType === 'motorcycle' ? 'inkl. 19 % MwSt. · DHL-Versand kostenlos' : 'inkl. MwSt., zzgl. 3,90 € Versand – versandkostenfrei ab 19 €'}</p>
-          <p className={styles.shippingProgress} aria-live="polite">{shippingRemaining > 0 ? `Noch ${formatPrice(shippingRemaining)} bis zum kostenlosen Versand` : 'Versandkostenfrei ✓'}</p>
+          <p className={styles.livePriceNote}>inkl. 19 % MwSt. · Versand kostenlos</p>
+          <p className={styles.shippingProgress} aria-live="polite">Versand kostenlos ✓</p>
           <DeliveryGuarantee label={isHerbst ? 'Pünktlich-Garantie' : undefined} />
           {isHerbst && plateType === 'standard' && <label className={styles.extraCheck}><input type="checkbox" checked={parkingPlate} onChange={(event) => setParkingPlate(event.target.checked)} /><span>Parkplatz-Kennzeichen hinzufügen (gleiche Kombination) <strong>+{formatPrice((pricing?.unitPriceCents ?? 0) / 100)}</strong></span></label>}
           {plateType !== 'motorcycle' && <label className={styles.extraCheck}><input type="checkbox" checked={bikeRackPlate} onChange={(event) => setBikeRackPlate(event.target.checked)} /><span>Fahrradträger-Kennzeichen hinzufügen (gleiche Kombination) <strong>+{formatPrice(((plateType === 'standard' ? pricing?.unitPriceCents : pricing?.bikeRackExtraPriceCents) ?? 0) / 100)}</strong></span></label>}
@@ -541,7 +537,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           <h2 id="local-comparison-title">Schilderdienst vor Ort oder bequem nach Hause?</h2>
         </div>
         <p><strong>Schilderdienst vor Ort:</strong> oft 30–50 € für Standardschilder ohne Carbon-Optik, plus Wartezeit.</p>
-        <p><strong>Bei uns:</strong> 3 Autokennzeichen für 29,40 €, versandkostenfrei, bequem nach Hause.</p>
+        <p><strong>Bei uns:</strong> 3 Autokennzeichen für 29,40 €, Versand kostenlos, bequem nach Hause.</p>
       </section>}
 
       <section className={styles.proofBar} aria-label="Produktvorteile">
@@ -827,7 +823,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           <li>
             <CheckCircle2 />
             <span>
-              <strong>DHL-Versand mit Tracking</strong>Für Auto- und Motorradkennzeichen kostenlos, sonst 3,90 € (ab 19 € Warenwert kostenlos)
+              <strong>Versand kostenlos</strong>mit DHL-Tracking
             </span>
           </li>
           <li>
@@ -938,7 +934,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         <a href={configuratorHref}>
           Jetzt Kennzeichen konfigurieren <ArrowRight />
         </a>
-        <small>inkl. 19 % MwSt. · für Autokennzeichen versandkostenfrei · Tracking per E-Mail</small>
+        <small>inkl. 19 % MwSt. · Versand kostenlos · Tracking per E-Mail</small>
       </section>
 
       {isHerbst && GOOGLE_REVIEW_RATING !== null && GOOGLE_REVIEW_COUNT !== null && <section className={styles.lowerReviews} aria-label="Google-Bewertungen">

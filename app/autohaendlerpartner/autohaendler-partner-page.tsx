@@ -28,7 +28,6 @@ import {
   isSinglePlateProduct,
   isValidPlate,
   PRODUCTS,
-  SHIPPING_PRICE,
   type PlateType,
 } from '@/config/products';
 import styles from './page.module.css';
@@ -74,7 +73,7 @@ export function AutohaendlerPartnerPage() {
   );
   const quantity: 1 | 2 = isSinglePlateProduct(plateType) ? 1 : 2;
   const motorcyclePricing = plateType === 'motorcycle' ? getCheckoutPricing('motorcycle', 'black', 1, undefined) : null;
-  const total = motorcyclePricing ? motorcyclePricing.totalCents / 100 : getPackagePrice(plateType, 'black', quantity) + SHIPPING_PRICE;
+  const total = motorcyclePricing ? motorcyclePricing.totalCents / 100 : getPackagePrice(plateType, 'black', quantity);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -305,7 +304,7 @@ export function AutohaendlerPartnerPage() {
 
           <div className={styles.summary}>
             <span>
-              {quantity} × {PRODUCTS[plateType].label} · Versand inklusive
+              {quantity} × {PRODUCTS[plateType].label} · Versand kostenlos
             </span>
             <strong>{formatPrice(total)}</strong>
           </div>

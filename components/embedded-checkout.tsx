@@ -29,7 +29,6 @@ import { CHECKOUT_UPSELLS_ENABLED } from '@/config/checkout-features';
 import {
   BIKE_RACK_PLATE_PRICE,
   CARBON_SURCHARGE,
-  FREE_SHIPPING_THRESHOLD,
   formatPrice,
   getPackagePrice,
   getMotorcyclePackage,
@@ -39,7 +38,6 @@ import {
   PARKING_PLATE_PRICE,
   plateColorLabel,
   PRODUCTS,
-  SHIPPING_PRICE,
   type PlateColor,
   type PlateType,
 } from '@/config/products';
@@ -623,7 +621,7 @@ export function EmbeddedCheckout({
     (extras.parkingPlate ? PARKING_PLATE_PRICE : 0) +
     (extras.bikeRackPlate ? BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0) : 0);
   const offerEstimate = getCheckoutPricing(selection.plateType, selection.plateColor, baseQuantity, undefined, extras, offer);
-  const total = offerEstimate ? offerEstimate.totalCents / 100 : subtotal + (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_PRICE);
+  const total = offerEstimate ? offerEstimate.totalCents / 100 : subtotal;
   const offerBreakdown = pricing ?? offerEstimate;
   const motorcyclePackage = selection.plateType === 'motorcycle' ? getMotorcyclePackage(selection.plateColor, baseQuantity) : null;
 
@@ -836,7 +834,7 @@ export function EmbeddedCheckout({
         )}
         <div className="real-order-line">
           <span>DHL-Versand</span>
-          <strong>{pricing?.shippingCents === 0 || (!pricing && (offerEstimate ? offerEstimate.shippingCents === 0 : subtotal >= FREE_SHIPPING_THRESHOLD)) ? 'Kostenlos' : formatPrice(SHIPPING_PRICE)}</strong>
+          <strong>Kostenlos</strong>
         </div>
         {pricing && pricing.discountCents > pricing.packageDiscountCents && (
           <div className="real-order-line real-order-discount">
