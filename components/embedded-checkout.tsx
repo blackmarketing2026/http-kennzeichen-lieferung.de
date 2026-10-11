@@ -20,6 +20,7 @@ import {
   LockKeyhole,
 } from 'lucide-react';
 import { PaymentLogos } from '@/components/payment-logos';
+import { PurchaseTracker } from '@/components/purchase-tracker';
 import { ShippingNotice } from '@/components/shipping-notice';
 import { EvbPartnerBlock } from '@/components/evb-partner-block';
 import { DeliveryGuarantee } from '@/components/delivery-guarantee';
@@ -50,6 +51,7 @@ import {
 } from '@/components/parking-upsell';
 import { readAttribution } from '@/lib/attribution';
 import { trackKennzeichenGtmEvent } from '@/lib/kennzeichen-gtm-events';
+import type { PurchaseEvent } from '@/lib/purchase-event';
 import styles from './checkout-extras.module.css';
 import { DinCertificationLink } from '@/components/din-certification-link';
 import { formatSeasonMonth } from '@/lib/season-period';
@@ -74,46 +76,6 @@ type PaymentIntentResponse = {
   publishableKey?: string;
   pricing?: CheckoutPricing;
 };
-
-type PurchaseWindow = Window & {
-  dataLayer?: unknown[];
-  kl_transaction_id?: string;
-  kl_value?: number;
-  kl_currency?: string;
-};
-
-/** Exposes the completed purchase for Google tag: flat globals for the "Extract data from your
- * page" rules (JavaScript variable kl_transaction_id / kl_value / kl_currency) plus a GA4
- * `purchase` dataLayer event for GTM. Nothing is sent anywhere unless GTM was consented to. */
-function trackPurchase(
-  transactionId: string,
-  pricing: CheckoutPricing,
-  selection: ActiveSelection,
-) {
-  const w = window as PurchaseWindow;
-  const value = pricing.totalCents / 100;
-  w.kl_transaction_id = transactionId;
-  w.kl_value = value;
-  w.kl_currency = 'EUR';
-  w.dataLayer = w.dataLayer || [];
-  w.dataLayer.push({ ecommerce: null });
-  w.dataLayer.push({
-    event: 'purchase',
-    ecommerce: {
-      transaction_id: transactionId,
-      value,
-      currency: 'EUR',
-      shipping: pricing.shippingCents / 100,
-      items: [
-        {
-          item_id: selection.plateType,
-          item_name: PRODUCTS[selection.plateType].label,
-          quantity: selection.quantity,
-        },
-      ],
-    },
-  });
-}
 
 function PaymentForm({
   selection,
@@ -156,6 +118,7 @@ function PaymentForm({
   const [isPaying, setIsPaying] = useState(false);
   const [message, setMessage] = useState('');
   const [succeeded, setSucceeded] = useState(false);
+  const [completedPurchase, setCompletedPurchase] = useState<PurchaseEvent | null>(null);
   const [promoInput, setPromoInput] = useState(pricing.promoCode ?? '');
   const [promoMessage, setPromoMessage] = useState(
     pricing.promoCode ? 'Händlercode angewendet.' : '',
@@ -365,7 +328,15 @@ function PaymentForm({
     }
 
     if (paymentIntent?.status === 'succeeded') {
-      trackPurchase(paymentIntent.id, pricing, selection);
+      setCompletedPurchase({
+        transactionId: paymentIntent.id,
+        valueCents: paymentIntent.amount,
+        currency: paymentIntent.currency,
+        shippingCents: pricing.shippingCents,
+        itemId: selection.plateType,
+        itemName: PRODUCTS[selection.plateType].label,
+        quantity: selection.quantity,
+      });
       setSucceeded(true);
     } else if (paymentIntent?.status === 'processing') {
       setMessage(
@@ -382,6 +353,7 @@ function PaymentForm({
   if (succeeded) {
     return (
       <div className="real-payment-success">
+        {completedPurchase && <PurchaseTracker purchase={completedPurchase} />}
         <span>
           <CheckCircle2 />
         </span>

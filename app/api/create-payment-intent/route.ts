@@ -204,6 +204,8 @@ export async function POST(request: Request) {
     const metadata = {
       kennzeichen: plate,
       kennzeichenart: product.label,
+      plate_type: plateType,
+      shipping_cents: String(pricing.shippingCents),
       groesse: product.size,
       schriftfarbe: plateColorLabel(color),
       anzahl: String(quantity),
@@ -248,6 +250,8 @@ export async function POST(request: Request) {
         current.metadata.rabattcode === metadata.rabattcode &&
         (current.metadata.offer ?? 'standard') === metadata.offer &&
         current.metadata.anzahl === String(quantity) &&
+        current.metadata.plate_type === metadata.plate_type &&
+        current.metadata.shipping_cents === metadata.shipping_cents &&
         current.metadata.parkplatzkennzeichen ===
           metadata.parkplatzkennzeichen &&
         current.metadata.fahrradtraegerkennzeichen ===
