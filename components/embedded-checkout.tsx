@@ -834,7 +834,7 @@ export function EmbeddedCheckout({
         )}
         <div className="real-order-line">
           <span>DHL-Versand</span>
-          <strong>Kostenlos</strong>
+          <strong>{(pricing?.shippingCents ?? offerEstimate?.shippingCents ?? 0) > 0 ? formatPrice((pricing?.shippingCents ?? offerEstimate?.shippingCents ?? 0) / 100) : 'Kostenlos'}</strong>
         </div>
         {pricing && pricing.discountCents > pricing.packageDiscountCents && (
           <div className="real-order-line real-order-discount">

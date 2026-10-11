@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { getPackageDiscountCents, getUnitPrice, isAvailableConfiguration, isValidPlate, PRODUCTS, type PlateColor, type PlateType } from '@/config/products';
+import { getPackageDiscountCents, getUnitPrice, isAgriculturePlate, isAvailableConfiguration, isValidPlate, PRODUCTS, SINGLE_PLATE_SHIPPING_CENTS, type PlateColor, type PlateType } from '@/config/products';
 import { ensureSchema, isDatabaseConfigured, query } from '@/lib/db';
 import { submitOrderToManufacturer } from '@/lib/manufacturer-order';
 
@@ -75,7 +75,7 @@ export async function POST(request: Request) {
   const unitPriceCents = Math.round(getUnitPrice(plateType, color, quantity) * 100);
   const discountCents = getPackageDiscountCents(plateType, color, quantity);
   const merchandiseCents = unitPriceCents * quantity - discountCents;
-  const shippingCents = 0;
+  const shippingCents = quantity === 1 && !isAgriculturePlate(plateType) ? SINGLE_PLATE_SHIPPING_CENTS : 0;
   const totalCents = merchandiseCents + shippingCents;
   const address = {
     name: `${firstName} ${lastName}`,

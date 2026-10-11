@@ -30,6 +30,7 @@ import {
   isValidPlate,
   getMotorcyclePackage,
   MOTORCYCLE_PACKAGES,
+  SINGLE_PLATE_SHIPPING_CENTS,
   PRODUCTS,
   type PlateColor,
   type PlateType,
@@ -123,7 +124,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
   const product = PRODUCTS[plateType];
   const totalPlates = quantity + Number(isHerbst && plateType === 'standard' && parkingPlate) + Number(bikeRackPlate && plateType !== 'motorcycle');
   const motorcyclePackage = plateType === 'motorcycle' ? getMotorcyclePackage(plateColor, quantity) : null;
-  const motorcycleUpgradeCents = MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents;
+  const motorcycleUpgradeCents = MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents - SINGLE_PLATE_SHIPPING_CENTS;
   const motorcycleCarbonUpgradeCents = quantity === 2
     ? MOTORCYCLE_PACKAGES.motorrad_carbon_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_2.priceCents
     : MOTORCYCLE_PACKAGES.motorrad_carbon_1.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents;
@@ -290,7 +291,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             sicher online. Deine DIN-zertifizierten Schilder werden in 10
             Minuten geprägt und für den DHL-Versand vorbereitet.
           </p>}
-          {isHerbst ? plateType === 'motorcycle' ? <p className={styles.heroOffer}><span>Motorrad-Kennzeichen ab</span><strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong><small>inkl. MwSt. und Versand</small></p> : <p className={styles.heroOffer}><span>Autokennzeichen ab</span><strong>9,80 €</strong><small>pro Schild · inkl. MwSt. und Versand</small></p> : <p className={styles.heroOffer}>
+          {isHerbst ? plateType === 'motorcycle' ? <p className={styles.heroOffer}><span>Motorrad-Kennzeichen ab</span><strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong><small>inkl. MwSt. · einzeln zzgl. 3,95 € Versand</small></p> : <p className={styles.heroOffer}><span>Autokennzeichen ab</span><strong>9,80 €</strong><small>pro Schild · inkl. MwSt. · einzeln zzgl. 3,95 € Versand</small></p> : <p className={styles.heroOffer}>
             <span>Kennzeichen ab</span>
             <strong>9,80 €</strong>
             <small>pro Schild · inkl. 19 % MwSt.</small>
@@ -345,7 +346,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
                 <button key={id} type="button" aria-pressed={motorcyclePackage === id} onClick={() => selectMotorcyclePackage(id)}>
                   {id === 'motorrad_2' && <em>Meistgewählt</em>}
                   <strong>{motorcycle.label}</strong>
-                  <span>{formatPrice(motorcycle.priceCents / 100)} · Versand kostenlos</span>
+                  <span>{formatPrice(motorcycle.priceCents / 100)} · {motorcycle.quantity === 1 ? 'zzgl. 3,95 € Versand' : 'Versand kostenlos'}</span>
                   {id === 'motorrad_2' && <small>nur {formatPrice(motorcycleUpgradeCents / 100)} mehr</small>}
                 </button>
               ))}
@@ -485,13 +486,13 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             </div>
             <div>
               <span>DHL-Versand mit Tracking</span>
-              <strong>Kostenlos</strong>
+              <strong>{pricing?.shippingCents ? formatPrice(pricing.shippingCents / 100) : 'Kostenlos'}</strong>
             </div>
             {parkingPlate && isHerbst && plateType === 'standard' && <div><span>Parkplatz-Kennzeichen</span><strong>{formatPrice((pricing?.parkingExtraPriceCents ?? 0) / 100)}</strong></div>}
             {bikeRackPlate && plateType !== 'motorcycle' && <div><span>Fahrradträger-Kennzeichen</span><strong>{formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100)}</strong></div>}
           </div>
-          <p className={styles.livePriceNote}>inkl. 19 % MwSt. · Versand kostenlos</p>
-          <p className={styles.shippingProgress} aria-live="polite">Versand kostenlos ✓</p>
+          <p className={styles.livePriceNote}>inkl. 19 % MwSt. · {pricing?.shippingCents ? 'Versand 3,95 €' : 'Versand kostenlos'}</p>
+          <p className={styles.shippingProgress} aria-live="polite">{pricing?.shippingCents ? '3,95 € Versand bei einem Schild' : 'Versand kostenlos ✓'}</p>
           <DeliveryGuarantee label={isHerbst ? 'Pünktlich-Garantie' : undefined} />
           {isHerbst && plateType === 'standard' && <label className={styles.extraCheck}><input type="checkbox" checked={parkingPlate} onChange={(event) => setParkingPlate(event.target.checked)} /><span>Parkplatz-Kennzeichen hinzufügen (gleiche Kombination) <strong>+{formatPrice((pricing?.unitPriceCents ?? 0) / 100)}</strong></span></label>}
           {plateType !== 'motorcycle' && <label className={styles.extraCheck}><input type="checkbox" checked={bikeRackPlate} onChange={(event) => setBikeRackPlate(event.target.checked)} /><span>Fahrradträger-Kennzeichen hinzufügen (gleiche Kombination) <strong>+{formatPrice(((plateType === 'standard' ? pricing?.unitPriceCents : pricing?.bikeRackExtraPriceCents) ?? 0) / 100)}</strong></span></label>}
@@ -528,7 +529,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           <div><h3>Autokennzeichen Carbon</h3><p>1 Schild <strong>14,60 €</strong></p><p>2 Schilder <strong>29,20 €</strong></p><p>3 Schilder <strong>43,80 €</strong></p><p>4 Schilder <strong>58,40 €</strong></p></div>
           <div><h3>Motorrad-Kennzeichen</h3><p>Standard <strong>9,80 €</strong></p><p>Carbon <strong>14,60 €</strong></p></div>
         </div>
-        <small>Alle Preise inklusive 19 % Mehrwertsteuer und DHL-Versand.</small>
+        <small>Alle Schildpreise inklusive 19 % Mehrwertsteuer. Bei einem Auto- oder Motorradschild kommen 3,95 € Versand hinzu.</small>
       </section>}
 
       {isHerbst && <section className={styles.localComparison} aria-labelledby="local-comparison-title">
@@ -804,7 +805,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             <br />
             <em>Direkt zu dir.</em>
           </h2>
-          <p className={styles.includedPrice}>Kennzeichen ab 9,80 € pro Schild · inkl. MwSt. und Versand</p>
+          <p className={styles.includedPrice}>Kennzeichen ab 9,80 € pro Schild · inkl. MwSt. · einzeln zzgl. 3,95 € Versand</p>
         </div>
         <ul>
           <li>
@@ -823,7 +824,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           <li>
             <CheckCircle2 />
             <span>
-              <strong>Versand kostenlos</strong>mit DHL-Tracking
+              <strong>{pricing?.shippingCents ? 'Versand 3,95 €' : 'Versand kostenlos'}</strong>mit DHL-Tracking
             </span>
           </li>
           <li>
@@ -934,7 +935,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         <a href={configuratorHref}>
           Jetzt Kennzeichen konfigurieren <ArrowRight />
         </a>
-        <small>inkl. 19 % MwSt. · Versand kostenlos · Tracking per E-Mail</small>
+        <small>inkl. 19 % MwSt. · einzeln 3,95 € Versand · ab zwei Schildern versandkostenfrei · Tracking per E-Mail</small>
       </section>
 
       {isHerbst && GOOGLE_REVIEW_RATING !== null && GOOGLE_REVIEW_COUNT !== null && <section className={styles.lowerReviews} aria-label="Google-Bewertungen">

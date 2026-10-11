@@ -304,7 +304,7 @@ export function AutohaendlerPartnerPage() {
 
           <div className={styles.summary}>
             <span>
-              {quantity} × {PRODUCTS[plateType].label} · Versand kostenlos
+              {quantity} × {PRODUCTS[plateType].label} · {motorcyclePricing?.shippingCents ? '3,95 € Versand' : 'Versand kostenlos'}
             </span>
             <strong>{formatPrice(total)}</strong>
           </div>

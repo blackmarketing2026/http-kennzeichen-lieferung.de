@@ -27,6 +27,7 @@ import {
   getPackagePrice,
   getMotorcyclePackage,
   MOTORCYCLE_PACKAGES,
+  SINGLE_PLATE_SHIPPING_CENTS,
   isValidPlate,
   PRODUCTS,
   type PlateColor,
@@ -69,7 +70,7 @@ const FAQS = [
   ],
   [
     'Was kosten die Kennzeichen?',
-    `Autokennzeichen kosten 9,80 € pro Schild, zwei zusammen 19,60 € und drei 29,40 €. Carbon kostet 14,60 € pro Schild. Ein Motorradkennzeichen kostet ab ${formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}. Versand kostenlos für alle Kennzeichenarten.`,
+    `Autokennzeichen kosten 9,80 € pro Schild, zwei zusammen 19,60 € und drei 29,40 €. Carbon kostet 14,60 € pro Schild. Ein Motorradkennzeichen kostet ab ${formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}. Für ein einzelnes Auto- oder Motorradschild fallen 3,95 € Versand an; ab zwei Schildern ist der Versand kostenlos.`,
   ],
   [
     'Wie schnell wird versendet?',
@@ -167,7 +168,7 @@ export default function Home() {
   const motorcyclePricing = plateType === 'motorcycle' ? getCheckoutPricing('motorcycle', plateColor, quantity, undefined) : null;
   const motorcyclePackage = plateType === 'motorcycle' ? getMotorcyclePackage(plateColor, quantity) : null;
   const plateSubtotal = motorcyclePricing ? motorcyclePricing.subtotalCents / 100 : getPackagePrice(plateType, plateColor, quantity);
-  const shippingPrice = 0;
+  const shippingPrice = quantity === 1 && (plateType === 'standard' || plateType === 'motorcycle') ? SINGLE_PLATE_SHIPPING_CENTS / 100 : 0;
   const total = motorcyclePricing ? motorcyclePricing.totalCents / 100 : plateSubtotal + shippingPrice;
   const status = useMemo(
     () => isValidPlate(plateValue, plateType),
@@ -541,7 +542,7 @@ export default function Home() {
                 <div>
                   <span>
                     {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} ·
-                    Versand kostenlos
+                    {shippingPrice === 0 ? 'Versand kostenlos' : `Versand ${formatPrice(shippingPrice)}`}
                   </span>
                   <strong>{formatPrice(total)}</strong>
                 </div>
@@ -740,11 +741,11 @@ export default function Home() {
               <div className="home-motorcycle-packages" aria-label="Motorrad-Pakete">
                 {(Object.entries(MOTORCYCLE_PACKAGES) as [MotorcyclePackage, typeof MOTORCYCLE_PACKAGES[MotorcyclePackage]][]).map(([id, option]) => <button key={id} type="button" aria-pressed={motorcyclePackage === id} onClick={() => chooseMotorcyclePackage(id)}>
                   {id === 'motorrad_2' && <em>Meistgewählt</em>}
-                  <strong>{option.label}</strong><span>{formatPrice(option.priceCents / 100)} · Versand kostenlos</span>
-                  {id === 'motorrad_2' && <small>nur {formatPrice((MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents) / 100)} mehr</small>}
+                  <strong>{option.label}</strong><span>{formatPrice(option.priceCents / 100)} · {option.quantity === 1 ? 'zzgl. 3,95 € Versand' : 'Versand kostenlos'}</span>
+                  {id === 'motorrad_2' && <small>nur {formatPrice((MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents - SINGLE_PLATE_SHIPPING_CENTS) / 100)} mehr</small>}
                 </button>)}
               </div>
-              {status && motorcyclePackage === 'motorrad_1' && <div className="home-motorcycle-upsell">Für nur {formatPrice((MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents) / 100)} mehr: Ersatzschild dazu – falls dein Schild verbiegt oder beschädigt wird. <button type="button" onClick={() => chooseMotorcyclePackage('motorrad_2')}>Ersatzschild hinzufügen</button></div>}
+              {status && motorcyclePackage === 'motorrad_1' && <div className="home-motorcycle-upsell">Für nur {formatPrice((MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents - SINGLE_PLATE_SHIPPING_CENTS) / 100)} mehr: Ersatzschild dazu – falls dein Schild verbiegt oder beschädigt wird. <button type="button" onClick={() => chooseMotorcyclePackage('motorrad_2')}>Ersatzschild hinzufügen</button></div>}
               <p>Das Ersatzschild trägt dieselbe Kombination. Wird dein Schild verbogen oder beschädigt, lässt du das Ersatzschild einfach bei der Zulassungsstelle stempeln – ohne neu zu bestellen.</p>
             </div>}
             <div className="price-card">
@@ -763,8 +764,7 @@ export default function Home() {
                 <strong>{formatPrice(total)}</strong>
               </div>
               <small>
-                Alle Preise inklusive gesetzlicher Mehrwertsteuer und{' '}
-                Versand kostenlos.
+                Alle Preise inklusive gesetzlicher Mehrwertsteuer. {shippingPrice === 0 ? 'Versand kostenlos.' : 'Versand 3,95 €.'}
               </small>
             </div>
             <DeliveryGuarantee />
