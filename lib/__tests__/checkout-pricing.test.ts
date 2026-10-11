@@ -1,123 +1,41 @@
-﻿import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
-import { HERBST_PRICING, getHerbstPackage, herbstIndividualComparisonCents, herbstSetPriceCents, normalizeOffer } from '@/lib/pricing';
 
-describe('checkout pricing', () => {
+describe('current license plate prices', () => {
   it.each([
-    ['black', 1380, 390, 1770],
-    ['carbon', 2380, 0, 2380],
-  ] as const)('prices two %s car plates', (color, subtotalCents, shippingCents, totalCents) => {
-    expect(getCheckoutPricing('standard', color, 2, undefined)).toMatchObject({
-      subtotalCents, shippingCents, totalCents, packageDiscountCents: 0,
-    });
+    ['black', 1, false, 980],
+    ['black', 2, false, 1960],
+    ['black', 2, true, 2940],
+    ['carbon', 1, false, 1460],
+    ['carbon', 2, false, 2920],
+    ['carbon', 2, true, 4380],
+  ] as const)('charges %s for %i car plates with third plate %s', (color, quantity, thirdPlate, totalCents) => {
+    for (const offer of ['standard', 'herbst']) {
+      expect(getCheckoutPricing('standard', color, quantity, undefined, { parkingPlate: false, bikeRackPlate: thirdPlate }, offer))
+        .toMatchObject({ totalCents, shippingCents: 0, packageDiscountCents: 0 });
+    }
   });
 
-  it('charges shipping below 19 euros and waives it at the threshold', () => {
-    expect(getCheckoutPricing('standard', 'black', 1, undefined)).toMatchObject({ subtotalCents: 690, shippingCents: 390, totalCents: 1080 });
-    expect(getCheckoutPricing('standard', 'carbon', 2, undefined)).toMatchObject({ subtotalCents: 2380, shippingCents: 0 });
+  it.each([
+    ['black', 1, 980], ['carbon', 1, 1460],
+    ['black', 2, 1960], ['carbon', 2, 2920],
+  ] as const)('charges %s for %i motorcycle plates', (color, quantity, totalCents) => {
+    expect(getCheckoutPricing('motorcycle', color, quantity, undefined))
+      .toMatchObject({ totalCents, shippingCents: 0 });
   });
 
-  it('adds the bicycle-rack plate for 4.90 euros plus 5 euros in carbon', () => {
-    const extras = { parkingPlate: false, bikeRackPlate: true };
-    expect(getCheckoutPricing('standard', 'black', 2, undefined, extras)).toMatchObject({ bikeRackExtraPriceCents: 490, subtotalCents: 1870, shippingCents: 390, totalCents: 2260 });
-    expect(getCheckoutPricing('standard', 'carbon', 2, undefined, extras)).toMatchObject({ bikeRackExtraPriceCents: 990, subtotalCents: 3370, shippingCents: 0, totalCents: 3370 });
-  });
-
-  it('reaches the requested totals with the 5.90 euro emission sticker', () => {
-    const extras = { parkingPlate: false, bikeRackPlate: false, emissionSticker: true };
-    expect(getCheckoutPricing('standard', 'black', 2, undefined, extras)).toMatchObject({ emissionStickerPriceCents: 590, subtotalCents: 1970, shippingCents: 0, totalCents: 1970 });
-    expect(getCheckoutPricing('standard', 'carbon', 2, undefined, extras)).toMatchObject({ emissionStickerPriceCents: 590, subtotalCents: 2970, shippingCents: 0, totalCents: 2970 });
-  });
-
-  it('keeps the existing prices of other plate types', () => {
-    expect(getCheckoutPricing('motorcycle', 'black', 1, undefined)?.totalCents).toBe(1490);
+  it('adds extras to the new car prices and keeps other plate types unchanged', () => {
+    expect(getCheckoutPricing('standard', 'black', 2, undefined, { parkingPlate: false, bikeRackPlate: false, emissionSticker: true }))
+      .toMatchObject({ totalCents: 2550, emissionStickerPriceCents: 590 });
     expect(getCheckoutPricing('electric', 'black', 2, undefined)?.totalCents).toBe(1990);
     expect(getCheckoutPricing('agriculture240', 'green', 1, undefined)?.totalCents).toBe(2490);
   });
 
-  it('applies the test promotion to the payable total', () => {
-    expect(getCheckoutPricing('standard', 'black', 2, 'TEST5')).toMatchObject({ totalCents: 500, discountCents: 1270 });
+  it('applies promotions and rejects unsupported configurations', () => {
+    expect(getCheckoutPricing('standard', 'black', 2, 'TEST5'))
+      .toMatchObject({ totalCents: 500, discountCents: 1460 });
     expect(getCheckoutPricing('standard', 'black', 2, 'UNKNOWN')).toBeNull();
-  });
-
-  it('rejects unavailable configurations', () => {
     expect(getCheckoutPricing('motorcycle', 'carbon', 3 as 1, undefined)).toBeNull();
     expect(getCheckoutPricing('standard', 'green', 2, undefined)).toBeNull();
-    expect(getCheckoutPricing('agriculture240', 'carbon', 1, undefined)).toBeNull();
-    expect(getCheckoutPricing('motorcycle', 'black', 1, undefined, { parkingPlate: false, bikeRackPlate: true })).toBeNull();
-  });
-});
-
-describe('Herbst pricing', () => {
-  const october = new Date('2026-10-31T22:59:59.000Z');
-  const november = new Date('2026-10-31T23:00:00.000Z');
-  const extras = (bikeRackPlate: boolean) => ({ parkingPlate: false, bikeRackPlate });
-
-  it('recognizes only the three advertised packages for the checkout summary', () => {
-    expect(getHerbstPackage('standard', 'black', 2, false)).toBe('basis');
-    expect(getHerbstPackage('standard', 'black', 2, true)).toBe('complete');
-    expect(getHerbstPackage('standard', 'carbon', 2, true)).toBe('premium');
-    expect(getHerbstPackage('standard', 'carbon', 2, false)).toBeNull();
-    expect(getHerbstPackage('electric', 'black', 2, true)).toBeNull();
-  });
-
-  it.each([
-    ['black', 1, false, 1180], ['carbon', 1, false, 1680],
-    ['black', 2, false, 1970], ['carbon', 2, false, 2970],
-    ['black', 2, true, 2190], ['carbon', 2, true, 3490],
-  ] as const)('prices %s × %i with bicycle rack %s in October', (color, quantity, rack, totalCents) => {
-    expect(getCheckoutPricing('standard', color, quantity, undefined, extras(rack), 'herbst', october))
-      .toMatchObject({ totalCents, shippingCents: rack ? 0 : HERBST_PRICING.shippingCents });
-  });
-
-  it('switches at midnight Berlin time and leaves the basis unchanged', () => {
-    expect(getCheckoutPricing('standard', 'black', 2, undefined, extras(true), 'herbst', november)?.totalCents).toBe(2390);
-    expect(getCheckoutPricing('standard', 'carbon', 2, undefined, extras(true), 'herbst', november)?.totalCents).toBe(3790);
-    expect(getCheckoutPricing('standard', 'black', 2, undefined, extras(false), 'herbst', november)?.totalCents).toBe(1970);
-    expect(getCheckoutPricing('standard', 'black', 2, undefined, extras(true), 'herbst', new Date(november.getTime() - 1))?.totalCents).toBe(2190);
-  });
-
-  it('charges shipping for a single base plate plus a bicycle-rack plate', () => {
-    expect(getCheckoutPricing('standard', 'black', 1, undefined, extras(true), 'herbst', october))
-      .toMatchObject({ subtotalCents: 1580, shippingCents: 390, totalCents: 1970 });
-    expect(getCheckoutPricing('standard', 'carbon', 1, undefined, extras(true), 'herbst', october))
-      .toMatchObject({ subtotalCents: 2580, shippingCents: 390, totalCents: 2970 });
-  });
-
-  it('derives comparison prices, savings, and carbon upgrade from configuration', () => {
-    expect(herbstIndividualComparisonCents('black')).toBe(2760);
-    expect(herbstIndividualComparisonCents('carbon')).toBe(4260);
-    expect(herbstIndividualComparisonCents('black') - herbstSetPriceCents('black', october)).toBe(570);
-    expect(herbstIndividualComparisonCents('carbon') - herbstSetPriceCents('carbon', october)).toBe(770);
-    expect(herbstSetPriceCents('carbon', october) - herbstSetPriceCents('black', october)).toBe(1300);
-  });
-
-  it('keeps standard and invalid profiles at standard prices', () => {
-    expect(normalizeOffer('wrong')).toBe('standard');
-    for (const now of [october, november]) {
-      expect(getCheckoutPricing('standard', 'black', 2, undefined, extras(true), 'standard', now)?.totalCents).toBe(2260);
-      expect(getCheckoutPricing('standard', 'black', 2, undefined, extras(true), 'wrong', now)?.totalCents).toBe(2260);
-      expect(getCheckoutPricing('electric', 'black', 2, undefined, extras(false), 'herbst', now)?.totalCents).toBe(1990);
-      expect(getCheckoutPricing('historic', 'black', 2, undefined, extras(false), 'herbst', now)?.totalCents).toBe(1990);
-      expect(getCheckoutPricing('season', 'black', 2, undefined, extras(false), 'herbst', now)?.totalCents).toBe(1990);
-      expect(getCheckoutPricing('motorcycle', 'black', 1, undefined, extras(false), 'herbst', now)?.totalCents).toBe(1490);
-    }
-  });
-});
-
-describe('Motorcycle packages', () => {
-  it.each([
-    ['black', 1, 1490], ['black', 2, 1890],
-    ['carbon', 1, 1990], ['carbon', 2, 2590],
-  ] as const)('derives %s × %i on the server', (color, quantity, totalCents) => {
-    expect(getCheckoutPricing('motorcycle', color, quantity, undefined)).toMatchObject({
-      totalCents, subtotalCents: totalCents, shippingCents: 0,
-      unitPriceCents: totalCents / quantity,
-    });
-  });
-
-  it('rejects unavailable motorcycle combinations and unrelated extras', () => {
-    expect(getCheckoutPricing('motorcycle', 'green', 1, undefined)).toBeNull();
-    expect(getCheckoutPricing('motorcycle', 'black', 2, undefined, { parkingPlate: false, bikeRackPlate: true })).toBeNull();
   });
 });

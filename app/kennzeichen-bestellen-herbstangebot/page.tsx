@@ -3,7 +3,7 @@ import { KennzeichenLandingPage } from '@/app/kennzeichen-bestellen/kennzeichen-
 import { HERBST_DESCRIPTION } from '@/lib/pricing';
 
 export const metadata: Metadata = {
-  title: 'Herbst-Angebot: 3 Kennzeichen für 21,90 € | kennzeichen-lieferung.de',
+  title: 'Herbst-Angebot: Autokennzeichen ab 9,80 € | kennzeichen-lieferung.de',
   description: HERBST_DESCRIPTION,
   alternates: { canonical: '/kennzeichen-bestellen' },
   robots: { index: false, follow: true },

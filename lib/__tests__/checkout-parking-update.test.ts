@@ -104,7 +104,7 @@ describe('checkout payment updates', () => {
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 2270,
+        amount: 2460,
         metadata: expect.objectContaining({
           anzahl: '3',
           parkplatzkennzeichen: '1',
@@ -113,7 +113,7 @@ describe('checkout payment updates', () => {
     );
     expect(await response.json()).toMatchObject({
       paymentIntentId: current.id,
-      pricing: { totalCents: 2270, parkingExtraPriceCents: 500 },
+      pricing: { totalCents: 2460, parkingExtraPriceCents: 500 },
     });
   });
 
@@ -127,7 +127,7 @@ describe('checkout payment updates', () => {
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 1770,
+        amount: 1960,
         metadata: expect.objectContaining({
           anzahl: '2',
           parkplatzkennzeichen: '0',
@@ -142,7 +142,7 @@ describe('checkout payment updates', () => {
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 2370,
+        amount: 3440,
         metadata: expect.objectContaining({
           anzahl: '4',
           parkplatzkennzeichen: '1',
@@ -162,7 +162,7 @@ describe('checkout payment updates', () => {
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 2260,
+        amount: 2940,
         metadata: expect.objectContaining({ anzahl: '3', parkplatzkennzeichen: '0', fahrradtraegerkennzeichen: '1' }),
       }),
     );
@@ -204,7 +204,7 @@ describe('checkout payment updates', () => {
     expect(stripe.retrieve).not.toHaveBeenCalled();
   });
 
-  it('updates the same autumn checkout from Basis to Premium including color and amount', async () => {
+  it('updates the same autumn checkout when color and third plate change', async () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date('2026-10-08T12:00:00+02:00'));
     stripe.retrieve.mockResolvedValue({
@@ -215,10 +215,10 @@ describe('checkout payment updates', () => {
     const response = await POST(requestWithHerbstPackage('carbon', true));
     expect(response.status).toBe(200);
     expect(stripe.update).toHaveBeenCalledWith(current.id, expect.objectContaining({
-      amount: 3490,
+      amount: 4380,
       metadata: expect.objectContaining({ schriftfarbe: 'Carbon', anzahl: '3', fahrradtraegerkennzeichen: '1' }),
     }));
-    expect(await response.json()).toMatchObject({ paymentIntentId: current.id, pricing: { totalCents: 3490 } });
+    expect(await response.json()).toMatchObject({ paymentIntentId: current.id, pricing: { totalCents: 4380 } });
   });
 
   it('rejects a color change on a standard checkout', async () => {

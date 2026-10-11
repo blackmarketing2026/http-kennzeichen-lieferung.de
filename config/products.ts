@@ -12,14 +12,14 @@ export const SHIPPING_PRICE = 3.9;
 export const FREE_SHIPPING_THRESHOLD = 19;
 export const PARKING_PLATE_PRICE = 5;
 export const BIKE_RACK_PLATE_PRICE = 4.9;
-export const CARBON_SURCHARGE = 5;
+export const CARBON_SURCHARGE = 4.8;
 export const EMISSION_STICKER_PRICE = 5.9;
 
 export const MOTORCYCLE_PACKAGES = {
-  motorrad_1: { label: '1 Motorrad-Schild', color: 'black', quantity: 1, priceCents: 1490 },
-  motorrad_2: { label: '1 Schild + Ersatzschild', color: 'black', quantity: 2, priceCents: 1890 },
-  motorrad_carbon_1: { label: '1 Carbon-Schild', color: 'carbon', quantity: 1, priceCents: 1990 },
-  motorrad_carbon_2: { label: 'Carbon + Carbon-Ersatzschild', color: 'carbon', quantity: 2, priceCents: 2590 },
+  motorrad_1: { label: '1 Motorrad-Schild', color: 'black', quantity: 1, priceCents: 980 },
+  motorrad_2: { label: '1 Schild + Ersatzschild', color: 'black', quantity: 2, priceCents: 1960 },
+  motorrad_carbon_1: { label: '1 Carbon-Schild', color: 'carbon', quantity: 1, priceCents: 1460 },
+  motorrad_carbon_2: { label: 'Carbon + Carbon-Ersatzschild', color: 'carbon', quantity: 2, priceCents: 2920 },
 } as const;
 export type MotorcyclePackage = keyof typeof MOTORCYCLE_PACKAGES;
 
@@ -50,7 +50,7 @@ export const PRODUCTS: Record<
     shortLabel: 'Standard',
     size: '520 mm',
     format: 'long',
-    prices: { 1: 6.9, 2: 6.9, 3: 6.9 },
+    prices: { 1: 9.8, 2: 9.8, 3: 9.8 },
   },
   motorcycle: {
     label: 'Motorrad',

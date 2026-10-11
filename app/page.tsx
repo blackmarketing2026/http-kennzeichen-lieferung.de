@@ -71,7 +71,7 @@ const FAQS = [
   ],
   [
     'Was kosten die Kennzeichen?',
-    `Autokennzeichen kosten 6,90 € pro Schild, zwei zusammen 13,80 €. Ein Motorradkennzeichen kostet ab ${formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)} inklusive Versand. Für andere Kennzeichen kostet der Versand 3,90 € pro Bestellung und ist ab 19 € Warenwert kostenlos.`,
+    `Autokennzeichen kosten 9,80 € pro Schild, zwei zusammen 19,60 € und drei 29,40 €. Carbon kostet 14,60 € pro Schild. Ein Motorradkennzeichen kostet ab ${formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)} inklusive Versand. Für andere Kennzeichen kostet der Versand 3,90 € pro Bestellung und ist ab 19 € Warenwert kostenlos.`,
   ],
   [
     'Wie schnell wird versendet?',
@@ -169,7 +169,7 @@ export default function Home() {
   const motorcyclePricing = plateType === 'motorcycle' ? getCheckoutPricing('motorcycle', plateColor, quantity, undefined) : null;
   const motorcyclePackage = plateType === 'motorcycle' ? getMotorcyclePackage(plateColor, quantity) : null;
   const plateSubtotal = motorcyclePricing ? motorcyclePricing.subtotalCents / 100 : getPackagePrice(plateType, plateColor, quantity);
-  const shippingPrice = motorcyclePricing ? motorcyclePricing.shippingCents / 100 : plateSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_PRICE;
+  const shippingPrice = plateType === 'standard' ? 0 : motorcyclePricing ? motorcyclePricing.shippingCents / 100 : plateSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_PRICE;
   const total = motorcyclePricing ? motorcyclePricing.totalCents / 100 : plateSubtotal + shippingPrice;
   const status = useMemo(
     () => isValidPlate(plateValue, plateType),
@@ -766,7 +766,7 @@ export default function Home() {
               </div>
               <small>
                 Alle Preise inklusive gesetzlicher Mehrwertsteuer und{' '}
-                {plateType === 'motorcycle' ? 'kostenlosem DHL-Versand beim Motorrad.' : 'DHL-Versand für 3,90 € pro Bestellung, kostenlos ab 19 € Warenwert.'}
+                {plateType === 'motorcycle' || plateType === 'standard' ? 'kostenlosem DHL-Versand.' : 'DHL-Versand für 3,90 € pro Bestellung, kostenlos ab 19 € Warenwert.'}
               </small>
             </div>
             <DeliveryGuarantee />

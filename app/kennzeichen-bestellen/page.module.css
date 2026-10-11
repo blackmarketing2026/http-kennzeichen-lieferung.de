@@ -1816,6 +1816,14 @@
 .reviewPlaceholder svg { width: 15px; height: 15px; }
 .reviewPlaceholder .reviewStarFilled { color: #e9a321; fill: currentColor; }
 .reviewPlaceholder small { font-size: .68rem; }
+.priceOverview { padding: 60px max(20px, calc((100vw - 1180px) / 2)); background: #fff; }
+.priceOverview h2 { margin: 0 0 26px; font-size: clamp(1.7rem, 3vw, 2.6rem); }
+.priceOverviewGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.priceOverviewGrid > div { padding: 24px; border: 1px solid #d8e5ec; border-radius: 14px; background: #f7fafc; }
+.priceOverviewGrid h3 { margin: 0 0 16px; font-size: 1rem; }
+.priceOverviewGrid p { display: flex; justify-content: space-between; gap: 12px; margin: 8px 0; }
+.priceOverviewGrid strong { white-space: nowrap; }
+.priceOverview > small { display: block; margin-top: 16px; color: #526a78; }
 .localComparison { padding: 45px max(20px, calc((100vw - 1180px) / 2)); display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 20px; align-items: center; background: #f3f8fc; }
 .localComparison h2 { margin: 0; font-size: clamp(1.4rem, 2.3vw, 2rem); }
 .localComparison p:not(.kicker) { margin: 0; padding: 18px; border-radius: 10px; background: #fff; line-height: 1.5; }
@@ -1849,6 +1857,7 @@
   .herbstHero .lead { margin-top: 10px; }
   .herbstHero .heroOffer { margin: 10px 0; }
   .localComparison { grid-template-columns: 1fr; }
+  .priceOverviewGrid { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .herbstHero { padding: 29px 16px 52px; gap: 24px; }

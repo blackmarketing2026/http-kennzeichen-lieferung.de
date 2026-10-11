@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { HerbstCountdown } from '@/components/herbst-countdown';
 import { formatPrice, MOTORCYCLE_PACKAGES } from '@/config/products';
 
 export function OfferBanner() {
@@ -15,9 +14,9 @@ export function OfferBanner() {
   if (pathname === '/kennzeichen-bestellen-herbstangebot') {
     return <div className="offer-banner" role="note">
       <span className="offer-banner-label">Herbst-Angebot</span>
-      <span className="offer-banner-message"><HerbstCountdown /></span>
-      <span className="offer-banner-mobile-message"><HerbstCountdown compact /></span>
-      <Link href="/kennzeichen-bestellen-herbstangebot#angebote">Angebote ansehen</Link>
+      <span className="offer-banner-message">Autokennzeichen ab <strong>9,80 €</strong> · Carbon ab <strong>14,60 €</strong></span>
+      <span className="offer-banner-mobile-message">Autokennzeichen ab <strong>9,80 €</strong></span>
+      <Link href="/kennzeichen-bestellen-herbstangebot#konfigurator">Jetzt bestellen</Link>
     </div>;
   }
 
@@ -26,7 +25,7 @@ export function OfferBanner() {
       <span className="offer-banner-label">Motorrad</span>
       <span className="offer-banner-message">Motorrad-Kennzeichen ab <strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong> · Versandkostenfrei</span>
       <span className="offer-banner-mobile-message">Motorrad-Schild ab <strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong></span>
-      <Link href="/motorradkennzeichen-bestellen#konfigurator">Pakete ansehen</Link>
+      <Link href="/motorradkennzeichen-bestellen#konfigurator">Jetzt bestellen</Link>
     </div>;
   }
 
@@ -34,10 +33,10 @@ export function OfferBanner() {
     <div className="offer-banner" role="note">
       <span className="offer-banner-label">Kennzeichen</span>
       <span className="offer-banner-message">
-        Autokennzeichen ab <strong>6,90 € pro Schild</strong> · Versandkostenfrei ab 19 € Warenwert
+        Autokennzeichen ab <strong>9,80 € pro Schild</strong> · versandkostenfrei
       </span>
       <span className="offer-banner-mobile-message">
-        Autokennzeichen ab <strong>6,90 €</strong> pro Schild
+        Autokennzeichen ab <strong>9,80 €</strong> pro Schild
       </span>
       <Link href="/kennzeichen-bestellen#konfigurator">Jetzt bestellen</Link>
     </div>

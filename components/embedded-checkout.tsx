@@ -11,7 +11,7 @@ import {
   useElements,
   useStripe,
 } from '@stripe/react-stripe-js';
-import { loadStripe, type StripeElements } from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import {
   ArrowLeft,
   ArrowRight,
@@ -44,9 +44,8 @@ import {
   type PlateType,
 } from '@/config/products';
 import type { CheckoutExtras, CheckoutPricing } from '@/lib/checkout-pricing';
-import { getHerbstPackage, type HerbstPackage, type OfferProfile } from '@/lib/pricing';
+import { type OfferProfile } from '@/lib/pricing';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
-import { saveCheckoutDraft } from '@/lib/checkout-draft';
 import {
   ExtrasUpsellPopup,
   type UpsellKind,
@@ -69,11 +68,6 @@ type CheckoutSelection = {
 type ActiveSelection = Omit<CheckoutSelection, 'quantity'> & {
   quantity: number;
 };
-const HERBST_PACKAGE_OPTIONS: { id: HerbstPackage; label: string; color: PlateColor; bikeRackPlate: boolean; description: string }[] = [
-  { id: 'basis', label: 'Basis', color: 'black', bikeRackPlate: false, description: '2 Standard-Kennzeichen' },
-  { id: 'complete', label: 'Komplett-Set', color: 'black', bikeRackPlate: true, description: '2 Standard-Kennzeichen + 1 zusätzliches Kennzeichen für Fahrradträger oder Parkplatz' },
-  { id: 'premium', label: 'Premium-Set', color: 'carbon', bikeRackPlate: true, description: '2 Carbon-Kennzeichen + 1 zusätzliches Kennzeichen für Fahrradträger oder Parkplatz' },
-];
 type PaymentIntentResponse = {
   error?: string;
   clientSecret?: string;
@@ -132,8 +126,6 @@ function PaymentForm({
   onApplyPromo,
   onChangeExtra,
   onStepChange,
-  onElementsChange,
-  onFormBusyChange,
   isUpdatingPackage,
   checkoutSyncReady,
   trackKennzeichenFunnel,
@@ -147,8 +139,6 @@ function PaymentForm({
   onApplyPromo: (code: string) => Promise<CheckoutPricing>;
   onChangeExtra: (extras: CheckoutExtras) => Promise<CheckoutPricing>;
   onStepChange: (step: 'address' | 'payment') => void;
-  onElementsChange: (elements: StripeElements | null) => void;
-  onFormBusyChange: (busy: boolean) => void;
   isUpdatingPackage: boolean;
   checkoutSyncReady: boolean;
   trackKennzeichenFunnel: boolean;
@@ -176,16 +166,6 @@ function PaymentForm({
   const [promoReady, setPromoReady] = useState(true);
   const [isUpdatingExtra, setIsUpdatingExtra] = useState(false);
   const changingExtra = useRef(false);
-
-  useEffect(() => {
-    onElementsChange(elements);
-    return () => onElementsChange(null);
-  }, [elements, onElementsChange]);
-
-  useEffect(() => {
-    onFormBusyChange(isPaying || isApplyingPromo || isUpdatingExtra);
-    return () => onFormBusyChange(false);
-  }, [isPaying, isApplyingPromo, isUpdatingExtra, onFormBusyChange]);
 
   async function continueToPayment() {
     setMessage('');
@@ -633,30 +613,18 @@ export function EmbeddedCheckout({
   const [error, setError] = useState('');
   const [checkoutStep, setCheckoutStep] = useState<'address' | 'payment'>('address');
   const [requestAttempt, setRequestAttempt] = useState(0);
-  const [paymentElements, setPaymentElements] = useState<StripeElements | null>(null);
-  const [formBusy, setFormBusy] = useState(false);
-  const [isUpdatingPackage, setIsUpdatingPackage] = useState(false);
-  const [checkoutSyncReady, setCheckoutSyncReady] = useState(true);
-  const [packageError, setPackageError] = useState('');
-  const [packagePickerOpen, setPackagePickerOpen] = useState(false);
+  const isUpdatingPackage = false;
+  const checkoutSyncReady = true;
   const cartId = useRef<string | null>(null);
   const product = PRODUCTS[selection.plateType];
   const subtotal =
     getPackagePrice(selection.plateType, selection.plateColor, baseQuantity) +
     (extras.parkingPlate ? PARKING_PLATE_PRICE : 0) +
     (extras.bikeRackPlate ? BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0) : 0);
-  const offerEstimate = offer === 'herbst' || selection.plateType === 'motorcycle'
-    ? getCheckoutPricing(selection.plateType, selection.plateColor, baseQuantity, undefined, extras, offer)
-    : null;
+  const offerEstimate = getCheckoutPricing(selection.plateType, selection.plateColor, baseQuantity, undefined, extras, offer);
   const total = offerEstimate ? offerEstimate.totalCents / 100 : subtotal + (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_PRICE);
-  const offerBreakdown = offer === 'herbst' || selection.plateType === 'motorcycle' ? pricing ?? offerEstimate : null;
+  const offerBreakdown = pricing ?? offerEstimate;
   const motorcyclePackage = selection.plateType === 'motorcycle' ? getMotorcyclePackage(selection.plateColor, baseQuantity) : null;
-  const herbstPackage = offer === 'herbst'
-    ? getHerbstPackage(selection.plateType, selection.plateColor, baseQuantity, extras.bikeRackPlate, extras.parkingPlate)
-    : null;
-  const herbstPackageName = herbstPackage === 'basis' ? 'Basis'
-    : herbstPackage === 'complete' ? 'Komplett-Set'
-    : herbstPackage === 'premium' ? 'Premium-Set' : null;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -778,37 +746,6 @@ export function EmbeddedCheckout({
     return data.pricing;
   }
 
-  async function changePackage(nextPackage: HerbstPackage) {
-    if (!pricing || !paymentElements || isUpdatingPackage || formBusy || (nextPackage === herbstPackage && checkoutSyncReady)) return;
-    const option = HERBST_PACKAGE_OPTIONS.find((item) => item.id === nextPackage);
-    if (!option) return;
-    const nextExtras = { ...extras, parkingPlate: false, bikeRackPlate: option.bikeRackPlate };
-    setIsUpdatingPackage(true);
-    setPackageError('');
-    let intentUpdated = false;
-    try {
-      await updateCheckout(pricing.promoCode ?? '', nextExtras, option.color);
-      intentUpdated = true;
-      const update = await paymentElements.fetchUpdates();
-      if (update.error) throw new Error('Der Zahlbetrag konnte nicht synchronisiert werden. Bitte wähle das Paket erneut.');
-      setCheckoutSyncReady(true);
-      setPackagePickerOpen(false);
-      saveCheckoutDraft('kennzeichen-bestellen-herbstangebot', {
-        plate: selection.plate,
-        plateType: selection.plateType,
-        plateColor: option.color,
-        quantity: baseQuantity,
-        bikeRackPlate: option.bikeRackPlate,
-        promoCode: pricing.promoCode ?? undefined,
-      });
-    } catch (cause) {
-      if (intentUpdated) setCheckoutSyncReady(false);
-      setPackageError(cause instanceof Error ? cause.message : 'Das Paket konnte nicht aktualisiert werden.');
-    } finally {
-      setIsUpdatingPackage(false);
-    }
-  }
-
   const stripePromise = useMemo(
     () => (publishableKey ? loadStripe(publishableKey) : null),
     [publishableKey],
@@ -842,15 +779,9 @@ export function EmbeddedCheckout({
         <div className="checkout-flow-step">
           <div className="checkout-order-copy">
             <span>Deine Bestellung</span>
-            <h1>{herbstPackage ? 'Dein Paket im Überblick' : 'Kennzeichen im Überblick'}</h1>
+            <h1>Kennzeichen im Überblick</h1>
           </div>
-        {herbstPackage ? <div className="checkout-package-line">
-          <div>
-            <strong>{herbstPackageName}</strong>
-            <span>{selection.plate} · 2 {selection.plateColor === 'carbon' ? 'Carbon-' : 'Standard-'}Kennzeichen{extras.bikeRackPlate && ' + 1 Kennzeichen für Fahrradträger oder Parkplatz'}</span>
-          </div>
-          <strong>{formatPrice(((offerBreakdown?.subtotalCents ?? 0) + (offerBreakdown?.shippingCents ?? 0)) / 100)}</strong>
-        </div> : <div className="real-order-line">
+        <div className="real-order-line">
           <div>
             <strong>
               {motorcyclePackage ? MOTORCYCLE_PACKAGES[motorcyclePackage].label : `${baseQuantity} × ${product.label}`}
@@ -870,26 +801,8 @@ export function EmbeddedCheckout({
               ),
             )}
           </strong>
-        </div>}
+        </div>
         {motorcyclePackage && baseQuantity === 2 && <p className="checkout-preview-note">Das Ersatzschild trägt dieselbe Kombination. Bei Beschädigung lässt du es bei der Zulassungsstelle stempeln.</p>}
-        {herbstPackage && <div className="checkout-package-change">
-          <button type="button" className={styles.packageToggle} aria-expanded={packagePickerOpen} aria-controls="checkout-package-options" onClick={() => setPackagePickerOpen((open) => !open)}>
-            {packagePickerOpen ? 'Paketauswahl schließen' : 'Paket ändern'}
-            <ArrowRight size={16} aria-hidden="true" />
-          </button>
-          {packagePickerOpen && <fieldset id="checkout-package-options" className={styles.packageOptions}>
-            <legend>Wähle dein Paket</legend>
-            {HERBST_PACKAGE_OPTIONS.map((option) => {
-              const optionPricing = getCheckoutPricing('standard', option.color, 2, undefined, { parkingPlate: false, bikeRackPlate: option.bikeRackPlate }, 'herbst');
-              return <button key={option.id} type="button" className={`${styles.packageOption} ${herbstPackage === option.id ? styles.packageOptionSelected : ''}`} aria-pressed={herbstPackage === option.id} disabled={!paymentElements || isUpdatingPackage || formBusy} onClick={() => changePackage(option.id)}>
-                <span className={styles.packageOptionText}><strong>{option.label}</strong><small>{option.description}</small></span>
-                <span className={styles.packageOptionPrice}><b>{optionPricing ? formatPrice(optionPricing.totalCents / 100) : ''}</b>{herbstPackage === option.id && <CheckCircle2 size={16} aria-label="Ausgewählt" />}</span>
-              </button>;
-            })}
-          </fieldset>}
-          {isUpdatingPackage && <output className="checkout-package-message"><LoaderCircle className="spin" size={15} /> Paket und Zahlbetrag werden aktualisiert …</output>}
-          {packageError && <p className="checkout-package-error" role="alert">{packageError}</p>}
-        </div>}
         </div>
         <div className="checkout-flow-step checkout-preview-block">
           <div className="checkout-step-heading">
@@ -907,32 +820,22 @@ export function EmbeddedCheckout({
           {selection.plateType !== 'motorcycle' && !isAgriculturePlate(selection.plateType) && (
             <p className="checkout-preview-note">Amtliche Siegel dienen nur der Vorschau und sind nicht im Lieferumfang.</p>
           )}
-        {herbstPackage && <div className="checkout-package-includes">
-          <strong>Im Paket enthalten</strong>
-          <ul>
-            <li>{baseQuantity} Kennzeichen für dein Fahrzeug · {plateColorLabel(selection.plateColor)}</li>
-            {extras.bikeRackPlate && <li>1 zusätzliches Kennzeichen für Fahrradträger oder Parkplatz · {plateColorLabel(selection.plateColor)}</li>}
-            <li>{herbstPackage === 'basis' ? 'DHL-Versand inklusive' : 'DHL-Versand kostenfrei'}</li>
-            {extras.bikeRackPlate && <li>Checkliste für die Zulassung per E-Mail</li>}
-          </ul>
-          <small>Ein Paketpreis inkl. 19 % MwSt. und Versand</small>
-        </div>}
-        {!herbstPackage && extras.parkingPlate && (
+        {extras.parkingPlate && (
           <div className="real-order-line">
             <span>1 × Parkplatz-Kennzeichen</span>
             <strong>{formatPrice(PARKING_PLATE_PRICE)}</strong>
           </div>
         )}
-        {!herbstPackage && extras.bikeRackPlate && (
+        {extras.bikeRackPlate && (
           <div className="real-order-line">
             <span>1 × Fahrradträger-Kennzeichen</span>
             <strong>{formatPrice(offerBreakdown ? offerBreakdown.bikeRackExtraPriceCents / 100 : BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0))}</strong>
           </div>
         )}
-        {!herbstPackage && <div className="real-order-line">
+        <div className="real-order-line">
           <span>DHL-Versand</span>
           <strong>{pricing?.shippingCents === 0 || (!pricing && (offerEstimate ? offerEstimate.shippingCents === 0 : subtotal >= FREE_SHIPPING_THRESHOLD)) ? 'Kostenlos' : formatPrice(SHIPPING_PRICE)}</strong>
-        </div>}
+        </div>
         {pricing && pricing.discountCents > pricing.packageDiscountCents && (
           <div className="real-order-line real-order-discount">
             <span>Rabatt ({pricing.promoCode})</span>
@@ -1001,8 +904,6 @@ export function EmbeddedCheckout({
                 updateCheckout(pricing.promoCode ?? '', nextExtras)
               }
               onStepChange={setCheckoutStep}
-              onElementsChange={setPaymentElements}
-              onFormBusyChange={setFormBusy}
               isUpdatingPackage={isUpdatingPackage}
               checkoutSyncReady={checkoutSyncReady}
               trackKennzeichenFunnel={returnPath?.startsWith('/kennzeichen-bestellen') === true}
