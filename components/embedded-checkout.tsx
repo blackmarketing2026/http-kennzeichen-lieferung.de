@@ -386,8 +386,8 @@ function PaymentForm({
       <section className="checkout-flow-step" hidden={step !== 'address'}>
         <div className="checkout-step-heading">
           <span>Schritt 2 von 3</span>
-          <h2>Wohin dürfen wir liefern?</h2>
-          <p>Wohin dürfen wir deine Kennzeichen schicken?</p>
+          <h2>Wohin dürfen wir die Kennzeichen schicken?</h2>
+          <p>Gib hier deine Lieferadresse ein.</p>
         </div>
       <label className="checkout-email">
         E-Mail-Adresse
@@ -789,7 +789,7 @@ export function EmbeddedCheckout({
               {selection.plateType === 'season' && ` · ${formatSeasonMonth(selection.seasonStartMonth ?? 4)}–${formatSeasonMonth(selection.seasonEndMonth ?? 10)}`}
             </span>
           </div>
-          <strong>
+          {checkoutStep === 'payment' && <strong>
             {formatPrice(
               offerBreakdown ? (offerBreakdown.unitPriceCents * baseQuantity - offerBreakdown.packageDiscountCents) / 100 : getPackagePrice(
                 selection.plateType,
@@ -797,7 +797,7 @@ export function EmbeddedCheckout({
                 baseQuantity,
               ),
             )}
-          </strong>
+          </strong>}
         </div>
         {motorcyclePackage && baseQuantity === 2 && <p className="checkout-preview-note">Das Ersatzschild trägt dieselbe Kombination. Bei Beschädigung lässt du es bei der Zulassungsstelle stempeln.</p>}
         </div>
@@ -820,34 +820,34 @@ export function EmbeddedCheckout({
         {extras.parkingPlate && (
           <div className="real-order-line">
             <span>1 × Parkplatz-Kennzeichen</span>
-            <strong>{formatPrice(offerBreakdown ? offerBreakdown.parkingExtraPriceCents / 100 : PARKING_PLATE_PRICE)}</strong>
+            {checkoutStep === 'payment' && <strong>{formatPrice(offerBreakdown ? offerBreakdown.parkingExtraPriceCents / 100 : PARKING_PLATE_PRICE)}</strong>}
           </div>
         )}
         {extras.bikeRackPlate && (
           <div className="real-order-line">
             <span>1 × Fahrradträger-Kennzeichen</span>
-            <strong>{formatPrice(offerBreakdown ? offerBreakdown.bikeRackExtraPriceCents / 100 : BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0))}</strong>
+            {checkoutStep === 'payment' && <strong>{formatPrice(offerBreakdown ? offerBreakdown.bikeRackExtraPriceCents / 100 : BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0))}</strong>}
           </div>
         )}
         {(extras.addOns ?? []).map((id) => <div className="real-order-line" key={id}>
-          <span>{ADDONS[id].name}</span><strong>{formatPrice(ADDONS[id].priceCents / 100)}</strong>
+          <span>{ADDONS[id].name}</span>{checkoutStep === 'payment' && <strong>{formatPrice(ADDONS[id].priceCents / 100)}</strong>}
         </div>)}
-        <div className="real-order-line">
+        {checkoutStep === 'payment' && <div className="real-order-line">
           <span>DHL-Versand</span>
           <strong>{(pricing?.shippingCents ?? offerEstimate?.shippingCents ?? 0) > 0 ? formatPrice((pricing?.shippingCents ?? offerEstimate?.shippingCents ?? 0) / 100) : 'Kostenlos'}</strong>
-        </div>
-        {pricing && pricing.discountCents > pricing.packageDiscountCents && (
+        </div>}
+        {checkoutStep === 'payment' && pricing && pricing.discountCents > pricing.packageDiscountCents && (
           <div className="real-order-line real-order-discount">
             <span>Rabatt ({pricing.promoCode})</span>
             <strong>−{formatPrice((pricing.discountCents - pricing.packageDiscountCents) / 100)}</strong>
           </div>
         )}
-        <div className="real-order-total">
+        {checkoutStep === 'payment' && <div className="real-order-total">
           <span>Gesamt</span>
           <strong className="checkout-live-price" key={offerBreakdown?.totalCents ?? total}>
             {formatPrice(offerBreakdown ? offerBreakdown.totalCents / 100 : total)}
           </strong>
-        </div>
+        </div>}
         <p className="checkout-scope">
           Du bestellst geprägte Schilder. Reservierung, Zulassung und amtliche
           Plaketten sind nicht enthalten.
