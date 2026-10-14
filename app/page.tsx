@@ -23,18 +23,14 @@ import { ShippingNotice } from '@/components/shipping-notice';
 import { DeliveryGuarantee } from '@/components/delivery-guarantee';
 import { LicensePlate, LicensePlateEditor } from '@/components/license-plate';
 import {
-  formatPrice,
-  getPackagePrice,
   getMotorcyclePackage,
   MOTORCYCLE_PACKAGES,
-  SINGLE_PLATE_SHIPPING_CENTS,
   isValidPlate,
   PRODUCTS,
   type PlateColor,
   type PlateType,
   type MotorcyclePackage,
 } from '@/config/products';
-import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import {
   Dialog,
   DialogContent,
@@ -70,7 +66,7 @@ const FAQS = [
   ],
   [
     'Was kosten die Kennzeichen?',
-    `Autokennzeichen kosten 9,80 € pro Schild, zwei zusammen 19,60 € und drei 29,40 €. Carbon kostet 14,60 € pro Schild. Ein Motorradkennzeichen kostet ab ${formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}. Für ein einzelnes Auto- oder Motorradschild fallen 3,95 € Versand an; ab zwei Schildern ist der Versand kostenlos.`,
+    'Autokennzeichen kosten ab 9,80 € pro Schild. Ab zwei Schildern ist der Versand kostenlos. Den Gesamtpreis siehst du vor der Zahlung im Checkout.',
   ],
   [
     'Wie schnell wird versendet?',
@@ -165,11 +161,7 @@ export default function Home() {
   const plateInputEventSent = useRef(false);
   const product = PRODUCTS[plateType];
   const plateValue = `${cityCode} ${serialLetters} ${serialNumbers}`;
-  const motorcyclePricing = plateType === 'motorcycle' ? getCheckoutPricing('motorcycle', plateColor, quantity, undefined) : null;
   const motorcyclePackage = plateType === 'motorcycle' ? getMotorcyclePackage(plateColor, quantity) : null;
-  const plateSubtotal = motorcyclePricing ? motorcyclePricing.subtotalCents / 100 : getPackagePrice(plateType, plateColor, quantity);
-  const shippingPrice = quantity === 1 && (plateType === 'standard' || plateType === 'motorcycle') ? SINGLE_PLATE_SHIPPING_CENTS / 100 : 0;
-  const total = motorcyclePricing ? motorcyclePricing.totalCents / 100 : plateSubtotal + shippingPrice;
   const status = useMemo(
     () => isValidPlate(plateValue, plateType),
     [plateValue, plateType],
@@ -384,23 +376,16 @@ export default function Home() {
                 {quantity === 1 ? 'Schild' : 'Schilder'}
               </span>
             </div>
-            <strong>{formatPrice(plateSubtotal)}</strong>
+            <strong>ab 9,80 € pro Schild</strong>
           </div>
-          <div className="cart-order-line shipping">
-            <span>DHL-Versand</span>
-            <strong>{shippingPrice === 0 ? 'Kostenlos' : formatPrice(shippingPrice)}</strong>
-          </div>
-          <div className="cart-total">
-            <span>Gesamt</span>
-            <strong>{formatPrice(total)}</strong>
-          </div>
+          <p>Ab zwei Schildern kostenloser Versand. Den Gesamtpreis siehst du im Checkout.</p>
           <DeliveryGuarantee />
           <button
             className="button button-wide"
             type="button"
             onClick={openCheckout}
           >
-            Mit Stripe bezahlen <ArrowRight size={18} />
+            Weiter zum Checkout <ArrowRight size={18} />
           </button>
           <PaymentLogos />
           <p className="demo-disclaimer">
@@ -542,9 +527,9 @@ export default function Home() {
                 <div>
                   <span>
                     {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} ·
-                    {shippingPrice === 0 ? 'Versand kostenlos' : `Versand ${formatPrice(shippingPrice)}`}
+                    ab zwei Schildern kostenloser Versand
                   </span>
-                  <strong>{formatPrice(total)}</strong>
+                  <strong>ab 9,80 € pro Schild</strong>
                 </div>
                 <button
                   className="button button-wide"
@@ -736,37 +721,18 @@ export default function Home() {
             {plateType === 'motorcycle' && <div className="home-motorcycle-options">
               <div className="home-motorcycle-finish" aria-label="Motorrad-Ausführung">
                 <button type="button" aria-pressed={plateColor === 'black'} onClick={() => setMotorcycleColor('black')}>Standard</button>
-                <button type="button" aria-pressed={plateColor === 'carbon'} onClick={() => setMotorcycleColor('carbon')}>Carbon (+{formatPrice((quantity === 2 ? MOTORCYCLE_PACKAGES.motorrad_carbon_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_2.priceCents : MOTORCYCLE_PACKAGES.motorrad_carbon_1.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents) / 100)})</button>
+                <button type="button" aria-pressed={plateColor === 'carbon'} onClick={() => setMotorcycleColor('carbon')}>Carbon</button>
               </div>
               <div className="home-motorcycle-packages" aria-label="Motorrad-Pakete">
                 {(Object.entries(MOTORCYCLE_PACKAGES) as [MotorcyclePackage, typeof MOTORCYCLE_PACKAGES[MotorcyclePackage]][]).map(([id, option]) => <button key={id} type="button" aria-pressed={motorcyclePackage === id} onClick={() => chooseMotorcyclePackage(id)}>
                   {id === 'motorrad_2' && <em>Meistgewählt</em>}
-                  <strong>{option.label}</strong><span>{formatPrice(option.priceCents / 100)} · {option.quantity === 1 ? 'zzgl. 3,95 € Versand' : 'Versand kostenlos'}</span>
-                  {id === 'motorrad_2' && <small>nur {formatPrice((MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents - SINGLE_PLATE_SHIPPING_CENTS) / 100)} mehr</small>}
+                  <strong>{option.label}</strong><span>{option.quantity === 2 ? 'Kostenloser Versand' : 'Preis im Checkout'}</span>
                 </button>)}
               </div>
-              {status && motorcyclePackage === 'motorrad_1' && <div className="home-motorcycle-upsell">Für nur {formatPrice((MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents - SINGLE_PLATE_SHIPPING_CENTS) / 100)} mehr: Ersatzschild dazu – falls dein Schild verbiegt oder beschädigt wird. <button type="button" onClick={() => chooseMotorcyclePackage('motorrad_2')}>Ersatzschild hinzufügen</button></div>}
+              {status && motorcyclePackage === 'motorrad_1' && <div className="home-motorcycle-upsell">Ein Ersatzschild hilft, falls dein Schild verbiegt oder beschädigt wird. <button type="button" onClick={() => chooseMotorcyclePackage('motorrad_2')}>Ersatzschild hinzufügen</button></div>}
               <p>Das Ersatzschild trägt dieselbe Kombination. Wird dein Schild verbogen oder beschädigt, lässt du das Ersatzschild einfach bei der Zulassungsstelle stempeln – ohne neu zu bestellen.</p>
             </div>}
-            <div className="price-card">
-              <div>
-                <span>
-                  {plateType === 'motorcycle' && motorcyclePackage ? MOTORCYCLE_PACKAGES[motorcyclePackage].label : `${quantity} × ${product.label}`}, {product.size}, {plateColor === 'carbon' ? 'Carbon' : 'Schwarz'}
-                </span>
-                <strong>{formatPrice(plateSubtotal)}</strong>
-              </div>
-              <div>
-                <span>DHL-Versand</span>
-                <strong>{shippingPrice === 0 ? 'Kostenlos' : formatPrice(shippingPrice)}</strong>
-              </div>
-              <div className="price-total">
-                <span>Gesamt</span>
-                <strong>{formatPrice(total)}</strong>
-              </div>
-              <small>
-                Alle Preise inklusive gesetzlicher Mehrwertsteuer. {shippingPrice === 0 ? 'Versand kostenlos.' : 'Versand 3,95 €.'}
-              </small>
-            </div>
+            <p>Autokennzeichen ab 9,80 € pro Schild · ab zwei Schildern kostenloser Versand. Deinen Gesamtpreis siehst du im Checkout.</p>
             <DeliveryGuarantee />
             <button
               className="button button-wide"
@@ -937,7 +903,7 @@ export default function Home() {
             <span>
               {product.label} · Schwarz · {quantity} ×
             </span>
-            <strong>{formatPrice(total)}</strong>
+            <strong>ab 9,80 € pro Schild</strong>
           </div>
         </div>
         <div
@@ -975,7 +941,7 @@ export default function Home() {
             onClick={openCheckout}
             disabled={!status}
           >
-            Zum sicheren Checkout · {formatPrice(total)}
+            Zum sicheren Checkout
           </button>
           <small>Mit dem Klick öffnet sich unsere eigene Checkout-Seite.</small>
           <DinCertificationLink />
@@ -1079,7 +1045,7 @@ export default function Home() {
             {plateValue}
             {suffix && ` ${suffix}`}
           </span>
-          <strong>{formatPrice(total)}</strong>
+          <strong>ab 9,80 € pro Schild</strong>
         </div>
         <button type="button" onClick={openCheckout} disabled={!status}>
           Bestellen <ArrowRight size={17} />

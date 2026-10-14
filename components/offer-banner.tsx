@@ -14,7 +14,7 @@ export function OfferBanner() {
   if (pathname === '/kennzeichen-bestellen-herbstangebot') {
     return <div className="offer-banner" role="note">
       <span className="offer-banner-label">Herbst-Angebot</span>
-      <span className="offer-banner-message">Autokennzeichen ab <strong>9,80 €</strong> · Carbon ab <strong>14,60 €</strong></span>
+      <span className="offer-banner-message">Autokennzeichen ab <strong>9,80 € pro Schild</strong> · ab zwei Schildern kostenloser Versand</span>
       <span className="offer-banner-mobile-message">Autokennzeichen ab <strong>9,80 €</strong></span>
       <Link href="/kennzeichen-bestellen-herbstangebot#konfigurator">Jetzt bestellen</Link>
     </div>;
@@ -33,7 +33,7 @@ export function OfferBanner() {
     <div className="offer-banner" role="note">
       <span className="offer-banner-label">Kennzeichen</span>
       <span className="offer-banner-message">
-        Autokennzeichen ab <strong>9,80 € pro Schild</strong> · einzeln zzgl. 3,95 € Versand
+        Autokennzeichen ab <strong>9,80 € pro Schild</strong> · ab zwei Schildern kostenloser Versand
       </span>
       <span className="offer-banner-mobile-message">
         Autokennzeichen ab <strong>9,80 €</strong> pro Schild

@@ -27,7 +27,6 @@ import { EvbPartnerBlock } from '@/components/evb-partner-block';
 import { DeliveryGuarantee } from '@/components/delivery-guarantee';
 import { GERMAN_STATES, HOLIDAY_REGIONS, type GermanState } from '@/lib/delivery-promise';
 import { LicensePlate } from '@/components/license-plate';
-import { CHECKOUT_UPSELLS_ENABLED } from '@/config/checkout-features';
 import {
   BIKE_RACK_PLATE_PRICE,
   CARBON_SURCHARGE,
@@ -36,7 +35,6 @@ import {
   getMotorcyclePackage,
   MOTORCYCLE_PACKAGES,
   isAgriculturePlate,
-  isSinglePlateProduct,
   PARKING_PLATE_PRICE,
   plateColorLabel,
   PRODUCTS,
@@ -46,10 +44,6 @@ import {
 import type { CheckoutExtras, CheckoutPricing } from '@/lib/checkout-pricing';
 import { type OfferProfile } from '@/lib/pricing';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
-import {
-  ExtrasUpsellPopup,
-  type UpsellKind,
-} from '@/components/parking-upsell';
 import { readAttribution } from '@/lib/attribution';
 import { trackKennzeichenGtmEvent } from '@/lib/kennzeichen-gtm-events';
 import type { PurchaseEvent } from '@/lib/purchase-event';
@@ -87,6 +81,7 @@ function PaymentForm({
   paymentIntentId,
   onApplyPromo,
   onChangeExtra,
+  onChangeColor,
   onStepChange,
   isUpdatingPackage,
   checkoutSyncReady,
@@ -100,6 +95,7 @@ function PaymentForm({
   paymentIntentId: string;
   onApplyPromo: (code: string) => Promise<CheckoutPricing>;
   onChangeExtra: (extras: CheckoutExtras) => Promise<CheckoutPricing>;
+  onChangeColor: (color: PlateColor) => Promise<CheckoutPricing>;
   onStepChange: (step: 'address' | 'payment') => void;
   isUpdatingPackage: boolean;
   checkoutSyncReady: boolean;
@@ -189,16 +185,16 @@ function PaymentForm({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  async function changeExtras(nextExtras: CheckoutExtras) {
+  async function changeSelection(update: () => Promise<CheckoutPricing>) {
     if (!elements || isPaying || isApplyingPromo || isUpdatingPackage || !checkoutSyncReady || changingExtra.current)
       return false;
     changingExtra.current = true;
     setIsUpdatingExtra(true);
     setMessage('');
     try {
-      await onChangeExtra(nextExtras);
-      const update = await elements.fetchUpdates();
-      if (update.error) throw new Error(update.error.message);
+      await update();
+      const elementUpdate = await elements.fetchUpdates();
+      if (elementUpdate.error) throw new Error(elementUpdate.error.message);
       setPromoReady(true);
       return true;
     } catch (error) {
@@ -217,15 +213,11 @@ function PaymentForm({
     }
   }
 
-  async function changeExtra(kind: UpsellKind, selected: boolean) {
-    return changeExtras({ ...extras, [kind === 'parking' ? 'parkingPlate' : 'bikeRackPlate']: selected });
-  }
-
   async function changeAddon(id: AddonId, selected: boolean) {
-    return changeExtras({ ...extras, addOns: selected
+    return changeSelection(() => onChangeExtra({ ...extras, addOns: selected
       ? [...(extras.addOns ?? []), id]
       : (extras.addOns ?? []).filter((current) => current !== id),
-    });
+    }));
   }
 
   async function applyPromo(code: string) {
@@ -430,32 +422,6 @@ function PaymentForm({
           {Object.entries(HOLIDAY_REGIONS[deliveryState]).map(([code, name]) => <option key={code} value={code}>{name}</option>)}
         </select>
       </label>}
-      {CHECKOUT_UPSELLS_ENABLED && !isSinglePlateProduct(selection.plateType) && (
-        <section className={styles.optionalExtras} aria-label="Zusatzkennzeichen">
-          <div><strong>Passendes Zubehör (optional)</strong><p>Ein weiteres Kennzeichen für Parkplatz oder Fahrradträger.</p></div>
-          <ExtrasUpsellPopup
-            plate={selection.plate}
-            plateType={selection.plateType}
-            plateColor={selection.plateColor}
-            priceCents={Math.round(PARKING_PLATE_PRICE * 100)}
-            selected={{ parking: extras.parkingPlate, bikeRack: extras.bikeRackPlate }}
-            busy={isUpdatingExtra}
-            disabled={!stripe || !elements || isPaying || isApplyingPromo || isUpdatingPackage || !checkoutSyncReady}
-            onChange={changeExtra}
-          />
-        </section>
-      )}
-      <section className={styles.optionalExtras} aria-label="Zusatzprodukte">
-        <div><strong>Zusatzprodukte (optional)</strong><p>Wähle nur aus, was du zu deiner Bestellung hinzufügen möchtest.</p></div>
-        {ADDON_IDS.filter((id) => isAddonAvailable(id, selection.plateType)).map((id) => (
-          <label key={id} className={styles.addonChoice}>
-            <input type="checkbox" checked={extras.addOns?.includes(id) ?? false}
-              disabled={!stripe || !elements || isPaying || isUpdatingExtra || isApplyingPromo || isUpdatingPackage || !checkoutSyncReady}
-              onChange={(event) => { void changeAddon(id, event.target.checked); }} />
-            <span>{ADDONS[id].name} – {formatPrice(ADDONS[id].priceCents / 100)}</span>
-          </label>
-        ))}
-      </section>
       {message && step === 'address' && <p className="checkout-error" role="alert">{message}</p>}
       <button className="checkout-continue" type="button" onClick={continueToPayment} disabled={!elements || isUpdatingExtra || isApplyingPromo || isUpdatingPackage || !checkoutSyncReady}>
         Weiter zur Zahlung <ArrowRight size={18} />
@@ -542,6 +508,32 @@ function PaymentForm({
         <span>Gesamtbetrag inkl. DHL-Versand</span>
         <strong className="checkout-live-price" key={pricing.totalCents}>{formatPrice(pricing.totalCents / 100)}</strong>
       </div>
+      <section className={styles.optionalExtras} aria-label="Zusatzoptionen">
+        <div><strong>Extras zu deiner Bestellung (optional)</strong><p>Wähle Zusatzkennzeichen und Carbon-Optik vor der Zahlung.</p></div>
+        {selection.plateType === 'standard' && <label className={styles.addonChoice}>
+          <input type="checkbox" checked={extras.parkingPlate} disabled={!stripe || !elements || isUpdatingExtra || isPaying || isApplyingPromo || !checkoutSyncReady}
+            onChange={(event) => { void changeSelection(() => onChangeExtra({ ...extras, parkingPlate: event.target.checked })); }} />
+          <span>Parkplatz-Kennzeichen (gleiche Kombination) · +{formatPrice(pricing.unitPriceCents / 100)}</span>
+        </label>}
+        {!['motorcycle', 'agriculture240', 'agriculture255'].includes(selection.plateType) && <label className={styles.addonChoice}>
+          <input type="checkbox" checked={extras.bikeRackPlate} disabled={!stripe || !elements || isUpdatingExtra || isPaying || isApplyingPromo || !checkoutSyncReady}
+            onChange={(event) => { void changeSelection(() => onChangeExtra({ ...extras, bikeRackPlate: event.target.checked })); }} />
+          <span>Fahrradträger-Kennzeichen (gleiche Kombination) · +{formatPrice(selection.plateType === 'standard' ? pricing.unitPriceCents / 100 : BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0))}</span>
+        </label>}
+        {!isAgriculturePlate(selection.plateType) && <label className={styles.addonChoice}>
+          <input type="checkbox" checked={selection.plateColor === 'carbon'} disabled={!stripe || !elements || isUpdatingExtra || isPaying || isApplyingPromo || !checkoutSyncReady}
+            onChange={(event) => { void changeSelection(() => onChangeColor(event.target.checked ? 'carbon' : 'black')); }} />
+          <span>Carbon-Optik · {selection.plateColor === 'carbon' ? 'ausgewählt' : `+${formatPrice(CARBON_SURCHARGE)} pro Schild`}</span>
+        </label>}
+        {ADDON_IDS.filter((id) => isAddonAvailable(id, selection.plateType)).map((id) => (
+          <label key={id} className={styles.addonChoice}>
+            <input type="checkbox" checked={extras.addOns?.includes(id) ?? false}
+              disabled={!stripe || !elements || isPaying || isUpdatingExtra || isApplyingPromo || isUpdatingPackage || !checkoutSyncReady}
+              onChange={(event) => { void changeAddon(id, event.target.checked); }} />
+            <span>{ADDONS[id].name} · +{formatPrice(ADDONS[id].priceCents / 100)}</span>
+          </label>
+        ))}
+      </section>
       <button
         className="stripe-pay-button"
         type="submit"
@@ -561,8 +553,7 @@ function PaymentForm({
           </>
         ) : (
           <>
-            <LockKeyhole /> Jetzt {formatPrice(pricing.totalCents / 100)}{' '}
-            bezahlen
+            <LockKeyhole /> Bestellung abschließen · {formatPrice(pricing.totalCents / 100)}
           </>
         )}
       </button>
@@ -829,7 +820,7 @@ export function EmbeddedCheckout({
         {extras.parkingPlate && (
           <div className="real-order-line">
             <span>1 × Parkplatz-Kennzeichen</span>
-            <strong>{formatPrice(PARKING_PLATE_PRICE)}</strong>
+            <strong>{formatPrice(offerBreakdown ? offerBreakdown.parkingExtraPriceCents / 100 : PARKING_PLATE_PRICE)}</strong>
           </div>
         )}
         {extras.bikeRackPlate && (
@@ -912,6 +903,7 @@ export function EmbeddedCheckout({
               onChangeExtra={(nextExtras) =>
                 updateCheckout(pricing.promoCode ?? '', nextExtras, selectedColor, true)
               }
+              onChangeColor={(nextColor) => updateCheckout(pricing.promoCode ?? '', extras, nextColor, true)}
               onStepChange={setCheckoutStep}
               isUpdatingPackage={isUpdatingPackage}
               checkoutSyncReady={checkoutSyncReady}

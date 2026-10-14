@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin']
 
 export const metadata: Metadata = {
   title: 'Kennzeichen ab 9,80 € bestellen | kennzeichen-lieferung.de',
-  description: 'Autokennzeichen ab 9,80 € pro Schild, Carbon ab 14,60 €. Alle Preise inkl. MwSt. Einzelschild Auto oder Motorrad zzgl. 3,95 € Versand.',
+  description: 'Autokennzeichen ab 9,80 € pro Schild inklusive Mehrwertsteuer. Ab zwei Schildern ist der Versand kostenlos.',
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -145,9 +145,9 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
       setPlateType(draft.plateType);
       setCarQuantity(draft.quantity === 1 ? 1 : 2);
       setMotorcycleQuantity(draft.plateType === 'motorcycle' && draft.quantity === 2 ? 2 : 1);
-      setPlateColor(draft.plateColor);
-      setParkingPlate(isHerbst && draft.plateType === 'standard' && draft.parkingPlate === true);
-      setBikeRackPlate(draft.bikeRackPlate === true);
+      setPlateColor(isHerbst ? 'black' : draft.plateColor);
+      setParkingPlate(false);
+      setBikeRackPlate(!isHerbst && draft.bikeRackPlate === true);
       setCity(savedCity);
       setLetters(savedLetters);
       setNumbers(savedNumbers);
@@ -266,7 +266,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           />
         </Link>
         <nav className={styles.nav} aria-label="Seitennavigation">
-          {isHerbst && <a href="#konfigurator">Preise</a>}
+          {isHerbst && <a href="#konfigurator">Bestellen</a>}
           <a href="#qualitaet">Qualität</a>
           <a href="#versand">Versand</a>
           <a href="#fragen">FAQ</a>
@@ -291,7 +291,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             sicher online. Deine DIN-zertifizierten Schilder werden in 10
             Minuten geprägt und für den DHL-Versand vorbereitet.
           </p>}
-          {isHerbst ? plateType === 'motorcycle' ? <p className={styles.heroOffer}><span>Motorrad-Kennzeichen ab</span><strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong><small>inkl. MwSt. · einzeln zzgl. 3,95 € Versand</small></p> : <p className={styles.heroOffer}><span>Autokennzeichen ab</span><strong>9,80 €</strong><small>pro Schild · inkl. MwSt. · einzeln zzgl. 3,95 € Versand</small></p> : <p className={styles.heroOffer}>
+          {isHerbst ? plateType === 'motorcycle' ? <p className={styles.heroOffer}><span>Motorrad-Kennzeichen ab</span><strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong><small>pro Schild · inkl. MwSt.</small></p> : <p className={styles.heroOffer}><span>Autokennzeichen ab</span><strong>9,80 €</strong><small>pro Schild · inkl. MwSt.</small></p> : <p className={styles.heroOffer}>
             <span>Kennzeichen ab</span>
             <strong>9,80 €</strong>
             <small>pro Schild · inkl. 19 % MwSt.</small>
@@ -317,9 +317,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         <div className={styles.orderCard} id="konfigurator">
           <div className={styles.cardTopline}>
             <span>Schritt 1: Kennzeichen wählen</span>
-            <strong>
-              {isHerbst ? totalPlates : quantity} {(isHerbst ? totalPlates : quantity) === 1 ? 'Schild' : 'Schilder'} · {formatPrice(total)} gesamt
-            </strong>
+            <strong>{isHerbst ? `${quantity} ${quantity === 1 ? 'Schild' : 'Schilder'}` : `${quantity} ${quantity === 1 ? 'Schild' : 'Schilder'} · ${formatPrice(total)} gesamt`}</strong>
           </div>
           {isHerbst && <p className={styles.offerSelectionSummary} aria-live="polite">✓ Deine Auswahl: <strong>{totalPlates} Kennzeichen · {plateColor === 'carbon' ? 'Carbon' : 'Standard'}</strong></p>}
           <div className={styles.livePreviewLabel}>
@@ -339,7 +337,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             <span className={styles.inlinePackagesTitle}>Motorrad-Kennzeichen wählen</span>
             <div className={styles.motorcycleFinishChoice} aria-label="Motorrad-Ausführung">
               <button type="button" aria-pressed={plateColor === 'black'} onClick={() => setPlateColor('black')}>Standard</button>
-              <button type="button" aria-pressed={plateColor === 'carbon'} onClick={() => setPlateColor('carbon')}>Carbon (+{formatPrice(motorcycleCarbonUpgradeCents / 100)})</button>
+              {!isHerbst && <button type="button" aria-pressed={plateColor === 'carbon'} onClick={() => setPlateColor('carbon')}>Carbon (+{formatPrice(motorcycleCarbonUpgradeCents / 100)})</button>}
             </div>
             {!isHerbst && <div className={styles.motorcyclePackageGrid} aria-label="Motorrad-Kennzeichen">
               {(Object.entries(MOTORCYCLE_PACKAGES) as [MotorcyclePackage, typeof MOTORCYCLE_PACKAGES[MotorcyclePackage]][]).map(([id, motorcycle]) => (
@@ -406,7 +404,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
               </div>
             </div>
           )}
-          {plateType !== 'motorcycle' && (
+          {!isHerbst && plateType !== 'motorcycle' && (
             <div className={styles.finishChoice} aria-label="Ausführung">
               <button type="button" aria-pressed={plateColor === 'black'} onClick={() => setPlateColor('black')}>Standard</button>
               <button type="button" aria-pressed={plateColor === 'carbon'} onClick={() => setPlateColor('carbon')}>Carbon-Optik <b>Beliebt</b><small>+4,80 € pro Schild</small></button>
@@ -475,7 +473,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             </div>
           )}
 
-          <div className={styles.summary}>
+          {!isHerbst && <div className={styles.summary}>
             <div>
               <span className={styles.platePrice}>
                 {quantity} {quantity === 1 ? 'Schild' : 'Schilder'}: {formatPrice((quantity * (pricing?.unitPriceCents ?? 0) - (pricing?.packageDiscountCents ?? 0)) / 100)}
@@ -490,12 +488,11 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             </div>
             {parkingPlate && isHerbst && plateType === 'standard' && <div><span>Parkplatz-Kennzeichen</span><strong>{formatPrice((pricing?.parkingExtraPriceCents ?? 0) / 100)}</strong></div>}
             {bikeRackPlate && plateType !== 'motorcycle' && <div><span>Fahrradträger-Kennzeichen</span><strong>{formatPrice((pricing?.bikeRackExtraPriceCents ?? 0) / 100)}</strong></div>}
-          </div>
-          <p className={styles.livePriceNote}>inkl. 19 % MwSt. · {pricing?.shippingCents ? 'Versand 3,95 €' : 'Versand kostenlos'}</p>
-          <p className={styles.shippingProgress} aria-live="polite">{pricing?.shippingCents ? '3,95 € Versand bei einem Schild' : 'Versand kostenlos ✓'}</p>
+          </div>}
+          {!isHerbst && <p className={styles.livePriceNote}>inkl. 19 % MwSt. · {pricing?.shippingCents ? 'Versand 3,95 €' : 'Versand kostenlos'}</p>}
+          <p className={styles.shippingProgress} aria-live="polite">{isHerbst ? quantity >= 2 ? 'Ab zwei Kennzeichen: kostenloser Versand ✓' : 'Ab zwei Kennzeichen kostenloser Versand' : pricing?.shippingCents ? '3,95 € Versand bei einem Schild' : 'Versand kostenlos ✓'}</p>
           <DeliveryGuarantee label={isHerbst ? 'Pünktlich-Garantie' : undefined} />
-          {isHerbst && plateType === 'standard' && <label className={styles.extraCheck}><input type="checkbox" checked={parkingPlate} onChange={(event) => setParkingPlate(event.target.checked)} /><span>Parkplatz-Kennzeichen hinzufügen (gleiche Kombination) <strong>+{formatPrice((pricing?.unitPriceCents ?? 0) / 100)}</strong></span></label>}
-          {plateType !== 'motorcycle' && <label className={styles.extraCheck}><input type="checkbox" checked={bikeRackPlate} onChange={(event) => setBikeRackPlate(event.target.checked)} /><span>Fahrradträger-Kennzeichen hinzufügen (gleiche Kombination) <strong>+{formatPrice(((plateType === 'standard' ? pricing?.unitPriceCents : pricing?.bikeRackExtraPriceCents) ?? 0) / 100)}</strong></span></label>}
+          {!isHerbst && plateType !== 'motorcycle' && <label className={styles.extraCheck}><input type="checkbox" checked={bikeRackPlate} onChange={(event) => setBikeRackPlate(event.target.checked)} /><span>Fahrradträger-Kennzeichen hinzufügen (gleiche Kombination) <strong>+{formatPrice(((plateType === 'standard' ? pricing?.unitPriceCents : pricing?.bikeRackExtraPriceCents) ?? 0) / 100)}</strong></span></label>}
           {showShippingCutoff && <p className={styles.shippingCutoff}><Truck size={17} /> Bis {HERBST_SHIPPING_CUTOFF_TIME} Uhr bestellt – heute noch versendet.</p>}
           <button
             className={styles.orderButton}
@@ -512,7 +509,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
             )}
           </button>
           <p className={styles.checkoutNote}>
-            <LockKeyhole /> {formatPrice(total)} inkl. MwSt. und Versand · Adresse und Zahlung folgen · kein Konto nötig
+            <LockKeyhole /> {isHerbst ? 'Gesamtpreis und Versand im nächsten Schritt · kein Konto nötig' : `${formatPrice(total)} inkl. MwSt. und Versand · Adresse und Zahlung folgen · kein Konto nötig`}
           </p>
           {isHerbst && <ReviewPlaceholder />}
           <div className={styles.paymentWrap}>
@@ -520,26 +517,6 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           </div>
         </div>
       </section>
-
-      {isHerbst && <section className={styles.priceOverview} aria-labelledby="price-overview-title">
-        <p className={styles.kicker}><span /> Unsere Preise</p>
-        <h2 id="price-overview-title">Kennzeichen zum festen Stückpreis</h2>
-        <div className={styles.priceOverviewGrid}>
-          <div><h3>Autokennzeichen</h3><p>1 Schild <strong>9,80 €</strong></p><p>2 Schilder <strong>19,60 €</strong></p><p>3 Schilder <strong>29,40 €</strong></p><p>4 Schilder <strong>39,20 €</strong></p></div>
-          <div><h3>Autokennzeichen Carbon</h3><p>1 Schild <strong>14,60 €</strong></p><p>2 Schilder <strong>29,20 €</strong></p><p>3 Schilder <strong>43,80 €</strong></p><p>4 Schilder <strong>58,40 €</strong></p></div>
-          <div><h3>Motorrad-Kennzeichen</h3><p>Standard <strong>9,80 €</strong></p><p>Carbon <strong>14,60 €</strong></p></div>
-        </div>
-        <small>Alle Schildpreise inklusive 19 % Mehrwertsteuer. Bei einem Auto- oder Motorradschild kommen 3,95 € Versand hinzu.</small>
-      </section>}
-
-      {isHerbst && <section className={styles.localComparison} aria-labelledby="local-comparison-title">
-        <div>
-          <p className={styles.kicker}><span /> Preisvergleich</p>
-          <h2 id="local-comparison-title">Schilderdienst vor Ort oder bequem nach Hause?</h2>
-        </div>
-        <p><strong>Schilderdienst vor Ort:</strong> oft 30–50 € für Standardschilder ohne Carbon-Optik, plus Wartezeit.</p>
-        <p><strong>Bei uns:</strong> 3 Autokennzeichen für 29,40 €, Versand kostenlos, bequem nach Hause.</p>
-      </section>}
 
       <section className={styles.proofBar} aria-label="Produktvorteile">
         <div>
@@ -935,7 +912,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
         <a href={configuratorHref}>
           Jetzt Kennzeichen konfigurieren <ArrowRight />
         </a>
-        <small>inkl. 19 % MwSt. · einzeln 3,95 € Versand · ab zwei Schildern versandkostenfrei · Tracking per E-Mail</small>
+        <small>inkl. 19 % MwSt. · ab zwei Schildern versandkostenfrei · Tracking per E-Mail</small>
       </section>
 
       {isHerbst && GOOGLE_REVIEW_RATING !== null && GOOGLE_REVIEW_COUNT !== null && <section className={styles.lowerReviews} aria-label="Google-Bewertungen">
@@ -957,10 +934,8 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
 
       <div className={styles.mobileBar}>
         <div>
-          <span>
-            {totalPlates} {totalPlates === 1 ? 'Schild' : 'Schilder'} · Gesamt inkl. Versand
-          </span>
-          <strong>{isHerbst ? formatPrice(total) : `Jetzt ${formatPrice(total)}`}</strong>
+          <span>{isHerbst ? 'Autokennzeichen ab · pro Schild' : `${totalPlates} ${totalPlates === 1 ? 'Schild' : 'Schilder'} · Gesamt inkl. Versand`}</span>
+          <strong>{isHerbst ? '9,80 €' : `Jetzt ${formatPrice(total)}`}</strong>
         </div>
         {isHerbst ? <button type="button" onClick={() => valid && validSeason ? checkout() : document.getElementById('konfigurator')?.scrollIntoView({ behavior: 'smooth' })}>
           Jetzt bestellen <ArrowRight />
