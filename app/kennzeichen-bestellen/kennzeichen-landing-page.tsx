@@ -25,6 +25,7 @@ import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
 import { DeliveryGuarantee } from '@/components/delivery-guarantee';
 import { DinCertificationLink } from '@/components/din-certification-link';
+import { SeoBreadcrumbs } from '@/components/seo-breadcrumbs';
 import {
   formatPrice,
   isValidPlate,
@@ -265,6 +266,8 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           />
         </Link>
         <nav className={styles.nav} aria-label="Seitennavigation">
+          <Link href="/">Startseite</Link>
+          <Link href="/ratgeber">Ratgeber</Link>
           {isHerbst && <a href="#konfigurator">Bestellen</a>}
           <a href="#qualitaet">Qualität</a>
           <a href="#versand">Versand</a>
@@ -274,6 +277,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           Kennzeichen konfigurieren
         </a>
       </header>
+      <SeoBreadcrumbs current={isHerbst ? 'Herbstangebot' : 'Autokennzeichen bestellen'} />
 
       <section className={`${styles.hero} ${isHerbst ? styles.herbstHero : ''}`} id="bestellen">
         <div className={styles.heroCopy}>

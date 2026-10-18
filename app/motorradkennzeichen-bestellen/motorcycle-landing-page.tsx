@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { ArrowRight, BadgeCheck, CheckCircle2, LockKeyhole, Truck } from 'lucide-react';
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
+import { SeoBreadcrumbs } from '@/components/seo-breadcrumbs';
 import { formatPrice, getMotorcyclePackage, isValidPlate, MOTORCYCLE_PACKAGES, type MotorcyclePackage, type PlateColor } from '@/config/products';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
@@ -67,6 +68,7 @@ export function MotorcycleLandingPage() {
       <Link href="/" aria-label="kennzeichen-lieferung.de Startseite"><Image src="/kennzeichen-lieferung-logo.png" alt="kennzeichen-lieferung.de" width={2172} height={724} priority /></Link>
       <a href="#konfigurator">Motorrad-Schild konfigurieren <ArrowRight size={16} /></a>
     </header>
+    <SeoBreadcrumbs current="Motorradkennzeichen bestellen" />
     <section className={styles.hero}>
       <div className={styles.copy}>
         <p className={styles.kicker}>DIN 74069 · 180 × 200 mm</p>
@@ -114,5 +116,6 @@ export function MotorcycleLandingPage() {
       <h2>Ein Schild für dein Motorrad. Ein Ersatz bei Beschädigung.</h2>
       <p>Alle vier Pakete enthalten die Prägung deiner Kombination und den DHL-Versand. Das Ersatzschild ist ein zweites, gleich geprägtes Schild; für den Einsatz muss es bei der Zulassungsstelle gestempelt werden.</p>
     </section>
+    <section className="seo-motorcycle-extra"><h2>Häufige Fragen zum Motorradkennzeichen</h2><details><summary>Welche Größe kann ich hier bestellen?</summary><p>Der Konfigurator bietet ein zweizeiliges Schild in 180 × 200 mm. Prüfe vor der Bestellung, welche Schildform und Zeichenfolge dir zugeteilt wurden.</p></details><details><summary>Ist das Ersatzschild anders beschriftet?</summary><p>Nein. Beide Schilder eines Pakets tragen dieselbe Kombination. Amtliche Plaketten sind nicht im Lieferumfang.</p></details><details><summary>Wird meine Kombination hier reserviert?</summary><p>Nein. Die Eingabe dient nur der Schilderbestellung. Informationen zur Reservierung findest du im <Link href="/ratgeber/wunschkennzeichen-reservieren">Ratgeber</Link>.</p></details><div><Link href="/ratgeber/kennzeichengroessen">Kennzeichengrößen vergleichen →</Link><Link href="/carbon-kennzeichen">Carbon-Optik ansehen →</Link></div></section>
   </main>;
 }

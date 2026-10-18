@@ -13,7 +13,14 @@ export type CheckoutSource =
   | 'kennzeichen-bestellen-herbstangebot'
   | 'motorradkennzeichen-bestellen'
   | 'autohaendlerpartner'
-  | 'landmaschinen-kennzeichen';
+  | 'landmaschinen-kennzeichen'
+  | 'fahrradtraeger-kennzeichen'
+  | 'anhaengerkennzeichen'
+  | 'e-kennzeichen'
+  | 'h-kennzeichen'
+  | 'saisonkennzeichen'
+  | 'carbon-kennzeichen'
+  | 'kennzeichenhalter';
 
 export type CheckoutDraft = {
   plate: string;
@@ -51,7 +58,14 @@ export function isCheckoutSource(value: unknown): value is CheckoutSource {
     value === 'kennzeichen-bestellen-herbstangebot' ||
     value === 'motorradkennzeichen-bestellen' ||
     value === 'autohaendlerpartner' ||
-    value === 'landmaschinen-kennzeichen'
+    value === 'landmaschinen-kennzeichen' ||
+    value === 'fahrradtraeger-kennzeichen' ||
+    value === 'anhaengerkennzeichen' ||
+    value === 'e-kennzeichen' ||
+    value === 'h-kennzeichen' ||
+    value === 'saisonkennzeichen' ||
+    value === 'carbon-kennzeichen' ||
+    value === 'kennzeichenhalter'
   );
 }
 

@@ -10,6 +10,7 @@ import { PaymentLogos } from '@/components/payment-logos';
 import { KlarnaPromo } from '@/components/klarna-promo';
 import { DhlPickupPromo } from '@/components/dhl-pickup-promo';
 import { ProductionPromo } from '@/components/production-promo';
+import { ProductDirectory } from '@/components/product-directory';
 import { formatPrice, isValidPlate, PRODUCTS, type PlateColor, type PlateType } from '@/config/products';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import { readCheckoutDraft, saveCheckoutDraft, type CheckoutSource } from '@/lib/checkout-draft';
@@ -137,7 +138,7 @@ export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', sho
     <div className={styles.utility}><span><ShieldCheck size={16} /> DIN 74069 geprüfte Schilder</span><span><Factory size={16} /> Prägung in Deutschland</span><span><Truck size={16} /> DHL-Versand mit Sendungsverfolgung</span></div>
     <header className={styles.header}>
       <Link href="/" className={styles.brand} aria-label="kennzeichen-lieferung.de – Startseite"><Image src="/kennzeichen-lieferung-logo.png" alt="kennzeichen-lieferung.de" width={2172} height={724} priority /></Link>
-      <nav aria-label="Seitennavigation"><a href="#konfigurator">Konfigurator</a><a href="#ablauf">So funktioniert&apos;s</a><a href="#fragen">Fragen & Antworten</a></nav>
+      <nav aria-label="Seitennavigation"><a href="#konfigurator">Konfigurator</a><Link href="/kennzeichen-bestellen">Produkte</Link><Link href="/ratgeber">Ratgeber</Link><a href="#fragen">FAQ</a></nav>
       <button className={styles.cartTrigger} type="button" onClick={() => setCartOpen(true)} aria-label={`Warenkorb öffnen, ${cart ? cart.quantity : 0} Artikel`}><ShoppingBag size={21} /><span>{cart ? cart.quantity : 0}</span></button>
     </header>
 
@@ -190,6 +191,7 @@ export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', sho
     </section>
 
     <section className={styles.process} id="ablauf"><div className={styles.processHead}><span className={styles.overline}>SO EINFACH GEHT&apos;S</span><h2>Von der Idee bis zum Briefkasten.</h2></div><div className={styles.processGrid}><article><span>01</span><CarFront size={26} /><h3>Konfigurieren</h3><p>Fahrzeug, Kombination und Oberfläche auswählen. Die Vorschau zeigt dein Schild direkt an.</p></article><article><span>02</span><LockKeyhole size={26} /><h3>Sicher bestellen</h3><p>Im Warenkorb prüfst du den Gesamtpreis. Adresse und Zahlung folgen im geschützten Checkout.</p></article><article><span>03</span><PackageCheck size={26} /><h3>Liefern lassen</h3><p>Wir prägen dein Kennzeichen und schicken es mit DHL und Sendungsverfolgung zu dir.</p></article></div></section>
+    {source === 'home' && <ProductDirectory />}
     {showKlarnaPromo && <KlarnaPromo />}
     <section className={styles.referenceGallery} aria-labelledby="beispielbilder-heading">
       <div className={styles.referenceHeading}><span className={styles.overline}>BEISPIEL-EINSENDUNGEN</span><h2 id="beispielbilder-heading">So könnten Einsendungen von Kunden aussehen.</h2><p>Illustrativ erstellte Bilder im Stil privater Kundenfotos von Autos, Anhängern und Wohnwagen. Es sind keine echten Kundeneinsendungen.</p></div>

@@ -159,6 +159,7 @@ export function LandmaschinenLandingPage() {
           Jetzt konfigurieren
         </a>
       </header>
+      <nav className="seo-breadcrumbs" aria-label="Brotkrumennavigation"><Link href="/">Startseite</Link><span aria-hidden="true">/</span><span aria-current="page">Landmaschinen-Kennzeichen</span></nav>
 
       <section className={styles.hero}>
         <div className={styles.heroCopy}>

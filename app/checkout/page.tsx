@@ -13,6 +13,7 @@ const PLATE_TYPES = Object.keys(PRODUCTS) as PlateType[];
 export const metadata: Metadata = {
   title: 'Bestellung abschließen | kennzeichen-lieferung.de',
   description: 'Prüfe deine Kennzeichen-Bestellung und gib deine Lieferadresse ein.',
+  robots: { index: false, follow: false },
 };
 
 function first(value: string | string[] | undefined) {

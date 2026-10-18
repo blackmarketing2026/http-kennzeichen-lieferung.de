@@ -1,10 +1,11 @@
 ﻿import type { Metadata } from 'next';
 import { OnlineOrderPage } from './kennzeichen-online-bestellen24/online-order-page';
+import { absoluteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Kennzeichen online bestellen24 | kennzeichen-lieferung.de',
   description: 'Kennzeichen online konfigurieren, Preis und Versand prüfen und sicher bestellen. Für Auto, E-Auto, Oldtimer, Motorrad und Landmaschinen.',
-  alternates: { canonical: '/' },
+  alternates: { canonical: absoluteUrl('/') },
 };
 
 export default function Home() {
