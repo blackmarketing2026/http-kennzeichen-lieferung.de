@@ -11,6 +11,5 @@
 .referenceGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .referenceCard{margin:0;border:1px solid var(--border);border-radius:12px;background:#fff;overflow:hidden;box-shadow:0 8px 22px #1025370a}
 .referenceCard img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
-.referenceCard figcaption{padding:13px 15px;color:#455b64;font-size:13px;font-weight:700}
 @media(max-width:900px){.referenceGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.referenceGallery{padding:62px 20px}.referenceGrid{grid-template-columns:1fr;gap:16px}}
