@@ -5,7 +5,9 @@ import { usePathname } from 'next/navigation';
 import { CookieSettingsButton } from '@/components/cookie-notice';
 
 export function SiteLegalFooter() {
-  const isHerbst = usePathname() === '/kennzeichen-bestellen-herbstangebot';
+  const pathname = usePathname();
+  const isHerbst = pathname === '/kennzeichen-bestellen-herbstangebot';
+  if (pathname === '/checkout') return null;
   return (
     <div className="site-legal-footer">
       <span>© {new Date().getFullYear()} Function Concept · kennzeichen-lieferung.de</span>

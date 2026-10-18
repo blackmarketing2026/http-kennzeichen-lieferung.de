@@ -16,13 +16,14 @@ import {
   ArrowLeft,
   ArrowRight,
   CheckCircle2,
+  ChevronDown,
   LoaderCircle,
   LockKeyhole,
 } from 'lucide-react';
-import { PaymentLogos } from '@/components/payment-logos';
 import { ADDONS, ADDON_IDS, isAddonAvailable, type AddonId } from '@/config/addons';
 import { PurchaseTracker } from '@/components/purchase-tracker';
 import { ShippingNotice } from '@/components/shipping-notice';
+import { CookieSettingsButton } from '@/components/cookie-notice';
 import { EvbPartnerBlock } from '@/components/evb-partner-block';
 import { DeliveryGuarantee } from '@/components/delivery-guarantee';
 import { GERMAN_STATES, HOLIDAY_REGIONS, type GermanState } from '@/lib/delivery-promise';
@@ -82,7 +83,6 @@ function PaymentForm({
   onApplyPromo,
   onChangeExtra,
   onChangeColor,
-  onStepChange,
   isUpdatingPackage,
   checkoutSyncReady,
   trackKennzeichenFunnel,
@@ -96,7 +96,6 @@ function PaymentForm({
   onApplyPromo: (code: string) => Promise<CheckoutPricing>;
   onChangeExtra: (extras: CheckoutExtras) => Promise<CheckoutPricing>;
   onChangeColor: (color: PlateColor) => Promise<CheckoutPricing>;
-  onStepChange: (step: 'address' | 'payment') => void;
   isUpdatingPackage: boolean;
   checkoutSyncReady: boolean;
   trackKennzeichenFunnel: boolean;
@@ -180,7 +179,6 @@ function PaymentForm({
       // The internal hint must not prevent the customer from paying.
     }
     setStep('payment');
-    onStepChange('payment');
     if (trackKennzeichenFunnel) trackKennzeichenGtmEvent('kennzeichen_adresse');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -384,10 +382,9 @@ function PaymentForm({
   return (
     <form className="real-payment-form" onSubmit={handleSubmit}>
       <section className="checkout-flow-step" hidden={step !== 'address'}>
-        <div className="checkout-step-heading">
-          <span>Schritt 2 von 3</span>
-          <h2>Wohin dürfen wir die Kennzeichen schicken?</h2>
-          <p>Gib hier deine Lieferadresse ein.</p>
+        <div className="checkout-step-heading checkout-contact-heading">
+          <h2>Kontakt</h2>
+          <Link href="/konto/login">Anmelden</Link>
         </div>
       <label className="checkout-email">
         E-Mail-Adresse
@@ -399,8 +396,11 @@ function PaymentForm({
           required
         />
       </label>
+      <div className="checkout-step-heading checkout-section-heading">
+        <h2>Lieferung</h2>
+        <p>Wohin dürfen wir deine Kennzeichen schicken?</p>
+      </div>
       <div className="stripe-element-group">
-        <span>Lieferadresse</span>
         <AddressElement
           options={{
             mode: 'shipping',
@@ -422,6 +422,14 @@ function PaymentForm({
           {Object.entries(HOLIDAY_REGIONS[deliveryState]).map(([code, name]) => <option key={code} value={code}>{name}</option>)}
         </select>
       </label>}
+      <div className="checkout-shipping-section">
+        <h3>Versand</h3>
+        <div className="checkout-shipping-option">
+          <span className="checkout-shipping-radio" aria-hidden="true" />
+          <span><strong>DHL Standardversand</strong><small>Lieferung voraussichtlich in 1–4 Werktagen nach Bestellung und Zahlung.</small></span>
+          <strong>{pricing.shippingCents ? formatPrice(pricing.shippingCents / 100) : 'Kostenlos'}</strong>
+        </div>
+      </div>
       {message && step === 'address' && <p className="checkout-error" role="alert">{message}</p>}
       <button className="checkout-continue" type="button" onClick={continueToPayment} disabled={!elements || isUpdatingExtra || isApplyingPromo || isUpdatingPackage || !checkoutSyncReady}>
         Weiter zur Zahlung <ArrowRight size={18} />
@@ -429,18 +437,16 @@ function PaymentForm({
       </section>
       <section className="checkout-flow-step" hidden={step !== 'payment'}>
         <div className="checkout-step-heading">
-          <span>Schritt 3 von 3</span>
-          <h2>Zahlungsart wählen</h2>
-          <p>Prüfe deine Lieferadresse und schließe die Bestellung sicher ab.</p>
+          <h2>Zahlung</h2>
+          <p>Alle Transaktionen sind sicher und verschlüsselt.</p>
         </div>
       {shippingAddress && <div className="checkout-address-review">
-        <div><strong>Lieferadresse</strong><button type="button" onClick={() => { setStep('address'); onStepChange('address'); setMessage(''); }}>Ändern</button></div>
+        <div><strong>Lieferadresse</strong><button type="button" onClick={() => { setStep('address'); setMessage(''); }}>Ändern</button></div>
         <p>{shippingAddress.name}<br />{shippingAddress.address.line1}{shippingAddress.address.line2 && <><br />{shippingAddress.address.line2}</>}<br />{shippingAddress.address.postal_code} {shippingAddress.address.city}<br />{email}</p>
       </div>}
-      <div className="checkout-shipping-method"><span>Lieferung mit DHL</span><strong>Inklusive</strong></div>
+      <div className="checkout-shipping-method"><span>Lieferung mit DHL</span><strong>{pricing.shippingCents ? formatPrice(pricing.shippingCents / 100) : 'Kostenlos'}</strong></div>
       <div className="stripe-element-group">
-        <span>Zahlungsart</span>
-        {step === 'payment' && <PaymentElement options={{ layout: 'tabs' }} />}
+        {step === 'payment' && <PaymentElement options={{ layout: 'accordion' }} />}
       </div>
       <p className="checkout-account-hint">
         Du bestellst als Gast – kein Konto nötig. Schon Kunde?{' '}
@@ -557,7 +563,6 @@ function PaymentForm({
           </>
         )}
       </button>
-      <PaymentLogos />
       <p className="stripe-secure">
         <LockKeyhole /> Verschlüsselte Zahlung direkt über Stripe Elements
       </p>
@@ -595,7 +600,7 @@ export function EmbeddedCheckout({
   const [publishableKey, setPublishableKey] = useState('');
   const [pricing, setPricing] = useState<CheckoutPricing | null>(null);
   const [error, setError] = useState('');
-  const [checkoutStep, setCheckoutStep] = useState<'address' | 'payment'>('address');
+  const [summaryOpen, setSummaryOpen] = useState(false);
   const [requestAttempt, setRequestAttempt] = useState(0);
   const isUpdatingPackage = false;
   const [isUpdatingSelection, setIsUpdatingSelection] = useState(false);
@@ -754,31 +759,34 @@ export function EmbeddedCheckout({
       : '/#konfigurator');
 
   return (
-    <main className="real-checkout-page">
+    <main className="real-checkout-page shop-checkout">
       <header className="checkout-header">
         <Link className="checkout-logo" href="/">
           <Image src="/kennzeichen-lieferung-logo.png" alt="kennzeichen-lieferung.de" width={2172} height={724} priority />
         </Link>
         <span><LockKeyhole size={15} /> Sicher bestellen</span>
       </header>
-      <nav className="checkout-progress" aria-label="Bestellschritte">
-        <span className="is-complete"><b><CheckCircle2 size={17} /></b>Kennzeichen</span>
-        <span className={checkoutStep === 'address' ? 'is-current' : 'is-complete'}><b>{checkoutStep === 'address' ? '2' : <CheckCircle2 size={17} />}</b>Lieferadresse</span>
-        <span className={checkoutStep === 'payment' ? 'is-current' : ''}><b>3</b>Zahlung</span>
-      </nav>
-      <section className="checkout-order-panel">
+      <button type="button" className="checkout-summary-toggle" aria-expanded={summaryOpen} aria-controls="checkout-order-summary" onClick={() => setSummaryOpen((open) => !open)}>
+        <span>Bestellübersicht <ChevronDown size={17} aria-hidden="true" /></span>
+        <strong>{formatPrice(offerBreakdown ? offerBreakdown.totalCents / 100 : total)}</strong>
+      </button>
+      <section className={`checkout-order-panel${summaryOpen ? ' is-open' : ''}`} id="checkout-order-summary" aria-label="Bestellübersicht">
         <Link
           className="checkout-back"
           href={backHref}
         >
           <ArrowLeft /> Konfiguration ändern
         </Link>
-        <div className="checkout-flow-step">
+        <div className="checkout-flow-step checkout-product-block">
           <div className="checkout-order-copy">
             <span>Deine Bestellung</span>
             <h1>Kennzeichen im Überblick</h1>
           </div>
-        <div className="real-order-line">
+        <div className="real-order-line checkout-product-line">
+          <div className="checkout-product-thumbnail">
+            <LicensePlate value={selection.plate} type={selection.plateType} seasonStartMonth={selection.seasonStartMonth} seasonEndMonth={selection.seasonEndMonth} color={selection.plateColor} />
+            <span>{baseQuantity}</span>
+          </div>
           <div>
             <strong>
               {motorcyclePackage ? MOTORCYCLE_PACKAGES[motorcyclePackage].label : `${baseQuantity} × ${product.label}`}
@@ -789,7 +797,7 @@ export function EmbeddedCheckout({
               {selection.plateType === 'season' && ` · ${formatSeasonMonth(selection.seasonStartMonth ?? 4)}–${formatSeasonMonth(selection.seasonEndMonth ?? 10)}`}
             </span>
           </div>
-          {checkoutStep === 'payment' && <strong>
+          <strong>
             {formatPrice(
               offerBreakdown ? (offerBreakdown.unitPriceCents * baseQuantity - offerBreakdown.packageDiscountCents) / 100 : getPackagePrice(
                 selection.plateType,
@@ -797,57 +805,49 @@ export function EmbeddedCheckout({
                 baseQuantity,
               ),
             )}
-          </strong>}
+          </strong>
         </div>
         {motorcyclePackage && baseQuantity === 2 && <p className="checkout-preview-note">Das Ersatzschild trägt dieselbe Kombination. Bei Beschädigung lässt du es bei der Zulassungsstelle stempeln.</p>}
         </div>
         <div className="checkout-flow-step checkout-preview-block">
-          <div className="checkout-step-heading">
-            <span>Dein Kennzeichen</span>
-          </div>
-          <p className="checkout-live-label"><span aria-hidden="true" /> Live-Vorschau deiner Konfiguration</p>
-          <LicensePlate
-            value={selection.plate}
-            type={selection.plateType}
-            seasonStartMonth={selection.seasonStartMonth}
-            seasonEndMonth={selection.seasonEndMonth}
-            color={selection.plateColor}
-            className="real-checkout-plate"
-          />
           {selection.plateType !== 'motorcycle' && !isAgriculturePlate(selection.plateType) && (
             <p className="checkout-preview-note">Amtliche Siegel dienen nur der Vorschau und sind nicht im Lieferumfang.</p>
           )}
         {extras.parkingPlate && (
           <div className="real-order-line">
             <span>1 × Parkplatz-Kennzeichen</span>
-            {checkoutStep === 'payment' && <strong>{formatPrice(offerBreakdown ? offerBreakdown.parkingExtraPriceCents / 100 : PARKING_PLATE_PRICE)}</strong>}
+            <strong>{formatPrice(offerBreakdown ? offerBreakdown.parkingExtraPriceCents / 100 : PARKING_PLATE_PRICE)}</strong>
           </div>
         )}
         {extras.bikeRackPlate && (
           <div className="real-order-line">
             <span>1 × Fahrradträger-Kennzeichen</span>
-            {checkoutStep === 'payment' && <strong>{formatPrice(offerBreakdown ? offerBreakdown.bikeRackExtraPriceCents / 100 : BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0))}</strong>}
+            <strong>{formatPrice(offerBreakdown ? offerBreakdown.bikeRackExtraPriceCents / 100 : BIKE_RACK_PLATE_PRICE + (selection.plateColor === 'carbon' ? CARBON_SURCHARGE : 0))}</strong>
           </div>
         )}
         {(extras.addOns ?? []).map((id) => <div className="real-order-line" key={id}>
-          <span>{ADDONS[id].name}</span>{checkoutStep === 'payment' && <strong>{formatPrice(ADDONS[id].priceCents / 100)}</strong>}
+          <span>{ADDONS[id].name}</span><strong>{formatPrice(ADDONS[id].priceCents / 100)}</strong>
         </div>)}
-        {checkoutStep === 'payment' && <div className="real-order-line">
+        <div className="real-order-line checkout-subtotal-line">
+          <span>Zwischensumme · {quantity} Artikel</span>
+          <strong>{formatPrice(offerBreakdown ? (offerBreakdown.subtotalCents - offerBreakdown.packageDiscountCents) / 100 : total)}</strong>
+        </div>
+        <div className="real-order-line">
           <span>DHL-Versand</span>
           <strong>{(pricing?.shippingCents ?? offerEstimate?.shippingCents ?? 0) > 0 ? formatPrice((pricing?.shippingCents ?? offerEstimate?.shippingCents ?? 0) / 100) : 'Kostenlos'}</strong>
-        </div>}
-        {checkoutStep === 'payment' && pricing && pricing.discountCents > pricing.packageDiscountCents && (
+        </div>
+        {pricing && pricing.discountCents > pricing.packageDiscountCents && (
           <div className="real-order-line real-order-discount">
             <span>Rabatt ({pricing.promoCode})</span>
             <strong>−{formatPrice((pricing.discountCents - pricing.packageDiscountCents) / 100)}</strong>
           </div>
         )}
-        {checkoutStep === 'payment' && <div className="real-order-total">
-          <span>Gesamt</span>
+        <div className="real-order-total">
+          <span>Gesamt <small>inkl. MwSt.</small></span>
           <strong className="checkout-live-price" key={offerBreakdown?.totalCents ?? total}>
             {formatPrice(offerBreakdown ? offerBreakdown.totalCents / 100 : total)}
           </strong>
-        </div>}
+        </div>
         <p className="checkout-scope">
           Du bestellst geprägte Schilder. Reservierung, Zulassung und amtliche
           Plaketten sind nicht enthalten.
@@ -904,7 +904,6 @@ export function EmbeddedCheckout({
                 updateCheckout(pricing.promoCode ?? '', nextExtras, selectedColor, true)
               }
               onChangeColor={(nextColor) => updateCheckout(pricing.promoCode ?? '', extras, nextColor, true)}
-              onStepChange={setCheckoutStep}
               isUpdatingPackage={isUpdatingPackage}
               checkoutSyncReady={checkoutSyncReady}
               trackKennzeichenFunnel={returnPath?.startsWith('/kennzeichen-bestellen') === true}
@@ -918,6 +917,13 @@ export function EmbeddedCheckout({
           </div>
         )}
       </section>
+      <footer className="checkout-legal" aria-label="Rechtliche Informationen">
+        <Link href="/widerruf">Widerruf</Link>
+        <Link href="/liefergarantie">Versand & Lieferung</Link>
+        <Link href="/datenschutz">Datenschutz</Link>
+        <Link href="/impressum">Impressum</Link>
+        <CookieSettingsButton />
+      </footer>
     </main>
   );
 }

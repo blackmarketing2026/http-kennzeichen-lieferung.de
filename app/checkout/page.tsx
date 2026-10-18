@@ -6,6 +6,7 @@ import { isAvailableConfiguration, isValidPlate, PRODUCTS, type PlateColor, type
 import { checkoutReturnPath, isCheckoutSource } from '@/lib/checkout-draft';
 import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, isValidSeasonPeriod } from '@/lib/season-period';
 import { normalizeOffer } from '@/lib/pricing';
+import './shop-checkout.css';
 
 const PLATE_TYPES = Object.keys(PRODUCTS) as PlateType[];
 
