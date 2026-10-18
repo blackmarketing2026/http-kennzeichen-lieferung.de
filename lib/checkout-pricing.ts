@@ -16,7 +16,8 @@ import {
 import { addonTotalCents, isAddonAvailable, type AddonId } from '@/config/addons';
 
 const PROMO_CODES = {
-  TEST5: { totalCents: 500 },
+  TEST5: { kind: 'fixed-total', totalCents: 500 },
+  NEUEKENNZEICHEN: { kind: 'free-shipping' },
 } as const;
 
 export type CheckoutPricing = {
@@ -58,6 +59,7 @@ export function getCheckoutPricing(
   if ((extras.addOns ?? []).some((id) => !isAddonAvailable(id, plateType)) || new Set(extras.addOns ?? []).size !== (extras.addOns ?? []).length) return null;
   const promoCode = requestedCode?.trim().toUpperCase() || null;
   if (promoCode && !(promoCode in PROMO_CODES)) return null;
+  const promo = promoCode ? PROMO_CODES[promoCode as keyof typeof PROMO_CODES] : null;
   const addonPriceCents = addonTotalCents(extras.addOns ?? []);
 
   if (plateType === 'motorcycle') {
@@ -65,9 +67,9 @@ export function getCheckoutPricing(
     if (!packageId) return null;
     const subtotalCents = MOTORCYCLE_PACKAGES[packageId].priceCents;
     const emissionStickerPriceCents = extras.emissionSticker ? Math.round(EMISSION_STICKER_PRICE * 100) : 0;
-    const shippingCents = SHIPPING_CENTS;
+    const shippingCents = promo?.kind === 'free-shipping' ? 0 : SHIPPING_CENTS;
     const regularTotalCents = subtotalCents + emissionStickerPriceCents + shippingCents + addonPriceCents;
-    const totalCents = promoCode ? PROMO_CODES[promoCode as keyof typeof PROMO_CODES].totalCents + addonPriceCents : regularTotalCents;
+    const totalCents = promo?.kind === 'fixed-total' ? promo.totalCents + addonPriceCents : regularTotalCents;
     if (totalCents > regularTotalCents) return null;
     return {
       unitPriceCents: subtotalCents / baseQuantity, packageDiscountCents: 0,
@@ -99,11 +101,10 @@ export function getCheckoutPricing(
     color,
     baseQuantity,
   );
-  const shippingCents = SHIPPING_CENTS;
+  const shippingCents = promo?.kind === 'free-shipping' ? 0 : SHIPPING_CENTS;
   const regularTotalCents = subtotalCents + shippingCents - packageDiscountCents + addonPriceCents;
-  const targetTotalCents = promoCode
-    ? PROMO_CODES[promoCode as keyof typeof PROMO_CODES].totalCents + addonPriceCents
-    : regularTotalCents;
+  const targetTotalCents = promo?.kind === 'fixed-total'
+    ? promo.totalCents + addonPriceCents : regularTotalCents;
   if (targetTotalCents > regularTotalCents) return null;
 
   return {

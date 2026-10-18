@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { formatPrice, MOTORCYCLE_PACKAGES } from '@/config/products';
 
 export function OfferBanner() {
   const pathname = usePathname();
@@ -14,8 +13,8 @@ export function OfferBanner() {
   if (pathname === '/kennzeichen-bestellen-herbstangebot') {
     return <div className="offer-banner" role="note">
       <span className="offer-banner-label">Herbst-Angebot</span>
-      <span className="offer-banner-message">Autokennzeichen ab <strong>9,80 € pro Schild</strong> · zzgl. 4,90 € Versand</span>
-      <span className="offer-banner-mobile-message">Autokennzeichen ab <strong>9,80 €</strong></span>
+      <span className="offer-banner-message">Für kostenlosen Versand gib den Code <strong>neuekennzeichen</strong> ein.</span>
+      <span className="offer-banner-mobile-message">Gratis Versand: <strong>neuekennzeichen</strong></span>
       <Link href="/kennzeichen-bestellen-herbstangebot#konfigurator">Jetzt bestellen</Link>
     </div>;
   }
@@ -23,8 +22,8 @@ export function OfferBanner() {
   if (pathname === '/motorradkennzeichen-bestellen') {
     return <div className="offer-banner" role="note">
       <span className="offer-banner-label">Motorrad</span>
-      <span className="offer-banner-message">Motorrad-Kennzeichen ab <strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong> · zzgl. 4,90 € Versand</span>
-      <span className="offer-banner-mobile-message">Motorrad-Schild ab <strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong></span>
+      <span className="offer-banner-message">Für kostenlosen Versand gib den Code <strong>neuekennzeichen</strong> ein.</span>
+      <span className="offer-banner-mobile-message">Gratis Versand: <strong>neuekennzeichen</strong></span>
       <Link href="/motorradkennzeichen-bestellen#konfigurator">Jetzt bestellen</Link>
     </div>;
   }
@@ -33,10 +32,10 @@ export function OfferBanner() {
     <div className="offer-banner" role="note">
       <span className="offer-banner-label">Kennzeichen</span>
       <span className="offer-banner-message">
-        Autokennzeichen ab <strong>9,80 € pro Schild</strong> · zzgl. 4,90 € Versand
+        Für kostenlosen Versand gib den Code <strong>neuekennzeichen</strong> ein.
       </span>
       <span className="offer-banner-mobile-message">
-        Autokennzeichen ab <strong>9,80 €</strong> pro Schild
+        Gratis Versand: <strong>neuekennzeichen</strong>
       </span>
       <Link href="/kennzeichen-bestellen#konfigurator">Jetzt bestellen</Link>
     </div>

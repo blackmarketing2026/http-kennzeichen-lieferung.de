@@ -132,7 +132,7 @@ function PaymentForm({
   const [completedPurchase, setCompletedPurchase] = useState<PurchaseEvent | null>(null);
   const [promoInput, setPromoInput] = useState(pricing.promoCode ?? '');
   const [promoMessage, setPromoMessage] = useState(
-    pricing.promoCode ? 'Händlercode angewendet.' : '',
+    pricing.promoCode === 'NEUEKENNZEICHEN' ? 'Kostenloser Versand aktiviert.' : pricing.promoCode ? 'Rabattcode angewendet.' : '',
   );
   const [promoError, setPromoError] = useState(false);
   const [isApplyingPromo, setIsApplyingPromo] = useState(false);
@@ -191,7 +191,7 @@ function PaymentForm({
       setPromoReady(true);
       setPromoMessage(
         updatedPricing.promoCode
-          ? 'Rabattcode angewendet.'
+          ? updatedPricing.promoCode === 'NEUEKENNZEICHEN' ? 'Kostenloser Versand aktiviert.' : 'Rabattcode angewendet.'
           : 'Rabattcode entfernt.',
       );
     } catch (error) {
@@ -866,7 +866,7 @@ export function EmbeddedCheckout({
                 <div className="checkout-shipping-option">
                   <span className="checkout-shipping-radio" aria-hidden="true" />
                   <span><strong>DHL Standardversand</strong></span>
-                  <strong>{formatPrice((offerBreakdown?.shippingCents ?? SHIPPING_CENTS) / 100)}</strong>
+                  <strong>{(offerBreakdown?.shippingCents ?? SHIPPING_CENTS) === 0 ? 'Kostenlos' : formatPrice((offerBreakdown?.shippingCents ?? SHIPPING_CENTS) / 100)}</strong>
                 </div>
               </div>
               {addressError && <p className="checkout-error" role="alert">{addressError}</p>}

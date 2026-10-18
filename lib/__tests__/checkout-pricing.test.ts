@@ -81,6 +81,23 @@ describe('current license plate prices', () => {
     })).toMatchObject({ totalCents: 1290, addonPriceCents: 790 });
   });
 
+  it.each([
+    ['standard', 'black', 2, 1960],
+    ['motorcycle', 'black', 1, 980],
+    ['agriculture240', 'green', 1, 2490],
+  ] as const)('makes shipping free with neuekennzeichen for %s', (plateType, color, quantity, totalCents) => {
+    expect(getCheckoutPricing(plateType, color, quantity, ' neuekennzeichen '))
+      .toMatchObject({ totalCents, shippingCents: 0, promoCode: 'NEUEKENNZEICHEN' });
+    expect(getCheckoutPricing(plateType, color, quantity, undefined)?.totalCents)
+      .toBe(totalCents + 490);
+  });
+
+  it('keeps paid extras while removing only the shipping charge', () => {
+    expect(getCheckoutPricing('standard', 'black', 2, 'neuekennzeichen', {
+      parkingPlate: false, bikeRackPlate: true, addOns: ['holderScrews'],
+    })).toMatchObject({ totalCents: 3730, shippingCents: 0, addonPriceCents: 790 });
+  });
+
   it('applies promotions and rejects unsupported configurations', () => {
     expect(getCheckoutPricing('standard', 'black', 2, 'TEST5'))
       .toMatchObject({ totalCents: 500, shippingCents: 490, discountCents: 1950 });

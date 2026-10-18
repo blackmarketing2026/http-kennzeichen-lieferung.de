@@ -212,6 +212,16 @@ describe('checkout payment updates', () => {
     );
   });
 
+  it('keeps free shipping when the number of plates changes', async () => {
+    const response = await POST(request(3, 'neuekennzeichen'));
+    expect(response.status).toBe(200);
+    expect(stripe.update).toHaveBeenCalledWith(current.id, expect.objectContaining({
+      amount: 2940,
+      metadata: expect.objectContaining({ rabattcode: 'NEUEKENNZEICHEN', shipping_cents: '0' }),
+    }));
+    expect(await response.json()).toMatchObject({ pricing: { totalCents: 2940, shippingCents: 0 } });
+  });
+
   it('rejects a different cart and does not change its payment', async () => {
     stripe.retrieve.mockResolvedValue({
       ...current,
