@@ -5,7 +5,6 @@ import { preconnect } from 'react-dom';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  AddressElement,
   Elements,
   PaymentElement,
   useElements,
@@ -38,6 +37,7 @@ import {
   PARKING_PLATE_PRICE,
   plateColorLabel,
   PRODUCTS,
+  SHIPPING_CENTS,
   type PlateColor,
   type PlateType,
 } from '@/config/products';
@@ -72,6 +72,21 @@ type PaymentIntentResponse = {
   pricing?: CheckoutPricing;
 };
 
+type ShippingAddress = {
+  name: string;
+  phone?: string;
+  address: { city: string; country: string; line1: string; line2?: string; postal_code: string; state: GermanState };
+};
+
+type AddressDraft = {
+  name: string;
+  line1: string;
+  line2: string;
+  postalCode: string;
+  city: string;
+  phone: string;
+};
+
 function PaymentForm({
   selection,
   offer,
@@ -85,6 +100,11 @@ function PaymentForm({
   isUpdatingPackage,
   checkoutSyncReady,
   trackKennzeichenFunnel,
+  email,
+  shippingAddress,
+  deliveryState,
+  holidayRegion,
+  onEditAddress,
 }: {
   selection: ActiveSelection;
   offer: OfferProfile;
@@ -98,18 +118,14 @@ function PaymentForm({
   isUpdatingPackage: boolean;
   checkoutSyncReady: boolean;
   trackKennzeichenFunnel: boolean;
+  email: string;
+  shippingAddress: ShippingAddress;
+  deliveryState: GermanState;
+  holidayRegion: string;
+  onEditAddress: () => void;
 }) {
   const stripe = useStripe();
   const elements = useElements();
-  const [email, setEmail] = useState('');
-  const [step, setStep] = useState<'address' | 'payment'>('address');
-  const [shippingAddress, setShippingAddress] = useState<{
-    name: string;
-    phone?: string;
-    address: { city: string; country: string; line1: string; line2?: string; postal_code: string; state?: string };
-  } | null>(null);
-  const [deliveryState, setDeliveryState] = useState<GermanState | ''>('');
-  const [holidayRegion, setHolidayRegion] = useState('');
   const [isPaying, setIsPaying] = useState(false);
   const [message, setMessage] = useState('');
   const [succeeded, setSucceeded] = useState(false);
@@ -123,64 +139,6 @@ function PaymentForm({
   const [promoReady, setPromoReady] = useState(true);
   const [isUpdatingExtra, setIsUpdatingExtra] = useState(false);
   const changingExtra = useRef(false);
-
-  async function continueToPayment() {
-    setMessage('');
-    if (isUpdatingPackage || !checkoutSyncReady) {
-      setMessage('Bitte warte, bis dein Paket und der Zahlbetrag aktualisiert wurden.');
-      return;
-    }
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      setMessage('Bitte gib eine gültige E-Mail-Adresse ein.');
-      return;
-    }
-    const addressValue = await elements?.getElement(AddressElement)?.getValue();
-    if (!addressValue?.complete) {
-      setMessage('Bitte vervollständige deine Lieferadresse.');
-      return;
-    }
-    if (!deliveryState || (HOLIDAY_REGIONS[deliveryState] && !holidayRegion)) {
-      setMessage('Bitte wähle Bundesland und gegebenenfalls die Feiertagsregion.');
-      return;
-    }
-    const address = addressValue.value.address;
-    setShippingAddress({
-      name: addressValue.value.name,
-      phone: addressValue.value.phone || undefined,
-      address: {
-        city: address.city,
-        country: address.country,
-        line1: address.line1,
-        line2: address.line2 || undefined,
-        postal_code: address.postal_code,
-        state: deliveryState,
-      },
-    });
-    try {
-      await fetch('/api/checkout-address-added', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          cartId: getCartId(),
-          paymentIntentId,
-          email,
-          reminderConsent: false,
-          address: {
-            name: addressValue.value.name,
-            line1: address.line1,
-            city: address.city,
-            postalCode: address.postal_code,
-            country: address.country,
-          },
-        }),
-      });
-    } catch {
-      // The internal hint must not prevent the customer from paying.
-    }
-    setStep('payment');
-    if (trackKennzeichenFunnel) trackKennzeichenGtmEvent('kennzeichen_adresse');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
 
   async function changeSelection(update: () => Promise<CheckoutPricing>) {
     if (!elements || isPaying || isApplyingPromo || isUpdatingPackage || !checkoutSyncReady || changingExtra.current)
@@ -259,7 +217,7 @@ function PaymentForm({
       isPaying ||
       isApplyingPromo ||
       changingExtra.current ||
-      !promoReady || isUpdatingPackage || !checkoutSyncReady || step !== 'payment' || !shippingAddress
+      !promoReady || isUpdatingPackage || !checkoutSyncReady
     )
       return;
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
@@ -283,11 +241,6 @@ function PaymentForm({
       return;
     }
 
-    if (!deliveryState) {
-      setMessage('Bitte wähle das Bundesland deiner Lieferadresse.');
-      setIsPaying(false);
-      return;
-    }
     const region = HOLIDAY_REGIONS[deliveryState] ? holidayRegion : 'BASE';
     if (!region) {
       setMessage('Bitte wähle die Feiertagsregion deiner Lieferadresse.');
@@ -380,72 +333,18 @@ function PaymentForm({
 
   return (
     <form className="real-payment-form" onSubmit={handleSubmit}>
-      <section className="checkout-flow-step" hidden={step !== 'address'}>
-        <div className="checkout-step-heading checkout-contact-heading">
-          <h2>Kontakt</h2>
-          <Link href="/konto/login">Anmelden</Link>
-        </div>
-      <label className="checkout-email">
-        E-Mail-Adresse
-        <input
-          type="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          autoComplete="email"
-          required
-        />
-      </label>
-      <div className="checkout-step-heading checkout-section-heading">
-        <h2>Lieferung</h2>
-        <p>Wohin dürfen wir deine Kennzeichen schicken?</p>
-      </div>
-      <div className="stripe-element-group">
-        <AddressElement
-          options={{
-            mode: 'shipping',
-            allowedCountries: ['DE'],
-            fields: { phone: 'auto' },
-            defaultValues: { address: { country: 'DE' } },
-          }}
-        />
-      </div>
-      <label className="checkout-email">Bundesland der Lieferadresse
-        <select value={deliveryState} onChange={(event) => { setDeliveryState(event.target.value as GermanState | ''); setHolidayRegion(''); }} required>
-          <option value="">Bitte auswählen</option>
-          {Object.entries(GERMAN_STATES).map(([code, name]) => <option key={code} value={code}>{name}</option>)}
-        </select>
-      </label>
-      {deliveryState && HOLIDAY_REGIONS[deliveryState] && <label className="checkout-email">Feiertagsregion der Lieferadresse
-        <select value={holidayRegion} onChange={(event) => setHolidayRegion(event.target.value)} required>
-          <option value="">Bitte auswählen</option>
-          {Object.entries(HOLIDAY_REGIONS[deliveryState]).map(([code, name]) => <option key={code} value={code}>{name}</option>)}
-        </select>
-      </label>}
-      <div className="checkout-shipping-section">
-        <h3>Versand</h3>
-        <div className="checkout-shipping-option">
-          <span className="checkout-shipping-radio" aria-hidden="true" />
-          <span><strong>DHL Standardversand</strong></span>
-          <strong>{pricing.shippingCents ? formatPrice(pricing.shippingCents / 100) : 'Kostenlos'}</strong>
-        </div>
-      </div>
-      {message && step === 'address' && <p className="checkout-error" role="alert">{message}</p>}
-      <button className="checkout-continue" type="button" onClick={continueToPayment} disabled={!elements || isUpdatingExtra || isApplyingPromo || isUpdatingPackage || !checkoutSyncReady}>
-        Weiter zur Zahlung <ArrowRight size={18} />
-      </button>
-      </section>
-      <section className="checkout-flow-step" hidden={step !== 'payment'}>
+      <section className="checkout-flow-step">
         <div className="checkout-step-heading">
           <h2>Zahlung</h2>
           <p>Alle Transaktionen sind sicher und verschlüsselt.</p>
         </div>
-      {shippingAddress && <div className="checkout-address-review">
-        <div><strong>Lieferadresse</strong><button type="button" onClick={() => { setStep('address'); setMessage(''); }}>Ändern</button></div>
+      <div className="checkout-address-review">
+        <div><strong>Lieferadresse</strong><button type="button" onClick={onEditAddress}>Ändern</button></div>
         <p>{shippingAddress.name}<br />{shippingAddress.address.line1}{shippingAddress.address.line2 && <><br />{shippingAddress.address.line2}</>}<br />{shippingAddress.address.postal_code} {shippingAddress.address.city}<br />{email}</p>
-      </div>}
+      </div>
       <div className="checkout-shipping-method"><span>Lieferung mit DHL</span><strong>{pricing.shippingCents ? formatPrice(pricing.shippingCents / 100) : 'Kostenlos'}</strong></div>
       <div className="stripe-element-group">
-        {step === 'payment' && <PaymentElement options={{ layout: 'accordion' }} />}
+        <PaymentElement options={{ layout: 'accordion' }} />
       </div>
       <p className="checkout-account-hint">
         Du bestellst als Gast – kein Konto nötig. Schon Kunde?{' '}
@@ -500,7 +399,7 @@ function PaymentForm({
         )}
       </div>
       </section>
-      <section className="checkout-flow-step checkout-final-step" hidden={step !== 'payment'}>
+      <section className="checkout-flow-step checkout-final-step">
         <div className="checkout-step-heading">
           <h2>Bestellung abschließen</h2>
         </div>
@@ -599,6 +498,15 @@ export function EmbeddedCheckout({
   const [publishableKey, setPublishableKey] = useState('');
   const [pricing, setPricing] = useState<CheckoutPricing | null>(null);
   const [error, setError] = useState('');
+  const [checkoutStep, setCheckoutStep] = useState<'address' | 'payment'>('address');
+  const [email, setEmail] = useState('');
+  const [addressDraft, setAddressDraft] = useState<AddressDraft>({
+    name: '', line1: '', line2: '', postalCode: '', city: '', phone: '',
+  });
+  const [deliveryState, setDeliveryState] = useState<GermanState | ''>('');
+  const [holidayRegion, setHolidayRegion] = useState('');
+  const [shippingAddress, setShippingAddress] = useState<ShippingAddress | null>(null);
+  const [addressError, setAddressError] = useState('');
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [requestAttempt, setRequestAttempt] = useState(0);
   const isUpdatingPackage = false;
@@ -751,6 +659,58 @@ export function EmbeddedCheckout({
     () => (publishableKey ? loadStripe(publishableKey) : null),
     [publishableKey],
   );
+
+  useEffect(() => {
+    if (checkoutStep !== 'payment' || !shippingAddress || !paymentIntentId || !cartId.current) return;
+    const address = shippingAddress.address;
+    void fetch('/api/checkout-address-added', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        cartId: cartId.current,
+        paymentIntentId,
+        email,
+        reminderConsent: false,
+        address: {
+          name: shippingAddress.name,
+          line1: address.line1,
+          city: address.city,
+          postalCode: address.postal_code,
+          country: address.country,
+        },
+      }),
+    }).catch(() => {
+      // This optional reminder must not delay payment.
+    });
+  }, [checkoutStep, shippingAddress, paymentIntentId, email]);
+
+  function continueToPayment(event: React.SubmitEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!addressDraft.name.trim() || !addressDraft.line1.trim() || !addressDraft.city.trim()) {
+      setAddressError('Bitte vervollständige deine Lieferadresse.');
+      return;
+    }
+    if (!deliveryState || (HOLIDAY_REGIONS[deliveryState] && !holidayRegion)) {
+      setAddressError('Bitte wähle Bundesland und gegebenenfalls die Feiertagsregion.');
+      return;
+    }
+    setAddressError('');
+    setShippingAddress({
+      name: addressDraft.name.trim(),
+      phone: addressDraft.phone.trim() || undefined,
+      address: {
+        line1: addressDraft.line1.trim(),
+        line2: addressDraft.line2.trim() || undefined,
+        postal_code: addressDraft.postalCode.trim(),
+        city: addressDraft.city.trim(),
+        country: 'DE',
+        state: deliveryState,
+      },
+    });
+    setCheckoutStep('payment');
+    if (returnPath?.startsWith('/kennzeichen-bestellen')) trackKennzeichenGtmEvent('kennzeichen_adresse');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
   const backHref =
     returnPath ??
     (isAgriculturePlate(selection.plateType)
@@ -855,7 +815,65 @@ export function EmbeddedCheckout({
         </div>
       </section>
       <section className="checkout-payment-panel">
-        {error ? (
+        {checkoutStep === 'address' ? (
+          <form className="real-payment-form checkout-address-form" onSubmit={continueToPayment}>
+            <section className="checkout-flow-step">
+              <div className="checkout-step-heading checkout-contact-heading">
+                <h2>Kontakt</h2>
+                <Link href="/konto/login">Anmelden</Link>
+              </div>
+              <label className="checkout-email">E-Mail-Adresse
+                <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} autoComplete="email" required />
+              </label>
+              <div className="checkout-step-heading checkout-section-heading">
+                <h2>Lieferung</h2>
+                <p>Wohin dürfen wir deine Kennzeichen schicken?</p>
+              </div>
+              <label className="checkout-email">Vollständiger Name
+                <input value={addressDraft.name} onChange={(event) => setAddressDraft({ ...addressDraft, name: event.target.value })} autoComplete="name" required />
+              </label>
+              <label className="checkout-email">Straße und Hausnummer
+                <input value={addressDraft.line1} onChange={(event) => setAddressDraft({ ...addressDraft, line1: event.target.value })} autoComplete="address-line1" required />
+              </label>
+              <label className="checkout-email">Adresszusatz (optional)
+                <input value={addressDraft.line2} onChange={(event) => setAddressDraft({ ...addressDraft, line2: event.target.value })} autoComplete="address-line2" />
+              </label>
+              <div className="checkout-address-grid">
+                <label className="checkout-email">Postleitzahl
+                  <input value={addressDraft.postalCode} onChange={(event) => setAddressDraft({ ...addressDraft, postalCode: event.target.value })} autoComplete="postal-code" inputMode="numeric" pattern="[0-9]{5}" title="Bitte gib eine fünfstellige Postleitzahl ein." required />
+                </label>
+                <label className="checkout-email">Stadt
+                  <input value={addressDraft.city} onChange={(event) => setAddressDraft({ ...addressDraft, city: event.target.value })} autoComplete="address-level2" required />
+                </label>
+              </div>
+              <label className="checkout-email">Telefon (optional)
+                <input type="tel" value={addressDraft.phone} onChange={(event) => setAddressDraft({ ...addressDraft, phone: event.target.value })} autoComplete="tel" />
+              </label>
+              <label className="checkout-email">Bundesland der Lieferadresse
+                <select value={deliveryState} onChange={(event) => { setDeliveryState(event.target.value as GermanState | ''); setHolidayRegion(''); }} required>
+                  <option value="">Bitte auswählen</option>
+                  {Object.entries(GERMAN_STATES).map(([code, name]) => <option key={code} value={code}>{name}</option>)}
+                </select>
+              </label>
+              {deliveryState && HOLIDAY_REGIONS[deliveryState] && <label className="checkout-email">Feiertagsregion der Lieferadresse
+                <select value={holidayRegion} onChange={(event) => setHolidayRegion(event.target.value)} required>
+                  <option value="">Bitte auswählen</option>
+                  {Object.entries(HOLIDAY_REGIONS[deliveryState]).map(([code, name]) => <option key={code} value={code}>{name}</option>)}
+                </select>
+              </label>}
+              <div className="checkout-shipping-section">
+                <h3>Versand</h3>
+                <div className="checkout-shipping-option">
+                  <span className="checkout-shipping-radio" aria-hidden="true" />
+                  <span><strong>DHL Standardversand</strong></span>
+                  <strong>{formatPrice((offerBreakdown?.shippingCents ?? SHIPPING_CENTS) / 100)}</strong>
+                </div>
+              </div>
+              {addressError && <p className="checkout-error" role="alert">{addressError}</p>}
+              <button className="checkout-continue" type="submit">Weiter zur Zahlung <ArrowRight size={18} /></button>
+            </section>
+          </form>
+        ) : error ? (
           <div className="checkout-load-error">
             <h2>Checkout nicht verfügbar</h2>
             <p>{error}</p>
@@ -873,7 +891,7 @@ export function EmbeddedCheckout({
               Zurück zur Konfiguration
             </Link>
           </div>
-        ) : clientSecret && stripePromise && pricing ? (
+        ) : clientSecret && stripePromise && pricing && shippingAddress && deliveryState ? (
           <Elements
             stripe={stripePromise}
             options={{
@@ -905,6 +923,11 @@ export function EmbeddedCheckout({
               isUpdatingPackage={isUpdatingPackage}
               checkoutSyncReady={checkoutSyncReady}
               trackKennzeichenFunnel={returnPath?.startsWith('/kennzeichen-bestellen') === true}
+              email={email}
+              shippingAddress={shippingAddress}
+              deliveryState={deliveryState}
+              holidayRegion={holidayRegion}
+              onEditAddress={() => setCheckoutStep('address')}
             />
           </Elements>
         ) : (

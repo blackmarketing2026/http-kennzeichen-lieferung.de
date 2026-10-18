@@ -117,6 +117,19 @@
   font-size: .88rem;
 }
 
+.shop-checkout .checkout-address-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: 10px;
+}
+
+@media (max-width: 560px) {
+  .shop-checkout .checkout-address-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
 .shop-checkout .stripe-element-group {
   margin-bottom: 14px;
 }
