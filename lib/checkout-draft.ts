@@ -9,6 +9,7 @@ import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, isValidSeasonPeri
 export type CheckoutSource =
   | 'home'
   | 'kennzeichen-bestellen'
+  | 'kennzeichen-online-bestellen24'
   | 'kennzeichen-bestellen-herbstangebot'
   | 'motorradkennzeichen-bestellen'
   | 'autohaendlerpartner'
@@ -46,6 +47,7 @@ export function isCheckoutSource(value: unknown): value is CheckoutSource {
   return (
     value === 'home' ||
     value === 'kennzeichen-bestellen' ||
+    value === 'kennzeichen-online-bestellen24' ||
     value === 'kennzeichen-bestellen-herbstangebot' ||
     value === 'motorradkennzeichen-bestellen' ||
     value === 'autohaendlerpartner' ||
@@ -69,11 +71,13 @@ export function readCheckoutDraft(source: CheckoutSource): CheckoutDraft | null 
     if (!draft || typeof draft !== 'object') return null;
     const value = draft as Record<string, unknown>;
     const allowedTypes =
-      source === 'landmaschinen-kennzeichen' ? AGRICULTURE_TYPES : CAR_TYPES;
+      source === 'landmaschinen-kennzeichen' ? AGRICULTURE_TYPES : source === 'kennzeichen-online-bestellen24' ? [...CAR_TYPES, ...AGRICULTURE_TYPES] : CAR_TYPES;
+    const agricultureColor = source === 'landmaschinen-kennzeichen' ||
+      (source === 'kennzeichen-online-bestellen24' && AGRICULTURE_TYPES.includes(value.plateType as PlateType));
     if (
       typeof value.plate !== 'string' ||
       !allowedTypes.includes(value.plateType as PlateType) ||
-      (source === 'landmaschinen-kennzeichen'
+      (agricultureColor
         ? value.plateColor !== 'black' && value.plateColor !== 'green'
         : value.plateColor !== 'black' && value.plateColor !== 'carbon') ||
       (value.quantity !== 1 && value.quantity !== 2 && value.quantity !== 3) ||
