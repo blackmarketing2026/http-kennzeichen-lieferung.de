@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { ArrowRight, Bike, CarFront, Check, ChevronRight, CircleHelp, Clock3, Factory, Leaf, LockKeyhole, Minus, PackageCheck, Plus, RefreshCw, ShieldCheck, ShoppingBag, Tractor, Truck, X, Zap } from 'lucide-react';
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
+import { KlarnaPromo } from '@/components/klarna-promo';
 import { formatPrice, isValidPlate, PRODUCTS, type PlateColor, type PlateType } from '@/config/products';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import { readCheckoutDraft, saveCheckoutDraft, type CheckoutSource } from '@/lib/checkout-draft';
@@ -37,7 +38,7 @@ const examplePhotos = [
   { src: '/references/beispiel-wohnwagen-stellplatz.jpg', alt: 'Wohnwagen mit Kennzeichen auf einem Stellplatz' },
 ] as const;
 
-export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24' }: { source?: CheckoutSource }) {
+export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', showKlarnaPromo = false }: { source?: CheckoutSource; showKlarnaPromo?: boolean }) {
   const router = useRouter();
   const [vehicle, setVehicle] = useState<Vehicle>('car');
   const [type, setType] = useState<PlateType>('standard');
@@ -187,6 +188,7 @@ export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24' }: {
     </section>
 
     <section className={styles.process} id="ablauf"><div className={styles.processHead}><span className={styles.overline}>SO EINFACH GEHT&apos;S</span><h2>Von der Idee bis zum Briefkasten.</h2></div><div className={styles.processGrid}><article><span>01</span><CarFront size={26} /><h3>Konfigurieren</h3><p>Fahrzeug, Kombination und Oberfläche auswählen. Die Vorschau zeigt dein Schild direkt an.</p></article><article><span>02</span><LockKeyhole size={26} /><h3>Sicher bestellen</h3><p>Im Warenkorb prüfst du den Gesamtpreis. Adresse und Zahlung folgen im geschützten Checkout.</p></article><article><span>03</span><PackageCheck size={26} /><h3>Liefern lassen</h3><p>Wir prägen dein Kennzeichen und schicken es mit DHL und Sendungsverfolgung zu dir.</p></article></div></section>
+    {showKlarnaPromo && <KlarnaPromo />}
     <section className={styles.referenceGallery} aria-labelledby="beispielbilder-heading">
       <div className={styles.referenceHeading}><span className={styles.overline}>BEISPIEL-EINSENDUNGEN</span><h2 id="beispielbilder-heading">So könnten Einsendungen von Kunden aussehen.</h2><p>Illustrativ erstellte Bilder im Stil privater Kundenfotos von Autos, Anhängern und Wohnwagen. Es sind keine echten Kundeneinsendungen.</p></div>
       <div className={styles.referenceGrid}>{examplePhotos.map((photo) => <figure key={photo.src} className={styles.referenceCard}><Image src={photo.src} alt={photo.alt} width={1448} height={1086} sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" loading="lazy" /></figure>)}</div>
