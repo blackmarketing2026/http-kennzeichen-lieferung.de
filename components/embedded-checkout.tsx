@@ -25,7 +25,6 @@ import { PurchaseTracker } from '@/components/purchase-tracker';
 import { ShippingNotice } from '@/components/shipping-notice';
 import { CookieSettingsButton } from '@/components/cookie-notice';
 import { EvbPartnerBlock } from '@/components/evb-partner-block';
-import { DeliveryGuarantee } from '@/components/delivery-guarantee';
 import { GERMAN_STATES, HOLIDAY_REGIONS, type GermanState } from '@/lib/delivery-promise';
 import { LicensePlate } from '@/components/license-plate';
 import {
@@ -426,7 +425,7 @@ function PaymentForm({
         <h3>Versand</h3>
         <div className="checkout-shipping-option">
           <span className="checkout-shipping-radio" aria-hidden="true" />
-          <span><strong>DHL Standardversand</strong><small>Lieferung voraussichtlich in 1–4 Werktagen nach Bestellung und Zahlung.</small></span>
+          <span><strong>DHL Standardversand</strong></span>
           <strong>{pricing.shippingCents ? formatPrice(pricing.shippingCents / 100) : 'Kostenlos'}</strong>
         </div>
       </div>
@@ -853,7 +852,6 @@ export function EmbeddedCheckout({
           Plaketten sind nicht enthalten.
         </p>
         <DinCertificationLink />
-        <DeliveryGuarantee label={offer === 'herbst' ? 'Pünktlich-Garantie' : undefined} />
         </div>
       </section>
       <section className="checkout-payment-panel">
