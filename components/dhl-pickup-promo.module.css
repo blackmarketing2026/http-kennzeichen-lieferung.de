@@ -1,0 +1,92 @@
+.section {
+  color: #241610;
+  background: #ffcc00;
+  border-top: 10px solid #d50029;
+  overflow: hidden;
+}
+
+.inner {
+  max-width: 1370px;
+  margin: 0 auto;
+  padding: clamp(65px, 7vw, 100px) 32px;
+}
+
+.heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, .7fr);
+  align-items: start;
+  gap: 48px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  color: #a80020;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .15em;
+}
+
+.heading h2 {
+  max-width: 800px;
+  margin: 0;
+  font-size: clamp(39px, 4vw, 62px);
+  line-height: 1.05;
+  letter-spacing: -.05em;
+}
+
+.lead { max-width: 590px; margin: 22px 0 0; font-size: 18px; line-height: 1.5; }
+.logo { width: min(100%, 440px); height: auto; justify-self: end; margin-top: 25px; }
+
+.pickups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 43px;
+}
+
+.pickup {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  align-items: center;
+  column-gap: 16px;
+  min-height: 116px;
+  padding: 21px 24px;
+  border: 1px solid #a8002038;
+  border-bottom: 5px solid #d50029;
+  border-radius: 13px;
+  background: #fff7d7;
+  box-shadow: 0 13px 24px #9c58001c;
+}
+
+.icon { grid-row: span 2; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: #d50029; color: white; }
+.number { align-self: end; color: #9f3c1f; font-size: 12px; font-weight: 900; letter-spacing: .12em; }
+.pickup strong { align-self: start; font-size: 24px; line-height: 1.15; letter-spacing: -.025em; }
+
+.bottom { display: flex; align-items: center; justify-content: space-between; gap: 30px; margin-top: 33px; }
+.bottom p { display: flex; align-items: center; gap: 10px; max-width: 650px; margin: 0; font-size: 14px; line-height: 1.5; font-weight: 650; }
+.bottom p svg { flex: none; color: #b50025; }
+.bottom a { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 52px; padding: 0 22px; border-radius: 8px; background: #d50029; color: white; font-size: 14px; font-weight: 850; white-space: nowrap; transition: background .2s, transform .2s; }
+.bottom a:hover { background: #aa0020; transform: translateY(-2px); }
+.bottom a:focus-visible { outline: 3px solid #241610; outline-offset: 4px; }
+
+@media (max-width: 900px) {
+  .heading { grid-template-columns: 1fr; gap: 10px; }
+  .logo { grid-row: 1; justify-self: start; margin: 0 0 18px; width: min(65vw, 330px); }
+  .pickup { grid-template-columns: 1fr; gap: 9px; }
+  .icon { grid-row: auto; }
+}
+
+@media (max-width: 650px) {
+  .inner { padding: 60px 20px; }
+  .heading h2 { font-size: clamp(36px, 10vw, 48px); }
+  .lead { font-size: 16px; }
+  .pickups { grid-template-columns: 1fr; gap: 10px; margin-top: 32px; }
+  .pickup { grid-template-columns: 48px 1fr; min-height: 82px; padding: 14px 18px; column-gap: 14px; }
+  .icon { grid-row: span 2; width: 48px; height: 48px; }
+  .pickup strong { font-size: 21px; }
+  .bottom { flex-direction: column; align-items: stretch; }
+  .bottom a { width: 100%; white-space: normal; text-align: center; }
+}

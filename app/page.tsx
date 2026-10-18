@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <OnlineOrderPage source="home" showKlarnaPromo />;
+  return <OnlineOrderPage source="home" showKlarnaPromo showDhlPickupPromo />;
 }
