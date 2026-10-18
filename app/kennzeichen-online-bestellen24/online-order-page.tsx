@@ -9,6 +9,7 @@ import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
 import { KlarnaPromo } from '@/components/klarna-promo';
 import { DhlPickupPromo } from '@/components/dhl-pickup-promo';
+import { ProductionPromo } from '@/components/production-promo';
 import { formatPrice, isValidPlate, PRODUCTS, type PlateColor, type PlateType } from '@/config/products';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import { readCheckoutDraft, saveCheckoutDraft, type CheckoutSource } from '@/lib/checkout-draft';
@@ -39,7 +40,7 @@ const examplePhotos = [
   { src: '/references/beispiel-wohnwagen-stellplatz.jpg', alt: 'Wohnwagen mit Kennzeichen auf einem Stellplatz' },
 ] as const;
 
-export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', showKlarnaPromo = false, showDhlPickupPromo = false }: { source?: CheckoutSource; showKlarnaPromo?: boolean; showDhlPickupPromo?: boolean }) {
+export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', showKlarnaPromo = false, showDhlPickupPromo = false, showProductionPromo = false }: { source?: CheckoutSource; showKlarnaPromo?: boolean; showDhlPickupPromo?: boolean; showProductionPromo?: boolean }) {
   const router = useRouter();
   const [vehicle, setVehicle] = useState<Vehicle>('car');
   const [type, setType] = useState<PlateType>('standard');
@@ -194,6 +195,7 @@ export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', sho
       <div className={styles.referenceHeading}><span className={styles.overline}>BEISPIEL-EINSENDUNGEN</span><h2 id="beispielbilder-heading">So könnten Einsendungen von Kunden aussehen.</h2><p>Illustrativ erstellte Bilder im Stil privater Kundenfotos von Autos, Anhängern und Wohnwagen. Es sind keine echten Kundeneinsendungen.</p></div>
       <div className={styles.referenceGrid}>{examplePhotos.map((photo) => <figure key={photo.src} className={styles.referenceCard}><Image src={photo.src} alt={photo.alt} width={1448} height={1086} sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" loading="lazy" /></figure>)}</div>
     </section>
+    {showProductionPromo && <ProductionPromo />}
     {showDhlPickupPromo && <DhlPickupPromo />}
     <section className={styles.assurance}><div><ShieldCheck size={30} /><strong>DIN 74069</strong><span>Geprüfte Kennzeichen</span></div><div><Clock3 size={30} /><strong>Direkt in Produktion</strong><span>Nach deiner Bestellung</span></div><div><Zap size={30} /><strong>Einfach bestellen</strong><span>Ohne Kundenkonto</span></div><div><Leaf size={30} /><strong>Transparent</strong><span>Preis und Versand im Blick</span></div></section>
     <section className={styles.faq} id="fragen"><div><span className={styles.overline}>GUT ZU WISSEN</span><h2>Fragen vor der Bestellung?</h2><p>Die wichtigsten Antworten auf einen Blick.</p></div><div className={styles.faqList}><details><summary>Wann kommen meine Kennzeichen an?<ChevronRight size={18} /></summary><p>Wir machen deine Kennzeichen in etwa 10 Minuten versandfertig und versenden an Versandtagen dreimal täglich. Häufig treffen sie schon am nächsten Werktag ein, oft innerhalb von zwei Werktagen. Bitte plane dennoch 3–4 Werktage ein, da die Zustellung vom Versanddienstleister abhängt.</p></details><details><summary>Reserviere ich mit der Bestellung mein Wunschkennzeichen?<ChevronRight size={18} /></summary><p>Nein. Die Kennzeichenkombination musst du vorab bei deiner Zulassungsstelle reservieren oder zugeteilt bekommen. Hier bestellst du das geprägte Schild.</p></details><details><summary>Sind diese Kennzeichen auch für die Zulassungsbehörde geeignet?<ChevronRight size={18} /></summary><p>Ja. Unsere Kennzeichenschilder erfüllen die DIN 74069 und sind für die Vorlage bei der Zulassungsbehörde geeignet. Wir arbeiten mit einem entsprechend zertifizierten Hersteller zusammen.</p></details><details><summary>Wann sehe ich die Versandkosten?<ChevronRight size={18} /></summary><p>Der Gesamtpreis inklusive Versand steht bereits neben deiner Vorschau und wird im Warenkorb und Checkout erneut angezeigt.</p></details><details><summary>Sind die amtlichen Siegel enthalten?<ChevronRight size={18} /></summary><p>Nein. Die Siegel erhältst du bei der Zulassungsstelle. Die Vorschau dient nur zur Orientierung.</p></details></div></section>

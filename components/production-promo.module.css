@@ -1,0 +1,18 @@
+.section { background: #f2f6f3; overflow: hidden; }
+.inner { max-width: 1370px; margin: auto; padding: 90px 32px; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: clamp(35px, 5vw, 86px); }
+.copy { padding: 12px 0; }
+.eyebrow { display: flex; align-items: center; gap: 9px; color: #087f87; margin: 0 0 20px; font-size: 12px; font-weight: 900; letter-spacing: .13em; }
+.copy h2 { max-width: 600px; color: #102537; font-size: clamp(39px, 4vw, 62px); line-height: 1.06; letter-spacing: -.05em; margin: 0; }
+.lead { max-width: 540px; color: #49616d; font-size: 18px; line-height: 1.58; margin: 23px 0 0; }
+.steps { display: flex; flex-wrap: wrap; gap: 10px; margin: 32px 0; }
+.steps span { display: inline-flex; align-items: center; gap: 9px; border: 1px solid #c9dfdc; border-radius: 999px; background: #fff; padding: 10px 13px; color: #193949; font-size: 13px; font-weight: 750; }
+.steps strong { color: #08838a; font-size: 12px; }
+.cta { display: inline-flex; align-items: center; justify-content: center; gap: 13px; min-height: 53px; padding: 0 21px; border-radius: 8px; background: #07848b; color: #fff; font-size: 14px; font-weight: 850; transition: background .2s, transform .2s; }
+.cta:hover { background: #08666e; transform: translateY(-2px); }
+.cta:focus-visible { outline: 3px solid #102537; outline-offset: 4px; }
+.visual { position: relative; border-radius: 22px; background: #eee4d8; box-shadow: 0 28px 55px #10253720; }
+.visual img { display: block; width: 100%; height: auto; border-radius: inherit; }
+.badge { position: absolute; right: 20px; bottom: 20px; display: inline-flex; align-items: center; gap: 9px; padding: 13px 17px; border-radius: 10px; background: #fff; box-shadow: 0 9px 25px #10253726; color: #102537; font-size: 13px; font-weight: 850; }
+.badge svg { color: #07848b; }
+@media (max-width: 900px) { .inner { grid-template-columns: 1fr; gap: 36px; padding: 70px 24px; } .visual { max-width: 720px; } }
+@media (max-width: 600px) { .inner { padding: 59px 20px 65px; } .copy h2 { font-size: clamp(36px, 9vw, 48px); } .lead { font-size: 16px; } .steps { margin: 26px 0; } .steps span { font-size: 12px; } .cta { width: 100%; } .badge { right: 10px; bottom: 10px; padding: 9px 11px; font-size: 11px; } }
