@@ -29,6 +29,14 @@ const carTypes = [
 ] as const;
 const months = Array.from({ length: 12 }, (_, index) => index + 1);
 const source = 'kennzeichen-online-bestellen24' as const;
+const examplePhotos = [
+  { src: '/references/beispiel-auto-einfahrt.jpg', alt: 'Blaues Auto mit Kennzeichen in einer Einfahrt', caption: 'Auto in der Einfahrt' },
+  { src: '/references/beispiel-auto-hinterhof.jpg', alt: 'Weißes Auto mit Kennzeichen in einem Hinterhof', caption: 'Auto im Hinterhof' },
+  { src: '/references/beispiel-anhaenger-gartenladung.jpg', alt: 'Anhänger mit Kennzeichen und Gartenladung', caption: 'Anhänger im Alltag' },
+  { src: '/references/beispiel-auto-regenparkplatz.jpg', alt: 'Rotes Auto mit Kennzeichen auf einem regennassen Parkplatz', caption: 'Auto bei Regen' },
+  { src: '/references/beispiel-auto-tiefgarage.jpg', alt: 'Auto mit Kennzeichen in einer Tiefgarage', caption: 'Auto in der Tiefgarage' },
+  { src: '/references/beispiel-anhaenger-garten.jpg', alt: 'Weißer Anhänger mit Kennzeichen in einem Garten', caption: 'Anhänger im Garten' },
+] as const;
 
 export function OnlineOrderPage() {
   const router = useRouter();
@@ -180,6 +188,10 @@ export function OnlineOrderPage() {
     </section>
 
     <section className={styles.process} id="ablauf"><div className={styles.processHead}><span className={styles.overline}>SO EINFACH GEHT&apos;S</span><h2>Von der Idee bis zum Briefkasten.</h2></div><div className={styles.processGrid}><article><span>01</span><CarFront size={26} /><h3>Konfigurieren</h3><p>Fahrzeug, Kombination und Oberfläche auswählen. Die Vorschau zeigt dein Schild direkt an.</p></article><article><span>02</span><LockKeyhole size={26} /><h3>Sicher bestellen</h3><p>Im Warenkorb prüfst du den Gesamtpreis. Adresse und Zahlung folgen im geschützten Checkout.</p></article><article><span>03</span><PackageCheck size={26} /><h3>Liefern lassen</h3><p>Wir prägen dein Kennzeichen und schicken es mit DHL und Sendungsverfolgung zu dir.</p></article></div></section>
+    <section className={styles.referenceGallery} aria-labelledby="beispielbilder-heading">
+      <div className={styles.referenceHeading}><span className={styles.overline}>KENNZEICHEN IM ALLTAG</span><h2 id="beispielbilder-heading">So sieht ein Schild am Fahrzeug aus.</h2><p>Illustrative Beispielaufnahmen im Stil privater Handyfotos von Autos und Anhängern.</p></div>
+      <div className={styles.referenceGrid}>{examplePhotos.map((photo) => <figure key={photo.src} className={styles.referenceCard}><Image src={photo.src} alt={photo.alt} width={1448} height={1086} sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" loading="lazy" /><figcaption>{photo.caption}</figcaption></figure>)}</div>
+    </section>
     <section className={styles.assurance}><div><ShieldCheck size={30} /><strong>DIN 74069</strong><span>Geprüfte Kennzeichen</span></div><div><Clock3 size={30} /><strong>Direkt in Produktion</strong><span>Nach deiner Bestellung</span></div><div><Zap size={30} /><strong>Einfach bestellen</strong><span>Ohne Kundenkonto</span></div><div><Leaf size={30} /><strong>Transparent</strong><span>Preis und Versand im Blick</span></div></section>
     <section className={styles.faq} id="fragen"><div><span className={styles.overline}>GUT ZU WISSEN</span><h2>Fragen vor der Bestellung?</h2><p>Die wichtigsten Antworten auf einen Blick.</p></div><div className={styles.faqList}><details><summary>Reserviere ich mit der Bestellung mein Wunschkennzeichen?<ChevronRight size={18} /></summary><p>Nein. Die Kennzeichenkombination musst du vorab bei deiner Zulassungsstelle reservieren oder zugeteilt bekommen. Hier bestellst du das geprägte Schild.</p></details><details><summary>Wann sehe ich die Versandkosten?<ChevronRight size={18} /></summary><p>Der Gesamtpreis inklusive Versand steht bereits neben deiner Vorschau und wird im Warenkorb und Checkout erneut angezeigt.</p></details><details><summary>Sind die amtlichen Siegel enthalten?<ChevronRight size={18} /></summary><p>Nein. Die Siegel erhältst du bei der Zulassungsstelle. Die Vorschau dient nur zur Orientierung.</p></details></div></section>
     <div className={styles.payment}><PaymentLogos /></div>
