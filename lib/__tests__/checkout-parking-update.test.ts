@@ -23,7 +23,7 @@ const cartId = 'parking-checkout-test-1234';
 const current = {
   id: 'pi_test123',
   client_secret: 'pi_test123_secret_test',
-  amount: 1990,
+  amount: 2450,
   status: 'requires_payment_method',
   metadata: {
     cartId,
@@ -112,7 +112,7 @@ describe('checkout payment updates', () => {
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 2940,
+        amount: 3430,
         metadata: expect.objectContaining({
           anzahl: '3',
           parkplatzkennzeichen: '1',
@@ -121,15 +121,15 @@ describe('checkout payment updates', () => {
     );
     expect(await response.json()).toMatchObject({
       paymentIntentId: current.id,
-      pricing: { totalCents: 2940, parkingExtraPriceCents: 980 },
+      pricing: { totalCents: 3430, shippingCents: 490, parkingExtraPriceCents: 980 },
     });
   });
 
   it.each([
-    [[], 1960],
-    [['holderScrews'], 2750],
-    [['warningVest'], 2450],
-    [['holderScrews', 'warningVest'], 3240],
+    [[], 2450],
+    [['holderScrews'], 3240],
+    [['warningVest'], 2940],
+    [['holderScrews', 'warningVest'], 3730],
   ] as const)('updates a test-mode Stripe intent for add-ons %j', async (addOns, amount) => {
     const response = await POST(requestWithAddons([...addOns]));
     expect(response.status).toBe(200);
@@ -148,14 +148,14 @@ describe('checkout payment updates', () => {
   it('removes the extra and restores the original amount', async () => {
     stripe.retrieve.mockResolvedValue({
       ...current,
-      amount: 2940,
+      amount: 3430,
       metadata: { ...current.metadata, anzahl: '3', parkplatzkennzeichen: '1' },
     });
     expect((await POST(request(2))).status).toBe(200);
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 1960,
+        amount: 2450,
         metadata: expect.objectContaining({
           anzahl: '2',
           parkplatzkennzeichen: '0',
@@ -170,7 +170,7 @@ describe('checkout payment updates', () => {
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 3920,
+        amount: 4410,
         metadata: expect.objectContaining({
           anzahl: '4',
           parkplatzkennzeichen: '1',
@@ -183,14 +183,14 @@ describe('checkout payment updates', () => {
   it('can keep the bicycle-rack plate while removing the parking plate', async () => {
     stripe.retrieve.mockResolvedValue({
       ...current,
-      amount: 3920,
+      amount: 4410,
       metadata: { ...current.metadata, anzahl: '4', parkplatzkennzeichen: '1', fahrradtraegerkennzeichen: '1' },
     });
     expect((await POST(requestWithExtras(false, true))).status).toBe(200);
     expect(stripe.update).toHaveBeenCalledWith(
       current.id,
       expect.objectContaining({
-        amount: 2940,
+        amount: 3430,
         metadata: expect.objectContaining({ anzahl: '3', parkplatzkennzeichen: '0', fahrradtraegerkennzeichen: '1' }),
       }),
     );
@@ -237,16 +237,16 @@ describe('checkout payment updates', () => {
     vi.setSystemTime(new Date('2026-10-08T12:00:00+02:00'));
     stripe.retrieve.mockResolvedValue({
       ...current,
-      amount: 1970,
+      amount: 2450,
       metadata: { ...current.metadata, offer: 'herbst', parkplatzkennzeichen: '0', fahrradtraegerkennzeichen: '0' },
     });
     const response = await POST(requestWithHerbstPackage('carbon', true));
     expect(response.status).toBe(200);
     expect(stripe.update).toHaveBeenCalledWith(current.id, expect.objectContaining({
-      amount: 4380,
+      amount: 4870,
       metadata: expect.objectContaining({ schriftfarbe: 'Carbon', anzahl: '3', fahrradtraegerkennzeichen: '1' }),
     }));
-    expect(await response.json()).toMatchObject({ paymentIntentId: current.id, pricing: { totalCents: 4380 } });
+    expect(await response.json()).toMatchObject({ paymentIntentId: current.id, pricing: { totalCents: 4870, shippingCents: 490 } });
   });
 
   it('rejects a color change on a standard checkout', async () => {

@@ -23,9 +23,9 @@ import {
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
 import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
+import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import {
   formatPrice,
-  getUnitPrice,
   isValidPlate,
   PRODUCTS,
   type PlateColor,
@@ -81,7 +81,7 @@ export function LandmaschinenLandingPage() {
     () => isValidPlate(plateValue, plateType),
     [plateValue, plateType],
   );
-  const total = getUnitPrice(plateType, plateColor, 1);
+  const total = (getCheckoutPricing(plateType, plateColor, 1, undefined)?.totalCents ?? 0) / 100;
   const product = PRODUCTS[plateType];
 
   useEffect(() => {
@@ -325,7 +325,7 @@ export function LandmaschinenLandingPage() {
             )}
           </button>
           <p className={styles.secureNote}>
-            <LockKeyhole /> Sicherer Checkout · Versand kostenlos
+            <LockKeyhole /> Sicherer Checkout · 4,90 € Versand
           </p>
           <div className={styles.payments}>
             <PaymentLogos />
@@ -544,7 +544,7 @@ export function LandmaschinenLandingPage() {
         <a href="#konfigurator">
           Jetzt für {formatPrice(total)} bestellen <ArrowRight />
         </a>
-        <small>1 Schild · Versand kostenlos · Tracking per E-Mail</small>
+        <small>1 Schild · 4,90 € Versand · Tracking per E-Mail</small>
       </section>
 
       <footer className={styles.footer}>

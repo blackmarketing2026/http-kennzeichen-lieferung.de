@@ -4,7 +4,7 @@ import { KennzeichenLandingPage } from './kennzeichen-landing-page';
 export const metadata: Metadata = {
   title: 'Kennzeichen ab 9,80 € bestellen | DIN-zertifiziert',
   description:
-    'Autokennzeichen ab 9,80 € pro Schild, Carbon-Optik ab 14,60 €. Alle Preise inkl. 19 % MwSt. Einzelschild zzgl. 3,95 € Versand.',
+    'Autokennzeichen ab 9,80 € pro Schild, Carbon-Optik ab 14,60 €. Alle Preise inkl. 19 % MwSt., zzgl. 4,90 € Versand pro Bestellung.',
   alternates: { canonical: '/kennzeichen-bestellen' },
 };
 

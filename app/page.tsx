@@ -66,7 +66,7 @@ const FAQS = [
   ],
   [
     'Was kosten die Kennzeichen?',
-    'Autokennzeichen kosten ab 9,80 € pro Schild. Ab zwei Schildern ist der Versand kostenlos. Den Gesamtpreis siehst du vor der Zahlung im Checkout.',
+    'Autokennzeichen kosten ab 9,80 € pro Schild. Der DHL-Versand kostet 4,90 € pro Bestellung. Den Gesamtpreis siehst du vor der Zahlung im Checkout.',
   ],
   [
     'Wie schnell wird versendet?',
@@ -378,7 +378,7 @@ export default function Home() {
             </div>
             <strong>ab 9,80 € pro Schild</strong>
           </div>
-          <p>Ab zwei Schildern kostenloser Versand. Den Gesamtpreis siehst du im Checkout.</p>
+          <p>4,90 € DHL-Versand pro Bestellung. Den Gesamtpreis siehst du im Checkout.</p>
           <DeliveryGuarantee />
           <button
             className="button button-wide"
@@ -527,7 +527,7 @@ export default function Home() {
                 <div>
                   <span>
                     {quantity} {quantity === 1 ? 'Schild' : 'Schilder'} ·
-                    ab zwei Schildern kostenloser Versand
+                    4,90 € DHL-Versand pro Bestellung
                   </span>
                   <strong>ab 9,80 € pro Schild</strong>
                 </div>
@@ -726,13 +726,13 @@ export default function Home() {
               <div className="home-motorcycle-packages" aria-label="Motorrad-Pakete">
                 {(Object.entries(MOTORCYCLE_PACKAGES) as [MotorcyclePackage, typeof MOTORCYCLE_PACKAGES[MotorcyclePackage]][]).map(([id, option]) => <button key={id} type="button" aria-pressed={motorcyclePackage === id} onClick={() => chooseMotorcyclePackage(id)}>
                   {id === 'motorrad_2' && <em>Meistgewählt</em>}
-                  <strong>{option.label}</strong><span>{option.quantity === 2 ? 'Kostenloser Versand' : 'Preis im Checkout'}</span>
+                  <strong>{option.label}</strong><span>zzgl. 4,90 € Versand</span>
                 </button>)}
               </div>
               {status && motorcyclePackage === 'motorrad_1' && <div className="home-motorcycle-upsell">Ein Ersatzschild hilft, falls dein Schild verbiegt oder beschädigt wird. <button type="button" onClick={() => chooseMotorcyclePackage('motorrad_2')}>Ersatzschild hinzufügen</button></div>}
               <p>Das Ersatzschild trägt dieselbe Kombination. Wird dein Schild verbogen oder beschädigt, lässt du das Ersatzschild einfach bei der Zulassungsstelle stempeln – ohne neu zu bestellen.</p>
             </div>}
-            <p>Autokennzeichen ab 9,80 € pro Schild · ab zwei Schildern kostenloser Versand. Deinen Gesamtpreis siehst du im Checkout.</p>
+            <p>Autokennzeichen ab 9,80 € pro Schild · zzgl. 4,90 € Versand pro Bestellung. Deinen Gesamtpreis siehst du im Checkout.</p>
             <DeliveryGuarantee />
             <button
               className="button button-wide"

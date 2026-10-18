@@ -9,7 +9,7 @@ import {
   isSinglePlateProduct,
   PARKING_PLATE_PRICE,
   MOTORCYCLE_PACKAGES,
-  SINGLE_PLATE_SHIPPING_CENTS,
+  SHIPPING_CENTS,
   type PlateColor,
   type PlateType,
 } from '@/config/products';
@@ -65,7 +65,7 @@ export function getCheckoutPricing(
     if (!packageId) return null;
     const subtotalCents = MOTORCYCLE_PACKAGES[packageId].priceCents;
     const emissionStickerPriceCents = extras.emissionSticker ? Math.round(EMISSION_STICKER_PRICE * 100) : 0;
-    const shippingCents = baseQuantity === 1 ? SINGLE_PLATE_SHIPPING_CENTS : 0;
+    const shippingCents = SHIPPING_CENTS;
     const regularTotalCents = subtotalCents + emissionStickerPriceCents + shippingCents + addonPriceCents;
     const totalCents = promoCode ? PROMO_CODES[promoCode as keyof typeof PROMO_CODES].totalCents + addonPriceCents : regularTotalCents;
     if (totalCents > regularTotalCents) return null;
@@ -99,8 +99,7 @@ export function getCheckoutPricing(
     color,
     baseQuantity,
   );
-  const shippingCents = !isSinglePlateProduct(plateType) && baseQuantity + Number(extras.parkingPlate) + Number(extras.bikeRackPlate) === 1
-    ? SINGLE_PLATE_SHIPPING_CENTS : 0;
+  const shippingCents = SHIPPING_CENTS;
   const regularTotalCents = subtotalCents + shippingCents - packageDiscountCents + addonPriceCents;
   const targetTotalCents = promoCode
     ? PROMO_CODES[promoCode as keyof typeof PROMO_CODES].totalCents + addonPriceCents

@@ -26,10 +26,10 @@ beforeEach(() => {
 
 describe('checkout add-on storage', () => {
   it.each([
-    [[], 1960],
-    [['holderScrews'], 2750],
-    [['warningVest'], 2450],
-    [['holderScrews', 'warningVest'], 3240],
+    [[], 2450],
+    [['holderScrews'], 3240],
+    [['warningVest'], 2940],
+    [['holderScrews', 'warningVest'], 3730],
   ] as const)('stores explicit selection %j and server price', async (addOns, total) => {
     const response = await POST(new Request('https://shop.example.com/api/create-payment-intent', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },

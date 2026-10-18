@@ -8,7 +8,7 @@ export type PlateType =
   | 'agriculture255';
 export type PlateColor = 'black' | 'carbon' | 'green';
 
-export const SINGLE_PLATE_SHIPPING_CENTS = 395;
+export const SHIPPING_CENTS = 490;
 
 export const PARKING_PLATE_PRICE = 5;
 export const BIKE_RACK_PLATE_PRICE = 4.9;

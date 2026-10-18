@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { ArrowRight, BadgeCheck, CheckCircle2, LockKeyhole, Truck } from 'lucide-react';
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
-import { formatPrice, getMotorcyclePackage, isValidPlate, MOTORCYCLE_PACKAGES, SINGLE_PLATE_SHIPPING_CENTS, type MotorcyclePackage, type PlateColor } from '@/config/products';
+import { formatPrice, getMotorcyclePackage, isValidPlate, MOTORCYCLE_PACKAGES, type MotorcyclePackage, type PlateColor } from '@/config/products';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
 import { trackKennzeichenGtmEvent } from '@/lib/kennzeichen-gtm-events';
@@ -28,7 +28,7 @@ export function MotorcycleLandingPage() {
   const valid = useMemo(() => isValidPlate(plate, 'motorcycle'), [plate]);
   const packageId = getMotorcyclePackage(color, quantity);
   const pricing = getCheckoutPricing('motorcycle', color, quantity, undefined);
-  const extraCents = MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents - SINGLE_PLATE_SHIPPING_CENTS;
+  const extraCents = MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents;
   const carbonCents = quantity === 2
     ? MOTORCYCLE_PACKAGES.motorrad_carbon_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_2.priceCents
     : MOTORCYCLE_PACKAGES.motorrad_carbon_1.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents;
@@ -72,7 +72,7 @@ export function MotorcycleLandingPage() {
         <p className={styles.kicker}>DIN 74069 · 180 × 200 mm</p>
         <h1>Motorrad-Kennzeichen bestellen. <em>Passend zu deiner Fahrt.</em></h1>
         <p className={styles.lead}>Deine Kombination auf einem zweizeiligen Motorrad-Schild. Wähle Standard oder Carbon-Optik und bei Bedarf ein Ersatzschild mit derselben Kombination.</p>
-        <p className={styles.price}>Ab <strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong> · einzeln zzgl. 3,95 € Versand</p>
+        <p className={styles.price}>Ab <strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong> · zzgl. 4,90 € Versand</p>
         <ul>
           <li><BadgeCheck size={18} /> DIN-zertifiziert für die Zulassungsstelle</li>
           <li><Truck size={18} /> DHL-Versand mit Sendungsverfolgung</li>
@@ -95,7 +95,7 @@ export function MotorcycleLandingPage() {
         <div className={styles.packages} aria-label="Motorrad-Pakete">
           {packageEntries.map(([id, selected]) => <button key={id} type="button" aria-pressed={packageId === id} onClick={() => choosePackage(id)}>
             {id === 'motorrad_2' && <em>Meistgewählt</em>}
-            <strong>{selected.label}</strong><span>{formatPrice(selected.priceCents / 100)} · {selected.quantity === 1 ? 'zzgl. 3,95 € Versand' : 'Versand kostenlos'}</span>
+            <strong>{selected.label}</strong><span>{formatPrice(selected.priceCents / 100)} · zzgl. 4,90 € Versand</span>
             {id === 'motorrad_2' && <small>nur {formatPrice(extraCents / 100)} mehr</small>}
           </button>)}
         </div>

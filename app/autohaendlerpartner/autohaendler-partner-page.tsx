@@ -24,7 +24,6 @@ import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import {
   formatPrice,
-  getPackagePrice,
   isSinglePlateProduct,
   isValidPlate,
   PRODUCTS,
@@ -72,8 +71,8 @@ export function AutohaendlerPartnerPage() {
     [plateValue, plateType],
   );
   const quantity: 1 | 2 = isSinglePlateProduct(plateType) ? 1 : 2;
-  const motorcyclePricing = plateType === 'motorcycle' ? getCheckoutPricing('motorcycle', 'black', 1, undefined) : null;
-  const total = motorcyclePricing ? motorcyclePricing.totalCents / 100 : getPackagePrice(plateType, 'black', quantity);
+  const pricing = getCheckoutPricing(plateType, 'black', quantity, undefined);
+  const total = (pricing?.totalCents ?? 0) / 100;
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -304,7 +303,7 @@ export function AutohaendlerPartnerPage() {
 
           <div className={styles.summary}>
             <span>
-              {quantity} × {PRODUCTS[plateType].label} · {motorcyclePricing?.shippingCents ? '3,95 € Versand' : 'Versand kostenlos'}
+              {quantity} × {PRODUCTS[plateType].label} · 4,90 € Versand
             </span>
             <strong>{formatPrice(total)}</strong>
           </div>

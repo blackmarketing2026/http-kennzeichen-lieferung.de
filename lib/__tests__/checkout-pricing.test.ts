@@ -3,76 +3,76 @@ import { getCheckoutPricing } from '@/lib/checkout-pricing';
 
 describe('current license plate prices', () => {
   it.each([
-    ['black', 1, false, 1375],
-    ['black', 2, false, 1960],
-    ['black', 2, true, 2940],
-    ['carbon', 1, false, 1855],
-    ['carbon', 2, false, 2920],
-    ['carbon', 2, true, 4380],
+    ['black', 1, false, 1470],
+    ['black', 2, false, 2450],
+    ['black', 2, true, 3430],
+    ['carbon', 1, false, 1950],
+    ['carbon', 2, false, 3410],
+    ['carbon', 2, true, 4870],
   ] as const)('charges %s for %i car plates with third plate %s', (color, quantity, thirdPlate, totalCents) => {
     for (const offer of ['standard', 'herbst']) {
       expect(getCheckoutPricing('standard', color, quantity, undefined, { parkingPlate: false, bikeRackPlate: thirdPlate }, offer))
-        .toMatchObject({ totalCents, shippingCents: quantity === 1 && !thirdPlate ? 395 : 0, packageDiscountCents: 0 });
+        .toMatchObject({ totalCents, shippingCents: 490, packageDiscountCents: 0 });
     }
   });
 
   it.each([
-    ['black', false, false, 1960],
-    ['black', true, false, 2940],
-    ['black', false, true, 2940],
-    ['black', true, true, 3920],
-    ['carbon', false, false, 2920],
-    ['carbon', true, false, 4380],
-    ['carbon', false, true, 4380],
-    ['carbon', true, true, 5840],
+    ['black', false, false, 2450],
+    ['black', true, false, 3430],
+    ['black', false, true, 3430],
+    ['black', true, true, 4410],
+    ['carbon', false, false, 3410],
+    ['carbon', true, false, 4870],
+    ['carbon', false, true, 4870],
+    ['carbon', true, true, 6330],
   ] as const)('prices two %s plates plus parking %s and bicycle rack %s', (color, parkingPlate, bikeRackPlate, totalCents) => {
     expect(getCheckoutPricing('standard', color, 2, undefined, { parkingPlate, bikeRackPlate }, 'herbst'))
-      .toMatchObject({ totalCents, shippingCents: 0 });
+      .toMatchObject({ totalCents, shippingCents: 490 });
   });
 
   it.each([
-    ['black', 1, 1375], ['carbon', 1, 1855],
-    ['black', 2, 1960], ['carbon', 2, 2920],
+    ['black', 1, 1470], ['carbon', 1, 1950],
+    ['black', 2, 2450], ['carbon', 2, 3410],
   ] as const)('charges %s for %i motorcycle plates', (color, quantity, totalCents) => {
     expect(getCheckoutPricing('motorcycle', color, quantity, undefined))
-      .toMatchObject({ totalCents, shippingCents: quantity === 1 ? 395 : 0 });
+      .toMatchObject({ totalCents, shippingCents: 490 });
   });
 
-  it('adds extras to the new car prices and keeps other plate types unchanged', () => {
+  it('adds extras to car prices and charges 4.90 shipping for all plate types', () => {
     expect(getCheckoutPricing('standard', 'black', 2, undefined, { parkingPlate: false, bikeRackPlate: false, emissionSticker: true }))
-      .toMatchObject({ totalCents: 2550, emissionStickerPriceCents: 590 });
-    expect(getCheckoutPricing('electric', 'black', 2, undefined)?.totalCents).toBe(1990);
-    expect(getCheckoutPricing('agriculture240', 'green', 1, undefined)?.totalCents).toBe(2490);
+      .toMatchObject({ totalCents: 3040, emissionStickerPriceCents: 590 });
+    expect(getCheckoutPricing('electric', 'black', 2, undefined)?.totalCents).toBe(2480);
+    expect(getCheckoutPricing('agriculture240', 'green', 1, undefined)?.totalCents).toBe(2980);
   });
 
   it.each([
     ['agriculture240', 'green', 1],
     ['agriculture255', 'green', 1],
-  ] as const)('ships %s plates for free', (plateType, color, quantity) => {
-    expect(getCheckoutPricing(plateType, color, quantity, undefined)?.shippingCents).toBe(0);
+  ] as const)('charges 4.90 shipping for %s plates', (plateType, color, quantity) => {
+    expect(getCheckoutPricing(plateType, color, quantity, undefined)?.shippingCents).toBe(490);
   });
 
-  it.each(['electric', 'historic', 'season'] as const)('adds shipping to one %s car plate', (plateType) => {
-    expect(getCheckoutPricing(plateType, 'black', 1, undefined)?.shippingCents).toBe(395);
-    expect(getCheckoutPricing(plateType, 'black', 2, undefined)?.shippingCents).toBe(0);
+  it.each(['electric', 'historic', 'season'] as const)('charges shipping for one or two %s plates', (plateType) => {
+    expect(getCheckoutPricing(plateType, 'black', 1, undefined)?.shippingCents).toBe(490);
+    expect(getCheckoutPricing(plateType, 'black', 2, undefined)?.shippingCents).toBe(490);
   });
 
-  it('ships a car plate with an additional physical plate for free', () => {
+  it('charges shipping once when a car plate has an additional physical plate', () => {
     expect(getCheckoutPricing('standard', 'black', 1, undefined, { parkingPlate: true, bikeRackPlate: false }))
-      .toMatchObject({ totalCents: 1960, shippingCents: 0 });
+      .toMatchObject({ totalCents: 2450, shippingCents: 490 });
     expect(getCheckoutPricing('standard', 'carbon', 1, undefined, { parkingPlate: false, bikeRackPlate: true }))
-      .toMatchObject({ totalCents: 2920, shippingCents: 0 });
+      .toMatchObject({ totalCents: 3410, shippingCents: 490 });
   });
 
   it.each([
-    [[], 1960],
-    [['holderScrews'], 2750],
-    [['warningVest'], 2450],
-    [['holderScrews', 'warningVest'], 3240],
+    [[], 2450],
+    [['holderScrews'], 3240],
+    [['warningVest'], 2940],
+    [['holderScrews', 'warningVest'], 3730],
   ] as const)('prices checkout add-ons %j separately from the plates', (addOns, totalCents) => {
     expect(getCheckoutPricing('standard', 'black', 2, undefined, {
       parkingPlate: false, bikeRackPlate: false, addOns: [...addOns],
-    })).toMatchObject({ totalCents, addonPriceCents: totalCents - 1960 });
+    })).toMatchObject({ totalCents, addonPriceCents: totalCents - 2450, shippingCents: 490 });
   });
 
   it('keeps paid add-ons on top of a fixed-price promotion', () => {
@@ -83,7 +83,7 @@ describe('current license plate prices', () => {
 
   it('applies promotions and rejects unsupported configurations', () => {
     expect(getCheckoutPricing('standard', 'black', 2, 'TEST5'))
-      .toMatchObject({ totalCents: 500, discountCents: 1460 });
+      .toMatchObject({ totalCents: 500, shippingCents: 490, discountCents: 1950 });
     expect(getCheckoutPricing('standard', 'black', 2, 'UNKNOWN')).toBeNull();
     expect(getCheckoutPricing('motorcycle', 'carbon', 3 as 1, undefined)).toBeNull();
     expect(getCheckoutPricing('standard', 'green', 2, undefined)).toBeNull();
