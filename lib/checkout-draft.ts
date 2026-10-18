@@ -71,9 +71,9 @@ export function readCheckoutDraft(source: CheckoutSource): CheckoutDraft | null 
     if (!draft || typeof draft !== 'object') return null;
     const value = draft as Record<string, unknown>;
     const allowedTypes =
-      source === 'landmaschinen-kennzeichen' ? AGRICULTURE_TYPES : source === 'kennzeichen-online-bestellen24' ? [...CAR_TYPES, ...AGRICULTURE_TYPES] : CAR_TYPES;
+      source === 'landmaschinen-kennzeichen' ? AGRICULTURE_TYPES : source === 'home' || source === 'kennzeichen-online-bestellen24' ? [...CAR_TYPES, ...AGRICULTURE_TYPES] : CAR_TYPES;
     const agricultureColor = source === 'landmaschinen-kennzeichen' ||
-      (source === 'kennzeichen-online-bestellen24' && AGRICULTURE_TYPES.includes(value.plateType as PlateType));
+      ((source === 'home' || source === 'kennzeichen-online-bestellen24') && AGRICULTURE_TYPES.includes(value.plateType as PlateType));
     if (
       typeof value.plate !== 'string' ||
       !allowedTypes.includes(value.plateType as PlateType) ||

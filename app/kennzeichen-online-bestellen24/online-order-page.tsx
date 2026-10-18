@@ -9,7 +9,7 @@ import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
 import { formatPrice, isValidPlate, PRODUCTS, type PlateColor, type PlateType } from '@/config/products';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
-import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
+import { readCheckoutDraft, saveCheckoutDraft, type CheckoutSource } from '@/lib/checkout-draft';
 import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, isValidSeasonPeriod } from '@/lib/season-period';
 import styles from './page.module.css';
 
@@ -28,7 +28,6 @@ const carTypes = [
   { id: 'season', label: 'Saison', detail: 'Mit Saisonzeitraum' },
 ] as const;
 const months = Array.from({ length: 12 }, (_, index) => index + 1);
-const source = 'kennzeichen-online-bestellen24' as const;
 const examplePhotos = [
   { src: '/references/beispiel-auto-einfahrt.jpg', alt: 'Blaues Auto mit Kennzeichen in einer Einfahrt', caption: 'Auto in der Einfahrt' },
   { src: '/references/beispiel-auto-hinterhof.jpg', alt: 'Weißes Auto mit Kennzeichen in einem Hinterhof', caption: 'Auto im Hinterhof' },
@@ -38,7 +37,7 @@ const examplePhotos = [
   { src: '/references/beispiel-wohnwagen-stellplatz.jpg', alt: 'Wohnwagen mit Kennzeichen auf einem Stellplatz', caption: 'Wohnwagen auf dem Stellplatz' },
 ] as const;
 
-export function OnlineOrderPage() {
+export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24' }: { source?: CheckoutSource }) {
   const router = useRouter();
   const [vehicle, setVehicle] = useState<Vehicle>('car');
   const [type, setType] = useState<PlateType>('standard');
@@ -69,7 +68,7 @@ export function OnlineOrderPage() {
       setSeasonEnd(draft.seasonEndMonth ?? DEFAULT_SEASON_END_MONTH);
     }, 0);
     return () => window.clearTimeout(timer);
-  }, []);
+  }, [source]);
 
   const plate = `${city} ${letters} ${numbers}`.trim();
   const valid = isValidPlate(plate, type);

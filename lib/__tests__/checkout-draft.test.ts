@@ -64,6 +64,19 @@ describe('checkout draft', () => {
     );
   });
 
+  it('restores a land-machine selection when returning to the home configurator', () => {
+    useSessionStorage();
+    saveCheckoutDraft('home', {
+      plate: 'B AB 123',
+      plateType: 'agriculture240',
+      plateColor: 'green',
+      quantity: 1,
+    });
+
+    expect(readCheckoutDraft('home')).toMatchObject({ plateType: 'agriculture240', plateColor: 'green' });
+    expect(checkoutReturnPath('home')).toBe('/#konfigurator');
+  });
+
   it('ignores a damaged saved draft', () => {
     const values = useSessionStorage();
     values.set('kennzeichen-checkout-draft:home', '{invalid');
