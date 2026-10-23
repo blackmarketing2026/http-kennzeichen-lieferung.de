@@ -8,7 +8,7 @@ import { ArrowRight, BadgeCheck, CheckCircle2, LockKeyhole, Truck } from 'lucide
 import { LicensePlate } from '@/components/license-plate';
 import { PaymentLogos } from '@/components/payment-logos';
 import { SeoBreadcrumbs } from '@/components/seo-breadcrumbs';
-import { formatPrice, getMotorcyclePackage, isValidPlate, MOTORCYCLE_PACKAGES, type MotorcyclePackage, type PlateColor } from '@/config/products';
+import { formatPrice, getMotorcyclePackage, isValidPlate, MOTORCYCLE_PACKAGES, SHIPPING_CENTS, type MotorcyclePackage, type PlateColor } from '@/config/products';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import { readCheckoutDraft, saveCheckoutDraft } from '@/lib/checkout-draft';
 import { trackKennzeichenGtmEvent } from '@/lib/kennzeichen-gtm-events';
@@ -30,9 +30,6 @@ export function MotorcycleLandingPage() {
   const packageId = getMotorcyclePackage(color, quantity);
   const pricing = getCheckoutPricing('motorcycle', color, quantity, undefined);
   const extraCents = MOTORCYCLE_PACKAGES.motorrad_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents;
-  const carbonCents = quantity === 2
-    ? MOTORCYCLE_PACKAGES.motorrad_carbon_2.priceCents - MOTORCYCLE_PACKAGES.motorrad_2.priceCents
-    : MOTORCYCLE_PACKAGES.motorrad_carbon_1.priceCents - MOTORCYCLE_PACKAGES.motorrad_1.priceCents;
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -72,9 +69,9 @@ export function MotorcycleLandingPage() {
     <section className={styles.hero}>
       <div className={styles.copy}>
         <p className={styles.kicker}>DIN 74069 · 180 × 200 mm</p>
-        <h1>Motorrad-Kennzeichen bestellen. <em>Passend zu deiner Fahrt.</em></h1>
-        <p className={styles.lead}>Deine Kombination auf einem zweizeiligen Motorrad-Schild. Wähle Standard oder Carbon-Optik und bei Bedarf ein Ersatzschild mit derselben Kombination.</p>
-        <p className={styles.price}>Ab <strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong> · zzgl. 4,90 € Versand</p>
+        <h1>Motorradkennzeichen bestellen. <em>Direkt online konfigurieren.</em></h1>
+        <p className={styles.lead}>Bestelle dein Motorrad-Kennzeichen mit der bereits zugeteilten Kombination: zweizeilig in 180 × 200 mm, als Standard-Schild oder in Carbon-Optik. Die Vorschau zeigt dir deine Eingabe vor dem Checkout.</p>
+        <p className={styles.price}>Ab <strong>{formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)}</strong> · zzgl. {formatPrice(SHIPPING_CENTS / 100)} Versand</p>
         <ul>
           <li><BadgeCheck size={18} /> DIN-zertifiziert für die Zulassungsstelle</li>
           <li><Truck size={18} /> DHL-Versand mit Sendungsverfolgung</li>
@@ -90,14 +87,11 @@ export function MotorcycleLandingPage() {
         </div>
         <div className={styles.preview}><span>Live-Vorschau · 180 × 200 mm, zweizeilig</span><LicensePlate value={plate} type="motorcycle" color={color} /></div>
         <p className={`${styles.validation} ${valid ? styles.valid : ''}`}>{valid ? '✓ Kombination ist bereit' : 'Bitte Ort, Buchstaben und Zahlen eingeben.'}</p>
-        <div className={styles.finish} aria-label="Ausführung">
-          <button type="button" aria-pressed={color === 'black'} onClick={() => setColor('black')}>Standard</button>
-          <button type="button" aria-pressed={color === 'carbon'} onClick={() => setColor('carbon')}>Carbon (+{formatPrice(carbonCents / 100)})</button>
-        </div>
+        <p className={styles.packageHeading}>Ausführung und Anzahl wählen</p>
         <div className={styles.packages} aria-label="Motorrad-Pakete">
           {packageEntries.map(([id, selected]) => <button key={id} type="button" aria-pressed={packageId === id} onClick={() => choosePackage(id)}>
             {id === 'motorrad_2' && <em>Meistgewählt</em>}
-            <strong>{selected.label}</strong><span>{formatPrice(selected.priceCents / 100)} · zzgl. 4,90 € Versand</span>
+            <strong>{selected.label}</strong><span>{formatPrice(selected.priceCents / 100)} · zzgl. {formatPrice(SHIPPING_CENTS / 100)} Versand</span>
             {id === 'motorrad_2' && <small>nur {formatPrice(extraCents / 100)} mehr</small>}
           </button>)}
         </div>
@@ -105,7 +99,7 @@ export function MotorcycleLandingPage() {
           <span>Für nur {formatPrice(extraCents / 100)} mehr: Ersatzschild dazu – falls dein Schild verbiegt oder beschädigt wird.</span>
           <button type="button" onClick={() => choosePackage('motorrad_2')}>Ersatzschild hinzufügen</button>
         </div>}
-        <p className={styles.spareNote}>Das Ersatzschild trägt dieselbe Kombination. Wird dein Schild verbogen oder beschädigt, lässt du das Ersatzschild einfach bei der Zulassungsstelle stempeln – ohne neu zu bestellen.</p>
+        <p className={styles.spareNote}>Ein Ersatzschild trägt dieselbe Kombination. Amtliche Plaketten sind nicht enthalten; die Verwendung eines Ersatzschilds klärst du mit deiner Zulassungsstelle.</p>
         <div className={styles.total}><span>{packageId ? MOTORCYCLE_PACKAGES[packageId].label : ''} · inkl. MwSt. und Versand</span><strong>{formatPrice((pricing?.totalCents ?? 0) / 100)}</strong></div>
         <button className={styles.orderButton} type="button" disabled={!valid || !pricing} onClick={checkout}>Weiter zur Lieferadresse <ArrowRight size={18} /></button>
         <p className={styles.secure}><LockKeyhole size={15} /> Sichere Zahlung über Stripe · kein Konto nötig</p>
@@ -113,9 +107,16 @@ export function MotorcycleLandingPage() {
       </div>
     </section>
     <section className={styles.info}>
-      <h2>Ein Schild für dein Motorrad. Ein Ersatz bei Beschädigung.</h2>
-      <p>Alle vier Pakete enthalten die Prägung deiner Kombination und den DHL-Versand. Das Ersatzschild ist ein zweites, gleich geprägtes Schild; für den Einsatz muss es bei der Zulassungsstelle gestempelt werden.</p>
+      <div className={styles.infoInner}>
+        <p className={styles.kicker}>So funktioniert die Bestellung</p>
+        <h2>Dein Motorrad-Kennzeichen in drei Schritten</h2>
+        <div className={styles.steps}>
+          <article><span>01</span><h3>Kombination eingeben</h3><p>Übertrage das zugeteilte Ortskürzel, die Buchstaben und Zahlen. Prüfe die zweizeilige Vorschau sorgfältig.</p></article>
+          <article><span>02</span><h3>Schild auswählen</h3><p>Wähle Standard oder Carbon-Optik und entscheide, ob du ein zweites Schild mit derselben Kombination möchtest.</p></article>
+          <article><span>03</span><h3>Bestellung abschließen</h3><p>Im Checkout gibst du Lieferadresse und Zahlungsdaten ein. Dort siehst du den Gesamtpreis vor der Zahlung.</p></article>
+        </div>
+      </div>
     </section>
-    <section className="seo-motorcycle-extra"><h2>Häufige Fragen zum Motorradkennzeichen</h2><details><summary>Welche Größe kann ich hier bestellen?</summary><p>Der Konfigurator bietet ein zweizeiliges Schild in 180 × 200 mm. Prüfe vor der Bestellung, welche Schildform und Zeichenfolge dir zugeteilt wurden.</p></details><details><summary>Ist das Ersatzschild anders beschriftet?</summary><p>Nein. Beide Schilder eines Pakets tragen dieselbe Kombination. Amtliche Plaketten sind nicht im Lieferumfang.</p></details><details><summary>Wird meine Kombination hier reserviert?</summary><p>Nein. Die Eingabe dient nur der Schilderbestellung. Informationen zur Reservierung findest du im <Link href="/ratgeber/wunschkennzeichen-reservieren">Ratgeber</Link>.</p></details><div><Link href="/ratgeber/kennzeichengroessen">Kennzeichengrößen vergleichen →</Link><Link href="/carbon-kennzeichen">Carbon-Optik ansehen →</Link></div></section>
+    <section className={styles.faq}><div className={styles.faqInner}><p className={styles.kicker}>Gut zu wissen</p><h2>Häufige Fragen zum Motorradkennzeichen</h2><details><summary>Welche Größe kann ich hier bestellen?</summary><p>Der Konfigurator bietet ein zweizeiliges Motorradkennzeichen in 180 × 200 mm. Prüfe vor der Bestellung, welche Schildform und Zeichenfolge dir zugeteilt wurden.</p></details><details><summary>Kann ich ein Motorradkennzeichen mit Carbon-Optik bestellen?</summary><p>Ja. Wähle im Konfigurator das Carbon-Schild oder das Paket mit einem zweiten Carbon-Schild. Der jeweilige Preis steht direkt bei der Auswahl.</p></details><details><summary>Ist das Ersatzschild anders beschriftet?</summary><p>Nein. Beide Schilder eines Pakets tragen dieselbe Kombination. Amtliche Plaketten sind nicht im Lieferumfang.</p></details><details><summary>Wird meine Kombination hier reserviert?</summary><p>Nein. Die Eingabe dient nur der Schilderbestellung. Informationen zur Reservierung findest du im <Link href="/ratgeber/wunschkennzeichen-reservieren">Ratgeber</Link>.</p></details><div className={styles.related}><Link href="/ratgeber/kennzeichengroessen">Kennzeichengrößen vergleichen →</Link><Link href="/carbon-kennzeichen">Carbon-Optik ansehen →</Link></div></div></section>
   </main>;
 }

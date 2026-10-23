@@ -9,6 +9,7 @@ import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, isValidSeasonPeri
 export type CheckoutSource =
   | 'home'
   | 'kennzeichen-bestellen'
+  | 'autokennzeichen-express-lieferung'
   | 'kennzeichen-online-bestellen24'
   | 'kennzeichen-bestellen-herbstangebot'
   | 'motorradkennzeichen-bestellen'
@@ -54,6 +55,7 @@ export function isCheckoutSource(value: unknown): value is CheckoutSource {
   return (
     value === 'home' ||
     value === 'kennzeichen-bestellen' ||
+    value === 'autokennzeichen-express-lieferung' ||
     value === 'kennzeichen-online-bestellen24' ||
     value === 'kennzeichen-bestellen-herbstangebot' ||
     value === 'motorradkennzeichen-bestellen' ||

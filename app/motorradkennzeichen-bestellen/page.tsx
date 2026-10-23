@@ -4,8 +4,8 @@ import { formatPrice, MOTORCYCLE_PACKAGES, SHIPPING_CENTS } from '@/config/produ
 import { absoluteUrl, breadcrumbJsonLd, safeJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: `Motorrad-Kennzeichen bestellen – ab ${formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)} · zzgl. ${formatPrice(SHIPPING_CENTS / 100)} Versand`,
-  description: `DIN 74069 Motorrad-Kennzeichen in 180 × 200 mm bestellen. DHL-Versand ${formatPrice(SHIPPING_CENTS / 100)} pro Bestellung.`,
+  title: 'Motorradkennzeichen bestellen | 180 × 200 mm',
+  description: `Motorrad-Kennzeichen online bestellen: 180 × 200 mm, zweizeilig, Standard oder Carbon-Optik. Ab ${formatPrice(MOTORCYCLE_PACKAGES.motorrad_1.priceCents / 100)} zzgl. ${formatPrice(SHIPPING_CENTS / 100)} Versand.`,
   alternates: { canonical: absoluteUrl('/motorradkennzeichen-bestellen') },
 };
 

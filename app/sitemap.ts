@@ -4,7 +4,7 @@ import { guides } from '@/config/guides';
 import { absoluteUrl } from '@/lib/seo';
 
 const routes = [
-  '/', '/kennzeichen-bestellen', '/motorradkennzeichen-bestellen', '/landmaschinen-kennzeichen',
+  '/', '/kennzeichen-bestellen', '/autokennzeichen-express-lieferung', '/motorradkennzeichen-bestellen', '/landmaschinen-kennzeichen',
   '/autohaendlerpartner', '/din-74069', '/liefergarantie',
   '/ratgeber', ...SEO_PRODUCT_SLUGS.map(slug => `/${slug}`),
   ...guides.map(guide => `/ratgeber/${guide.slug}`),

@@ -581,6 +581,7 @@ export function KennzeichenLandingPage({ offer = 'standard' }: { offer?: OfferPr
           <article><b>03</b><strong>Sicher bezahlen</strong><p>Wähle deine Zahlungsart. Wir prägen dein Kennzeichen und versenden es mit DHL und Sendungsverfolgung.</p></article>
         </div>
         <Link href="/liefergarantie">Mehr über unsere {isHerbst ? 'Pünktlich-Garantie' : 'Liefergarantie'} erfahren <ArrowRight size={17} /></Link>
+        {!isHerbst && <Link href="/autokennzeichen-express-lieferung">Autoschilder und schnelle Lieferung im Überblick <ArrowRight size={17} /></Link>}
       </section>
 
       {!isHerbst && <section className={styles.klarnaBanner} aria-labelledby="klarna-bestellen-title">
