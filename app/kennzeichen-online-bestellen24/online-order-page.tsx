@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -11,8 +11,8 @@ import { KlarnaPromo } from '@/components/klarna-promo';
 import { DhlPickupPromo } from '@/components/dhl-pickup-promo';
 import { ProductionPromo } from '@/components/production-promo';
 import { ProductDirectory } from '@/components/product-directory';
-import { formatPrice, isValidPlate, PRODUCTS, type PlateColor, type PlateType } from '@/config/products';
-import { getCheckoutPricing } from '@/lib/checkout-pricing';
+import { formatPrice, isValidPlate, PRODUCTS, SHIPPING_CENTS, type PlateColor, type PlateType } from '@/config/products';
+import { getCheckoutPricing, type CheckoutPricing } from '@/lib/checkout-pricing';
 import { readCheckoutDraft, saveCheckoutDraft, type CheckoutSource } from '@/lib/checkout-draft';
 import { DEFAULT_SEASON_END_MONTH, DEFAULT_SEASON_START_MONTH, isValidSeasonPeriod } from '@/lib/season-period';
 import styles from './page.module.css';
@@ -40,8 +40,44 @@ const examplePhotos = [
   { src: '/references/beispiel-auto-tiefgarage.jpg', alt: 'Auto mit Kennzeichen in einer Tiefgarage' },
   { src: '/references/beispiel-wohnwagen-stellplatz.jpg', alt: 'Wohnwagen mit Kennzeichen auf einem Stellplatz' },
 ] as const;
+const FREE_SHIPPING_CODE = 'neuekennzeichen';
+const PROMO_FALLBACK_ERROR = 'Der kostenlose Versand konnte gerade nicht aktiviert werden. Bitte versuche es erneut.';
 
-export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', showKlarnaPromo = false, showDhlPickupPromo = false, showProductionPromo = false }: { source?: CheckoutSource; showKlarnaPromo?: boolean; showDhlPickupPromo?: boolean; showProductionPromo?: boolean }) {
+// Asks the server to validate the promo code for this selection. Returns the
+// server price only while it matches the current selection, so a stale
+// discount is never shown after the configuration changes.
+function useVerifiedPromoPricing(type: PlateType | undefined, color: PlateColor | undefined, quantity: 1 | 2 | undefined, promoCode: string | null, onInvalid: (message: string) => void) {
+  const key = type && color && quantity && promoCode ? `${type}|${color}|${quantity}|${promoCode}` : null;
+  const [result, setResult] = useState<{ key: string; pricing: CheckoutPricing } | null>(null);
+  const onInvalidRef = useRef(onInvalid);
+  useEffect(() => { onInvalidRef.current = onInvalid; });
+
+  useEffect(() => {
+    if (!key || !type || !color || !quantity || !promoCode) return;
+    const controller = new AbortController();
+    fetch('/api/checkout-pricing', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ plateType: type, color, quantity, promoCode }),
+      signal: controller.signal,
+    })
+      .then(async (response) => {
+        const data = (await response.json()) as { pricing?: CheckoutPricing; error?: string };
+        if (!response.ok || !data.pricing || data.pricing.shippingCents !== 0) throw new Error(data.error ?? PROMO_FALLBACK_ERROR);
+        setResult({ key, pricing: data.pricing });
+      })
+      .catch((error: Error) => {
+        if (error.name === 'AbortError') return;
+        onInvalidRef.current(error instanceof SyntaxError || error instanceof TypeError ? PROMO_FALLBACK_ERROR : error.message);
+      });
+    return () => controller.abort();
+  }, [key, type, color, quantity, promoCode]);
+
+  const pricing = key && result?.key === key ? result.pricing : null;
+  return { pricing, checking: Boolean(key) && !pricing };
+}
+
+export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', showKlarnaPromo = false, showDhlPickupPromo = false, showProductionPromo = false, showFreeShippingActivation = false }: { source?: CheckoutSource; showKlarnaPromo?: boolean; showDhlPickupPromo?: boolean; showProductionPromo?: boolean; showFreeShippingActivation?: boolean }) {
   const router = useRouter();
   const [vehicle, setVehicle] = useState<Vehicle>('car');
   const [type, setType] = useState<PlateType>('standard');
@@ -55,6 +91,8 @@ export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', sho
   const [cart, setCart] = useState<Selection | null>(null);
   const [cartOpen, setCartOpen] = useState(false);
   const [attempted, setAttempted] = useState(false);
+  const [promoCode, setPromoCode] = useState<string | null>(null);
+  const [promoError, setPromoError] = useState('');
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -70,16 +108,25 @@ export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', sho
       setQuantity(draft.quantity === 1 ? 1 : 2);
       setSeasonStart(draft.seasonStartMonth ?? DEFAULT_SEASON_START_MONTH);
       setSeasonEnd(draft.seasonEndMonth ?? DEFAULT_SEASON_END_MONTH);
+      if (showFreeShippingActivation && draft.promoCode) setPromoCode(draft.promoCode);
     }, 0);
     return () => window.clearTimeout(timer);
-  }, [source]);
+  }, [source, showFreeShippingActivation]);
 
   const plate = `${city} ${letters} ${numbers}`.trim();
   const valid = isValidPlate(plate, type);
   const validSeason = type !== 'season' || isValidSeasonPeriod(seasonStart, seasonEnd);
   const preview = valid ? plate : `${city || 'B'} ${letters || 'AB'} ${numbers || '123'}`;
-  const pricing = getCheckoutPricing(type, color, quantity, undefined);
-  const cartPricing = cart ? getCheckoutPricing(cart.type, cart.color, cart.quantity, undefined) : null;
+  function dropPromo(message: string) {
+    setPromoCode(null);
+    setPromoError(message);
+  }
+  const promo = useVerifiedPromoPricing(type, color, quantity, promoCode, dropPromo);
+  const cartPromo = useVerifiedPromoPricing(cart?.type, cart?.color, cart?.quantity, promoCode, dropPromo);
+  // Shipping stays visible until the server has confirmed the discount.
+  const pricing = promo.pricing ?? getCheckoutPricing(type, color, quantity, undefined);
+  const cartPricing = cart ? cartPromo.pricing ?? getCheckoutPricing(cart.type, cart.color, cart.quantity, undefined) : null;
+  const freeShippingActive = Boolean(promo.pricing);
   const cartProduct = cart ? PRODUCTS[cart.type] : null;
   const categoryName = useMemo(() => vehicle === 'car' ? 'Auto & Anhänger' : vehicle === 'motorcycle' ? 'Motorrad' : 'Landmaschine', [vehicle]);
 
@@ -94,6 +141,12 @@ export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', sho
   function chooseType(next: PlateType) {
     setType(next);
     setColor('black');
+  }
+
+  function activateFreeShipping() {
+    if (promoCode) return;
+    setPromoError('');
+    setPromoCode(FREE_SHIPPING_CODE);
   }
 
   function randomPlate() {
@@ -118,15 +171,18 @@ export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', sho
   }
 
   function checkout() {
-    if (!cart || !cartPricing) return;
+    if (!cart || !cartPricing || cartPromo.checking) return;
+    const appliedPromo = cartPromo.pricing?.promoCode ?? undefined;
     saveCheckoutDraft(source, {
       plate: cart.plate,
       plateType: cart.type,
       plateColor: cart.color,
       quantity: cart.quantity,
+      promoCode: appliedPromo,
       ...(cart.type === 'season' ? { seasonStartMonth: cart.seasonStart, seasonEndMonth: cart.seasonEnd } : {}),
     });
     const params = new URLSearchParams({ plate: cart.plate, type: cart.type, color: cart.color, quantity: String(cart.quantity), source });
+    if (appliedPromo) params.set('promo', appliedPromo);
     if (cart.type === 'season') {
       params.set('seasonStartMonth', String(cart.seasonStart));
       params.set('seasonEndMonth', String(cart.seasonEnd));
@@ -149,7 +205,7 @@ export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', sho
         <p className={styles.lead}>Wunschkombination eingeben, Ausführung wählen, Preis sehen. Dein Schild wird für dich geprägt und direkt zu dir geschickt.</p>
         <div className={styles.heroPoints}><span><Check size={17} /> Live-Vorschau</span><span><Check size={17} /> Preis vor dem Bezahlen</span><span><Check size={17} /> Sicherer Checkout</span></div>
         <a className={styles.heroCta} href="#konfigurator">Jetzt Schild gestalten <ArrowRight size={19} /></a>
-        <p className={styles.heroFoot}>Ab {formatPrice(PRODUCTS.standard.prices[1])} pro Autoschild inkl. MwSt. · Versand wird im Konfigurator angezeigt</p>
+        <p className={styles.heroFoot}>Ab {formatPrice(PRODUCTS.standard.prices[1])} pro Autoschild inkl. MwSt. </p>
       </div>
       <div className={styles.heroVisual}><Image src="/herbst-hero-auto.webp" alt="Auto mit deutschem Kennzeichen" fill sizes="(max-width: 900px) 100vw, 55vw" priority /><div className={styles.heroPhotoLabel}><span>01 / 03</span><strong>Vom Wunschkennzeichen zum fertigen Schild.</strong></div></div>
     </section>
@@ -186,7 +242,7 @@ export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', sho
           <p className={styles.quantityHint}>{vehicle === 'agriculture' ? 'Landmaschinenschilder sind hier einzeln bestellbar.' : quantity === 2 ? 'Zwei Schilder mit derselben Kombination.' : 'Ein einzelnes Schild.'}</p>
         </div>
 
-        <aside className={styles.summaryCard} aria-label="Bestellübersicht"><div className={styles.summaryTop}><span>DEINE VORSCHAU</span><span className={styles.liveDot}>Live</span></div><div className={styles.plateStage}><LicensePlate value={preview} type={type} color={color} seasonStartMonth={seasonStart} seasonEndMonth={seasonEnd} className={styles.plate} /></div><p className={styles.previewNote}>{valid ? 'Deine eingegebene Kombination' : 'Beispielvorschau – bitte Kombination eingeben'} · Amtliche Siegel sind nicht enthalten.</p><div className={styles.summaryLine}><span>Ausführung</span><strong>{PRODUCTS[type].shortLabel}</strong></div><div className={styles.summaryLine}><span>Format</span><strong>{PRODUCTS[type].size}</strong></div><div className={styles.summaryLine}><span>Anzahl</span><strong>{quantity} {quantity === 1 ? 'Schild' : 'Schilder'}</strong></div><div className={styles.summaryLine}><span>Versand</span><strong>{pricing?.shippingCents ? formatPrice(pricing.shippingCents / 100) : 'Inklusive'}</strong></div><div className={styles.total}><span>Gesamtpreis <small>inkl. 19 % MwSt.</small></span><strong>{pricing ? formatPrice(pricing.totalCents / 100) : '–'}</strong></div><button type="button" className={styles.addButton} onClick={addToCart}><ShoppingBag size={20} /> In den Warenkorb <ArrowRight size={19} /></button><p className={styles.secureNote}><LockKeyhole size={15} /> Bezahlen erst im nächsten Schritt</p></aside>
+        <aside className={styles.summaryCard} aria-label="Bestellübersicht"><div className={styles.summaryTop}><span>DEINE VORSCHAU</span><span className={styles.liveDot}>Live</span></div><div className={styles.plateStage}><LicensePlate value={preview} type={type} color={color} seasonStartMonth={seasonStart} seasonEndMonth={seasonEnd} className={styles.plate} /></div><p className={styles.previewNote}>{valid ? 'Deine eingegebene Kombination' : 'Beispielvorschau – bitte Kombination eingeben'} · Amtliche Siegel sind nicht enthalten.</p><div className={styles.summaryLine}><span>Ausführung</span><strong>{PRODUCTS[type].shortLabel}</strong></div><div className={styles.summaryLine}><span>Format</span><strong>{PRODUCTS[type].size}</strong></div><div className={styles.summaryLine}><span>Anzahl</span><strong>{quantity} {quantity === 1 ? 'Schild' : 'Schilder'}</strong></div>{showFreeShippingActivation && pricing && <div className={styles.summaryLine}><span>Kennzeichen</span><strong>{formatPrice((pricing.totalCents - pricing.shippingCents) / 100)}</strong></div>}{source !== 'home' && <div className={styles.summaryLine}><span>Versand</span><strong>{freeShippingActive ? <><s className={styles.oldShipping}>{formatPrice(SHIPPING_CENTS / 100)}</s> {formatPrice(0)}</> : pricing?.shippingCents ? formatPrice(pricing.shippingCents / 100) : 'Inklusive'}</strong></div>}<div className={styles.total}><span>{source === 'home' ? 'Kennzeichenpreis' : 'Gesamtpreis'} <small>inkl. 19 % MwSt.</small></span><strong>{pricing ? formatPrice((pricing.totalCents - (source === 'home' ? pricing.shippingCents : 0)) / 100) : '–'}</strong></div>{showFreeShippingActivation && <div className={styles.freeShipping}><p className={styles.freeShippingHint}><Truck size={17} /> <span>Spare {formatPrice(SHIPPING_CENTS / 100)} Versand mit Code <strong>{FREE_SHIPPING_CODE}</strong>.</span></p>{freeShippingActive ? <output className={styles.freeShippingActive}>✓ Kostenloser Versand aktiviert</output> : <button type="button" className={styles.freeShippingButton} onClick={activateFreeShipping} disabled={promo.checking} aria-busy={promo.checking}>{promo.checking ? 'Wird aktiviert …' : 'Kostenlosen Versand aktivieren'}</button>}{promoError && <p className={styles.freeShippingError} role="alert">{promoError}</p>}</div>}<button type="button" className={styles.addButton} onClick={addToCart}><ShoppingBag size={20} /> In den Warenkorb <ArrowRight size={19} /></button><p className={styles.secureNote}><LockKeyhole size={15} /> Bezahlen erst im nächsten Schritt</p></aside>
       </div>
     </section>
 
@@ -199,10 +255,10 @@ export function OnlineOrderPage({ source = 'kennzeichen-online-bestellen24', sho
     </section>
     {showProductionPromo && <ProductionPromo />}
     {showDhlPickupPromo && <DhlPickupPromo />}
-    <section className={styles.assurance}><div><ShieldCheck size={30} /><strong>DIN 74069</strong><span>Geprüfte Kennzeichen</span></div><div><Clock3 size={30} /><strong>Direkt in Produktion</strong><span>Nach deiner Bestellung</span></div><div><Zap size={30} /><strong>Einfach bestellen</strong><span>Ohne Kundenkonto</span></div><div><Leaf size={30} /><strong>Transparent</strong><span>Preis und Versand im Blick</span></div></section>
-    <section className={styles.faq} id="fragen"><div><span className={styles.overline}>GUT ZU WISSEN</span><h2>Fragen vor der Bestellung?</h2><p>Die wichtigsten Antworten auf einen Blick.</p></div><div className={styles.faqList}><details><summary>Wann kommen meine Kennzeichen an?<ChevronRight size={18} /></summary><p>Wir machen deine Kennzeichen in etwa 10 Minuten versandfertig und versenden an Versandtagen dreimal täglich. Häufig treffen sie schon am nächsten Werktag ein, oft innerhalb von zwei Werktagen. Bitte plane dennoch 3–4 Werktage ein, da die Zustellung vom Versanddienstleister abhängt.</p></details><details><summary>Reserviere ich mit der Bestellung mein Wunschkennzeichen?<ChevronRight size={18} /></summary><p>Nein. Die Kennzeichenkombination musst du vorab bei deiner Zulassungsstelle reservieren oder zugeteilt bekommen. Hier bestellst du das geprägte Schild.</p></details><details><summary>Sind diese Kennzeichen auch für die Zulassungsbehörde geeignet?<ChevronRight size={18} /></summary><p>Ja. Unsere Kennzeichenschilder erfüllen die DIN 74069 und sind für die Vorlage bei der Zulassungsbehörde geeignet. Wir arbeiten mit einem entsprechend zertifizierten Hersteller zusammen.</p></details><details><summary>Wann sehe ich die Versandkosten?<ChevronRight size={18} /></summary><p>Der Gesamtpreis inklusive Versand steht bereits neben deiner Vorschau und wird im Warenkorb und Checkout erneut angezeigt.</p></details><details><summary>Sind die amtlichen Siegel enthalten?<ChevronRight size={18} /></summary><p>Nein. Die Siegel erhältst du bei der Zulassungsstelle. Die Vorschau dient nur zur Orientierung.</p></details></div></section>
+    <section className={styles.assurance}><div><ShieldCheck size={30} /><strong>DIN 74069</strong><span>Geprüfte Kennzeichen</span></div><div><Clock3 size={30} /><strong>Direkt in Produktion</strong><span>Nach deiner Bestellung</span></div><div><Zap size={30} /><strong>Einfach bestellen</strong><span>Ohne Kundenkonto</span></div><div><Leaf size={30} /><strong>Transparent</strong><span>Preis vor dem Bezahlen</span></div></section>
+    <section className={styles.faq} id="fragen"><div><span className={styles.overline}>GUT ZU WISSEN</span><h2>Fragen vor der Bestellung?</h2><p>Die wichtigsten Antworten auf einen Blick.</p></div><div className={styles.faqList}><details><summary>Wann kommen meine Kennzeichen an?<ChevronRight size={18} /></summary><p>Wir machen deine Kennzeichen in etwa 10 Minuten versandfertig und versenden an Versandtagen dreimal täglich. Häufig treffen sie schon am nächsten Werktag ein, oft innerhalb von zwei Werktagen. Bitte plane dennoch 3–4 Werktage ein, da die Zustellung vom Versanddienstleister abhängt.</p></details><details><summary>Reserviere ich mit der Bestellung mein Wunschkennzeichen?<ChevronRight size={18} /></summary><p>Nein. Die Kennzeichenkombination musst du vorab bei deiner Zulassungsstelle reservieren oder zugeteilt bekommen. Hier bestellst du das geprägte Schild.</p></details><details><summary>Sind diese Kennzeichen auch für die Zulassungsbehörde geeignet?<ChevronRight size={18} /></summary><p>Ja. Unsere Kennzeichenschilder erfüllen die DIN 74069 und sind für die Vorlage bei der Zulassungsbehörde geeignet. Wir arbeiten mit einem entsprechend zertifizierten Hersteller zusammen.</p></details>{source !== 'home' && <details><summary>Wann sehe ich die Versandkosten?<ChevronRight size={18} /></summary><p>Der Gesamtpreis inklusive Versand steht bereits neben deiner Vorschau und wird im Warenkorb und Checkout erneut angezeigt.</p></details>}<details><summary>Sind die amtlichen Siegel enthalten?<ChevronRight size={18} /></summary><p>Nein. Die Siegel erhältst du bei der Zulassungsstelle. Die Vorschau dient nur zur Orientierung.</p></details></div></section>
     <div className={styles.payment}><PaymentLogos /></div>
 
-    {cartOpen && <div className={styles.overlay}><button type="button" className={styles.backdrop} onClick={() => setCartOpen(false)} aria-label="Warenkorb schließen" /><dialog open className={styles.drawer} aria-modal="true" aria-label="Warenkorb"><div className={styles.drawerHeader}><div><span className={styles.overline}>DEINE BESTELLUNG</span><h2>Warenkorb</h2></div><button type="button" onClick={() => setCartOpen(false)} aria-label="Warenkorb schließen"><X size={24} /></button></div>{cart && cartPricing && cartProduct ? <><div className={styles.cartItem}><div className={styles.cartPlate}><LicensePlate value={cart.plate} type={cart.type} color={cart.color} seasonStartMonth={cart.seasonStart} seasonEndMonth={cart.seasonEnd} /></div><div><strong>{cartProduct.label}</strong><span>{cart.plate}{cart.type === 'electric' ? 'E' : cart.type === 'historic' ? 'H' : ''}</span><small>{cartProduct.size} · {cart.color === 'carbon' ? 'Carbon' : cart.color === 'green' ? 'Grün' : 'Schwarz'}</small><div className={styles.cartActions}><div className={styles.counter}><button type="button" onClick={() => changeCartQuantity(1)} disabled={cart.quantity === 1} aria-label="Anzahl verringern"><Minus size={15} /></button><strong>{cart.quantity}</strong><button type="button" onClick={() => changeCartQuantity(2)} disabled={cart.quantity === 2 || cart.type === 'agriculture240' || cart.type === 'agriculture255'} aria-label="Anzahl erhöhen"><Plus size={15} /></button></div><button type="button" onClick={() => setCart(null)}>Entfernen</button></div></div></div><div className={styles.drawerBottom}><div><span>Zwischensumme</span><strong>{formatPrice((cartPricing.totalCents - cartPricing.shippingCents) / 100)}</strong></div><div><span>Versand</span><strong>{cartPricing.shippingCents ? formatPrice(cartPricing.shippingCents / 100) : 'Inklusive'}</strong></div><div className={styles.drawerTotal}><span>Gesamt inkl. MwSt.</span><strong>{formatPrice(cartPricing.totalCents / 100)}</strong></div><button type="button" className={styles.addButton} onClick={checkout}>Weiter zu Adresse & Zahlung <ArrowRight size={19} /></button><p><LockKeyhole size={15} /> Sicherer Checkout ohne Kundenkonto</p></div></> : <div className={styles.emptyCart}><ShoppingBag size={38} /><h3>Dein Warenkorb ist leer.</h3><p>Stelle dein Kennzeichen im Konfigurator zusammen.</p><button type="button" onClick={() => setCartOpen(false)}>Weiter konfigurieren</button></div>}</dialog></div>}
+    {cartOpen && <div className={styles.overlay}><button type="button" className={styles.backdrop} onClick={() => setCartOpen(false)} aria-label="Warenkorb schließen" /><dialog open className={styles.drawer} aria-modal="true" aria-label="Warenkorb"><div className={styles.drawerHeader}><div><span className={styles.overline}>DEINE BESTELLUNG</span><h2>Warenkorb</h2></div><button type="button" onClick={() => setCartOpen(false)} aria-label="Warenkorb schließen"><X size={24} /></button></div>{cart && cartPricing && cartProduct ? <><div className={styles.cartItem}><div className={styles.cartPlate}><LicensePlate value={cart.plate} type={cart.type} color={cart.color} seasonStartMonth={cart.seasonStart} seasonEndMonth={cart.seasonEnd} /></div><div><strong>{cartProduct.label}</strong><span>{cart.plate}{cart.type === 'electric' ? 'E' : cart.type === 'historic' ? 'H' : ''}</span><small>{cartProduct.size} · {cart.color === 'carbon' ? 'Carbon' : cart.color === 'green' ? 'Grün' : 'Schwarz'}</small><div className={styles.cartActions}><div className={styles.counter}><button type="button" onClick={() => changeCartQuantity(1)} disabled={cart.quantity === 1} aria-label="Anzahl verringern"><Minus size={15} /></button><strong>{cart.quantity}</strong><button type="button" onClick={() => changeCartQuantity(2)} disabled={cart.quantity === 2 || cart.type === 'agriculture240' || cart.type === 'agriculture255'} aria-label="Anzahl erhöhen"><Plus size={15} /></button></div><button type="button" onClick={() => setCart(null)}>Entfernen</button></div></div></div><div className={styles.drawerBottom}><div><span>Zwischensumme</span><strong>{formatPrice((cartPricing.totalCents - cartPricing.shippingCents) / 100)}</strong></div>{source !== 'home' && <div><span>Versand</span><strong>{cartPromo.pricing ? <><s className={styles.oldShipping}>{formatPrice(SHIPPING_CENTS / 100)}</s> {formatPrice(0)}</> : cartPricing.shippingCents ? formatPrice(cartPricing.shippingCents / 100) : 'Inklusive'}</strong></div>}{cartPromo.pricing && <output className={styles.freeShippingActive}>✓ Kostenloser Versand aktiviert</output>}<div className={styles.drawerTotal}><span>{source === 'home' ? 'Kennzeichenpreis inkl. MwSt.' : 'Gesamt inkl. MwSt.'}</span><strong>{formatPrice((cartPricing.totalCents - (source === 'home' ? cartPricing.shippingCents : 0)) / 100)}</strong></div><button type="button" className={styles.addButton} onClick={checkout} disabled={cartPromo.checking}>Weiter zu Adresse & Zahlung <ArrowRight size={19} /></button><p><LockKeyhole size={15} /> Sicherer Checkout ohne Kundenkonto</p></div></> : <div className={styles.emptyCart}><ShoppingBag size={38} /><h3>Dein Warenkorb ist leer.</h3><p>Stelle dein Kennzeichen im Konfigurator zusammen.</p><button type="button" onClick={() => setCartOpen(false)}>Weiter konfigurieren</button></div>}</dialog></div>}
   </main>;
 }

@@ -521,6 +521,11 @@ export function EmbeddedCheckout({
   const offerEstimate = getCheckoutPricing(selection.plateType, selection.plateColor, baseQuantity, pricing?.promoCode || initialPromoCode || undefined, extras, offer);
   const total = offerEstimate ? offerEstimate.totalCents / 100 : subtotal;
   const offerBreakdown = isUpdatingSelection ? offerEstimate : pricing ?? offerEstimate;
+  const deferShipping = returnPath === '/#konfigurator';
+  const showShipping = !deferShipping || checkoutStep === 'payment';
+  const displayedTotalCents = offerBreakdown
+    ? offerBreakdown.totalCents - (showShipping ? 0 : offerBreakdown.shippingCents)
+    : Math.round(total * 100);
   const motorcyclePackage = selection.plateType === 'motorcycle' ? getMotorcyclePackage(selection.plateColor, baseQuantity) : null;
 
   useEffect(() => {
@@ -723,11 +728,11 @@ export function EmbeddedCheckout({
         <Link className="checkout-logo" href="/">
           <Image src="/kennzeichen-lieferung-logo.png" alt="kennzeichen-lieferung.de" width={2172} height={724} priority />
         </Link>
-        <span><LockKeyhole size={15} /> Sicher bestellen</span>
+        {checkoutStep === 'payment' ? <span className="checkout-header-promo">Rabattcode: <strong>neuekennzeichen</strong></span> : <span><LockKeyhole size={15} /> Sicher bestellen</span>}
       </header>
       <button type="button" className="checkout-summary-toggle" aria-expanded={summaryOpen} aria-controls="checkout-order-summary" onClick={() => setSummaryOpen((open) => !open)}>
         <span>Bestellübersicht <ChevronDown size={17} aria-hidden="true" /></span>
-        <strong>{formatPrice(offerBreakdown ? offerBreakdown.totalCents / 100 : total)}</strong>
+        <strong>{formatPrice(displayedTotalCents / 100)}</strong>
       </button>
       <section className={`checkout-order-panel${summaryOpen ? ' is-open' : ''}`} id="checkout-order-summary" aria-label="Bestellübersicht">
         <Link
@@ -791,10 +796,10 @@ export function EmbeddedCheckout({
           <span>Zwischensumme · {quantity} Artikel</span>
           <strong>{formatPrice(offerBreakdown ? (offerBreakdown.subtotalCents - offerBreakdown.packageDiscountCents) / 100 : total)}</strong>
         </div>
-        <div className="real-order-line">
+        {showShipping && <div className="real-order-line">
           <span>DHL-Versand</span>
           <strong>{(pricing?.shippingCents ?? offerEstimate?.shippingCents ?? 0) > 0 ? formatPrice((pricing?.shippingCents ?? offerEstimate?.shippingCents ?? 0) / 100) : 'Kostenlos'}</strong>
-        </div>
+        </div>}
         {pricing && pricing.discountCents > pricing.packageDiscountCents && (
           <div className="real-order-line real-order-discount">
             <span>Rabatt ({pricing.promoCode})</span>
@@ -803,8 +808,8 @@ export function EmbeddedCheckout({
         )}
         <div className="real-order-total">
           <span>Gesamt <small>inkl. MwSt.</small></span>
-          <strong className="checkout-live-price" key={offerBreakdown?.totalCents ?? total}>
-            {formatPrice(offerBreakdown ? offerBreakdown.totalCents / 100 : total)}
+          <strong className="checkout-live-price" key={displayedTotalCents}>
+            {formatPrice(displayedTotalCents / 100)}
           </strong>
         </div>
         <p className="checkout-scope">
@@ -861,14 +866,14 @@ export function EmbeddedCheckout({
                   {Object.entries(HOLIDAY_REGIONS[deliveryState]).map(([code, name]) => <option key={code} value={code}>{name}</option>)}
                 </select>
               </label>}
-              <div className="checkout-shipping-section">
+              {showShipping && <div className="checkout-shipping-section">
                 <h3>Versand</h3>
                 <div className="checkout-shipping-option">
                   <span className="checkout-shipping-radio" aria-hidden="true" />
                   <span><strong>DHL Standardversand</strong></span>
                   <strong>{(offerBreakdown?.shippingCents ?? SHIPPING_CENTS) === 0 ? 'Kostenlos' : formatPrice((offerBreakdown?.shippingCents ?? SHIPPING_CENTS) / 100)}</strong>
                 </div>
-              </div>
+              </div>}
               {addressError && <p className="checkout-error" role="alert">{addressError}</p>}
               <button className="checkout-continue" type="submit">Weiter zur Zahlung <ArrowRight size={18} /></button>
             </section>

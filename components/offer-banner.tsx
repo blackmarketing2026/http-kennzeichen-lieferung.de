@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 export function OfferBanner() {
   const pathname = usePathname();
 
-  if (pathname?.startsWith('/admin') || pathname?.startsWith('/konto') || pathname?.startsWith('/checkout')) {
+  if (pathname === '/' || pathname?.startsWith('/admin') || pathname?.startsWith('/konto') || pathname?.startsWith('/checkout')) {
     return null;
   }
 
