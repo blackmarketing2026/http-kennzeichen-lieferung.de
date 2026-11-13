@@ -22,3 +22,7 @@ Erster Serverstart ohne expliziten Host meldete uv_interface_addresses-Fehler; m
 
 ## Veröffentlichungsprüfung
 Zum Zeitpunkt dieses Berichts lokal geprüft und zur Veröffentlichung vorbereitet. Nach Übertragung auf main werden Commitstatus, neue Live-Seiten und öffentliche Sitemap per HTTP/API geprüft. Ein Push allein wird nicht als Deployment oder Indexierung ausgegeben. Keine GSC-Sitemap-Einreichung durchgeführt: verfügbare OpenSEO-Funktionen bieten dafür keine passende Operation. robots.txt verweist auf die Sitemap; GSC-Property durch erfolgreichen Leistungsabruf bestätigt.
+
+## Bestätigter Abschluss
+Content-Commit: 1d0673502c15bef7bfdc908186094947d0c252a7 auf main. Vercel-Status success am 13.11.2026. Übertragener GitHub-Dateistand bytegleich mit allen 13 lokal geprüften Dateien.
+Alle zehn finalen Produktions-URLs anschließend per HTTP bestätigt: jeweils 200, erwarteter Titel, genau eine H1 und korrektes absolutes Canonical. Öffentliche Sitemap als XML geprüft: 42 eindeutige URLs, alle zehn neuen enthalten. Keine Google-Indexierung behauptet. Ergebnis im OpenSEO-Rechercheprotokoll dokumentiert.
