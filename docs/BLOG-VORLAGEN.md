@@ -38,3 +38,9 @@ Bestehende ?bersicht: `app/ratgeber/page.tsx`; Artikelvorlage: `app/ratgeber/[sl
 ## Pr?fung vor Abschluss
 
 `npm run build` ausf?hren; ?bersicht und Artikel auf Desktop und Mobilger?ten pr?fen. Pr?fen: Footer-Link, leere beziehungsweise bef?llte ?bersicht, Artikelroute, unbekannter Slug (404), H1, Canonical, strukturierte Daten und Sitemap. Bei neuen Inhalten sachliche Quellen und interne Links pr?fen. Keine Ver?ffentlichung oder Push ohne passenden Auftrag.
+
+## Ergänzung vom 13.11.2026
+
+Blogartikel können mit `relatedLinks?: { href: string; label: string }[]` auf passende Blogartikel und Produktseiten verweisen. Nur bestehende interne Ziele verwenden. Ratgeber zeigen zugeordnete Blogartikel anhand von `relatedGuideSlugs`. Neue Ratgeber können ein individuelles `reviewedAt` (ISO-Datum) erhalten; das globale alte Prüfdatum bleibt für ungeprüfte Bestandsartikel unverändert.
+
+Für den ausdrücklich autorisierten SEO-Auftrag erfolgt die Prüfung ohne Browser oder Screenshots: Build, Code, HTTP, Metadaten, Links und Sitemap. Codeprüfung ersetzt keinen visuellen Nachweis. Nach bestandenen Prüfungen sind Push und Veröffentlichung im bestehenden Ablauf autorisiert. `scripts/editorial-smoke.mjs` prüft das datierte Zehnerpaket; `scripts/seo-smoke.mjs` den aktuellen Gesamtbestand. Für HTTP-Prüfungen `SEO_SMOKE_ORIGIN` auf den gewünschten Server setzen.

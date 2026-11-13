@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Clock3, ArrowRight, CalendarDays } from 'lucide-react';
 import { notFound } from 'next/navigation';
+import { blogArticles, formatBlogDate } from '@/config/blog';
 import { guides } from '@/config/guides';
 import { registrationGuides, guideReadingMinutes, guideWordCount, GUIDE_REVIEWED_DATE } from '@/config/registration-guides';
 import { getGuideBanners } from '@/config/guide-banners';
@@ -46,7 +47,7 @@ export default async function GuideArticle({ params }: Props) {
     '@context': 'https://schema.org', '@type': 'BlogPosting', headline: guide.title, description: guide.teaser,
     mainEntityOfPage: absoluteUrl(`/ratgeber/${slug}`), inLanguage: 'de-DE', wordCount, timeRequired: `PT${readingMinutes}M`,
     author: { '@type': 'Organization', name: 'kennzeichen-lieferung.de', url: absoluteUrl('/') },
-    ...(article ? { dateModified: GUIDE_REVIEWED_DATE } : {}),
+    ...(article ? { dateModified: article.reviewedAt ?? GUIDE_REVIEWED_DATE } : {}),
   };
   return <main className={styles.page} id="artikelanfang">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd(breadcrumbs)) }} />
@@ -61,7 +62,7 @@ export default async function GuideArticle({ params }: Props) {
       <div className={styles.article}>
         <article>
           <div className={styles.articleIntro}><span>{article?.category ?? 'KENNZEICHENWISSEN'}</span><h1>{guide.title}</h1><p>{guide.teaser}</p>
-            <div className={styles.meta}><span><Clock3 size={16} aria-hidden="true" />{readingMinutes} Min. Lesezeit</span><span>Redaktion kennzeichen-lieferung.de</span>{article && <span><CalendarDays size={16} aria-hidden="true" />Stand: <time dateTime={GUIDE_REVIEWED_DATE}>24. Oktober 2026</time></span>}</div>
+            <div className={styles.meta}><span><Clock3 size={16} aria-hidden="true" />{readingMinutes} Min. Lesezeit</span><span>Redaktion kennzeichen-lieferung.de</span>{article && <span><CalendarDays size={16} aria-hidden="true" />Stand: <time dateTime={article.reviewedAt ?? GUIDE_REVIEWED_DATE}>{formatBlogDate(article.reviewedAt ?? GUIDE_REVIEWED_DATE)}</time></span>}</div>
           </div>
           <div className={styles.body}>
             {article ? <>
@@ -79,6 +80,7 @@ export default async function GuideArticle({ params }: Props) {
           </div>
           <section className={styles.next}><span>DEIN NÄCHSTER SCHRITT</span><h2>Schilderkauf? Kannst du jetzt erledigen.</h2><p>{article?.cta ?? 'Deine Kombination steht fest? Konfiguriere die passenden Schilder und prüfe den Gesamtpreis vor der Zahlung.'}</p><Link href="/kennzeichen-bestellen">Jetzt Kennzeichen bestellen <ArrowRight size={17} aria-hidden="true" /></Link><small>Geprägte Schilder ohne Reservierung, Zulassung und amtliche Plaketten.</small></section>
           <section className={styles.related}><h2>Das könnte dich auch interessieren</h2>{related.map(item => <Link href={`/ratgeber/${item.slug}`} key={item.slug}>{item.title}<ArrowRight size={17} aria-hidden="true" /></Link>)}</section>
+          {blogArticles.some(item => item.relatedGuideSlugs?.includes(slug)) && <section className={styles.related}><h2>Praktische Tipps im Blog</h2>{blogArticles.filter(item => item.relatedGuideSlugs?.includes(slug)).map(item => <Link href={`/blog/${item.slug}`} key={item.slug}>{item.title}<ArrowRight size={17} aria-hidden="true" /></Link>)}</section>}
           <a className={styles.backTop} href="#artikelanfang">Zurück nach oben ↑</a>
         </article>
         <aside className={styles.aside} aria-label="Kennzeichen bestellen und weitere Ratgeber">

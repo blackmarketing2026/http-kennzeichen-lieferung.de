@@ -58,3 +58,10 @@
 
 - Blog?bersicht `/blog`, Artikelvorlage `/blog/[slug]` und Artikel-Datenmodell `config/blog.ts` nutzen das bestehende Ratgeberdesign. Der Footer verlinkt den Blog; ?bersicht und ver?ffentlichte Artikel stehen automatisch in der Sitemap. Das Array ist zun?chst leer; es gibt keine ?ffentlichen Platzhalterartikel.
 - F?r sp?tere Agenten: `docs/BLOG-VORLAGEN.md` beschreibt Blog- und Ratgebervorlagen, Inhaltsmodell, redaktionelle Anforderungen und Pr?fungen. Ratgeber weiterhin nach `docs/RATGEBER.md` pflegen. Inhalte sind dateibasiert und ben?tigen einen Build/Deployment.
+
+## SEO-Content-Paket (13.11.2026)
+
+- Acht Blogartikel in config/blog.ts und zwei Ratgeber in config/registration-guides.ts ergänzt. Themen, Quellen, GSC-Auswertung und vollständige Seitenliste unter docs/seo/2026-11-13-*.
+- Vorhandene Vorlage, Banner und Preisquellen erhalten. Sichtbare Umlautfehler im Blog korrigiert; relatedLinks ergänzt. Neue Ratgeber haben individuelles reviewedAt; älteres globales Datum unverändert.
+- Build, gezieltes Lint und beide HTTP-Smoke-Prüfungen erfolgreich; Sitemap 32 → 42 URLs ohne Löschung. Zwei alte Tabellen-Lintbefunde dokumentiert. Keine visuelle Browserprüfung gemäß Nutzerauftrag.
+- Für nächste Läufe diese zehn Suchintentionen als vorhanden behandeln. Veröffentlichung separat anhand Commit-/Deploymentstatus und Live-HTTP bestätigen.

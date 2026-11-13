@@ -10,6 +10,7 @@ export type RegistrationGuide = {
   title: string;
   teaser: string;
   category: string;
+  reviewedAt?: string;
   intro: string[];
   takeaway: string;
   sections: GuideSection[];
@@ -24,6 +25,203 @@ const tax = { label: 'Zoll: Zahlung der Kfz-Steuer und SEPA-Mandat', href: 'http
 const shortTerm = { label: 'Service Berlin: Kurzzeitkennzeichen beantragen', href: 'https://service.berlin.de/dienstleistung/121479/' };
 
 export const registrationGuides: RegistrationGuide[] = [
+{
+  "slug": "kennzeichen-beschaedigt-ersetzen",
+  "title": "Kennzeichen beschädigt: So ersetzt du das Schild",
+  "teaser": "Verbogene oder unleserliche Schilder richtig austauschen: Was du vor der Bestellung mit der Behörde klärst und welche Unterlagen wichtig sind.",
+  "category": "Schilder ersetzen",
+  "reviewedAt": "2026-11-13",
+  "intro": [
+    "Ein Parkrempler hat das vordere Schild verbogen oder die Schrift ist trotz Reinigung kaum noch erkennbar. Dann geht es nicht nur um ein neues Stück Blech. Das Ersatzschild muss zur bisherigen Zuteilung passen und erforderliche Plaketten müssen im zuständigen Verfahren erneuert werden.",
+    "Dieser Ratgeber betrifft vorhandene beschädigte Schilder. Fehlt ein Schild nach Verlust oder Diebstahl, gilt ein anderes Verfahren. Dafür findest du unten einen eigenen Ratgeber."
+  ],
+  "takeaway": "Bei einem vorhandenen beschädigten Schild kann die bisherige Kombination grundsätzlich erhalten bleiben. Kläre den Ablauf mit deiner Zulassungsstelle, bestelle die passende Ausführung und bewahre die alten Schilder für den Austausch auf.",
+  "sections": [
+    {
+      "id": "schaden",
+      "title": "1. Den Schaden richtig einordnen",
+      "paragraphs": [
+        "Prüfe zuerst, ob nur Schmutz die Zeichen verdeckt. Eine schonende Reinigung kann ausreichen. Bleiben Zeichen unleserlich, ist das Schild gerissen oder die Oberfläche beschädigt, solltest du den Austausch klären. Nicht mit Stift nachzeichnen oder mit Folie reparieren.",
+        "Unterscheide Schild, Halter und Plaketten. Ein gebrochener Rahmen kann ersetzt werden, ohne das intakte Schild zu erneuern. Eine beschädigte amtliche Plakette dagegen lässt sich nicht durch den Kauf eines leeren Schilds lösen."
+      ],
+      "items": [
+        "Schild vorhanden, aber beschädigt: Austauschverfahren prüfen.",
+        "Nur Halter defekt: passende Befestigung erneuern.",
+        "Plakette beschädigt: zuständige Stelle zur Erneuerung kontaktieren.",
+        "Schild verschwunden: Verlust- oder Diebstahlverfahren nutzen."
+      ]
+    },
+    {
+      "id": "behoerde",
+      "title": "2. Den Ablauf vor dem Kauf klären",
+      "paragraphs": [
+        "Rufe die offizielle Website deiner Zulassungsbehörde auf und suche nach Kennzeichentausch oder Ersatz wegen Unleserlichkeit. Frage, welche alten Schilder, Dokumente und Nachweise sie benötigt und ob du einen Termin brauchst.",
+        "Das Berliner Serviceportal nennt beispielsweise alte und neue Schilder sowie die Zulassungsbescheinigung Teil I. Dort sollen beim Pkw auch dann beide bisherigen Schilder vorgelegt werden, wenn nur eines ersetzt wird. Das ist ein konkretes Behördenbeispiel, keine bundesweit identische Unterlagenliste."
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "3. Ersatz mit der richtigen Kombination bestellen",
+      "paragraphs": [
+        "Übernimm die zugeteilte Kombination aus dem Fahrzeugschein und gleiche sie mit dem bisherigen Schild ab. Prüfe das Format und besondere Merkmale wie E, H oder Saison. Die bloße Ähnlichkeit der Vorschau genügt nicht; alle Zeichen müssen stimmen.",
+        "Bestelle die tatsächlich benötigte Anzahl. Wenn nur ein Schild defekt ist, musst du nicht automatisch beide neu anfertigen lassen. Ob der Shop die passende Einzelkonfiguration anbietet, prüfst du in der aktuellen Auswahl. Alte Schilder trotzdem bis zum Abschluss des Vorgangs behalten."
+      ]
+    },
+    {
+      "id": "plaketten",
+      "title": "4. Amtliche Plaketten separat erledigen",
+      "paragraphs": [
+        "Die Schilderbestellung umfasst das geprägte Produkt. Sie beinhaltet keine amtliche Abstempelung. Löse die Stempelplakette nicht selbst ab, um sie auf ein neues Schild zu kleben. Nach der FZV ist sie so ausgeführt, dass sie beim Entfernen zerstört wird.",
+        "Am hinteren Schild kann außerdem die HU-Plakette betroffen sein. Frage vor dem Termin nach dem nötigen Nachweis und dem zuständigen Ablauf. Ein neues Schild verändert nicht von selbst die Fälligkeit der Hauptuntersuchung."
+      ]
+    },
+    {
+      "id": "kosten",
+      "title": "5. Schilderpreis und Behördenkosten trennen",
+      "paragraphs": [
+        "Plane die Anfertigung und gegebenenfalls Versand einerseits sowie die Gebühren für den behördlichen Vorgang andererseits. Die konkrete Summe hängt vom Fall ab. Ein günstiger Preis für das Blech ist deshalb nicht automatisch der Gesamtpreis für den Austausch.",
+        "Prüfe den Warenkorb vor der Zahlung und die Gebührenangaben deiner Behörde. Vermeide eine feste Terminplanung auf Basis einer unbestätigten Lieferannahme. Bei einem knappen Termin klärst du zuerst, ob Schilder und erforderliche Unterlagen rechtzeitig vorliegen."
+      ]
+    },
+    {
+      "id": "abschluss",
+      "title": "6. Sicher montieren und Vorgang abschließen",
+      "paragraphs": [
+        "Kontrolliere das Ersatzschild vor der Montage auf die richtige Kombination und sichtbare Schäden. Nach den erforderlichen behördlichen Schritten befestigst du es sicher am vorgesehenen Ort. Prüfe auch die Halterung: War sie Ursache des Schadens, sollte der Fehler nicht bestehen bleiben.",
+        "Ein ungestempeltes Ersatzschild berechtigt nicht allgemein zur Fahrt. Besondere Fahrten im Zulassungsverfahren sind an Voraussetzungen gebunden. Kläre eine notwendige Fahrt vorab mit Behörde und Versicherung, statt aus der Bestellung eine Erlaubnis abzuleiten."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Muss ich wegen eines verbogenen Schilds eine neue Kombination wählen?",
+      "answer": "Bei einem vorhandenen beschädigten Schild ist der Austausch grundsätzlich mit der bisherigen Kombination möglich. Die Behörde klärt den konkreten Vorgang. Bei Verlust oder Diebstahl ist das anders."
+    },
+    {
+      "question": "Kann ich die alte Stempelplakette selbst übertragen?",
+      "answer": "Nein. Sie ist nicht als wiederverwendbarer Aufkleber ausgeführt. Kläre die erforderliche Erneuerung mit der zuständigen Stelle."
+    },
+    {
+      "question": "Reicht es, nur das defekte Schild mitzunehmen?",
+      "answer": "Nicht überall. Berlin verlangt beim Pkw beispielsweise beide alten Schilder, auch wenn nur eines ersetzt wird. Maßgeblich sind die Hinweise deiner Behörde."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Service Berlin: Kennzeichen wegen Unleserlichkeit ersetzen",
+      "href": "https://service.berlin.de/dienstleistung/324907/"
+    },
+    {
+      "label": "FZV § 12: Ausgestaltung und Anbringung der Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "related": [
+    "kennzeichen-verloren-gestohlen",
+    "kennzeichengroessen",
+    "kennzeichen-online-bestellen"
+  ],
+  "cta": "Ablauf, Kombination und Format sind geklärt? Dann kannst du das passende Ersatzschild bestellen und den behördlichen Austausch vorbereiten."
+},
+{
+  "slug": "kennzeichen-verloren-gestohlen",
+  "title": "Kennzeichen verloren oder gestohlen: Was tun?",
+  "teaser": "Die richtige Reihenfolge bei fehlenden Schildern: Meldung, behördliche Klärung, neue Kombination und passende Ersatzschilder.",
+  "category": "Schilder ersetzen",
+  "reviewedAt": "2026-11-13",
+  "intro": [
+    "Am geparkten Auto fehlt plötzlich ein Kennzeichen. Ob es verloren ging oder entwendet wurde, lässt sich nicht immer sofort erkennen. Bestelle jetzt nicht einfach dieselbe Kombination nach: Ein fehlendes amtliches Schild ist ein Fall für die zuständigen Stellen.",
+    "Dieser Ratgeber bündelt Verlust und Diebstahl, weil beide zum behördlichen Ersatzverfahren führen. Er zeigt außerdem, welche Folgeänderungen du nach der neuen Kombination prüfen solltest."
+  ],
+  "takeaway": "Bei einem fehlenden amtlichen Schild zuerst den Verlust beziehungsweise Diebstahl melden und die Umkennzeichnung klären. Erst danach Schilder für die bestätigte neue Kombination bestellen.",
+  "sections": [
+    {
+      "id": "sofort",
+      "title": "1. Nicht einfach mit einem fehlenden Schild weiterfahren",
+      "paragraphs": [
+        "Kontrolliere, ob nur ein Schild oder beide fehlen. Notiere Zeitpunkt und Ort der Feststellung. Fotografiere eine beschädigte Halterung, wenn du Spuren bemerkst. Setze die Fahrt mit fehlendem vorgeschriebenem Kennzeichen nicht einfach fort.",
+        "Eine selbst geschriebene Pappe oder ein Foto hinter der Scheibe ersetzt das amtliche Schild nicht. Kläre mit der zuständigen Stelle beziehungsweise einem Pannendienst, wie das Fahrzeug erforderlichenfalls bewegt werden kann. Bringe dich bei der Suche nach einem verlorenen Schild nicht im fließenden Verkehr in Gefahr."
+      ]
+    },
+    {
+      "id": "melden",
+      "title": "2. Diebstahl und Verlust richtig melden",
+      "paragraphs": [
+        "Bei Diebstahl verständigst du die Polizei und bewahrst den Nachweis der Anzeige auf. Melde das fehlende Schild außerdem der Zulassungsbehörde. Beschreibe ehrlich, ob du einen Diebstahl vermutest oder lediglich festgestellt hast, dass es fehlt.",
+        "Für einen Verlust kann eine entsprechende Erklärung oder Versicherung an Eides statt verlangt werden. Welche Form und Unterlagen erforderlich sind, erklärt deine Behörde. Übernimm nicht ungeprüft ein Formular einer anderen Stadt."
+      ]
+    },
+    {
+      "id": "mappe",
+      "title": "3. Unterlagen für deinen konkreten Fall vorbereiten",
+      "paragraphs": [
+        "Als Orientierung nennt das Berliner Serviceportal Identitätsnachweis, Fahrzeugpapiere, HU-Nachweis und ein noch vorhandenes Schild. Bei Diebstahl kommt das Anzeigeprotokoll hinzu. Für Vertretung, Firmen oder besondere Fahrzeugfälle können weitere Nachweise erforderlich sein.",
+        "Nutze diese Orientierung zum Vorbereiten, bestätige die Liste aber auf dem Portal deiner zuständigen Behörde. Eine eidesstattliche Erklärung, Terminverfügbarkeit und Gebühren hängen vom Verfahren ab."
+      ],
+      "items": [
+        "Zuständige Zulassungsstelle und Leistung auswählen.",
+        "Identität und Fahrzeugunterlagen bereitlegen.",
+        "Noch vorhandenes Schild aufbewahren.",
+        "Anzeigenachweis beziehungsweise verlangte Verlusterklärung vorbereiten.",
+        "Bei Vertretung Vollmacht und notwendige Nachweise klären."
+      ]
+    },
+    {
+      "id": "kombination",
+      "title": "4. Warum dieselbe Kombination nicht einfach nachbestellt wird",
+      "paragraphs": [
+        "Nach dem behördlichen Verfahren wird das verschwundene Kennzeichen gesperrt und das Fahrzeug erhält eine andere Kombination. So wird der fehlende Gegenstand von der weiteren Fahrzeugkennzeichnung getrennt. Das betrifft auch den Fall, dass beim Pkw nur eines der beiden Schilder fehlt.",
+        "Bestelle neue Schilder erst, wenn die neue Kombination und Ausführung bestätigt sind. Eine im Shop frei eingetippte Wunschkombination ist keine behördliche Reservierung. Das noch vorhandene alte Schild wird nicht einfach mit einem anders beschrifteten neuen kombiniert."
+      ]
+    },
+    {
+      "id": "folgen",
+      "title": "5. Was du nach der Umkennzeichnung aktualisieren solltest",
+      "paragraphs": [
+        "Prüfe anschließend Dienste und Zubehör, bei denen die alte Kombination hinterlegt ist. Dazu können Parkberechtigungen, Zufahrtskontrollen und ein Wiederholungskennzeichen am Fahrradträger gehören. Ob und wie eine Änderung gemeldet werden muss, sagt der jeweilige Anbieter.",
+        "Gehe deine tatsächlich genutzten Dienste durch, statt neue unnötige Leistungen zu kaufen. Bei einem Fahrradträger muss das Schild zur aktuellen Fahrzeugkombination passen. Ein Träger mit dem alten Zusatzschild ist nach dem Wechsel nicht automatisch richtig gekennzeichnet."
+      ]
+    },
+    {
+      "id": "schutz",
+      "title": "6. Neue Schilder prüfen und Befestigung kontrollieren",
+      "paragraphs": [
+        "Vergleiche die Lieferung mit der bestätigten neuen Kombination. Erledige die erforderlichen Plaketten im zuständigen Verfahren und montiere die Schilder sicher. Kontrolliere den Rahmen auf gebrochene Clips oder ausgerissene Aufnahmen.",
+        "Eine bessere Befestigung ist keine Diebstahlgarantie. Sie kann aber vermeiden, dass ein bereits lockerer Verschluss erneut zum Problem wird. Wenn das alte Schild später wieder auftaucht, verwende es nicht eigenmächtig weiter, sondern melde den Fund der zuständigen Stelle."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Genügt es, ein einzelnes verlorenes Schild mit derselben Nummer nachzukaufen?",
+      "answer": "Nein. Bei einem fehlenden amtlichen Schild muss zuerst das Verlust- oder Diebstahlverfahren geklärt werden. Die alte Kombination wird gesperrt und das Fahrzeug umgekennzeichnet."
+    },
+    {
+      "question": "Was ist bei einem nur beschädigten Schild anders?",
+      "answer": "Ist das Schild noch vorhanden, kann ein Austausch wegen Beschädigung grundsätzlich unter Beibehaltung der Kombination möglich sein. Dafür gibt es einen eigenen Ratgeber."
+    },
+    {
+      "question": "Sind Polizei, Zulassung und neue Schilder im Shoppreis enthalten?",
+      "answer": "Nein. Der Shop liefert geprägte Schilder. Meldungen, behördliche Vorgänge und amtliche Plaketten gehören nicht zur normalen Schilderbestellung."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Service Berlin: Kennzeichen nach Diebstahl oder Verlust ersetzen",
+      "href": "https://service.berlin.de/dienstleistung/324196/"
+    },
+    {
+      "label": "FZV § 12: Ausgestaltung und Anbringung der Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "related": [
+    "kennzeichen-beschaedigt-ersetzen",
+    "auto-anmelden-vollmacht",
+    "wunschkennzeichen-reservieren"
+  ],
+  "cta": "Die neue Kombination ist behördlich bestätigt? Bestelle dafür die passenden Schilder. Eine Nachprägung der verschwundenen alten Kombination ersetzt das Verfahren nicht."
+},
   {
     slug: 'auto-anmelden-unterlagen', title: 'Auto anmelden: Welche Unterlagen brauche ich?',
     teaser: 'Die vollständige Vorbereitung für deinen Zulassungstermin: Fahrzeugpapiere, eVB, HU, SEPA-Mandat und wichtige Sonderfälle.',

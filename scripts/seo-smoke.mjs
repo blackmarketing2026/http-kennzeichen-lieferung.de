@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import { blogArticles } from '../config/blog.ts';
+import { registrationGuides } from '../config/registration-guides.ts';
 
 const local = process.env.SEO_SMOKE_ORIGIN ?? 'http://localhost:56782';
 const publicOrigin = 'https://www.kennzeichen-lieferung.de';
@@ -9,7 +11,9 @@ const products = [
 ];
 const guides = [
   '/ratgeber', '/ratgeber/wunschkennzeichen-reservieren',
-  '/ratgeber/kennzeichengroessen', '/ratgeber/kennzeichen-online-bestellen',
+  '/ratgeber/kennzeichen-online-bestellen',
+  ...registrationGuides.map(guide => `/ratgeber/${guide.slug}`),
+  '/blog', ...blogArticles.map(article => `/blog/${article.slug}`),
 ];
 
 for (const path of ['/', ...products, ...guides]) {
@@ -38,7 +42,7 @@ const checkout = await (await fetch(local + '/checkout')).text();
 assert.match(checkout, /<meta\s+name="robots"\s+content="[^"]*noindex/, 'checkout noindex');
 const sitemap = await (await fetch(local + '/sitemap.xml')).text();
 const sitemapPaths = [
-  '/', ...products, ...guides, '/landmaschinen-kennzeichen', '/autohaendlerpartner',
+  '/', ...products, ...guides, '/landmaschinen-kennzeichen', '/autohaendlerpartner', '/autokennzeichen-express-lieferung',
   '/din-74069', '/liefergarantie', '/impressum', '/datenschutz', '/widerruf',
 ];
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
