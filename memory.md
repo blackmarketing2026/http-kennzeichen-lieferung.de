@@ -52,3 +52,9 @@
 
 - Den vom Nutzer bereitgestellten Google-Site-Verification-Wert über `verification.google` in der zentralen Next.js-Metadata in `app/layout.tsx` ergänzt. Der erzeugte HTML-Head der lokalen Startseite enthält den exakten Meta-Tag.
 - Build und gezieltes Linting erfolgreich. Auf ausdrücklichen Wunsch des Nutzers werden die zuvor lokal gebliebenen Shop-/SEO-Änderungen samt Sitemap und Verifizierung jetzt auf `main` gepusht; die vorigen Aussagen „nicht gepusht“ dokumentieren den damaligen Stand.
+
+
+## Blogsystem und redaktionelle Vorlagen (13.11.2026)
+
+- Blog?bersicht `/blog`, Artikelvorlage `/blog/[slug]` und Artikel-Datenmodell `config/blog.ts` nutzen das bestehende Ratgeberdesign. Der Footer verlinkt den Blog; ?bersicht und ver?ffentlichte Artikel stehen automatisch in der Sitemap. Das Array ist zun?chst leer; es gibt keine ?ffentlichen Platzhalterartikel.
+- F?r sp?tere Agenten: `docs/BLOG-VORLAGEN.md` beschreibt Blog- und Ratgebervorlagen, Inhaltsmodell, redaktionelle Anforderungen und Pr?fungen. Ratgeber weiterhin nach `docs/RATGEBER.md` pflegen. Inhalte sind dateibasiert und ben?tigen einen Build/Deployment.
