@@ -20,3 +20,7 @@ OpenSEO bestätigt am 15.11. weiterhin die ausgewählte Property https://www.ken
 
 ## Veröffentlichung
 Dieser Bericht dokumentiert die Prüfung vor Übertragung auf main. Commitstatus und öffentliche Seiten werden nach Veröffentlichung separat bestätigt. Push allein ist kein Deploymentnachweis.
+
+## Bestätigter Produktionsabschluss
+Content-Commit https://github.com/blackmarketing2026/http-kennzeichen-lieferung.de/commit/6e589bf088f30a495e7af01c5e8575ebdf3a1a00 direkt auf main veröffentlicht, ohne Force-Push; vorheriger main unverändert und erwarteter SHA beim Update geprüft. Alle sieben übertragenen Dateien bytegleich mit lokal geprüftem Stand.
+Vercel-Status success. Anschließend redaktioneller Smoke gegen https://www.kennzeichen-lieferung.de erfolgreich: alle 10 Seiten und insgesamt 43 HTTP-Ziele, erwartete Inhalte, Canonicals, Metadaten, strukturierte Daten, interne Links, Übersichten und 404. Öffentliche Sitemap erneut als XML geprüft: 52 eindeutige URLs, alle zehn neuen enthalten, keine bisherige entfernt. Keine Google-Indexierung behauptet. Rechercheprotokoll im zugehörigen OpenSEO-Projekt ergänzt.

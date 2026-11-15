@@ -73,3 +73,4 @@
 - GSC-Wochenbriefing vom 13.11. weiterverwenden; nächste reguläre Analyse ab 20.11. Aktuelle Property erneut bestätigt. OpenSEO: drei neue SERPs vorhanden; neue Keywordmetriken wegen Providerfehler/Creditmangel nicht verfügbar. Keine Wiederholungen ohne Anlass.
 - Aktuelle amtliche Quellen beachten: 35. BImSchV Anhang 3 Nr.11 enthält E-Kennzeichnungs-Ausnahme. BMV-i-Kfz-Seite und aktueller FZV-§31-Text nennen abweichende Tageszahlen; Artikel verweist auf das konkrete Enddatum des amtlichen Nachweises.
 - Redaktioneller Smoke unterstützt SEO_SMOKE_DATE für das jeweilige datierte Manifest; Standard bleibt 2026-11-13.
+- Produktionsabschluss bestätigt: Content-Commit 6e589bf088f30a495e7af01c5e8575ebdf3a1a00, Vercel success; Live-Smoke 10 Seiten/43 HTTP-Ziele bestanden. Öffentliche Sitemap 52 eindeutige URLs, +10/-0. OpenSEO-Protokoll ergänzt. Keine Indexierungszusage.
