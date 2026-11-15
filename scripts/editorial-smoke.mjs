@@ -4,7 +4,7 @@ import {blogArticles} from '../config/blog.ts';
 import {registrationGuides} from '../config/registration-guides.ts';
 const origin=process.env.SEO_SMOKE_ORIGIN ?? 'http://localhost:56782';
 const canonicalOrigin='https://www.kennzeichen-lieferung.de';
-const pages=JSON.parse(readFileSync(new URL('../docs/seo/2026-11-13-new-pages.json',import.meta.url),'utf8'));
+const pages=JSON.parse(readFileSync(new URL(`../docs/seo/${process.env.SEO_SMOKE_DATE ?? '2026-11-13'}-new-pages.json`,import.meta.url),'utf8'));
 const allGuides=new Set([...registrationGuides.map(a=>a.slug),'kennzeichen-online-bestellen','wunschkennzeichen-reservieren']);
 const urls=new Set();
 for(const a of blogArticles){

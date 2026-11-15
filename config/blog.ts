@@ -15,6 +15,628 @@ export type BlogArticle = {
 };
 
 export const blogArticles: BlogArticle[] = [
+{
+  "slug": "e-kennzeichen-nachtraeglich",
+  "title": "E-Kennzeichen nachträglich beantragen: der Ablauf",
+  "description": "Schon zugelassen, aber noch ohne E? So klärst du Eignung, Behördenunterlagen und die Bestellung neuer Schilder.",
+  "category": "Kennzeichen und Zulassung",
+  "publishedAt": "2026-11-15",
+  "intro": [
+    "Dein Elektroauto ist bereits zugelassen, fährt aber noch mit normalen Schildern. Ein E am Ende lässt sich nicht einfach aufkleben. Wenn du die Kennzeichnung nachträglich möchtest, gehören die behördliche Änderung und neue passende Schilder zusammen."
+  ],
+  "takeaway": "Prüfe die Eignung deines Fahrzeugs und beantrage die Änderung bei der Zulassungsstelle. Bestelle die E-Schilder erst mit bestätigter Kombination und passendem Format.",
+  "sections": [
+    {
+      "id": "eignung",
+      "title": "Nicht jedes Fahrzeug mit Elektromotor erfüllt die Bedingungen",
+      "paragraphs": [
+        "Die Kennzeichnung richtet sich nach § 11 FZV und den dort genannten Voraussetzungen des Elektromobilitätsgesetzes. Bei einem Plug-in-Hybrid genügt die Bezeichnung Hybrid allein nicht. Die technischen Nachweise des konkreten Fahrzeugs sind entscheidend.",
+        "Halte die Fahrzeugpapiere und gegebenenfalls die Übereinstimmungsbescheinigung (CoC) bereit. Lass unklare Angaben vor der Bestellung von der zuständigen Stelle prüfen. Der Schilderhersteller entscheidet nicht über die Berechtigung."
+      ]
+    },
+    {
+      "id": "antrag",
+      "title": "Den nachträglichen Antrag vorbereiten",
+      "paragraphs": [
+        "Suche bei deiner Behörde nach E-Kennzeichen oder Änderung der Kennzeichenart. Das Berliner Serviceportal beschreibt auch den Antrag für bereits zugelassene Fahrzeuge. Die dortige Unterlagenliste umfasst unter anderem Fahrzeugpapiere, bisherige Schilder und Nachweise zur Eignung.",
+        "Ob zusätzlich eine neue Versicherungsbestätigung benötigt wird, hängt vom Vorgang ab. Übernimm eine lokale Liste nicht ungeprüft für einen anderen Zulassungsbezirk. Kläre auch, ob die vorhandene Kombination erhalten bleiben kann."
+      ]
+    },
+    {
+      "id": "format",
+      "title": "Das zusätzliche E braucht Platz",
+      "paragraphs": [
+        "Ein weiterer Buchstabe verändert den Platzbedarf. Prüfe die zulässige Kombination und das bestätigte Schildformat gemeinsam. Eine bisher knapp passende kurze Ausführung muss nicht auch mit E möglich sein.",
+        "Wähle im Shop die Kennzeichenart E. Der Konfigurator ergänzt den Zusatz; gib das E nicht noch einmal als Teil der Grundkombination ein. Kontrolliere die fertige Vorschau und die Anzahl der benötigten Schilder."
+      ]
+    },
+    {
+      "id": "wechsel",
+      "title": "Alte und neue Schilder sauber auseinanderhalten",
+      "paragraphs": [
+        "Bewahre die bisherigen Schilder für das behördliche Verfahren auf. Übertrage Stempel- oder HU-Plaketten nicht eigenmächtig. Die Bestellung neuer Schilder allein macht die Änderung nicht wirksam.",
+        "Prüfe nach Abschluss alle Dienste, die deine Kennzeichenangabe verwenden: etwa eine Parkberechtigung, Garage oder hinterlegte Fahrzeugdaten. Ob etwas angepasst werden muss, richtet sich nach dem jeweiligen Anbieter."
+      ],
+      "items": [
+        "Bestätigte Kombination samt E prüfen.",
+        "Amtliche Änderung und Schildertausch abschließen.",
+        "Hinterlegte Kennzeichenangaben vergleichen.",
+        "Örtliche Parkregeln gesondert lesen."
+      ]
+    },
+    {
+      "id": "vorteile",
+      "title": "Ein E ist kein allgemeiner Gratisparkschein",
+      "paragraphs": [
+        "Park- oder sonstige Nutzungsvorteile hängen von den örtlichen Regelungen und der Beschilderung ab. Auch mit E können Gebühren, Höchstparkdauer oder zusätzliche Nachweise gelten.",
+        "Für Umweltzonen enthält die aktuelle 35. BImSchV eine Ausnahme für entsprechend gekennzeichnete Elektrofahrzeuge. Die Frage nach der Umweltplakette behandeln wir im verlinkten Beitrag gesondert."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 11",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__11.html"
+    },
+    {
+      "label": "Berlin: E-Kennzeichen beantragen",
+      "href": "https://service.berlin.de/dienstleistung/327084/"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichengroessen",
+    "auto-anmelden-unterlagen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/e-kennzeichen",
+      "label": "E-Kennzeichenschilder konfigurieren"
+    },
+    {
+      "href": "/blog/elektroauto-umweltplakette",
+      "label": "Braucht das Elektroauto eine Umweltplakette?"
+    }
+  ]
+},
+{
+  "slug": "elektroauto-umweltplakette",
+  "title": "Elektroauto und Umweltplakette: Was gilt mit E-Kennzeichen?",
+  "description": "Die aktuelle Ausnahme für E-Kennzeichen erklärt – und warum Elektroantrieb und sichtbare Kennzeichnung nicht dasselbe sind.",
+  "category": "Kennzeichen und Zulassung",
+  "publishedAt": "2026-11-15",
+  "intro": [
+    "Du möchtest mit einem Elektroauto in eine Umweltzone fahren und fragst dich, ob zusätzlich eine grüne Plakette nötig ist. Die Antwort hängt nicht nur vom Antrieb ab. Wichtig ist auch, wie das Fahrzeug amtlich gekennzeichnet ist."
+  ],
+  "takeaway": "Nach der aktuell geprüften 35. BImSchV sind Fahrzeuge mit einer Kennzeichnung nach § 11 FZV von den dort erfassten Umweltzonen-Verboten auch ohne Umweltplakette ausgenommen. Ein Elektroauto ohne diese Kennzeichnung ist nicht allein wegen seines Antriebs automatisch davon befreit.",
+  "sections": [
+    {
+      "id": "ausnahme",
+      "title": "Die aktuelle Ausnahme richtig lesen",
+      "paragraphs": [
+        "Anhang 3 Nummer 11 der 35. BImSchV nennt Fahrzeuge mit einer Kennzeichnung für elektrisch betriebene Fahrzeuge nach § 11 FZV. Für ein entsprechend gekennzeichnetes deutsches Fahrzeug ist das E am Kennzeichen daher für diese Ausnahme entscheidend.",
+        "Ältere Ratgeber können noch pauschal eine grüne Plakette für jedes Elektroauto verlangen. Prüfe bei widersprüchlichen Angaben den aktuellen Gesetzesstand und die Hinweise zur konkreten Umweltzone."
+      ]
+    },
+    {
+      "id": "ohne-e",
+      "title": "Was ist bei einem Elektroauto ohne E?",
+      "paragraphs": [
+        "Ein Elektroantrieb ist von außen nicht immer eindeutig erkennbar. Die gesetzliche Ausnahme knüpft an die vorgeschriebene Kennzeichnung an. Verlasse dich deshalb nicht allein auf Modellname, Ladebuchse oder einen privaten Elektro-Aufkleber.",
+        "Ohne passende Kennzeichnung prüfst du vor der Einfahrt die üblichen Anforderungen an eine Umweltplakette oder eine andere tatsächlich einschlägige Ausnahme. Eine erforderliche Plakette muss zu den Fahrzeugdaten passen; das bloße Bestellen eines E-Schilds schafft keine Berechtigung."
+      ]
+    },
+    {
+      "id": "ausland",
+      "title": "Ausländische Kennzeichen gesondert prüfen",
+      "paragraphs": [
+        "§ 11 FZV enthält auch Regelungen für Fahrzeuge mit ausländischer Zulassung. Die vorgesehene Kennzeichnung kann sich von einem deutschen E-Kennzeichen unterscheiden. Ein beliebiger Aufkleber aus einem anderen Land ist nicht automatisch gleichwertig.",
+        "Nutze dafür die amtlichen Hinweise zum ausländischen Fahrzeug. Bestelle keine deutschen Schilder, nur um eine Umweltzone zu befahren; Fahrzeugzulassung und Kennzeichnung müssen zusammenpassen."
+      ]
+    },
+    {
+      "id": "grenzen",
+      "title": "Die Ausnahme hebt andere Regeln nicht auf",
+      "paragraphs": [
+        "Eine Umweltzone ist etwas anderes als eine Fußgängerzone, ein Bewohnerparkbereich oder eine zeitlich beschränkte Zufahrt. Auch Ladeplätze können eigene Nutzungsbedingungen haben. Lies deshalb weiterhin Schilder und Zusatzzeichen.",
+        "Die Umweltzonen-Ausnahme bedeutet weder kostenloses Parken noch ein allgemeines Durchfahrtsrecht. Prüfe das Ziel vor der Fahrt, besonders wenn mehrere Verkehrsregelungen gleichzeitig gelten."
+      ]
+    },
+    {
+      "id": "entscheidung",
+      "title": "Vor dem Kauf kurz abgleichen",
+      "paragraphs": [
+        "Schau zuerst auf deine vorhandenen Schilder und die Fahrzeugpapiere. Ist die passende E-Kennzeichnung bereits vorhanden, brauchst du allein für die hier beschriebene Ausnahme keine zusätzliche Umweltplakette.",
+        "Möchtest du ein berechtigtes Fahrzeug nachträglich auf E umstellen, beginne beim Behördenverfahren. Die passende Schilderbestellung folgt auf die geklärten Angaben. So kaufst du kein Zubehör, das dein eigentliches Anliegen nicht löst."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "35. BImSchV: Anhang 3, insbesondere Nummer 11",
+      "href": "https://www.gesetze-im-internet.de/bimschv_35/anhang_3.html"
+    },
+    {
+      "label": "FZV § 11",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__11.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-anmelden-unterlagen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/e-kennzeichen-nachtraeglich",
+      "label": "E-Kennzeichen nachträglich beantragen"
+    },
+    {
+      "href": "/e-kennzeichen",
+      "label": "E-Kennzeichenschilder ansehen"
+    }
+  ]
+},
+{
+  "slug": "h-kennzeichen-voraussetzungen",
+  "title": "H-Kennzeichen: Welche Voraussetzungen muss dein Auto erfüllen?",
+  "description": "Alter allein genügt nicht: Zustand, Oldtimergutachten und Zulassung vor der Bestellung eines H-Kennzeichens prüfen.",
+  "category": "Kennzeichen und Zulassung",
+  "publishedAt": "2026-11-15",
+  "intro": [
+    "Dein Auto wird 30 Jahre alt. Damit stellt sich die Frage nach dem H-Kennzeichen. Das Alter ist ein wichtiger Einstieg, aber noch keine automatische Freigabe. Zustand und Begutachtung gehören ebenfalls dazu."
+  ],
+  "takeaway": "Ein Oldtimer muss die gesetzlichen Voraussetzungen erfüllen und für die H-Zulassung entsprechend begutachtet werden. Bestelle H-Schilder erst, wenn Kennzeichenart, Kombination und Format geklärt sind.",
+  "sections": [
+    {
+      "id": "alter",
+      "title": "30 Jahre sind nur ein Teil der Definition",
+      "paragraphs": [
+        "Die FZV beschreibt Oldtimer als Fahrzeuge, die vor mindestens 30 Jahren erstmals in Verkehr gekommen sind. Hinzu kommen ein weitgehend originaler Zustand, ein guter Erhaltungszustand und die Pflege des kraftfahrzeugtechnischen Kulturguts.",
+        "Orientiere dich nicht nur am Modelljahr einer Baureihe. Prüfe die Angaben deines konkreten Fahrzeugs. Ein jüngeres Exemplar derselben Baureihe erfüllt die Altersvoraussetzung nicht automatisch."
+      ]
+    },
+    {
+      "id": "zustand",
+      "title": "Umbauten vor der Begutachtung ansprechen",
+      "paragraphs": [
+        "Lass den Zustand und vorhandene Veränderungen fachlich beurteilen. Nicht jede Reparatur verhindert die Einstufung; umgekehrt ist ein altes Fahrzeug mit beliebigen Umbauten nicht automatisch geeignet. Eine pauschale Zusage anhand von Fotos wäre zu wenig.",
+        "Stelle Unterlagen zu Umbauten und zur Fahrzeughistorie zusammen. Frage die Prüfstelle vor einem Termin, welche Nachweise sie benötigt. So vermeidest du, nur wegen fehlender Dokumentation erneut erscheinen zu müssen."
+      ]
+    },
+    {
+      "id": "gutachten",
+      "title": "Oldtimergutachten und HU unterscheiden",
+      "paragraphs": [
+        "§ 23 StVZO regelt das Gutachten zur Einstufung als Oldtimer. Die Vorschrift sieht dabei grundsätzlich auch eine Untersuchung im Umfang der Hauptuntersuchung vor; für ein gleichzeitig erstelltes Gutachten nach § 21 gilt die dort genannte Ausnahme.",
+        "Kläre mit der Prüfstelle den konkreten Umfang und welche Bescheinigungen du für die Zulassungsstelle erhältst. Ein positiver eigener Eindruck vom Auto ersetzt das erforderliche Gutachten nicht."
+      ]
+    },
+    {
+      "id": "zulassung",
+      "title": "Erst die behördliche Grundlage, dann die Schilder",
+      "paragraphs": [
+        "Die Zuteilung des Oldtimerkennzeichens erfolgt auf Antrag. Neben dem Gutachten werden die Unterlagen für den jeweiligen Zulassungsvorgang benötigt. Prüfe die lokale Liste und die gewünschte Kombination vorab.",
+        "Im Shop wählst du die H-Ausführung. Das H wird als Zusatz berücksichtigt und gehört nicht nochmals in die Grundkombination. Plane genug Platz für den zusätzlichen Buchstaben ein. Amtliche Plaketten erhältst du im Zulassungsverfahren, nicht als Bestandteil der normalen Schilderlieferung."
+      ]
+    },
+    {
+      "id": "entscheidung",
+      "title": "Ganzjährig oder nur in einer Saison?",
+      "paragraphs": [
+        "Wenn du den Oldtimer nur zeitweise nutzt, kann eine Kombination mit Saison interessant sein. Sie verlangt aber eine eigene Entscheidung zu Monaten, Stellplatz und Versicherung. Der aktuelle Shop bietet H mit Saison nicht als kombinierte Ausführung an.",
+        "Für die reguläre H-Ausführung findest du unten die Produktseite. Wenn du eine Kombination benötigst, bestelle nicht versehentlich ein ganzjähriges H-Schild als Ersatz dafür."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV: Begriffsbestimmungen, § 2 Nummer 22",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__2.html"
+    },
+    {
+      "label": "FZV § 10",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__10.html"
+    },
+    {
+      "label": "StVZO § 23: Oldtimergutachten",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__23.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-anmelden-unterlagen",
+    "kennzeichengroessen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/h-kennzeichen",
+      "label": "Reguläre H-Kennzeichenschilder"
+    },
+    {
+      "href": "/blog/h-saisonkennzeichen",
+      "label": "H und Saison kombinieren"
+    }
+  ]
+},
+{
+  "slug": "h-saisonkennzeichen",
+  "title": "H und Saison kombinieren: Was du vorher klären solltest",
+  "description": "Oldtimer nur einige Monate nutzen: Voraussetzungen, Platz auf dem Schild und Grenzen des aktuellen Shopangebots.",
+  "category": "Kennzeichen und Zulassung",
+  "publishedAt": "2026-11-15",
+  "intro": [
+    "Der Oldtimer steht im Winter ohnehin in der Garage. Ein H-Saisonkennzeichen kann dann zur Nutzung passen. Es verbindet die Oldtimerkennzeichnung mit einem festgelegten jährlichen Betriebszeitraum. Für die Bestellung ist das eine eigene kombinierte Ausführung."
+  ],
+  "takeaway": "H und Saison lassen sich grundsätzlich kombinieren. Dafür müssen sowohl die H-Voraussetzungen als auch die Regeln des Saisonzeitraums erfüllt sein. Die kombinierte Ausführung ist im aktuellen Shop nicht bestellbar.",
+  "sections": [
+    {
+      "id": "kombination",
+      "title": "Zwei Voraussetzungen gelten gleichzeitig",
+      "paragraphs": [
+        "§ 10 FZV ermöglicht die Saisonkennzeichnung auch für Oldtimerkennzeichen. Das ersetzt nicht das notwendige Oldtimergutachten. Ebenso hebt das H die Grenzen des Saisonzeitraums nicht auf.",
+        "Kläre mit der Behörde, ob du eine bestehende H-Zulassung ändern möchtest oder das Fahrzeug erstmals als Oldtimer zulässt. Davon hängt ab, welche Nachweise bereits vorliegen und welche neu gebraucht werden."
+      ]
+    },
+    {
+      "id": "monate",
+      "title": "Die Saison nach deiner Nutzung wählen",
+      "paragraphs": [
+        "Der Zeitraum umfasst mindestens zwei und höchstens elf volle Monate. Wähle ihn so, dass geplante Ausfahrten und Veranstaltungen hineinfallen. Außerhalb der Saison ist auch das Abstellen auf öffentlichen Straßen grundsätzlich unzulässig.",
+        "Ein privater geeigneter Stellplatz ist deshalb ein wichtiger Teil der Entscheidung. Wenn du das Fahrzeug spontan ganzjährig nutzen möchtest, kann die reguläre H-Zulassung praktischer sein."
+      ]
+    },
+    {
+      "id": "platz",
+      "title": "H und Monatszahlen brauchen Fläche",
+      "paragraphs": [
+        "Auf dem Schild müssen Kombination, H und Saisonangabe gemeinsam Platz finden. Bestelle nicht einfach die bisherige kleine Schildgröße mit zusätzlichen Angaben. Lass Kombination und Format für den konkreten Fall klären.",
+        "Nimm Maße der vorhandenen Befestigung auf und gleiche sie mit der zulässigen Ausführung ab. Die Größe des Kennzeichenhalters allein entscheidet nicht darüber, was die Behörde zulässt."
+      ]
+    },
+    {
+      "id": "kosten",
+      "title": "Die Entscheidung nicht nur am Schilderpreis festmachen",
+      "paragraphs": [
+        "Vergleiche den tatsächlichen Nutzungsbedarf mit Versicherungsbedingungen und den anfallenden Gebühren für die Änderung. Frage die Versicherung nach einem konkreten Angebot für deinen Zeitraum. Pauschale Sparversprechen helfen hier wenig.",
+        "Auch die neuen Schilder und der organisatorische Aufwand gehören in den Vergleich. Für wenige zusätzliche Fahrten außerhalb der bisherigen Saison kann eine Änderung sinnvoll sein; entscheide anhand deiner Termine statt nur anhand eines beworbenen Monatsbeitrags."
+      ]
+    },
+    {
+      "id": "angebot",
+      "title": "Wichtig für die Schilderbestellung",
+      "paragraphs": [
+        "Der aktuelle Konfigurator bietet H-Kennzeichen und Saisonkennzeichen als getrennte Arten. Die kombinierte Variante H mit Saison ist darin nicht enthalten. Zwei getrennte Bestellungen ergeben kein zulässiges kombiniertes Schild.",
+        "Kläre eine passende Bezugsquelle für die bestätigte kombinierte Ausführung. Falls du dich bewusst für ein reguläres ganzjähriges H-Kennzeichen entscheidest, kannst du dafür die vorhandene H-Produktseite nutzen. Die behördliche Entscheidung muss dazu passen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 10",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__10.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "saisonkennzeichen-zeitraum-aendern",
+    "kennzeichengroessen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/h-kennzeichen-voraussetzungen",
+      "label": "Voraussetzungen für das H-Kennzeichen"
+    },
+    {
+      "href": "/h-kennzeichen",
+      "label": "Ganzjährige H-Ausführung ansehen"
+    }
+  ]
+},
+{
+  "slug": "hu-plakette-lesen",
+  "title": "HU-Plakette lesen: Monat und Jahr schnell erkennen",
+  "description": "So liest du die Prüfplakette am hinteren Kennzeichen und vergleichst den Termin mit deinen Unterlagen.",
+  "category": "Kennzeichen und Zulassung",
+  "publishedAt": "2026-11-15",
+  "intro": [
+    "Die runde Plakette hinten am Auto zeigt den nächsten HU-Termin. Du musst dafür keine Farben auswendig lernen. Zwei Angaben reichen: die Zahl in der Mitte und der Monat ganz oben."
+  ],
+  "takeaway": "Die mittlere Zahl steht für das Jahr, die oberste Zahl am Rand für den Monat. Kontrolliere beides zusammen und gleiche unklare Angaben mit dem Untersuchungsbericht ab.",
+  "sections": [
+    {
+      "id": "ablesen",
+      "title": "So liest du den Termin in drei Schritten",
+      "paragraphs": [
+        "Stelle das Fahrzeug sicher ab und sieh dir das hintere Kennzeichen gerade von hinten an. In der Mitte stehen die letzten beiden Ziffern des Jahres. Der oben stehende Wert am Rand bezeichnet den fälligen Monat.",
+        "Steht oben die 6 und in der Mitte die 28, ist Juni 2028 gemeint. Die schwarze Markierung ist eine optische Hilfe; für deinen Termin liest du die Zahlen. Verwechsle den oberen Randwert nicht mit dem Monat, der gerade aktuell ist."
+      ],
+      "items": [
+        "Jahreszahl in der Mitte ablesen.",
+        "Obersten Monatswert am Rand ablesen.",
+        "Monat und Jahr im Kalender vormerken."
+      ]
+    },
+    {
+      "id": "farbe",
+      "title": "Warum die Farbe allein nicht reicht",
+      "paragraphs": [
+        "Die gesetzlich vorgesehenen Plakettenfarben wiederholen sich im Sechsjahresrhythmus. Eine Farbe ist deshalb kein dauerhaft eindeutiges Jahr. Bei älteren Fahrzeugfotos oder unklaren Bildern kann eine Zuordnung nur nach Farbe irreführen.",
+        "Für den konkreten Termin sind die aufgedruckten Zahlen maßgeblich. Ist die Plakette verschmutzt, reinige sie behutsam. Kratze nicht an ihr und übermale keine unleserlichen Stellen."
+      ]
+    },
+    {
+      "id": "abgleich",
+      "title": "Bei Unklarheit die Unterlagen prüfen",
+      "paragraphs": [
+        "Vergleiche die Plakette mit dem HU-Bericht und den Angaben in deinen Fahrzeugunterlagen. Stimmen sie nicht überein oder ist etwas nicht lesbar, kläre die Abweichung mit der zuständigen Prüfstelle beziehungsweise Behörde.",
+        "Ein Kalenderhinweis aus einer App ist bequem, ersetzt aber keinen überprüften Termin. Plane den Untersuchungstermin rechtzeitig im angegebenen Monat. Eine neue Schilderbestellung verschiebt die HU nicht."
+      ]
+    },
+    {
+      "id": "unterschied",
+      "title": "HU-Plakette, Stempel und Umweltplakette unterscheiden",
+      "paragraphs": [
+        "Die HU-Plakette sitzt am hinteren Kennzeichen und zeigt den Untersuchungszeitpunkt. Die amtliche Stempelplakette erfüllt eine andere Aufgabe im Zulassungsverfahren. Die Umweltplakette gehört bei entsprechendem Bedarf an die Windschutzscheibe.",
+        "Kaufe deshalb keine beliebige Plakette, wenn eine Kennzeichnung fehlt. Frage nach dem richtigen Verfahren. Amtliche Prüf- oder Stempelplaketten sind kein frei austauschbares Zubehör zur Schilderbestellung."
+      ]
+    },
+    {
+      "id": "ersatz",
+      "title": "Was passiert bei einem neuen hinteren Schild?",
+      "paragraphs": [
+        "Ist das hintere Schild beschädigt, kläre neben der Neuanfertigung auch die erforderliche Erneuerung der Plaketten. Bewahre das alte Schild und den HU-Nachweis auf. Löse die Plakette nicht zum Umkleben ab.",
+        "Der verlinkte Ersatzratgeber erklärt die Vorbereitung des Schildtausches. Bestelle erst die bestätigte Kombination und Ausführung; der HU-Termin bleibt davon getrennt."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "StVZO Anlage IX: Prüfplaketten",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/anlage_ix.html"
+    },
+    {
+      "label": "StVZO § 29: Untersuchung und Prüfplakette",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__29.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-beschaedigt-ersetzen",
+    "auto-ohne-tuev-anmelden"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichen-reinigen",
+      "label": "Kennzeichen schonend reinigen"
+    }
+  ]
+},
+{
+  "slug": "kennzeichen-entsiegeln-online-abmeldung",
+  "title": "Online-Abmeldung: Kennzeichen erst im richtigen Schritt entsiegeln",
+  "description": "Sicherheitscodes und amtliche Plaketten: So bereitest du die digitale Abmeldung vor und vermeidest einen unnötigen Abbruch.",
+  "category": "Kennzeichen und Zulassung",
+  "publishedAt": "2026-11-15",
+  "intro": [
+    "Für die digitale Außerbetriebsetzung werden Sicherheitscodes benötigt. Manche liegen unter Abdeckungen an Dokumenten und Stempelplaketten. Das Freilegen ist kein unverbindlicher Test: Bereite den Vorgang vollständig vor, bevor du damit beginnst."
+  ],
+  "takeaway": "Nutze die Anleitung des amtlichen Portals. Lege Codes erst im vorgesehenen Schritt frei und sichere die abschließende Bestätigung. Eine beschädigte Plakette allein ist keine bestätigte Abmeldung.",
+  "sections": [
+    {
+      "id": "voraussetzungen",
+      "title": "Zuerst prüfen, ob der digitale Weg passt",
+      "paragraphs": [
+        "§ 24 FZV beschreibt die internetbasierte Außerbetriebsetzung. Dafür müssen die Kennzeichenschilder und die Zulassungsbescheinigung Teil I die erforderlichen Sicherheitsmerkmale besitzen. Nicht jeder ältere Dokumentensatz ist geeignet.",
+        "Öffne das Portal über die offizielle Website deiner Zulassungsbehörde. Prüfe den Vorgang zunächst ohne Beschädigung von Plaketten oder Dokumenten. Wenn Codes fehlen, nutze den von der Behörde vorgesehenen anderen Weg."
+      ]
+    },
+    {
+      "id": "vorbereiten",
+      "title": "Fahrzeug und Unterlagen vorbereiten",
+      "paragraphs": [
+        "Stelle das Fahrzeug vor Beginn an einem geeigneten Ort ab und plane keine anschließende normale Fahrt mit entsiegelten Schildern. Halte alle benötigten Schilder und die Originaldokumente griffbereit. Sorge für eine stabile Verbindung und die vom Portal angebotene Zahlungsmöglichkeit.",
+        "Wenn du die Kombination später wiederverwenden möchtest, lies vor Abschluss die Hinweise zur Reservierung. Die Aufbewahrung der Bleche allein reserviert die Nummer nicht."
+      ],
+      "items": [
+        "Offizielles Portal und Voraussetzungen kontrollieren.",
+        "Geeigneten Abstellplatz vor dem Entsiegeln wählen.",
+        "Benötigte Schilder und Teil I bereitlegen.",
+        "Reservierungswunsch und Abschlussnachweis einplanen."
+      ]
+    },
+    {
+      "id": "codes",
+      "title": "Nur die verlangten Codes freilegen",
+      "paragraphs": [
+        "Folge den dargestellten Schritten des Portals für das konkrete Sicherheitsmerkmal. Bearbeite nicht versehentlich die HU-Plakette. Vermeide ein wahlloses Abschaben, bei dem der benötigte Code beschädigt wird.",
+        "Behandle die freigelegten Codes vertraulich. Veröffentliche keine Fotos davon und sende sie nicht an einen Schilderhändler. Die Codes gehören in das amtliche Verfahren, nicht in den Konfigurator für neue Schilder."
+      ]
+    },
+    {
+      "id": "abschluss",
+      "title": "Den Abschluss ausdrücklich kontrollieren",
+      "paragraphs": [
+        "Überprüfe nach Eingabe der Daten, ob der Vorgang tatsächlich erfolgreich abgeschlossen wurde. Speichere Bescheid, Bestätigung und Vorgangsnummer entsprechend den Portalhinweisen. Eine Zahlungsbuchung oder ein abgebrochener Bildschirm ist kein ausreichender Statusnachweis.",
+        "Funktioniert der Abschluss nicht, wende dich mit der Fehlermeldung an die Behörde. Klebe abgelöste Stempel nicht wieder an und gehe nicht davon aus, dass der alte Zustand dadurch wiederhergestellt wäre."
+      ]
+    },
+    {
+      "id": "danach",
+      "title": "Alte Schilder und spätere Nutzung trennen",
+      "paragraphs": [
+        "Erst nach geklärtem Status entscheidest du über Aufbewahrung oder Entsorgung. Für eine spätere Wiederzulassung kann eine neue Schilderbestellung nötig sein, etwa bei anderer Kombination oder beschädigtem Material.",
+        "Die digitale Abmeldung selbst erfordert keinen vorsorglichen Schilderkauf. Der verlinkte Beitrag zur Wiederzulassung erklärt, wann Schilder und amtliche Nachweise wieder zusammenkommen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 24",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__24.html"
+    },
+    {
+      "label": "FZV § 12",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-online-zulassen-kennzeichen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/alte-kennzeichen-entsorgen",
+      "label": "Alte Kennzeichen aufbewahren oder entsorgen"
+    }
+  ]
+},
+{
+  "slug": "wechselkennzeichen-zwei-autos",
+  "title": "Wechselkennzeichen für zwei Autos: Passt das zu deinem Alltag?",
+  "description": "Voraussetzungen, gemeinsamer Kennzeichenteil und Abstellplatz: Was du vor der Entscheidung für ein Wechselkennzeichen wissen solltest.",
+  "category": "Kennzeichen und Zulassung",
+  "publishedAt": "2026-11-15",
+  "intro": [
+    "Zwei Fahrzeuge, aber immer nur eines im Einsatz: Dafür kann ein Wechselkennzeichen infrage kommen. Es ist jedoch nicht einfach ein normales Schild, das du beliebig zwischen zwei Autos umsteckst. Beide Fahrzeuge müssen entsprechend zugelassen sein."
+  ],
+  "takeaway": "Das Wechselkennzeichen erlaubt keine gleichzeitige Nutzung beider Fahrzeuge. Das Fahrzeug ohne vollständige Kennzeichnung darf auch nicht auf öffentlichen Straßen abgestellt werden. Diese Ausführung wird im aktuellen Shop nicht angeboten.",
+  "sections": [
+    {
+      "id": "fahrzeuge",
+      "title": "Welche Fahrzeuge zusammenpassen müssen",
+      "paragraphs": [
+        "§ 9 FZV erlaubt die Zuteilung für zwei Fahrzeuge desselben Halters unter bestimmten Voraussetzungen. Sie müssen derselben der dort genannten Fahrzeugklassen M1, L oder O1 angehören und Schilder gleicher Anzahl und Abmessungen verwenden können.",
+        "Zwei beliebige Fahrzeuge sind damit nicht automatisch kombinierbar. Lass die konkreten Fahrzeugdaten und die Kennzeichenausführung von der Zulassungsstelle prüfen. Eine optisch passende Halterung ist kein Nachweis der Zulässigkeit."
+      ]
+    },
+    {
+      "id": "teile",
+      "title": "Wie die Kennzeichenteile zusammenarbeiten",
+      "paragraphs": [
+        "Die Ausführung besteht aus einem gemeinsamen Teil und einem am jeweiligen Fahrzeug verbleibenden Teil. Der gemeinsame Teil wird für die Nutzung umgesteckt. Erst die vollständige Kombination kennzeichnet das jeweilige Fahrzeug ordnungsgemäß.",
+        "Lass dir vor der Anfertigung erklären, welche Teile in welcher Anzahl benötigt werden. Ein Satz normaler Schilder mit derselben Kombination ersetzt dieses System nicht."
+      ]
+    },
+    {
+      "id": "parken",
+      "title": "Der Abstellplatz ist oft die entscheidende Frage",
+      "paragraphs": [
+        "Das Fahrzeug ohne vollständiges Wechselkennzeichen darf weder auf öffentlichen Straßen betrieben noch dort abgestellt werden. Du brauchst für das jeweils nicht genutzte Fahrzeug deshalb eine passende Abstellmöglichkeit außerhalb des öffentlichen Verkehrsraums.",
+        "Wenn beide Autos morgens von verschiedenen Personen gebraucht werden, passt das Modell nicht. Auch ein Zweitwagen, der regelmäßig am Straßenrand wartet, lässt sich so nicht ohne Weiteres einplanen."
+      ]
+    },
+    {
+      "id": "alternativen",
+      "title": "Mit getrennten Zulassungen und Saison vergleichen",
+      "paragraphs": [
+        "Ein Wechselkennzeichen kann nicht gleichzeitig als Saison-, rotes, Kurzzeit- oder Ausfuhrkennzeichen zugeteilt werden. Überlege deshalb, ob du wirklich zwischen zwei Fahrzeugen wechseln oder eines nur während bestimmter Monate nutzen möchtest.",
+        "Vergleiche konkrete Versicherungsangebote und behördliche Kosten. Leite aus dem gemeinsamen Schild keine pauschale Halbierung aller laufenden Kosten ab. Der praktische Nutzen hängt vor allem von Nutzungszeiten und Stellplatz ab."
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "Keine normale Bestellung als Ersatz verwenden",
+      "paragraphs": [
+        "Der aktuelle Shop bietet keine Wechselkennzeichenausführung. Bestelle dafür nicht zwei gewöhnliche Kennzeichensätze. Kläre nach behördlicher Prüfung eine passende Anfertigung der speziellen Teile.",
+        "Entscheidest du dich stattdessen für zwei reguläre Zulassungen, braucht jedes Fahrzeug seine eigene zugeteilte Kombination und passende Schilder. Für diese regulären Ausführungen kannst du den vorhandenen Konfigurator nutzen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 9",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__9.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "saisonkennzeichen-zeitraum-aendern",
+    "kennzeichengroessen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Schilder für eine reguläre Zulassung konfigurieren"
+    }
+  ]
+},
+{
+  "slug": "leasing-wunschkennzeichen",
+  "title": "Wunschkennzeichen beim Leasing: Wer kümmert sich um was?",
+  "description": "Reservierung, Fahrzeugpapiere und Schilderkauf mit Händler und Leasinggesellschaft abstimmen – ohne doppelte Bestellung.",
+  "category": "Kennzeichen und Zulassung",
+  "publishedAt": "2026-11-15",
+  "intro": [
+    "Du möchtest dein neues Leasingauto mit einer persönlichen Kombination übernehmen. Bevor du selbst Schilder bestellst, kläre den Ablauf mit dem Händler. Häufig übernimmt ein Zulassungsdienst einzelne Schritte, während wichtige Fahrzeugpapiere bei der Leasinggesellschaft liegen."
+  ],
+  "takeaway": "Kläre Zuständigkeit, Halterdaten und die Einbindung deiner Reservierung schriftlich. Bestelle erst dann selbst Schilder, wenn feststeht, dass der Händler sie nicht bereits beschafft und die Kombination im Vorgang verwendet werden kann.",
+  "sections": [
+    {
+      "id": "zustaendigkeit",
+      "title": "Zuerst einen Ansprechpartner festlegen",
+      "paragraphs": [
+        "Frage beim Händler oder Leasinganbieter, wer die Zulassung tatsächlich erledigt. Das kann der Händler, ein externer Dienst oder nach Vereinbarung auch du selbst sein. Ein allgemeines Leasingangebot sagt noch nichts über deinen konkreten Ablauf aus.",
+        "VWFS beschreibt für ein eigenes Angebot beispielsweise die Übergabe einer Wunschkennzeichenreservierung an den Zulassungspartner. Das zeigt eine mögliche Organisation, ist aber keine Zusage für jeden Leasingvertrag."
+      ]
+    },
+    {
+      "id": "reservierung",
+      "title": "Die Reservierung mit dem Zulassungsvorgang verbinden",
+      "paragraphs": [
+        "Lass dir die vorgesehenen Halterdaten und den zuständigen Zulassungsbezirk bestätigen. Stimme ab, unter welchen Angaben die Wunschkombination reserviert werden soll und wie der Nachweis an den Bearbeiter gelangt.",
+        "Prüfe die Gültigkeit deiner Reservierung gegen den geplanten Übergabetermin. Bei Lieferverzögerungen klärst du rechtzeitig, ob eine Verlängerung nötig und möglich ist. Eine abgelaufene Reservierung wird durch bereits geprägte Schilder nicht gerettet."
+      ]
+    },
+    {
+      "id": "papiere",
+      "title": "Fahrzeugpapiere nicht einfach voraussetzen",
+      "paragraphs": [
+        "Bei Leasing liegt die Zulassungsbescheinigung Teil II häufig bei der Leasinggesellschaft. VWFS weist auf diese Dokumentenverwahrung hin. Frage deshalb vor einem eigenen Termin, wie die Papiere zur zuständigen Stelle gelangen.",
+        "Plane keine Abholung oder Online-Zulassung mit Unterlagen, die du noch gar nicht erhalten sollst. Die genaue Bereitstellung und spätere Rückgabe richten sich nach dem Vertrag und dem vereinbarten Zulassungsweg."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "Doppelte Schilderbestellungen vermeiden",
+      "paragraphs": [
+        "Prüfe, ob Zulassung und Schilder im vereinbarten Händlerpaket enthalten sind. Wenn du die Schilder selbst besorgen darfst, bestätige Kombination, Kennzeichenart, Format und Lieferadresse. Bei E, H oder Saison muss die Ausführung zum zugelassenen Fahrzeug passen.",
+        "Lass dir sagen, bis wann und an wen die Schilder übergeben werden sollen. Der Preis für geprägte Schilder umfasst nicht automatisch eine Reservierung oder die Dienstleistung des Zulassungspartners."
+      ],
+      "items": [
+        "Wer reserviert und wer meldet an?",
+        "Welche Halterdaten werden verwendet?",
+        "Sind Schilder bereits im Paket enthalten?",
+        "Wohin gehen Reservierungsnachweis und Schilder?",
+        "Was passiert bei verschobener Fahrzeugübergabe?"
+      ]
+    },
+    {
+      "id": "rueckgabe",
+      "title": "Den späteren Fahrzeugwechsel getrennt planen",
+      "paragraphs": [
+        "Wenn du die Kombination nach Vertragsende erneut nutzen möchtest, kläre den Ablauf rechtzeitig mit Händler und Behörde. Die Rückgabe des Autos reserviert die Nummer nicht automatisch für dein nächstes Fahrzeug.",
+        "Bewahre Reservierungsnachweise und Absprachen auf. Für die neue Bestellung zählt die dann tatsächlich bestätigte Kombination. Der allgemeine Wunschkennzeichenratgeber erklärt die behördliche Reservierung im Detail."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "VWFS: Abholung, Lieferung und Zulassung",
+      "href": "https://gebrauchtwagen.vwfs.de/gebrauchtwagenkauf/abholunglieferung.html"
+    },
+    {
+      "label": "VWFS: Informationen zum Auto-Leasing",
+      "href": "https://www.vwfs.de/service/produkte/auto-leasing.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "wunschkennzeichen-reservieren",
+    "auto-anmelden-vollmacht"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Bestätigte Wunschkombination prägen lassen"
+    },
+    {
+      "href": "/blog/kennzeichen-lieferung-pruefen",
+      "label": "Gelieferte Schilder vor Übergabe prüfen"
+    }
+  ]
+},
   {
     "slug": "kennzeichen-reinigen",
     "title": "Kennzeichen reinigen: schonend und gut lesbar",
@@ -604,6 +1226,7 @@ export const blogArticles: BlogArticle[] = [
       }
     ],
     "relatedGuideSlugs": [
+      "auto-online-zulassen-kennzeichen",
       "kennzeichen-online-bestellen",
       "kennzeichen-beschaedigt-ersetzen"
     ],

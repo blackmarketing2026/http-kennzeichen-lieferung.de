@@ -26,6 +26,204 @@ const shortTerm = { label: 'Service Berlin: Kurzzeitkennzeichen beantragen', hre
 
 export const registrationGuides: RegistrationGuide[] = [
 {
+  "slug": "saisonkennzeichen-zeitraum-aendern",
+  "title": "Saisonkennzeichen: den Zeitraum ändern",
+  "teaser": "Die Saison verlängern oder verkürzen: So planst du Versicherung, Behördenvorgang und neue Schilder in der richtigen Reihenfolge.",
+  "category": "Zulassung planen",
+  "reviewedAt": "2026-11-15",
+  "intro": [
+    "Dein Cabrio soll künftig schon im März statt im April auf die Straße? Dafür reicht es nicht, Schilder mit anderen Monatszahlen zu bestellen. Der neue Betriebszeitraum muss zur Zulassung und zur Versicherung passen. Plane die Änderung, bevor du die zusätzliche Fahrzeit nutzen möchtest."
+  ],
+  "takeaway": "Kläre zuerst den neuen Zeitraum mit Versicherung und Zulassungsstelle. Lass anschließend die passende Ausführung prägen. Die Monatsangabe auf dem Schild ersetzt keine behördliche Änderung.",
+  "sections": [
+    {
+      "id": "zeitraum",
+      "title": "1. Den passenden Zeitraum festlegen",
+      "paragraphs": [
+        "Ein Saisonkennzeichen gilt für mindestens zwei und höchstens elf volle Monate. Die obere Zahl bezeichnet den ersten, die untere den letzten Monat. März bis Oktober umfasst damit auch den gesamten Oktober. Eine tagesgenaue Freigabe ab Mitte März bildet das Schild nicht ab.",
+        "Überlege, wann du das Fahrzeug wirklich brauchst und wo es außerhalb der Saison steht. Auf öffentlichen Straßen darf es außerhalb des eingetragenen Zeitraums grundsätzlich weder gefahren noch abgestellt werden. Ein Stellplatz vor dem Haus kann öffentlicher Verkehrsraum sein; die bloße Nähe zum Grundstück genügt nicht."
+      ]
+    },
+    {
+      "id": "versicherung",
+      "title": "2. Die Versicherung vorab einbeziehen",
+      "paragraphs": [
+        "Teile deiner Versicherung den gewünschten neuen Zeitraum mit. Frage nach der dafür erforderlichen Versicherungsbestätigung und nach Änderungen des Beitrags. Übernimm keine alte eVB ungeprüft für einen anderen Zeitraum.",
+        "Lass dir erklären, wann die Anpassung wirksam wird. Eine neue Versicherungsbestätigung allein ändert die Zulassung noch nicht. Umgekehrt sollte ein neuer Eintrag nicht mit einem ungeklärten Versicherungsschutz zusammenfallen."
+      ]
+    },
+    {
+      "id": "unterlagen",
+      "title": "3. Den örtlichen Änderungsablauf prüfen",
+      "paragraphs": [
+        "Suche auf der offiziellen Seite deiner Zulassungsbehörde nach Änderung des Saisonzeitraums. Prüfe Terminpflicht, Vollmacht und die konkrete Unterlagenliste. Die Zuständigkeit richtet sich nach deinem Zulassungsfall.",
+        "Berlin nennt für das Saisonverfahren unter anderem Ausweis, Fahrzeugpapiere, bisherige Schilder, Versicherungsnachweis mit Saisonzeitraum und HU-Nachweis. Das ist ein örtliches Beispiel. Ob in deinem Fall weitere Unterlagen benötigt werden, bestätigt deine Behörde."
+      ],
+      "items": [
+        "Gewünschten Beginn und Schlussmonat notieren.",
+        "Zulassungsbescheinigungen und HU-Nachweis bereitlegen.",
+        "Versicherungsbestätigung für den neuen Zeitraum klären.",
+        "Alte Schilder bis zum abgeschlossenen Austausch aufbewahren."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "4. Neue Schilder erst mit geklärten Angaben bestellen",
+      "paragraphs": [
+        "Andere Monatszahlen erfordern eine dazu passende Prägung. Überklebe oder ändere die vorhandenen Ziffern nicht selbst. Kläre auch, ob die bisherige Kombination im konkreten Vorgang bestehen bleibt und welches Format zugelassen ist.",
+        "Bei der Schilderbestellung wählst du die bestätigten Monate. Vergleiche die Vorschau Zeichen für Zeichen mit den Vorgaben. Der Shop liefert geprägte Schilder; amtliche Stempel und die Änderung der Fahrzeugpapiere gehören zum Zulassungsverfahren. Die Produktseite Saisonkennzeichen erreichst du über die Produktauswahl im Bestelleinstieg."
+      ]
+    },
+    {
+      "id": "wechsel",
+      "title": "5. Den Übergang ohne Lücke planen",
+      "paragraphs": [
+        "Wenn die bisherige Saison im April beginnt, berechtigt dich eine geplante Verlängerung noch nicht zur Fahrt im März. Warte auf die wirksame Änderung und die erforderliche Kennzeichnung. Plane Behördentermin, Lieferung und Montage so, dass die Voraussetzungen vor der ersten Fahrt erfüllt sind.",
+        "Die Saison kehrt im unveränderten Zeitraum jährlich wieder. Du musst sie nicht jedes Frühjahr neu beantragen. Dieser Ratgeber betrifft eine tatsächliche Änderung der Monate, nicht den normalen Saisonbeginn."
+      ]
+    },
+    {
+      "id": "kosten",
+      "title": "Kosten getrennt betrachten",
+      "paragraphs": [
+        "Vergleiche Versicherungsänderung, Behördengebühren und Schilderkosten getrennt. Eine längere Saison bedeutet nicht nur neue Schilder. Ob sie wirtschaftlich sinnvoll ist, hängt von deiner Nutzung und deinem Vertrag ab.",
+        "Bei einem H-Kennzeichen ist eine Saison grundsätzlich möglich. Der aktuelle Shop bietet die kombinierte Ausführung H mit Saison jedoch nicht an. Bestelle dafür nicht zwei getrennte Kennzeichenarten in der Hoffnung, daraus eine Kombination zu erhalten."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Kann ich die Monate auf dem alten Schild überkleben?",
+      "answer": "Nein. Nutze eine passende neue Prägung und das behördliche Änderungsverfahren. Eine selbst veränderte Monatsangabe ersetzt weder Zulassung noch Versicherung."
+    },
+    {
+      "question": "Muss ich das Auto jedes Jahr neu anmelden?",
+      "answer": "Bei unverändertem Saisonzeitraum ist keine jährliche Neuanmeldung allein wegen des Saisonbeginns erforderlich. Außerhalb des Zeitraums bleiben Nutzung und öffentliches Abstellen eingeschränkt."
+    },
+    {
+      "question": "Kann ich sofort nach der Schilderbestellung fahren?",
+      "answer": "Nein. Entscheidend sind die wirksame Zulassung, der Versicherungsschutz und die erforderlichen amtlichen Kennzeichnungen. Eine Bestellbestätigung genügt nicht."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 10",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__10.html"
+    },
+    {
+      "label": "Berlin: Saisonkennzeichen beantragen",
+      "href": "https://service.berlin.de/dienstleistung/121480/"
+    }
+  ],
+  "related": [
+    "kennzeichengroessen",
+    "auto-anmelden-unterlagen",
+    "auto-ummelden-kennzeichen-behalten"
+  ],
+  "cta": "Zeitraum und Kombination bestätigt? Wähle im Konfigurator Saisonkennzeichen und prüfe beide Monatsangaben vor der Bestellung."
+},
+{
+  "slug": "auto-online-zulassen-kennzeichen",
+  "title": "Auto online zulassen: Wann brauchst du die Kennzeichen?",
+  "teaser": "i-Kfz verständlich erklärt: Schilder bestellen, den amtlichen Bescheid abrufen und Plaketten richtig einplanen.",
+  "category": "Zulassung planen",
+  "reviewedAt": "2026-11-15",
+  "intro": [
+    "Bei einer Online-Zulassung läuft der Behördengang digital. Die Kennzeichenschilder bleiben trotzdem ein physisches Produkt. Wer diese beiden Vorgänge getrennt plant, vermeidet eine fertige Zulassung ohne passende Schilder oder eine Bestellung mit einer noch ungeklärten Kombination."
+  ],
+  "takeaway": "Nutze das offizielle i-Kfz-Portal deiner Behörde. Bestelle nur die geklärte Kombination. Für eine sofortige Nutzung brauchst du die behördliche Freigabe und die im Verfahren verlangten Nachweise – nicht nur eine Bestellbestätigung.",
+  "sections": [
+    {
+      "id": "portal",
+      "title": "1. Beim offiziellen Portal beginnen",
+      "paragraphs": [
+        "Rufe das Zulassungsportal über die Website deiner zuständigen Behörde auf. Prüfe dort, ob dein Vorgang online möglich ist. Erstzulassung, Wiederzulassung und Halterwechsel haben unterschiedliche Voraussetzungen. Ein privater Schilderkonfigurator ist kein behördliches Zulassungsportal.",
+        "Lege die geforderten Identifikationsmittel, Fahrzeugdokumente, Versicherungsdaten und Zahlungsinformationen bereit. Welche Sicherheitscodes benötigt werden, hängt vom Vorgang ab. Ältere Dokumente ohne geeignete Codes können eine digitale Bearbeitung verhindern."
+      ]
+    },
+    {
+      "id": "vorbereiten",
+      "title": "2. Angaben vor dem Antrag abgleichen",
+      "paragraphs": [
+        "Vergleiche Halterdaten, Fahrzeug-Identifizierungsnummer und die gewünschte Kennzeichenart. Prüfe, ob ein gültiger HU-Nachweis erforderlich ist und ob die Versicherungsbestätigung zum Vorgang passt. Lies die Hinweise des Portals vor dem Freilegen von Codes.",
+        "Bei Leasing oder Finanzierung liegt Teil II möglicherweise beim Vertragspartner. Kläre rechtzeitig, wie die notwendigen Dokumente oder Daten für deinen Vorgang bereitgestellt werden. Ein Foto des Fahrzeugscheins ersetzt nicht automatisch alle geforderten Nachweise."
+      ],
+      "items": [
+        "Offizielles Portal und unterstützten Vorgang prüfen.",
+        "Identifikation und benötigte Originaldokumente bereitlegen.",
+        "eVB und gegebenenfalls HU-/Steuerdaten abgleichen.",
+        "Druckmöglichkeit für behördliche Nachweise einplanen."
+      ]
+    },
+    {
+      "id": "bestellen",
+      "title": "3. Die Schilderbestellung richtig einordnen",
+      "paragraphs": [
+        "Eine Wunschkennzeichenreservierung hält eine Kombination nach den Bedingungen der Behörde vor. Sie ist noch keine Zulassung. Prüfe Schreibweise, Reservierungsdaten und die richtige Kennzeichenart, bevor du personalisierte Schilder bestellst.",
+        "Wenn die Kombination erst im Antrag feststeht, warte diese Festlegung ab. Brauchst du die Schilder direkt nach der digitalen Entscheidung, plane Lieferung und Antrag entsprechend. Es gibt keine automatische Verbindung zwischen deiner Schilderbestellung und dem Behördenportal."
+      ]
+    },
+    {
+      "id": "bescheid",
+      "title": "4. Bescheid und vorläufigen Nachweis sichern",
+      "paragraphs": [
+        "Nach erfolgreicher Entscheidung kann das Verfahren eine vorläufige Nutzung ermöglichen. Lade die bereitgestellten Dokumente innerhalb der im Portal genannten Abruffrist herunter. Folge den Druck- und Mitführungshinweisen. Ein Screenshot einer Zahlung ist kein Zulassungsbescheid.",
+        "Maßgeblich ist das Enddatum im vorläufigen Zulassungsnachweis. § 32 FZV sieht diesen Nachweis im Fall der vorläufigen Inbetriebsetzung vor; beim Pkw muss er von außen gut lesbar ausgelegt werden. Zusätzlich sind die Vorgaben zur Mitführung des Zulassungsbescheids zu beachten. Verlasse dich nicht auf eine allgemeine Tageszahl aus einem älteren Ratgeber."
+      ]
+    },
+    {
+      "id": "plaketten",
+      "title": "5. Amtliche Plaketten gesondert behandeln",
+      "paragraphs": [
+        "Die erforderlichen Unterlagen und Plakettenträger kommen im vorgesehenen behördlichen Verfahren. Bringe sie ausschließlich nach der mitgelieferten Anleitung an. Die Schilderlieferung aus dem Shop enthält keine behördliche Zulassung und keine frei verwendbaren amtlichen Siegel.",
+        "Fehlt eine Sendung oder läuft der vorläufige Nachweis ab, kontaktiere rechtzeitig die Zulassungsbehörde. Die Wartezeit verlängert die Fahrberechtigung nicht automatisch. Nutze das Fahrzeug nur, wenn die Voraussetzungen tatsächlich vorliegen."
+      ]
+    },
+    {
+      "id": "fehler",
+      "title": "Wenn das Portal nicht abschließt",
+      "paragraphs": [
+        "Eine abgebrochene Sitzung oder eine bezahlte Gebühr beweist noch keine erfolgreiche Zulassung. Sichere Vorgangsnummer und Fehlermeldung und kläre den Status mit der zuständigen Stelle. Vermeide einen zweiten Antrag, bevor klar ist, was mit dem ersten geschehen ist.",
+        "Bestelle bei unklarer Kombination keine weiteren Schilder auf Verdacht. Wenn der digitale Weg für deine Dokumente nicht funktioniert, plane den von der Behörde genannten alternativen Weg ein."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Kann ich bei der Schilderbestellung das Auto gleich zulassen?",
+      "answer": "Die Bestellung in diesem Shop betrifft Kennzeichenschilder. Die Zulassung erledigst du getrennt im amtlichen Portal oder bei der Behörde."
+    },
+    {
+      "question": "Darf ich mit ungestempelten Schildern sofort losfahren?",
+      "answer": "Nicht allein wegen der Bestellung. Eine vorläufige Nutzung setzt den erfolgreichen behördlichen Vorgang und alle dafür geforderten Nachweise voraus."
+    },
+    {
+      "question": "Was mache ich ohne Drucker?",
+      "answer": "Plane vor dem Antrag eine Möglichkeit zum Ausdruck ein, wenn du die vorläufige Nutzung brauchst. Folge den Anforderungen des Portals; eine Anzeige auf dem Handy ersetzt vorgeschriebene Ausdrucke nicht."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 31",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__31.html"
+    },
+    {
+      "label": "FZV § 32",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__32.html"
+    },
+    {
+      "label": "BMV: Internetbasierte Fahrzeugzulassung",
+      "href": "https://www.bmv.de/i-Kfz"
+    }
+  ],
+  "related": [
+    "auto-anmelden-unterlagen",
+    "wunschkennzeichen-reservieren",
+    "fahrzeugschein-fahrzeugbrief-unterschied"
+  ],
+  "cta": "Kombination und Ausführung stehen fest? Bestelle die passenden Schilder und erledige die amtliche Zulassung getrennt davon."
+},
+{
   "slug": "kennzeichen-beschaedigt-ersetzen",
   "title": "Kennzeichen beschädigt: So ersetzt du das Schild",
   "teaser": "Verbogene oder unleserliche Schilder richtig austauschen: Was du vor der Bestellung mit der Behörde klärst und welche Unterlagen wichtig sind.",
@@ -117,6 +315,7 @@ export const registrationGuides: RegistrationGuide[] = [
     }
   ],
   "related": [
+    "auto-online-zulassen-kennzeichen",
     "kennzeichen-verloren-gestohlen",
     "kennzeichengroessen",
     "kennzeichen-online-bestellen"

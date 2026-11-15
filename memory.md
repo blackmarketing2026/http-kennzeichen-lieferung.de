@@ -65,3 +65,11 @@
 - Vorhandene Vorlage, Banner und Preisquellen erhalten. Sichtbare Umlautfehler im Blog korrigiert; relatedLinks ergänzt. Neue Ratgeber haben individuelles reviewedAt; älteres globales Datum unverändert.
 - Build, gezieltes Lint und beide HTTP-Smoke-Prüfungen erfolgreich; Sitemap 32 → 42 URLs ohne Löschung. Zwei alte Tabellen-Lintbefunde dokumentiert. Keine visuelle Browserprüfung gemäß Nutzerauftrag.
 - Für nächste Läufe diese zehn Suchintentionen als vorhanden behandeln. Veröffentlichung separat anhand Commit-/Deploymentstatus und Live-HTTP bestätigen.
+
+## SEO-Durchlauf 15.11.2026
+- Neues Paket: 8 Blogs (E nachträglich, Elektroauto/Umweltplakette, H-Voraussetzungen, H-Saison, HU-Plakette lesen, digitale Entsiegelung, Wechselkennzeichen, Leasing-Wunschkennzeichen) und 2 Ratgeber (Saisonzeitraum ändern, Onlinezulassung/Schilder).
+- Briefing, Manifest und Prüfbericht unter docs/seo/2026-11-15-*.md/json. Vor weiteren Artikeln Bestand abgleichen.
+- Build, gezieltes Lint und beide HTTP-Smokes erfolgreich; Sitemap automatisch 42 auf 52 URLs, keine entfernten. Kein Browser. Produktionsbestätigung folgt nach Push.
+- GSC-Wochenbriefing vom 13.11. weiterverwenden; nächste reguläre Analyse ab 20.11. Aktuelle Property erneut bestätigt. OpenSEO: drei neue SERPs vorhanden; neue Keywordmetriken wegen Providerfehler/Creditmangel nicht verfügbar. Keine Wiederholungen ohne Anlass.
+- Aktuelle amtliche Quellen beachten: 35. BImSchV Anhang 3 Nr.11 enthält E-Kennzeichnungs-Ausnahme. BMV-i-Kfz-Seite und aktueller FZV-§31-Text nennen abweichende Tageszahlen; Artikel verweist auf das konkrete Enddatum des amtlichen Nachweises.
+- Redaktioneller Smoke unterstützt SEO_SMOKE_DATE für das jeweilige datierte Manifest; Standard bleibt 2026-11-13.
