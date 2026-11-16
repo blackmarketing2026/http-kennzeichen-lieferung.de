@@ -13,7 +13,18 @@ type Pixel = {
   disablePushState: boolean;
 };
 
-let pixel: Promise<Pixel | null> | undefined;
+type PixelContext = { fbq: Pixel; history: History; lastPagePath?: string };
+
+let pixel: Promise<PixelContext | null> | undefined;
+
+function currentPixelUrl() {
+  const source = new URL(window.location.href);
+  const url = new URL(source.origin);
+  url.pathname = source.pathname;
+  const clickId = source.searchParams.get('fbclid');
+  if (clickId && /^[A-Za-z0-9_-]{1,512}$/.test(clickId)) url.searchParams.set('fbclid', clickId);
+  return url;
+}
 
 function hasMetaConsent() {
   try {
@@ -24,7 +35,7 @@ function hasMetaConsent() {
 }
 
 function loadPixel() {
-  pixel ??= new Promise<Pixel | null>((resolve) => {
+  pixel ??= new Promise<PixelContext | null>((resolve) => {
     // Give the SDK a clean URL and referrer, separate from checkout query parameters.
     const frame = document.createElement('iframe');
     frame.hidden = true;
@@ -46,6 +57,7 @@ function loadPixel() {
       }) as Pixel;
       Object.assign(fbq, { queue: [], push: fbq, loaded: true, version: '2.0', disablePushState: true });
       context.fbq = context._fbq = fbq;
+      context.history.replaceState(null, '', currentPixelUrl().href);
       fbq('set', 'autoConfig', false, PIXEL_ID);
       fbq('init', PIXEL_ID);
 
@@ -54,7 +66,7 @@ function loadPixel() {
       const script = doc.createElement('script');
       script.async = true;
       script.src = 'https://connect.facebook.net/en_US/fbevents.js';
-      script.addEventListener('load', () => resolve(fbq), { once: true });
+      script.addEventListener('load', () => resolve({ fbq, history: context.history }), { once: true });
       script.addEventListener('error', () => {
         window.removeEventListener(CONSENT_CHANGED_EVENT, updateConsent);
         frame.remove();
@@ -63,20 +75,28 @@ function loadPixel() {
       doc.head.appendChild(script);
     }, { once: true });
     document.body.appendChild(frame);
-  }).then((fbq) => {
-    if (!fbq) pixel = undefined;
-    return fbq;
+  }).then((context) => {
+    if (!context) pixel = undefined;
+    return context;
   });
   return pixel;
 }
 
-async function track(event: 'AddShippingInfo' | 'AddPaymentInfo' | 'Purchase', purchase?: PurchaseEvent) {
+async function track(event: 'PageView' | 'AddShippingInfo' | 'AddPaymentInfo' | 'Purchase', purchase?: PurchaseEvent) {
   try {
     if (!hasMetaConsent()) return;
     const key = purchase && `kl_meta_purchase_${purchase.transactionId}`;
     if (key && window.localStorage.getItem(key)) return;
-    const fbq = await loadPixel();
-    if (!fbq || !hasMetaConsent()) return;
+    const context = await loadPixel();
+    if (!context || !hasMetaConsent()) return;
+    const { fbq } = context;
+    const url = currentPixelUrl();
+    if (context.lastPagePath !== url.pathname) {
+      context.history.replaceState(null, '', url.href);
+      fbq('trackSingle', PIXEL_ID, 'PageView');
+      context.lastPagePath = url.pathname;
+    }
+    if (event === 'PageView') return;
 
     if (!purchase || !key) {
       fbq(event === 'AddShippingInfo' ? 'trackSingleCustom' : 'trackSingle', PIXEL_ID, event);
@@ -91,6 +111,10 @@ async function track(event: 'AddShippingInfo' | 'AddPaymentInfo' | 'Purchase', p
   } catch {
     // Tracking must not interrupt checkout.
   }
+}
+
+export function trackMetaPageView() {
+  void track('PageView');
 }
 
 export function trackMetaCheckout(event: 'AddShippingInfo' | 'AddPaymentInfo') {

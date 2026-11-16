@@ -14,10 +14,10 @@ import {
 } from '@/lib/cookie-consent';
 
 const OPTIONAL_SERVICES: { key: OptionalService; name: string; purpose: string }[] = [
-  { key: 'googleTagManager', name: 'Google Tag Manager', purpose: 'Lädt die unten gewählten Analyse- und Marketing-Dienste' },
+  { key: 'googleTagManager', name: 'Google Tag Manager', purpose: 'Verwaltet Google Analytics und Microsoft Clarity' },
   { key: 'googleAnalytics', name: 'Google Analytics', purpose: 'Reichweitenmessung und Verbesserung der Website (über Google Tag Manager)' },
   { key: 'microsoftClarity', name: 'Microsoft Clarity', purpose: 'Auswertung der Nutzung und Bedienbarkeit (über Google Tag Manager)' },
-  { key: 'metaPixel', name: 'Meta Pixel', purpose: 'Messung von Bestellschritten und Werbekampagnen' },
+  { key: 'metaPixel', name: 'Meta Pixel', purpose: 'Messung von Seitenaufrufen, Bestellschritten und Werbekampagnen' },
 ];
 
 export function CookieNotice() {
@@ -95,7 +95,7 @@ export function CookieNotice() {
         Mit „Alles erlauben“ kannst du optionalen Analyse- und Marketingfunktionen zustimmen.
       </p>
       <p className="cookie-dialog-status">
-        Optionale Dienste werden ausschließlich über den Google Tag Manager und erst nach deiner Einwilligung geladen.
+        Optionale Dienste werden erst nach deiner Einwilligung geladen.
         Ohne Zustimmung werden keine Analyse- oder Marketing-Skripte ausgeführt.
       </p>
 
@@ -117,7 +117,7 @@ export function CookieNotice() {
               />
             </label>
           ))}
-          <p className="cookie-options-note">Alle optionalen Funktionen sind zunächst ausgeschaltet. Ohne Google Tag Manager wird keiner der übrigen Dienste geladen.</p>
+          <p className="cookie-options-note">Alle optionalen Funktionen sind zunächst ausgeschaltet. Google Analytics und Microsoft Clarity benötigen zusätzlich Google Tag Manager.</p>
         </div>
       )}
 

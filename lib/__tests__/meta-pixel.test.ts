@@ -8,7 +8,9 @@ function browser(metaPixel: boolean) {
     [CONSENT_STORAGE_KEY, JSON.stringify(createConsentRecord({ ...NO_OPTIONAL_ALLOWED, metaPixel }))],
   ]);
   const script = new EventTarget();
-  const context: { fbq?: { queue: unknown[][] } } = {};
+  const context: { fbq?: { queue: unknown[][] }; history: { replaceState: ReturnType<typeof vi.fn> } } = {
+    history: { replaceState: vi.fn() },
+  };
   const frame = Object.assign(new EventTarget(), {
     contentWindow: context,
     contentDocument: {
@@ -20,6 +22,7 @@ function browser(metaPixel: boolean) {
   const appendChild = vi.fn(() => frame.dispatchEvent(new Event('load')));
   vi.stubGlobal('document', { createElement: () => frame, body: { appendChild } });
   vi.stubGlobal('window', Object.assign(new EventTarget(), {
+    location: { href: 'https://www.kennzeichen-lieferung.de/checkout?plate=TEST&fbclid=valid-id' },
     localStorage: { getItem: (key: string) => storage.get(key), setItem: storage.set.bind(storage) },
   }));
   return { appendChild, context, storage };
@@ -57,8 +60,28 @@ it('sends the checkout steps without values and a single paid amount per transac
   expect(context.fbq?.queue).toEqual([
     ['set', 'autoConfig', false, PIXEL_ID],
     ['init', PIXEL_ID],
+    ['trackSingle', PIXEL_ID, 'PageView'],
     ['trackSingleCustom', PIXEL_ID, 'AddShippingInfo'],
     ['trackSingle', PIXEL_ID, 'AddPaymentInfo'],
     ['trackSingle', PIXEL_ID, 'Purchase', { value: 32.4, currency: 'EUR' }, { eventID: 'pi_confirmed' }],
   ]);
+  expect(context.history.replaceState).toHaveBeenLastCalledWith(
+    null, '', 'https://www.kennzeichen-lieferung.de/checkout?fbclid=valid-id',
+  );
+});
+
+it('registers one page view per navigation, including when returning to a page', async () => {
+  const { context } = browser(true);
+  const { trackMetaPageView } = await import('@/lib/meta-pixel');
+  const pageViews = () => context.fbq?.queue.filter((entry) => entry[2] === 'PageView');
+
+  trackMetaPageView();
+  trackMetaPageView();
+  await vi.waitFor(() => expect(pageViews()).toHaveLength(1));
+  window.location.href = 'https://www.kennzeichen-lieferung.de/datenschutz';
+  trackMetaPageView();
+  await vi.waitFor(() => expect(pageViews()).toHaveLength(2));
+  window.location.href = 'https://www.kennzeichen-lieferung.de/checkout';
+  trackMetaPageView();
+  await vi.waitFor(() => expect(pageViews()).toHaveLength(3));
 });
