@@ -80,3 +80,4 @@
 - Briefing/Manifest/Prüfbericht unter docs/seo/2026-11-16-*. Vor neuen Artikeln alle42 redaktionellen Seiten auf Überschneidung prüfen.
 - Build, gezieltes Lint, Editorial-Smoke10/47 HTTP-Ziele und Gesamt-Smoke54 Seiten erfolgreich. Sitemap automatisch52→62, +10/-0; keine visuelle Prüfung. Live-Nachweis folgt nach Push.
 - OpenSEO weiterhin INSUFFICIENT_CREDITS bei drei neuen SERPs; keine weiteren kostenpflichtigen Wiederholungen. Amtliche Quellen genutzt, keine Suchvolumina erfunden. GSC-Property korrekt, Wochenbriefing13.11. bis nächstem regulären Vergleich ab20.11. wiederverwenden.
+- Live-Abschluss16.11. bestätigt: Content-Commit60af6cac97d0d8bf2867686eda935795359e78ba, Vercel success, öffentlicher Editorial-Smoke10/47 bestanden. Sitemap62 eindeutig, +10/-0. OpenSEO-Protokoll ergänzt; keine Indexierungszusage.
