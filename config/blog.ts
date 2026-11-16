@@ -16,6 +16,644 @@ export type BlogArticle = {
 
 export const blogArticles: BlogArticle[] = [
 {
+  "slug": "carbon-3d-kennzeichen-unterschied",
+  "title": "Carbon-Optik oder 3D-Kennzeichen: Was ist der Unterschied?",
+  "description": "Oberfläche und Material sind zwei verschiedene Entscheidungen. So erkennst du, welche Kennzeichenausführung du tatsächlich bestellst.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-16",
+  "intro": [
+    "Ein Kennzeichen mit Carbonmuster sieht anders aus als die klassische schwarze Ausführung. Daraus lässt sich aber noch nicht ableiten, ob es aus Aluminium oder Kunststoff besteht. Die Begriffe Carbon und 3D beschreiben unterschiedliche Eigenschaften."
+  ],
+  "takeaway": "Carbon bezeichnet hier die angebotene Optik. Der Shop verkauft geprägte Aluminiumschilder mit dieser Oberfläche, keine 3D-Kunststoffkennzeichen. Prüfe Material, Format und Kennzeichenart getrennt.",
+  "sections": [
+    {
+      "id": "begriffe",
+      "title": "Optik und Aufbau auseinanderhalten",
+      "paragraphs": [
+        "Carbon-Optik meint ein sichtbares Muster. Sie ist kein Beleg dafür, dass das gesamte Schild aus Carbonfasern besteht. Auch aus dem Begriff 3D allein solltest du keine Material- oder Zulassungszusage ableiten.",
+        "Der Hersteller 3D-Kennzeichen beschreibt seine Produkte als Kunststoffschilder mit gesonderten Lettern. Solche Kunststoffprodukte können ebenfalls eine Carbon-Optik haben. Das zeigt: Die beiden Begriffe sind keine eindeutigen Gegensätze."
+      ]
+    },
+    {
+      "id": "shop",
+      "title": "Was du in diesem Shop auswählst",
+      "paragraphs": [
+        "Die Carbon-Ausführung im aktuellen Sortiment basiert auf einem reflektierenden Aluminiumrohling. Du wählst eine Oberflächenvariante zur passenden Kennzeichenart. Die zugeteilte Kombination bleibt unverändert.",
+        "Ein Kunststoffschild mit aufgesetzten Lettern ist hier nicht angeboten. Wenn du genau dieses Material suchst, löst die Auswahl Carbon im Konfigurator deinen Wunsch nicht. Lies deshalb die Produktangaben vor der Zahlung."
+      ]
+    },
+    {
+      "id": "anforderungen",
+      "title": "Die rechtlichen Anforderungen gelten weiterhin",
+      "paragraphs": [
+        "§ 12 FZV verlangt unter anderem die vorgeschriebene Ausgestaltung, Reflexion und das DIN-Prüf- und Überwachungszeichen mit Registernummer. Ein auffälliges Muster ersetzt diese Anforderungen nicht.",
+        "Entscheidend ist das konkrete fertige Schild, nicht allein der Werbename. Verwechsle das Prüfzeichen des Produkts nicht mit der amtlichen Stempelplakette. Die behördliche Kennzeichnung ist ein eigener Schritt."
+      ]
+    },
+    {
+      "id": "folie",
+      "title": "Ein bestehendes Schild nicht selbst umgestalten",
+      "paragraphs": [
+        "Klebe keine Carbonfolie über vorhandene Buchstaben oder die Schildfläche. Die FZV untersagt zusätzliche unzulässige Abdeckungen. Eine selbst aufgebrachte Folie ist nicht dasselbe wie eine entsprechend gefertigte Produktausführung.",
+        "Wenn du die Optik ändern möchtest, kläre den Austausch und die erforderlichen Plaketten. Löse amtliche Siegel nicht zum Wiederverwenden ab. Der Ersatzratgeber hilft bei der Vorbereitung."
+      ]
+    },
+    {
+      "id": "vergleich",
+      "title": "Diese Angaben vor dem Kauf vergleichen",
+      "paragraphs": [
+        "Prüfe zunächst das Material, danach Kennzeichenart und Maße. Vergleiche anschließend die Anzahl sowie den vollständigen Warenkorb mit Versand. Ein Preis pro Schild lässt sich nicht direkt mit einem Paketpreis vergleichen.",
+        "Es gibt hier keinen belastbaren eigenen Haltbarkeits- oder Sicherheitstest zwischen den Bauarten. Wähle nach den belegten Produktangaben und deiner gewünschten Optik, nicht nach unbewiesenen Aussagen wie unzerstörbar."
+      ],
+      "items": [
+        "Aluminium oder Kunststoff eindeutig benannt?",
+        "Carbon-Optik ausdrücklich gewählt?",
+        "Kombination, Zusatz und Format passend?",
+        "Gesamtpreis und Lieferumfang kontrolliert?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 12",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "Hersteller: Aufbau und Oberflächen von 3D-Kennzeichen",
+      "href": "https://3d-kennzeichen.de/3d-magazin/matt-hochglanz-carbon-gruen-und-rot-wie-entsteht-die-optik-der-3d-kennzeichen"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-beschaedigt-ersetzen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/carbon-kennzeichen",
+      "label": "Carbon-Optik auf Aluminiumschildern"
+    },
+    {
+      "href": "/blog/kennzeichen-praegen-herstellung",
+      "label": "So entsteht ein geprägtes Schild"
+    }
+  ]
+},
+{
+  "slug": "kennzeichen-o-oder-null",
+  "title": "O oder 0 auf dem Kennzeichen? So liest du die Kombination",
+  "description": "Buchstaben und Zahlen sicher unterscheiden und fehlerfrei in den Konfigurator übertragen – mit einem einfachen Beispiel.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-16",
+  "intro": [
+    "Auf einem kleinen Foto sehen O und 0 schnell ähnlich aus. Vor einer Schilderbestellung solltest du deshalb nicht raten. Die Position innerhalb der Kennzeichengruppen und die amtlichen Unterlagen helfen dir beim sicheren Abgleich."
+  ],
+  "takeaway": "Lies Ortskürzel, Buchstabengruppe und Zahlengruppe getrennt. In der Buchstabengruppe steht O, in der Zahlengruppe kann 0 vorkommen. Übernimm die bestätigte Kombination aus den Unterlagen.",
+  "sections": [
+    {
+      "id": "gruppen",
+      "title": "Die Kombination in Gruppen zerlegen",
+      "paragraphs": [
+        "Ein reguläres Kennzeichen besteht aus dem Unterscheidungszeichen des Zulassungsbezirks und der Erkennungsnummer. Diese enthält die zugeteilte Buchstaben- und Zahlengruppe. Die Gruppenstruktur ist hilfreicher als ein unscharfes Foto.",
+        "Beim erfundenen Lesebeispiel OL BO 100 ist das O in BO ein Buchstabe. Die beiden runden Zeichen in 100 sind Nullen. Dieses Beispiel erklärt nur das Lesen und ist keine Aussage über eine freie oder reservierbare Kombination."
+      ]
+    },
+    {
+      "id": "zeichen",
+      "title": "Auch ähnliche Buchstaben nicht ausschließen",
+      "paragraphs": [
+        "Anlage 1 FZV erlaubt in der Erkennungsnummer grundsätzlich die Buchstaben des Alphabets außer Ä, Ö und Ü. Ein O ist deshalb nicht schon wegen seiner Ähnlichkeit zur Null ausgeschlossen. Für das Ortskürzel gelten eigene Festlegungen; dort vorkommende Umlaute sind davon zu unterscheiden.",
+        "Die Zahlengruppen beginnen in den dort genannten Reihen mit 1. Eine führende Null ist keine frei wählbare Gestaltung. Ändere die Nummer nicht, um eine gewünschte optische Wirkung zu erreichen."
+      ]
+    },
+    {
+      "id": "vorlage",
+      "title": "Welche Vorlage du verwenden solltest",
+      "paragraphs": [
+        "Nutze die bestätigte Reservierungsangabe beziehungsweise die endgültig zugeteilte Kombination. Bei einem bestehenden Fahrzeug vergleichst du zusätzlich die Fahrzeugpapiere und beide Schilder. Screenshots aus Verkaufsanzeigen sind dafür eine schwache Grundlage.",
+        "Wenn Unterlagen und vorhandenes Schild voneinander abweichen, halte vor der Bestellung inne. Kläre die Abweichung mit dem zuständigen Ansprechpartner. Ein Schilderhändler darf eine amtliche Angabe nicht auf Vermutung korrigieren."
+      ]
+    },
+    {
+      "id": "eingabe",
+      "title": "Die Eingabe bewusst kontrollieren",
+      "paragraphs": [
+        "Trage Ortskürzel, Buchstaben und Zahlen in die vorgesehenen Felder ein. Prüfe E oder H als gesonderten Zusatz der gewählten Kennzeichenart. Ein im Konfigurator automatisch ergänzter Zusatz gehört nicht noch einmal in die Grundkombination.",
+        "Lies die Vorschau anschließend Zeichen für Zeichen. Bitte bei Unsicherheit eine zweite Person, unabhängig mit der Vorlage zu vergleichen. Das ist besonders hilfreich bei diktierten Nummern oder einem Wechsel zwischen Handy und Papier."
+      ],
+      "items": [
+        "Gruppen getrennt lesen.",
+        "Buchstaben und Zahlen einzeln abgleichen.",
+        "Zusätze und Saisonangaben prüfen.",
+        "Erst danach die Bestellung abschließen."
+      ]
+    },
+    {
+      "id": "fehler",
+      "title": "Wenn die Bestellung schon abgeschickt ist",
+      "paragraphs": [
+        "Prüfe sofort die Bestellbestätigung gegen die amtliche Angabe. Entdeckst du einen Fehler, kontaktiere den Anbieter mit Bestellnummer und klarer Korrektur. Ob die Produktion noch geändert werden kann, hängt vom tatsächlichen Bearbeitungsstand ab.",
+        "Eine technisch akzeptierte Eingabe beweist nicht, dass die Kombination für dein Fahrzeug stimmt. Der verlinkte Beitrag zu Fehlbestellungen erklärt die nächsten Schritte."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 9",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__9.html"
+    },
+    {
+      "label": "FZV Anlage 1: Buchstaben- und Zahlengruppen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/anlage_1.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "wunschkennzeichen-reservieren"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichen-falsch-bestellt",
+      "label": "Fehler nach der Bestellung klären"
+    },
+    {
+      "href": "/blog/kennzeichen-lieferung-pruefen",
+      "label": "Gelieferte Kombination kontrollieren"
+    }
+  ]
+},
+{
+  "slug": "kennzeichenbeleuchtung-pruefen",
+  "title": "Kennzeichenbeleuchtung prüfen: Licht statt neuer Schilder?",
+  "description": "Ein dunkles hinteres Kennzeichen braucht nicht automatisch ein neues Schild. So grenzt du Beleuchtung, Verschmutzung und Halterung ab.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-16",
+  "intro": [
+    "Die Rückleuchten funktionieren, aber die Nummer am Heck bleibt dunkel. Das Problem liegt dann möglicherweise an der Kennzeichenbeleuchtung. Bevor du neue Schilder bestellst, prüfe, welcher Teil tatsächlich betroffen ist."
+  ],
+  "takeaway": "Das hintere Kennzeichen braucht eine vorschriftsmäßige Beleuchtung. Kontrolliere sie am sicher abgestellten Fahrzeug. Ein neues Schild behebt weder eine defekte Leuchte noch einen elektrischen Fehler.",
+  "sections": [
+    {
+      "id": "pflicht",
+      "title": "Warum das hintere Schild beleuchtet wird",
+      "paragraphs": [
+        "§ 12 Absatz 7 FZV regelt die Beleuchtung des hinteren Kennzeichens. Sie soll die gesamte Kombination lesbar machen. Für die Technik und den Anbau gelten die dort genannten Anforderungen; eine beliebige Lampe genügt nicht.",
+        "Verwechsle Kennzeichenbeleuchtung nicht mit der Rückstrahlung des Schilds. Eine reflektierende Fläche wirft einfallendes Licht zurück. Sie ersetzt keine vorgeschriebene Beleuchtungseinrichtung."
+      ]
+    },
+    {
+      "id": "sichtcheck",
+      "title": "Ein einfacher Check ohne Demontage",
+      "paragraphs": [
+        "Stelle das Auto sicher ab und schalte die entsprechende Fahrzeugbeleuchtung nach Bedienungsanleitung ein. Sieh von hinten nach, ob die Kennzeichenfläche vollständig beleuchtet wird. Prüfe auch auf Flackern, auffällige Dunkelstellen und einen verdeckenden Rahmen.",
+        "Ein Blick bei Tageslicht auf die Leuchte allein kann täuschen. Kontrolliere die Wirkung am Schild, ohne dafür auf der Fahrbahn zu stehen. Tagfahrlicht ist nicht automatisch ein geeigneter Nachweis, dass die hintere Beleuchtung eingeschaltet ist."
+      ]
+    },
+    {
+      "id": "ursache",
+      "title": "Leuchte, Fläche und Befestigung unterscheiden",
+      "paragraphs": [
+        "Ist die Schildfläche sauber und unbeschädigt, aber dunkel, ist ein Schildertausch meist nicht die passende erste Maßnahme. Eine Werkstatt kann Lichtquelle, Fassung, Leitung oder das jeweilige Modul prüfen.",
+        "Ist Licht vorhanden, die Nummer aber verschmutzt oder teilweise verdeckt, beseitige die Ursache. Ein falsch montierter Rahmen kann die Sicht beeinträchtigen. Folge für Ausbau und Befestigung den Fahrzeug- und Halterhinweisen."
+      ]
+    },
+    {
+      "id": "ersatz",
+      "title": "Beim Ersatz passende Lichttechnik verwenden",
+      "paragraphs": [
+        "§ 49a StVZO verlangt die für die jeweilige Bauart bestimmten Lichtquellen. Tausche daher nicht beliebig gegen ein helleres oder farbiges Zubehörteil. Entscheidend sind Eignung und die erforderlichen Genehmigungen, nicht nur ein passender Stecker.",
+        "Wenn du die Freigabe oder die Montage nicht sicher beurteilen kannst, lass das Bauteil fachgerecht prüfen. Im Kennzeichenshop werden keine Ersatzleuchten angeboten; eine Schilderbestellung ersetzt diese Reparatur nicht."
+      ]
+    },
+    {
+      "id": "traeger",
+      "title": "Auch den Zustand mit Träger kontrollieren",
+      "paragraphs": [
+        "Bei einem Heckträger können Schild und Leuchten verdeckt werden. Prüfe deshalb nach dem Anbau erneut die Sichtbarkeit und die vorgesehene Beleuchtung des Trägers. Der Zustand ohne Ladung ist nicht automatisch der Zustand mit Fahrrädern.",
+        "Ist das Schild selbst dauerhaft beschädigt, führt der Weg zum Ersatzratgeber. Trenne dabei die neue Prägung von Beleuchtungsreparatur und amtlichen Plaketten."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 12",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "StVZO § 49a: Lichttechnische Einrichtungen",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__49a.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-beschaedigt-ersetzen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichenhalter-wechseln",
+      "label": "Kennzeichenhalter richtig wechseln"
+    },
+    {
+      "href": "/blog/fahrradtraeger-kennzeichen-ohne-stempel",
+      "label": "Wiederholungskennzeichen am Fahrradträger"
+    }
+  ]
+},
+{
+  "slug": "auto-verkaufen-kennzeichen-uebergeben",
+  "title": "Auto verkaufen: Kennzeichen mitgeben oder vorher abmelden?",
+  "description": "Die Kennzeichenübergabe beim Privatverkauf planen: Zulassungsstatus, Verkaufsmeldung und die nächsten Schritte des Käufers.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-16",
+  "intro": [
+    "Der Käufer möchte das Auto nach der Besichtigung direkt mitnehmen. Vor der Schlüsselübergabe solltest du klären, ob das Fahrzeug zugelassen bleibt oder vorher abgemeldet wird. Diese Entscheidung betrifft mehr als die Frage, wer die beiden Schilder bekommt."
+  ],
+  "takeaway": "Dokumentiere Zulassungsstatus und Übergabe genau. Melde einen Halterwechsel unverzüglich, soweit die gesetzliche Ausnahme nicht greift. Ein Kaufvertrag allein meldet das Fahrzeug nicht automatisch um.",
+  "sections": [
+    {
+      "id": "status",
+      "title": "Die Übergabevariante vorab vereinbaren",
+      "paragraphs": [
+        "Ein noch zugelassenes Auto kann andere organisatorische Schritte erfordern als ein bereits abgemeldetes Fahrzeug. Wenn du vorher abmeldest, muss der Käufer eine rechtmäßige Abholung oder spätere Zulassung organisieren. Alte Bleche am Fahrzeug erlauben dann keine gewöhnliche Heimfahrt.",
+        "Wenn das Fahrzeug zugelassen übergeben wird, kläre den Versicherungsschutz und den zeitnahen Halterwechsel. Verlasse dich nicht allein auf die mündliche Zusage, irgendwann nächste Woche zur Zulassungsstelle zu gehen."
+      ]
+    },
+    {
+      "id": "protokoll",
+      "title": "Die Übergabe nachvollziehbar festhalten",
+      "paragraphs": [
+        "Notiere Datum und Uhrzeit, Fahrzeug-Identifizierungsnummer, Kennzeichen und die übergebenen Dokumente. Gleiche die Käuferdaten mit einem geeigneten Identitätsnachweis ab und lasse den Empfang der Papiere bestätigen. Bewahre deine Vertragsausfertigung auf.",
+        "Damit hast du die Angaben für die Verkaufsmeldung griffbereit. Ein Foto der Kennzeichen allein dokumentiert weder den Erwerber noch die Übergabe der Zulassungsbescheinigungen."
+      ],
+      "items": [
+        "Zulassungsstatus schriftlich festhalten.",
+        "Käufername und vollständige Anschrift prüfen.",
+        "Zeitpunkt der Übergabe dokumentieren.",
+        "Empfang von Papieren, Schlüsseln und Schildern bestätigen."
+      ]
+    },
+    {
+      "id": "meldung",
+      "title": "Behörde und Versicherung gesondert informieren",
+      "paragraphs": [
+        "§ 15 Absatz 5 FZV regelt die Mitteilung des Halterwechsels. Sie enthält unter anderem Kennzeichen, Erwerberdaten und die Bestätigung der Dokumentenübergabe. Die Mitteilung ist entbehrlich, wenn der Erwerber seine dort genannten Pflichten bereits erfüllt hat.",
+        "Das Berliner Serviceportal weist außerdem auf die gesonderte Meldung an die Versicherung hin. Der Verkauf selbst beendet nicht automatisch alle laufenden Pflichten. Prüfe den tatsächlichen Abschluss der Ummeldung oder Außerbetriebsetzung."
+      ]
+    },
+    {
+      "id": "kaeufer",
+      "title": "Braucht der Käufer neue Schilder?",
+      "paragraphs": [
+        "Wenn die vorhandene Kombination im zulässigen Verfahren weitergeführt wird und die Schilder in Ordnung sind, ist nicht allein wegen des Verkaufs ein Neukauf nötig. Wählt der Käufer eine neue Kombination, müssen die Schilder dazu passen.",
+        "Eine Behauptung wie Kennzeichen bleiben immer am Auto wäre zu pauschal. Entscheidend sind Zulassungsstatus, gewählter Vorgang und die amtliche Entscheidung. Der Ummelderatgeber erklärt die Kennzeichenmitnahme genauer."
+      ]
+    },
+    {
+      "id": "wunsch",
+      "title": "Wenn du deine Kombination behalten möchtest",
+      "paragraphs": [
+        "Sprich eine gewünschte spätere Nutzung deiner Nummer vor der Übergabe mit der Zulassungsstelle ab. Eine private Vereinbarung mit dem Käufer ersetzt keine amtliche Reservierung. Auch das Abmontieren und Aufbewahren der Schilder reserviert die Kombination nicht.",
+        "Für dein nächstes Auto bestellst du erst mit geklärter Zuteilung. So vermeidest du, dieselbe Wunschkombination auf Verdacht für zwei verschiedene Fahrzeuge einzuplanen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 15",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    },
+    {
+      "label": "Berlin: Fahrzeugverkauf melden",
+      "href": "https://service.berlin.de/dienstleistung/120900/"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-ummelden-kennzeichen-behalten",
+    "wunschkennzeichen-reservieren"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichen-entsiegeln-online-abmeldung",
+      "label": "Online-Abmeldung vorbereiten"
+    }
+  ]
+},
+{
+  "slug": "umweltplakette-kennzeichenwechsel",
+  "title": "Neue Kennzeichen: Muss die Umweltplakette auch neu?",
+  "description": "Wann eine neue Kombination oder Windschutzscheibe eine neue Umweltplakette erfordert – und wann ein Schildtausch allein nichts ändert.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-16",
+  "intro": [
+    "Die neue Nummer ist montiert, auf der Windschutzscheibe steht aber noch die alte Kombination. Diesen kleinen Eintrag solltest du bei einer Umkennzeichnung nicht übersehen. Die Umweltplakette wird für das jeweilige Fahrzeug mit seiner Kennzeichenangabe ausgestellt."
+  ],
+  "takeaway": "Wenn du eine Umweltplakette benötigst und sich die Kennzeichenkombination ändert, muss die Plakette die neue Angabe tragen. Ein bloßer Austausch beschädigter Bleche bei gleicher Kombination ist davon zu unterscheiden.",
+  "sections": [
+    {
+      "id": "neue-nummer",
+      "title": "Bei neuer Kombination den Eintrag erneuern lassen",
+      "paragraphs": [
+        "§ 3 der 35. BImSchV sieht vor, dass die Ausgabestelle das Kennzeichen in die Plakette einträgt. Die Berliner Umweltinformationen nennen eine geänderte Kombination ausdrücklich als Grund für eine neue Plakette.",
+        "Das betrifft beispielsweise eine freiwillige Umkennzeichnung oder einen Halterwechsel mit neuer Nummer. Eine passende Farbe allein genügt nicht, wenn im Schriftfeld noch das alte Kennzeichen steht."
+      ]
+    },
+    {
+      "id": "gleich",
+      "title": "Gleiche Kombination bedeutet einen anderen Fall",
+      "paragraphs": [
+        "Wird ein beschädigtes Schild mit identischer zugeteilter Kombination ersetzt, ändert sich der Eintrag auf der Umweltplakette dadurch nicht. Auch ein reiner Halter- oder Anschriftenwechsel ist von einer neuen Nummer zu unterscheiden.",
+        "Prüfe trotzdem, ob die vorhandene Plakette lesbar und unbeschädigt ist. Eine verblasste Kennzeichenangabe kann einen Austausch erforderlich machen. Das Alter allein bedeutet dagegen kein festes allgemeines Ablaufdatum."
+      ]
+    },
+    {
+      "id": "scheibe",
+      "title": "Nach einem Scheibentausch nicht umkleben",
+      "paragraphs": [
+        "Die Verordnung verlangt eine nicht wiederverwendbare Plakette, die sich beim Ablösen zerstört. Übertrage sie deshalb nicht von der alten auf die neue Windschutzscheibe. Kläre beim Scheibentausch die Neuausstellung.",
+        "Schreibe eine alte Nummer nicht selbst um und überklebe das Schriftfeld nicht. Die passende Ausgabestelle prüft die erforderlichen Fahrzeugangaben und stellt die neue Plakette aus."
+      ]
+    },
+    {
+      "id": "bedarf",
+      "title": "Zuerst prüfen, ob du überhaupt eine brauchst",
+      "paragraphs": [
+        "Die Pflicht hängt von der jeweiligen Umweltzone und möglichen Ausnahmen ab. Für entsprechend gekennzeichnete Elektrofahrzeuge enthält die aktuell geprüfte Regelung eine Ausnahme. Diese behandeln wir im verlinkten E-Kennzeichen-Beitrag.",
+        "Eine solche Ausnahme ist kein allgemeines Recht auf Einfahrt in jede gesperrte Straße. Parkregeln, Zufahrtsbeschränkungen und andere Verkehrszeichen bleiben gesondert zu beachten."
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "Die richtige Reihenfolge beim Wechsel",
+      "paragraphs": [
+        "Kläre zuerst die neue amtliche Kombination. Bestelle danach die passenden Schilder und organisiere bei Bedarf die Umweltplakette mit genau dieser Angabe. Halte die geforderten Fahrzeugnachweise bereit.",
+        "Eine normale Schilderlieferung enthält nicht automatisch eine Umweltplakette. Wenn du im Warenkorb ein entsprechendes Zusatzprodukt auswählst, prüfe den Lieferumfang ausdrücklich. Behördliche Stempel und HU-Plakette sind wiederum andere Kennzeichnungen."
+      ],
+      "items": [
+        "Neue Kombination endgültig geklärt?",
+        "Umweltplakette tatsächlich erforderlich?",
+        "Eintrag stimmt Zeichen für Zeichen?",
+        "Alte Plakette nicht selbst geändert oder wiederverwendet?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "35. BImSchV § 3: Kennzeichnung",
+      "href": "https://www.gesetze-im-internet.de/bimschv_35/__3.html"
+    },
+    {
+      "label": "Berlin: Fahrzeug und Umweltplakette",
+      "href": "https://www.berlin.de/sen/uvk/umwelt/luft/luftreinhaltung/umweltzone/fahrzeug-plakette/"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-freiwillig-aendern",
+    "kennzeichen-beschaedigt-ersetzen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/elektroauto-umweltplakette",
+      "label": "Ausnahme bei E-Kennzeichen"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Schilder für die bestätigte Kombination"
+    }
+  ]
+},
+{
+  "slug": "motorrad-versicherungskennzeichen-unterschied",
+  "title": "Motorrad- oder Versicherungskennzeichen: Welches brauchst du?",
+  "description": "Motorrad, Leichtkraftrad und Kleinkraftrad unterscheiden – damit du das richtige Verfahren und passende Schilder wählst.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-16",
+  "intro": [
+    "Zwei Fahrzeuge sehen ähnlich aus, brauchen aber unterschiedliche Kennzeichen. Das gilt besonders bei Rollern und kleinen Motorrädern. Entscheidend ist die Fahrzeugklasse in den Unterlagen, nicht allein die Optik oder der Verkaufsname."
+  ],
+  "takeaway": "Prüfe zuerst die Fahrzeugklasse. Leichtkrafträder benötigen trotz ihrer besonderen Zulassungsregelung ein amtliches Kennzeichen. Versicherungskennzeichen für entsprechende Kleinkrafträder erhältst du im Versicherungsverfahren, nicht als frei geprägtes Motorradschild.",
+  "sections": [
+    {
+      "id": "klasse",
+      "title": "Mit den Fahrzeugunterlagen beginnen",
+      "paragraphs": [
+        "Lies Betriebserlaubnis, CoC oder vorhandene Zulassungsunterlagen. Die Einordnung als Kraftrad, Leichtkraftrad oder Kleinkraftrad bestimmt den weiteren Weg. Eine Beschreibung wie kleiner Roller reicht dafür nicht.",
+        "Bei Umbauten oder unklaren Papieren lasse die Einstufung vor dem Kauf eines Schilds klären. Verlasse dich nicht auf das Kennzeichen eines ähnlich aussehenden Nachbarfahrzeugs."
+      ]
+    },
+    {
+      "id": "motorrad",
+      "title": "Reguläres Motorrad: amtliche Zuteilung und Schild",
+      "paragraphs": [
+        "Bei einem zulassungspflichtigen Motorrad gehören Versicherung, Zulassung und die zugeteilte Kombination zusammen. Das physische Schild lässt du anschließend in der passenden Ausführung anfertigen. Die amtliche Stempelung ist davon getrennt.",
+        "Prüfe das erforderliche Format und die Zeichenlänge. Im aktuellen Shop ist das Motorradformat 180 × 200 mm vorgesehen. Dass die Kombination im Formular akzeptiert wird, ersetzt keine behördliche Entscheidung zum konkreten Fahrzeug."
+      ]
+    },
+    {
+      "id": "leichtkraftrad",
+      "title": "Leichtkraftrad heißt nicht ohne amtliches Kennzeichen",
+      "paragraphs": [
+        "Die FZV nimmt Leichtkrafträder von der regulären Zulassungspflicht aus. § 4 verlangt für diese Fahrzeuggruppe dennoch ein amtliches Kennzeichen. Zulassungsfrei ist deshalb kein Synonym für Versicherungskennzeichen.",
+        "Kläre mit der Behörde die Kennzeichenzuteilung und Schildform. Bestelle nicht automatisch das angebotene Motorradformat, wenn für dein Leichtkraftrad eine andere Ausführung vorgesehen ist. Der Größenratgeber hilft beim Abgleich."
+      ]
+    },
+    {
+      "id": "versicherung",
+      "title": "Kleinkraftrad: das Versicherungskennzeichen ist ein Nachweis",
+      "paragraphs": [
+        "Für die in § 4 Absatz 3 FZV genannten Fahrzeuge dient das Versicherungskennzeichen als Nachweis der Haftpflichtversicherung. Nach § 52 wird es im vorgesehenen Versicherungsverfahren ausgegeben und gilt für das jeweilige Verkehrsjahr.",
+        "Dieses Verkehrsjahr läuft vom 1. März bis Ende Februar des Folgejahres. Ein nachgemachtes Schild mit alten Zeichen verlängert keinen Versicherungsschutz. Prüfe beim Versicherer den tatsächlichen Vertrag und die Gültigkeit."
+      ]
+    },
+    {
+      "id": "kaufen",
+      "title": "Was der Shop anbietet und was nicht",
+      "paragraphs": [
+        "Hier kannst du passende geprägte Motorradkennzeichenschilder für eine geklärte amtliche Kombination bestellen. Versicherungskennzeichen oder Versicherungsverträge sind nicht Teil dieses Angebots.",
+        "Wähle erst nach der Einordnung das Produkt. Das verhindert einen teuren Umweg über ein Schild, das zwar an die Halterung passt, aber nicht zum vorgeschriebenen Verfahren gehört."
+      ],
+      "items": [
+        "Fahrzeugklasse aus Originalunterlagen bestimmen.",
+        "Amtliche Zuteilung oder Versicherungsverfahren klären.",
+        "Passendes Format bestätigen lassen.",
+        "Nur die tatsächlich benötigte Schildart bestellen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 3",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__3.html"
+    },
+    {
+      "label": "FZV § 4",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__4.html"
+    },
+    {
+      "label": "FZV § 52",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__52.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichengroessen",
+    "auto-anmelden-unterlagen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/motorradkennzeichen-bestellen",
+      "label": "Motorradschilder im angebotenen Format"
+    }
+  ]
+},
+{
+  "slug": "namensaenderung-fahrzeugpapiere-kennzeichen",
+  "title": "Namensänderung: Brauchst du neue Kennzeichen?",
+  "description": "Nach Heirat oder anderer Namensänderung die Fahrzeugpapiere berichtigen – und einen freiwilligen Nummernwechsel davon trennen.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-16",
+  "intro": [
+    "Dein Nachname hat sich geändert, etwa nach einer Heirat. Die Initialen auf dem Kennzeichen passen vielleicht nicht mehr. Daraus folgt aber nicht automatisch, dass du neue Schilder brauchst. Pflicht zur Datenänderung und Wunsch nach einer neuen Kombination sind zwei verschiedene Dinge."
+  ],
+  "takeaway": "Melde die Namensänderung der Zulassungsbehörde und lasse die Fahrzeugpapiere berichtigen. Die bestehende Kombination muss nicht allein wegen eines neuen Namens ersetzt werden. Andere Initialen beantragst du gesondert.",
+  "sections": [
+    {
+      "id": "melden",
+      "title": "Die Halterdaten zeitnah berichtigen",
+      "paragraphs": [
+        "§ 15 FZV regelt die unverzügliche Mitteilung bestimmter Halterdatenänderungen. Warte deshalb nicht auf einen späteren Fahrzeugverkauf, um einen geänderten Namen in den Unterlagen korrigieren zu lassen.",
+        "Suche auf dem offiziellen Behördenportal nach Namensänderung in Fahrzeugpapieren. Ein Eintrag beim Einwohnermeldeamt bedeutet nicht, dass jeder weitere Vorgang bereits erledigt ist. Prüfe den konkreten Ablauf deiner Zulassungsstelle."
+      ]
+    },
+    {
+      "id": "unterlagen",
+      "title": "Die passende Unterlagenliste nutzen",
+      "paragraphs": [
+        "Berlin nennt für diesen Vorgang unter anderem Teil I und Teil II der Zulassungsbescheinigung sowie einen Identitätsnachweis. Bei Vertretung kommen die dort geforderten Vollmachts- und Ausweisdokumente hinzu.",
+        "Welche Nachweise zur Namensänderung in deinem Fall erforderlich sind, klärst du örtlich. Verwende Originale beziehungsweise die ausdrücklich akzeptierte Form. Eine allgemeine Checkliste für einen Umzug passt nicht automatisch zu einer Namensänderung."
+      ]
+    },
+    {
+      "id": "leasing",
+      "title": "Bei verwahrtem Fahrzeugbrief früh abstimmen",
+      "paragraphs": [
+        "Liegt Teil II bei einer Bank oder Leasinggesellschaft, frage rechtzeitig nach dem vorgesehenen Verfahren. Plane den Termin erst, wenn die benötigten Dokumente verfügbar gemacht werden können.",
+        "Bleibt dieselbe Person Halter, ist die reine Namensänderung von einem Wechsel auf eine andere Person zu unterscheiden. Wenn das Fahrzeug zugleich auf den Ehepartner übergehen soll, beschreibe der Behörde beide Änderungen, statt nur einen neuen Namen einzutragen."
+      ]
+    },
+    {
+      "id": "initialen",
+      "title": "Neue Initialen sind eine freiwillige Entscheidung",
+      "paragraphs": [
+        "Du kannst die vorhandene Kombination weiter nutzen, wenn nur der Name geändert wird und kein anderer Anlass für einen Wechsel besteht. Persönliche Initialen sind keine vorgeschriebene Übereinstimmung zwischen Nummer und Haltername.",
+        "Möchtest du trotzdem andere Buchstaben, prüfe eine freiwillige Umkennzeichnung. Dabei müssen Verfügbarkeit und Zuteilung der neuen Kombination geklärt werden. Erst danach ist der Kauf neuer Schilder sinnvoll."
+      ]
+    },
+    {
+      "id": "abgleich",
+      "title": "Nach Abschluss die Folgedaten vergleichen",
+      "paragraphs": [
+        "Kontrolliere den Namen in den berichtigten Papieren und gleiche ihn mit Versicherungs- und Vertragsdaten ab. Bei einer zusätzlichen Kennzeichenänderung kommen kennzeichenbezogene Dienste und gegebenenfalls die Umweltplakette hinzu.",
+        "Bestelle keine neuen Bleche nur zur Berichtigung eines Namens, der auf dem Schild gar nicht steht. Der verlinkte Ratgeber zur freiwilligen Änderung ist für den gesonderten Wunsch nach einer neuen Nummer gedacht."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 15",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    },
+    {
+      "label": "Berlin: Namensänderung in Fahrzeugpapieren",
+      "href": "https://service.berlin.de/dienstleistung/324173/"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-freiwillig-aendern",
+    "auto-anmelden-vollmacht"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/leasing-wunschkennzeichen",
+      "label": "Abstimmung bei Leasingfahrzeugen"
+    }
+  ]
+},
+{
+  "slug": "wunschkennzeichen-nicht-verfuegbar",
+  "title": "Wunschkennzeichen nicht verfügbar: Was steckt dahinter?",
+  "description": "Vergeben, örtlich gesperrt oder für das Format ungeeignet? So prüfst du eine abgelehnte Wunschkombination vor der Schilderbestellung.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-16",
+  "intro": [
+    "Deine Wunschkombination erscheint im Reservierungsportal nicht. Das bedeutet nicht immer, dass jemand anderes genau diese Nummer fährt. Auch örtliche Vergaberegeln, reservierte Bereiche oder die benötigte Schildart können eine Rolle spielen."
+  ],
+  "takeaway": "Prüfe die Meldung im offiziellen Portal und frage bei unklarem Ergebnis die Behörde. Eine Schildervorschau ist keine Verfügbarkeitsprüfung. Bestelle die Kombination erst, wenn ihre Verwendung für deinen Vorgang geklärt ist.",
+  "sections": [
+    {
+      "id": "belegt",
+      "title": "Vergeben und reserviert sind verschiedene Zustände",
+      "paragraphs": [
+        "Eine Kombination kann bereits zugeteilt oder für einen anderen Vorgang reserviert sein. Aus einem nicht verfügbaren Ergebnis lässt sich ohne weitere Auskunft nicht erkennen, welcher Grund tatsächlich vorliegt.",
+        "Plane deshalb keine Bestellung auf Grundlage der Hoffnung, dass eine Nummer bald frei wird. Auch alte Schilder aus einer früheren Zulassung beweisen keine aktuelle Verfügbarkeit."
+      ]
+    },
+    {
+      "id": "regeln",
+      "title": "Es gibt keine verlässliche bundesweite Internet-Sperrliste",
+      "paragraphs": [
+        "§ 9 FZV schließt Kombinationen aus, die gegen die guten Sitten verstoßen. Die konkrete Vergabepraxis kann darüber hinaus örtliche Einschränkungen enthalten. Prüfe die Angaben deiner zuständigen Behörde.",
+        "Berlin nennt beispielsweise mehrere generell nicht verfügbare Buchstabenserien und eigene Regeln für kurze Kombinationen. Das ist ein lokales Beispiel. Eine Liste aus einem anderen Bundesland ist keine verbindliche Zusage für deinen Wohnort."
+      ]
+    },
+    {
+      "id": "format",
+      "title": "Nicht jede Kombination passt zu jeder Schildart",
+      "paragraphs": [
+        "Eine gewünschte Zeichenfolge kann für ein bestimmtes Format zu lang sein. E, H oder Saisonangaben benötigen zusätzlichen Platz. Sehr kurze Kombinationen können wiederum einer besonderen Vergabepraxis unterliegen.",
+        "Kläre deshalb Kennzeichenart und Format zusammen mit der Kombination. Ein kleiner Halter am Fahrzeug begründet nicht automatisch einen Anspruch auf eine besonders kurze Nummer. Der Größenratgeber erklärt den Unterschied zwischen Befestigungsfläche und zulässigem Schild."
+      ]
+    },
+    {
+      "id": "alternativen",
+      "title": "Eine Alternative systematisch vorbereiten",
+      "paragraphs": [
+        "Notiere zwei oder drei Varianten, die dir ebenfalls gefallen. Ändere bewusst einen Teil, statt wahllos viele Reservierungen anzulegen. Prüfe jeweils die passende Person, den Zulassungsbezirk und den vorgesehenen Fahrzeugtyp.",
+        "Achte auf örtliche Reservierungsdauer und Bedingungen. Eine bereits abgelaufene Bestätigung solltest du erneut klären, bevor du personalisierte Schilder kaufst. Aus einem Shop-Warenkorb entsteht keine Reservierung."
+      ],
+      "items": [
+        "Meldung und zuständige Behörde prüfen.",
+        "Kennzeichenart und Format festlegen.",
+        "Wenige sinnvolle Alternativen auswählen.",
+        "Gültigen amtlichen Nachweis abwarten."
+      ]
+    },
+    {
+      "id": "bestellen",
+      "title": "Erst die bestätigte Variante prägen lassen",
+      "paragraphs": [
+        "Übertrage die bestätigten Zeichen genau in den Konfigurator. Prüfe Zusatz und Maße separat. Die technische Eingabeprüfung im Shop prüft nicht, ob die Behörde diese Nummer gerade vergeben darf.",
+        "Wenn du eine bestehende Fahrzeugnummer freiwillig ändern möchtest, reicht auch eine neue Reservierung allein nicht. Der verlinkte Umkennzeichnungsratgeber führt durch den anschließenden behördlichen Wechsel."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 9",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__9.html"
+    },
+    {
+      "label": "Berlin: Bedingungen der Wunschkennzeichenreservierung",
+      "href": "https://service.berlin.de/dienstleistung/121484/"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "wunschkennzeichen-reservieren",
+    "kennzeichengroessen",
+    "kennzeichen-freiwillig-aendern"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichen-o-oder-null",
+      "label": "O und Null sicher unterscheiden"
+    }
+  ]
+},
+{
   "slug": "e-kennzeichen-nachtraeglich",
   "title": "E-Kennzeichen nachträglich beantragen: der Ablauf",
   "description": "Schon zugelassen, aber noch ohne E? So klärst du Eignung, Behördenunterlagen und die Bestellung neuer Schilder.",
@@ -1069,6 +1707,7 @@ export const blogArticles: BlogArticle[] = [
       "kennzeichen-online-bestellen"
     ],
     "relatedLinks": [
+      {"href": "/blog/kennzeichen-o-oder-null", "label": "O oder Null: Eingabe sicher prüfen"},
       {
         "href": "/blog/kennzeichen-lieferung-pruefen",
         "label": "Checkliste für gelieferte Kennzeichen"
@@ -1151,6 +1790,7 @@ export const blogArticles: BlogArticle[] = [
       "wunschkennzeichen-reservieren"
     ],
     "relatedLinks": [
+      {"href": "/blog/carbon-3d-kennzeichen-unterschied", "label": "Carbon und 3D unterscheiden"},
       {
         "href": "/din-74069",
         "label": "Informationen zur Kennzeichenausführung"

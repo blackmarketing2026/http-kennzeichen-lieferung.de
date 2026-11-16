@@ -26,6 +26,217 @@ const shortTerm = { label: 'Service Berlin: Kurzzeitkennzeichen beantragen', hre
 
 export const registrationGuides: RegistrationGuide[] = [
 {
+  "slug": "kennzeichen-freiwillig-aendern",
+  "title": "Kennzeichen freiwillig ändern: neue Kombination, gleiches Auto",
+  "teaser": "Du möchtest eine andere Nummer am bisherigen Auto? So planst du Antrag, Schildertausch und die nötigen Folgeänderungen.",
+  "category": "Zulassung und Schilderwahl",
+  "reviewedAt": "2026-11-16",
+  "intro": [
+    "Das Auto bleibt bei dir, aber die bisherige Kombination gefällt dir nicht mehr. Eine freiwillige Umkennzeichnung kann auch ohne Verkauf oder Umzug möglich sein. Dafür brauchst du einen behördlichen Vorgang: Neue Bleche mit einer anderen Nummer allein reichen nicht."
+  ],
+  "takeaway": "Beantrage die Änderung bei der Zulassungsbehörde. Lass die neue Kombination verbindlich klären, bevor du personalisierte Schilder bestellst. Alte Schilder, Fahrzeugpapiere und kennzeichenbezogene Dienste gehören in denselben Ablauf.",
+  "sections": [
+    {
+      "id": "anlass",
+      "title": "1. Den richtigen Vorgang wählen",
+      "paragraphs": [
+        "§ 9 Absatz 4 FZV erlaubt eine Änderung des zugeteilten Kennzeichens von Amts wegen oder auf Antrag. Hier geht es um deinen freiwilligen Wunsch nach einer neuen Kombination am selben Fahrzeug. Bei Verlust oder Diebstahl ist das entsprechende Ersatzverfahren richtig.",
+        "Suche auf der Website deiner Behörde nach Umkennzeichnung auf Wunsch. Frage nach Termin, Unterlagen und dem Zeitpunkt der Schilderanfertigung. Eine allgemeine Wunschkennzeichenreservierung erledigt diesen Änderungsvorgang noch nicht."
+      ]
+    },
+    {
+      "id": "kombination",
+      "title": "2. Verfügbarkeit und Zuteilung klären",
+      "paragraphs": [
+        "Prüfe eine Wunschkombination im offiziellen Reservierungssystem. Beachte Halterdaten, Frist und mögliche Einschränkungen für kurze Kombinationen oder besondere Kennzeichenarten. Ein freies Suchergebnis allein ist noch keine endgültige Zuteilung.",
+        "Berlin empfiehlt beim freiwilligen Wechsel, die Schilder erst nach endgültiger Zuteilung prägen zu lassen. Kläre den Ablauf bei deiner eigenen Behörde. So vermeidest du eine individuell gefertigte Kombination, die im konkreten Vorgang nicht verwendet werden kann."
+      ]
+    },
+    {
+      "id": "unterlagen",
+      "title": "3. Dokumente und alte Schilder bereitlegen",
+      "paragraphs": [
+        "Für das Berliner Verfahren werden unter anderem Ausweis, Zulassungsbescheinigungen Teil I und II sowie bisherige Schilder genannt. Je nach Fall kommen Reservierungsnachweis, Vollmacht oder HU-Nachweis hinzu. Die Liste deiner zuständigen Stelle ist maßgeblich.",
+        "Liegt Teil II bei einer Bank oder Leasinggesellschaft, organisiere die Bereitstellung vor dem Termin. Reserviere nicht mehrere Behördentermine auf Verdacht, solange ein erforderliches Originaldokument fehlt."
+      ],
+      "items": [
+        "Neue Kombination und Kennzeichenart bestätigen lassen.",
+        "Fahrzeugpapiere und Identitätsnachweis zusammenstellen.",
+        "Bisherige Schilder für das Verfahren aufbewahren.",
+        "Bei Vertretung Vollmacht und erforderliche Ausweise prüfen."
+      ]
+    },
+    {
+      "id": "bestellen",
+      "title": "4. Schilder passend zur neuen Zuteilung bestellen",
+      "paragraphs": [
+        "Übernimm Ortskürzel, Buchstaben und Zahlen genau aus der bestätigten Angabe. Prüfe E, H oder Saison getrennt von der Grundkombination. Auch das Format und die benötigte Anzahl müssen stimmen.",
+        "Die Schilderlieferung enthält keine behördliche Umkennzeichnung und keine amtlichen Plaketten. Montiere die neue Nummer nicht vorzeitig und übertrage keine alten Siegel selbst. Lass den Schildertausch im vorgesehenen amtlichen Ablauf abschließen."
+      ]
+    },
+    {
+      "id": "folge",
+      "title": "5. Hinterlegte Kennzeichen aktualisieren",
+      "paragraphs": [
+        "Nach dem Wechsel können weitere Angaben veraltet sein. Prüfe Umweltplakette, Parkberechtigung, Garagenzugang und andere Dienste, die dein Fahrzeug anhand der Nummer erkennen. Wenn ein Fahrradträger die Fahrzeugnummer wiederholt, muss auch dieses Zusatzschild zur neuen Kombination passen.",
+        "Kläre mit der Versicherung, ob sie weitere Angaben benötigt. Bewahre Bescheid und Kaufunterlagen auf. Die Kennzeichenänderung ersetzt keine sonstigen Vertragsänderungen und keine neue Hauptuntersuchung."
+      ],
+      "items": [
+        "Umweltplakette bei Bedarf auf neue Kombination ausstellen lassen.",
+        "Park- und Zufahrtsberechtigungen abgleichen.",
+        "Wiederholungskennzeichen am Fahrradträger prüfen.",
+        "Versicherungs- und Vertragsdaten kontrollieren."
+      ]
+    },
+    {
+      "id": "kosten",
+      "title": "Kosten und Zeit getrennt planen",
+      "paragraphs": [
+        "Unterscheide Gebühren für den Behördenvorgang, eine mögliche Wunschreservierung und die Schilderkosten. Eine günstige Schilderbestellung ist nicht der Gesamtpreis der Umkennzeichnung.",
+        "Plane Lieferung und Termin mit etwas Abstand. Wenn du die bisherige Nummer später wieder nutzen möchtest, frage die Behörde ausdrücklich nach der Möglichkeit einer Reservierung. Das Aufbewahren der alten Bleche sichert dir die Kombination nicht."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Muss ich dafür ein anderes Auto kaufen?",
+      "answer": "Nein. Eine Änderung auf Antrag kann auch beim bisherigen Fahrzeug möglich sein. Die zuständige Zulassungsbehörde entscheidet über den konkreten Vorgang."
+    },
+    {
+      "question": "Darf ich die neue Nummer einfach prägen und montieren?",
+      "answer": "Nein. Die neue Kombination muss dem Fahrzeug amtlich zugeteilt sein; die erforderlichen Kennzeichnungen und Papiere müssen dazu passen."
+    },
+    {
+      "question": "Brauche ich bei gleicher Nummer nur wegen neuer Bleche diesen Vorgang?",
+      "answer": "Ein Ersatz beschädigter Schilder mit unveränderter Kombination ist ein anderer Fall. Nutze dafür den verlinkten Ersatzratgeber."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 9",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__9.html"
+    },
+    {
+      "label": "Berlin: Kennzeichen auf Wunsch ändern",
+      "href": "https://service.berlin.de/dienstleistung/121473/"
+    }
+  ],
+  "related": [
+    "wunschkennzeichen-reservieren",
+    "kennzeichen-beschaedigt-ersetzen",
+    "kennzeichen-verloren-gestohlen"
+  ],
+  "cta": "Die neue Zuteilung ist geklärt? Konfiguriere die passenden Schilder. Reservierung, amtliche Änderung und Plaketten erledigst du getrennt davon."
+},
+{
+  "slug": "anhaenger-gruenes-schwarzes-kennzeichen",
+  "title": "Anhänger: grünes oder schwarzes Kennzeichen?",
+  "teaser": "Nutzung, Steuerbefreiung und Schildform richtig unterscheiden – bevor du ein Kennzeichen für den Anhänger bestellst.",
+  "category": "Zulassung und Schilderwahl",
+  "reviewedAt": "2026-11-16",
+  "intro": [
+    "Ein gebrauchter Anhänger wird mit grünem Kennzeichen angeboten. Du möchtest damit künftig aber auch Gartenabfälle oder Möbel transportieren. Dann solltest du die Farbe nicht einfach übernehmen: Entscheidend sind Fahrzeugart, genehmigte Nutzung und die Voraussetzungen der Steuerbefreiung."
+  ],
+  "takeaway": "Grüne Schrift ist keine frei wählbare Gestaltung. Kläre die Einstufung anhand der Fahrzeugpapiere und deiner geplanten Nutzung. Bestelle danach die amtlich vorgesehene Farbe, Kombination und Schildform.",
+  "sections": [
+    {
+      "id": "grundlage",
+      "title": "1. Kennzeichenfarbe ist nicht Geschmackssache",
+      "paragraphs": [
+        "§ 10 FZV regelt grüne Kennzeichen für bestimmte steuerbefreite Fahrzeuge und enthält Ausnahmen. Die Voraussetzungen der Steuerbefreiung stehen im Kraftfahrzeugsteuergesetz. Nicht jede Steuerbefreiung führt zu grüner Schrift.",
+        "Die Zulassungsbehörde und das zuständige Hauptzollamt haben dabei unterschiedliche Aufgaben. Ein Händler kann Schilder anfertigen, aber keine Steuerbefreiung durch die Wahl der Farbe herbeiführen."
+      ]
+    },
+    {
+      "id": "alltag",
+      "title": "2. Die tatsächliche Nutzung beschreiben",
+      "paragraphs": [
+        "Ein normaler Anhänger für wechselnde private Transportaufgaben ist nicht allein deshalb ein Sportanhänger, weil gelegentlich Fahrräder darauf stehen. Prüfe, welche Fahrzeugart und welcher Verwendungszweck in den Unterlagen stehen.",
+        "Schreibe vor einer Anfrage auf, was du tatsächlich transportieren willst. Ein konkretes Beispiel hilft mehr als die Frage, ob grüne Kennzeichen billiger sind. Gerade bei einem gebrauchten Pferde- oder Bootstransporter lohnt sich dieser Abgleich vor dem Kauf."
+      ]
+    },
+    {
+      "id": "sport",
+      "title": "3. Den Sonderfall Sportanhänger verstehen",
+      "paragraphs": [
+        "Die FZV nimmt bestimmte Spezialanhänger von der Zulassungspflicht aus, wenn sie ausschließlich für die dort genannten Sport- oder Rettungszwecke verwendet werden. Zulassungsfrei bedeutet aber nicht automatisch ohne Kennzeichen: § 4 FZV sieht für bestimmte Anhänger ein eigenes amtliches Kennzeichen vor.",
+        "Die Stadt Emden weist beispielsweise darauf hin, dass der Sportzweck aus den Fahrzeugunterlagen hervorgehen muss. Ein als Viehtransporter eingestufter Anhänger wird dort anders behandelt als ein entsprechend dokumentierter Sportanhänger. Das ist ein konkretes Behördenbeispiel, keine Freigabe für deinen Einzelfall."
+      ]
+    },
+    {
+      "id": "aenderung",
+      "title": "4. Nutzungsänderungen vor der Fahrt klären",
+      "paragraphs": [
+        "Wenn eine Begünstigung an einen bestimmten Zweck gebunden ist, darfst du daraus keine beliebige Transporterlaubnis ableiten. Kläre eine geplante andere Nutzung mit den zuständigen Stellen. Nur das grüne Schild gegen ein schwarzes zu tauschen, ändert die Eintragung und steuerliche Behandlung nicht.",
+        "Auch Versicherung und technische Anforderungen müssen zum tatsächlichen Betrieb passen. Frage deine Versicherung nach dem konkreten Fahrzeug und Einsatz. Aus grüner Schrift allein lässt sich weder vollständiger Versicherungsschutz noch Versicherungsfreiheit ablesen."
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "5. Erst Farbe, dann das passende Produkt wählen",
+      "paragraphs": [
+        "Für einen Anhänger mit bestätigtem schwarzem, einzeiligem Standardschild bietet die Anhängerseite im Shop die Ausführung 520 × 110 mm. Prüfe zuerst, ob genau diese Schildform zu deinem Anhänger passt.",
+        "Grüne Ausführungen stehen im aktuellen Sortiment nur in den Landmaschinenformaten 240 × 130 und 255 × 130 mm zur Verfügung. Ein grünes 520-mm-Anhängerschild ist damit nicht angeboten. Bestelle nicht irgendeine andere Form, nur weil die Schriftfarbe stimmt."
+      ],
+      "items": [
+        "Kombination aus amtlichen Unterlagen übernehmen.",
+        "Vorgesehene Schriftfarbe bestätigen.",
+        "Zulässiges Format und Befestigungsfläche abgleichen.",
+        "Nur eine tatsächlich passende angebotene Ausführung wählen."
+      ]
+    },
+    {
+      "id": "grenzen",
+      "title": "Schild, Steuer und Zulassung getrennt halten",
+      "paragraphs": [
+        "Eine erfolgreiche Bestellung bestätigt nur den Kauf des ausgewählten Produkts. Sie ersetzt weder eine behördliche Einordnung noch die Prüfung deiner Steuervergünstigung. Amtliche Stempel und gegebenenfalls HU-Plakette gehören ebenfalls zum zuständigen Verfahren.",
+        "Bei fehlenden oder widersprüchlichen Fahrzeugpapieren klärst du zuerst die Unterlagen. Das vermeidet Fehlbestellungen und schafft eine belastbare Grundlage für den späteren Schilderkauf."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Kann ich mir die grüne Schrift frei aussuchen?",
+      "answer": "Nein. Die Kennzeichnung muss zur amtlichen Einstufung passen. Eine Bestellung grüner Schilder bewirkt keine Steuerbefreiung."
+    },
+    {
+      "question": "Ist jeder Anhänger mit grünem Schild zulassungsfrei?",
+      "answer": "Nein. Steuerliche Behandlung, Zulassungspflicht und Kennzeichenpflicht sind getrennt zu prüfen. Fahrzeugart und Nutzung entscheiden."
+    },
+    {
+      "question": "Gibt es hier ein grünes 520-mm-Anhängerschild?",
+      "answer": "Im aktuell geprüften Sortiment nicht. Die Anhängerseite bietet das schwarze Standardschild; grüne Ausführungen gibt es nur in den genannten Landmaschinenformaten."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 3",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__3.html"
+    },
+    {
+      "label": "FZV § 4",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__4.html"
+    },
+    {
+      "label": "FZV § 10",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__10.html"
+    },
+    {
+      "label": "KraftStG § 3: Steuerbefreiungen",
+      "href": "https://www.gesetze-im-internet.de/kraftstg/__3.html"
+    },
+    {
+      "label": "Emden: Anhänger für Sportzwecke",
+      "href": "https://www.emden.de/rathaus/verwaltung/fb-400-oeffentliche-sicherheit-buergerservice/fd-433-buergerbuero-und-standesamt/kfz-angelegenheiten/anhaenger-fuer-sportzwecke"
+    }
+  ],
+  "related": [
+    "kennzeichengroessen",
+    "auto-anmelden-unterlagen"
+  ],
+  "cta": "Farbe, Kombination und Format stehen fest? Prüfe das aktuelle Sortiment. Ein schwarzes Standardschild passt nur, wenn genau diese Ausführung für deinen Anhänger vorgesehen ist."
+},
+{
   "slug": "saisonkennzeichen-zeitraum-aendern",
   "title": "Saisonkennzeichen: den Zeitraum ändern",
   "teaser": "Die Saison verlängern oder verkürzen: So planst du Versicherung, Behördenvorgang und neue Schilder in der richtigen Reihenfolge.",

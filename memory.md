@@ -74,3 +74,9 @@
 - Aktuelle amtliche Quellen beachten: 35. BImSchV Anhang 3 Nr.11 enthält E-Kennzeichnungs-Ausnahme. BMV-i-Kfz-Seite und aktueller FZV-§31-Text nennen abweichende Tageszahlen; Artikel verweist auf das konkrete Enddatum des amtlichen Nachweises.
 - Redaktioneller Smoke unterstützt SEO_SMOKE_DATE für das jeweilige datierte Manifest; Standard bleibt 2026-11-13.
 - Produktionsabschluss bestätigt: Content-Commit 6e589bf088f30a495e7af01c5e8575ebdf3a1a00, Vercel success; Live-Smoke 10 Seiten/43 HTTP-Ziele bestanden. Öffentliche Sitemap 52 eindeutige URLs, +10/-0. OpenSEO-Protokoll ergänzt. Keine Indexierungszusage.
+
+## SEO-Paket 16.11.2026
+- Acht Blogs: Carbon/3D, O/Null, Beleuchtung, Verkauf/Übergabe, Umweltplakettenwechsel, Motorrad-/Versicherungskennzeichen, Namensänderung, Wunschkennzeichen nicht verfügbar. Zwei Ratgeber: freiwillige Umkennzeichnung und Anhänger grün/schwarz.
+- Briefing/Manifest/Prüfbericht unter docs/seo/2026-11-16-*. Vor neuen Artikeln alle42 redaktionellen Seiten auf Überschneidung prüfen.
+- Build, gezieltes Lint, Editorial-Smoke10/47 HTTP-Ziele und Gesamt-Smoke54 Seiten erfolgreich. Sitemap automatisch52→62, +10/-0; keine visuelle Prüfung. Live-Nachweis folgt nach Push.
+- OpenSEO weiterhin INSUFFICIENT_CREDITS bei drei neuen SERPs; keine weiteren kostenpflichtigen Wiederholungen. Amtliche Quellen genutzt, keine Suchvolumina erfunden. GSC-Property korrekt, Wochenbriefing13.11. bis nächstem regulären Vergleich ab20.11. wiederverwenden.
