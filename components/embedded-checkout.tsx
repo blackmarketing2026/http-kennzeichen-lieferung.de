@@ -46,6 +46,7 @@ import { type OfferProfile } from '@/lib/pricing';
 import { getCheckoutPricing } from '@/lib/checkout-pricing';
 import { readAttribution } from '@/lib/attribution';
 import { trackKennzeichenGtmEvent } from '@/lib/kennzeichen-gtm-events';
+import { trackMetaCheckout } from '@/lib/meta-pixel';
 import type { PurchaseEvent } from '@/lib/purchase-event';
 import styles from './checkout-extras.module.css';
 import { DinCertificationLink } from '@/components/din-certification-link';
@@ -259,6 +260,7 @@ function PaymentForm({
       return;
     }
 
+    trackMetaCheckout('AddPaymentInfo');
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       redirect: 'if_required',
@@ -713,6 +715,7 @@ export function EmbeddedCheckout({
       },
     });
     setCheckoutStep('payment');
+    trackMetaCheckout('AddShippingInfo');
     if (returnPath?.startsWith('/kennzeichen-bestellen')) trackKennzeichenGtmEvent('kennzeichen_adresse');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }

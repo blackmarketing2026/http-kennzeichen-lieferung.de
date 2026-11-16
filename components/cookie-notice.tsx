@@ -17,7 +17,7 @@ const OPTIONAL_SERVICES: { key: OptionalService; name: string; purpose: string }
   { key: 'googleTagManager', name: 'Google Tag Manager', purpose: 'Lädt die unten gewählten Analyse- und Marketing-Dienste' },
   { key: 'googleAnalytics', name: 'Google Analytics', purpose: 'Reichweitenmessung und Verbesserung der Website (über Google Tag Manager)' },
   { key: 'microsoftClarity', name: 'Microsoft Clarity', purpose: 'Auswertung der Nutzung und Bedienbarkeit (über Google Tag Manager)' },
-  { key: 'metaPixel', name: 'Meta Pixel', purpose: 'Messung von Werbekampagnen (über Google Tag Manager)' },
+  { key: 'metaPixel', name: 'Meta Pixel', purpose: 'Messung von Bestellschritten und Werbekampagnen' },
 ];
 
 export function CookieNotice() {
