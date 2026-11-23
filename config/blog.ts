@@ -16,6 +16,432 @@ export type BlogArticle = {
 
 export const blogArticles: BlogArticle[] = [
 {
+  "slug": "kennzeichen-umlaute-buchstaben",
+  "title": "Umlaute auf Kennzeichen: Ortskürzel und Wunschbuchstaben unterscheiden",
+  "description": "Warum Ä, Ö und Ü im Ortskürzel vorkommen können, bei den Wunschbuchstaben aber nicht erlaubt sind – und was du vor dem Prägen prüfst.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Ein Ortskürzel mit Umlaut ist kein Beleg dafür, dass du auch deine Wunschbuchstaben mit Ä, Ö oder Ü wählen kannst. Das Kennzeichen besteht aus unterschiedlichen Teilen. Für sie gelten unterschiedliche Regeln."
+  ],
+  "takeaway": "Übernimm das amtliche Ortskürzel unverändert. In der Erkennungsnummer sind Ä, Ö und Ü ausgeschlossen. Eine im Shop darstellbare Kombination ist noch keine behördliche Reservierung.",
+  "sections": [
+    {
+      "id": "aufbau",
+      "title": "Welche Buchstaben gehören zu welchem Teil?",
+      "paragraphs": [
+        "§ 9 FZV unterscheidet das Unterscheidungszeichen des Verwaltungsbezirks und die Erkennungsnummer des Fahrzeugs. Das Ortskürzel steht am Anfang. Dahinter folgen bei einem gewöhnlichen Kennzeichen die individuell zugeteilten Buchstaben und Zahlen.",
+        "Die Regeln für Wunschbuchstaben beziehen sich auf diese Erkennungsnummer. Sie lassen sich nicht einfach auf das Ortskürzel übertragen. Prüfe beim Abschreiben deshalb zuerst, wo der Ortsbereich endet und wo die individuelle Kombination beginnt."
+      ]
+    },
+    {
+      "id": "umlaut",
+      "title": "Ä, Ö und Ü: nicht bei den Wunschbuchstaben",
+      "paragraphs": [
+        "Anlage 1 FZV erlaubt die übrigen Buchstaben des Alphabets einzeln oder als Zweierkombination in der Erkennungsnummer. Die drei Umlaute sind davon ausdrücklich ausgenommen. Ein Vorname mit Umlaut führt also nicht zu einem Anspruch auf denselben Buchstaben auf dem Schild.",
+        "Ersetze einen Umlaut im amtlichen Ortskürzel nicht eigenmächtig durch zwei Buchstaben. Eine solche Umschreibung kann eine andere Zeichenfolge ergeben. Maßgeblich ist die Schreibweise in der Zuteilung beziehungsweise Reservierungsbestätigung."
+      ]
+    },
+    {
+      "id": "vergabe",
+      "title": "Erlaubte Zeichen bedeuten nicht freie Verfügbarkeit",
+      "paragraphs": [
+        "Auch eine grundsätzlich zulässige Buchstabenfolge kann schon vergeben oder nicht für deinen Vorgang verfügbar sein. Zusätzlich verbietet § 9 FZV Kombinationen, die gegen die guten Sitten verstoßen. Die zuständige Zulassungsstelle entscheidet über die konkrete Zuteilung.",
+        "Eine selbst zusammengestellte Liste vermeintlich überall erlaubter Kombinationen hilft daher weniger als die Prüfung im zuständigen Reservierungsportal. Speichere die Bestätigung und kontrolliere, ob sie zu deinem Zulassungsvorgang gehört."
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "So überträgst du die bestätigte Kombination",
+      "paragraphs": [
+        "Gib Ortskürzel, individuelle Buchstaben und Zahlen in die dafür vorgesehenen Felder ein. Vergleiche danach die Vorschau Zeichen für Zeichen mit deiner Bestätigung. Die geprägte Beschriftung muss zur amtlichen Kombination passen; eine alternative Schreibweise ist kein gestalterisches Extra."
+      ],
+      "items": [
+        "Ortskürzel einschließlich vorhandener Umlaute unverändert übernehmen.",
+        "Nur bestätigte Wunschbuchstaben und Zahlen verwenden.",
+        "E-, H- oder Saison-Ausführung gesondert kontrollieren.",
+        "Bei widersprüchlicher Bestätigung vor der Bestellung nachfragen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 9: Aufbau und Zuteilung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__9.html"
+    },
+    {
+      "label": "FZV Anlage 1: zulässige Buchstaben",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/anlage_1.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "wunschkennzeichen-reservieren"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichen-fe-schrift",
+      "label": "Die vorgeschriebene FE-Schrift"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Bestätigte Kombination prägen lassen"
+    }
+  ]
+},
+{
+  "slug": "fin-kennzeichen-unterschied",
+  "title": "FIN und Kennzeichen: Welche Nummer gehört in die Schilderbestellung?",
+  "description": "Fahrzeug-Identifizierungsnummer, amtliche Kombination und Bestelldaten unterscheiden. So vermeidest du eine falsche Zuordnung beim Fahrzeugwechsel.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "In Kaufvertrag, Fahrzeugpapieren und Zulassungsantrag stehen mehrere Nummern. Für die Schilderprägung brauchst du die amtliche Kennzeichenkombination. Die Fahrzeug-Identifizierungsnummer, kurz FIN, erfüllt einen anderen Zweck."
+  ],
+  "takeaway": "Die FIN identifiziert das Fahrzeug. Das Kennzeichen wird behördlich zugeteilt und kann sich ändern. Gib die FIN deshalb nicht als Kennzeichenkombination in den Konfigurator ein.",
+  "sections": [
+    {
+      "id": "identitaet",
+      "title": "Die FIN gehört zur Fahrzeugidentität",
+      "paragraphs": [
+        "§ 59 StVZO regelt die Fahrzeug-Identifizierungsnummer und ihre Kennzeichnung am Fahrzeug. Bei den dort genannten standardisierten Nummern sind 17 Stellen vorgesehen; für andere Nummern nennt die Vorschrift abweichende Grenzen. Gerade bei historischen Fahrzeugen ist die Länge allein daher kein sicherer Fehlernachweis.",
+        "Die FIN hilft dir, Unterlagen dem richtigen Fahrzeug zuzuordnen. Vergleiche sie bei einem Kauf mit den Fahrzeugpapieren und der Kennzeichnung am Fahrzeug. Unstimmigkeiten gehören vor die Zulassung geklärt, nicht durch eine Schilderbestellung übergangen."
+      ]
+    },
+    {
+      "id": "zuteilung",
+      "title": "Das Kennzeichen ist eine andere Zuordnung",
+      "paragraphs": [
+        "Die Zulassungsbehörde teilt das Kennzeichen nach § 9 FZV zu. Ein Fahrzeug kann im Laufe seines Lebens unterschiedliche Kennzeichen erhalten, etwa bei einer freiwilligen Änderung der Kombination. Daraus entsteht keine neue Fahrzeugidentität.",
+        "Umgekehrt beweist ein aufgeschraubtes Schild allein nicht, dass es zum vor dir stehenden Fahrzeug gehört. Bei der Übernahme eines Gebrauchtwagens sind Fahrzeug, Papiere und aktueller Zulassungsstatus gemeinsam zu prüfen."
+      ]
+    },
+    {
+      "id": "wechsel",
+      "title": "Beim Fahrzeugwechsel beide Datensätze trennen",
+      "paragraphs": [
+        "Wenn du deine bisherige Kombination auf ein anderes Fahrzeug übernehmen möchtest, bleiben es zwei verschiedene Fahrzeuge mit eigenen Identifizierungsnummern. Die Übernahme der Kombination ist ein eigener behördlicher Vorgang. Das Umstecken der Schilder erledigt ihn nicht.",
+        "Lege Kaufunterlagen für das neue Auto und Unterlagen zur bisherigen Kombination getrennt bereit. So vermeidest du, dass eine Reservierung oder Bestellung zwar die gewünschten Zeichen enthält, aber zeitlich nicht zur Zuteilung passt."
+      ]
+    },
+    {
+      "id": "eingabe",
+      "title": "Was du für die Prägung kontrollierst",
+      "paragraphs": [
+        "Für die Beschriftung sind das bestätigte Ortskürzel, die Buchstaben und die Zahlen maßgeblich. Dazu kommen die tatsächlich benötigte Kennzeichenart, Größe und Stückzahl. Die FIN ist kein Ersatz für diese Angaben.",
+        "Falls du vor der Bestellung nur die FIN kennst, kläre zuerst die Kombination bei der Zulassungsstelle. Eine Schilderbestellung ist weder eine Registerauskunft noch eine automatische Zulassung."
+      ],
+      "items": [
+        "Richtiges Fahrzeug anhand der Originalunterlagen zuordnen.",
+        "Zuteilung oder Reservierung der Kombination klären.",
+        "Kennzeichenzeichen statt FIN in die Vorschau übernehmen.",
+        "Vor der Zahlung Ausführung und Menge prüfen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "StVZO § 59: Fahrzeug-Identifizierungsnummer",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__59.html"
+    },
+    {
+      "label": "FZV § 9: Kennzeichenzuteilung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__9.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "fahrzeugschein-fahrzeugbrief-unterschied",
+    "kennzeichen-fahrzeugwechsel-uebernehmen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Kennzeichenschilder konfigurieren"
+    }
+  ]
+},
+{
+  "slug": "rote-06-kennzeichen-probefahrt",
+  "title": "Rote 06-Kennzeichen: Was bei Händlerprobefahrt und Abholung wichtig ist",
+  "description": "Rote Händlerkennzeichen sind an Berechtigung, Fahrzweck und Dokumentation gebunden. So unterscheidest du Probefahrt und spätere reguläre Zulassung.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Ein rotes Kennzeichen am Händlerfahrzeug ermöglicht nicht jede beliebige Fahrt. Die Kennzeichen mit einer Erkennungsnummer beginnend mit 06 gehören zu einem besonderen Verfahren. Für private Käufer ist vor allem die Abgrenzung zur eigenen Zulassung wichtig."
+  ],
+  "takeaway": "Ein 06-Kennzeichen ist kein frei mietbares privates Überführungskennzeichen. Kläre mit dem verantwortlichen Betrieb Fahrzweck, Versicherung und Dokumentation. Für die spätere eigene Nutzung brauchst du das passende reguläre Verfahren.",
+  "sections": [
+    {
+      "id": "berechtigung",
+      "title": "Wer eine 06-Nummer erhalten kann",
+      "paragraphs": [
+        "§ 41 FZV nennt unter anderem zuverlässige Fahrzeughersteller, Werkstätten und Fahrzeughändler als mögliche Empfänger für die wiederkehrende betriebliche Verwendung. Die Behörde kann die Zuteilung befristen oder widerruflich vornehmen.",
+        "Die rote Beschriftung allein zeigt dir deshalb nicht, dass eine bestimmte Fahrt erlaubt ist. Das Kennzeichen muss zum berechtigten Inhaber und zum vorgesehenen Verfahren gehören. Ein loses Schild aus einer privaten Anzeige reicht dafür nicht."
+      ]
+    },
+    {
+      "id": "zweck",
+      "title": "Probefahrt ist ein konkreter Verwendungszweck",
+      "paragraphs": [
+        "Die Vorschrift behandelt Prüfungs-, Probe- und Überführungsfahrten. Außerdem nennt sie bestimmte notwendige Fahrten im Zusammenhang damit, etwa zum Tanken oder zur Reparatur. Daraus entsteht keine allgemeine Erlaubnis für private Alltagsfahrten.",
+        "Besprich vor einer Händlerprobefahrt Strecke, Zeitraum, Fahrer und Versicherung mit dem Betrieb. Plane keine zusätzlichen privaten Erledigungen ein. Eine technisch fahrbereite Maschine und ein befestigtes rotes Schild ersetzen diese Klärung nicht."
+      ]
+    },
+    {
+      "id": "heft",
+      "title": "Dokumentation gehört zur Fahrt",
+      "paragraphs": [
+        "Für das Fahrzeug muss der Inhaber die vorgeschriebenen Angaben im Fahrzeugscheinheft vor der ersten Fahrt eintragen. Das Heft ist während der Fahrt mitzuführen. Hinzu kommen fortlaufende Aufzeichnungen über die jeweiligen Fahrten.",
+        "Lass dir deshalb nicht lediglich die Schlüssel geben, wenn unklar ist, welche Unterlagen mitfahren. Frage nach dem verantwortlichen Ansprechpartner. Für Käufer ist das ein praktischer Punkt in der Übergabeplanung, kein zusätzlicher Schilderauftrag."
+      ]
+    },
+    {
+      "id": "abholung",
+      "title": "Was nach dem Kauf gilt",
+      "paragraphs": [
+        "Vereinbare vor der Abholung, ob das Fahrzeug bereits regulär zugelassen wird oder ein anderes zulässiges Überführungsverfahren erforderlich ist. Kurzzeitkennzeichen und rote Oldtimerkennzeichen mit 07 sind eigene Verfahren mit anderen Voraussetzungen.",
+        "Unser Shop bietet keine roten 06-Kennzeichen oder deren Vermietung an. Wenn die reguläre deutsche Kombination für dein gekauftes Fahrzeug feststeht, kannst du hier die passenden angebotenen Schilder bestellen. Versicherung und Zulassung bleiben davon getrennt."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 41: Voraussetzungen und Dokumentation",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__41.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kurzzeitkennzeichen-fahrzeugueberfuehrung",
+    "auto-anmelden-unterlagen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/07-oder-h-kennzeichen",
+      "label": "07-Kennzeichen und H-Kennzeichen unterscheiden"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Schilder für die reguläre Zulassung"
+    }
+  ]
+},
+{
+  "slug": "auslaendisches-elektroauto-e-plakette",
+  "title": "Ausländisches Elektroauto: E-Plakette oder deutsches E-Kennzeichen?",
+  "description": "Für ein im Ausland zugelassenes Elektroauto gelten andere Kennzeichnungswege als bei einer deutschen Zulassung. Stand und zeitliche Grenze der Regelung.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Du fährst ein im Ausland zugelassenes Elektroauto in Deutschland? Dann ist ein zusätzlich bestelltes deutsches Schild mit E nicht automatisch der richtige Weg. Entscheidend ist, ob das Fahrzeug weiter ausländisch zugelassen bleibt oder in Deutschland zugelassen werden soll."
+  ],
+  "takeaway": "Für ausländisch zugelassene Fahrzeuge sieht § 11 FZV einen Plakettenweg vor und erkennt entsprechende ausländische Kennzeichnungen an. Stand 24.11.2026 ist die Anwendung dieser Vorschrift nach § 79 Absatz 9 bis Ende 2026 begrenzt. Für spätere Fahrten den dann geltenden Stand prüfen.",
+  "sections": [
+    {
+      "id": "status",
+      "title": "Vorübergehender Aufenthalt oder deutsche Zulassung?",
+      "paragraphs": [
+        "Bleibt das Fahrzeug nach den Vorschriften seines Herkunftsstaats zum Verkehr berechtigt, ist eine deutsche Kennzeichenprägung nicht der Ersatz für seine vorhandene Zulassung. § 11 Absatz 4 behandelt für berechtigte elektrisch betriebene Fahrzeuge die Kennzeichnung durch eine Plakette.",
+        "Soll das Fahrzeug dagegen eine deutsche Zulassung erhalten, gehören Herkunftsunterlagen, Genehmigungsnachweise und die behördliche Zuteilung zum Importverfahren. Erst danach lässt sich das deutsche Kennzeichen korrekt anfertigen."
+      ]
+    },
+    {
+      "id": "antrag",
+      "title": "Plakette bei einer vorgesehenen Ausgabestelle beantragen",
+      "paragraphs": [
+        "Die FZV nennt Zulassungsbehörden, weitere nach Landesrecht zuständige Stellen und anerkannte Stellen für Abgasuntersuchungen als Ausgabestellen. Als Nachweis kommen die Zulassungsbescheinigung, eine Übereinstimmungsbescheinigung oder ein anderes geeignetes Dokument infrage.",
+        "Die Ausgabestelle trägt das Kennzeichen des Fahrzeugs ein. Die Plakette ist gut sichtbar an der Rückseite anzubringen. Bereits im Ausland erteilte Kennzeichen oder Plaketten für elektrisch betriebene Fahrzeuge werden nach Absatz 5 gleichgestellt; kläre bei unklarer Kennzeichnung die Anerkennung vor der Reise."
+      ]
+    },
+    {
+      "id": "vorteile",
+      "title": "Kennzeichnung ist keine allgemeine Parkerlaubnis",
+      "paragraphs": [
+        "Ein Nachweis der elektrischen Fahrzeugart ersetzt nicht die örtlichen Verkehrsregeln. Prüfe am Zielort die konkrete Beschilderung und die Bedingungen einer möglichen Bevorrechtigung. Gehe nicht von deutschlandweit kostenlosem Parken oder einer freien Nutzung jeder Busspur aus.",
+        "Die E-Plakette ist außerdem ein anderer Nachweis als eine Umweltplakette. Verwechsle die beiden Produkte bei einer Suche oder Bestellung nicht. Unser Shop bietet die hier beschriebene E-Plakette für ausländische Fahrzeuge nicht an."
+      ]
+    },
+    {
+      "id": "datum",
+      "title": "Für 2027 erneut prüfen",
+      "paragraphs": [
+        "Der am 24. November 2026 geprüfte § 79 Absatz 9 FZV bestimmt, dass § 11 und Anlage 3 mit Ablauf des 31. Dezember 2026 nicht mehr anzuwenden sind. Daraus leiten wir keine unveränderte Fortgeltung für 2027 ab.",
+        "Wenn deine Reise später beginnt, prüfe vor dem Antrag die aktuelle amtliche Regelung und frage die Ausgabestelle. Für eine geplante deutsche Zulassung hilft dir der Import-Ratgeber; die passende deutsche E-Ausführung bestellst du erst nach Klärung der Zuteilung."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 11: ausländische Fahrzeuge und Plakette",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__11.html"
+    },
+    {
+      "label": "FZV § 79 Absatz 9: Anwendungsgrenze",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__79.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "eu-import-deutsche-kennzeichen",
+    "drittland-import-zulassung"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/e-kennzeichen-nachtraeglich",
+      "label": "Deutsches E-Kennzeichen nachträglich beantragen"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Schilder für eine bestätigte deutsche Zuteilung"
+    }
+  ]
+},
+{
+  "slug": "abgemeldetes-auto-abstellen",
+  "title": "Abgemeldetes Auto abstellen: Stellplatz vor der Abmeldung klären",
+  "description": "Was du beim Stellplatz, Transport und späteren Wiederzulassen eines abgemeldeten Autos vorbereitest – ohne öffentliche Parkplätze einzuplanen.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Du willst das Auto verkaufen, reparieren oder einige Zeit nicht nutzen? Kläre den Abstellort, bevor du es außer Betrieb setzt. Eine erfolgreiche Online-Abmeldung verschafft dir keinen privaten Stellplatz und verlängert keine öffentliche Parkerlaubnis."
+  ],
+  "takeaway": "Plane für das abgemeldete Auto einen geeigneten, erlaubten privaten Abstellort und einen zulässigen Transport dorthin. Neu geprägte Schilder allein machen das Fahrzeug weder wieder zugelassen noch öffentlich parkberechtigt.",
+  "sections": [
+    {
+      "id": "strasse",
+      "title": "Der öffentliche Parkplatz ist keine Dauerlösung",
+      "paragraphs": [
+        "Die amtliche Berliner Beschreibung der Außerbetriebsetzung weist darauf hin, dass das stillgelegte Fahrzeug anschließend nicht mehr auf öffentlichen Straßen gefahren oder abgestellt werden darf. Plane deshalb nicht mit einigen kostenlosen Übergangstagen am Straßenrand.",
+        "Auch alte Schilder am Auto ändern den Zulassungsstatus nicht. Eine behördliche Aufforderung zur Entfernung ist kein sinnvoller Startpunkt für die Stellplatzsuche. Örtliche Maßnahmen und Kosten können sich unterscheiden; eine bundesweite Pauschalfrist nennen wir deshalb nicht."
+      ]
+    },
+    {
+      "id": "privat",
+      "title": "Abstellort und Erlaubnis zusammen prüfen",
+      "paragraphs": [
+        "Frage den Eigentümer oder Vermieter, ob du das Fahrzeug am gewünschten Ort abstellen darfst. Prüfe Zufahrt, Platzbedarf und die Möglichkeit, es später wieder abzuholen. Eine private Grundstücksgrenze allein beantwortet nicht jede Frage zur tatsächlichen öffentlichen Zugänglichkeit.",
+        "Bei einem frei zugänglichen Kundenparkplatz oder einer offenen Gemeinschaftsfläche solltest du die zulässige Nutzung ausdrücklich klären. Wähle im Zweifel einen eindeutig geeigneten privaten Stellplatz. Austretende Betriebsstoffe oder eine spätere Entsorgung sind zusätzliche Themen und werden durch die Abmeldung nicht erledigt."
+      ]
+    },
+    {
+      "id": "transport",
+      "title": "Die letzte Fahrt vorher organisieren",
+      "paragraphs": [
+        "§ 12 Absatz 4 FZV enthält eine begrenzte Rückfahrtausnahme nach Entfernung der Stempelplakette: mit dem bisherigen Kennzeichen bis zum Ende des Abmeldetags, wenn die Haftpflichtversicherung diese Fahrt erfasst. Das ist keine allgemeine Erlaubnis, ein abgemeldetes Auto weiterzufahren.",
+        "Kläre die Voraussetzungen und den Versicherungsschutz vorab. Passt die Ausnahme nicht, organisiere einen geeigneten Transport statt einer Fahrt auf eigener Achse. Für spätere Fahrten gibt es eigene Zulassungs- und Überführungsverfahren."
+      ]
+    },
+    {
+      "id": "rueckkehr",
+      "title": "Vor der Wiederinbetriebnahme neu entscheiden",
+      "paragraphs": [
+        "Prüfe vor der erneuten Nutzung Unterlagen, Versicherungsnachweis, HU und die Kennzeichenzuteilung. Wenn die vorhandenen Schilder weiterhin zur bestätigten Kombination und Ausführung passen, ist nicht automatisch ein Neukauf erforderlich.",
+        "Brauchst du wegen einer neuen Kombination oder beschädigter Schilder Ersatz, bestelle erst nach dieser Klärung. Die Lieferung umfasst die Schilder; die erforderliche Zulassung und amtliche Plaketten kommen nicht automatisch mit."
+      ],
+      "items": [
+        "Erlaubten Abstellort vor der Abmeldung sichern.",
+        "Fahrt oder Transport rechtzeitig klären.",
+        "Unterlagen und alte Schilder geordnet aufbewahren.",
+        "Vor erneuter Nutzung Zulassung und Schildbedarf prüfen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "Berlin: Außerbetriebsetzung und öffentliches Abstellen",
+      "href": "https://service.berlin.de/dienstleistung/120877/standort/122304/"
+    },
+    {
+      "label": "FZV § 12 Absatz 4: begrenzte Rückfahrtausnahme",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-online-zulassen-kennzeichen",
+    "kurzzeitkennzeichen-fahrzeugueberfuehrung"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichen-entsiegeln-online-abmeldung",
+      "label": "Entsiegeln bei der Online-Abmeldung"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Bei Bedarf passende neue Schilder bestellen"
+    }
+  ]
+},
+{
+  "slug": "traktor-gruenes-kennzeichen",
+  "title": "Grünes Kennzeichen am Traktor: Nutzung vor der Schilderfarbe prüfen",
+  "description": "Wann land- und forstwirtschaftliche Zugmaschinen für eine Steuerbefreiung infrage kommen und warum die grüne Prägung keine Bewilligung ersetzt.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Ein alter oder kleiner Traktor erhält nicht allein wegen seiner Bauform ein grünes Kennzeichen. Für die landwirtschaftliche Steuerbefreiung sind Fahrzeugart und tatsächliche Verwendung wichtig. Das muss geklärt sein, bevor du grüne Schilder bestellst."
+  ],
+  "takeaway": "Prüfe den begünstigten Verwendungszweck und die behördliche Zuteilung. Ein grünes Schild bewirkt keine Steuerbefreiung. Auch eine passende kleine Montagefläche erlaubt nicht automatisch jedes verkleinerte Format.",
+  "sections": [
+    {
+      "id": "zweck",
+      "title": "Welche Nutzung das Gesetz beschreibt",
+      "paragraphs": [
+        "§ 3 Nummer 7 KraftStG nennt unter anderem Zugmaschinen, ausgenommen Sattelzugmaschinen, die ausschließlich für die dort aufgeführten Zwecke eingesetzt werden. Dazu gehören Einsätze in land- oder forstwirtschaftlichen Betrieben und bestimmte Arbeiten oder Beförderungen für solche Betriebe.",
+        "Es reicht daher nicht, dass das Fahrzeug früher auf einem Bauernhof stand. Bereite eine konkrete Beschreibung deiner Nutzung vor. Die steuerliche Einordnung klärst du mit dem zuständigen Hauptzollamt; sie ist keine Auswahloption des Schilderkonfigurators."
+      ]
+    },
+    {
+      "id": "hobby",
+      "title": "Hobbyfahrten nicht ungeprüft als begünstigt behandeln",
+      "paragraphs": [
+        "Ein privat genutzter Sammlertraktor und eine ausschließlich begünstigt eingesetzte Zugmaschine sind unterschiedliche Fälle. Leite aus einem grünen Schild des Vorbesitzers keinen eigenen Anspruch ab. Eine neue oder gemischte Verwendung muss gesondert geklärt werden.",
+        "Frage vor einer geplanten abweichenden Nutzung nach den steuerlichen Folgen. Dieser Artikel gibt keine Freigabe für einzelne Freizeitfahrten. Eine nachträgliche Bestellung schwarzer oder grüner Schilder ändert für sich allein weder den Steuerbescheid noch die Fahrzeugdaten."
+      ]
+    },
+    {
+      "id": "farbe",
+      "title": "Steuerstatus und Kennzeichenzuteilung verbinden",
+      "paragraphs": [
+        "§ 10 Absatz 2 FZV regelt die grüne Beschriftung für steuerbefreite Fahrzeuge und enthält zugleich Ausnahmen. Deshalb bedeutet nicht jede denkbare Steuerbefreiung automatisch ein grünes Kennzeichen. Für deine Zugmaschine zählt die konkret vorgesehene Zuteilung.",
+        "Kläre bei einer Änderung des Status mit der Zulassungsstelle, welche Unterlagen und Schilder vorzulegen sind. Bearbeite vorhandene schwarze Schrift nicht selbst mit grüner Farbe. Die vorgeschriebene Ausführung muss als Kennzeichenschild passen."
+      ]
+    },
+    {
+      "id": "format",
+      "title": "Erst danach das angebotene Format wählen",
+      "paragraphs": [
+        "Der Shop bietet Landmaschinen-Ausführungen in 240 × 130 und 255 × 130 mm mit auswählbarer schwarzer oder grüner Schrift. Das sind Produktmaße, keine Genehmigung für jedes Fahrzeug. Prüfe die behördlich zulässige Schildform, die Kombination und den Montageort.",
+        "Vergleiche außerdem die tatsächlich benötigte Anzahl. Wenn die Zuteilung geklärt ist und ein angebotenes Format passt, kannst du gezielt bestellen. Steuerantrag, Versicherung, Zulassung und amtliche Plaketten sind nicht im Schilderkauf enthalten."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "KraftStG § 3 Nummer 7: landwirtschaftliche Verwendungszwecke",
+      "href": "https://www.gesetze-im-internet.de/kraftstg/__3.html"
+    },
+    {
+      "label": "FZV § 10 Absatz 2: grüne Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__10.html"
+    },
+    {
+      "label": "FZV Anlage 4: Schildformate",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/anlage_4.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "anhaenger-gruenes-schwarzes-kennzeichen",
+    "kennzeichengroessen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/arbeitsmaschine-kennzeichen-20-kmh",
+      "label": "Arbeitsmaschine und Kennzeichenpflicht"
+    },
+    {
+      "href": "/landmaschinen-kennzeichen",
+      "label": "Angebotene Landmaschinen-Schilder"
+    }
+  ]
+},
+{
   "slug": "kennzeichen-engschrift-kurzes-schild",
   "title": "Engschrift beim Kennzeichen: Wann ist die schmale Schrift vorgesehen?",
   "description": "Wenig Platz für das Kennzeichen? Erfahre, wann Engschrift vorgesehen ist und warum eine kurze Kombination noch keine Freigabe für jedes Schildformat bedeutet.",
@@ -164,6 +590,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/kennzeichen-engschrift-kurzes-schild",
       "label": "Engschrift bei begrenztem Platz"
+    },
+    {
+      "href": "/blog/kennzeichen-umlaute-buchstaben",
+      "label": "Umlaute im Ortskürzel und bei Wunschbuchstaben"
     }
   ]
 },
@@ -318,6 +748,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/landmaschinen-kennzeichen",
       "label": "Angebotene Landmaschinenformate ansehen"
+    },
+    {
+      "href": "/blog/traktor-gruenes-kennzeichen",
+      "label": "Grünes Kennzeichen für landwirtschaftliche Zugmaschinen"
     }
   ]
 },
@@ -563,6 +997,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/ratgeber/fahrzeug-auf-minderjaehrige-zulassen",
       "label": "Zulassung auf Minderjährige"
+    },
+    {
+      "href": "/blog/fin-kennzeichen-unterschied",
+      "label": "FIN und Kennzeichen unterscheiden"
     }
   ]
 },
@@ -995,6 +1433,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/h-saisonkennzeichen",
       "label": "H-Kennzeichen mit Saisonzeitraum"
+    },
+    {
+      "href": "/blog/rote-06-kennzeichen-probefahrt",
+      "label": "Rote 06-Kennzeichen bei Händlerprobefahrten"
     }
   ]
 },
@@ -1897,6 +2339,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/elektroauto-umweltplakette",
       "label": "Braucht das Elektroauto eine Umweltplakette?"
+    },
+    {
+      "href": "/blog/auslaendisches-elektroauto-e-plakette",
+      "label": "Kennzeichnung ausländischer Elektroautos"
     }
   ]
 },
@@ -2286,6 +2732,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/alte-kennzeichen-entsorgen",
       "label": "Alte Kennzeichen aufbewahren oder entsorgen"
+    },
+    {
+      "href": "/blog/abgemeldetes-auto-abstellen",
+      "label": "Stellplatz vor der Abmeldung vorbereiten"
     }
   ]
 },

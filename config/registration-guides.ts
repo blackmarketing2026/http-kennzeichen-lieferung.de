@@ -26,6 +26,371 @@ const shortTerm = { label: 'Service Berlin: Kurzzeitkennzeichen beantragen', hre
 
 export const registrationGuides: RegistrationGuide[] = [
 {
+  "slug": "ausfuhrkennzeichen-ablauf",
+  "title": "Ausfuhrkennzeichen: Ablauf für die dauerhafte Überführung ins Ausland",
+  "teaser": "Versicherung, HU, Unterlagen und Befristung beim Ausfuhrkennzeichen einordnen. Der Shop bietet reguläre Schilder, keine Ausfuhrkennzeichen.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Ein Fahrzeug soll dauerhaft in ein anderes Land gebracht werden. Dann reicht es nicht, für die Fahrt irgendein Kennzeichenschild anzuschrauben. Das Ausfuhrverfahren verbindet die befristete Zulassung mit einer dafür passenden Versicherung und einer besonderen Kennzeichenausführung."
+  ],
+  "takeaway": "Kläre vor der Fahrt das Ausfuhrverfahren, den Versicherungszeitraum und die HU. Unser Shop bietet keine Ausfuhrkennzeichen an. Reguläre deutsche Schilder sind dafür kein Ersatz.",
+  "sections": [
+    {
+      "id": "zweck",
+      "title": "1. Export und normale Auslandsreise unterscheiden",
+      "paragraphs": [
+        "§ 45 FZV behandelt die dauerhafte Verbringung bestimmter nicht zugelassener Fahrzeuge ins Ausland, bei Kraftfahrzeugen auf eigener Achse und bei Anhängern hinter einem Kraftfahrzeug. Eine Urlaubsfahrt mit einem weiterhin regulär zugelassenen Auto ist ein anderer Fall.",
+        "Auch die Beförderung als Ladung ist von einer Fahrt des Fahrzeugs selbst zu unterscheiden. Beschreibe der zuständigen Stelle deshalb, wie und wohin das Fahrzeug gelangen soll. Plane Transitländer mit ein und kläre dortige Anforderungen, statt eine pauschale Anerkennung aller Kennzeichenarten anzunehmen."
+      ]
+    },
+    {
+      "id": "versicherung",
+      "title": "2. Versicherung und HU auf den Zeitraum abstimmen",
+      "paragraphs": [
+        "Die FZV verlangt für diesen Vorgang einen besonderen Versicherungsnachweis. Die Zulassung ist an die nachgewiesene Versicherungsdauer gebunden und auf höchstens ein Jahr begrenzt. Die Behörde kann den Zeitraum im Einzelfall weiter beschränken.",
+        "Der nächste HU-Termin muss die Anforderungen des § 45 erfüllen. Läuft die Untersuchung vor dem vorgesehenen Zulassungsende ab, ist eine Untersuchung erforderlich. Vereinbare deshalb keine lange Exportgültigkeit, ohne die HU-Unterlagen vorher zu prüfen."
+      ]
+    },
+    {
+      "id": "unterlagen",
+      "title": "3. Die örtliche Unterlagenliste prüfen",
+      "paragraphs": [
+        "Halte Fahrzeugpapiere, Identitätsnachweis, Versicherungsunterlagen und den HU-Nachweis bereit. Bei einem noch zugelassenen Fahrzeug sind auch die bisherigen Schilder ein Thema. Frage die Zulassungsstelle nach den konkreten Steuer-, Vertretungs- und gegebenenfalls Empfangsbevollmächtigungsunterlagen.",
+        "Berlin verlangt beispielsweise in bestimmten Fällen eine Fahrzeugvorführung, etwa wenn das Fahrzeug zuvor nicht im Bundesgebiet zugelassen war oder zuletzt ein Ausfuhrkennzeichen hatte. Das ist ein örtliches Verfahrensbeispiel; kläre die Vorführung und den Termin bei deiner zuständigen Stelle. Eine vorherige separate Abmeldung wird in der Berliner Beschreibung nicht pauschal verlangt."
+      ]
+    },
+    {
+      "id": "ablaufdatum",
+      "title": "4. Das Ablaufdatum ernst nehmen",
+      "paragraphs": [
+        "Das Ausfuhrkennzeichen enthält ein Ablaufdatum. Die Zulassungsbescheinigung Teil I wird auf die Ausfuhr beschränkt und erhält ebenfalls die Befristung. Nach Ablauf darf das Fahrzeug auf öffentlichen Straßen nicht weiter in Betrieb gesetzt werden.",
+        "Ein späterer Rückflug, eine verschobene Übergabe oder ein noch lesbares Schild verlängern die Gültigkeit nicht. Stimme Transport, behördlichen Termin und Versicherung so ab, dass zwischen Ausstellung und Fahrt ein realistischer Zeitplan liegt."
+      ]
+    },
+    {
+      "id": "sortiment",
+      "title": "5. Die richtige Leistung beauftragen",
+      "paragraphs": [
+        "Für das Ausfuhrverfahren brauchst du einen Anbieter für die tatsächlich vorgesehene besondere Schildausführung. Ein normales Schild mit der bisherigen deutschen Kombination erfüllt diesen Zweck nicht. Rote Händlerkennzeichen und Kurzzeitkennzeichen sind ebenfalls keine pauschal austauschbaren Alternativen.",
+        "Hier kannst du reguläre angebotene deutsche Kennzeichenschilder für eine entsprechende Zuteilung bestellen. Der Shop vermittelt in diesem Vorgang weder Ausfuhrversicherung noch Exportzulassung und bietet keine Ausfuhrschilder an."
+      ],
+      "items": [
+        "Dauerhaften Export und Transportart klären.",
+        "Versicherung und HU mit dem gewünschten Zeitraum abgleichen.",
+        "Örtliche Unterlagen und mögliche Vorführung bestätigen.",
+        "Ausfuhrkennzeichen über das passende Verfahren beschaffen."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Kann ich einfach normale deutsche Schilder für den Export bestellen?",
+      "answer": "Nein. Eine reguläre Prägung ersetzt weder die erforderliche Ausfuhrzulassung noch deren besondere Schildausführung."
+    },
+    {
+      "question": "Gilt ein Ausfuhrkennzeichen immer ein Jahr?",
+      "answer": "Nein. Ein Jahr ist die gesetzliche Obergrenze. Versicherungsdauer und behördliche Entscheidung bestimmen die tatsächliche Befristung."
+    },
+    {
+      "question": "Verkauft dieser Shop Ausfuhrkennzeichen?",
+      "answer": "Nein. Der Bestelleinstieg führt zu den regulär angebotenen deutschen Schildern, nicht zu Ausfuhrkennzeichen."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 45: Ausfuhrverfahren",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__45.html"
+    },
+    {
+      "label": "Berlin: Ausfuhrkennzeichen beantragen",
+      "href": "https://service.berlin.de/dienstleistung/121476/"
+    }
+  ],
+  "related": [
+    "kurzzeitkennzeichen-fahrzeugueberfuehrung",
+    "eu-import-deutsche-kennzeichen"
+  ],
+  "cta": "Du benötigst stattdessen Schilder für eine reguläre deutsche Zulassung? Prüfe die bestätigte Kombination und die angebotene Ausführung im Konfigurator. Ausfuhrschilder sind dort nicht erhältlich."
+},
+{
+  "slug": "drittland-import-zulassung",
+  "title": "Auto aus einem Drittland importiert: Deutsche Zulassung vorbereiten",
+  "teaser": "Herkunftspapiere, Zollunterlagen, technische Genehmigung und passende Schilder für einen Gebrauchtwagen außerhalb von EU und EWR vorbereiten.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Bei einem gebrauchten Importauto aus einem Drittland kommen zu den üblichen Zulassungsunterlagen weitere Fragen hinzu. Wo war es zugelassen? Welche technische Genehmigung liegt vor? Welche Einfuhrunterlagen werden benötigt? Diese Punkte sollten vor der Bestellung deutscher Schilder geklärt sein."
+  ],
+  "takeaway": "Beginne mit Herkunfts- und Genehmigungsnachweisen. Ein ausländischer Fahrzeugschein oder eine bestellte deutsche Kennzeichenplatte allein reichen nicht für die Zulassung. Dieser Ablauf betrifft Gebrauchtfahrzeuge aus Staaten außerhalb von EU und EWR.",
+  "sections": [
+    {
+      "id": "herkunft",
+      "title": "1. Herkunft und Dokumente sauber zuordnen",
+      "paragraphs": [
+        "Sammle die ausländischen Fahrzeugpapiere und deinen Nachweis über den Erwerb beziehungsweise die Verfügungsberechtigung. Vergleiche die Fahrzeug-Identifizierungsnummer in den Unterlagen mit dem Fahrzeug. Kläre fehlende oder widersprüchliche Dokumente vor dem Zulassungstermin.",
+        "Der bestehende EU/EWR-Ratgeber behandelt einen anderen Ausgangsfall. Übertrage seine vereinfachte Vorbereitung nicht ungeprüft auf einen Drittlandimport. Ein Fahrzeugmodell, das auch in Deutschland verkauft wurde, muss nicht dieselbe genehmigte Ausführung haben."
+      ]
+    },
+    {
+      "id": "einfuhr",
+      "title": "2. Einfuhrunterlagen getrennt von der Zulassung klären",
+      "paragraphs": [
+        "Die Berliner Unterlagenliste nennt eine Zollunbedenklichkeitsbescheinigung. Liegt diese dort nicht vor, wird nach der veröffentlichten Beschreibung das Hauptzollamt über die Einfuhr informiert. Das ist keine Zusage, dass fehlende Zollformalitäten bedeutungslos wären.",
+        "Kläre deinen Einfuhrfall unmittelbar mit der zuständigen Zollstelle und der Zulassungsbehörde. Wir nennen hier keine pauschalen Abgabensätze: Herkunft, Verfahren und mögliche Besonderheiten müssen für das konkrete Fahrzeug geprüft werden. Eine Schilderrechnung ersetzt keinen Einfuhrnachweis."
+      ]
+    },
+    {
+      "id": "technik",
+      "title": "3. Den anerkannten Genehmigungsnachweis feststellen",
+      "paragraphs": [
+        "Nach der Berliner Verfahrensbeschreibung kommen ein Gutachten nach § 21 StVZO mit technischem Datenblatt oder unter bestimmten Voraussetzungen CoC beziehungsweise Herstellerdaten infrage. Ein CoC genügt dort nicht automatisch: Die Anerkennung der EG-Typgenehmigungsnummer muss aus den Drittstaatspapieren hervorgehen.",
+        "Lass die zuständige Stelle und eine geeignete Prüforganisation vorab beurteilen, welcher Nachweis für dein Fahrzeug benötigt wird. Ein §-21-Gutachten und eine eventuell erforderliche Ausnahmegenehmigung sind unterschiedliche Schritte. Bestelle keine Umbauten nach einer allgemeinen Internetliste, bevor der tatsächliche Prüfbedarf feststeht."
+      ]
+    },
+    {
+      "id": "termin",
+      "title": "4. HU und Zulassungsantrag vorbereiten",
+      "paragraphs": [
+        "Für die Terminvorbereitung nennt das amtliche Beispiel außerdem eine gültige HU, eVB, Identitätsunterlagen und gegebenenfalls SEPA-Mandat oder Vollmacht. Die Behörde benötigt die geforderten Originalunterlagen; stimme die konkrete Liste und mögliche Übersetzungen vorher ab.",
+        "Plane genügend Zeit für fehlende Nachweise. Ein reserviertes Wunschkennzeichen verpflichtet die Behörde nicht, ungeklärte technische oder dokumentarische Fragen zu übergehen. Vereinbare die Schilderbestellung deshalb passend zum tatsächlichen Fortschritt des Verfahrens."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "5. Deutsche Kombination und Montagefläche abgleichen",
+      "paragraphs": [
+        "Bei Importfahrzeugen kann die vorhandene Kennzeichenaussparung von den üblichen deutschen Maßen abweichen. Eine kleine Aussparung allein ist keine Erlaubnis, ein beliebiges verkleinertes Schild zu verwenden. Kläre die zulässige Form mit der Behörde und gegebenenfalls im technischen Verfahren.",
+        "Wenn Kombination, Ausführung und Maße feststehen, vergleiche sie mit dem Angebot. Der reguläre Autokonfigurator bietet 520-mm-Schilder. Benötigst du ein nicht angebotenes Sonderformat, bestelle nicht ersatzweise eine ungefähr passende Platte. Zulassung und amtliche Plaketten bleiben vom Schilderkauf getrennt."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Braucht jeder Drittlandimport zwingend ein Vollgutachten?",
+      "answer": "Das hängt vom vorhandenen Genehmigungsnachweis und dem konkreten Fahrzeug ab. Die örtliche Behörde und eine geeignete Prüfstelle klären, welcher Nachweis anerkannt wird."
+    },
+    {
+      "question": "Ist die ausländische Kombination auf deutschen Schildern ausreichend?",
+      "answer": "Nein. Für die deutsche Zulassung ist die deutsche behördliche Zuteilung maßgeblich. Eine bloße Nachprägung der ausländischen Zeichen ersetzt sie nicht."
+    },
+    {
+      "question": "Kann ich vor der technischen Prüfung bestellen?",
+      "answer": "Sinnvoll ist die Bestellung erst, wenn Kombination und zulässiges Format feststehen. Bei ungeklärter Genehmigung besteht das Risiko einer unpassenden Prägung."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Berlin: Zulassung eines Drittland-Gebrauchtfahrzeugs",
+      "href": "https://service.berlin.de/dienstleistung/324197/"
+    },
+    {
+      "label": "StVZO § 21: Einzelbetriebserlaubnis",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__21.html"
+    },
+    {
+      "label": "FZV Anlage 4: Formate",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/anlage_4.html"
+    }
+  ],
+  "related": [
+    "eu-import-deutsche-kennzeichen",
+    "vollgutachten-21-zulassung",
+    "kennzeichengroessen"
+  ],
+  "cta": "Unterlagen, Zuteilung und passendes Format sind bestätigt? Bestelle jetzt die dafür angebotenen deutschen Kennzeichenschilder."
+},
+{
+  "slug": "vollgutachten-21-zulassung",
+  "title": "Vollgutachten nach § 21: Vom technischen Nachweis zur Zulassung",
+  "teaser": "Wann ein Gutachten nach § 21 StVZO relevant ist, was die Behörde entscheidet und wann die Kennzeichenbestellung in den Ablauf passt.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Du hörst bei einem Import, Umbau oder besonderen Fahrzeug vom Vollgutachten. Damit ist noch nicht gesagt, dass du bereits eine Betriebserlaubnis oder eine Zulassung hast. Technische Begutachtung, behördliche Entscheidung und Schilderprägung erfüllen unterschiedliche Aufgaben."
+  ],
+  "takeaway": "Kläre zuerst, ob das §-21-Verfahren für dein Fahrzeug erforderlich ist. Das Gutachten liefert den technischen Nachweis; die zuständige Behörde erteilt die Betriebserlaubnis. Die Kennzeichenbestellung ersetzt keinen dieser Schritte.",
+  "sections": [
+    {
+      "id": "anwendung",
+      "title": "1. Den konkreten Anlass prüfen lassen",
+      "paragraphs": [
+        "§ 21 StVZO behandelt Fahrzeuge, die nicht zu einem genehmigten Typ gehören. Außerdem ist das Verfahren bei bestimmten Änderungen relevant, durch die eine frühere Betriebserlaubnis nach § 19 Absatz 2 erloschen ist. Nicht jeder Zubehöranbau führt automatisch zu diesem Ergebnis.",
+        "Liegt bereits eine passende Typgenehmigung oder Einzelbetriebserlaubnis vor, darf eine Begutachtung nach § 21 Absatz 1a nicht einfach ohne den dort vorgesehenen Anlass verlangt werden. Eine lange Standzeit allein solltest du deshalb nicht mit einem zwingenden Vollgutachten gleichsetzen. Lass den vorhandenen Genehmigungsstand prüfen."
+      ]
+    },
+    {
+      "id": "vorbereitung",
+      "title": "2. Unterlagen vor der Begutachtung zusammenstellen",
+      "paragraphs": [
+        "Bereite vorhandene Fahrzeugpapiere, technische Daten und Nachweise zu Änderungen vor. Bei einem Import helfen die vollständigen Herkunftsunterlagen, bei einem Umbau die Dokumente der verbauten Teile. Beschreibe der Prüfstelle, was tatsächlich am Fahrzeug geändert wurde.",
+        "Kläre vor der Anfahrt, ob die gewählte Stelle die benötigte Begutachtung für deine Fahrzeugklasse durchführen kann. Die Vorschrift nennt amtlich anerkannte Sachverständige beziehungsweise entsprechend benannte Technische Dienste. Eine normale HU-Buchung ist nicht automatisch der richtige Termin."
+      ]
+    },
+    {
+      "id": "gutachten",
+      "title": "3. Was im Gutachten stehen muss",
+      "paragraphs": [
+        "Das Gutachten enthält die technische Beschreibung in dem Umfang, der für die Zulassungsbescheinigungen benötigt wird. Hinzu kommen die technischen Vorschriften, auf deren Grundlage eine Betriebserlaubnis erteilt werden kann. Bei erloschener Betriebserlaubnis werden auch die dafür maßgeblichen Änderungen dargestellt.",
+        "Der Sachverständige oder Technische Dienst bestätigt die zutreffende Beschreibung und den vorschriftsmäßigen Zustand. Fehlende Nachweise oder notwendige Arbeiten können zusätzliche Schritte auslösen. Ein vorab gebuchter Zulassungstermin verkürzt diese Prüfung nicht."
+      ]
+    },
+    {
+      "id": "behoerde",
+      "title": "4. Gutachten und behördliche Erlaubnis unterscheiden",
+      "paragraphs": [
+        "Das Gutachten wird der nach Landesrecht zuständigen Behörde für den Antrag auf Betriebserlaubnis vorgelegt. Die Behörde überträgt die erforderlichen Angaben in die Fahrzeugdokumente. Falls zusätzlich eine Ausnahme nötig ist, muss auch diese Entscheidung geklärt werden.",
+        "Frage nach, welche Unterlagen außer dem technischen Gutachten für die anschließende Zulassung fehlen. Versicherung, Identitätsnachweise, HU und steuerliche Angaben sind eigenständige Punkte des konkreten Vorgangs. Ein Gutachten ist kein universeller Ersatz für den gesamten Zulassungsantrag."
+      ]
+    },
+    {
+      "id": "bestellen",
+      "title": "5. Kennzeichen erst auf bestätigter Grundlage bestellen",
+      "paragraphs": [
+        "Kläre die Kombination und die zulässige Schildform, bevor du prägen lässt. Das ist besonders wichtig, wenn sich Fahrzeugart, Montagefläche oder benötigte Ausführung geändert haben. Eine technische Besonderheit lässt sich nicht durch Abschneiden oder Verformen des Kennzeichens lösen.",
+        "Bei einer bestehenden Zulassung und unveränderter Kombination sind neue Schilder nicht allein wegen eines Gutachtens automatisch erforderlich. Wenn tatsächlich neue Schilder gebraucht werden, vergleiche die bestätigten Angaben mit dem verfügbaren Shopprodukt. Amtliche Plaketten gehören nicht zum Lieferumfang."
+      ],
+      "items": [
+        "Anlass und Genehmigungsstand klären.",
+        "Geeignete Prüfstelle und Unterlagen abstimmen.",
+        "Gutachten und mögliche weitere Entscheidungen abschließen.",
+        "Zulassung und tatsächlichen Schilderbedarf prüfen."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Ist das Vollgutachten bereits die Betriebserlaubnis?",
+      "answer": "Nein. Es ist der technische Nachweis für die behördliche Entscheidung. Die Betriebserlaubnis wird von der zuständigen Behörde erteilt."
+    },
+    {
+      "question": "Brauche ich nach jedem Umbau ein Vollgutachten?",
+      "answer": "Nein. Die Art der Änderung, vorhandene Genehmigungen und die Voraussetzungen des § 19 StVZO sind entscheidend. Kläre das vor dem Umbau mit einer geeigneten Prüfstelle."
+    },
+    {
+      "question": "Muss ich danach immer neue Kennzeichen kaufen?",
+      "answer": "Nein. Nur ein tatsächlicher Wechsel der Kombination oder Ausführung beziehungsweise ein Ersatzbedarf macht neue Schilder erforderlich."
+    }
+  ],
+  "sources": [
+    {
+      "label": "StVZO § 21: Verfahren und Gutachten",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__21.html"
+    },
+    {
+      "label": "StVZO § 19: Wirksamkeit der Betriebserlaubnis",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__19.html"
+    },
+    {
+      "label": "FZV § 12: Kennzeichenausführung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "related": [
+    "drittland-import-zulassung",
+    "wohnmobil-umbau-zulassung",
+    "zulassung-abgelehnt-gruende"
+  ],
+  "cta": "Dein Verfahren ist geklärt und neue Schilder sind erforderlich? Wähle die bestätigte Kombination im passenden angebotenen Format."
+},
+{
+  "slug": "wohnmobil-umbau-zulassung",
+  "title": "Zum Wohnmobil umgebaut: Fahrzeugpapiere und Kennzeichen richtig einplanen",
+  "teaser": "Vom geplanten Ausbau über die Begutachtung bis zur Änderung der Fahrzeugpapiere: Wann neue Kennzeichenschilder nötig sind und wann nicht.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Aus einem Transporter soll ein Wohnmobil werden. Die entscheidende Frage ist zunächst die genehmigte Fahrzeugart. Ein fertiger Innenausbau oder eine passende Versicherung allein ersetzen die technische und behördliche Klärung nicht."
+  ],
+  "takeaway": "Stimme den Ausbau vorab mit einer geeigneten Prüfstelle ab. Ändert sich die genehmigte Fahrzeugart, sind Betriebserlaubnis und Fahrzeugpapiere zu klären. Neue Kennzeichenschilder werden dadurch nicht automatisch erforderlich.",
+  "sections": [
+    {
+      "id": "planung",
+      "title": "1. Vor dem Ausbau die Prüfbarkeit klären",
+      "paragraphs": [
+        "Zeige der Prüfstelle deine Ausbauplanung und die vorhandenen Fahrzeugpapiere. Besprich insbesondere Sitzplätze, Befestigungen, Gewichte und die geplante Nutzung. Nachträgliche Änderungen an einem fertigen Ausbau können deutlich aufwendiger sein als eine rechtzeitige Abstimmung.",
+        "Dieser Ratgeber ist keine Bauanleitung für Gas-, Elektro- oder Sitzanlagen. Lass solche Anforderungen für das konkrete Fahrzeug fachlich prüfen. Eine vermeintlich erfolgreiche Lösung bei einem anderen Transporter ist keine Genehmigung für deinen Umbau."
+      ]
+    },
+    {
+      "id": "ausstattung",
+      "title": "2. Wohnausstattung und Fahrplätze auseinanderhalten",
+      "paragraphs": [
+        "Die GTÜ nennt für die Anerkennung als Wohnmobil unter anderem Sitzgelegenheiten und Tisch, Schlafmöglichkeiten, eine dauerhaft eingebaute Kochmöglichkeit sowie Stauraum. Die Wohnausstattung ist grundsätzlich fest anzubringen; für den Tisch gibt es eine Ausnahme.",
+        "Ein Platz, auf dem du im Stand sitzen kannst, ist deshalb noch kein zugelassener Sitzplatz für die Fahrt. Die GTÜ weist hierfür gesondert auf die Anforderungen an Sitze und Gurtverankerungen hin. Kläre auch, ob herausnehmbare Einrichtungen überhaupt zu einer Änderung der Fahrzeugart führen."
+      ]
+    },
+    {
+      "id": "erlaubnis",
+      "title": "3. Änderung der Fahrzeugart technisch und behördlich behandeln",
+      "paragraphs": [
+        "Nach § 19 Absatz 2 StVZO erlischt die Betriebserlaubnis unter anderem, wenn Änderungen die genehmigte Fahrzeugart verändern. Für die Erteilung einer neuen Betriebserlaubnis verweist die Vorschrift auf § 21. Die Behörde benötigt dafür den erforderlichen technischen Nachweis.",
+        "Unterscheide also zwischen einem geprüften Umbau und der anschließenden behördlichen Bearbeitung. Lass dir erklären, welche Unterlagen du nach der Begutachtung erhältst und welcher Antrag noch zu stellen ist. Ein Kennzeichenschild am Fahrzeug beantwortet nicht, ob der Umbau bereits zulässig dokumentiert ist."
+      ]
+    },
+    {
+      "id": "papiere",
+      "title": "4. Fahrzeugdaten und Versicherung aktualisieren",
+      "paragraphs": [
+        "§ 15 FZV verlangt die unverzügliche Mitteilung bestimmter Änderungen, darunter Änderungen der Fahrzeugklasse und weiterer technischer Daten. Welche Angaben dein Umbau betrifft, ergibt sich aus dem tatsächlichen Ergebnis der Begutachtung.",
+        "Kläre mit der Zulassungsstelle, welche Fahrzeugpapiere vorzulegen und zu ändern sind. Informiere den Versicherer über die geänderte Nutzung und die Fahrzeugdaten. Nenne ihm die bestätigten Angaben statt einer geschätzten Einstufung. Steuer- oder Beitragsersparnisse lassen sich aus dem Wort Wohnmobil allein nicht verlässlich ableiten."
+      ]
+    },
+    {
+      "id": "kennzeichen",
+      "title": "5. Bestehende Kombination oder neue Schilder?",
+      "paragraphs": [
+        "Wenn die bisherige Kombination und Schildausführung weitergeführt werden können und die Schilder in Ordnung sind, ist ein Neukauf nicht allein wegen der Umschreibung nötig. Kläre diese Frage im Zulassungsvorgang, bevor du Ersatz bestellst.",
+        "Möchtest du zusätzlich etwa auf eine bestätigte Saison-Ausführung wechseln, ist das ein eigener Schritt. Prüfe dann Zeitraum, Kombination und Platz für das Saisonfeld. Erst bei geklärter Zuteilung bestellst du die passenden Schilder. Der Shop liefert keine Betriebserlaubnis, Fahrzeugpapiere oder amtlichen Plaketten."
+      ],
+      "items": [
+        "Ausbau mit geeigneter Prüfstelle vorab besprechen.",
+        "Genehmigte Fahrplätze von Wohnsitzen im Stand unterscheiden.",
+        "Gutachten und behördliche Änderung abschließen.",
+        "Versicherung und tatsächlichen Schildbedarf klären."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Brauche ich nach der Wohnmobil-Umschreibung eine neue Nummer?",
+      "answer": "Nicht automatisch. Kläre im konkreten Vorgang, ob Kombination und Ausführung weitergeführt werden. Nur die Umschreibung begründet keinen pauschalen Schilderneukauf."
+    },
+    {
+      "question": "Reicht eine lose Campingausstattung für die Umschreibung?",
+      "answer": "Das solltest du nicht voraussetzen. Die technische Einordnung hängt von der vorgesehenen Ausstattung und dem konkreten Ausbau ab. Stimme sie vorab mit einer geeigneten Prüfstelle ab."
+    },
+    {
+      "question": "Kann der Schilderanbieter die Umschreibung erledigen?",
+      "answer": "Die Schilderbestellung umfasst hier die Prägung und Lieferung der angebotenen Ausführung. Begutachtung und Änderung der Fahrzeugpapiere erfolgen separat."
+    }
+  ],
+  "sources": [
+    {
+      "label": "StVZO § 19: Änderung der Fahrzeugart",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__19.html"
+    },
+    {
+      "label": "StVZO § 21: Betriebserlaubnis",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__21.html"
+    },
+    {
+      "label": "FZV § 15: Änderungen von Fahrzeugdaten",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    },
+    {
+      "label": "GTÜ: Technische Vorbereitung des Wohnmobilumbaus",
+      "href": "https://www.gtue.de/de/privatkunden/technischer-dienst-fuer-privatkunden/umbau-zum-wohnmobil"
+    }
+  ],
+  "related": [
+    "vollgutachten-21-zulassung",
+    "auto-anmelden-unterlagen",
+    "saisonkennzeichen-zeitraum-aendern"
+  ],
+  "cta": "Falls du nach der behördlichen Klärung neue Schilder brauchst: Kontrolliere Kombination, Ausführung und Stückzahl im Konfigurator."
+},
+{
   "slug": "auto-geerbt-ummelden",
   "title": "Auto geerbt: Ummeldung und Kennzeichen nach einem Todesfall",
   "teaser": "Welche Punkte du bei einem geerbten Auto zuerst klärst: Berechtigung, Fahrzeugpapiere, Versicherung, Halterwechsel und möglicher Schilderbedarf.",
@@ -629,7 +994,9 @@ export const registrationGuides: RegistrationGuide[] = [
     "auto-anmelden-unterlagen",
     "kennzeichengroessen",
     "wunschkennzeichen-reservieren",
-    "kurzzeitkennzeichen-fahrzeugueberfuehrung"
+    "kurzzeitkennzeichen-fahrzeugueberfuehrung",
+    "drittland-import-zulassung",
+    "ausfuhrkennzeichen-ablauf"
   ],
   "cta": "Deine deutsche Kombination und die passenden Maße stehen fest? Konfiguriere die angebotenen Schilder für deinen Zulassungstermin. Herkunftsdokumente, Versicherung, Zulassung und amtliche Plaketten bleiben eigenständige Schritte."
 },

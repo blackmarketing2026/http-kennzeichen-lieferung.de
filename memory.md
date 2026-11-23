@@ -96,3 +96,10 @@
 - Build, gezieltes Lint, Editorial-Smoke (10/52 HTTP-Ziele), SEO-Smoke (74 Seiten) und Sitemapvergleich (72→82, +10/-0) bestanden. Keine Browserprüfung gemäß Auftrag.
 - Push und Live-Nachweis werden im Abend-Prüfbericht ergänzt. Themen dieses Durchlaufs künftig nicht erneut anlegen.
 - Produktionsnachweis Abend: Inhaltscommit ca251b04368631a306a703df9294c88aa7465c85, Vercel success. Alle zehn neuen Seiten und ihre internen Ziele per öffentlichem Editorial-Smoke bestanden; Live-Sitemap 82 eindeutige URLs (+10/-0). Alle 10 bestätigt live, keine Indexierungsbehauptung.
+
+## SEO-Paket 24.11.2026
+- 6 Blogs: Umlaute, FIN, rote06, ausländische E-Plakette, Abstellen nach Abmeldung, grünesTraktorkennzeichen. 4 Ratgeber: Ausfuhr, Drittlandimport, Vollgutachten21, Wohnmobilumbau. Manifest/Briefing/Prüfbericht unter docs/seo/2026-11-24-*.
+- Bestand danach72 redaktionelle Seiten (inklusive2 Legacy), Sitemap92. Neue Inhalte künftig nicht doppeln; Leichtkraftradgröße/zweizeiligeGrundlagen bewusst wegen Bestand verworfen.
+- GSC korrekt, Wochenanalyse23.11. wiederverwendet; nächste frühestens30.11. DreiSERPs INSUFFICIENT_CREDITS, amtliche Quellen ergänzt. Keine Volumenannahmen.
+- Build/Lint/Editorial10Seiten49HTTP-Ziele/SEO84Seiten bestanden; Sitemap82→92+10/-0. Kein Browser. Live-Nachtrag folgt.
+- §79(9)FZV aktuelle Anwendungsgrenze31.12.2026 für§11/Anlage3: neuerAuslands-E-Artikel nennt sie. Vor2027 erneut amtlichenStand prüfen, keine automatische Fortgeltung behaupten.
