@@ -21,3 +21,10 @@ Ausländische E-Plakette: §79(9) FZV nennt aktuell das Ende der Anwendung von§
 
 ## Veröffentlichung
 Push und öffentliche Produktionsprüfung stehen beim Inhaltscommit noch aus. Bestätigter Nachtrag folgt im selben Durchlauf nach HTTP-Kontrolle.
+
+### Produktionsnachtrag, 24.11.2026, 00:12 MEZ
+- Inhaltscommit 3c1748f5591c47c9b97b87e6d44b181ae32e9aa2 direkt auf main per Fast-Forward und erwarteter Ausgangs-SHA veröffentlicht. Kein Force-Push. Anschließend alle sechs Dateien per git fetch/show bytegenau mit geprüftem Stand verglichen.
+- Vercel success: https://vercel.com/stefve/http-kennzeichen-lieferung-de/9R2KLApFxDdmqj95JJL3cmNen7Bs.
+- Öffentlicher Editorial-Smoke erfolgreich: alle10 neuen URLs HTTP200 mit erwarteten Titeln, Canonicals, Metadaten, JSON-LD, internen Links, Übersichten und unbekannten Slugs404. Insgesamt49 HTTP-Ziele.
+- Live-Sitemap92 eindeutige URLs: exakt10 neue kanonische Einträge, keine der82 vorherigen entfernt.
+- Ergebnis:6 neue Blogs und4 neue Ratgeber, alle10 bestätigt live. Keine Google-Indexierung oder GSC-Sitemap-Einreichung bestätigt.
