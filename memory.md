@@ -88,3 +88,4 @@
 - Finale Wochenanalyse24.10.–20.11. gegen26.09.–23.10., drei Monate21.08.–20.11.:11 Seitenklicks gegenüber0,3386 gegenüber26 Seiten-Impressionen. Querydaten anonymisierungsbedingt nicht gleich. Nächste reguläre Wochenanalyse frühestens30.11.; keine Umsatzableitung.
 - OpenSEO-SERP3/3 INSUFFICIENT_CREDITS; keine weiteren kostenpflichtigen Versuche. Amtliche Recherche ergänzt. Keine GSC-Sitemap-Verwaltung im verfügbaren Werkzeugumfang.
 - Build, gezieltes Lint, Editorial-Smoke10/50 HTTP-Ziele und Gesamt-Smoke64 Seiten bestanden. Sitemap automatisch62→72, +10/-0. Alte Inhalte und Daten erhalten, gezielte Rücklinks ergänzt. Kein Browser. Veröffentlichungsnachweis folgt nach Push.
+- Live-Abschluss23.11. bestätigt: Content-Commit ad5c38eec113a18cd25a128e0ef0c51273f0fb03, Vercel success, öffentlicher Editorial-Smoke10/50 bestanden. Sitemap72 eindeutig, +10/-0. OpenSEO-Rechercheprotokoll ergänzt. Keine Indexierungszusage.

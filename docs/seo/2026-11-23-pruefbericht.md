@@ -35,3 +35,12 @@ Verfügbare OpenSEO-Werkzeuge bieten keine GSC-Sitemap-Lese-/Einreichungsoperati
 ## Veröffentlichung
 
 Veröffentlichung erst nach abschließendem main-Abgleich; danach Deploymentstatus und öffentliche HTTP-Seiten/Sitemap separat prüfen. Dieser Abschnitt ist noch kein Live-Nachweis.
+
+## Bestätigter Veröffentlichungsabschluss
+
+- Vor Veröffentlichung main erneut abgeglichen: c3c15e720fa209610b86895b98bc4d2a629ed34b unverändert. Atomarer Ref-Update mit erwartetem Vorgänger, kein Force-Push.
+- Content-Commit: https://github.com/blackmarketing2026/http-kennzeichen-lieferung.de/commit/ad5c38eec113a18cd25a128e0ef0c51273f0fb03 . Alle sieben veröffentlichten Dateien anschließend bytegleich mit dem lokal geprüften Stand verifiziert.
+- Vercel-Status success: https://vercel.com/stefve/http-kennzeichen-lieferung-de/D9oHzmsPZ5ARGYovCtpUhLkdzKZ3 . Push und bestätigtes Deployment getrennt geprüft.
+- Öffentlicher Editorial-Smoke auf https://www.kennzeichen-lieferung.de/ erfolgreich: alle zehn neuen Seiten200, erwartete Titel/Inhalte, Metadaten, Canonicals, Indexierbarkeit, BlogPosting/Breadcrumbs, interne Links, Übersichten, Bestelleinstiege und unbekannte Slugs404;50 HTTP-Ziele.
+- Öffentliche Sitemap als XML geprüft:72 eindeutige URLs, alle zehn neuen genau einmal, keine der62 vorherigen entfernt. Keine Google-Indexierung oder GSC-Einreichung behauptet.
+- OpenSEO-Rechercheprotokoll dieses Projekts ergänzt. Andere Projekte und Automationen unverändert.
