@@ -18,3 +18,10 @@ Wochenanalyse vom heutigen früheren Durchlauf wiederverwendet; nächste Analyse
 
 ## Veröffentlichung
 Vor Push aktuellen main erneut geprüft: unverändert, ungeschützt. Veröffentlichung und öffentliche HTTP-Prüfung stehen zum Zeitpunkt dieses Inhaltscommits noch aus; Nachtrag folgt nach erfolgreicher Kontrolle.
+
+### Bestätigter Produktionsnachtrag, 23.11.2026, ca. 23:13 MEZ
+- Inhaltscommit ca251b04368631a306a703df9294c88aa7465c85 direkt per Fast-Forward mit erwarteter main-SHA veröffentlicht, kein Force-Push. Alle sechs übertragenen Dateien anschließend per git fetch/git show bytegenau mit dem geprüften Arbeitsstand verglichen.
+- Vercel-Commitstatus success: https://vercel.com/stefve/http-kennzeichen-lieferung-de/DhMtJKU8hJ8iohmczpTu4hXEd6Fm.
+- Öffentlicher Editorial-Smoke gegen https://www.kennzeichen-lieferung.de erfolgreich: alle zehn neuen URLs HTTP 200 mit erwartetem Titel/Inhalt, Canonical, Metadaten, JSON-LD, internen Links, Übersichtsverlinkung und 404 für unbekannte Slugs. Insgesamt 52 HTTP-Ziele geprüft.
+- Öffentliche Sitemap bestätigt: 82 eindeutige URLs; exakt zehn neue Einträge, keine der 72 vorherigen URLs entfernt.
+- Somit 6 neue Blogs und 4 neue Ratgeber, alle 10 bestätigt live. Keine Google-Indexierung oder GSC-Sitemap-Einreichung behauptet.

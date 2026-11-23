@@ -95,3 +95,4 @@
 - Wochenanalyse vom Morgen wiederverwendet; neue OpenSEO-SERPs weiterhin INSUFFICIENT_CREDITS. Keine Volumenannahmen. Nächste Wochenanalyse frühestens 30.11.
 - Build, gezieltes Lint, Editorial-Smoke (10/52 HTTP-Ziele), SEO-Smoke (74 Seiten) und Sitemapvergleich (72→82, +10/-0) bestanden. Keine Browserprüfung gemäß Auftrag.
 - Push und Live-Nachweis werden im Abend-Prüfbericht ergänzt. Themen dieses Durchlaufs künftig nicht erneut anlegen.
+- Produktionsnachweis Abend: Inhaltscommit ca251b04368631a306a703df9294c88aa7465c85, Vercel success. Alle zehn neuen Seiten und ihre internen Ziele per öffentlichem Editorial-Smoke bestanden; Live-Sitemap 82 eindeutige URLs (+10/-0). Alle 10 bestätigt live, keine Indexierungsbehauptung.
