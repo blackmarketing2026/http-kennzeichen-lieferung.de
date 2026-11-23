@@ -16,6 +16,688 @@ export type BlogArticle = {
 
 export const blogArticles: BlogArticle[] = [
 {
+  "slug": "evb-nummer-kennzeichenbestellung",
+  "title": "eVB und Kennzeichenbestellung: Welche Nummer gehört wohin?",
+  "description": "Versicherungscode, Wunschkennzeichen und Bestellnummer haben verschiedene Aufgaben. So bereitest du die Schilderbestellung ohne Verwechslungen vor.",
+  "category": "Zulassung vorbereiten",
+  "publishedAt": "2026-11-23",
+  "intro": [
+    "Deine Versicherung schickt dir eine eVB. Gleichzeitig hast du eine Wunschkombination reserviert. Beide Angaben brauchst du für unterschiedliche Schritte. Auf das Kennzeichenschild gehört die bestätigte Kombination der Zulassungsbehörde, nicht der Versicherungscode."
+  ],
+  "takeaway": "Die eVB weist die Kfz-Haftpflichtversicherung im Zulassungsverfahren nach. Für die Schilderbestellung verwendest du die bestätigte Kennzeichenkombination. Eine eVB reserviert keine Nummer und ersetzt keine Zulassung.",
+  "sections": [
+    {
+      "id": "evb",
+      "title": "Was die eVB tatsächlich erledigt",
+      "paragraphs": [
+        "Die elektronische Versicherungsbestätigung kommt von deiner Versicherung. Bei der eVB zum Abruf erhältst du einen siebenstelligen Code aus Buchstaben und Zahlen. Damit kann die Zulassungsbehörde die hinterlegten Versicherungsdaten abrufen.",
+        "§ 49 FZV regelt diesen Versicherungsnachweis. Er kann auch Angaben zur vorgesehenen Kennzeichenart und bei einer Saison zum maximalen Zeitraum enthalten. Melde der Versicherung deshalb, welches Fahrzeug du wie zulassen möchtest. Eine eVB für einen anderen Vorgang solltest du nicht ungeprüft verwenden."
+      ]
+    },
+    {
+      "id": "reservierung",
+      "title": "Die Reservierung betrifft deine Wunschkombination",
+      "paragraphs": [
+        "Die Wunschkennzeichenreservierung läuft über die zuständige Zulassungsbehörde. Ihre Bestätigung kann zusätzlich eine Reservierungsnummer oder PIN enthalten. Auch diese PIN wird nicht auf das Schild geprägt.",
+        "Prüfe auf der Bestätigung die eigentliche Kombination, den Namen und die Frist. Halte die Vorgänge getrennt: Die Versicherung bestätigt den Schutz, die Behörde entscheidet über die Zuteilung. Ein verfügbares Kennzeichen im Suchfeld ist noch keine abgeschlossene Zulassung."
+      ]
+    },
+    {
+      "id": "bestellen",
+      "title": "Was du im Konfigurator eingibst",
+      "paragraphs": [
+        "Übertrage Ortskürzel, Buchstaben und Ziffern aus der bestätigten Kombination. Wähle die passende Ausführung und Anzahl. Zusätze wie E oder H und ein Saisonzeitraum müssen zum behördlichen Vorgang passen.",
+        "Der Schilderkonfigurator ist kein Versicherungsantrag. Trage den eVB-Code weder in das Nummernfeld noch als Wunschtext ein. Bewahre ihn für das Zulassungsverfahren auf. Auch eine erfolgreiche Zahlung im Shop stellt noch keine amtlichen Plaketten bereit."
+      ]
+    },
+    {
+      "id": "fehler",
+      "title": "Wenn die eVB bei der Zulassung nicht passt",
+      "paragraphs": [
+        "Prüfe gemeinsam mit der Versicherung, ob Halterdaten, Fahrzeugart und geplanter Vorgang richtig hinterlegt sind. Frage dort auch nach der konkreten Gültigkeit. Eine pauschale Frist für jede Versicherung wäre unzuverlässig.",
+        "Ändere bei einem eVB-Problem nicht vorschnell deine Schilderbestellung. Solange die bestätigte Kennzeichenkombination gleich bleibt, ist ein korrigierter Versicherungscode kein neuer Schildaufdruck. Ändert die Behörde dagegen die Kombination, musst du die Prägung erneut abgleichen."
+      ]
+    },
+    {
+      "id": "check",
+      "title": "Vor der Bestellung kurz abgleichen",
+      "paragraphs": [
+        "Lege Reservierungsbestätigung und Zulassungsunterlagen nebeneinander. Lies die Vorschau Zeichen für Zeichen. So fällt auf, wenn du versehentlich die Reservierungs-PIN oder eine Ziffer aus einem anderen Dokument übernommen hast.",
+        "Bestelle erst, wenn Kombination und Ausführung für deinen Vorgang geklärt sind. Die für die Zulassung erforderliche Versicherung und die amtlichen Plaketten organisierst du separat."
+      ],
+      "items": [
+        "eVB für das richtige Fahrzeug und den richtigen Vorgang bereithalten.",
+        "Bestätigte Kennzeichenkombination als Grundlage nehmen.",
+        "Maße, Kennzeichenart und Stückzahl prüfen.",
+        "Bestellbestätigung nach dem Kauf noch einmal vergleichen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 49: Versicherungsnachweis",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__49.html"
+    },
+    {
+      "label": "Landkreis Lichtenfels: elektronische Versicherungsbestätigung",
+      "href": "https://www.lkr-lif.de/landratsamt/verkehr/zulassungsstelle/1909.Elektronische-Versicherungsbestaetigung-eVB.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-anmelden-unterlagen",
+    "eu-import-deutsche-kennzeichen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Schilder mit bestätigter Kombination bestellen"
+    },
+    {
+      "href": "/blog/kennzeichen-o-oder-null",
+      "label": "Buchstaben und Ziffern richtig übernehmen"
+    }
+  ]
+},
+{
+  "slug": "kennzeichen-ausland-d-schild",
+  "title": "Mit dem Auto ins Ausland: Reicht das D im Euro-Kennzeichen?",
+  "description": "Wann das integrierte D-Zeichen innerhalb der EU genügt und was du für Nicht-EU-Länder und Transitstrecken vor der Reise prüfen solltest.",
+  "category": "Kennzeichen unterwegs",
+  "publishedAt": "2026-11-23",
+  "intro": [
+    "Vor der Autofahrt ins Ausland taucht oft dieselbe Frage auf: Muss noch ein ovales D-Schild ans Heck? Bei einem vorschriftsmäßigen Euro-Kennzeichen gibt es innerhalb der EU eine klare Anerkennungsregel. Für die komplette Reise zählt aber auch deine Strecke."
+  ],
+  "takeaway": "Innerhalb der EU wird das vorgeschriebene Länderzeichen im Euro-Kennzeichen anerkannt. Für Ziele und Durchfahrten außerhalb der EU prüfst du die dortigen Vorgaben gesondert. Das D muss erkennbar bleiben.",
+  "sections": [
+    {
+      "id": "eu",
+      "title": "Die Regel für Fahrten innerhalb der EU",
+      "paragraphs": [
+        "Die Verordnung (EG) Nr. 2411/98 regelt die Anerkennung des Zulassungsstaats am linken Kennzeichenrand. Sie gilt für in einem Mitgliedstaat zugelassene Fahrzeuge im Verkehr innerhalb der EU.",
+        "Ein entsprechend gestaltetes Euro-Kennzeichen mit D erfüllt dort die Funktion des Länderzeichens. Ein zusätzliches ovales D ist dafür nicht erforderlich. Die Regel betrifft das Erkennungszeichen des Zulassungsstaats; sie ersetzt weder Fahrzeugpapiere noch sonstige Reisevoraussetzungen."
+      ]
+    },
+    {
+      "id": "route",
+      "title": "Ziel und Durchfahrtsländer getrennt prüfen",
+      "paragraphs": [
+        "Europa und EU sind nicht deckungsgleich. Auch eine Fahrt zwischen zwei EU-Ländern kann durch ein Nicht-EU-Land führen. Leite aus der EU-Regel deshalb keine pauschale Zusage für jede europäische Route ab.",
+        "Notiere alle Durchfahrtsländer. Prüfe vor Abfahrt die aktuellen Fahrzeug- und Einreiseinformationen der jeweiligen Behörden oder offiziellen Ländervertretungen. Suche ausdrücklich nach dem Länderkennzeichen für in Deutschland zugelassene Fahrzeuge. Eine alte Packliste kann die aktuelle Auskunft nicht ersetzen."
+      ]
+    },
+    {
+      "id": "alt",
+      "title": "Bei einem alten Schild ohne Euro-Feld",
+      "paragraphs": [
+        "Fehlt das integrierte Länderzeichen, greift diese Anerkennungsregel für dein Schild nicht. Kläre für die geplante Fahrt, welches gesonderte Unterscheidungszeichen erforderlich ist.",
+        "Klebe nicht selbst einen blauen Streifen auf das amtliche Schild, um ein Euro-Kennzeichen nachzubauen. Wenn du auf neue Schilder wechseln möchtest, stimme den Austausch und die erforderlichen amtlichen Plaketten mit der Zulassungsstelle ab. Ein reiner Onlinekauf erledigt das nicht."
+      ]
+    },
+    {
+      "id": "sichtbar",
+      "title": "Das Länderzeichen muss sichtbar bleiben",
+      "paragraphs": [
+        "Das vorgeschriebene Euro-Feld hat einen blauen Hintergrund, zwölf gelbe Sterne und das Länderzeichen. Eine schwarze Dekorfolie verändert diese Ausführung. Auch ein Urlaubsaufkleber gehört nicht über das D.",
+        "Prüfe vor dem Beladen das hintere Schild und seine Beleuchtung. Ein Koffer oder Fahrradträger kann die Sicht verdecken. Für einen verdeckten Kennzeichenbereich gelten eigene Anforderungen; der verlinkte Fahrradträgerartikel erklärt das Wiederholungsschild."
+      ]
+    },
+    {
+      "id": "abfahrt",
+      "title": "Deine kurze Abfahrtskontrolle",
+      "paragraphs": [
+        "Ein gut erhaltenes, richtig montiertes Schild muss allein wegen einer EU-Reise nicht neu bestellt werden. Ist es beschädigt oder schlecht lesbar, kümmere dich vor der Abfahrt um einen ordentlichen Ersatz samt behördlicher Abstimmung."
+      ],
+      "items": [
+        "Alle Länder auf Hin- und Rückfahrt erfassen.",
+        "Vorhandenes Länderzeichen und Schildzustand prüfen.",
+        "Vorgaben außerhalb der EU aktuell nachlesen.",
+        "Kennzeichen nach dem Beladen auf freie Sicht prüfen.",
+        "Benötigten Schildertausch mit Zeit für die Zulassungsstelle planen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "EU-Verordnung 2411/98: Anerkennung des Länderzeichens",
+      "href": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:31998R2411"
+    },
+    {
+      "label": "FZV § 12: Ausgestaltung und Sichtbarkeit",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichengroessen",
+    "kennzeichen-beschaedigt-ersetzen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Passende Ersatzschilder konfigurieren"
+    },
+    {
+      "href": "/blog/kennzeichen-eu-feld-ueberkleben",
+      "label": "Warum das Euro-Feld unverändert bleiben muss"
+    },
+    {
+      "href": "/blog/fahrradtraeger-kennzeichen-ohne-stempel",
+      "label": "Kennzeichen am Fahrradträger"
+    }
+  ]
+},
+{
+  "slug": "kennzeichen-eu-feld-ueberkleben",
+  "title": "Euro-Feld überkleben: Ist ein schwarzer Kennzeichen-Sticker erlaubt?",
+  "description": "Das blaue Euro-Feld ist vorgeschrieben. Warum ein schwarzer Sticker keine Carbon-Ausführung ist und was du bei einem beklebten Schild tun solltest.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-23",
+  "intro": [
+    "Ein schwarzer Streifen am linken Kennzeichenrand soll oft besser zum Auto passen. Das Euro-Feld ist jedoch kein frei gestaltbarer Teil des Schilds. Auch wenn die Buchstaben deiner Kombination sichtbar bleiben, ist eine veränderte Länderkennung ein eigenes Problem."
+  ],
+  "takeaway": "Das vorgeschriebene blaue Euro-Feld darfst du nicht durch eine schwarze Dekorfolie ersetzen. Carbon-Optik der angebotenen Beschriftung ist etwas anderes. Verändere weder das Länderzeichen noch amtliche Plaketten.",
+  "sections": [
+    {
+      "id": "vorgabe",
+      "title": "Die Farbe gehört zur vorgeschriebenen Ausführung",
+      "paragraphs": [
+        "§ 12 FZV verlangt die Ausgestaltung nach Anlage 4. Diese verweist für das Länderzeichen auf die EU-Verordnung 2411/98. Dort sind ein blauer reflektierender Hintergrund, zwölf gelbe Sterne und das Länderzeichen festgelegt.",
+        "Das D ist also nicht bloß eine Dekoration. Ein schwarzer Hintergrund entspricht dieser vorgeschriebenen Gestaltung nicht. Dass eine Folie passend zugeschnitten ist oder im Zubehörhandel angeboten wird, macht sie nicht zu einer zulässigen Änderung für den Straßenverkehr."
+      ]
+    },
+    {
+      "id": "folie",
+      "title": "Lesbare Buchstaben allein reichen nicht",
+      "paragraphs": [
+        "Die FZV untersagt zusätzlich unzulässige Abdeckungen wie Folien. Für ein ordnungsgemäßes Schild zählen außerdem Reflexion, Maße und Ausführung. Du kannst die Anforderungen nicht auf die Frage reduzieren, ob ein Mensch die Nummer noch lesen kann.",
+        "Überklebe auch keine Plaketten, Ränder oder Prüfkennzeichnungen. Eine transparente Folie ist ebenfalls keine allgemeine Erlaubnis, die Schildfläche abzudecken. Für vorgesehene technische Sonderbauarten gelten eigene Anforderungen; ein selbst geklebter Sticker ist damit nicht gleichzusetzen."
+      ]
+    },
+    {
+      "id": "carbon",
+      "title": "Carbon-Optik lässt das Euro-Feld bestehen",
+      "paragraphs": [
+        "Im Shop bezeichnet Carbon eine angebotene Oberfläche der geprägten Aluminiumschilder. Das ist keine Bestellung eines schwarzen Euro-Felds. Wähle die Ausführung im Konfigurator, statt ein vorhandenes Schild selbst mit Folie umzugestalten.",
+        "Der verlinkte Materialvergleich erklärt zusätzlich den Unterschied zu 3D-Kunststoffkennzeichen. Entscheidend für deinen Kauf sind das konkrete Produkt und die passende Kennzeichenart, nicht ein besonders auffälliges Beispielbild aus sozialen Medien."
+      ]
+    },
+    {
+      "id": "vorhanden",
+      "title": "Wenn schon ein Sticker auf dem Schild klebt",
+      "paragraphs": [
+        "Prüfe, ob die ursprüngliche Oberfläche ohne Beschädigung wiederhergestellt werden kann. Arbeite nicht mit aggressiven Lösemitteln oder scharfen Werkzeugen an der reflektierenden Fläche. Beschädigte Beschichtung und unleserliche Zeichen sind kein guter Tausch gegen einen entfernten Sticker.",
+        "Ist das Schild beschädigt oder eine amtliche Plakette betroffen, stimme das weitere Vorgehen mit der Zulassungsstelle ab. Amtliche Siegel nicht abziehen und auf ein anderes Blech kleben. Bei Bedarf lässt du die bestätigte Kombination neu prägen und erledigst die amtliche Kennzeichnung separat."
+      ]
+    },
+    {
+      "id": "kauf",
+      "title": "Vor dem Kauf einer anderen Optik",
+      "paragraphs": [
+        "Ein sauberer Wechsel beginnt mit einer passenden Produktausführung. Prüfe in der Vorschau die unveränderte Kombination und die Kennzeichenart. Für den Schildertausch am zugelassenen Auto gehört die Abstimmung der Plaketten dazu."
+      ],
+      "items": [
+        "Euro-Feld in vorgeschriebener Gestaltung belassen.",
+        "Keine Dekorfolie über die Schildfläche kleben.",
+        "Bei Carbon Material und Oberfläche des Produkts lesen.",
+        "Ersatz bei beschädigter Reflexion oder Plaketten abstimmen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 12: Schildausführung und Abdeckungen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "FZV Anlage 4: Euro-Feld",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/anlage_4.html"
+    },
+    {
+      "label": "EU-Verordnung 2411/98: Farben des Länderzeichens",
+      "href": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:31998R2411"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-beschaedigt-ersetzen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/carbon-kennzeichen",
+      "label": "Angebotene Carbon-Ausführung ansehen"
+    },
+    {
+      "href": "/blog/carbon-3d-kennzeichen-unterschied",
+      "label": "Carbon-Optik und 3D unterscheiden"
+    },
+    {
+      "href": "/blog/kennzeichen-ausland-d-schild",
+      "label": "Länderzeichen bei Auslandsfahrten"
+    }
+  ]
+},
+{
+  "slug": "motorrad-kennzeichen-winkel",
+  "title": "Motorrad-Kennzeichen: Welcher Winkel ist beim Heckumbau wichtig?",
+  "description": "Beim kurzen Heck zählen Neigung, Sichtbarkeit und Beleuchtung gemeinsam. So prüfst du den Kennzeichenhalter und wählst das passende Schildformat.",
+  "category": "Motorrad und Montage",
+  "publishedAt": "2026-11-23",
+  "intro": [
+    "Ein kurzer Kennzeichenhalter verändert die Optik des Motorrads. Damit das Schild richtig sitzt, reicht ein Blick von der Seite nicht aus. Der Winkel ist nur ein Teil der Anforderungen. Auch Sichtachsen, Beleuchtung und die Unterlagen zum Umbau müssen passen."
+  ],
+  "takeaway": "Miss die Neigung gegenüber der Senkrechten, nicht gegenüber der Straße. Für die einschlägigen L-Fahrzeuge nennt EU 44/2014 in Anhang XIV einen Bereich von −15° bis +30°. Daraus allein folgt keine Freigabe deines Heckumbaus.",
+  "sections": [
+    {
+      "id": "grundlage",
+      "title": "Zuerst Fahrzeug und Halter zuordnen",
+      "paragraphs": [
+        "§ 12 Absatz 6 FZV verweist für entsprechende Fahrzeuge der L-Klasse auf Anhang XIV der Verordnung (EU) Nr. 44/2014. Dort sind Anforderungen an die Anbringungsstelle des hinteren Kennzeichens geregelt.",
+        "Prüfe die Genehmigung deines Motorrads und die Unterlagen des Halters. Insbesondere bei älteren Fahrzeugen, ungewöhnlichen Halterungen oder einem seitlichen Umbau sollte eine Prüfstelle die konkrete Ausführung beurteilen. Eine allgemeine Gradzahl ersetzt weder die passende Teileunterlage noch eine gegebenenfalls erforderliche Abnahme."
+      ]
+    },
+    {
+      "id": "neigung",
+      "title": "Die Senkrechte ist der Bezug",
+      "paragraphs": [
+        "Der genannte Bereich von −15° bis +30° steht in Anhang XIV Nummer 1.5.1.3.1. Er bezieht sich auf die Senkrechte. Ein Schild, das nur 30 Grad über der Fahrbahn liegt, ist damit nicht automatisch richtig ausgerichtet.",
+        "Eine grobe Messung kann einen offensichtlichen Fehler zeigen. Sie ist aber keine technische Freigabe. Prüfe die Richtung der Neigung und die vorgesehene Einbaulage anhand der Fahrzeug- und Halterunterlagen. Verstelle einen Halter nicht nur für einen Prüftermin."
+      ]
+    },
+    {
+      "id": "sicht",
+      "title": "Winkel, Sicht und Licht gehören zusammen",
+      "paragraphs": [
+        "Ein korrekt geneigtes Schild kann trotzdem durch Reifen, Gepäck oder Teile des Hecks verdeckt sein. Die EU-Vorgaben enthalten deshalb auch Anforderungen an Höhe und geometrische Sichtbarkeit.",
+        "Die Kennzeichenbeleuchtung muss zur Fahrzeugausführung passen. Nach einem Heckumbau kann die alte Leuchte anders auf das Schild treffen. Kontrolliere die gesamte Fläche und achte darauf, dass Halter, Schrauben und Kabel nicht über Beschriftung oder Plaketten laufen. Den Beleuchtungstausch erklärt der verlinkte Artikel ausführlicher."
+      ]
+    },
+    {
+      "id": "montage",
+      "title": "Vor der ersten Fahrt systematisch prüfen",
+      "paragraphs": [
+        "Lass bei einem Umbau auch Freigängigkeit und Befestigung beurteilen. Ein Abstand im unbelasteten Stand sagt noch nicht, ob bei Bewegung genug Platz bleibt. Das Schild darf weder als Anschlag dienen noch den Reifen berühren."
+      ],
+      "items": [
+        "Halter ausdrücklich für dein Modell und Baujahr vorgesehen?",
+        "Unterlagen zu Einbau und möglicher Abnahme vorhanden?",
+        "Neigung gegenüber der Senkrechten geprüft?",
+        "Sichtbarkeit und Beleuchtung vollständig gegeben?",
+        "Befestigung und Freigängigkeit fachlich kontrolliert?"
+      ]
+    },
+    {
+      "id": "format",
+      "title": "Das passende Schild für den passenden Halter",
+      "paragraphs": [
+        "Der Motorradkonfigurator bietet aktuell zweizeilige Schilder in 180 × 200 mm an. Miss vor der Bestellung und kläre, ob die bestätigte Kombination auf diese Ausführung passt. Ein schmaleres Schild macht einen ungeeigneten Halter nicht automatisch zulässig.",
+        "Bestelle nur die benötigte Anzahl. Für ein zugelassenes Motorrad ist das hintere Schild vorgesehen; ein zusätzlich gekauftes Ersatzblech trägt nicht automatisch die nötigen amtlichen Plaketten. Wenn du wegen eines beschädigten Schilds ersetzt, kläre deren Erneuerung vorab."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 12: Anbringung, Sichtbarkeit und Beleuchtung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "EU-Verordnung 44/2014, Anhang XIV: Kennzeichen-Anbringungsstelle",
+      "href": "https://eur-lex.europa.eu/legal-content/DE/ALL/?uri=celex:32014R0044"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichengroessen",
+    "kennzeichen-beschaedigt-ersetzen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/motorradkennzeichen-bestellen",
+      "label": "Motorradschild in 180 × 200 mm konfigurieren"
+    },
+    {
+      "href": "/blog/kennzeichenbeleuchtung-pruefen",
+      "label": "Kennzeichenbeleuchtung prüfen"
+    }
+  ]
+},
+{
+  "slug": "saisonkennzeichen-hu-ausserhalb-saison",
+  "title": "Saisonkennzeichen: Was gilt, wenn die HU außerhalb der Saison fällig ist?",
+  "description": "Die HU fällt in die Winterpause? Erfahre, wann die Prüfung nachzuholen ist, wie du den Termin planst und wann kein neues Schild nötig ist.",
+  "category": "Saison und Termine",
+  "publishedAt": "2026-11-23",
+  "intro": [
+    "Dein Saisonfahrzeug darf von April bis Oktober fahren, die HU-Plakette zeigt aber Januar. Musst du mitten in der Pause zur Prüfstelle? Für diese Konstellation gibt es eine eigene Regel. Entscheidend ist, ob die HU tatsächlich außerhalb des Betriebszeitraums fällig wird."
+  ],
+  "takeaway": "Fällt die HU außerhalb der eingetragenen Saison an, lässt du sie im ersten Monat des nächsten Betriebszeitraums durchführen. Eine bereits während der Saison überfällige HU wird dadurch nicht automatisch verschoben.",
+  "sections": [
+    {
+      "id": "regel",
+      "title": "Der erste Betriebsmonat ist die Frist",
+      "paragraphs": [
+        "Anlage VIII Nummer 2.6 StVZO regelt den Fall ausdrücklich: Wäre die Untersuchung außerhalb des Betriebszeitraums durchzuführen, gehört sie in den ersten Monat des nächsten Betriebszeitraums.",
+        "Die Regel gilt nicht einfach für jedes Fahrzeug, das im Winter wenig gefahren wird. Maßgeblich ist das zugeteilte Saisonkennzeichen. Eine normale Ganzjahreszulassung wird durch Abstellen in der Garage nicht zur Saisonzulassung."
+      ]
+    },
+    {
+      "id": "beispiele",
+      "title": "Zwei Fälle im direkten Vergleich",
+      "paragraphs": [
+        "Beispiel 1: Saison 04–10, HU fällig im Januar. Januar liegt außerhalb der Saison. Du lässt die HU im April, dem ersten Monat des nächsten Betriebszeitraums, durchführen.",
+        "Beispiel 2: Saison 04–10, HU fällig im September. September liegt innerhalb der Saison. Du kannst die Prüfung nicht mit Hinweis auf die anschließende Winterpause bis April verschieben. Ist dieser Termin bereits verpasst, kläre den weiteren Ablauf mit der Prüfstelle."
+      ]
+    },
+    {
+      "id": "fahrt",
+      "title": "Ein Termin erlaubt keine Fahrt außerhalb der Saison",
+      "paragraphs": [
+        "§ 10 Absatz 3 FZV begrenzt den Betrieb und das Abstellen auf öffentlichen Straßen auf den eingetragenen Zeitraum. Eine Terminbestätigung der Prüfstelle hebt diese Begrenzung nicht auf.",
+        "Plane die Fahrt zur HU deshalb innerhalb der Saison. Soll das Fahrzeug vorher untersucht oder repariert werden, kläre eine rechtlich passende Transportlösung. Fahre nicht allein deshalb los, weil das Ziel eine Werkstatt oder Prüfstelle ist."
+      ]
+    },
+    {
+      "id": "plan",
+      "title": "So vermeidest du Engpässe zum Saisonstart",
+      "paragraphs": [
+        "Reserviere früh einen Termin im ersten Betriebsmonat. Prüfe vorab HU-Bericht und Fahrzeugpapiere. Nach längerer Standzeit lohnt sich zudem die Kontrolle von Reifen, Bremsen, Batterie, Beleuchtung und Kennzeichenbefestigung.",
+        "Besteht ein technischer Mangel, macht die Saisonregel das Fahrzeug nicht verkehrssicher. Kläre Reparatur und Transport, bevor du eine Fahrt planst. Die zeitliche HU-Regel und der tatsächliche Fahrzeugzustand sind zwei verschiedene Fragen."
+      ]
+    },
+    {
+      "id": "schild",
+      "title": "Brauchst du wegen des HU-Termins neue Schilder?",
+      "paragraphs": [
+        "Nein, allein wegen dieses Termins musst du weder die Saisonmonate ändern noch neue Bleche bestellen. Bei bestandener HU wird die Prüfplakette nach dem vorgesehenen Verfahren erneuert. Sie ist nicht Bestandteil einer Schilderbestellung.",
+        "Möchtest du die Saison wirklich verlängern, ist das ein eigener Zulassungsvorgang. Der verlinkte Ratgeber erklärt die Änderung. Erst bei bestätigtem neuem Zeitraum oder nötigem Schilderersatz wählst du die passende Ausführung im Shop."
+      ],
+      "items": [
+        "Saisonmonate mit dem HU-Monat vergleichen.",
+        "Termin im ersten Betriebsmonat einplanen, wenn die Sonderregel greift.",
+        "Keine Fahrt außerhalb der Saison aus dem HU-Termin ableiten.",
+        "Schilder nur bei tatsächlichem Änderungs- oder Ersatzbedarf bestellen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "StVZO Anlage VIII, Nummer 2.6: HU bei Saisonkennzeichen",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/anlage_viii.html"
+    },
+    {
+      "label": "FZV § 10 Absatz 3: Betriebszeitraum",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__10.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "saisonkennzeichen-zeitraum-aendern",
+    "auto-ohne-tuev-anmelden"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/saisonkennzeichen",
+      "label": "Saisonschilder für einen bestätigten Zeitraum"
+    },
+    {
+      "href": "/blog/hu-plakette-lesen",
+      "label": "HU-Plakette richtig lesen"
+    }
+  ]
+},
+{
+  "slug": "07-oder-h-kennzeichen",
+  "title": "07 oder H-Kennzeichen: Welche Nutzung passt zu deinem Oldtimer?",
+  "description": "H-Zulassung und rotes 07-Kennzeichen erlauben unterschiedliche Fahrten. Vergleiche den Einsatzzweck, bevor du Schilder für deinen Oldtimer bestellst.",
+  "category": "Oldtimer",
+  "publishedAt": "2026-11-23",
+  "intro": [
+    "Du möchtest deinen Oldtimer gelegentlich im Alltag fahren oder nur zu Veranstaltungen bewegen? Diese Entscheidung ist wichtiger als die Farbe der Schrift. Ein rotes 07-Kennzeichen ist kein frei nutzbarer Ersatz für ein H-Kennzeichen."
+  ],
+  "takeaway": "Das H-Kennzeichen gehört zur Zulassung eines einzelnen Oldtimers. Das rote 07-Kennzeichen ist auf bestimmte Fahrtzwecke begrenzt. Für gewöhnliche Alltagsfahrten ist die 07-Regelung nicht gedacht.",
+  "sections": [
+    {
+      "id": "h",
+      "title": "H: Zulassung des einzelnen Fahrzeugs",
+      "paragraphs": [
+        "§ 10 Absatz 1 FZV regelt das Oldtimerkennzeichen mit dem Zusatz H. Anders als die rote 07-Regelung knüpft diese Vorschrift die Nutzung nicht an eine einzelne Oldtimerveranstaltung oder Reparaturfahrt.",
+        "Die allgemeinen Verkehrsregeln und die Bedingungen deines Versicherungsvertrags gelten trotzdem. Manche Tarife begrenzen die Nutzung oder Fahrleistung. Kläre daher getrennt, was die Zulassung erlaubt und was du mit deinem Versicherer vereinbart hast. Die Voraussetzungen für das H-Gutachten findest du im verlinkten Fachartikel."
+      ]
+    },
+    {
+      "id": "07",
+      "title": "07: Der Zweck der Fahrt zählt",
+      "paragraphs": [
+        "§ 43 FZV nennt Veranstaltungen zur Darstellung von Oldtimern und zur Pflege des kraftfahrzeugtechnischen Kulturguts einschließlich der An- und Abfahrt. Hinzu kommen dort genannte Probe-, Überführungs-, Reparatur- und Wartungsfahrten.",
+        "Fahrten zum Tanken und zur Außenreinigung sind in der Vorschrift anlässlich der Veranstaltungsfahrt genannt. Daraus entsteht keine allgemeine Erlaubnis für beliebige Ausflüge oder die tägliche Fahrt zur Arbeit. Entscheidend ist der konkrete zulässige Zweck."
+      ]
+    },
+    {
+      "id": "unterlagen",
+      "title": "Fahrzeugscheinheft und zugeordnete Fahrzeuge",
+      "paragraphs": [
+        "Für das rote Oldtimerkennzeichen wird ein Fahrzeugscheinheft ausgegeben. Es ist bei jeder Fahrt mitzuführen und auf Verlangen vorzuzeigen. Das Kennzeichen darf nur an einem Fahrzeug verwendet werden, für das es ausgegeben wurde.",
+        "Die entsprechende Anwendung des § 41 FZV bringt weitere Voraussetzungen und Aufzeichnungspflichten mit sich. Lass dir von der zuständigen Behörde erklären, welche Nachweise und Aufzeichnungen sie für deinen Fall benötigt. Ein beliebiges historisches Fahrzeug wird nicht allein durch Anschrauben eines vorhandenen 07-Schilds erfasst."
+      ]
+    },
+    {
+      "id": "entscheidung",
+      "title": "Diese Fragen helfen bei der Auswahl",
+      "paragraphs": [
+        "Beginne mit deinen tatsächlichen Fahrten. Schreibe für die kommende Saison einige typische Anlässe auf. So erkennst du früh, ob eine eingeschränkte Fahrtzweckregel überhaupt zu deinem Vorhaben passt."
+      ],
+      "items": [
+        "Willst du das Auto auch für gewöhnliche Alltagswege nutzen?",
+        "Geht es überwiegend um passende Oldtimerveranstaltungen?",
+        "Welche konkreten Fahrzeuge sollen erfasst werden?",
+        "Welche Dokumentationspflichten kannst du zuverlässig erfüllen?",
+        "Passt die geplante Nutzung zum Versicherungsvertrag?"
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "Erst entscheiden, dann Schilder bestellen",
+      "paragraphs": [
+        "Dieser Shop bietet H-Kennzeichenschilder an, aber keine roten 07-Schilder. Die Bestellung eines H-Schilds ersetzt weder das erforderliche Gutachten noch die Zuteilung durch die Zulassungsbehörde.",
+        "Wenn die H-Zulassung und die Kombination geklärt sind, wählst du die passende Schilderausführung. Achte auf den Zusatz H und die bestätigten Maße. Für eine rote 07-Lösung klärst du das Verfahren direkt mit deiner Behörde; der normale Konfigurator ist dafür nicht vorgesehen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 43: rote Oldtimerkennzeichen und Fahrtzwecke",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__43.html"
+    },
+    {
+      "label": "FZV § 10 Absatz 1: H-Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__10.html"
+    },
+    {
+      "label": "FZV § 41: entsprechend geltende Voraussetzungen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__41.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-anmelden-unterlagen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/h-kennzeichen",
+      "label": "H-Kennzeichenschilder konfigurieren"
+    },
+    {
+      "href": "/blog/h-kennzeichen-voraussetzungen",
+      "label": "Voraussetzungen für das H-Kennzeichen"
+    },
+    {
+      "href": "/blog/h-saisonkennzeichen",
+      "label": "H-Kennzeichen mit Saisonzeitraum"
+    }
+  ]
+},
+{
+  "slug": "anhaenger-100-plakette-kennzeichen",
+  "title": "Anhänger: Tempo-100-Plakette und Kennzeichen sind zwei verschiedene Dinge",
+  "description": "Ein 100-Aufkleber ersetzt keine Genehmigung und kein Kennzeichen. Was für die Kombination zählt und welches Schild du im Shop bestellen kannst.",
+  "category": "Anhänger",
+  "publishedAt": "2026-11-23",
+  "intro": [
+    "Am Anhänger können sowohl ein amtliches Kennzeichenschild als auch eine runde 100-Plakette sitzen. Beide haben unterschiedliche Aufgaben. Wenn du einen Anhänger kaufst oder neu beschilderst, solltest du sie nicht gemeinsam als bloße Aufkleberauswahl behandeln."
+  ],
+  "takeaway": "Die Tempo-100-Regelung setzt mehr voraus als einen Aufkleber: passende Technik, die erforderlichen Nachweise und Einträge sowie eine behördlich ausgegebene, gesiegelte Plakette. Das Kennzeichenschild identifiziert den Anhänger und bleibt davon getrennt.",
+  "sections": [
+    {
+      "id": "regel",
+      "title": "Was die 100-Plakette bedeutet",
+      "paragraphs": [
+        "Die 9. Ausnahmeverordnung zur StVO erlaubt unter ihren Voraussetzungen Tempo 100 auf Autobahnen und Kraftfahrstraßen. Dazu gehört eine von der zuständigen Behörde ausgegebene und gesiegelte Tempo-100-Plakette an der Rückseite des Anhängers.",
+        "Ein frei gekaufter Aufkleber allein erteilt diese Berechtigung nicht. Ebenso wenig gilt damit automatisch Tempo 100 auf jeder Straße oder im Ausland. Niedrigere ausgeschilderte Grenzen und eine der Situation angepasste Geschwindigkeit bleiben maßgeblich."
+      ]
+    },
+    {
+      "id": "kombination",
+      "title": "Auch das Zugfahrzeug muss passen",
+      "paragraphs": [
+        "Prüfe die konkrete Kombination aus Auto und Anhänger. Die Verordnung berücksichtigt unter anderem das Antiblockiersystem des Zugfahrzeugs, Massenverhältnisse sowie je nach Bauart Bremsen, Schwingungsdämpfer und Stabilisierung.",
+        "Ein Anhänger mit vorhandener 100-Plakette passt deshalb nicht zwangsläufig zu jedem Auto. Lass die Bedingungen anhand der Fahrzeugpapiere und der technischen Unterlagen prüfen. Eine Kennzeichenbestellung und eine pauschale Gewichtsangabe ersetzen diese Beurteilung nicht."
+      ]
+    },
+    {
+      "id": "reifen",
+      "title": "Die Reifen bleiben ein laufender Prüfpunkt",
+      "paragraphs": [
+        "§ 3 der Ausnahmeverordnung verlangt für die jeweilige Fahrt Reifen am Anhänger, die jünger als sechs Jahre sind und mindestens die Geschwindigkeitskategorie L tragen. Entscheidend ist das eingeprägte Herstellungsdatum, nicht das Datum des letzten Reifenwechsels.",
+        "Die 100-Plakette erneuert sich nicht mit dem Reifenalter. Prüfe den Zustand und die Voraussetzungen daher auch bei einem lange unverändert genutzten Gespann. Fallen Bedingungen weg, richtet sich die zulässige Geschwindigkeit wieder nach den allgemeinen Regeln."
+      ]
+    },
+    {
+      "id": "anbringen",
+      "title": "Zwei Kennzeichnungen, zwei Aufgaben",
+      "paragraphs": [
+        "Das reguläre Anhängerkennzeichen sitzt hinten und trägt die zugeteilte Kombination. Die Tempo-100-Plakette kommt ebenfalls an die Rückseite des Anhängers, aber nicht als Überklebung der Buchstaben, Ziffern oder amtlichen Plaketten des Kennzeichens.",
+        "Ist die 100-Plakette beschädigt oder fehlt ihr Siegel, frage die zuständige Stelle nach dem Ersatzverfahren. Für ein beschädigtes Kennzeichenschild ist wiederum die bestätigte Kombination und die erforderliche amtliche Kennzeichnung maßgeblich. Verwechsle die beiden Ersatzvorgänge nicht."
+      ]
+    },
+    {
+      "id": "shop",
+      "title": "Was du hier bestellen kannst",
+      "paragraphs": [
+        "Im Shop kannst du ein angebotenes Kennzeichenschild für den Anhänger konfigurieren. Eine amtliche Tempo-100-Plakette oder die Genehmigung für Tempo 100 ist darin nicht enthalten.",
+        "Prüfe vor der Schilderbestellung die zugeteilte Kombination, Schriftfarbe, Maße und Anzahl. Ob ein grünes oder schwarzes Kennzeichen richtig ist, hängt vom behördlichen Vorgang ab und nicht von der gewünschten Geschwindigkeit. Dafür gibt es den verlinkten Ratgeber."
+      ],
+      "items": [
+        "Kombination und Unterlagen für Tempo 100 prüfen lassen.",
+        "Reifenalter und Kategorie kontrollieren.",
+        "Gesiegelte 100-Plakette und Kennzeichenschild unterscheiden.",
+        "Nur das tatsächlich benötigte, angebotene Kennzeichenschild bestellen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "9. Ausnahmeverordnung zur StVO: Tempo-100-Voraussetzungen",
+      "href": "https://www.gesetze-im-internet.de/stvoausnv_9/BJNR317100998.html"
+    },
+    {
+      "label": "FZV § 12: Kennzeichen am Anhänger",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "anhaenger-gruenes-schwarzes-kennzeichen",
+    "kennzeichen-beschaedigt-ersetzen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/anhaengerkennzeichen",
+      "label": "Angebotenes Anhängerkennzeichen konfigurieren"
+    }
+  ]
+},
+{
+  "slug": "kennzeichen-vorne-hinten-vertauschen",
+  "title": "Kennzeichen vorne und hinten vertauscht: So ordnest du die Schilder richtig zu",
+  "description": "Beim Pkw gehört die HU-Plakette nach hinten. So erkennst du vertauschte Schilder und klärst, ob Umsetzen genügt oder Ersatz nötig ist.",
+  "category": "Montage und Alltag",
+  "publishedAt": "2026-11-23",
+  "intro": [
+    "Nach dem Wechsel der Kennzeichenhalter fällt dir auf: Die runde HU-Plakette sitzt jetzt vorne. Obwohl auf beiden Schildern dieselbe Kombination steht, sind sie nach der amtlichen Kennzeichnung nicht beliebig austauschbar."
+  ],
+  "takeaway": "Bei einem normalen zugelassenen Pkw gehört das Schild mit der HU-Prüfplakette nach hinten. Sind nur die beiden intakten Schilder vertauscht, ordnest du sie richtig zu. Löse dafür keine Plaketten ab.",
+  "sections": [
+    {
+      "id": "erkennen",
+      "title": "Das hintere Schild an der HU-Plakette erkennen",
+      "paragraphs": [
+        "§ 29 Absatz 2 StVZO schreibt die HU-Prüfplakette auf dem hinteren amtlichen Kennzeichen vor. Die Stempelplakette der Zulassungsbehörde hat eine andere Funktion. Verwechsle diese beiden Kennzeichnungen nicht.",
+        "Der hier beschriebene Fall betrifft einen gewöhnlichen zugelassenen Pkw mit zwei Schildern. Bei Motorrad, Anhänger oder besonderen Kennzeichenarten ist die Anordnung anders. Ein Fahrradträger-Wiederholungsschild ist ebenfalls kein Ersatz für das amtlich gekennzeichnete hintere Fahrzeugschild."
+      ]
+    },
+    {
+      "id": "gleich",
+      "title": "Gleiche Kombination, unterschiedliche Aufgabe",
+      "paragraphs": [
+        "Vor der amtlichen Kennzeichnung können zwei gleich ausgeführte neue Bleche gleich aussehen. Nach dem Anbringen der Plaketten ergibt sich die Zuordnung am Fahrzeug. Die passende Nummer allein reicht nicht als Montagekontrolle.",
+        "Prüfe auch das Format. Manche Fahrzeuge nutzen vorne und hinten unterschiedliche Maße. Schraube ein Schild nicht in eine unpassende Aufnahme, nur weil seine Kombination stimmt. Maß und Position müssen gemeinsam passen."
+      ]
+    },
+    {
+      "id": "umsetzen",
+      "title": "Wenn wirklich nur die Schilder vertauscht sind",
+      "paragraphs": [
+        "Steht das Fahrzeug sicher, löse die Halter nach deren Anleitung und setze die intakten Schilder an die richtige Position. Behalte die Plaketten auf dem jeweiligen Blech. Kontrolliere anschließend den festen Sitz und die freie Sicht auf die gesamte Fläche.",
+        "Hinten gehört zusätzlich die passende Kennzeichenbeleuchtung dazu. Prüfe nach dem Umsetzen, ob der Halter Teile der Beschriftung oder Plaketten verdeckt. Wenn ein Rahmen gebrochen ist, sichere das Schild mit einem passenden Halter statt einer improvisierten Abdeckung."
+      ]
+    },
+    {
+      "id": "beschaedigt",
+      "title": "Wenn eine Plakette oder das Schild beschädigt ist",
+      "paragraphs": [
+        "Ein abgerissenes Siegel oder eine beschädigte HU-Plakette lässt sich nicht durch Vertauschen der Bleche reparieren. Kläre den Ersatz mit der zuständigen Zulassungsstelle beziehungsweise der zur Untersuchung berechtigten Stelle.",
+        "Klebe amtliche Plaketten nicht selbst von einem Schild auf das andere. Auch ein ungestempeltes Ersatzblech mit identischer Kombination ist nicht automatisch für die Fahrt bereit. Bei Verlust oder Diebstahl eines Schilds gilt ein eigener Ablauf; bestelle nicht einfach stillschweigend eine Kopie."
+      ]
+    },
+    {
+      "id": "bestellen",
+      "title": "Wann du überhaupt ein neues Schild brauchst",
+      "paragraphs": [
+        "Ein bloßer Montagefehler erfordert bei unbeschädigten, passenden Schildern normalerweise keinen Neukauf. Ein Ersatz wird sinnvoll, wenn das Blech oder seine Oberfläche tatsächlich beschädigt ist und das Verfahren geklärt wurde.",
+        "Bestelle dann die bestätigte Kombination, richtige Ausführung und tatsächlich benötigte Stückzahl. Die amtlichen Plaketten sind ein separater Schritt. So vermeidest du, wegen einer vertauschten Position unnötig ein komplettes Schilderpaar zu kaufen."
+      ],
+      "items": [
+        "HU-Plakette am hinteren Pkw-Schild?",
+        "Beide Kombinationen mit den Papieren abgeglichen?",
+        "Schilder fest und vollständig sichtbar?",
+        "Amtliche Plaketten unverletzt?",
+        "Hintere Beleuchtung funktionsfähig?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "StVZO § 29 Absatz 2: HU-Plakette am hinteren Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__29.html"
+    },
+    {
+      "label": "FZV § 12: amtliche Plaketten und Anbringung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-beschaedigt-ersetzen",
+    "kennzeichen-verloren-gestohlen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Bei Bedarf passende Ersatzschilder bestellen"
+    },
+    {
+      "href": "/blog/hu-plakette-lesen",
+      "label": "HU-Plakette erkennen und lesen"
+    },
+    {
+      "href": "/blog/kennzeichenhalter-wechseln",
+      "label": "Kennzeichenhalter wechseln"
+    }
+  ]
+},
+{
   "slug": "carbon-3d-kennzeichen-unterschied",
   "title": "Carbon-Optik oder 3D-Kennzeichen: Was ist der Unterschied?",
   "description": "Oberfläche und Material sind zwei verschiedene Entscheidungen. So erkennst du, welche Kennzeichenausführung du tatsächlich bestellst.",
@@ -94,7 +776,8 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/kennzeichen-praegen-herstellung",
       "label": "So entsteht ein geprägtes Schild"
-    }
+    },
+    {"href": "/blog/kennzeichen-eu-feld-ueberkleben", "label": "Euro-Feld nicht mit Dekorfolie verändern"}
   ]
 },
 {
@@ -252,7 +935,8 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/fahrradtraeger-kennzeichen-ohne-stempel",
       "label": "Wiederholungskennzeichen am Fahrradträger"
-    }
+    },
+    {"href": "/blog/motorrad-kennzeichen-winkel", "label": "Motorrad: Winkel und Sichtbarkeit nach dem Heckumbau"}
   ]
 },
 {
@@ -331,7 +1015,8 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/kennzeichen-entsiegeln-online-abmeldung",
       "label": "Online-Abmeldung vorbereiten"
-    }
+    },
+    {"href": "/ratgeber/kennzeichen-fahrzeugwechsel-uebernehmen", "label": "Bisherige Kombination für das Folgefahrzeug klären"}
   ]
 },
 {
@@ -890,7 +1575,8 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/h-saisonkennzeichen",
       "label": "H und Saison kombinieren"
-    }
+    },
+    {"href": "/blog/07-oder-h-kennzeichen", "label": "H und rote 07 nach dem Fahrtzweck vergleichen"}
   ]
 },
 {
@@ -1041,7 +1727,9 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/kennzeichen-reinigen",
       "label": "Kennzeichen schonend reinigen"
-    }
+    },
+    {"href": "/blog/saisonkennzeichen-hu-ausserhalb-saison", "label": "HU-Termin außerhalb der Saison"},
+    {"href": "/blog/kennzeichen-vorne-hinten-vertauschen", "label": "Vertauschte Schilder richtig zuordnen"}
   ]
 },
 {
@@ -1559,8 +2247,9 @@ export const blogArticles: BlogArticle[] = [
       {
         "href": "/blog/kennzeichenhalter-wechseln",
         "label": "Intakten Rahmen weiterverwenden oder wechseln"
-      }
-    ]
+      },
+    {"href": "/ratgeber/kennzeichen-fahrzeugwechsel-uebernehmen", "label": "Alte Kombination für ein neues Auto übernehmen"}
+  ]
   },
   {
     "slug": "fahrradtraeger-kennzeichen-ohne-stempel",
@@ -1715,8 +2404,9 @@ export const blogArticles: BlogArticle[] = [
       {
         "href": "/impressum",
         "label": "Kontakt zum Anbieter"
-      }
-    ]
+      },
+    {"href": "/blog/evb-nummer-kennzeichenbestellung", "label": "eVB und Kennzeichenkombination unterscheiden"}
+  ]
   },
   {
     "slug": "kennzeichen-praegen-herstellung",

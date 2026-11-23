@@ -26,6 +26,230 @@ const shortTerm = { label: 'Service Berlin: Kurzzeitkennzeichen beantragen', hre
 
 export const registrationGuides: RegistrationGuide[] = [
 {
+  "slug": "kennzeichen-fahrzeugwechsel-uebernehmen",
+  "title": "Kennzeichen auf ein neues Auto übernehmen: So planst du den Fahrzeugwechsel",
+  "teaser": "Du möchtest deine bisherige Kombination am nächsten Auto nutzen? Kläre Freigabe, örtliche Reservierung und Schilderzustand vor der neuen Zulassung.",
+  "category": "Zulassung und Schilderwahl",
+  "reviewedAt": "2026-11-23",
+  "intro": [
+    "Dein bisheriges Auto wird verkauft oder abgemeldet. Die vertraute Kombination soll am nächsten Fahrzeug bleiben. Das kann möglich sein, ist aber kein bloßes Umstecken der Schilder. Die Zulassungsbehörde muss die Nummer für das andere Fahrzeug zuteilen."
+  ],
+  "takeaway": "Kläre den Fahrzeugwechsel vor der Abmeldung mit deiner zuständigen Behörde. Eine Reservierung für die spätere Wiederzulassung desselben Autos ist nicht automatisch eine Reservierung für das Folgefahrzeug. Neue Schilder erst bestellen, wenn Kombination, Ausführung und Ablauf feststehen.",
+  "sections": [
+    {
+      "id": "unterschied",
+      "title": "1. Fahrzeugwechsel von Kennzeichenmitnahme unterscheiden",
+      "paragraphs": [
+        "Nach § 9 FZV wird das Kennzeichen einem Fahrzeug zugeteilt. Hier geht es um zwei verschiedene Autos: das bisherige und das neu erworbene. Das ist ein anderer Fall als ein Umzug mit demselben Auto oder dessen Verkauf mit unverändertem Kennzeichen.",
+        "Befestige die bisherigen gestempelten Schilder deshalb nicht einfach am neuen Auto. Auch wenn du beide Fahrzeuge besitzt, übernimmt das neue dadurch keine Zulassung. Wenn beide parallel eingesetzt werden sollen, brauchst du eine passende eigenständige Zulassungslösung; eine normale Kombination wird nicht durch einen zweiten Schilderkauf verdoppelt."
+      ]
+    },
+    {
+      "id": "behoerde",
+      "title": "2. Den örtlichen Ablauf vor der Abmeldung klären",
+      "paragraphs": [
+        "Frage deine Behörde ausdrücklich nach der Übernahme auf ein anderes Fahrzeug. Nenne die bisherige Kombination, den künftigen Halter und die geplanten Termine. So kann die Stelle unterscheiden, ob du dasselbe Auto später wieder zulassen oder ein Folgefahrzeug anmelden willst.",
+        "§ 16 Absatz 1 FZV sieht eine Reservierung für die Wiederzulassung des außer Betrieb gesetzten Fahrzeugs vor. Diese Regel ist kein allgemeiner Anspruch auf dieselbe Nummer am nächsten Auto. Verlass dich daher nicht auf ein pauschales Häkchen „Kennzeichen reservieren“, ohne den Zweck zu prüfen.",
+        "München nennt beispielsweise für ein Folgefahrzeug die Online-Reservierung am Tag nach der Außerbetriebsetzung und weist auf den fehlenden Rechtsanspruch hin. Andere örtliche Abläufe musst du bei deiner Behörde erfragen. Eine bundesweit einheitliche Freigabestunde oder garantierte Sofortübernahme gibt es aus diesem Beispiel nicht."
+      ],
+      "items": [
+        "Kann meine bisherige Kombination für das Folgefahrzeug zugeteilt werden?",
+        "Wann wird sie freigegeben und wie kann ich sie reservieren?",
+        "Müssen Abmeldung und neue Zulassung getrennt erfolgen?",
+        "Welche Bestätigung soll ich zum Termin mitbringen?"
+      ]
+    },
+    {
+      "id": "umzug",
+      "title": "3. Nach einem Umzug besonders genau hinsehen",
+      "paragraphs": [
+        "Eine aus einem anderen Zulassungsbezirk mitgenommene Nummer kann am bisherigen Fahrzeug erhalten bleiben. Daraus folgt nicht, dass die jetzt zuständige Behörde diese Kombination einem anderen Fahrzeug neu zuteilen darf.",
+        "Das BayernPortal weist darauf hin, dass eine bei Umzug oder Halterwechsel in einen anderen Bezirk übernommene Nummer nach Außerbetriebsetzung nicht erneut zugeteilt werden kann. Kläre diesen Punkt unbedingt vor dem Abmelden. Die reine Eingabe der alten Kombination im Schilderkonfigurator schafft keinen Anspruch auf ihre Verwendung."
+      ]
+    },
+    {
+      "id": "bleche",
+      "title": "4. Prüfen, ob die bisherigen Bleche weiter passen",
+      "paragraphs": [
+        "Eine identische Kombination bedeutet nicht zwingend identische Schilder. Vergleiche die benötigten Maße und die Kennzeichenart am neuen Fahrzeug. Ein erstmals gewählter E- oder H-Zusatz oder ein geänderter Saisonzeitraum verändert die erforderliche Ausführung.",
+        "Sind die bisherigen Bleche intakt und für die neue Zuteilung geeignet, frage die Zulassungsstelle nach ihrer Wiederverwendung. Du musst nicht allein wegen des Fahrzeugwechsels neue kaufen. Die Behörde muss aber die amtlichen Kennzeichnungen für den neuen Vorgang korrekt anbringen beziehungsweise erneuern.",
+        "Bewahre die alten Schilder bis zur Klärung auf. Löse Siegel nicht zum Weiterkleben ab. Beschädigte, schlecht lesbare oder unpassende Schilder ersetzt du nach Bestätigung der richtigen Kombination und Maße."
+      ]
+    },
+    {
+      "id": "ablauf",
+      "title": "5. Übergabe und Neuzulassung zusammen planen",
+      "paragraphs": [
+        "Vereinbare mit einem Käufer klar, ob das alte Fahrzeug abgemeldet übergeben wird. Die organisatorische Absprache ersetzt weder die Abmeldung noch eine geeignete Lösung für die anschließende Überführung.",
+        "Für das neue Fahrzeug brauchst du dessen eigene Unterlagen und den passenden Versicherungsnachweis. Eine Reservierungsbestätigung für die Nummer ersetzt diese Dokumente nicht. Plane genügend Zeit zwischen Freigabe, Bestätigung, gegebenenfalls Schilderlieferung und Zulassung."
+      ],
+      "items": [
+        "Bisherigen Zulassungsstatus und Übergabe klären.",
+        "Örtlichen Ablauf für die Kombination bestätigen lassen.",
+        "Dokumente und eVB für das neue Fahrzeug bereithalten.",
+        "Vorhandene Bleche auf Zustand, Maße und Zusätze prüfen.",
+        "Nur nötige Schilder nach bestätigter Kombination bestellen.",
+        "Amtliche Kennzeichnung und Zulassung abschließen."
+      ]
+    },
+    {
+      "id": "danach",
+      "title": "6. Dienste dem richtigen Fahrzeug zuordnen",
+      "paragraphs": [
+        "Prüfe nach dem Wechsel Parkberechtigungen und andere kennzeichenbezogene Dienste. Auch bei gleicher Nummer kann dort noch das bisherige Fahrzeug hinterlegt sein. Kontrolliere vor allem Dienste, die zusätzlich Fahrzeugdaten verlangen.",
+        "Die Umweltplakette gehört zum jeweiligen Fahrzeug und dessen Voraussetzungen. Übertrage sie nicht allein wegen der gleichen Nummer auf eine andere Windschutzscheibe. Gleiche Zeichenkombinationen bedeuten nicht automatisch gleiche Fahrzeugdaten."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Kann ich die Nummer gleichzeitig auf dem alten und neuen Auto nutzen?",
+      "answer": "Nicht durch einfaches Umstecken oder Nachbestellen normaler Schilder. Die Nummer muss dem jeweiligen Fahrzeug behördlich zugeteilt sein. Kläre für parallele Nutzung eigenständige Zulassungen oder eine dafür vorgesehene Lösung."
+    },
+    {
+      "question": "Muss ich neue Kennzeichenschilder kaufen?",
+      "answer": "Nicht zwingend. Wenn Kombination, Ausführung, Maße und Zustand passen, kläre mit der Behörde die Wiederverwendung. Amtliche Plaketten sind trotzdem Teil des neuen Zulassungsvorgangs."
+    },
+    {
+      "question": "Ist die Nummer nach der Abmeldung sicher für mich reserviert?",
+      "answer": "Nicht automatisch für ein anderes Fahrzeug. Die gesetzliche Reservierung zur Wiederzulassung betrifft das außer Betrieb gesetzte Fahrzeug. Für das Folgefahrzeug musst du den örtlichen Ablauf ausdrücklich klären."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 9: fahrzeugbezogene Zuteilung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__9.html"
+    },
+    {
+      "label": "FZV § 16: Außerbetriebsetzung und Wiederzulassung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__16.html"
+    },
+    {
+      "label": "München: Wunschkennzeichen und Folgefahrzeug",
+      "href": "https://stadt.muenchen.de/service/info/burgerburo-scheidplatz/1064481/"
+    },
+    {
+      "label": "BayernPortal: Umschreibung und Wiederzulassung",
+      "href": "https://www.bayernportal.de/dokumente/leistung/0666452463?localize=false"
+    }
+  ],
+  "related": [
+    "auto-ummelden-kennzeichen-behalten",
+    "wunschkennzeichen-reservieren",
+    "kennzeichen-beschaedigt-ersetzen"
+  ],
+  "cta": "Die Kombination für das neue Fahrzeug ist bestätigt und du brauchst neue Bleche? Prüfe Maße und Kennzeichenart und bestelle genau die benötigte Ausführung. Die Zulassung und amtlichen Plaketten erledigst du separat."
+},
+{
+  "slug": "eu-import-deutsche-kennzeichen",
+  "title": "EU-Gebrauchtwagen importiert: So bereitest du die deutschen Kennzeichen vor",
+  "teaser": "Welche Unterlagen beim EU- oder EWR-Gebrauchtwagen wichtig sind und wann du deutsche Kennzeichenschilder für die Zulassung bestellen solltest.",
+  "category": "Zulassung und Schilderwahl",
+  "reviewedAt": "2026-11-23",
+  "intro": [
+    "Du hast einen bereits zugelassenen Gebrauchtwagen aus einem EU- oder EWR-Staat gekauft und möchtest ihn in Deutschland anmelden. Neben den üblichen Zulassungsunterlagen brauchst du Informationen aus dem Herkunftsland. Prüfe diese zuerst, bevor du deutsche Schilder prägen lässt."
+  ],
+  "takeaway": "Kläre ausländische Fahrzeugpapiere, technische Nachweise und den Zulassungsablauf mit deiner Behörde. Bestelle deutsche Schilder erst mit bestätigter Kombination und passendem Format. Der Kauf der Bleche meldet das Fahrzeug weder in Deutschland an noch im Herkunftsland ab.",
+  "sections": [
+    {
+      "id": "umfang",
+      "title": "1. Den richtigen Zulassungsfall wählen",
+      "paragraphs": [
+        "Dieser Ratgeber behandelt ein Fahrzeug, das bereits in einem EU- oder EWR-Staat zugelassen war. Neufahrzeuge und Einfuhren aus Drittstaaten können zusätzliche oder andere Anforderungen haben. Wähle bei der Terminbuchung deshalb den passenden Importvorgang.",
+        "Halte Herkunftsland, Datum der ersten Zulassung und Fahrzeug-Identifizierungsnummer bereit. Frage deine Behörde, ob sie besondere Nachweise, Übersetzungen oder eine Vorführung benötigt. Die Anforderungen für deinen Einzelfall solltest du vor einem fest gebuchten Zulassungstermin kennen."
+      ]
+    },
+    {
+      "id": "dokumente",
+      "title": "2. Herkunftsdokumente vollständig beschaffen",
+      "paragraphs": [
+        "Für das Berliner Verfahren werden unter anderem Kaufvertrag oder Rechnung, Identitätsnachweis, eVB, SEPA-Mandat, ausländische Zulassungsdokumente und bei noch zugelassenen Fahrzeugen vorhandene ausländische Schilder genannt. Die Unterlagen sind dort grundsätzlich im Original vorzulegen. Nutze diese Liste als Vorbereitung und gleiche sie mit deiner eigenen Behörde ab.",
+        "§ 8 FZV regelt ausdrücklich den Fall einer ausländischen Zulassungsbescheinigung aus zwei Teilen. Fehlt Teil II, ist eine Bestätigung der zuständigen ausländischen Behörde über das Kraftfahrt-Bundesamt erforderlich. Ein fehlendes Dokument ist daher kein Problem, das ein Schilderkauf behebt."
+      ],
+      "items": [
+        "Kaufnachweis und Identitätsnachweis zusammenstellen.",
+        "Alle Teile der ausländischen Zulassungsdokumente beschaffen.",
+        "Fahrzeug-Identifizierungsnummer in den Unterlagen abgleichen.",
+        "Versicherungsnachweis und erforderliches SEPA-Mandat vorbereiten.",
+        "Unklare oder fehlende Nachweise vor dem Termin besprechen."
+      ]
+    },
+    {
+      "id": "technik",
+      "title": "3. Typgenehmigung und HU-Nachweis klären",
+      "paragraphs": [
+        "Bei einem typgenehmigten Fahrzeug helfen das CoC-Papier, also die EG-Übereinstimmungsbescheinigung, beziehungsweise eine Datenbestätigung des Herstellers beim Nachweis der technischen Daten. Bei fehlender Typgenehmigung kann ein Gutachten nach § 21 StVZO erforderlich sein. Kläre die passende Nachweisform, statt pauschal eine zusätzliche Prüfung zu buchen.",
+        "Für die Untersuchung eines bereits im EU- oder EWR-Raum betriebenen Fahrzeugs ist § 8 Absatz 2 FZV wichtig. Er berücksichtigt unter den dort genannten Voraussetzungen einen Nachweis über eine Untersuchung nach der europäischen Richtlinie. Eine deutsche HU ist also nicht allein wegen des Grenzübertritts immer neu erforderlich.",
+        "Lass prüfen, ob dein konkreter Untersuchungsnachweis anerkannt wird und welche Frist gilt. Das Datum der ersten Inbetriebnahme ist dabei nachzuweisen. Eine unklare Plakette auf dem ausländischen Schild ersetzt keinen verwertbaren Nachweis."
+      ]
+    },
+    {
+      "id": "herkunft",
+      "title": "4. Ausländische Abmeldung getrennt organisieren",
+      "paragraphs": [
+        "Die Zulassung in Deutschland darfst du nicht mit einer automatisch erledigten Abmeldung im Herkunftsland gleichsetzen. Berlin weist ausdrücklich darauf hin, dass eine Benachrichtigung erfolgt, der Halter aber selbst für eine noch nötige ausländische Abmeldung zuständig ist.",
+        "Frage vorab, welche Dokumente oder Schilder im Herkunftsland benötigt werden. Bewahre Rückgaben und Bestätigungen auf. Kläre außerdem separat, wie das Fahrzeug zulässig zum Standort oder zur Prüfstelle gelangt. Ein neues deutsches Schild ohne die erforderliche Zulassung ist keine allgemeine Überführungserlaubnis."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "5. Deutsche Kombination und Format bestätigen",
+      "paragraphs": [
+        "Wenn die Unterlagen und der Ablauf passen, klärst du die deutsche Kennzeichenkombination bei der Zulassungsbehörde. Eine Wunschreservierung ist dabei ein eigener Schritt; sie ist noch keine abgeschlossene Zulassung.",
+        "Miss die Kennzeichenaufnahme des Fahrzeugs. Die Größe des ausländischen Schilds ist keine automatische Freigabe für ein entsprechendes deutsches Format. Wenn die vorgesehene Aufnahme nicht passt, kläre die zulässige Lösung vor der Bestellung. Der Größenratgeber hilft bei der Orientierung.",
+        "Bestelle nur eine tatsächlich angebotene, für deinen Fall passende Ausführung. Bei einem Pkw gehören normalerweise Schilder vorne und hinten dazu. Kennzeichenart, Zusätze und Stückzahl müssen mit der vorgesehenen Zuteilung übereinstimmen."
+      ]
+    },
+    {
+      "id": "abschluss",
+      "title": "6. Bestellung und Zulassung abschließen",
+      "paragraphs": [
+        "Vergleiche die gelieferten Schilder mit der bestätigten Kombination und den vereinbarten Maßen. Die amtlichen Plaketten und die Zulassungsdokumente kommen nicht durch die Schilderbestellung hinzu. Sie werden im vorgesehenen Zulassungsverfahren erteilt.",
+        "Behalte Dokumente zur Herkunft und zur ausländischen Abmeldung griffbereit, bis der gesamte Vorgang geklärt ist. Plane die Schilderlieferung mit ausreichend Abstand zum Termin. Der Shop übernimmt keine Zusage, dass fehlende Importunterlagen bis dahin beschafft werden können."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Kann ich die ausländische Kombination einfach auf deutsche Bleche prägen lassen?",
+      "answer": "Für die deutsche Zulassung brauchst du eine von der zuständigen Behörde bestätigte deutsche Kombination. Das Nachprägen der bisherigen ausländischen Nummer erledigt keine deutsche Zulassung."
+    },
+    {
+      "question": "Ist eine neue deutsche HU immer erforderlich?",
+      "answer": "Nein, das lässt sich nicht pauschal sagen. § 8 Absatz 2 FZV berücksichtigt passende Untersuchungsnachweise aus EU- beziehungsweise EWR-Staaten. Lass deinen konkreten Nachweis und die Frist von der zuständigen Stelle prüfen."
+    },
+    {
+      "question": "Wann bestelle ich die Kennzeichenschilder?",
+      "answer": "Wenn die deutsche Kombination und das zulässige Format geklärt sind und dein Zulassungsablauf feststeht. Fehlende Fahrzeugdokumente solltest du vorher mit der Behörde klären."
+    },
+    {
+      "question": "Erledigt die deutsche Anmeldung die Abmeldung im Herkunftsland?",
+      "answer": "Verlass dich darauf nicht. Berlin weist ausdrücklich auf die Verantwortung des Halters für eine noch nötige Abmeldung im Herkunftsland hin. Kläre das Verfahren bei den beteiligten Behörden."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 8: Zulassung nach vorheriger Zulassung im Ausland",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__8.html"
+    },
+    {
+      "label": "Berlin: EU-/EWR-Gebrauchtfahrzeug zulassen",
+      "href": "https://service.berlin.de/dienstleistung/120884/"
+    },
+    {
+      "label": "FZV § 12 und Anlage 4: Kennzeichenausführung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "related": [
+    "auto-anmelden-unterlagen",
+    "kennzeichengroessen",
+    "wunschkennzeichen-reservieren",
+    "kurzzeitkennzeichen-fahrzeugueberfuehrung"
+  ],
+  "cta": "Deine deutsche Kombination und die passenden Maße stehen fest? Konfiguriere die angebotenen Schilder für deinen Zulassungstermin. Herkunftsdokumente, Versicherung, Zulassung und amtliche Plaketten bleiben eigenständige Schritte."
+},
+{
   "slug": "kennzeichen-freiwillig-aendern",
   "title": "Kennzeichen freiwillig ändern: neue Kombination, gleiches Auto",
   "teaser": "Du möchtest eine andere Nummer am bisherigen Auto? So planst du Antrag, Schildertausch und die nötigen Folgeänderungen.",
@@ -124,7 +348,8 @@ export const registrationGuides: RegistrationGuide[] = [
   "related": [
     "wunschkennzeichen-reservieren",
     "kennzeichen-beschaedigt-ersetzen",
-    "kennzeichen-verloren-gestohlen"
+    "kennzeichen-verloren-gestohlen",
+    "kennzeichen-fahrzeugwechsel-uebernehmen"
   ],
   "cta": "Die neue Zuteilung ist geklärt? Konfiguriere die passenden Schilder. Reservierung, amtliche Änderung und Plaketten erledigst du getrennt davon."
 },
