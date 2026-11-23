@@ -89,3 +89,9 @@
 - OpenSEO-SERP3/3 INSUFFICIENT_CREDITS; keine weiteren kostenpflichtigen Versuche. Amtliche Recherche ergänzt. Keine GSC-Sitemap-Verwaltung im verfügbaren Werkzeugumfang.
 - Build, gezieltes Lint, Editorial-Smoke10/50 HTTP-Ziele und Gesamt-Smoke64 Seiten bestanden. Sitemap automatisch62→72, +10/-0. Alte Inhalte und Daten erhalten, gezielte Rücklinks ergänzt. Kein Browser. Veröffentlichungsnachweis folgt nach Push.
 - Live-Abschluss23.11. bestätigt: Content-Commit ad5c38eec113a18cd25a128e0ef0c51273f0fb03, Vercel success, öffentlicher Editorial-Smoke10/50 bestanden. Sitemap72 eindeutig, +10/-0. OpenSEO-Rechercheprotokoll ergänzt. Keine Indexierungszusage.
+
+## SEO-Durchlauf 23.11.2026 – Abend
+- Weitere 6 Blogs und 4 Ratgeber nach Bestand von 52 redaktionellen Seiten erstellt; Gesamtbestand danach 62. Themen/Quellen im docs/seo/2026-11-23-abend-briefing.md, URLs im gleichnamigen new-pages-Manifest.
+- Wochenanalyse vom Morgen wiederverwendet; neue OpenSEO-SERPs weiterhin INSUFFICIENT_CREDITS. Keine Volumenannahmen. Nächste Wochenanalyse frühestens 30.11.
+- Build, gezieltes Lint, Editorial-Smoke (10/52 HTTP-Ziele), SEO-Smoke (74 Seiten) und Sitemapvergleich (72→82, +10/-0) bestanden. Keine Browserprüfung gemäß Auftrag.
+- Push und Live-Nachweis werden im Abend-Prüfbericht ergänzt. Themen dieses Durchlaufs künftig nicht erneut anlegen.

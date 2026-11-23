@@ -16,6 +16,466 @@ export type BlogArticle = {
 
 export const blogArticles: BlogArticle[] = [
 {
+  "slug": "kennzeichen-engschrift-kurzes-schild",
+  "title": "Engschrift beim Kennzeichen: Wann ist die schmale Schrift vorgesehen?",
+  "description": "Wenig Platz für das Kennzeichen? Erfahre, wann Engschrift vorgesehen ist und warum eine kurze Kombination noch keine Freigabe für jedes Schildformat bedeutet.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-23",
+  "intro": [
+    "Die Kombination steht fest, aber in der Kennzeichenaufnahme wird es eng. Dann sind Schildbreite und Schriftart gemeinsam zu prüfen. Engschrift ist keine beliebige Designoption, mit der sich jedes Wunschformat passend machen lässt."
+  ],
+  "takeaway": "Für normale ein- und zweizeilige Kennzeichen ist grundsätzlich Mittelschrift vorgesehen. Engschrift kommt unter den Bedingungen der Anlage 4 FZV infrage. Kläre die konkrete Ausführung vor der Bestellung.",
+  "sections": [
+    {
+      "id": "regel",
+      "title": "Was die FZV zur Engschrift sagt",
+      "paragraphs": [
+        "Anlage 4 Abschnitt 1 Nummer 4 nennt die Mittelschrift als Ausgangspunkt. Reicht die vorgesehene Höchstlänge nicht aus oder lässt die vorgeschriebene beziehungsweise vom Hersteller vorgesehene Anbringungsstelle dies nicht zu, kann Engschrift für die dort genannten Zeichengruppen verwendet werden.",
+        "Das ist etwas anderes als der persönliche Wunsch nach einer möglichst kleinen Tafel. Eine schmale Aufnahme muss am konkreten Fahrzeug beurteilt werden. Lass dir bei einem Sonderfall von der Zulassungsstelle erklären, welche Kombination und Ausführung geeignet sind."
+      ]
+    },
+    {
+      "id": "masse",
+      "title": "Schrift und Schild sind zwei verschiedene Maße",
+      "paragraphs": [
+        "Die Muster führen Mittelschrift und Engschrift jeweils mit 75 Millimetern Höhe. Engschrift macht die Zeichen also nicht einfach in jeder Richtung kleiner. Für Kraftradkennzeichen und verkleinerte zweizeilige Schilder gibt es ein eigenes kleineres Schriftmuster.",
+        "Außerdem brauchen Euro-Feld, Ränder, Zeichenabstände und Plaketten ihren vorgesehenen Platz. Eine kurze Kombination allein entscheidet deshalb nicht über das fertige Schildmaß. Messe die Aufnahme und halte Fotos sowie Fahrzeugunterlagen für eine Rückfrage bereit."
+      ]
+    },
+    {
+      "id": "problem",
+      "title": "Wenn die vorgesehene Aufnahme nicht passt",
+      "paragraphs": [
+        "Die Anlage 4 enthält auch Regeln für Fälle, in denen kein vorschriftsmäßiges Kennzeichen an die vorgesehene Stelle passt. Je nach Fall sind Änderungen am Fahrzeug oder eine behördlich geprüfte Ausnahme nötig. Zubehör, das erst nachträglich den Platz einschränkt, schafft nicht automatisch einen Ausnahmeanspruch.",
+        "Kürze ein gekauftes Blech deshalb nicht selbst und dränge die Beschriftung nicht durch Kleben oder Umarbeiten zusammen. Auch eine am Bildschirm passend wirkende Vorschau ersetzt keine Klärung des Sonderfalls."
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "Was der aktuelle Shop dafür anbietet",
+      "paragraphs": [
+        "Der normale Auto-Konfigurator bietet die 520-mm-Ausführung. Frei wählbare kurze Pkw-Schilder und eine gesonderte Engschrift-Auswahl sind hier nicht zugesagt. Wenn du eine davon abweichende Lösung brauchst, kläre zuerst die konkrete Lieferbarkeit und behördliche Eignung.",
+        "Passt die angebotene Standardausführung, überträgst du die bestätigte Kombination unverändert. Bei einem Ersatz an einem zugelassenen Fahrzeug gehören die amtlichen Plaketten in den gesonderten Austauschvorgang."
+      ],
+      "items": [
+        "Aufnahme am Fahrzeug messen.",
+        "Bestätigte Kombination und Zusätze berücksichtigen.",
+        "Engschrift oder Ausnahme mit der zuständigen Stelle klären.",
+        "Nur eine tatsächlich angebotene passende Ausführung bestellen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV Anlage 4: Schriftmuster und Ergänzungsbestimmungen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/anlage_4.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichengroessen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Angebotene Standardausführung konfigurieren"
+    },
+    {
+      "href": "/blog/kennzeichen-fe-schrift",
+      "label": "Was FE-Schrift bedeutet"
+    }
+  ]
+},
+{
+  "slug": "kennzeichen-fe-schrift",
+  "title": "FE-Schrift auf Kennzeichen: Warum die Zeichenform vorgegeben ist",
+  "description": "Was fälschungserschwerende Schrift bedeutet, welche Muster für Kennzeichen gelten und warum Wunschschrift oder ein eigener Ausdruck keine Alternative sind.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-23",
+  "intro": [
+    "Kennzeichenbuchstaben sehen anders aus als gewöhnliche Druckschrift. Die Formen sind vorgeschrieben. Beim Bestellen entscheidest du daher nicht wie bei einem Namensschild frei über die Schriftart."
+  ],
+  "takeaway": "FE steht für fälschungserschwerende Schrift. Die Beschriftung muss den amtlich vorgesehenen Mustern entsprechen. Weder eine ähnliche Computerschrift noch ein ausgedrucktes Kennzeichen ersetzt ein vorschriftsmäßiges Schild.",
+  "sections": [
+    {
+      "id": "begriff",
+      "title": "FE bezeichnet die Zeichenform",
+      "paragraphs": [
+        "Anlage 4 FZV benennt die fälschungserschwerende Schrift und verweist auf die Schriftmuster für Kfz-Kennzeichen. Vorgegeben sind nicht nur grobe Buchstabenformen, sondern auch Maße und Toleranzen.",
+        "Der Name bedeutet nicht fälschungssicher. Er ist weder eine Garantie gegen Missbrauch noch ein eigenständiges Zertifikat für ein angebotenes Produkt. Auch ein Blech mit ähnlich aussehenden Buchstaben muss die weiteren Anforderungen erfüllen."
+      ]
+    },
+    {
+      "id": "varianten",
+      "title": "Welche Muster unterschieden werden",
+      "paragraphs": [
+        "Die Anlage zeigt Mittelschrift und Engschrift mit 75 Millimetern Höhe sowie verkleinerte Mittelschrift mit 49 Millimetern für die dafür vorgesehenen Schildarten. Diese Muster sind an die Kennzeichenausführung gebunden.",
+        "Für die Frage, wann Engschrift wegen Platzmangels eingesetzt werden darf, gibt es einen eigenen verlinkten Artikel. Hier ist die Grundentscheidung wichtig: Eine selbst gewählte Schreibschrift, Kursivschrift oder frei skalierte Schrift ist keine reguläre Bestelloption für ein amtliches Schild."
+      ]
+    },
+    {
+      "id": "kombination",
+      "title": "Zeichenform ändert nicht die Kombination",
+      "paragraphs": [
+        "Prüfe den Text deiner Reservierungs- oder Zuteilungsbestätigung unabhängig vom Schriftbild. Eine Null bleibt eine Ziffer, ein O ein Buchstabe. Teile eine unklare Bestätigung der ausstellenden Stelle mit, statt das Zeichen nach persönlichem Geschmack zu wählen.",
+        "Die Nummernfolge, ihre amtliche Zuteilung und die technische Fertigung sind getrennte Schritte. Ein korrekt geprägter Buchstabe macht eine falsch übertragene Kombination nicht richtig. Der verlinkte O-und-Null-Artikel hilft beim Abgleich."
+      ]
+    },
+    {
+      "id": "produkt",
+      "title": "Worauf du am fertigen Schild achtest",
+      "paragraphs": [
+        "§ 12 FZV verlangt unter anderem die vorgeschriebene Ausführung, Reflexion sowie das DIN-Prüf- und Überwachungszeichen mit Registernummer. FE-Schrift ist nur ein Teil davon. Amtliche Stempel- und HU-Plaketten sind wiederum eigene Kennzeichnungen.",
+        "Prüfe vor dem Kauf Kennzeichenart, Maße und Kombination. Nach der Lieferung vergleichst du die Zeichen erneut. Dekoschilder oder eigene Papierausdrucke sind kein Ersatz für die im Zulassungsverfahren benötigten Schilder."
+      ],
+      "items": [
+        "Bestätigte Kombination Zeichen für Zeichen übertragen.",
+        "Vorgesehene Kennzeichenart und Maße auswählen.",
+        "Keine freie Wunschschrift für das amtliche Schild erwarten.",
+        "Prägung und amtliche Plaketten getrennt behandeln."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV Anlage 4: FE-Schrift und Muster",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/anlage_4.html"
+    },
+    {
+      "label": "FZV § 12: Anforderungen an Kennzeichenschilder",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichengroessen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Kennzeichenschilder konfigurieren"
+    },
+    {
+      "href": "/blog/kennzeichen-praegen-herstellung",
+      "label": "Wie Kennzeichen geprägt werden"
+    },
+    {
+      "href": "/blog/kennzeichen-o-oder-null",
+      "label": "O und Null sicher unterscheiden"
+    },
+    {
+      "href": "/blog/kennzeichen-engschrift-kurzes-schild",
+      "label": "Engschrift bei begrenztem Platz"
+    }
+  ]
+},
+{
+  "slug": "kennzeichen-diebstahlschutz",
+  "title": "Kennzeichen gegen Diebstahl sichern: Befestigung sinnvoll prüfen",
+  "description": "Was eine festere Befestigung leisten kann, worauf du bei Sicherheitshaltern achten solltest und warum es keine Diebstahlgarantie gibt.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-23",
+  "intro": [
+    "Die Schilder sind noch da, aber der Rahmen lässt sich sehr leicht öffnen. Jetzt kannst du die Befestigung prüfen, bevor etwas passiert. Eine Sicherung soll das unbemerkte Abnehmen erschweren, ohne die vorgeschriebene Lesbarkeit zu beeinträchtigen."
+  ],
+  "takeaway": "Prüfe die gesamte Befestigung von Schild und Halter. Eine festere Montage kann den Aufwand beim Abnehmen erhöhen, bietet aber keinen vollständigen Diebstahlschutz. Im Shop angebotene normale Halter sind keine geprüfte Sicherheitslösung.",
+  "sections": [
+    {
+      "id": "grenzen",
+      "title": "Keine Befestigung ist eine Diebstahlgarantie",
+      "paragraphs": [
+        "Der ADAC nennt verschraubte Schilder und spezielle Sicherheitshalter als Möglichkeiten, Dieben die Arbeit zu erschweren. Daraus folgt keine Garantie. Selbst verschraubte Schilder können mit Gewalt entfernt werden; auch die Polizei hat solche Fälle dokumentiert.",
+        "Wähle deshalb nicht allein nach einer Werbeaussage wie diebstahlsicher. Für eine konkrete Schutzwirkung wären belastbare Nachweise zum jeweiligen Produkt nötig. Dieser Artikel enthält keinen eigenen Vergleichstest und keine Erfolgsquote."
+      ]
+    },
+    {
+      "id": "system",
+      "title": "Schild und Halter als Einheit betrachten",
+      "paragraphs": [
+        "Eine besondere Schraube am Blech hilft wenig, wenn der gesamte Rahmen locker ist. Prüfe sichtbare Risse, offene Clips und die Verbindung zum Fahrzeug. Folge dabei der Anleitung des Halterherstellers.",
+        "Wenn du ein System mit Spezialwerkzeug wählst, bewahre dieses so auf, dass du es beim späteren Schilderwechsel wiederfindest. Prüfe vorher, ob das System zu Aufnahme und Schildformat passt. Eine schwierige Demontage kann sonst auch den regulären Austausch behindern."
+      ]
+    },
+    {
+      "id": "sicht",
+      "title": "Die Sicherung darf das Kennzeichen nicht verdecken",
+      "paragraphs": [
+        "§ 12 FZV verlangt die feste Anbringung und die vorgeschriebene Ausgestaltung. Befestigungsteile dürfen nicht einfach Buchstaben, Ziffern oder Plaketten überdecken. Eine zusätzliche Schutzscheibe oder Folie ist keine pauschal zulässige Sicherungsmethode.",
+        "Wenn für die Montage gebohrt werden muss, kläre geeignete Stellen und die Befestigung am Fahrzeug. Die praktische Bohranleitung ist verlinkt. Beschädige weder die reflektierende Fläche unnötig noch amtliche Siegel."
+      ]
+    },
+    {
+      "id": "kontrolle",
+      "title": "Kontrolle und Ersatz getrennt planen",
+      "paragraphs": [
+        "Ein kurzer Blick vor Fahrtbeginn hilft, lockere oder fehlende Schilder zu bemerken. Bei tatsächlichem Diebstahl zuerst Polizei und Zulassungsstelle einschalten. Ein zweites ungestempeltes Blech mit alter Kombination ist keine vorbereitete Ersatz-Zulassung.",
+        "Der Shop bietet Kennzeichenschilder und normale Halteroptionen, aber keine hier nachgewiesenen Spezial-Sicherheitshalter. Bestelle neue Schilder erst bei wirklichem Ersatzbedarf und nach Klärung der Kombination."
+      ],
+      "items": [
+        "Rahmen und Fahrzeugbefestigung gemeinsam kontrollieren.",
+        "Herstellerangaben zur Montage prüfen.",
+        "Lesbarkeit und Plaketten freihalten.",
+        "Spezialwerkzeug für spätere Demontage aufbewahren.",
+        "Bei fehlendem Schild das Verlustverfahren nutzen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "ADAC: Möglichkeiten und Grenzen des Kennzeichenschutzes",
+      "href": "https://www.adac.de/verkehr/recht/verkehrsvorschriften-deutschland/kennzeichenverlust/"
+    },
+    {
+      "label": "FZV § 12: Anbringung und Abdeckungen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "Polizeipräsidium Mittelhessen: auch verschraubtes Schild entwendet",
+      "href": "https://www.presseportal.de/blaulicht/pm/43647/5137879"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-verloren-gestohlen",
+    "kennzeichen-beschaedigt-ersetzen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichen-bohren-befestigen",
+      "label": "Kennzeichenschilder befestigen"
+    },
+    {
+      "href": "/blog/kennzeichenhalter-wechseln",
+      "label": "Defekten Kennzeichenhalter wechseln"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Schilder nach geklärtem Ersatzverfahren bestellen"
+    }
+  ]
+},
+{
+  "slug": "arbeitsmaschine-kennzeichen-20-kmh",
+  "title": "Arbeitsmaschine: Zulassungsfrei und trotzdem ein Kennzeichen?",
+  "description": "Bei selbstfahrenden Arbeitsmaschinen und Staplern sind Zulassung, Kennzeichen und Genehmigung getrennt zu prüfen. Wichtig ist auch die bauartbedingte Geschwindigkeit.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-23",
+  "intro": [
+    "Der Radlader wird nur kurz über die Straße zum nächsten Einsatz gefahren. Bedeutet zulassungsfrei, dass er kein Kennzeichen braucht? Nicht unbedingt. Fahrzeugart und bauartbedingte Höchstgeschwindigkeit entscheiden über unterschiedliche Pflichten."
+  ],
+  "takeaway": "Selbstfahrende Arbeitsmaschinen und Stapler sind nach § 3 FZV grundsätzlich vom Zulassungsverfahren ausgenommen. Bei mehr als 20 km/h verlangt § 4 dennoch ein zugeteiltes Kennzeichen. Ein normaler Traktor fällt nicht allein wegen seines Einsatzorts unter diese Ausnahme.",
+  "sections": [
+    {
+      "id": "klasse",
+      "title": "Die Eintragung ist wichtiger als der Alltagsname",
+      "paragraphs": [
+        "Prüfe die Fahrzeugunterlagen: Ist das Fahrzeug tatsächlich als selbstfahrende Arbeitsmaschine oder Stapler eingestuft? Ein landwirtschaftlich genutztes Fahrzeug ist nicht automatisch eine solche Arbeitsmaschine.",
+        "Leite die Einordnung nicht nur aus einem Anbaugerät oder der Bezeichnung auf einem Verkaufsportal ab. Bei fehlenden oder unklaren Papieren klärst du Fahrzeugklasse und Genehmigung zunächst mit einer zuständigen Stelle. Die Schildergröße löst diese Frage nicht."
+      ]
+    },
+    {
+      "id": "tempo",
+      "title": "Mehr als 20 km/h: eigene Kennzeichenzuteilung",
+      "paragraphs": [
+        "§ 4 Absatz 2 FZV verlangt für die dort genannten Arbeitsmaschinen und Stapler bei einer bauartbedingten Höchstgeschwindigkeit von mehr als 20 Kilometern pro Stunde ein Kennzeichen. Maßgeblich ist die technische Einstufung, nicht wie langsam du an diesem Tag fahren möchtest.",
+        "Die Zuteilung erfolgt behördlich. Einfach eine vorhandene Nummer eines anderen Betriebsfahrzeugs nachprägen zu lassen, ersetzt sie nicht. Bei freiwilliger Zulassung oder besonderen Fahrzeugfällen ist der konkrete Status gesondert zu berücksichtigen."
+      ]
+    },
+    {
+      "id": "langsam",
+      "title": "Bis 20 km/h bleiben weitere Pflichten",
+      "paragraphs": [
+        "Für die von § 4 Absatz 4 erfassten Fahrzeuge bis 20 km/h ist eine dauerhafte, deutlich lesbare Halterkennzeichnung auf der linken Fahrzeugseite vorgesehen: bei Privatpersonen Name und Wohnort, bei Firmen Bezeichnung und Sitz.",
+        "Das ist kein normales amtliches Nummernschild. Auch die Genehmigungsvoraussetzungen und erforderlichen Fahrzeugnachweise bleiben zu beachten. Zulassungsfreiheit bedeutet zudem nicht automatisch Versicherungsfreiheit; kläre den Schutz für den konkreten Einsatz mit deinem Versicherer."
+      ]
+    },
+    {
+      "id": "kauf",
+      "title": "Vor einer Schilderbestellung diese Angaben klären",
+      "paragraphs": [
+        "Wenn ein amtliches Kennzeichen zugeteilt wird, benötigst du die bestätigte Kombination, Farbe und zulässige Schildform. Der Shop bietet Landmaschinenformate in 240 × 130 und 255 × 130 Millimetern. Diese passen nicht automatisch zu jeder Arbeitsmaschine.",
+        "Bestelle erst nach dem Abgleich mit deinen Unterlagen. Die physische Tafel enthält weder eine Betriebserlaubnis noch die amtliche Zuteilung. Für eine vorgeschriebene Halteranschrift ist der Kennzeichenkonfigurator nicht als Beschriftungsdienst vorgesehen."
+      ],
+      "items": [
+        "Fahrzeugklasse und Genehmigung nachweisen.",
+        "Bauartbedingte Höchstgeschwindigkeit prüfen.",
+        "Kennzeichenzuteilung oder Halterbeschriftung unterscheiden.",
+        "Bestätigte Farbe und Format mit dem Sortiment abgleichen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 3: Ausnahmen vom Zulassungsverfahren",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__3.html"
+    },
+    {
+      "label": "FZV § 4: Voraussetzungen und Kennzeichnung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__4.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichengroessen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/landmaschinen-kennzeichen",
+      "label": "Angebotene Landmaschinenformate ansehen"
+    }
+  ]
+},
+{
+  "slug": "wohnwagen-eigenes-kennzeichen",
+  "title": "Wohnwagen: Warum du ein eigenes Kennzeichen brauchst",
+  "description": "Ein normaler Wohnanhänger führt seine eigene Kombination. So unterscheidest du ihn vom Fahrradträger und planst Schild, Saison und Zugwagenwechsel.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-23",
+  "intro": [
+    "Das Auto hat ein Kennzeichen. Kann der Wohnwagen einfach ein zweites Schild mit derselben Nummer bekommen? Bei einem normalen privat genutzten Wohnanhänger ist das nicht der richtige Weg. Er wird als eigenes Fahrzeug zugelassen."
+  ],
+  "takeaway": "Der reguläre Wohnwagen braucht seine eigene Zulassung und ein hinteres Kennzeichenschild mit der zugeteilten Kombination. Das ist kein Wiederholungsschild des Zugautos. Ein Wechsel des Zugwagens ändert deshalb nicht automatisch die Wohnwagenkombination.",
+  "sections": [
+    {
+      "id": "anhaenger",
+      "title": "Wohnanhänger und Fahrradträger unterscheiden",
+      "paragraphs": [
+        "§ 3 FZV sieht grundsätzlich die Zulassung von Kraftfahrzeugen und ihren Anhängern vor. Die Ausnahmen sind konkret beschrieben. Die besondere Ausnahme für bestimmte Wohnwagen im Schaustellergewerbe ist keine allgemeine Freizeitwohnwagen-Regel.",
+        "Ein Fahrradträger am Auto hat eine andere Funktion. Wird durch ihn das Fahrzeugkennzeichen verdeckt, kommt eine Wiederholung der Autokombination infrage. Übertrage diese Regel nicht auf einen regulär zulassungspflichtigen Wohnanhänger."
+      ]
+    },
+    {
+      "id": "schild",
+      "title": "Ein amtliches Schild an der Rückseite",
+      "paragraphs": [
+        "Nach § 12 FZV wird das Kennzeichen am Anhänger hinten angebracht. Bestelle die für den Wohnwagen bestätigte Kombination und prüfe das Format der Aufnahme. Für den gewöhnlichen Wohnwagen brauchst du nicht wie beim Pkw ein vorderes und ein hinteres Schilderpaar.",
+        "Die benötigten amtlichen Plaketten kommen über das vorgesehene Verfahren hinzu. Eine Tempo-100-Plakette ist wiederum eine andere Kennzeichnung mit eigenen Voraussetzungen. Sie ersetzt weder Zulassung noch Kennzeichenschild."
+      ]
+    },
+    {
+      "id": "zugwagen",
+      "title": "Was beim Wechsel des Zugautos wichtig ist",
+      "paragraphs": [
+        "Der Wohnwagen behält seine eigene Identität und Zulassung. Prüfe beim anderen Zugwagen trotzdem, ob Anhängelast, zulässige Kombination und gegebenenfalls Tempo-100-Bedingungen passen.",
+        "Du musst die Wohnwagenkombination nicht allein deshalb neu prägen lassen, weil das Zugauto eine andere Nummer hat. Bei einem tatsächlichen Halterwechsel oder einer behördlichen Änderung ist dagegen der entsprechende Vorgang zu klären."
+      ]
+    },
+    {
+      "id": "saison",
+      "title": "Saison und Bestellung zusammen planen",
+      "paragraphs": [
+        "Bei einer Saisonzulassung richtet sich der erlaubte Betriebszeitraum nach dem Wohnwagenkennzeichen. Ein ganzjährig zugelassenes Zugauto verlängert die Saison des Anhängers nicht. Prüfe die Monate daher für beide Fahrzeuge getrennt.",
+        "Wenn Kombination und Ausführung feststehen, wählst du ein passendes angebotenes Anhängerschild. Kontrolliere die Stückzahl vor der Zahlung. Für einen Saisonwunsch nutze nur eine dafür passende, bestätigte Ausführung."
+      ],
+      "items": [
+        "Eigene Wohnwagenkombination statt Autonummer verwenden.",
+        "Zulassungsstatus und mögliche Saisonmonate prüfen.",
+        "Hintere Aufnahme messen.",
+        "Ein benötigtes Schild und amtliche Plaketten unterscheiden."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 3: Zulassung und konkrete Anhängerausnahmen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__3.html"
+    },
+    {
+      "label": "FZV § 12: Anbringung an Anhängern",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "FZV § 10: Saisonkennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__10.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "saisonkennzeichen-zeitraum-aendern",
+    "auto-anmelden-unterlagen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/anhaengerkennzeichen",
+      "label": "Passendes Anhängerkennzeichen konfigurieren"
+    },
+    {
+      "href": "/blog/anhaenger-100-plakette-kennzeichen",
+      "label": "Tempo-100-Plakette richtig einordnen"
+    }
+  ]
+},
+{
+  "slug": "tageszulassung-kennzeichen",
+  "title": "Tageszulassung und Kennzeichen: Was gilt bei der Fahrzeugabholung?",
+  "description": "Der Verkaufsbegriff Tageszulassung sagt noch nichts über die erlaubte Abholfahrt. Prüfe aktuellen Zulassungsstatus, Nachweis und die spätere Schilderbestellung.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-23",
+  "intro": [
+    "Der Händler bietet ein Auto mit Tageszulassung an. Daraus folgt nicht, dass du es bei der Abholung einfach mit vorhandenen Schildern fahren darfst. Zuerst musst du klären, ob das Fahrzeug aktuell zugelassen oder bereits außer Betrieb gesetzt ist."
+  ],
+  "takeaway": "Die gesetzliche Tageszulassung nach § 7 FZV endet mit Ablauf des Tages der Erstzulassung. Sie ist keine mehrtägige Überführungserlaubnis. Für eine spätere Abholung brauchst du einen dafür gültigen Zulassungs- und Versicherungsstatus.",
+  "sections": [
+    {
+      "id": "begriff",
+      "title": "Verkaufsbeschreibung und aktueller Status trennen",
+      "paragraphs": [
+        "Eine Anzeige kann mit Tageszulassung die frühere kurze Zulassung eines angebotenen Autos meinen. Das Wort allein belegt weder eine heute bestehende Zulassung noch ein bestimmtes Datum für deine Fahrt.",
+        "Lass dir vor der Abholung erklären, welches Verfahren genutzt wurde, wann es wirksam war und welchen Status das Fahrzeug jetzt hat. Prüfe dazu die Fahrzeugpapiere. So wird aus einer unklaren Verkaufsbeschreibung ein konkreter Ablauf für die Übergabe."
+      ]
+    },
+    {
+      "id": "gesetz",
+      "title": "Was die Tageszulassung nach § 7 bedeutet",
+      "paragraphs": [
+        "Bei diesem Verfahren gilt die Erstzulassung ausschließlich für den Tag, an dem sie wirksam wird. Mit dessen Ablauf gilt das Fahrzeug ohne gesonderten Abmeldeantrag als außer Betrieb gesetzt.",
+        "Eine Abstempelung der Kennzeichenschilder ist dabei nicht erforderlich. Für die erlaubte Inbetriebsetzung sind aber die vorgeschriebenen Schilder nötig und der vorläufige Zulassungsnachweis muss von außen gut lesbar im Fahrzeug ausliegen. Das ist eine eng begrenzte Sonderregel, keine allgemeine Fahrerlaubnis mit ungestempelten Blechen."
+      ]
+    },
+    {
+      "id": "abholung",
+      "title": "Abholung nach dem Zulassungstag organisieren",
+      "paragraphs": [
+        "Liegt der Tag bereits zurück, vereinbare die passende weitere Zulassung oder einen rechtlich geeigneten Transport. Ein noch im Auto liegender vorläufiger Nachweis verlängert die Tageszulassung nicht.",
+        "Eine neue Schilderbestellung allein schafft ebenfalls keinen gültigen Status. Stimme mit dem Händler ab, wer Unterlagen bereitstellt und wer den nächsten behördlichen Vorgang erledigt. Die Versicherung muss zu diesem Vorgang passen."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "Erst den folgenden Vorgang, dann die Bleche planen",
+      "paragraphs": [
+        "Kläre, welche Kombination für die spätere Zulassung bestätigt ist und ob vorhandene Schilder in passender Ausführung weiterverwendet werden können. Bestelle nicht automatisch die frühere Händlerkombination nach.",
+        "Für eine bestätigte reguläre Kombination kannst du die passende angebotene Ausführung konfigurieren. Die Bestellung liefert Schilder, aber keine Tageszulassung, Versicherung oder amtlichen Plaketten. Plane die Lieferung mit Abstand zum vereinbarten Termin."
+      ],
+      "items": [
+        "Aktuellen Zulassungsstatus statt nur Anzeigenbegriff prüfen.",
+        "Tag und Gültigkeit eines vorläufigen Nachweises abgleichen.",
+        "Spätere Zulassung oder Transport vor Abholung vereinbaren.",
+        "Bestätigte Kombination und Schilderbedarf feststellen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 7: gesetzliche Tageszulassung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__7.html"
+    },
+    {
+      "label": "FZV § 16: Wiederzulassung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__16.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-online-zulassen-kennzeichen",
+    "kurzzeitkennzeichen-fahrzeugueberfuehrung"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Schilder für die bestätigte Zulassung bestellen"
+    },
+    {
+      "href": "/blog/evb-nummer-kennzeichenbestellung",
+      "label": "Versicherungsnachweis und Schilderkauf trennen"
+    }
+  ]
+},
+{
   "slug": "evb-nummer-kennzeichenbestellung",
   "title": "eVB und Kennzeichenbestellung: Welche Nummer gehört wohin?",
   "description": "Versicherungscode, Wunschkennzeichen und Bestellnummer haben verschiedene Aufgaben. So bereitest du die Schilderbestellung ohne Verwechslungen vor.",
@@ -95,6 +555,14 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/kennzeichen-o-oder-null",
       "label": "Buchstaben und Ziffern richtig übernehmen"
+    },
+    {
+      "href": "/ratgeber/auto-auf-firma-zulassen",
+      "label": "Zulassung auf ein Unternehmen"
+    },
+    {
+      "href": "/ratgeber/fahrzeug-auf-minderjaehrige-zulassen",
+      "label": "Zulassung auf Minderjährige"
     }
   ]
 },
@@ -606,6 +1074,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/anhaengerkennzeichen",
       "label": "Angebotenes Anhängerkennzeichen konfigurieren"
+    },
+    {
+      "href": "/blog/wohnwagen-eigenes-kennzeichen",
+      "label": "Eigenes Kennzeichen für den Wohnwagen"
     }
   ]
 },
@@ -1016,7 +1488,14 @@ export const blogArticles: BlogArticle[] = [
       "href": "/blog/kennzeichen-entsiegeln-online-abmeldung",
       "label": "Online-Abmeldung vorbereiten"
     },
-    {"href": "/ratgeber/kennzeichen-fahrzeugwechsel-uebernehmen", "label": "Bisherige Kombination für das Folgefahrzeug klären"}
+    {
+      "href": "/ratgeber/kennzeichen-fahrzeugwechsel-uebernehmen",
+      "label": "Bisherige Kombination für das Folgefahrzeug klären"
+    },
+    {
+      "href": "/ratgeber/auto-geerbt-ummelden",
+      "label": "Geerbtes Auto ummelden oder verkaufen"
+    }
   ]
 },
 {
@@ -2033,76 +2512,80 @@ export const blogArticles: BlogArticle[] = [
     ]
   },
   {
-    "slug": "kennzeichenhalter-wechseln",
-    "title": "Kennzeichenhalter wechseln: so gehst du vor",
-    "description": "Rahmen defekt oder Verschluss locker? So bereitest du den Wechsel vor und kontrollierst anschließend den festen Sitz deines Kennzeichens.",
-    "category": "Kennzeichen im Alltag",
-    "publishedAt": "2026-11-13",
-    "intro": [
-      "Ein beschädigter Halter ist kein Grund, automatisch neue Schilder zu kaufen. Ist das Kennzeichen selbst in Ordnung, kannst du es häufig weiterverwenden. Entscheidend sind ein passender Rahmen, intakte Befestigungspunkte und die Anleitung des Halterherstellers."
-    ],
-    "takeaway": "Erst den Verschluss erkennen, dann das Schild herausnehmen. Montiere einen passenden Rahmen an den vorgesehenen Punkten und kontrolliere alle Verriegelungen.",
-    "sections": [
-      {
-        "id": "system",
-        "title": "Welchen Verschluss hat dein Rahmen?",
-        "paragraphs": [
-          "Gängige Rahmen haben eine abnehmbare untere Leiste, seitliche Clips oder einen Klappmechanismus. Die Öffnungsrichtung ist nicht bei jedem Modell gleich. Suche vor dem Hebeln nach kleinen Markierungen oder der Montageanleitung.",
-          "Lege ein weiches Tuch bereit, damit das Schild nicht auf den Boden fällt. Setzt du ein Werkzeug ein, darf es weder die Schildfläche noch den Fahrzeuglack beschädigen. Bei brüchigem Kunststoff ist kräftiges Ziehen selten hilfreich."
-        ]
-      },
-      {
-        "id": "ausbau",
-        "title": "Schild und alten Rahmen ausbauen",
-        "paragraphs": [
-          "Öffne den vorgesehenen Verschluss und halte das Schild dabei fest. Lege es mit geschützter Oberfläche ab. Die amtlichen Plaketten bleiben am Schild. Anschließend löst du die Befestigung des leeren Rahmens.",
-          "Merke dir die Lage der Schrauben und vorhandenen Distanzteile. Kontrolliere, ob Gewinde oder Aufnahmen beschädigt sind. Ist die Aufnahme im Fahrzeug ausgerissen, behebt ein neuer Rahmen allein das Problem nicht."
-        ]
-      },
-      {
-        "id": "einbau",
-        "title": "Passenden Rahmen montieren",
-        "paragraphs": [
-          "Vergleiche Schildformat, Lochabstände und Befestigung mit dem Ersatzhalter. Nutze die vorgesehenen Fahrzeugaufnahmen und geeignete Schrauben nach Herstellerangaben. Es gibt keine Schraubenlänge, die für jedes Auto passt.",
-          "Setze das Schild vollständig in die Führung und schließe alle vorgesehenen Clips. Es darf nicht nur an einer Ecke eingehakt sein. Schrift, Plaketten und vorgeschriebene Kennzeichnungen müssen sichtbar bleiben."
-        ],
-        "items": [
-          "Schild sitzt in allen Führungen.",
-          "Verschluss ist vollständig eingerastet.",
-          "Rahmen und Schild wackeln nicht.",
-          "Beleuchtung und vorhandene Sensoren werden nicht verdeckt."
-        ]
-      },
-      {
-        "id": "entscheidung",
-        "title": "Wann brauchst du zusätzlich ein neues Schild?",
-        "paragraphs": [
-          "Risse, ausgerissene Löcher oder dauerhaft unleserliche Zeichen sind ein anderer Fall als ein defekter Rahmen. Kläre dann auch den Schilderaustausch. Ein fehlendes Schild gehört dagegen zum Verfahren bei Verlust oder Diebstahl.",
-          "Im Shop sind Kennzeichenhalter als passende Zusatzartikel zur Schilderbestellung vorgesehen. Prüfe die aktuelle Auswahl und Maße. Für die alleinige Reparatur eines intakten Schilds musst du kein unnötiges Schilderpaket kaufen."
-        ]
-      }
-    ],
-    "sources": [
-      {
-        "label": "FZV § 12: Ausgestaltung und Anbringung der Kennzeichen",
-        "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
-      }
-    ],
-    "relatedGuideSlugs": [
-      "kennzeichen-beschaedigt-ersetzen",
-      "kennzeichen-verloren-gestohlen"
-    ],
-    "relatedLinks": [
-      {
-        "href": "/kennzeichenhalter",
-        "label": "Halter als Zusatz zur Schilderbestellung"
-      },
-      {
-        "href": "/blog/kennzeichen-bohren-befestigen",
-        "label": "Direkte Verschraubung oder Rahmen?"
-      }
-    ]
-  },
+  "slug": "kennzeichenhalter-wechseln",
+  "title": "Kennzeichenhalter wechseln: so gehst du vor",
+  "description": "Rahmen defekt oder Verschluss locker? So bereitest du den Wechsel vor und kontrollierst anschließend den festen Sitz deines Kennzeichens.",
+  "category": "Kennzeichen im Alltag",
+  "publishedAt": "2026-11-13",
+  "intro": [
+    "Ein beschädigter Halter ist kein Grund, automatisch neue Schilder zu kaufen. Ist das Kennzeichen selbst in Ordnung, kannst du es häufig weiterverwenden. Entscheidend sind ein passender Rahmen, intakte Befestigungspunkte und die Anleitung des Halterherstellers."
+  ],
+  "takeaway": "Erst den Verschluss erkennen, dann das Schild herausnehmen. Montiere einen passenden Rahmen an den vorgesehenen Punkten und kontrolliere alle Verriegelungen.",
+  "sections": [
+    {
+      "id": "system",
+      "title": "Welchen Verschluss hat dein Rahmen?",
+      "paragraphs": [
+        "Gängige Rahmen haben eine abnehmbare untere Leiste, seitliche Clips oder einen Klappmechanismus. Die Öffnungsrichtung ist nicht bei jedem Modell gleich. Suche vor dem Hebeln nach kleinen Markierungen oder der Montageanleitung.",
+        "Lege ein weiches Tuch bereit, damit das Schild nicht auf den Boden fällt. Setzt du ein Werkzeug ein, darf es weder die Schildfläche noch den Fahrzeuglack beschädigen. Bei brüchigem Kunststoff ist kräftiges Ziehen selten hilfreich."
+      ]
+    },
+    {
+      "id": "ausbau",
+      "title": "Schild und alten Rahmen ausbauen",
+      "paragraphs": [
+        "Öffne den vorgesehenen Verschluss und halte das Schild dabei fest. Lege es mit geschützter Oberfläche ab. Die amtlichen Plaketten bleiben am Schild. Anschließend löst du die Befestigung des leeren Rahmens.",
+        "Merke dir die Lage der Schrauben und vorhandenen Distanzteile. Kontrolliere, ob Gewinde oder Aufnahmen beschädigt sind. Ist die Aufnahme im Fahrzeug ausgerissen, behebt ein neuer Rahmen allein das Problem nicht."
+      ]
+    },
+    {
+      "id": "einbau",
+      "title": "Passenden Rahmen montieren",
+      "paragraphs": [
+        "Vergleiche Schildformat, Lochabstände und Befestigung mit dem Ersatzhalter. Nutze die vorgesehenen Fahrzeugaufnahmen und geeignete Schrauben nach Herstellerangaben. Es gibt keine Schraubenlänge, die für jedes Auto passt.",
+        "Setze das Schild vollständig in die Führung und schließe alle vorgesehenen Clips. Es darf nicht nur an einer Ecke eingehakt sein. Schrift, Plaketten und vorgeschriebene Kennzeichnungen müssen sichtbar bleiben."
+      ],
+      "items": [
+        "Schild sitzt in allen Führungen.",
+        "Verschluss ist vollständig eingerastet.",
+        "Rahmen und Schild wackeln nicht.",
+        "Beleuchtung und vorhandene Sensoren werden nicht verdeckt."
+      ]
+    },
+    {
+      "id": "entscheidung",
+      "title": "Wann brauchst du zusätzlich ein neues Schild?",
+      "paragraphs": [
+        "Risse, ausgerissene Löcher oder dauerhaft unleserliche Zeichen sind ein anderer Fall als ein defekter Rahmen. Kläre dann auch den Schilderaustausch. Ein fehlendes Schild gehört dagegen zum Verfahren bei Verlust oder Diebstahl.",
+        "Im Shop sind Kennzeichenhalter als passende Zusatzartikel zur Schilderbestellung vorgesehen. Prüfe die aktuelle Auswahl und Maße. Für die alleinige Reparatur eines intakten Schilds musst du kein unnötiges Schilderpaket kaufen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 12: Ausgestaltung und Anbringung der Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-beschaedigt-ersetzen",
+    "kennzeichen-verloren-gestohlen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichenhalter",
+      "label": "Halter als Zusatz zur Schilderbestellung"
+    },
+    {
+      "href": "/blog/kennzeichen-bohren-befestigen",
+      "label": "Direkte Verschraubung oder Rahmen?"
+    },
+    {
+      "href": "/blog/kennzeichen-diebstahlschutz",
+      "label": "Befestigung und Diebstahlschutz"
+    }
+  ]
+},
   {
     "slug": "kennzeichen-bohren-befestigen",
     "title": "Kennzeichen bohren oder im Halter befestigen?",
@@ -2409,88 +2892,99 @@ export const blogArticles: BlogArticle[] = [
   ]
   },
   {
-    "slug": "kennzeichen-praegen-herstellung",
-    "title": "Wie werden Kennzeichen geprägt?",
-    "description": "Vom Rohling zur erhabenen Kombination: Was beim Prägen entsteht und weshalb ein fertiges Schild noch keine Zulassung ersetzt.",
-    "category": "Kennzeichen im Alltag",
-    "publishedAt": "2026-11-13",
-    "intro": [
-      "Ein deutsches Kennzeichenschild ist mehr als eine bedruckte Metallplatte. Bei einem geprägten Schild stehen die Buchstaben und Zahlen erhaben aus der Fläche heraus. Die Formgebung und die kontrastreiche Beschriftung erfüllen unterschiedliche Aufgaben."
-    ],
-    "takeaway": "Die Kombination wird in einen geeigneten Rohling geprägt und sichtbar ausgeführt. Die behördliche Zuteilung und die amtlichen Plaketten gehören zu einem anderen Vorgang.",
-    "sections": [
-      {
-        "id": "rohling",
-        "title": "Am Anfang steht die passende Schildform",
-        "paragraphs": [
-          "Vor der Fertigung muss feststehen, welche Ausführung benötigt wird. Ein einzeiliges Autoschild und ein Motorradschild haben andere Formate. Auch Platz für besondere Kennzeichenmerkmale ist bei der Auswahl zu berücksichtigen.",
-          "Für Kennzeichenschilder gelten Vorgaben zur Ausgestaltung und Reflexion. Ein ähnliches Aussehen allein belegt nicht, dass ein beliebiges Dekoschild für den Straßenverkehr geeignet ist. Prüfe die Produktangaben zur vorgesehenen Nutzung."
-        ]
-      },
-      {
-        "id": "praegung",
-        "title": "Was das Prägen verändert",
-        "paragraphs": [
-          "Beim Prägen wird die Zeichenform mechanisch in das Material eingebracht. Anders als bei einer flachen Beschriftung entsteht eine fühlbare Kontur. Die fertige Kombination muss mit der bestellten und behördlich geklärten Zeichenfolge übereinstimmen.",
-          "Dieser Artikel erläutert das Grundprinzip. Er ist kein Einblick in eine bestimmte Fertigungsanlage und verspricht weder eine bestimmte Maschine noch eine konkrete Bearbeitungszeit. Wie der Anbieter produziert und versendet, ergibt sich aus seinen aktuellen Angaben."
-        ]
-      },
-      {
-        "id": "schrift",
-        "title": "Warum Schriftbild und Lesbarkeit wichtig sind",
-        "paragraphs": [
-          "Die gesetzlichen Muster legen die Ausgestaltung fest. Zusätzliche Gestaltungsideen dürfen nicht einfach an die Stelle der vorgeschriebenen Beschriftung treten. Gerade bei vermeintlich ähnlichen Zeichen ist eine sorgfältige Kontrolle wichtig.",
-          "Vergleiche Ortskürzel, Buchstaben und Zahlen mit deiner offiziellen Bestätigung. Achte auch darauf, dass die gewählte Ausführung zum Fahrzeug passt. Eine technisch mögliche Eingabe im Shop bedeutet nicht automatisch, dass die Behörde sie zuteilt."
-        ]
-      },
-      {
-        "id": "zulassung",
-        "title": "Prägung, Reservierung und Zulassung auseinanderhalten",
-        "paragraphs": [
-          "Eine Reservierung sichert eine Kombination im jeweiligen behördlichen Verfahren. Die Bestellung beauftragt die Anfertigung der physischen Schilder. Die Zulassung und erforderliche Abstempelung erfolgen separat.",
-          "Die normale Schilderlieferung enthält deshalb keine amtliche Zulassung und keine Stempelplaketten. Für das Wiederholungskennzeichen am Fahrradträger gilt eine besondere Regel zur fehlenden Abstempelung; das macht es nicht zu einem Ersatz für das amtliche Schild am Auto."
-        ]
-      },
-      {
-        "id": "bestellcheck",
-        "title": "Vor der Fertigung lohnt der letzte Blick",
-        "paragraphs": [
-          "Prüfe die Vorschau vor dem Absenden. Korrekturen nach Beginn der individuellen Fertigung sind nicht selbstverständlich möglich."
-        ],
-        "items": [
-          "Kombination offiziell bestätigt?",
-          "Richtiges Format und richtige Kennzeichenart gewählt?",
-          "Anzahl der Schilder geprüft?",
-          "Lieferadresse und Gesamtpreis kontrolliert?"
-        ]
-      }
-    ],
-    "sources": [
-      {
-        "label": "FZV § 12: Ausgestaltung und Anbringung der Kennzeichen",
-        "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
-      },
-      {
-        "label": "FZV Anlage 4: Gestaltung der Kennzeichen",
-        "href": "https://www.gesetze-im-internet.de/fzv_2023/anlage_4.html"
-      }
-    ],
-    "relatedGuideSlugs": [
-      "kennzeichen-online-bestellen",
-      "wunschkennzeichen-reservieren"
-    ],
-    "relatedLinks": [
-      {"href": "/blog/carbon-3d-kennzeichen-unterschied", "label": "Carbon und 3D unterscheiden"},
-      {
-        "href": "/din-74069",
-        "label": "Informationen zur Kennzeichenausführung"
-      },
-      {
-        "href": "/blog/kennzeichen-falsch-bestellt",
-        "label": "Was bei einer falschen Bestellung zu tun ist"
-      }
-    ]
-  },
+  "slug": "kennzeichen-praegen-herstellung",
+  "title": "Wie werden Kennzeichen geprägt?",
+  "description": "Vom Rohling zur erhabenen Kombination: Was beim Prägen entsteht und weshalb ein fertiges Schild noch keine Zulassung ersetzt.",
+  "category": "Kennzeichen im Alltag",
+  "publishedAt": "2026-11-13",
+  "intro": [
+    "Ein deutsches Kennzeichenschild ist mehr als eine bedruckte Metallplatte. Bei einem geprägten Schild stehen die Buchstaben und Zahlen erhaben aus der Fläche heraus. Die Formgebung und die kontrastreiche Beschriftung erfüllen unterschiedliche Aufgaben."
+  ],
+  "takeaway": "Die Kombination wird in einen geeigneten Rohling geprägt und sichtbar ausgeführt. Die behördliche Zuteilung und die amtlichen Plaketten gehören zu einem anderen Vorgang.",
+  "sections": [
+    {
+      "id": "rohling",
+      "title": "Am Anfang steht die passende Schildform",
+      "paragraphs": [
+        "Vor der Fertigung muss feststehen, welche Ausführung benötigt wird. Ein einzeiliges Autoschild und ein Motorradschild haben andere Formate. Auch Platz für besondere Kennzeichenmerkmale ist bei der Auswahl zu berücksichtigen.",
+        "Für Kennzeichenschilder gelten Vorgaben zur Ausgestaltung und Reflexion. Ein ähnliches Aussehen allein belegt nicht, dass ein beliebiges Dekoschild für den Straßenverkehr geeignet ist. Prüfe die Produktangaben zur vorgesehenen Nutzung."
+      ]
+    },
+    {
+      "id": "praegung",
+      "title": "Was das Prägen verändert",
+      "paragraphs": [
+        "Beim Prägen wird die Zeichenform mechanisch in das Material eingebracht. Anders als bei einer flachen Beschriftung entsteht eine fühlbare Kontur. Die fertige Kombination muss mit der bestellten und behördlich geklärten Zeichenfolge übereinstimmen.",
+        "Dieser Artikel erläutert das Grundprinzip. Er ist kein Einblick in eine bestimmte Fertigungsanlage und verspricht weder eine bestimmte Maschine noch eine konkrete Bearbeitungszeit. Wie der Anbieter produziert und versendet, ergibt sich aus seinen aktuellen Angaben."
+      ]
+    },
+    {
+      "id": "schrift",
+      "title": "Warum Schriftbild und Lesbarkeit wichtig sind",
+      "paragraphs": [
+        "Die gesetzlichen Muster legen die Ausgestaltung fest. Zusätzliche Gestaltungsideen dürfen nicht einfach an die Stelle der vorgeschriebenen Beschriftung treten. Gerade bei vermeintlich ähnlichen Zeichen ist eine sorgfältige Kontrolle wichtig.",
+        "Vergleiche Ortskürzel, Buchstaben und Zahlen mit deiner offiziellen Bestätigung. Achte auch darauf, dass die gewählte Ausführung zum Fahrzeug passt. Eine technisch mögliche Eingabe im Shop bedeutet nicht automatisch, dass die Behörde sie zuteilt."
+      ]
+    },
+    {
+      "id": "zulassung",
+      "title": "Prägung, Reservierung und Zulassung auseinanderhalten",
+      "paragraphs": [
+        "Eine Reservierung sichert eine Kombination im jeweiligen behördlichen Verfahren. Die Bestellung beauftragt die Anfertigung der physischen Schilder. Die Zulassung und erforderliche Abstempelung erfolgen separat.",
+        "Die normale Schilderlieferung enthält deshalb keine amtliche Zulassung und keine Stempelplaketten. Für das Wiederholungskennzeichen am Fahrradträger gilt eine besondere Regel zur fehlenden Abstempelung; das macht es nicht zu einem Ersatz für das amtliche Schild am Auto."
+      ]
+    },
+    {
+      "id": "bestellcheck",
+      "title": "Vor der Fertigung lohnt der letzte Blick",
+      "paragraphs": [
+        "Prüfe die Vorschau vor dem Absenden. Korrekturen nach Beginn der individuellen Fertigung sind nicht selbstverständlich möglich."
+      ],
+      "items": [
+        "Kombination offiziell bestätigt?",
+        "Richtiges Format und richtige Kennzeichenart gewählt?",
+        "Anzahl der Schilder geprüft?",
+        "Lieferadresse und Gesamtpreis kontrolliert?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 12: Ausgestaltung und Anbringung der Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "FZV Anlage 4: Gestaltung der Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/anlage_4.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-online-bestellen",
+    "wunschkennzeichen-reservieren"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/carbon-3d-kennzeichen-unterschied",
+      "label": "Carbon und 3D unterscheiden"
+    },
+    {
+      "href": "/din-74069",
+      "label": "Informationen zur Kennzeichenausführung"
+    },
+    {
+      "href": "/blog/kennzeichen-falsch-bestellt",
+      "label": "Was bei einer falschen Bestellung zu tun ist"
+    },
+    {
+      "href": "/blog/kennzeichen-fe-schrift",
+      "label": "FE-Schrift: vorgeschriebene Zeichenform"
+    },
+    {
+      "href": "/blog/kennzeichen-engschrift-kurzes-schild",
+      "label": "Engschrift und begrenzter Platz"
+    }
+  ]
+},
   {
     "slug": "kennzeichen-lieferung-pruefen",
     "title": "Kennzeichen geliefert: Was solltest du prüfen?",

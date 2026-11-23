@@ -26,6 +26,390 @@ const shortTerm = { label: 'Service Berlin: Kurzzeitkennzeichen beantragen', hre
 
 export const registrationGuides: RegistrationGuide[] = [
 {
+  "slug": "auto-geerbt-ummelden",
+  "title": "Auto geerbt: Ummeldung und Kennzeichen nach einem Todesfall",
+  "teaser": "Welche Punkte du bei einem geerbten Auto zuerst klärst: Berechtigung, Fahrzeugpapiere, Versicherung, Halterwechsel und möglicher Schilderbedarf.",
+  "category": "Besondere Zulassungsfälle",
+  "reviewedAt": "2026-11-23",
+  "intro": [
+    "Nach einem Todesfall müssen oft viele Dinge gleichzeitig geregelt werden. Beim Auto hilft eine klare Reihenfolge: Wer darf über das Fahrzeug verfügen, wer wird künftig Halter und sind die Unterlagen vollständig? Neue Kennzeichenschilder sind erst danach eine mögliche Aufgabe."
+  ],
+  "takeaway": "Kläre den Halterwechsel oder die Außerbetriebsetzung zeitnah mit der Zulassungsstelle. Fehlende Nachlass- oder Fahrzeugunterlagen lassen sich nicht durch neue Schilder ersetzen. Die bisherige Kombination muss nicht allein wegen des Todesfalls wechseln.",
+  "sections": [
+    {
+      "id": "entscheidung",
+      "title": "1. Künftige Nutzung und Berechtigung klären",
+      "paragraphs": [
+        "Soll das Fahrzeug weitergenutzt, verkauft oder zunächst abgemeldet werden? Stimme diese Frage bei mehreren Beteiligten ab. Die Zulassungsbehörde entscheidet keine privatrechtlichen Erbstreitigkeiten; das stellt § 14 Absatz 7 FZV klar.",
+        "Besitz der Fahrzeugschlüssel allein ist kein ausreichender Grund, sich über ungeklärte Rechte hinwegzusetzen. Frage die Behörde, welche Nachweise sie für den konkreten Vorgang und die handelnde Person benötigt. Bei Streit über den Nachlass muss zuerst die Berechtigung geklärt werden."
+      ]
+    },
+    {
+      "id": "halter",
+      "title": "2. Halterdaten nicht unverändert weiterlaufen lassen",
+      "paragraphs": [
+        "§ 15 FZV regelt die Mitteilungspflichten bei einem Halterwechsel. Der Landkreis Meißen weist für den Todesfall ausdrücklich auf die unverzügliche Umschreibung auf den neuen Halter oder die Außerbetriebsetzung hin.",
+        "Plane deshalb nicht mit einer frei angenommenen mehrmonatigen Schonfrist. Melde dich bei der zuständigen Stelle, wenn Dokumente noch fehlen. Kläre mit dem Versicherer außerdem den weiteren Schutz und den benötigten Versicherungsnachweis. Ein vorhandenes Schild beantwortet diese Fragen nicht."
+      ]
+    },
+    {
+      "id": "unterlagen",
+      "title": "3. Fahrzeug- und Nachlassunterlagen zusammenstellen",
+      "paragraphs": [
+        "Für die Vorbereitung gehören die Zulassungsbescheinigungen Teil I und II, Identitätsnachweise, der erforderliche HU-Nachweis und die Angaben zur Versicherung zusammen. Je nach Vorgang kommen SEPA-Mandat, Vollmacht und Nachweise zur Verfügungsberechtigung hinzu.",
+        "Ein Erbschein ist nicht pauschal als Pflicht für jeden denkbaren Zulassungsvorgang anzunehmen. Lass dir die konkrete Liste geben. Meißen nennt ihn etwa ausdrücklich bei nicht mehr auffindbaren Fahrzeugpapieren des Verstorbenen und verlangt bei mehreren Erben eine bestimmte bevollmächtigte Person für das dort beschriebene Verfahren."
+      ],
+      "items": [
+        "Vorhandene Fahrzeugpapiere vollständig suchen.",
+        "Künftigen Halter und vertretende Person festlegen.",
+        "Behördlich benötigte Nachlassnachweise erfragen.",
+        "Versicherung und HU-Nachweis klären."
+      ]
+    },
+    {
+      "id": "kombination",
+      "title": "4. Kennzeichen behalten oder ändern",
+      "paragraphs": [
+        "Bei einem weiterhin zugelassenen Fahrzeug ist die Kennzeichenmitnahme beim Halterwechsel grundsätzlich möglich. Die Behörde muss den Vorgang trotzdem bearbeiten. Ein Halterwechsel ist nicht dadurch erledigt, dass die vorhandenen Schilder am Auto bleiben.",
+        "Ist das Auto bereits außer Betrieb gesetzt, prüfst du die erneute Zuteilung gesondert. Der vorhandene Mitnahmeratgeber erklärt diese Abgrenzung. Bestelle erst neue Schilder, wenn eine neue Kombination, andere Ausführung oder ein tatsächlicher Ersatzbedarf feststeht."
+      ]
+    },
+    {
+      "id": "termin",
+      "title": "5. Einen realistischen Ablauf vereinbaren",
+      "paragraphs": [
+        "Fehlen Fahrzeugpapiere, kann insbesondere der Ersatz von Teil II ein Aufbietungsverfahren erfordern. Vereinbare dann keinen festen Schilder- und Zulassungstermin auf Grundlage einer geratenen Bearbeitungsdauer.",
+        "Bestätige zunächst die vollständigen Unterlagen und die Kombination. Danach kannst du bei Bedarf die passenden Schilder bestellen. Die amtlichen Plaketten und die Umschreibung bleiben behördliche Schritte; die Schilderlieferung umfasst sie nicht."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Braucht das geerbte Auto zwingend eine neue Nummer?",
+      "answer": "Nein. Bei einem zugelassenen Fahrzeug kann die bisherige Kombination beim Halterwechsel grundsätzlich beibehalten werden. Der konkrete Zulassungsstatus und der behördliche Vorgang sind trotzdem zu prüfen."
+    },
+    {
+      "question": "Was ist bei mehreren Erben wichtig?",
+      "answer": "Kläre, wer wirksam handeln darf, und welche Vollmachten oder Nachweise die Behörde benötigt. Eine Schilderbestellung löst keinen Streit über die Verfügungsberechtigung."
+    },
+    {
+      "question": "Soll ich fehlende Papiere durch eine neue Schilderbestellung überbrücken?",
+      "answer": "Nein. Melde fehlende Fahrzeugpapiere und kläre deren Ersatz. Insbesondere bei Teil II kann ein gesondertes Aufbietungsverfahren nötig sein."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 15: Halterwechsel",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    },
+    {
+      "label": "FZV § 14: Verfügungsberechtigung und Dokumentenersatz",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__14.html"
+    },
+    {
+      "label": "Landkreis Meißen: Fahrzeughalter verstorben",
+      "href": "https://www.kreis-meissen.de/Landratsamt/Die-Verwaltung/Dezernat-Verwaltung/Kreisverkehrsamt/Kfz-Zulassung/"
+    },
+    {
+      "label": "BayernPortal: Umschreibung und Kennzeichenmitnahme",
+      "href": "https://www.bayernportal.de/dokumente/leistung/0666452463?localize=false"
+    }
+  ],
+  "related": [
+    "auto-ummelden-kennzeichen-behalten",
+    "fahrzeugpapiere-verloren",
+    "auto-anmelden-vollmacht"
+  ],
+  "cta": "Die Behörde hat die Kombination geklärt und neue Schilder sind wirklich nötig? Wähle die passende Ausführung und Stückzahl. Nachlassklärung, Umschreibung und amtliche Plaketten sind nicht Teil der Bestellung."
+},
+{
+  "slug": "auto-auf-firma-zulassen",
+  "title": "Auto auf die Firma zulassen: Unternehmensdaten und Kennzeichen vorbereiten",
+  "teaser": "Für Firmenfahrzeuge zählen neben den Fahrzeugpapieren auch Rechtsform, Anschrift und Vertretung. So vermeidest du unterschiedliche Angaben im Zulassungsprozess.",
+  "category": "Besondere Zulassungsfälle",
+  "reviewedAt": "2026-11-23",
+  "intro": [
+    "Das Fahrzeug soll auf dein Unternehmen zugelassen werden. Dann reicht die private Standardliste häufig nicht. Die Zulassungsstelle muss nachvollziehen können, welche Person oder Organisation Halter wird und wer für sie handeln darf."
+  ],
+  "takeaway": "Kläre zuerst den genauen Halter und die zuständige Behörde. Unternehmensnachweise, Vertretung, eVB und Reservierung müssen zusammenpassen. Die Anschrift für die Schilderlieferung ist davon getrennt.",
+  "sections": [
+    {
+      "id": "rechtsform",
+      "title": "1. Den Halter eindeutig benennen",
+      "paragraphs": [
+        "§ 6 FZV unterscheidet bei den Halterdaten zwischen natürlichen Personen, juristischen Personen und Vereinigungen. Für beruflich selbstständige Halter kommen Angaben zu Beruf oder Gewerbe hinzu.",
+        "Ein Werbename auf der Website ist deshalb nicht automatisch die vollständige Halterbezeichnung. Übernimm die benötigten Angaben aus deinen maßgeblichen Unterlagen. Kläre bei Einzelunternehmen, Gesellschaften oder nicht eingetragenen Vereinigungen, welche Form die Behörde verlangt."
+      ]
+    },
+    {
+      "id": "zustaendig",
+      "title": "2. Sitz und Niederlassung prüfen",
+      "paragraphs": [
+        "Nach § 75 FZV ist bei juristischen Personen, Gewerbetreibenden und Selbstständigen mit festem Betriebssitz grundsätzlich die Behörde des Sitzes beziehungsweise der beteiligten Niederlassung zuständig.",
+        "Der private Wohnort einer angestellten Fahrerin oder eines Geschäftsführers ist daher nicht automatisch der richtige Ausgangspunkt. Halte fest, welche betriebliche Anschrift für diesen Vorgang maßgeblich ist. Eine gewünschte Buchstabenkombination aus einem anderen Bezirk ändert die Zuständigkeit nicht."
+      ]
+    },
+    {
+      "id": "nachweise",
+      "title": "3. Organisation und Vertretung nachweisen",
+      "paragraphs": [
+        "Berlin nennt zusätzlich zu den Fahrzeugunterlagen beispielsweise Registerauszüge und einen Nachweis der örtlichen Anschrift. Bei nicht registrierten Organisationen können Errichtungsunterlagen erforderlich sein. Das ist eine örtliche Orientierung, keine abschließende Liste für jede Rechtsform und Behörde.",
+        "Prüfe außerdem, wer unterschreiben darf und wer den Termin wahrnimmt. Eine Mitarbeiterin mit Fahrzeugschlüsseln ist nicht allein dadurch vertretungsberechtigt. Bereite eine passende Vollmacht und die verlangten Identitätsnachweise vor."
+      ],
+      "items": [
+        "Vollständige Halterbezeichnung festhalten.",
+        "Passende Organisations- und Anschriftnachweise beschaffen.",
+        "Vertretungsberechtigung prüfen.",
+        "Vollmacht und Ausweisnachweise nach örtlicher Vorgabe vorbereiten."
+      ]
+    },
+    {
+      "id": "abgleich",
+      "title": "4. Versicherung, Steuer und Reservierung abgleichen",
+      "paragraphs": [
+        "Stimme den Versicherungsnachweis mit der Versicherung auf den vorgesehenen Halter und die Nutzung ab. Ein betrieblicher Einsatz, etwa Vermietung, kann weitere Anforderungen auslösen. Die allgemeine Firmenzulassung ersetzt solche Prüfungen nicht.",
+        "Kontrolliere das erforderliche SEPA-Mandat und die Berechtigung für das angegebene Konto. Prüfe bei einer Wunschreservierung die Halterangaben. Unterschiedliche Schreibweisen oder die Reservierung auf eine andere Person solltest du vor dem Termin klären, nicht erst nach der Prägung."
+      ]
+    },
+    {
+      "id": "bestellen",
+      "title": "5. Schilder eindeutig dem Fahrzeug zuordnen",
+      "paragraphs": [
+        "Für mehrere Firmenfahrzeuge lohnt eine einfache interne Liste: Fahrzeug-Identifizierungsnummer, bestätigte Kombination, Kennzeichenart, Maße und benötigte Anzahl. So vermeidest du, eine richtige Kombination dem falschen Auto zuzuordnen.",
+        "Prüfe Liefer- und Rechnungsdaten getrennt von den behördlichen Halterdaten. Bestelle nur die im Shop angebotenen Ausführungen; eine Flottenverwaltung oder ein Zulassungsdienst ist damit nicht zugesagt. Die amtlichen Plaketten und die Zulassung folgen im dafür vorgesehenen Verfahren."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Kann ich einfach den Namen meines Betriebs als Halter verwenden?",
+      "answer": "Die erforderlichen Halterangaben richten sich nach Rechtsform und behördlichem Verfahren. Ein bloßer Markenname reicht nicht automatisch. Kläre die vollständige Bezeichnung vor Reservierung und Zulassung."
+    },
+    {
+      "question": "Darf ein Mitarbeiter den Termin übernehmen?",
+      "answer": "Eine Vertretung ist grundsätzlich möglich, wenn die erforderliche Vollmacht, Vertretungsberechtigung und Identitätsnachweise vorliegen. Prüfe die örtliche Unterlagenliste."
+    },
+    {
+      "question": "Ist die Schilderbestellung zugleich eine Firmenzulassung?",
+      "answer": "Nein. Du bestellst die physischen Schilder. Organisationsprüfung, Versicherung, Steuerverfahren, Zulassung und amtliche Plaketten bleiben separate Schritte."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 6: Halterdaten im Zulassungsantrag",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__6.html"
+    },
+    {
+      "label": "FZV § 75: örtliche Zuständigkeit",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__75.html"
+    },
+    {
+      "label": "Berlin: Fahrzeuge auf Unternehmen und Vereinigungen zulassen",
+      "href": "https://www.berlin.de/labo/mobilitaet/kfz-zulassung/artikel.274551.php"
+    },
+    {
+      "label": "FZV § 15: besondere Verwendungen und Änderungen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    }
+  ],
+  "related": [
+    "auto-anmelden-vollmacht",
+    "sepa-mandat-kfz-steuer",
+    "wunschkennzeichen-reservieren"
+  ],
+  "cta": "Unternehmensdaten und Kombination bestätigt? Konfiguriere die passenden angebotenen Schilder und kontrolliere die Zuordnung zum Fahrzeug vor der Bestellung."
+},
+{
+  "slug": "fahrzeug-auf-minderjaehrige-zulassen",
+  "title": "Fahrzeug auf Minderjährige zulassen: Was vor der Kennzeichenbestellung zu klären ist",
+  "teaser": "Zustimmung der Eltern allein genügt nicht in jedem Fall. Prüfe Haltereigenschaft, örtliche Voraussetzungen, Versicherung und die passenden Unterlagen.",
+  "category": "Besondere Zulassungsfälle",
+  "reviewedAt": "2026-11-23",
+  "intro": [
+    "Das erste Motorrad oder Auto soll auf eine Person unter 18 zugelassen werden. Dafür ist eine gesonderte Prüfung nötig. Eine Wunschkennzeichenreservierung oder bezahlte Schilderbestellung bestätigt noch nicht, dass die Zulassung auf diese Person möglich ist."
+  ],
+  "takeaway": "Lass die Zulassungsstelle zuerst den konkreten Fall prüfen. Erforderliche Zustimmung, Identitätsnachweise und gegebenenfalls Fahrerlaubnis oder besondere Nachweise müssen vorliegen. Ein Haltereintrag erlaubt nicht automatisch das Fahren.",
+  "sections": [
+    {
+      "id": "rollen",
+      "title": "1. Halter und Fahrer nicht gleichsetzen",
+      "paragraphs": [
+        "Die Haltereigenschaft und die Fahrerlaubnis sind unterschiedliche Dinge. Wer ein Fahrzeug halten darf, darf es deshalb noch nicht selbst fahren. Für jede Fahrt müssen die passende Fahrerlaubnis und ihre Auflagen eingehalten werden.",
+        "Die Berliner Zulassungsbehörde beschreibt Halter als Personen, die das Fahrzeug auf eigene Rechnung gebrauchen und über seine Verwendung bestimmen. Für Minderjährige nennt sie besondere Ausnahmefälle. Übertrage deshalb eine Aussage zur Zulassung Erwachsener ohne Führerschein nicht ungeprüft auf ein Kind oder einen Jugendlichen."
+      ]
+    },
+    {
+      "id": "fall",
+      "title": "2. Die örtlichen Voraussetzungen vorab prüfen",
+      "paragraphs": [
+        "Berlin nennt für Minderjährige beispielsweise den Besitz der für das zulassungspflichtige Fahrzeug erforderlichen Fahrerlaubnis bei entsprechender Haltereigenschaft oder bestimmte Voraussetzungen aufgrund einer Schwerbehinderung. Hinzu kommt die schriftliche Zustimmung der Erziehungsberechtigten.",
+        "Das ist eine konkrete Behördenauskunft. Frage deine zuständige Stelle nach deinem Fahrzeug und deiner Situation. Ein Hinweis wie „mit 17“ ist allein zu ungenau: Fahrzeugklasse, vorhandene Fahrerlaubnis und weitere Voraussetzungen müssen zusammen betrachtet werden."
+      ]
+    },
+    {
+      "id": "zustimmung",
+      "title": "3. Zustimmung und Nachweise vorbereiten",
+      "paragraphs": [
+        "Nutze das Formular deiner Behörde, wenn eines vorgesehen ist. Kläre, welche gesetzlichen Vertreter zustimmen müssen und wie eine abweichende Vertretungslage nachgewiesen wird. Fehlende Unterschriften solltest du vor dem Termin bemerken.",
+        "Berlin verlangt im beschriebenen Verfahren auch die Originalausweise der Erziehungsberechtigten. Andere Stellen können eigene Vorgaben zur Vorlage haben. Verlasse dich daher nicht darauf, dass eine Handyaufnahme überall ausreicht."
+      ],
+      "items": [
+        "Konkreten Fall mit der Zulassungsstelle abstimmen.",
+        "Zustimmungsformular und nötige Unterschriften prüfen.",
+        "Identitäts- und Vertretungsnachweise zusammenstellen.",
+        "Erforderliche Fahrerlaubnis oder besondere Nachweise bereithalten."
+      ]
+    },
+    {
+      "id": "versicherung",
+      "title": "4. Versicherung und Halterangaben abstimmen",
+      "paragraphs": [
+        "Teile dem Versicherer mit, wer Halter und wer Fahrer sein soll. Der Versicherungsnachweis muss zum vorgesehenen Zulassungsvorgang passen. Eine Versicherung auf ein Elternteil beantwortet nicht automatisch die Frage, auf wen das Fahrzeug zugelassen werden kann.",
+        "Prüfe auch das gegebenenfalls erforderliche SEPA-Mandat und die Berechtigung zur Kontonutzung. Die Zustimmung zur Zulassung, der Versicherungsvertrag und der Schilderkauf sind verschiedene Vorgänge."
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "5. Erst nach Klärung die Schilder auswählen",
+      "paragraphs": [
+        "Wenn die Zulassung auf die minderjährige Person möglich und die Kombination bestätigt ist, wählst du die richtige Fahrzeug- und Kennzeichenart. Ein Motorrad benötigt eine andere Schildform als ein Pkw. Der aktuelle Motorradkonfigurator bietet 180 × 200 Millimeter.",
+        "Eine Reservierungsbestätigung oder ein fertiges Schild ersetzt keine Prüfung der Haltereigenschaft. Bestelle deshalb nicht vorsorglich eine Wunschkombination in der Hoffnung, sie werde anschließend schon zugeteilt. Amtliche Plaketten und Zulassung bleiben gesondert."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Reicht die Zustimmung der Eltern immer aus?",
+      "answer": "Nein. Die Behörde prüft zusätzlich die Voraussetzungen des konkreten Falls. Kläre diese vor einer personalisierten Schilderbestellung."
+    },
+    {
+      "question": "Darf die minderjährige Person mit dem zugelassenen Fahrzeug automatisch fahren?",
+      "answer": "Nein. Die passende Fahrerlaubnis und ihre Auflagen müssen unabhängig vom Haltereintrag eingehalten werden."
+    },
+    {
+      "question": "Sollte ich zuerst das Wunschkennzeichen prägen lassen?",
+      "answer": "Kläre zunächst Zulässigkeit, Halterangaben und Kombination. Erst danach ist die Bestellung der passenden Schilder sinnvoll."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Berlin: persönliche Voraussetzungen und Minderjährige",
+      "href": "https://www.berlin.de/labo/mobilitaet/kfz-zulassung/artikel.274605.php"
+    },
+    {
+      "label": "Berlin: Erstzulassung und Unterlagen",
+      "href": "https://service.berlin.de/dienstleistung/120882/"
+    },
+    {
+      "label": "FZV § 6: Zulassungsantrag und Halterdaten",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__6.html"
+    }
+  ],
+  "related": [
+    "auto-anmelden-unterlagen",
+    "wunschkennzeichen-reservieren",
+    "kennzeichengroessen"
+  ],
+  "cta": "Der konkrete Zulassungsfall und die Kombination sind bestätigt? Wähle die passende angebotene Schildart und prüfe die Vorschau. Die Schilderbestellung ersetzt weder Zustimmung noch Zulassung."
+},
+{
+  "slug": "fahrzeugpapiere-verloren",
+  "title": "Fahrzeugschein oder Fahrzeugbrief verloren: Ersatz vor dem Zulassungstermin",
+  "teaser": "Was du bei fehlenden Fahrzeugpapieren klären musst und warum der Ersatz von Teil II länger dauern kann. Neue Kennzeichenschilder sind nicht automatisch nötig.",
+  "category": "Besondere Zulassungsfälle",
+  "reviewedAt": "2026-11-23",
+  "intro": [
+    "Vor dem Zulassungstermin fehlt plötzlich ein Fahrzeugdokument. Zuerst musst du feststellen, ob Teil I, Teil II oder beide fehlen. Die Ersatzverfahren unterscheiden sich. Eine bereits bezahlte Schilderbestellung beschleunigt diese Verfahren nicht."
+  ],
+  "takeaway": "Melde den Verlust der zuständigen Stelle und kläre die Ersatzausstellung. Bei Teil II ist ein Aufbietungsverfahren mit Frist vorgesehen. Allein durch Papierverlust ändert sich die Kennzeichenkombination nicht automatisch.",
+  "sections": [
+    {
+      "id": "finden",
+      "title": "1. Das fehlende Dokument bestimmen",
+      "paragraphs": [
+        "Teil I ist der Fahrzeugschein, Teil II wird häufig Fahrzeugbrief genannt. Suche getrennt nach beiden Dokumenten. Frage bei Finanzierung oder Leasing zuerst nach, ob Teil II planmäßig bei der Bank oder Leasinggesellschaft verwahrt wird.",
+        "Ein verwahrter Fahrzeugbrief ist nicht verloren. Kläre in diesem Fall dessen Bereitstellung für den konkreten Vorgang. Erkläre gegenüber der Behörde genau, was fehlt und wann es zuletzt vorlag; vermische Verlust und vermuteten Diebstahl nicht."
+      ]
+    },
+    {
+      "id": "teil-eins",
+      "title": "2. Fehlenden Teil I ersetzen lassen",
+      "paragraphs": [
+        "Die Berliner Dienstleistungsbeschreibung verlangt, Verlust oder Diebstahl von Teil I unverzüglich mitzuteilen und ein Ersatzdokument zu beantragen. Frage deine zuständige Behörde nach Unterlagen, Identitätsnachweis und dem möglichen Verfahren.",
+        "§ 13 FZV regelt die Mitführpflicht für Teil I. Ein Foto auf dem Smartphone ist nicht einfach ein gleichwertiger Ersatz für das vorgeschriebene Dokument. Kläre eine Zwischenlösung direkt mit der Behörde, statt eine Fahrberechtigung aus der Terminbuchung abzuleiten."
+      ]
+    },
+    {
+      "id": "teil-zwei",
+      "title": "3. Bei Teil II zusätzliche Zeit einplanen",
+      "paragraphs": [
+        "Nach § 14 Absatz 5 FZV ist der Verlust einer ausgefertigten Zulassungsbescheinigung Teil II unverzüglich der zuständigen Zulassungsbehörde anzuzeigen. Das Kraftfahrt-Bundesamt bietet das Dokument mit einer Vorlagefrist auf. Erst nach Ablauf dieser Frist darf ein neues ausgefertigt werden.",
+        "Berlin weist darauf hin, dass auch ein geplanter Halterwechsel erst nach Abschluss des Aufbietungsverfahrens erfolgen kann. Verlasse dich nicht auf einen bundesweit garantierten Fertigstellungstag. Frage nach dem tatsächlichen Stand, bevor du Fahrzeugübergabe und Zulassung endgültig terminierst."
+      ]
+    },
+    {
+      "id": "nachweise",
+      "title": "4. Den Ersatzantrag vollständig vorbereiten",
+      "paragraphs": [
+        "Kläre, welche Erklärung zum Verlust nötig ist und wer sie abgeben muss. Berlin nennt beim Verlust von Teil II eine Versicherung an Eides statt durch den letzten Gewahrsamsinhaber; bei Diebstahl das Anzeigeprotokoll. Die konkrete Abgabeform ist mit der zuständigen Stelle zu klären.",
+        "Bereite vorhandene Fahrzeugdokumente, Identitätsnachweise und gegebenenfalls eine Vollmacht vor. Fehlen beide Teile oder sind Nachlassfragen beteiligt, sage das bereits bei der Terminvereinbarung. So kann die Behörde den richtigen Ablauf nennen."
+      ],
+      "items": [
+        "Teil I, Teil II oder beide als fehlend benennen.",
+        "Verwahrung bei Bank oder Leasinggeber ausschließen.",
+        "Verlust beziehungsweise Diebstahl zutreffend erklären.",
+        "Benötigte Originale und Vertretungsnachweise bereitlegen."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "5. Kennzeichenschilder erst bei echtem Bedarf bestellen",
+      "paragraphs": [
+        "Papierverlust ist kein Kennzeichendiebstahl. Solange die Schilder vorhanden sind und die Kombination unverändert bleibt, ist ein neuer Satz nicht allein wegen des Ersatzdokuments erforderlich.",
+        "Wenn im anschließenden Zulassungsvorgang eine neue Kombination oder Ausführung vorgesehen ist, warte mit der Bestellung auf deren Bestätigung. Wiedergefundene alte Dokumente nach einer Ersatzausstellung gibst du der zuständigen Behörde zurück; verwende nicht beide Fassungen parallel."
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Brauche ich wegen eines verlorenen Fahrzeugscheins neue Schilder?",
+      "answer": "Nicht automatisch. Der Dokumentenersatz ist vom Schilderersatz getrennt. Kläre neue Schilder nur bei geänderter Kombination, Ausführung oder tatsächlicher Beschädigung."
+    },
+    {
+      "question": "Warum dauert ein neuer Fahrzeugbrief länger?",
+      "answer": "Für verlorenen Teil II schreibt die FZV ein Aufbietungsverfahren mit Vorlagefrist vor. Die neue Bescheinigung darf erst nach Ablauf der Frist ausgefertigt werden."
+    },
+    {
+      "question": "Was mache ich mit wiedergefundenen Papieren?",
+      "answer": "Nach Ersatzausstellung sind wiedergefundene alte Dokumente der zuständigen Behörde abzugeben. Verwende sie nicht zusätzlich zum Ersatzdokument."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 13: Teil I und wiedergefundene Dokumente",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__13.html"
+    },
+    {
+      "label": "FZV § 14: Teil II und Aufbietung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__14.html"
+    },
+    {
+      "label": "Berlin: Ersatz für Teil I",
+      "href": "https://service.berlin.de/dienstleistung/121575/"
+    },
+    {
+      "label": "Berlin: Ersatz für Teil II",
+      "href": "https://service.berlin.de/dienstleistung/121584/"
+    }
+  ],
+  "related": [
+    "fahrzeugschein-fahrzeugbrief-unterschied",
+    "zulassung-abgelehnt-gruende",
+    "auto-geerbt-ummelden"
+  ],
+  "cta": "Die Ersatzpapiere und die neue Zuteilung sind geklärt? Falls du tatsächlich andere oder neue Schilder benötigst, bestelle die bestätigte Kombination in der passenden Ausführung."
+},
+{
   "slug": "kennzeichen-fahrzeugwechsel-uebernehmen",
   "title": "Kennzeichen auf ein neues Auto übernehmen: So planst du den Fahrzeugwechsel",
   "teaser": "Du möchtest deine bisherige Kombination am nächsten Auto nutzen? Kläre Freigabe, örtliche Reservierung und Schilderzustand vor der neuen Zulassung.",
