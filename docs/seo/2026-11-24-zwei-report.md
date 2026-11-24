@@ -41,3 +41,11 @@ Drei gezielte zusätzliche SERP-Abfragen (Bankbrief, HU-Bericht, Selbstfahrerver
 ## Veröffentlichung
 
 Vorbereitete Inhalte vollständig lokal geprüft. Push und öffentliches Deployment werden im folgenden Nachtrag mit tatsächlichem Status und Commit dokumentiert. Zum Zeitpunkt dieses Abschnitts noch keine Live-Bestätigung.
+
+### Live-Nachweis am 24.11.2026, ca. 01:15 Uhr Europe/Berlin
+
+Inhaltscommit: https://github.com/blackmarketing2026/http-kennzeichen-lieferung.de/commit/98ba65b2357de1e55e726a0a5a70684d4e7b3e7a . Direkt auf unverändertem, ungeschütztem main veröffentlicht; erwarteter Vorgänger geprüft, kein Force-Push. Alle sechs Remote-Dateien nach Fetch bytegleich mit dem geprüften lokalen Stand.
+
+Vercel-Status für diesen Commit: `success`, Deployment https://vercel.com/stefve/http-kennzeichen-lieferung-de/2UPqijphTSB1EjyVcGj2X1N3tZbu . Öffentlicher Editorial-Smoke erfolgreich: zehn neue Seiten, 50 HTTP-Ziele, erwartete Inhalte, Metadaten, JSON-LD, Links, Übersichten und echte 404 für unbekannte Slugs. Zusätzlicher öffentlicher Node-HTTP-Test bestätigt OG, Datum, Bannerslots und Bildabmessungen. Ein zunächst gestarteter Python-HTTP-Abruf hing und wurde abgebrochen; die gleichen Prüfungen wurden anschließend mit Node erfolgreich ausgeführt.
+
+Öffentliche Sitemap https://www.kennzeichen-lieferung.de/sitemap.xml enthält 102 eindeutige URLs, exakt die zehn neuen Seiten zusätzlich zum Ausgangsbestand, keine entfernte URL. Alle zehn Seiten bestätigt live. Keine Aussage über Google-Indexierung oder erzielte Bestellungen. Dieser Nachtrag ändert nur Dokumentation und Projektgedächtnis.
