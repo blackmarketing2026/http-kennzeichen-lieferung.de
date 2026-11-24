@@ -41,3 +41,11 @@ Build-, Smoke- und Veröffentlichungsnachweise werden nach tatsächlicher Ausfü
 - Sitemap gegen öffentliche Ausgangssitemap:122→132 eindeutige URLs, exakt+10/-0. Automatische Einbindung in app/sitemap.ts verifiziert; Datei unverändert, keine künstlichen lastmod-Aktualisierungen.
 
 Push und bestätigtes Deployment werden im folgenden Nachtrag dokumentiert. Dieser Abschnitt allein bestätigt noch keine öffentliche Veröffentlichung.
+
+### Veröffentlichung bestätigt – 24.11.2026, ca.04:13 Uhr Europe/Berlin
+
+Inhaltscommit https://github.com/blackmarketing2026/http-kennzeichen-lieferung.de/commit/c81bcd072c0963ff7ad9dbc0d748ac552f56e552 . Main unmittelbar vor Veröffentlichung erneut geprüft: unverändert und ungeschützt. Ref mit erwartetem Vorgänger aktualisiert, kein Force-Push. Nach Fetch alle sechs Dateien bytegleich zum geprüften Stand.
+
+Vercel meldet success: https://vercel.com/stefve/http-kennzeichen-lieferung-de/7otgvASphS6QsTnNwBYz9gHZNaN1 . Öffentlicher Editorial-Smoke bestanden: zehn neue Seiten/57HTTP-Ziele mit erwartetem Inhalt, H1, Metadaten, Canonicals, JSON-LD, internen Links, Übersichten und404. Zusätzliche öffentliche OG-/Datum-/Banner-/Bildabmessungsprüfung bestanden.
+
+Öffentliche Sitemap https://www.kennzeichen-lieferung.de/sitemap.xml :132 eindeutige URLs, exakt+10/-0 gegenüber122Ausgangs-URLs. Alle zehn Seiten bestätigt live. Keine Google-Indexierung, Sitemap-Einreichung oder Käufe behauptet. Der folgende Nachtragscommit enthält ausschließlich diesen Bericht und das Projektgedächtnis.
