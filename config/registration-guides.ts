@@ -26,6 +26,117 @@ const shortTerm = { label: 'Service Berlin: Kurzzeitkennzeichen beantragen', hre
 
 export const registrationGuides: RegistrationGuide[] = [
 {
+  "slug": "auslaendische-kennzeichen-deutschland",
+  "title": "Ausländische Kennzeichen in Deutschland: Wann ist eine deutsche Zulassung nötig?",
+  "teaser": "Besuch oder regelmäßiger Standort? Warum ein ausländisches Kennzeichen nicht pauschal ein Jahr Nutzung nach einem Umzug erlaubt und wann du deutsche Schilder einplanst.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Du kommst mit einem im Ausland zugelassenen Auto nach Deutschland. Bei einem Besuch ist die Ausgangslage anders als bei einem dauerhaft hier genutzten Fahrzeug. Kläre zuerst die Zulassungspflicht, bevor du deutsche Kennzeichenschilder bestellst."
+  ],
+  "takeaway": "Die vorübergehende Nutzung nach § 46 FZV setzt insbesondere voraus, dass kein regelmäßiger Standort in Deutschland begründet ist. Die Ein-Jahres-Regel ist deshalb keine allgemeine Schonfrist nach jedem Umzug.",
+  "sections": [
+    {
+      "id": "standort",
+      "title": "1. Besuch und regelmäßigen Standort unterscheiden",
+      "paragraphs": [
+        "Für Fahrzeuge aus EU-/EWR-Staaten und aus Drittstaaten nennt § 46 FZV unterschiedliche Dokumentenvoraussetzungen. Gemeinsam ist dem gewöhnlichen Fall: Das Fahrzeug nimmt nur vorübergehend teil und hat keinen regelmäßigen Standort in Deutschland.",
+        "Wenn das Auto dauerhaft von Deutschland aus genutzt werden soll, kläre die deutsche Zulassung frühzeitig mit der zuständigen Behörde. Das Landratsamt Neu-Ulm erläutert ebenfalls, dass ein regelmäßiger Standort grundsätzlich die deutsche Zulassung erforderlich macht. Ein ausländischer Haltereintrag allein beantwortet diese Standortfrage nicht."
+      ]
+    },
+    {
+      "id": "zeitraum",
+      "title": "2. Die Jahresfrist nicht isoliert betrachten",
+      "paragraphs": [
+        "§ 46 Absatz 7 beschreibt die vorübergehende Teilnahme grundsätzlich als Zeitraum bis zu einem Jahr. Bei einer Zulassungsbescheinigung beginnt die Frist mit dem Grenzübertritt; bei dem dort genannten internationalen Zulassungsschein mit dessen Ausstellung. Die übrigen Voraussetzungen müssen trotzdem erfüllt sein.",
+        "Für bestimmte Fälle der Arbeitnehmerfreizügigkeit, Niederlassungs- oder Dienstleistungsfreiheit nach EU-Recht kann die vorübergehende Teilnahme im Einzelfall länger dauern, höchstens drei Jahre. Das ist keine automatische Verlängerung für jedes ausländische Fahrzeug. Lass den konkreten Fall prüfen, statt eine kurze Auslandsfahrt als sicheren Neustart der Frist anzusehen."
+      ]
+    },
+    {
+      "id": "nachweise",
+      "title": "3. Ausländische Papiere und Kennzeichnung prüfen",
+      "paragraphs": [
+        "Die ausländische Zulassungsbescheinigung muss gültig sein und die nach § 46 erforderlichen Angaben enthalten. Abhängig von ihrer Ausgestaltung kann eine vorgeschriebene Übersetzung nötig sein. Die geforderten Dokumente sind mitzuführen und auf Verlangen zur Prüfung auszuhändigen.",
+        "§ 47 FZV regelt die heimischen Kennzeichen und das Unterscheidungszeichen des Zulassungsstaates. Montiere nicht eigenmächtig deutsche Schilder mit einer ausländischen Kombination. Auch für vorübergehend eingesetzte ausländische Fahrzeuge verlangt § 46 Betriebs- und Verkehrssicherheit."
+      ]
+    },
+    {
+      "id": "weitere-pflichten",
+      "title": "4. Versicherung und Steuer separat klären",
+      "paragraphs": [
+        "Lass den Versicherungsschutz für die tatsächliche Nutzung in Deutschland bestätigen. Eine ausländische Zulassungsbescheinigung allein ersetzt diese Klärung nicht. Bei einem geänderten Nutzungsort solltest du nicht auf Bedingungen vertrauen, die nur für eine kurze Reise gedacht waren.",
+        "Zulassungsrecht und Kraftfahrzeugsteuer sind verschiedene Prüfungen. § 3 Nummer 13 KraftStG enthält eine Befreiung für bestimmte vorübergehend eingeführte ausländische Fahrzeuge, die unter anderem bei regelmäßigem Standort im Inland entfällt. Daneben bestehen weitere gesetzliche Fallgruppen. Kläre deinen Fall mit dem zuständigen Hauptzollamt; bei Drittlandfahrzeugen sind zusätzlich Einfuhr- und Zollfragen zu beachten."
+      ]
+    },
+    {
+      "id": "deutsche-zulassung",
+      "title": "5. Den passenden deutschen Zulassungsweg vorbereiten",
+      "paragraphs": [
+        "Wenn eine deutsche Zulassung erforderlich ist, richtet sich der Nachweisweg unter anderem nach Herkunft, Genehmigung und bisherigen Fahrzeugpapieren. Die vorhandenen Ratgeber für EU-/EWR-Gebrauchtwagen und Drittlandimporte erklären diese unterschiedlichen Unterlagenwege.",
+        "Halte Einreisedatum, geplante Nutzung, Fahrzeug-Identifizierungsnummer und vorhandene Dokumente bereit. Kläre mit der Behörde, was noch fehlt und ob das Fahrzeug bis zum Abschluss weiter benutzt werden darf. Eine Schilderbestellung oder Terminbestätigung schafft für sich genommen keine zusätzliche Fahrtberechtigung."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "6. Deutsche Schilder erst mit geklärter Kombination bestellen",
+      "paragraphs": [
+        "Prüfe die für den deutschen Vorgang verwendbare Kombination und das passende Format. Die bisherige ausländische Nummer ist keine automatische deutsche Wunschkennzeichenreservierung. Bei begrenztem Einbauraum muss die zulässige Ausführung vor der Bestellung feststehen.",
+        "Der Shop liefert angebotene deutsche Kennzeichenschilder. Er erledigt weder die ausländische Abmeldung noch die deutsche Zulassung, Versicherung oder amtliche Abstempelung. Bestelle nur die bestätigte Kombination und plane diese weiteren Schritte getrennt."
+      ],
+      "items": [
+        "Besuch oder regelmäßiger Standort geklärt?",
+        "Frist und mögliche besondere Fallgruppe geprüft?",
+        "Gültige Fahrzeugpapiere und gegebenenfalls Übersetzung vorhanden?",
+        "Versicherung, Steuer und bei Bedarf Zoll abgestimmt?",
+        "Deutsche Zulassung und Kombination vor dem Schilderkauf vorbereitet?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Darf ich nach einem Umzug immer noch ein Jahr mit ausländischen Kennzeichen fahren?",
+      "answer": "Nein. Die vorübergehende Teilnahme setzt grundsätzlich voraus, dass kein regelmäßiger Standort in Deutschland begründet wurde. Die Zeitgrenze ist keine allgemeine Schonfrist nach einem Umzug."
+    },
+    {
+      "question": "Beginnt die Frist durch einen kurzen Grenzübertritt sicher neu?",
+      "answer": "Darauf solltest du dich nicht verlassen. Eine Reise beseitigt nicht automatisch einen regelmäßigen Standort. Kläre die tatsächliche Nutzung mit der zuständigen Behörde."
+    },
+    {
+      "question": "Muss jedes fremdsprachige Fahrzeugdokument übersetzt werden?",
+      "answer": "Nicht pauschal. § 46 Absatz 5 knüpft die Übersetzung an die Sprache und die dort genannten Anforderungen an das Dokument. Prüfe die konkrete Bescheinigung."
+    },
+    {
+      "question": "Kann ich die ausländische Nummer einfach auf ein deutsches Schild prägen lassen?",
+      "answer": "Eine Prägung ersetzt keine deutsche Kennzeichenzuteilung. Bestelle erst die für den deutschen Zulassungsvorgang bestätigte Kombination."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 46: vorübergehende Teilnahme und Standort",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__46.html"
+    },
+    {
+      "label": "FZV § 47: ausländische Kennzeichen und Länderzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__47.html"
+    },
+    {
+      "label": "KraftStG § 3: Steuerbefreiungen und Grenzen",
+      "href": "https://www.gesetze-im-internet.de/kraftstg/__3.html"
+    },
+    {
+      "label": "Landratsamt Neu-Ulm: Importzulassung und regelmäßiger Standort",
+      "href": "https://www.landkreis-nu.de/de/Service-Verwaltung/Unsere-Fachbereiche/Verkehr/Dienstleistungen/Dienstleistung?id=2639&item=service&view=publish"
+    }
+  ],
+  "related": [
+    "eu-import-deutsche-kennzeichen",
+    "drittland-import-zulassung",
+    "auto-zulassen-ohne-deutschen-wohnsitz",
+    "kennzeichengroessen"
+  ],
+  "cta": "Die deutsche Zulassung ist vorbereitet und die Kombination bestätigt? Konfiguriere die passenden angebotenen Schilder."
+},
+{
   "slug": "reifen-felgen-eintragen",
   "title": "Reifen und Felgen eintragen: Von der Genehmigung zu den Fahrzeugpapieren",
   "teaser": "CoC, Teilegenehmigung und Änderungsabnahme unterscheiden. Eine andere Rad-Reifen-Kombination bedeutet nicht automatisch neue Kennzeichenschilder.",
@@ -1365,7 +1476,8 @@ export const registrationGuides: RegistrationGuide[] = [
   "related": [
     "auto-anmelden-vollmacht",
     "auto-anmelden-unterlagen",
-    "ausfuhrkennzeichen-ablauf"
+    "ausfuhrkennzeichen-ablauf",
+    "auslaendische-kennzeichen-deutschland"
   ],
   "cta": "Zuständigkeit und Kombination sind bestätigt? Wähle die passende angebotene Schildausführung."
 },
@@ -1637,7 +1749,8 @@ export const registrationGuides: RegistrationGuide[] = [
   "related": [
     "eu-import-deutsche-kennzeichen",
     "vollgutachten-21-zulassung",
-    "kennzeichengroessen"
+    "kennzeichengroessen",
+    "auslaendische-kennzeichen-deutschland"
   ],
   "cta": "Unterlagen, Zuteilung und passendes Format sind bestätigt? Bestelle jetzt die dafür angebotenen deutschen Kennzeichenschilder."
 },
@@ -2442,7 +2555,8 @@ export const registrationGuides: RegistrationGuide[] = [
     "kurzzeitkennzeichen-fahrzeugueberfuehrung",
     "drittland-import-zulassung",
     "ausfuhrkennzeichen-ablauf",
-    "quad-zulassung-kennzeichen"
+    "quad-zulassung-kennzeichen",
+    "auslaendische-kennzeichen-deutschland"
   ],
   "cta": "Deine deutsche Kombination und die passenden Maße stehen fest? Konfiguriere die angebotenen Schilder für deinen Zulassungstermin. Herkunftsdokumente, Versicherung, Zulassung und amtliche Plaketten bleiben eigenständige Schritte."
 },

@@ -2144,7 +2144,8 @@ export const blogArticles: BlogArticle[] = [
   ],
   "relatedGuideSlugs": [
     "eu-import-deutsche-kennzeichen",
-    "drittland-import-zulassung"
+    "drittland-import-zulassung",
+    "auslaendische-kennzeichen-deutschland"
   ],
   "relatedLinks": [
     {
