@@ -28,3 +28,9 @@ Erster lokaler Next-Start ohne Hostangabe scheiterte an uv_interface_addresses d
 Korrekte GSC-Property erneut geprüft; Wochenanalyse23.11. wiederverwendet, nächster Vergleich ab30.11. Kein neuer Umsatznachweis. Kein verfügbares GSC-Sitemapverwaltungswerkzeug; keine Einreichung/Indexierung behauptet. OpenSEO dreimal INSUFFICIENT_CREDITS; keine Suchvolumina erfunden.
 
 Stand vor Push: lokal geprüft, öffentliche Veröffentlichung noch nicht bestätigt. Main vor Veröffentlichung erneut abgleichen; Deploymentstatus und öffentliche Route/Sitemap danach per API/HTTP prüfen. Keine anderen Projekte/Automationen geändert.
+
+## Öffentlicher Nachweis – 24.11.2026, 05:08 Uhr Europe/Berlin
+
+Contentcommit 4f9f92d7911099ac9306ab0e604320a30034f96e direkt auf main veröffentlicht; frischer Main-Abgleich vor Update, kein Force-Push, Branch ungeschützt. Alle sechs übertragenen Dateien nach Fetch bytegleich geprüft. Vercel-Status success, Deployment GSBAHTXnnc2PVkftGW5a2ZpYnEW2. Erster Abruf während pending erwartungsgemäß404; nach success vollständige Wiederholung erfolgreich.
+
+Öffentlicher Editorial-Smoke: 1 neue Seite,30 HTTP-Ziele, Titel/H1/Description/Canonical/Indexierbarkeit/JSON-LD/Links/Übersichten/404 bestanden. Zusätzlicher öffentlicher Check OG/Datum/Banner/Bildattribute erfolgreich. Live-Sitemap133 eindeutige URLs, neue kanonische URL genau einmal, alle132 bisherigen URLs erhalten. Somit 1 von1 neu erstellten Seiten bestätigt live. Mindestmenge10 weiterhin NICHT erreicht. Keine Google-Indexierung oder Sitemap-Einreichung behauptet. Dieser Nachtrag ist ausschließlich Dokumentation.
