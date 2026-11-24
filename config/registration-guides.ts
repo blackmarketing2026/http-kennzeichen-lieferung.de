@@ -26,6 +26,382 @@ const shortTerm = { label: 'Service Berlin: Kurzzeitkennzeichen beantragen', hre
 
 export const registrationGuides: RegistrationGuide[] = [
 {
+  "slug": "auto-wiederzulassen-lange-standzeit",
+  "title": "Auto nach langer Standzeit wieder zulassen: Papiere, HU und Kennzeichen",
+  "teaser": "Ein stillgelegtes Fahrzeug reaktivieren: Welche Nachweise wichtig sind und warum mehr als sieben Jahre nicht automatisch ein Vollgutachten bedeuten.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Das Auto stand mehrere Jahre in der Garage und soll wieder fahren. Beginne mit den Fahrzeugpapieren und dem technischen Zustand. Alte Schilder allein belegen weder eine aktuelle Zuteilung noch die Voraussetzungen für die Wiederzulassung."
+  ],
+  "takeaway": "Bei der Wiederzulassung müssen Genehmigungsnachweis, Fahrzeugdaten und erforderliche Untersuchungen geklärt sein. Ein Vollgutachten ist nicht allein wegen einer langen Standzeit automatisch vorgeschrieben.",
+  "sections": [
+    {
+      "id": "bestand",
+      "title": "1. Vorhandene Unterlagen und Fahrzeugzustand erfassen",
+      "paragraphs": [
+        "Suche Teil I und Teil II der Zulassungsbescheinigung sowie vorhandene Genehmigungs- und Prüfunterlagen zusammen. Notiere, wann das Fahrzeug außer Betrieb gesetzt wurde und ob seitdem technische Änderungen erfolgt sind.",
+        "Prüfe mit einer geeigneten Werkstatt, welche Arbeiten vor der Wiederinbetriebnahme erforderlich sind. Eine alte gültig wirkende Plakette ersetzt keine Zustandsprüfung. Plane den Transport zur Werkstatt oder Prüfstelle so, dass du keine ungeklärte Fahrt mit einem abgemeldeten Fahrzeug beginnst."
+      ]
+    },
+    {
+      "id": "hu",
+      "title": "2. Zwischenzeitlich fällige Untersuchung nachholen",
+      "paragraphs": [
+        "Nach § 16 Absatz 2 FZV ist vor der Wiederzulassung eine HU erforderlich, wenn zwischenzeitlich nach den maßgeblichen Fristen eine Untersuchung hätte stattfinden müssen. Entsprechendes gilt gegebenenfalls für eine Sicherheitsprüfung.",
+        "Kläre daher die tatsächliche Fälligkeit statt nur das Jahr der Abmeldung zu betrachten. Wenn lediglich der Bericht fehlt, ist zunächst der Nachweisweg zu prüfen. Der vorhandene Ratgeber zur fehlenden HU und der Blog zur Zweitschrift behandeln diese unterschiedlichen Fälle."
+      ]
+    },
+    {
+      "id": "daten",
+      "title": "3. Lange Stilllegung und Vollgutachten nicht gleichsetzen",
+      "paragraphs": [
+        "§ 16 Absatz 2 nennt eine bestimmte Kombination von Voraussetzungen für die Anwendung des § 21 StVZO: Die Fahrzeug- und Halterdaten sind bereits im Zentralen Fahrzeugregister gelöscht und der Genehmigungsnachweis des unveränderten Fahrzeugs kann nicht anderweitig erbracht werden.",
+        "Daraus folgt kein pauschales Vollgutachten nach jeder mehrjährigen Standzeit. Lege die vorhandenen Originalunterlagen vor und lasse den benötigten Nachweis feststellen. Bei Umbauten kann unabhängig von der Standzeit eine technische Begutachtung erforderlich sein."
+      ]
+    },
+    {
+      "id": "verfahren",
+      "title": "4. Antrag und möglichen Online-Weg vorbereiten",
+      "paragraphs": [
+        "§ 16 verlangt grundsätzlich Teil I und Teil II. Bei Wiederzulassung auf denselben Halter unter Beibehaltung des bisherigen Kennzeichens ist Teil II nach der dortigen Ausnahme nicht erforderlich. Kläre zusätzlich Versicherungsnachweis und weitere Antragsunterlagen.",
+        "Für die internetbasierte Wiederzulassung setzt § 29 Absatz 2 FZV voraus, dass das Fahrzeug nicht länger als sieben Jahre außer Betrieb war. Diese Online-Grenze ist von der Frage nach einem Vollgutachten zu unterscheiden. Auch innerhalb der Frist müssen die übrigen Voraussetzungen des Portals erfüllt sein."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "5. Kombination und tatsächlichen Ersatzbedarf prüfen",
+      "paragraphs": [
+        "Prüfe mit der Behörde, ob die bisherige Kombination erneut zugeteilt werden kann oder eine neue nötig ist. Vorhandene Schilder im Regal sichern die Nummer nicht dauerhaft. Eine Reservierung bei Abmeldung nach § 16 Absatz 1 ist zeitlich begrenzt.",
+        "Erst nach Bestätigung wählst du passende Schilder oder verwendest geeignete vorhandene Platten im vorgesehenen Verfahren weiter. Die Prägung ersetzt keine Wiederzulassung und keine amtlichen Plaketten. Eine Fahrt mit ungestempelten Schildern setzt die gesonderten Bedingungen des § 12 Absatz 4 voraus."
+      ],
+      "items": [
+        "Stilllegungsdatum und vollständige Unterlagen erfasst?",
+        "Technischer Zustand und HU geklärt?",
+        "Genehmigungsnachweis beziehungsweise Begutachtung abgestimmt?",
+        "Zuteilung und Schildzustand vor Bestellung geprüft?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Brauche ich nach sieben Jahren immer ein Vollgutachten?",
+      "answer": "Nein. § 16 Absatz 2 knüpft dies an weitere Voraussetzungen, insbesondere gelöschte Registerdaten und einen nicht anderweitig erbringbaren Genehmigungsnachweis."
+    },
+    {
+      "question": "Kann ich nach mehr als sieben Jahren online wiederzulassen?",
+      "answer": "§ 29 Absatz 2 lässt die internetbasierte Wiederzulassung nur zu, wenn die Außerbetriebsetzung nicht länger als sieben Jahre zurückliegt. Kläre andernfalls den behördlichen Weg."
+    },
+    {
+      "question": "Reichen meine alten Schilder aus?",
+      "answer": "Nicht allein. Die Kombination muss erneut verwendbar sein und die Schilder müssen zum bestätigten Vorgang passen."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 16: Wiederzulassung und Nachweise",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__16.html"
+    },
+    {
+      "label": "FZV § 29: internetbasierte Wiederzulassung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__29.html"
+    },
+    {
+      "label": "FZV § 12 Absatz 4: Zulassungsfahrten",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "related": [
+    "vollgutachten-21-zulassung",
+    "auto-ohne-tuev-anmelden",
+    "auto-online-zulassen-kennzeichen"
+  ],
+  "cta": "Kombination und Ausführung sind bestätigt? Bestelle nur die Schilder, die für die Wiederzulassung tatsächlich benötigt werden."
+},
+{
+  "slug": "auto-zulassen-schwerbehinderung",
+  "title": "Auto bei Schwerbehinderung zulassen: Antrag, Steuer und Kennzeichen trennen",
+  "teaser": "Halterangaben, Steuervergünstigung und Schilderfarbe richtig vorbereiten: Nicht jeder Schwerbehindertenausweis begründet dieselben Ansprüche.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Ein Fahrzeug soll auf eine schwerbehinderte Person zugelassen werden. Kläre den Zulassungsantrag und eine mögliche Steuervergünstigung als getrennte Schritte. Eine Bestellung grüner Kennzeichenschilder ist dafür nicht der richtige Ausgangspunkt."
+  ],
+  "takeaway": "Die Steuervergünstigung nach § 3a KraftStG hängt von den Voraussetzungen des Einzelfalls ab und muss beantragt werden. Fahrzeuge dieser Personengruppe sind nach § 10 FZV ausdrücklich von der grünen Kennzeichnung ausgenommen.",
+  "sections": [
+    {
+      "id": "halter",
+      "title": "1. Die vorgesehenen Halterdaten klären",
+      "paragraphs": [
+        "§ 3a KraftStG setzt für die dort geregelten Vergünstigungen voraus, dass das Fahrzeug auf die begünstigte Person zugelassen ist. Eine Zulassung auf Angehörige erfüllt diese Voraussetzung nicht allein deshalb, weil sie die Person regelmäßig fahren.",
+        "Bereite den normalen Zulassungsvorgang mit den korrekten Identitäts- und Fahrzeugunterlagen vor. Erfolgt der Antrag durch eine andere Person, kläre deren Vollmacht. Bei Minderjährigen sind zusätzlich die besonderen Zulassungsvoraussetzungen und Vertretungsnachweise zu beachten."
+      ]
+    },
+    {
+      "id": "merkmale",
+      "title": "2. Befreiung und Ermäßigung unterscheiden",
+      "paragraphs": [
+        "§ 3a Absatz 1 nennt für die Steuerbefreiung die Merkzeichen H, Bl oder aG. Für die Ermäßigung um 50 Prozent gelten andere Voraussetzungen nach Absatz 2. Die Zollverwaltung erläutert hierfür unter anderem G oder Gl sowie die Abgrenzung zur unentgeltlichen Beförderung im öffentlichen Personenverkehr.",
+        "Der Grad der Behinderung allein sagt deshalb noch nicht, welche Vergünstigung zusteht. Prüfe Ausweis, Merkzeichen und gegebenenfalls Beiblatt. Die Steuerermäßigung nach Absatz 2 wird nicht gleichzeitig mit der dort genannten unentgeltlichen Beförderung gewährt. Lass die konkrete Zuordnung vom zuständigen Hauptzollamt klären."
+      ]
+    },
+    {
+      "id": "antrag",
+      "title": "3. Den Steuerantrag gesondert stellen",
+      "paragraphs": [
+        "Die Vergünstigung steht nach § 3a Absatz 3 nur für ein Fahrzeug und auf Antrag zu. Das Zoll-Portal beschreibt den digitalen Antragsweg und die verlangten Nachweise. Eine Zulassung oder Schilderrechnung stellt diesen Antrag nicht automatisch für dich.",
+        "Stimme den Antrag auf die tatsächliche Fahrzeugzulassung ab und halte den Schwerbehindertenausweis bereit. Bei einer Ermäßigung kann das Beiblatt wichtig sein. Beachte die aktuelle Anleitung des Zolls und prüfe, welche Unterlagen bei der Zulassung zusätzlich verlangt werden."
+      ]
+    },
+    {
+      "id": "nutzung",
+      "title": "4. Die Nutzungsvorgaben im Alltag beachten",
+      "paragraphs": [
+        "§ 3a Absatz 3 begrenzt die begünstigte Nutzung. Genannt sind unter anderem Güterbeförderung mit Ausnahme von Handgepäck, entgeltliche Personenbeförderung mit der gesetzlichen Ausnahme sowie Fahrten anderer Personen ohne Zusammenhang mit Fortbewegung oder Haushaltsführung der begünstigten Person.",
+        "Das Fahrzeug wird damit nicht pauschal zum steuerbegünstigten Zweitwagen für beliebige Familienfahrten. Kläre einen geplanten Einsatz, der von den Voraussetzungen abweicht, vorab mit dem Hauptzollamt. Parkberechtigungen und andere Nachteilsausgleiche sind wiederum eigene Verfahren."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "5. Keine grünen Schilder wegen Schwerbehinderung bestellen",
+      "paragraphs": [
+        "§ 10 Absatz 2 Nummer 5 FZV nimmt Fahrzeuge von schwerbehinderten Personen im Sinne des § 3a Absatz 1 und 2 ausdrücklich von der grünen Kennzeichnung aus. Die Steuervergünstigung wird deshalb nicht durch grüne Schrift sichtbar gemacht.",
+        "Bestelle die von der Zulassungsstelle bestätigte Kombination und Ausführung. Eine Sonderkennzeichnung oder amtliche Plakette entsteht nicht durch einen frei gewählten Aufdruck. Die Schilderlieferung enthält weder einen Steuerbescheid noch eine Parkberechtigung."
+      ],
+      "items": [
+        "Zulassung auf die richtige Person vorbereitet?",
+        "Merkzeichen und Art der Vergünstigung geprüft?",
+        "Antrag und Nachweise beim Zoll abgestimmt?",
+        "Nutzungsvorgaben und bestätigte Schildausführung beachtet?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Bekomme ich wegen Schwerbehinderung ein grünes Kennzeichen?",
+      "answer": "Nicht aufgrund der Vergünstigung nach § 3a Absatz 1 oder 2 KraftStG. Diese Fahrzeuge sind nach § 10 FZV von grünen Kennzeichen ausgenommen."
+    },
+    {
+      "question": "Reicht ein bestimmter Grad der Behinderung allein?",
+      "answer": "Nein. Die gesetzlichen Voraussetzungen, insbesondere die passenden Nachweise und Merkzeichen, sind entscheidend."
+    },
+    {
+      "question": "Ist die Steuervergünstigung automatisch eine Parkerlaubnis?",
+      "answer": "Nein. Steuerliche Behandlung, Fahrzeugzulassung und besondere Parkberechtigungen sind getrennt zu prüfen."
+    }
+  ],
+  "sources": [
+    {
+      "label": "KraftStG § 3a: Voraussetzungen und Nutzung",
+      "href": "https://www.gesetze-im-internet.de/kraftstg/__3a.html"
+    },
+    {
+      "label": "FZV § 10 Absatz 2: Ausnahme von grünen Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__10.html"
+    },
+    {
+      "label": "Zoll-Portal: Steuervergünstigung beantragen",
+      "href": "https://www.help.zoll-portal.de/DE/Hilfe/Dienstleistungen/kraftfahrzeugsteuer/Kraftfahrzeugsteuer/Steuerverguenstigungen/steuerverguenstigung-beantragen/steuerverguenstigung-beantragen-node.html"
+    }
+  ],
+  "related": [
+    "fahrzeug-auf-minderjaehrige-zulassen",
+    "auto-anmelden-vollmacht",
+    "sepa-mandat-kfz-steuer"
+  ],
+  "cta": "Die Zulassung ist vorbereitet und die Kombination bestätigt? Prüfe die passende Schildausführung im Konfigurator."
+},
+{
+  "slug": "taxi-zulassung-vorbereiten",
+  "title": "Taxi zulassen: Fahrzeug, Genehmigung und Kennzeichen vorbereiten",
+  "teaser": "Ein Fahrzeug im Taxibetrieb einsetzen: Genehmigungsunterlagen, Verwendungsanzeige, Versicherung und Untersuchungen vor dem Start abstimmen.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Ein neues Auto soll in deinen Taxibetrieb aufgenommen werden. Die Zulassung auf den Unternehmensnamen ist dafür nur ein Teil des Ablaufs. Personenbeförderungsrechtliche Genehmigung, Fahrzeugverwendung und technische Nachweise müssen zusammenpassen."
+  ],
+  "takeaway": "Kläre den Fahrzeugeinsatz zuerst mit Genehmigungs- und Zulassungsbehörde. Die Verwendung zur Personenbeförderung ist gesondert anzuzeigen. Ein Taxi-Kennzeichenschild allein berechtigt nicht zur gewerblichen Beförderung.",
+  "sections": [
+    {
+      "id": "genehmigung",
+      "title": "1. Genehmigung und Fahrzeugzulassung auseinanderhalten",
+      "paragraphs": [
+        "Die Berechtigung zum Taxiverkehr entsteht nicht durch einen gewöhnlichen Kfz-Zulassungsantrag. Frage die zuständige Genehmigungsbehörde, welche Unterlagen für den Einsatz des konkreten Fahrzeugs in deinem Betrieb vorliegen müssen. Das gilt auch bei einem Fahrzeugwechsel.",
+        "Berlin nennt für den dortigen Zulassungsvorgang beispielsweise einen Genehmigungsnachweis und Gewerbeunterlagen. Das ist ein örtliches Beispiel, keine Zusage für die Erteilung einer neuen Konzession. Prüfe die aktuellen Bedingungen an deinem Betriebssitz, bevor du Fahrzeugübergabe und Einsatztermin festlegst."
+      ]
+    },
+    {
+      "id": "verwendung",
+      "title": "2. Die tatsächliche Verwendung anzeigen",
+      "paragraphs": [
+        "§ 15 Absatz 3 FZV verlangt bei den dort erfassten Personenbeförderungen die Anzeige vor Beginn und nach Ende der Verwendung sowie die Vorlage von Teil I zur Eintragung. Die Nutzung muss deshalb auch bei einem bereits zugelassenen Pkw korrekt behandelt werden.",
+        "Verwechsle diesen Einsatz nicht mit der gewerblichen Vermietung ohne Fahrer. Für Selbstfahrervermietfahrzeuge gibt es eigene Regeln und einen gesonderten Ratgeber. Beschreibe der Behörde konkret, wie das Fahrzeug eingesetzt wird, statt lediglich Mietwagen oder Firmenwagen zu sagen."
+      ]
+    },
+    {
+      "id": "versicherung",
+      "title": "3. Versicherung und Unternehmensunterlagen abstimmen",
+      "paragraphs": [
+        "Der Versicherungsnachweis muss zur vorgesehenen Verwendung passen. Die Berliner Unterlagenliste verlangt ausdrücklich eine für Taxi beziehungsweise die betreffende Beförderungsart ausgestellte eVB. Kläre dies mit deinem Versicherer vor dem Antrag.",
+        "Prüfe außerdem die korrekten Unternehmensdaten und die Vertretungsberechtigung. Beauftragt ein Mitarbeiter den Vorgang, muss die erforderliche Vollmacht passen. Bei finanzierten Fahrzeugen kann der Dokumentenweg für Teil II zusätzlich abzustimmen sein."
+      ]
+    },
+    {
+      "id": "untersuchung",
+      "title": "4. HU und BOKraft-Nachweise rechtzeitig planen",
+      "paragraphs": [
+        "Anlage VIII Nummer 2.1.2.2 StVZO sieht für die dort genannten Pkw zur Personenbeförderung einen HU-Abstand von zwölf Monaten vor. Die normale Drei-Jahres-Frist eines neuen privaten Pkw lässt sich deshalb nicht einfach auf das Taxi übertragen.",
+        "§ 42 BOKraft verlangt grundsätzlich vor der ersten Inbetriebnahme in einem Unternehmen eine außerordentliche Hauptuntersuchung. Die Vorschrift regelt für fabrikneue Fahrzeuge eine mögliche Beschränkung ihres Umfangs. Stimme die nötigen Prüfungen und die Vorlage des Berichts mit Prüfstelle und Genehmigungsbehörde ab; eine vorhandene normale HU beantwortet nicht automatisch alle Anforderungen."
+      ]
+    },
+    {
+      "id": "kennzeichen",
+      "title": "5. Kombination, Schilder und Einsatzfreigabe abgleichen",
+      "paragraphs": [
+        "Prüfe, ob die bestehende Kombination weitergeführt werden kann oder eine neue Zuteilung erforderlich ist. Eine Verwendungseintragung allein bedeutet nicht in jedem Fall einen Schilderneukauf. Bei einem neu aufgenommenen Fahrzeug ist die behördliche Bestätigung maßgeblich.",
+        "Für die Prägung wählst du die passende angebotene Ausführung und bestätigte Kombination. Der Shop liefert keine Konzession, technische Abnahme oder amtlichen Plaketten. Plane den tatsächlichen Einsatz erst, wenn die erforderlichen betrieblichen und behördlichen Schritte abgeschlossen sind."
+      ],
+      "items": [
+        "Genehmigungsstatus und konkretes Fahrzeug abgestimmt?",
+        "Verwendung korrekt angezeigt?",
+        "eVB und Vertretungsunterlagen passend?",
+        "HU-/BOKraft-Nachweise und Schilderbedarf geklärt?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Reicht die Zulassung auf meine Firma für den Taxibetrieb?",
+      "answer": "Nein. Genehmigung, Verwendungseintragung, Versicherung und erforderliche technische Nachweise sind zusätzlich zu klären."
+    },
+    {
+      "question": "Gilt für ein neues Taxi automatisch drei Jahre bis zur ersten HU?",
+      "answer": "Die allgemeine Frist für neue private Pkw ist nicht übertragbar. Prüfe die besonderen Untersuchungsregeln für Personenbeförderung und BOKraft."
+    },
+    {
+      "question": "Kann ich ein spezielles Taxi-Kennzeichen als Genehmigung kaufen?",
+      "answer": "Nein. Eine Schildprägung ersetzt keine Berechtigung zum Taxiverkehr. Bestellt wird die behördlich bestätigte Kombination."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 15 Absatz 3: Anzeige der Personenbeförderung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    },
+    {
+      "label": "StVZO Anlage VIII: HU-Fristen",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/anlage_viii.html"
+    },
+    {
+      "label": "BOKraft § 42: außerordentliche Hauptuntersuchung",
+      "href": "https://www.gesetze-im-internet.de/bokraft_1975/__42.html"
+    },
+    {
+      "label": "Berlin: Zulassung von Fahrzeugen zur Personenbeförderung",
+      "href": "https://service.berlin.de/dienstleistung/326033/"
+    }
+  ],
+  "related": [
+    "auto-auf-firma-zulassen",
+    "neuwagen-erstzulassung",
+    "selbstfahrervermietfahrzeug-zulassen"
+  ],
+  "cta": "Neue Schilder werden tatsächlich benötigt? Konfiguriere die bestätigte Kombination für das Fahrzeug."
+},
+{
+  "slug": "landwirtschaftlicher-anhaenger-folgekennzeichen",
+  "title": "Landwirtschaftlicher Anhänger bis 25 km/h: Wann passt ein Folgekennzeichen?",
+  "teaser": "Die Zulassungsfreiheit hängt von Betrieb, Zweck, Zugfahrzeug und Geschwindigkeit ab. So prüfst du die Voraussetzungen vor der Schilderbestellung.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Ein alter Anhänger trägt ein 25-km/h-Schild und soll hinter dem Traktor fahren. Die Zahl allein macht ihn nicht zulassungsfrei. Entscheidend ist, ob alle Voraussetzungen der land- oder forstwirtschaftlichen Ausnahme erfüllt sind."
+  ],
+  "takeaway": "§ 3 FZV beschreibt eine zweckgebundene Ausnahme. Bei einem darunter fallenden Anhänger verlangt § 12 Absatz 9 hinten ein Kennzeichen, das der Halter des Zugfahrzeugs für eines seiner Zugfahrzeuge verwenden darf. Eine Abstempelung ist dafür nicht erforderlich.",
+  "sections": [
+    {
+      "id": "ausnahme",
+      "title": "1. Alle Voraussetzungen gemeinsam prüfen",
+      "paragraphs": [
+        "§ 3 Absatz 3 Satz 1 Nummer 2 Buchstabe a betrifft Anhänger in land- oder forstwirtschaftlichen Betrieben. Sie müssen ausschließlich für land- oder forstwirtschaftliche Zwecke verwendet und mit höchstens 25 km/h hinter Zugmaschinen oder selbstfahrenden Arbeitsmaschinen mitgeführt werden.",
+        "Zusätzlich ist die vorgeschriebene Kennzeichnung für höchstens 25 km/h erforderlich. Ein entsprechender Aufkleber ersetzt jedoch weder den passenden Betrieb noch den Verwendungszweck. Eine private Möbelbeförderung fällt nicht allein deshalb darunter, weil ein Traktor zieht."
+      ]
+    },
+    {
+      "id": "genehmigung",
+      "title": "2. Zulassungsfrei heißt nicht ohne Fahrzeugnachweis",
+      "paragraphs": [
+        "§ 4 Absatz 1 FZV verlangt auch für diese zulassungsfreien Anhänger einen genehmigten Typ oder eine Fahrzeug-Einzelgenehmigung. Prüfe daher die vorhandenen Fahrzeugunterlagen. Ein lange benutzter Anhänger ohne nachvollziehbare Dokumente ist nicht automatisch ausreichend nachgewiesen.",
+        "Wenn keine Zulassungsbescheinigung Teil I ausgestellt wurde, regelt § 4 Absatz 5 die mitzuführenden Genehmigungsnachweise. Frage bei fehlenden Unterlagen nach dem richtigen Ersatz- oder Prüfverfahren. Ein neues Folgekennzeichen kann fehlende Fahrzeugpapiere nicht ersetzen."
+      ]
+    },
+    {
+      "id": "nummer",
+      "title": "3. Die richtige Kombination für das Folgeschild wählen",
+      "paragraphs": [
+        "§ 12 Absatz 9 verlangt an der Rückseite eine Kombination, die der Halter des Zugfahrzeugs für eines seiner Zugfahrzeuge verwenden darf. Die Vorschrift verlangt damit nicht pauschal die Nummer genau des gerade vorgespannten Traktors. Maßgeblich bleibt aber die gesetzlich bestimmte Halter- und Zugfahrzeugzuordnung.",
+        "Verwende keine beliebige alte Nummer aus dem Betrieb oder ein Schild von einer fremden Person, ohne diese Voraussetzung zu prüfen. Für dieses Kennzeichen ist keine Abstempelung erforderlich. Das unterscheidet es von einem eigenen amtlich zugeteilten Anhängerkennzeichen."
+      ]
+    },
+    {
+      "id": "wechsel",
+      "title": "4. Andere Einsätze gesondert bewerten",
+      "paragraphs": [
+        "Soll der Anhänger schneller fahren, hinter einem anderen Fahrzeugtyp eingesetzt oder für andere Zwecke genutzt werden, ist die Ausnahme neu zu prüfen. Ein vorhandenes Folgeschild erlaubt nicht automatisch die geänderte Nutzung.",
+        "Kläre dann Zulassung, technische Anforderungen, Versicherung und steuerliche Behandlung mit den zuständigen Stellen. Die Schriftfarbe allein entscheidet nicht über Zulassungsfreiheit. Der bestehende Ratgeber zu grünen und schwarzen Anhängerkennzeichen erläutert diese eigene Frage."
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "5. Schriftfarbe und Format vor dem Kauf bestätigen",
+      "paragraphs": [
+        "Lass die Kombination und die passende Ausführung anhand des konkreten Falls bestätigen. Prüfe Befestigungsfläche und zulässiges Format. Das Folgeschild muss ordentlich angebracht und lesbar sein; ein handgeschriebener Zettel ist keine geeignete Schilderbestellung.",
+        "Im aktuellen Shop sind grüne Landmaschinenformate 240 × 130 und 255 × 130 Millimeter angeboten. Ein grünes 520-mm-Schild steht hier nicht zur Auswahl. Bestelle nur, wenn ein angebotenes Format tatsächlich zu deinem Anhänger passt. Die Lieferung umfasst keine Fahrzeug-Einzelgenehmigung oder technische Freigabe."
+      ],
+      "items": [
+        "Land-/forstwirtschaftlicher Betrieb und ausschließlicher Zweck gegeben?",
+        "Zugfahrzeug, Höchstgeschwindigkeit und Kennzeichnung passend?",
+        "Genehmigungsunterlagen vorhanden?",
+        "Kombination, Farbe und geeignetes angebotenes Format bestätigt?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Macht ein 25-km/h-Schild jeden Anhänger zulassungsfrei?",
+      "answer": "Nein. Die Ausnahme setzt zusätzlich den passenden Betrieb, den ausschließlichen Zweck und die vorgesehenen Zugfahrzeuge voraus."
+    },
+    {
+      "question": "Muss das Folgeschild genau die Nummer des vorgespannten Traktors tragen?",
+      "answer": "§ 12 Absatz 9 erlaubt ein Kennzeichen, das der Halter des Zugfahrzeugs für eines seiner Zugfahrzeuge verwenden darf. Prüfe diese Zuordnung im konkreten Fall."
+    },
+    {
+      "question": "Braucht dieses Folgeschild einen Zulassungsstempel?",
+      "answer": "Für den beschriebenen Fall ist nach § 12 Absatz 9 keine Abstempelung erforderlich. Das ersetzt nicht die übrigen Voraussetzungen des Anhängerbetriebs."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 3 Absatz 3: Ausnahme für landwirtschaftliche Anhänger",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__3.html"
+    },
+    {
+      "label": "FZV § 4: Genehmigung und mitzuführende Nachweise",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__4.html"
+    },
+    {
+      "label": "FZV § 12 Absatz 9: Kennzeichnung bestimmter Anhänger",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "related": [
+    "anhaenger-gruenes-schwarzes-kennzeichen",
+    "kennzeichengroessen",
+    "auto-anmelden-unterlagen"
+  ],
+  "cta": "Alle Voraussetzungen und das Format sind geklärt? Prüfe die angebotenen Landmaschinen-Schilder für deine bestätigte Kombination."
+},
+{
   "slug": "neuwagen-erstzulassung",
   "title": "Neuwagen erstmals zulassen: Von den Fahrzeugpapieren zu den Kennzeichen",
   "teaser": "Welche Nachweise für ein bisher nicht zugelassenes Auto wichtig sind und wann du die Kennzeichenschilder bestellen kannst.",
@@ -956,7 +1332,8 @@ export const registrationGuides: RegistrationGuide[] = [
   "related": [
     "auto-anmelden-vollmacht",
     "sepa-mandat-kfz-steuer",
-    "wunschkennzeichen-reservieren"
+    "wunschkennzeichen-reservieren",
+    "taxi-zulassung-vorbereiten"
   ],
   "cta": "Unternehmensdaten und Kombination bestätigt? Konfiguriere die passenden angebotenen Schilder und kontrolliere die Zuordnung zum Fahrzeug vor der Bestellung."
 },

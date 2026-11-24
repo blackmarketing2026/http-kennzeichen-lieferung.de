@@ -16,6 +16,460 @@ export type BlogArticle = {
 
 export const blogArticles: BlogArticle[] = [
 {
+  "slug": "ungestempelte-kennzeichen-zulassungsfahrt",
+  "title": "Mit ungestempelten Kennzeichen zur Zulassung: Welche Voraussetzungen gelten?",
+  "description": "Zulassungsfahrt, Versicherung und vorab bestätigte Kombination prüfen: Eine gewöhnliche Wunschreservierung reicht für die Ausnahme nicht aus.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Die Schilder sind geliefert, aber noch nicht abgestempelt. Darfst du damit zur Zulassungsstelle oder zur Hauptuntersuchung fahren? Dafür gibt es eine eng begrenzte Ausnahme, keine allgemeine Fahrerlaubnis durch den Schilderkauf."
+  ],
+  "takeaway": "§ 12 Absatz 4 FZV verlangt einen Zusammenhang mit dem Zulassungsverfahren, eine passende Vorabzuteilung oder Reservierung nach § 16 Absatz 1 Satz 5 und Versicherungsschutz. Auch der zulässige räumliche Bereich ist begrenzt.",
+  "sections": [
+    {
+      "id": "zweck",
+      "title": "Zuerst den konkreten Fahrtzweck prüfen",
+      "paragraphs": [
+        "Die Regel betrifft Fahrten im Zusammenhang mit dem Zulassungsverfahren. Das Gesetz nennt insbesondere die Fahrt zur Anbringung der Stempelplakette sowie zur Haupt- oder Sicherheitsprüfung. Eine private Probefahrt, Einkaufsfahrt oder beliebige Fahrzeugabholung fällt nicht allein wegen vorhandener Schilder darunter.",
+        "Schreibe auf, welches Fahrzeug zu welchem Termin bewegt werden soll. Frage die Zulassungsstelle nach dem passenden Verfahren. Ist der Zweck nicht von der Ausnahme erfasst, klärst du eine andere zulässige Transport- oder Überführungslösung."
+      ]
+    },
+    {
+      "id": "nummer",
+      "title": "Eine normale Wunschreservierung nicht gleichsetzen",
+      "paragraphs": [
+        "Die Behörde muss das Kennzeichen vorab zugeteilt haben, oder es muss eine Reservierung nach § 16 Absatz 1 Satz 5 bestehen. Letztere betrifft die Reservierung bei Außerbetriebsetzung für die Wiederzulassung desselben Fahrzeugs.",
+        "Eine beliebige Online-Wunschreservierung und eine Rechnung des Schilderanbieters sind dafür kein gleichwertiger Nachweis. Lass dir vor der Fahrt bestätigen, dass die konkrete Zuteilung oder Reservierung die gesetzliche Voraussetzung erfüllt. Übernimm anschließend genau diese Kombination."
+      ]
+    },
+    {
+      "id": "strecke",
+      "title": "Bezirk und Versicherung gehören zur Prüfung",
+      "paragraphs": [
+        "Die Ausnahme für diese Zulassungsfahrten gilt innerhalb des Zulassungsbezirks und eines angrenzenden Zulassungsbezirks. Plane daher keine bundesweite Überführung auf dieser Grundlage. Prüfe Start, Ziel und tatsächliche Strecke.",
+        "Außerdem muss die Fahrt von der Kraftfahrzeug-Haftpflichtversicherung erfasst sein. Kläre das ausdrücklich mit dem Versicherer. Eine eVB-Nummer allein solltest du nicht als ungeprüfte Zusage für jede Fahrt ansehen. Auch der sichere technische Zustand bleibt erforderlich."
+      ]
+    },
+    {
+      "id": "rueckfahrt",
+      "title": "Die Rückfahrt nach Abmeldung ist ein eigener Fall",
+      "paragraphs": [
+        "§ 12 Absatz 4 enthält zusätzlich eine Regel für Rückfahrten nach Entfernung der Stempelplakette: mit dem bisher zugeteilten Kennzeichen bis zum Ablauf des Tages der Außerbetriebsetzung, sofern die Haftpflichtversicherung die Fahrt erfasst.",
+        "Leite daraus keine Nutzung am Folgetag oder Erlaubnis für andere Zwecke ab. Kläre den konkreten Rückweg und Versicherungsschutz vor der Abmeldung. Gelieferte neue Schilder begründen diese Rückfahrtregel nicht."
+      ],
+      "items": [
+        "Fahrtzweck und zuständige Behörde geklärt?",
+        "Vorabzuteilung oder gesetzlich passende Reservierung bestätigt?",
+        "Strecke im vorgesehenen Bereich?",
+        "Versicherungsschutz und Verkehrssicherheit geprüft?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 12 Absatz 4: Fahrten mit ungestempelten Schildern",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "FZV § 16 Absatz 1: Reservierung zur Wiederzulassung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__16.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-wiederzulassen-lange-standzeit",
+    "kurzzeitkennzeichen-fahrzeugueberfuehrung"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Schilder mit bestätigter Kombination bestellen"
+    }
+  ]
+},
+{
+  "slug": "hsn-tsn-fahrzeugschein",
+  "title": "HSN und TSN im Fahrzeugschein: Die richtigen Fahrzeugdaten finden",
+  "description": "Hersteller- und Typschlüsselnummer für Formulare erkennen und von FIN, Kennzeichen und Reservierungsnummer unterscheiden.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Ein Formular fragt nach HSN und TSN, du hast aber nur deine Kennzeichenkombination im Kopf. Diese Angaben erfüllen unterschiedliche Aufgaben. Mit einem Blick auf die richtigen Felder vermeidest du die Übernahme der falschen Nummer."
+  ],
+  "takeaway": "HSN bezeichnet den Hersteller, TSN den Fahrzeugtyp. Die Angaben stehen in der Zulassungsbescheinigung Teil I bei 2.1 und 2.2. Auf das Kennzeichenschild gehört dagegen die bestätigte amtliche Kombination.",
+  "sections": [
+    {
+      "id": "felder",
+      "title": "Die Feldbezeichnungen helfen bei der Suche",
+      "paragraphs": [
+        "Die Feldübersicht von Volkswagen Financial Services ordnet 2.1 dem Herstellercode und 2.2 dem Code für Typ, Variante und Version mit Prüfziffer zu. Feld A enthält das amtliche Kennzeichen; Feld E die Fahrzeug-Identifizierungsnummer.",
+        "Lies immer auch die Beschriftung des Formulars, das du ausfüllst. Wird nur ein Teil der Zeichenfolge verlangt, übernimm nicht automatisch den gesamten Inhalt des Feldes. Frage bei unklaren Eingabefeldern den tatsächlichen Empfänger statt Zeichen wegzulassen oder zu ergänzen."
+      ]
+    },
+    {
+      "id": "zuordnung",
+      "title": "Typdaten und einzelnes Fahrzeug auseinanderhalten",
+      "paragraphs": [
+        "Hersteller- und Typdaten helfen bei der Zuordnung einer Fahrzeugausführung. Die FIN bezieht sich auf das einzelne Fahrzeug. Die Kennzeichenkombination ist wiederum die für den Zulassungsvorgang maßgebliche Kennzeichnung.",
+        "Lege für deine Vorbereitung getrennte Notizen an: Fahrzeugdaten aus den Papieren, bestätigte Kombination und Versicherungsnachweis. So landet nicht versehentlich eine Versicherungs- oder Schlüsselnummer im Kennzeichenkonfigurator. Der vorhandene FIN-Artikel erklärt die Abgrenzung zum einzelnen Fahrzeug genauer."
+      ]
+    },
+    {
+      "id": "unklar",
+      "title": "Unklare Daten nicht aus einem ähnlichen Modell übernehmen",
+      "paragraphs": [
+        "Fehlen die Papiere oder passt die Eingabe nicht, lass die Angaben anhand der vorhandenen Fahrzeugunterlagen klären. Ein gleich aussehendes Auto aus einer Verkaufsanzeige muss nicht dieselbe Ausführung haben. Auch eine Modellbezeichnung allein kann zu ungenau sein.",
+        "Bitte Verkäufer, Herstellerkontakt oder den Empfänger des Formulars um den passenden Nachweisweg. Veröffentliche dafür keine vollständigen Dokumentenfotos in offenen Gruppen. Häufig genügt eine gezielte Rückfrage, welche Daten tatsächlich benötigt werden."
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "Für die Schilderbestellung die Kombination kontrollieren",
+      "paragraphs": [
+        "Im Konfigurator wählst du die angebotene Schildart und gibst die bestätigte Kennzeichenkombination ein. HSN und TSN werden nicht als Kennzeichen geprägt. Prüfe Ortskürzel, Buchstaben, Zahlen sowie gegebenenfalls E, H oder Saisonangaben.",
+        "Vergleiche die Vorschau mit der behördlichen Bestätigung. Die Fahrzeugdaten helfen bei der Vorbereitung anderer Vorgänge, ersetzen aber weder eine Reservierung noch eine Zuteilung. Wenn nur ein Formularfehler vorliegt, brauchst du deshalb nicht automatisch neue Schilder."
+      ],
+      "items": [
+        "Feldname statt bloßer Zahlenfolge prüfen.",
+        "Hersteller/Typ, FIN und Kennzeichen getrennt notieren.",
+        "Unklare Fahrzeugausführung anhand echter Unterlagen klären.",
+        "Nur bestätigte Kombination für die Prägung verwenden."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "Volkswagen Financial Services: Feldübersicht des Fahrzeugscheins",
+      "href": "https://www.vwfs.de/service/mobilitaetslexikon/f/fahrzeugschein.html"
+    },
+    {
+      "label": "FZV Anlage 6: Zulassungsbescheinigung Teil I",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/anlage_6.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "fahrzeugschein-fahrzeugbrief-unterschied",
+    "auto-anmelden-unterlagen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/fin-kennzeichen-unterschied",
+      "label": "FIN und Kennzeichen unterscheiden"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Kennzeichenkombination konfigurieren"
+    }
+  ]
+},
+{
+  "slug": "anhaengerkupplung-nachruesten-papiere",
+  "title": "Anhängerkupplung nachrüsten: Genehmigung, Fahrzeugpapiere und Kennzeichen prüfen",
+  "description": "Vor Anhänger oder Fahrradträger klären: Passt die Kupplung zum Fahrzeug, ist eine Abnahme nötig und welches Kennzeichen wird gebraucht?",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Die neue Anhängerkupplung soll einen Anhänger ziehen oder einen Fahrradträger aufnehmen. Vor dem Einsatz zählen mehr als mechanischer Sitz und Stecker: Genehmigung, zulässige Lasten und Kennzeichnung müssen zur konkreten Kombination passen."
+  ],
+  "takeaway": "Prüfe die Genehmigung und Einbauauflagen der Kupplung. Änderungen von Anhänge- oder Stützlast können eine unverzügliche Berichtigung der Fahrzeugdaten erfordern. Ein Anhängerkennzeichen und ein Wiederholungsschild am Träger erfüllen unterschiedliche Aufgaben.",
+  "sections": [
+    {
+      "id": "freigabe",
+      "title": "Genehmigung für das konkrete Fahrzeug prüfen",
+      "paragraphs": [
+        "§ 19 Absatz 3 StVZO regelt, unter welchen Voraussetzungen genehmigte Anbauteile die Betriebserlaubnis des Fahrzeugs erhalten. Bei den dort genannten europäischen Genehmigungen sind insbesondere Einschränkungen und Einbauanweisungen einzuhalten.",
+        "Ein Prüfzeichen ist deshalb keine pauschale Freigabe für jedes Fahrzeug. Prüfe Fahrzeugausführung, Verwendungsbereich und die vollständigen Montageunterlagen. Lass eine geeignete Fachwerkstatt beurteilen, ob Kupplung, Elektrik und vorhandene Fahrzeugtechnik zusammenpassen."
+      ]
+    },
+    {
+      "id": "abnahme",
+      "title": "Abnahme und Papieränderung getrennt klären",
+      "paragraphs": [
+        "Ob eine Abnahme erforderlich ist, hängt von den Genehmigungsunterlagen und dem tatsächlichen Umbau ab. § 19 unterscheidet verschiedene Nachweiswege. Frage vor dem Einbau, welche Bestätigung du anschließend erhältst und welche Unterlagen mitzuführen sind.",
+        "Eine Änderung der zulässigen Stütz- oder Anhängelast ist nach § 15 Absatz 1 Nummer 6 FZV unverzüglich mitzuteilen. Eine montierte Kupplung erhöht diese Werte nicht von selbst. Gerade bei Fahrzeugen ohne eingetragene Anhängelast solltest du die zulässige Nutzung vor dem Kauf klären."
+      ]
+    },
+    {
+      "id": "zweck",
+      "title": "Anhänger und Fahrradträger richtig unterscheiden",
+      "paragraphs": [
+        "Ein zulassungspflichtiger Anhänger benötigt seine eigene Kennzeichnung. Ein Ladungsträger, der das hintere Fahrzeugkennzeichen verdeckt, erfordert dagegen nach § 12 Absatz 10 FZV eine Wiederholung der Fahrzeugkombination. Dafür ist keine Abstempelung erforderlich.",
+        "Bestelle deshalb nicht automatisch dasselbe Schild für beide Einsätze. Prüfe außerdem die zulässigen Lasten der vollständigen Kombination und die Herstellerangaben des Trägers. Ein Zusatzkennzeichen bestätigt keine ausreichende Tragfähigkeit."
+      ]
+    },
+    {
+      "id": "abschluss",
+      "title": "Vor der ersten Nutzung vollständig kontrollieren",
+      "paragraphs": [
+        "Lass dir Montage, erforderliche Nachweise und gegebenenfalls Änderungen der Papiere erklären. Kontrolliere anschließend Beleuchtung, freie Kennzeichensicht und feste Anbringung. Ein elektrischer Anschluss allein garantiert noch keine vollständig passende Transportlösung.",
+        "Der Shop bietet Kennzeichenschilder, keine Anhängerkupplungen oder Umbauabnahmen. Sobald die richtige Kombination und Schildform feststehen, kannst du die passende angebotene Ausführung bestellen."
+      ],
+      "items": [
+        "Kupplung für genau diese Fahrzeugausführung freigegeben?",
+        "Abnahme und Nachweispflichten geklärt?",
+        "Anhängelast und Stützlast eingehalten?",
+        "Eigene Anhängernummer oder Wiederholungskennzeichen richtig gewählt?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "StVZO § 19: Anbauteile und Betriebserlaubnis",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__19.html"
+    },
+    {
+      "label": "FZV § 15: Änderung von Lasten",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    },
+    {
+      "label": "FZV § 12 Absatz 10: Kennzeichenwiederholung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "vollgutachten-21-zulassung",
+    "anhaenger-gruenes-schwarzes-kennzeichen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/fahrradtraeger-kennzeichen-ohne-stempel",
+      "label": "Kennzeichen am Fahrradträger"
+    },
+    {
+      "href": "/anhaengerkennzeichen",
+      "label": "Angebotene Anhängerschilder prüfen"
+    }
+  ]
+},
+{
+  "slug": "digitaler-fahrzeugschein-kennzeichenwechsel",
+  "title": "Digitaler Fahrzeugschein nach Kennzeichenwechsel: Daten und Nachweise aktuell halten",
+  "description": "i-Kfz-App, Papierdokument und neue Kombination abgleichen: Was nach Änderungen wichtig ist und warum ein Foto keinen amtlichen App-Nachweis ersetzt.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Du hast neue Kennzeichen und einen neuen Fahrzeugschein erhalten. Auf dem Handy ist noch der vorherige Stand gespeichert. Prüfe die Nachweise vor der nächsten Fahrt, statt die App-Anzeige als Bestätigung jeder Änderung anzusehen."
+  ],
+  "takeaway": "Der offizielle digitale Fahrzeugschein ist freiwillig und derzeit für die Nutzung in Deutschland vorgesehen. Nach einer neuen Papierausfertigung sollst du laut BMV den alten digitalen Schein löschen und den neuen laden.",
+  "sections": [
+    {
+      "id": "nachweis",
+      "title": "Offizielle App und Dokumentenfoto unterscheiden",
+      "paragraphs": [
+        "Das Bundesverkehrsministerium beschreibt den Fahrzeugschein in der i-Kfz-App als digitalen Nachweis für das Inland. Ein selbst aufgenommenes Foto ist nicht derselbe amtliche App-Nachweis. Für Fahrten ins Ausland ist nach der aktuellen BMV-Auskunft weiterhin das Papierdokument mitzuführen.",
+        "Entscheide vor einer Fahrt, welchen zulässigen Nachweis du verwendest. Ein Bild in einer Messenger-Unterhaltung sollte nicht mit einer ausdrücklich dafür bereitgestellten Funktion verwechselt werden. Bewahre die Papierunterlagen geordnet auf."
+      ]
+    },
+    {
+      "id": "aenderung",
+      "title": "Behördliche Änderung zuerst abschließen",
+      "paragraphs": [
+        "Ein Umzug, eine Namensänderung oder ein Kennzeichenwechsel wird nicht dadurch erledigt, dass du einen Eintrag auf dem Smartphone suchst. Die vorgeschriebenen Änderungen erfolgen im zuständigen Zulassungsverfahren. § 15 FZV regelt die Mitteilungspflichten.",
+        "Das BMV weist darauf hin, dass Änderungen zeitversetzt im Register und in der App erscheinen können. Wurde ein neuer Papier-Fahrzeugschein ausgegeben, ist die digitale Version neu zu laden. Vergleiche die bestätigte Kombination und die Fahrzeugdaten sorgfältig."
+      ]
+    },
+    {
+      "id": "weitergabe",
+      "title": "Bei gemeinsam genutzten Fahrzeugen den Stand abstimmen",
+      "paragraphs": [
+        "Die offizielle App bietet eine Weitergabefunktion. Prüfe bei einem gemeinsam genutzten Auto, welcher Nachweis der nächsten fahrenden Person tatsächlich zur Verfügung steht. Eine veraltete Kopie aus einem früheren Vorgang ist keine gute Grundlage für die Übergabe.",
+        "Informiere die beteiligten Personen über neue Fahrzeugpapiere und die bestätigte Kennzeichenkombination. Trenne dabei amtliche Nachweise von privaten Einträgen wie einer Garagenfreigabe oder einer Lieferadresse. Diese Stellen werden nicht allein durch die Schilderbestellung aktualisiert."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "App und Schilderbestellung haben verschiedene Aufgaben",
+      "paragraphs": [
+        "Die Kennzeichenprägung benötigt die bestätigte Kombination und passende Ausführung. Sie aktualisiert weder Register noch App. Umgekehrt ersetzt ein neuer digitaler Nachweis keine erforderlichen Schilder und amtlichen Plaketten.",
+        "Prüfe nach dem Wechsel alle Bestandteile zusammen: Fahrzeugpapiere, digitale Anzeige, tatsächlich montierte Schilder und weitere hinterlegte Kennzeichenangaben. Besteht nur ein Anzeigeproblem, bestelle nicht vorsorglich eine weitere Schildergarnitur."
+      ],
+      "items": [
+        "Zulassungsänderung abgeschlossen?",
+        "Neue Papierausfertigung und App-Version abgeglichen?",
+        "Für Auslandsfahrt Papier eingepackt?",
+        "Alle Fahrzeugnutzer über den aktuellen Nachweis informiert?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "BMV: Digitaler Fahrzeugschein und aktuelle FAQ",
+      "href": "https://www.bmv.de/ikfzapp"
+    },
+    {
+      "label": "FZV § 15: Änderungen melden",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-online-zulassen-kennzeichen",
+    "kennzeichen-freiwillig-aendern"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Bestätigte neue Kombination prägen lassen"
+    }
+  ]
+},
+{
+  "slug": "stempelplakette-beschaedigt",
+  "title": "Stempelplakette beschädigt: Brauchst du ein neues Kennzeichenschild?",
+  "description": "Bei unleserlichem oder gelöstem Zulassungssiegel zuerst die Behörde kontaktieren. Eine intakte Schildplatte muss nicht automatisch ersetzt werden.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Die Buchstaben und Zahlen sind gut lesbar, aber das amtliche Siegel ist beschädigt. Dann ist nicht automatisch die ganze Platte das Problem. Entscheidend ist, welche Plakette betroffen ist und wie die Zulassungsstelle den Ersatz abwickelt."
+  ],
+  "takeaway": "Die Stempelplakette wird amtlich erneuert. Klebe sie nicht selbst um und kaufe keine vermeintlichen amtlichen Ersatzsiegel. Neue Kennzeichenschilder sind nur nötig, wenn auch die Platte ersetzt werden muss.",
+  "sections": [
+    {
+      "id": "unterscheiden",
+      "title": "Stempelplakette und HU-Plakette erkennen",
+      "paragraphs": [
+        "§ 12 Absatz 3 FZV beschreibt die Stempelplakette mit Landeswappen und Behördenangaben. Sie ist von der HU-Plakette zu unterscheiden, deren Monat und Jahr den Untersuchungstermin anzeigen. Benenne bei deiner Anfrage genau, welche Kennzeichnung beschädigt ist.",
+        "Prüfe vorsichtig, ob die Platte selbst noch lesbar und unbeschädigt ist. Kratze nicht weiter an der Plakette, um ihre Schichten zu untersuchen. Bei einem verschwundenen ganzen Schild gilt dagegen der gesonderte Ablauf für Verlust oder Diebstahl."
+      ]
+    },
+    {
+      "id": "nicht-reparieren",
+      "title": "Amtliche Siegel nicht privat reparieren",
+      "paragraphs": [
+        "Die Stempelplakette enthält einen verdeckten Sicherheitscode und muss beim Entfernen zerstört werden. Das gehört nach § 12 Absatz 3 zur vorgesehenen Ausgestaltung. Eine abgelöste Plakette einfach wieder anzukleben, ersetzt deshalb keine amtliche Erneuerung.",
+        "Auch eine zusätzliche Folie über Schild oder Siegel ist keine passende Reparatur. Die FZV begrenzt Abdeckungen auf Kennzeichen. Lass den Zustand von der zuständigen Stelle einordnen, insbesondere wenn der Sicherheitscode sichtbar geworden ist."
+      ]
+    },
+    {
+      "id": "behoerde",
+      "title": "Ersatzverfahren vor der nächsten Nutzung klären",
+      "paragraphs": [
+        "Berlin nennt beispielsweise ausdrücklich die Erneuerung abgenutzter oder durch äußere Einwirkung beschädigter Siegelplaketten. Frage deine zuständige Zulassungsstelle nach dem konkreten Verfahren und den benötigten Nachweisen.",
+        "§ 12 Absatz 13 verlangt grundsätzlich das Vorhandensein der Stempelplakette. Fahre nicht allein mit dem Argument weiter, die Kombination sei noch lesbar. Kläre bei fehlendem Siegel auch den zulässigen Weg zur Behörde. Eine Terminbestätigung ist keine allgemeine Fahrterlaubnis."
+      ]
+    },
+    {
+      "id": "platte",
+      "title": "Nur bei tatsächlichem Bedarf die Platte ersetzen",
+      "paragraphs": [
+        "Wenn das Schild weiterverwendbar ist, kann sich der Vorgang auf die amtliche Plakette beziehen. Ist auch die Platte beschädigt, klärst du zusätzlich den Schilderersatz. Bewahre die vorhandenen Teile und Unterlagen für das behördliche Verfahren auf.",
+        "Bestelle bei notwendigem Austausch die bestätigte Kombination im passenden Format. Die neue Platte kommt ohne amtliche Stempel- und HU-Plaketten. Der Schilderanbieter kann das Zulassungssiegel nicht mitliefern oder die behördliche Prüfung ersetzen."
+      ],
+      "items": [
+        "Welche Plakette ist betroffen?",
+        "Ist das Schild selbst noch verwendbar?",
+        "Unterlagen und Ersatzverfahren mit der Behörde geklärt?",
+        "Fahrtweg und gegebenenfalls neue Platte gesondert geplant?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 12: Stempelplakette und Betriebsvoraussetzungen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "Berlin: Kennzeichen oder Siegelplaketten erneuern",
+      "href": "https://service.berlin.de/dienstleistung/324907/"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-beschaedigt-ersetzen",
+    "kennzeichen-verloren-gestohlen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/hu-plakette-lesen",
+      "label": "HU-Plakette erkennen"
+    },
+    {
+      "href": "/blog/ungestempelte-kennzeichen-zulassungsfahrt",
+      "label": "Voraussetzungen einer Zulassungsfahrt"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Bei Bedarf eine neue Schildplatte bestellen"
+    }
+  ]
+},
+{
+  "slug": "autofarbe-aendern-fahrzeugpapiere",
+  "title": "Autofarbe ändern: Was passiert mit Fahrzeugschein und Kennzeichen?",
+  "description": "Nach Lackierung oder Farbfolierung die Fahrzeugdaten prüfen: Wann eine Farbänderung mitzuteilen ist und warum die Kennzeichen nicht automatisch wechseln.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Das Auto ist nach der Folierung blau statt weiß. Die Kennzeichenkombination ist unverändert, doch die Fahrzeugpapiere nennen noch die bisherige Farbe. Kläre den Dateneintrag getrennt von der Gestaltung und Montage der Schilder."
+  ],
+  "takeaway": "Eine reine Farbänderung ist nicht mit einem Kennzeichenwechsel gleichzusetzen. Für andere als die ausdrücklich sofort meldepflichtigen Fahrzeugdaten nennt § 15 Absatz 1 FZV die Mitteilung beim nächsten Kontakt mit der Zulassungsbehörde.",
+  "sections": [
+    {
+      "id": "farbe",
+      "title": "Den Eintrag zur Fahrzeugfarbe abgleichen",
+      "paragraphs": [
+        "Die Farbe steht in der Zulassungsbescheinigung Teil I im Feld R. Vergleiche nach einer vollständigen Lackierung oder Farbfolierung den tatsächlichen Zustand mit diesem Eintrag. Eine kleine Zierfläche ist nicht automatisch derselbe Fall wie ein vollständig andersfarbiges Fahrzeug.",
+        "Bei mehreren Farben oder unklarer Zuordnung fragst du die Zulassungsstelle, welche Angabe für dein Fahrzeug einzutragen ist. Übernimm keine eigene Farbbezeichnung in amtliche Papiere und ändere das Dokument nicht selbst."
+      ]
+    },
+    {
+      "id": "zeitpunkt",
+      "title": "Reine Farbe und sofort meldepflichtige Änderungen trennen",
+      "paragraphs": [
+        "§ 15 Absatz 1 FZV zählt Änderungen auf, die unverzüglich mitzuteilen sind, etwa bestimmte Änderungen von Leistung, Fahrzeugklasse oder Lasten. Für andere Fahrzeugdaten sieht die Vorschrift die Mitteilung vor, sobald der Halter mit der zuständigen Zulassungsbehörde in Kontakt tritt.",
+        "Bezieht sich dein Vorhaben nur auf die Fahrzeugfarbe, ist dieser Unterschied relevant. Werden gleichzeitig weitere Umbauten ausgeführt, können dafür andere Pflichten und Fristen gelten. Bewerte das gesamte Vorhaben, nicht nur die sichtbare neue Farbe."
+      ]
+    },
+    {
+      "id": "kennzeichen",
+      "title": "Die Kombination bleibt eine eigene Entscheidung",
+      "paragraphs": [
+        "Eine neue Karosseriefarbe teilt dem Fahrzeug keine neue Kennzeichenkombination zu. Sind vorhandene Schilder geeignet und weiter gültig, entsteht durch die Farbänderung allein kein Schilderneukauf.",
+        "Die Gestaltung der Kennzeichenschilder richtet sich unabhängig davon nach § 12 FZV. Lackiere oder foliere die Platte deshalb nicht passend zur Karosserie um. Auch vorgeschriebene Zeichen und amtliche Plaketten dürfen durch die Arbeiten nicht beeinträchtigt werden."
+      ]
+    },
+    {
+      "id": "montage",
+      "title": "Nach den Arbeiten Schilder und Nachweise kontrollieren",
+      "paragraphs": [
+        "Wurden die Kennzeichen für die Arbeiten abgenommen, prüfe danach feste Montage, Lesbarkeit und Beleuchtung. Lass vorhandene Schäden einordnen, bevor du Ersatz bestellst. Die Zulassungsstelle bearbeitet die Fahrzeugdaten; ein Folierbetrieb oder Schilderanbieter ersetzt diesen Schritt nicht.",
+        "Falls du zusätzlich bewusst die Kombination ändern möchtest, ist das ein eigener Zulassungsvorgang. Nutze dafür den verlinkten Ratgeber. Neue Schilder bestellst du erst auf Grundlage der bestätigten Kombination und Ausführung."
+      ],
+      "items": [
+        "Feld R mit dem tatsächlichen Farbzustand verglichen?",
+        "Weitere Umbauten und deren Pflichten separat geprüft?",
+        "Kennzeichen und Siegel unverändert lesbar?",
+        "Nach Demontage festen Sitz und Beleuchtung kontrolliert?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 15 Absatz 1: Mitteilung geänderter Fahrzeugdaten",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    },
+    {
+      "label": "FZV § 12: Ausgestaltung der Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "Volkswagen Financial Services: Feld R im Fahrzeugschein",
+      "href": "https://www.vwfs.de/service/mobilitaetslexikon/f/fahrzeugschein.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-freiwillig-aendern",
+    "fahrzeugschein-fahrzeugbrief-unterschied"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichenhalter-wechseln",
+      "label": "Kennzeichen nach Demontage befestigen"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Neue Schilder bei bestätigtem Bedarf"
+    }
+  ]
+},
+{
   "slug": "coc-papiere-verloren",
   "title": "CoC-Papiere verloren: Den passenden Nachweis vor der Zulassung beschaffen",
   "description": "Was eine fehlende Übereinstimmungsbescheinigung bedeutet, wo du Ersatz anfragst und wann ein elektronischer Nachweis möglich ist.",
@@ -143,7 +597,8 @@ export const blogArticles: BlogArticle[] = [
   ],
   "relatedGuideSlugs": [
     "auto-ohne-tuev-anmelden",
-    "fahrzeugpapiere-verloren"
+    "fahrzeugpapiere-verloren",
+    "auto-wiederzulassen-lange-standzeit"
   ],
   "relatedLinks": [
     {
@@ -446,7 +901,8 @@ export const blogArticles: BlogArticle[] = [
   "relatedGuideSlugs": [
     "fahrzeugbrief-bank-zulassung",
     "auto-auf-firma-zulassen",
-    "auto-anmelden-vollmacht"
+    "auto-anmelden-vollmacht",
+    "auto-zulassen-schwerbehinderung"
   ],
   "relatedLinks": [
     {
@@ -596,6 +1052,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/kennzeichen-bestellen",
       "label": "Kennzeichenschilder konfigurieren"
+    },
+    {
+      "href": "/blog/hsn-tsn-fahrzeugschein",
+      "label": "HSN und TSN in den Papieren finden"
     }
   ]
 },
@@ -868,7 +1328,8 @@ export const blogArticles: BlogArticle[] = [
   ],
   "relatedGuideSlugs": [
     "anhaenger-gruenes-schwarzes-kennzeichen",
-    "kennzeichengroessen"
+    "kennzeichengroessen",
+    "landwirtschaftlicher-anhaenger-folgekennzeichen"
   ],
   "relatedLinks": [
     {
@@ -2624,6 +3085,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/leasing-wunschkennzeichen",
       "label": "Abstimmung bei Leasingfahrzeugen"
+    },
+    {
+      "href": "/blog/digitaler-fahrzeugschein-kennzeichenwechsel",
+      "label": "Digitalen Fahrzeugschein nach Änderungen prüfen"
     }
   ]
 },
@@ -3194,6 +3659,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/abgemeldetes-auto-abstellen",
       "label": "Stellplatz vor der Abmeldung vorbereiten"
+    },
+    {
+      "href": "/blog/ungestempelte-kennzeichen-zulassungsfahrt",
+      "label": "Zulassungsfahrten ohne Stempel richtig prüfen"
     }
   ]
 },
@@ -3495,6 +3964,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/kennzeichen-diebstahlschutz",
       "label": "Befestigung und Diebstahlschutz"
+    },
+    {
+      "href": "/blog/autofarbe-aendern-fahrzeugpapiere",
+      "label": "Nach Farbänderung die Fahrzeugdaten prüfen"
     }
   ]
 },
@@ -3732,6 +4205,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/ladung-verdeckt-kennzeichen",
       "label": "Kennzeichen bei sonstiger Ladung frei halten"
+    },
+    {
+      "href": "/blog/anhaengerkupplung-nachruesten-papiere",
+      "label": "Kupplungsnachrüstung und Fahrzeugpapiere"
     }
   ]
 },
@@ -3906,85 +4383,89 @@ export const blogArticles: BlogArticle[] = [
   ]
 },
   {
-    "slug": "kennzeichen-lieferung-pruefen",
-    "title": "Kennzeichen geliefert: Was solltest du prüfen?",
-    "description": "Die kurze Wareneingangskontrolle vor Montage und Zulassung: Kombination, Ausführung, Anzahl und sichtbare Schäden.",
-    "category": "Kennzeichen im Alltag",
-    "publishedAt": "2026-11-13",
-    "intro": [
-      "Das Paket ist da und der Zulassungstermin steht bevor. Nimm dir vor der Montage ein paar Minuten für die Kontrolle. So erkennst du eine Abweichung, solange Verpackung und Bestellbestätigung noch griffbereit sind."
-    ],
-    "takeaway": "Vergleiche jedes Schild mit Bestellung und offizieller Kombination. Prüfe anschließend Format, Anzahl und Zustand. Abweichungen vor Montage oder weiterer Bearbeitung melden.",
-    "sections": [
-      {
-        "id": "auspacken",
-        "title": "Vorsichtig öffnen und vollständig auslegen",
-        "paragraphs": [
-          "Öffne die Verpackung so, dass Messer oder Schere nicht über die Schildfläche fahren. Lege die Schilder auf eine saubere weiche Unterlage. Zähle sie einzeln, insbesondere wenn du ein Zusatzschild gewählt hast.",
-          "Vergleiche auch bestellte Zusatzartikel mit der Bestätigung. Halter und Schrauben sind nur enthalten, wenn sie Bestandteil deiner konkreten Auswahl sind. Aus einem Bild auf einer Informationsseite lässt sich der Lieferumfang nicht ableiten."
-        ]
-      },
-      {
-        "id": "kombination",
-        "title": "Jedes Zeichen einzeln vergleichen",
-        "paragraphs": [
-          "Lies nicht nur die bekannte Kombination als Ganzes. Vergleiche Ortskürzel, Buchstaben und Zahlen nacheinander mit dem amtlichen Nachweis. Prüfe bei mehreren Schildern jedes Exemplar.",
-          "Kontrolliere E- oder H-Zusatz und gegebenenfalls Saisonmonate. Ein falscher Zusatz ist keine Kleinigkeit, die sich durch Montage erledigt. Wenn Bestellung und Lieferung auseinanderfallen, fotografiere die Abweichung für die Kontaktaufnahme."
-        ]
-      },
-      {
-        "id": "zustand",
-        "title": "Format und Oberfläche ansehen",
-        "paragraphs": [
-          "Miss bei Unsicherheit Breite und Höhe und vergleiche das Ergebnis mit dem bestellten Produktmaß. Kontrolliere Kanten, Prägung und Oberfläche bei gutem Licht. Deutliche Knicke, Risse oder beschädigte Zeichen solltest du vor der Nutzung klären.",
-          "Entferne oder bearbeite keine vorgeschriebenen Bestandteile des Schilds. Eine Wareneingangskontrolle ersetzt keine technische Prüfung; sie hilft dir, sichtbare Abweichungen zu entdecken. Bei Zweifeln schicke dem Anbieter ein klares Foto statt selbst nachzubessern."
-        ]
-      },
-      {
-        "id": "melden",
-        "title": "Abweichungen nachvollziehbar melden",
-        "paragraphs": [
-          "Notiere Bestellnummer und betroffene Stückzahl. Halte die Verpackung zunächst bereit und dokumentiere sichtbare Transportschäden. Frage den Anbieter, wie der konkrete Fall weiter bearbeitet wird.",
-          "Plane einen Termin nicht allein anhand eines vermuteten Ersatzlieferdatums um. Warte auf eine bestätigte Auskunft. Dieser Artikel gibt keine pauschale Lieferzeit und keine Zusage für eine kostenlose Neuanfertigung."
-        ]
-      },
-      {
-        "id": "weiter",
-        "title": "Was nach der Kontrolle folgt",
-        "paragraphs": [
-          "Stimmen Schilder und Unterlagen überein, kannst du den nächsten vorgesehenen Schritt vorbereiten. Bei amtlichen Fahrzeugschildern gehört die erforderliche Abstempelung zum Zulassungsverfahren. Ein geliefertes ungestempeltes Schild ist allein noch keine allgemeine Fahrerlaubnis.",
-          "Für die Montage nutze passende Halter oder ein geeignetes Befestigungssystem. Alte Schilder erst entsorgen, wenn die Behörde sie nicht mehr benötigt."
-        ],
-        "items": [
-          "Alle bestellten Schilder und Zusätze vorhanden.",
-          "Kombination und Ausführung stimmen.",
-          "Keine ungeklärten sichtbaren Schäden.",
-          "Behördlicher nächster Schritt und Montage vorbereitet."
-        ]
-      }
-    ],
-    "sources": [
-      {
-        "label": "FZV § 12: Ausgestaltung und Anbringung der Kennzeichen",
-        "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
-      }
-    ],
-    "relatedGuideSlugs": [
-      "auto-online-zulassen-kennzeichen",
-      "kennzeichen-online-bestellen",
-      "kennzeichen-beschaedigt-ersetzen"
-    ],
-    "relatedLinks": [
-      {
-        "href": "/blog/kennzeichen-falsch-bestellt",
-        "label": "Abweichung oder Bestellfehler klären"
-      },
-      {
-        "href": "/blog/kennzeichenhalter-wechseln",
-        "label": "Montage im Kennzeichenhalter"
-      }
-    ]
-  }
+  "slug": "kennzeichen-lieferung-pruefen",
+  "title": "Kennzeichen geliefert: Was solltest du prüfen?",
+  "description": "Die kurze Wareneingangskontrolle vor Montage und Zulassung: Kombination, Ausführung, Anzahl und sichtbare Schäden.",
+  "category": "Kennzeichen im Alltag",
+  "publishedAt": "2026-11-13",
+  "intro": [
+    "Das Paket ist da und der Zulassungstermin steht bevor. Nimm dir vor der Montage ein paar Minuten für die Kontrolle. So erkennst du eine Abweichung, solange Verpackung und Bestellbestätigung noch griffbereit sind."
+  ],
+  "takeaway": "Vergleiche jedes Schild mit Bestellung und offizieller Kombination. Prüfe anschließend Format, Anzahl und Zustand. Abweichungen vor Montage oder weiterer Bearbeitung melden.",
+  "sections": [
+    {
+      "id": "auspacken",
+      "title": "Vorsichtig öffnen und vollständig auslegen",
+      "paragraphs": [
+        "Öffne die Verpackung so, dass Messer oder Schere nicht über die Schildfläche fahren. Lege die Schilder auf eine saubere weiche Unterlage. Zähle sie einzeln, insbesondere wenn du ein Zusatzschild gewählt hast.",
+        "Vergleiche auch bestellte Zusatzartikel mit der Bestätigung. Halter und Schrauben sind nur enthalten, wenn sie Bestandteil deiner konkreten Auswahl sind. Aus einem Bild auf einer Informationsseite lässt sich der Lieferumfang nicht ableiten."
+      ]
+    },
+    {
+      "id": "kombination",
+      "title": "Jedes Zeichen einzeln vergleichen",
+      "paragraphs": [
+        "Lies nicht nur die bekannte Kombination als Ganzes. Vergleiche Ortskürzel, Buchstaben und Zahlen nacheinander mit dem amtlichen Nachweis. Prüfe bei mehreren Schildern jedes Exemplar.",
+        "Kontrolliere E- oder H-Zusatz und gegebenenfalls Saisonmonate. Ein falscher Zusatz ist keine Kleinigkeit, die sich durch Montage erledigt. Wenn Bestellung und Lieferung auseinanderfallen, fotografiere die Abweichung für die Kontaktaufnahme."
+      ]
+    },
+    {
+      "id": "zustand",
+      "title": "Format und Oberfläche ansehen",
+      "paragraphs": [
+        "Miss bei Unsicherheit Breite und Höhe und vergleiche das Ergebnis mit dem bestellten Produktmaß. Kontrolliere Kanten, Prägung und Oberfläche bei gutem Licht. Deutliche Knicke, Risse oder beschädigte Zeichen solltest du vor der Nutzung klären.",
+        "Entferne oder bearbeite keine vorgeschriebenen Bestandteile des Schilds. Eine Wareneingangskontrolle ersetzt keine technische Prüfung; sie hilft dir, sichtbare Abweichungen zu entdecken. Bei Zweifeln schicke dem Anbieter ein klares Foto statt selbst nachzubessern."
+      ]
+    },
+    {
+      "id": "melden",
+      "title": "Abweichungen nachvollziehbar melden",
+      "paragraphs": [
+        "Notiere Bestellnummer und betroffene Stückzahl. Halte die Verpackung zunächst bereit und dokumentiere sichtbare Transportschäden. Frage den Anbieter, wie der konkrete Fall weiter bearbeitet wird.",
+        "Plane einen Termin nicht allein anhand eines vermuteten Ersatzlieferdatums um. Warte auf eine bestätigte Auskunft. Dieser Artikel gibt keine pauschale Lieferzeit und keine Zusage für eine kostenlose Neuanfertigung."
+      ]
+    },
+    {
+      "id": "weiter",
+      "title": "Was nach der Kontrolle folgt",
+      "paragraphs": [
+        "Stimmen Schilder und Unterlagen überein, kannst du den nächsten vorgesehenen Schritt vorbereiten. Bei amtlichen Fahrzeugschildern gehört die erforderliche Abstempelung zum Zulassungsverfahren. Ein geliefertes ungestempeltes Schild ist allein noch keine allgemeine Fahrerlaubnis.",
+        "Für die Montage nutze passende Halter oder ein geeignetes Befestigungssystem. Alte Schilder erst entsorgen, wenn die Behörde sie nicht mehr benötigt."
+      ],
+      "items": [
+        "Alle bestellten Schilder und Zusätze vorhanden.",
+        "Kombination und Ausführung stimmen.",
+        "Keine ungeklärten sichtbaren Schäden.",
+        "Behördlicher nächster Schritt und Montage vorbereitet."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 12: Ausgestaltung und Anbringung der Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-online-zulassen-kennzeichen",
+    "kennzeichen-online-bestellen",
+    "kennzeichen-beschaedigt-ersetzen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichen-falsch-bestellt",
+      "label": "Abweichung oder Bestellfehler klären"
+    },
+    {
+      "href": "/blog/kennzeichenhalter-wechseln",
+      "label": "Montage im Kennzeichenhalter"
+    },
+    {
+      "href": "/blog/stempelplakette-beschaedigt",
+      "label": "Beschädigte amtliche Plakette erneuern"
+    }
+  ]
+}
 ];
 
 export function blogReadingMinutes(article: BlogArticle) {
