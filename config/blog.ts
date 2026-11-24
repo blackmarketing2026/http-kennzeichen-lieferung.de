@@ -16,6 +16,456 @@ export type BlogArticle = {
 
 export const blogArticles: BlogArticle[] = [
 {
+  "slug": "alte-din-kennzeichen-weiterverwenden",
+  "title": "Alte DIN-Kennzeichen weiterverwenden: Bestandsschutz und Ersatz unterscheiden",
+  "description": "Wann alte Kennzeichen ohne Eurofeld gültig bleiben und was du vor einer Ersatzprägung prüfen solltest. Bestandsschutz ist keine freie Retro-Zulassung.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Am älteren Auto hängen noch Kennzeichen ohne blaues Eurofeld. Müssen diese allein wegen ihres Alters ersetzt werden? Entscheidend sind die frühere Zuteilung, der heutige Zulassungsstatus und der Zustand der Schilder."
+  ],
+  "takeaway": "Übergangsregeln können eine frühere Kennzeichenzuteilung erhalten. Daraus folgt keine allgemeine Erlaubnis, beliebige neue Retro-Schilder anzubringen.",
+  "sections": [
+    {
+      "id": "bestand",
+      "title": "Die Übergangsregel betrifft eine bestehende Zuteilung",
+      "paragraphs": [
+        "§ 79 Absatz 3 FZV lässt Kennzeichen gültig bleiben, die vor dem 1. März 2007 nach den damaligen Vorschriften der StVZO zugeteilt wurden. Absatz 3a enthält eine weitere Übergangsregel für Zuteilungen vor dem 1. September 2023.",
+        "Prüfe deshalb zuerst, ob es tatsächlich um die fortbestehende Zuteilung dieses Fahrzeugs geht. Ein altes Schild vom Flohmarkt oder eine historische Kombination aus der Familiengarage belegt keine aktuelle Berechtigung. Auch die bloße Übereinstimmung mit einem alten Fahrzeugbrief reicht für eine neue Zulassung nicht aus."
+      ]
+    },
+    {
+      "id": "zustand",
+      "title": "Alter und Beschädigung sind unterschiedliche Fragen",
+      "paragraphs": [
+        "Bestandsschutz macht ein schlecht lesbares oder beschädigtes Schild nicht automatisch zulässig. § 12 FZV regelt unter anderem die Ausgestaltung und Lesbarkeit der Kennzeichen. Prüfe auch, ob die amtlichen Plaketten unbeschädigt sind.",
+        "Ist das Schild verbogen, die Oberfläche abgelöst oder die Schrift nicht mehr deutlich erkennbar, kläre das Ersatzverfahren. Male Zeichen nicht selbst nach und klebe kein Eurofeld nachträglich auf. Eine solche Veränderung ist kein behördlich abgestimmter Austausch."
+      ]
+    },
+    {
+      "id": "ersatz",
+      "title": "Vor einer Ersatzprägung das zulässige Format klären",
+      "paragraphs": [
+        "Frage die Zulassungsstelle, welche Ausführung bei einem Ersatz oder einer Wiederzulassung in deinem Fall erforderlich ist. Die Fortgeltung einer alten Zuteilung beantwortet nicht automatisch, wie ein heute neu hergestelltes Schild aussehen darf.",
+        "Übermittle dafür die Fahrzeugdaten, die bisherige Kombination und den konkreten Anlass. Bei einer abgemeldeten oder neu erworbenen Maschine muss zusätzlich geklärt werden, ob die Nummer erneut verwendet werden kann. Bestelle erst, wenn Kombination und Schildausführung feststehen."
+      ]
+    },
+    {
+      "id": "kauf",
+      "title": "Was du für Bestellung und Auslandsreise mitnimmst",
+      "paragraphs": [
+        "Der Shop bietet keine freie Genehmigung für historische Schriftbilder. Wähle nur eine angebotene Ausführung, die zur bestätigten Zuteilung passt. Die Prägung umfasst weder Zulassung noch amtliche Plaketten.",
+        "Bei einer Reise ist außerdem die Länderkennzeichnung gesondert zu prüfen. Gerade ein altes Schild ohne Eurofeld beantwortet diese Frage nicht allein. Der verlinkte Beitrag zur Fahrt ins Ausland erklärt die Unterscheidung."
+      ],
+      "items": [
+        "Aktuelle Zuteilung und Fahrzeugzuordnung geprüft?",
+        "Schrift, Oberfläche und amtliche Plaketten lesbar beziehungsweise intakt?",
+        "Ersatzform und gegebenenfalls erneute Zuteilung bestätigt?",
+        "Erst danach passende Schilder bestellen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 79: Übergangsbestimmungen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__79.html"
+    },
+    {
+      "label": "FZV § 12: Ausgestaltung der Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-beschaedigt-ersetzen",
+    "kennzeichengroessen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichen-fe-schrift",
+      "label": "Warum Kennzeichen eine besondere Schrift haben"
+    },
+    {
+      "href": "/blog/kennzeichen-ausland-d-schild",
+      "label": "Länderkennzeichnung bei Auslandsfahrten"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Bestätigte Kennzeichen konfigurieren"
+    }
+  ]
+},
+{
+  "slug": "versicherungswechsel-kennzeichen",
+  "title": "Versicherung wechseln: Brauchst du neue Kennzeichen?",
+  "description": "Ein Wechsel der Kfz-Versicherung erfordert nicht automatisch neue Schilder. Prüfe Versicherungsnachweis, Fahrzeugdaten und lückenlosen Schutz.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Du wechselst die Kfz-Versicherung und fragst dich, ob die Nummer am Auto geändert werden muss. Bei unverändert zugelassenem Fahrzeug löst der reine Vertragswechsel keinen eigenen Schilderkauf aus. Wichtiger ist die korrekte Versicherungsbestätigung."
+  ],
+  "takeaway": "Versicherungsvertrag, Versicherungsnachweis und Kennzeichenzuteilung sind verschiedene Dinge. Eine neue Vertragsnummer ist keine neue Fahrzeugnummer.",
+  "sections": [
+    {
+      "id": "wechsel",
+      "title": "Gleicher Halter, gleiches Fahrzeug, gleiche Zulassung",
+      "paragraphs": [
+        "Bleiben Fahrzeug, Halter und Zulassungsstatus unverändert, ist ein bloßer Versichererwechsel kein Anlass, die vorhandenen Kennzeichen neu zu prägen. Die Versicherungsunterlagen können trotzdem neue Nummern und Ansprechpartner enthalten.",
+        "Verwechsle deshalb weder die Versicherungsscheinnummer noch eine eVB mit der Kombination auf den Schildern. Übertrage Angaben jeweils in das dafür vorgesehene Feld. Ein Kennzeichen gehört in Versicherungsunterlagen genauso sorgfältig geprüft wie die Fahrzeug-Identifizierungsnummer."
+      ]
+    },
+    {
+      "id": "nachweis",
+      "title": "Die elektronische Meldung korrekt zuordnen lassen",
+      "paragraphs": [
+        "§ 49 FZV regelt den Nachweis der Haftpflichtversicherung gegenüber der Zulassungsbehörde. Kläre mit dem neuen Versicherer, wie der Nachweis für das bereits zugelassene Fahrzeug übermittelt wird. Eine für eine andere Zulassung bereitgestellte eVB sollte nicht ungeprüft verwendet werden.",
+        "Prüfe Vertragsbeginn, Fahrzeugdaten und Halterangaben. Frage bei abweichenden Angaben nach, bevor du von einer erledigten Umstellung ausgehst. Bewahre Bestätigungen so auf, dass du einen Übermittlungs- oder Zuordnungsfehler schnell klären kannst."
+      ]
+    },
+    {
+      "id": "luecke",
+      "title": "Eine Versicherungslücke ist kein Kennzeichenproblem",
+      "paragraphs": [
+        "Stimme Ende und Beginn des Versicherungsschutzes ab. Wenn ein Schreiben der Zulassungsstelle wegen fehlender Haftpflichtversicherung eintrifft, behandle es als eigenen Vorgang. Neue Schilder oder eine unveränderte Nummer beseitigen die fehlende Deckung nicht.",
+        "§ 51 FZV sieht bei fehlender Haftpflichtversicherung die unverzügliche Außerbetriebsetzung vor. Kläre den tatsächlichen Versicherungs- und Zulassungsstatus sofort. Der neue Ratgeber zur Stilllegung erklärt, welche Nachweise und Verfahrensschritte auseinanderzuhalten sind."
+      ]
+    },
+    {
+      "id": "weitere-aenderungen",
+      "title": "Zusätzliche Änderungen separat vorbereiten",
+      "paragraphs": [
+        "Manchmal erfolgt der Versichererwechsel gleichzeitig mit Fahrzeugkauf, Halterwechsel oder einer Umstellung auf Saisonkennzeichen. Dann bestimmt der zusätzliche Zulassungsvorgang, ob neue Schilder erforderlich werden. Der Versicherungswechsel allein ist dafür keine ausreichende Begründung.",
+        "Notiere zunächst alle tatsächlich geplanten Änderungen. Lass die benötigten Unterlagen und die Kombination bestätigen. Wenn danach neue Schilder nötig sind, kannst du sie gezielt konfigurieren und einen unnötigen Kauf vermeiden."
+      ],
+      "items": [
+        "Bleiben Fahrzeug und Zulassungsstatus unverändert?",
+        "Passen Halter, Kennzeichen und Fahrzeug-Identifizierungsnummer?",
+        "Sind Beginn, Ende und elektronischer Nachweis geklärt?",
+        "Liegt ein Behördenbrief vor, der gesondert bearbeitet werden muss?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 49: Versicherungsnachweis",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__49.html"
+    },
+    {
+      "label": "FZV § 51: fehlender Versicherungsschutz",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__51.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "versicherung-fehlt-stilllegung",
+    "auto-anmelden-unterlagen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/evb-nummer-kennzeichenbestellung",
+      "label": "eVB und Schilderbestellung unterscheiden"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Neue Schilder bei bestätigtem Bedarf bestellen"
+    }
+  ]
+},
+{
+  "slug": "auto-zulassen-ohne-fuehrerschein",
+  "title": "Auto ohne Führerschein zulassen: Halter und Fahrer richtig planen",
+  "description": "Ein volljähriger Halter braucht nicht selbst zu fahren. So trennst du Zulassung, Fahrerlaubnis, Versicherung und Schilderbestellung.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Du möchtest ein Auto auf deinen Namen anmelden, fährst aber nicht selbst. Das kann etwa bei einem gemeinsam genutzten Familienauto vorkommen. Für die Vorbereitung musst du Halter, tatsächliche Fahrer und Versicherungsangaben sauber trennen."
+  ],
+  "takeaway": "Eine Zulassung auf deinen Namen erteilt dir keine Fahrerlaubnis. Umgekehrt ist der Führerschein bei einem volljährigen Halter nicht allgemein Voraussetzung für die Zulassung.",
+  "sections": [
+    {
+      "id": "halter",
+      "title": "Halter sein und selbst fahren sind zwei Fragen",
+      "paragraphs": [
+        "Das Landesamt für Bürger- und Ordnungsangelegenheiten Berlin erläutert bei den persönlichen Zulassungsvoraussetzungen, dass ein Halter nicht im Besitz einer Fahrerlaubnis sein muss. Für Minderjährige gelten besondere Voraussetzungen; dieser Beitrag behandelt den volljährigen Antragsteller.",
+        "Wer das Auto anschließend fährt, benötigt selbstverständlich die für das Fahrzeug erforderliche Fahrerlaubnis. Plane daher bereits vor der Abholung, wer die Überführung übernimmt. Eine erfolgreiche Anmeldung und montierte Kennzeichen ändern daran nichts."
+      ]
+    },
+    {
+      "id": "versicherung",
+      "title": "Die tatsächliche Nutzung mit dem Versicherer klären",
+      "paragraphs": [
+        "Gib an, wer Halter wird und wer das Fahrzeug tatsächlich fahren soll. Abweichende Personen sind eine Frage der konkreten Versicherung und ihrer korrekten Angaben. Trage nicht einfach dich selbst als einzigen Fahrer ein, wenn jemand anderes das Auto nutzen wird.",
+        "Lass den passenden Versicherungsnachweis bereitstellen. Die eVB ist für das Zulassungsverfahren bestimmt. Sie ist kein Führerschein und auch keine Nummer, die auf das Kennzeichenschild geprägt wird. Bei Unklarheiten hilft eine schriftliche Bestätigung der benötigten Angaben."
+      ]
+    },
+    {
+      "id": "unterlagen",
+      "title": "Den gewöhnlichen Zulassungsvorgang vorbereiten",
+      "paragraphs": [
+        "Ob Erstzulassung, Umschreibung oder Wiederzulassung: Der konkrete Vorgang bestimmt die Fahrzeugunterlagen. Bereite Identitätsnachweis, Versicherungsnachweis und die weiteren von deiner Behörde verlangten Unterlagen vor. Auch die steuerlichen Zahlungsangaben sind gesondert zu klären.",
+        "Kannst du den Termin nicht selbst wahrnehmen, prüfe die Anforderungen an eine Vollmacht. Eine bevollmächtigte Person muss nicht allein deshalb als Halter eingetragen werden, weil sie den Behördengang übernimmt. Der verlinkte Vollmachtsratgeber erläutert die Vorbereitung."
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "Kombination bestätigen und Abholung organisieren",
+      "paragraphs": [
+        "Sobald die zulässige beziehungsweise reservierte Kombination feststeht, kannst du passende Schilder bestellen. Prüfe Schreibweise, Format und Stückzahl. Das Paket enthält geprägte Schilder; die behördliche Zulassung und amtliche Plaketten bleiben eigene Schritte.",
+        "Plane auch den Weg nach dem Termin. Wenn du nicht selbst fahren darfst, sollte ein geeigneter Fahrer oder Transport bereits organisiert sein. Bei einer Zulassung auf Minderjährige nutze den gesonderten Ratgeber, statt die Regeln für Erwachsene zu übertragen."
+      ],
+      "items": [
+        "Volljähriger Halter und tatsächliche Fahrer festgelegt?",
+        "Versicherung mit zutreffenden Nutzungsangaben abgestimmt?",
+        "Unterlagen und gegebenenfalls Vollmacht vollständig?",
+        "Bestätigte Kombination und Abholung vorbereitet?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "Berlin LABO: persönliche Voraussetzungen für die Zulassung",
+      "href": "https://www.berlin.de/labo/mobilitaet/kfz-zulassung/artikel.274605.php"
+    },
+    {
+      "label": "FZV § 6: Zulassungsantrag",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__6.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-anmelden-unterlagen",
+    "auto-anmelden-vollmacht",
+    "fahrzeug-auf-minderjaehrige-zulassen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/halter-eigentuemer-zulassung",
+      "label": "Halter und Eigentümer unterscheiden"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Kennzeichen für die bestätigte Kombination bestellen"
+    }
+  ]
+},
+{
+  "slug": "kennzeichenverlust-im-ausland",
+  "title": "Kennzeichen im Ausland verloren: Rückreise und Ersatz richtig organisieren",
+  "description": "Polizei, deutsche Zulassungsstelle und Rücktransport koordinieren: Ein Ersatzschild oder Polizeiprotokoll ist keine pauschale Erlaubnis zur Heimfahrt.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Beim Urlaub oder auf einer Dienstreise fehlt plötzlich ein Kennzeichenschild. Im Ausland kommt zum deutschen Ersatzverfahren eine zweite Frage hinzu: Wie lässt sich das Fahrzeug am Aufenthaltsort und auf dem Rückweg rechtmäßig bewegen?"
+  ],
+  "takeaway": "Kläre den Vorfall vor Ort und das weitere Verfahren mit deiner deutschen Zulassungsstelle. Ein Polizeiprotokoll, Pappschild oder neu bestelltes Blech erlaubt nicht automatisch die Weiterfahrt.",
+  "sections": [
+    {
+      "id": "vor-ort",
+      "title": "Verlust oder Diebstahl am Aufenthaltsort klären",
+      "paragraphs": [
+        "Halte fest, welches Schild fehlt, wann du es zuletzt gesehen hast und wo das Fahrzeug steht. Wende dich bei Diebstahl an die örtliche Polizei. Frage auch bei ungeklärtem Verlust, welche Aufnahme oder Bescheinigung vor Ort erforderlich ist.",
+        "Das Auswärtige Amt beschreibt für Slowenien bei Kennzeichendiebstahl die Anzeige bei der örtlichen Polizei und ein Protokoll für das deutsche Verfahren. Das ist ein konkreter Länderhinweis und keine weltweit einheitliche Verfahrensregel. Prüfe die Hinweise für dein tatsächliches Reiseland."
+      ]
+    },
+    {
+      "id": "deutschland",
+      "title": "Die zuständige deutsche Behörde früh kontaktieren",
+      "paragraphs": [
+        "Melde dich bei der Zulassungsstelle, bei der das Fahrzeug geführt wird. Erkläre ausdrücklich, dass Fahrzeug und Halter gerade im Ausland sind. Frage nach benötigten Nachweisen, verbleibenden Schildern und einer möglichen Vertretung in Deutschland.",
+        "Kläre, ob eine neue Kombination zugeteilt werden muss und welche Originalunterlagen gebraucht werden. Lass eine bevollmächtigte Person nicht ohne abgestimmte Unterlagen losfahren. Eine fotografierte Bescheinigung genügt nicht automatisch für jeden Verfahrensschritt."
+      ]
+    },
+    {
+      "id": "rueckreise",
+      "title": "Fahrterlaubnis nicht aus dem Polizeiprotokoll ableiten",
+      "paragraphs": [
+        "Frage die zuständige Stelle im Aufenthaltsland, ob und unter welchen Bedingungen das Fahrzeug noch bewegt werden darf. Berücksichtige auch Transitländer. Eine örtliche Bescheinigung muss nicht in einem anderen Staat dieselbe Wirkung haben.",
+        "Kontaktiere bei Bedarf deinen Pannenhilfe- oder Versicherungsansprechpartner wegen sicherer Abstellung und Transportmöglichkeiten. Ein Transport kann nötig werden, wenn keine passende rechtmäßige Fahrtmöglichkeit geklärt ist. Verlasse dich nicht auf handgemalte Ersatzschilder oder eine eigenmächtige Kopie der alten Nummer."
+      ]
+    },
+    {
+      "id": "ersatz",
+      "title": "Schilder erst nach Bestätigung bestellen",
+      "paragraphs": [
+        "Bestelle erst, wenn die zuständige Behörde die weitere Kombination und den Verfahrensweg bestätigt hat. Prüfe zusätzlich, wie Schilder und notwendige Dokumente zum Fahrzeug gelangen. Die bloße Lieferung eines Schildes ersetzt keine behördliche Abstempelung.",
+        "Für den deutschen Verlust- und Diebstahlvorgang findest du die Einzelheiten im verlinkten Ratgeber. Dieser Beitrag ergänzt ihn um die Abstimmung über Ländergrenzen hinweg."
+      ],
+      "items": [
+        "Vorfall und sichere Abstellung geklärt?",
+        "Örtliche Aufnahme und Bescheinigung organisiert?",
+        "Deutsche Behörde und Vertretung abgestimmt?",
+        "Aufenthalts- und Transitregeln vor jeder Weiterfahrt geprüft?",
+        "Bestätigte Kombination statt vorschneller Nachprägung bestellt?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "Auswärtiges Amt: Slowenien – Hinweise bei Kennzeichendiebstahl",
+      "href": "https://www.auswaertiges-amt.de/de/service/laender/slowenien-node/sloweniensicherheit/210644"
+    },
+    {
+      "label": "Berlin: Kennzeichenverlust und Diebstahl",
+      "href": "https://service.berlin.de/dienstleistung/324196/"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-verloren-gestohlen",
+    "auto-anmelden-vollmacht"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichen-ausland-d-schild",
+      "label": "Länderkennzeichnung im Ausland"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Behördlich bestätigte Ersatzkombination konfigurieren"
+    }
+  ]
+},
+{
+  "slug": "kennzeichen-nach-unfall",
+  "title": "Kennzeichen nach einem Unfall: Ersatz, Abmeldung oder Fahrzeugwechsel?",
+  "description": "Schild beschädigt, Plakette verletzt oder Kennzeichen verloren? Ordne nach einem Unfall den passenden nächsten Schritt vor einer Neubestellung ein.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Nach einem Unfall ist das vordere Schild verbogen oder fehlt ganz. Jetzt kommt es darauf an, den Schaden richtig einzuordnen. Ein Kennzeichenkauf kann einen beschädigten Gegenstand ersetzen, aber keine ungeklärte Verkehrssicherheit oder Zulassung beheben."
+  ],
+  "takeaway": "Prüfe zuerst den Fahrzeugzustand. Unterscheide danach beschädigte Schilder, beschädigte Plaketten und fehlende Kennzeichen. Für diese Fälle können unterschiedliche Verfahren nötig sein.",
+  "sections": [
+    {
+      "id": "sicherheit",
+      "title": "Die Verkehrssicherheit kommt vor der Schilderfrage",
+      "paragraphs": [
+        "Lass bei Zweifeln klären, ob das Fahrzeug sicher bewegt werden kann. Ein geradegebogenes Schild sagt nichts über Lenkung, Beleuchtung oder andere Unfallschäden aus. § 5 FZV ermöglicht behördliche Maßnahmen bei nicht vorschriftsmäßigen Fahrzeugen.",
+        "Ist eine behördliche Beschränkung oder Betriebsuntersagung angeordnet, richte dich nach diesem konkreten Bescheid. Die Montage neuer Schilder hebt eine solche Maßnahme nicht auf. Organisiere nötigenfalls den Transport statt einer ungeklärten Fahrt."
+      ]
+    },
+    {
+      "id": "schaden",
+      "title": "Schild, Plakette und Verlust getrennt erfassen",
+      "paragraphs": [
+        "Dokumentiere den Zustand, soweit dies gefahrlos möglich ist. Sind alle Schilder vorhanden und ist nur eine Platte beschädigt, geht es um Ersatz bei bestehender Kombination. Ist die amtliche Plakette verletzt, muss auch das behördliche Verfahren geklärt werden.",
+        "Fehlt dagegen ein Schild, behandle es nicht einfach als vorhandenes beschädigtes Teil. Frage nach dem Verlustverfahren. Ob die bisherige Nummer weiterverwendet werden darf, darfst du nicht allein aus den verbliebenen Fahrzeugpapieren ableiten."
+      ]
+    },
+    {
+      "id": "weiteres-fahrzeug",
+      "title": "Reparatur und Verwertung führen zu anderen nächsten Schritten",
+      "paragraphs": [
+        "Soll das Fahrzeug repariert und weiter genutzt werden, stimme technischen Zustand und Schilderersatz ab. Bewahre beschädigte Schilder auf, bis geklärt ist, ob die Behörde sie sehen oder entstempeln muss.",
+        "Soll das Fahrzeug tatsächlich verwertet werden, ist ein neues Schild für dieses Auto normalerweise nicht das nächste Ziel. Kläre stattdessen Verwertungsnachweis und Außerbetriebsetzung. Der verlinkte Ratgeber behandelt diesen Ablauf, ohne ihn mit der Entsorgung einzelner Blechschilder zu vermischen."
+      ]
+    },
+    {
+      "id": "kauf",
+      "title": "Nur den bestätigten Bedarf bestellen",
+      "paragraphs": [
+        "Notiere Kombination, Anzahl und Format der tatsächlich benötigten Ersatzschilder. Frage bei beschädigten Siegeln vorab, welche Unterlagen und verbleibenden Platten zum Termin gehören. Der Shop liefert keine neue amtliche Plakette.",
+        "Wenn ein anderes Fahrzeug angeschafft wird, ist die Übernahme der bisherigen Nummer ein eigener Vorgang. Lass die Verfügbarkeit und Zuteilung für das Folgefahrzeug bestätigen. Eine alte Platte passt nicht allein deshalb zum neuen Auto, weil sie dir gehört."
+      ],
+      "items": [
+        "Fahrzeug sicher beziehungsweise Transport organisiert?",
+        "Schildschaden, Plakettenschaden oder Verlust unterschieden?",
+        "Reparatur, Verwertung oder Fahrzeugwechsel festgelegt?",
+        "Behördlicher Ablauf und tatsächlicher Schilderbedarf bestätigt?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 5: Beschränkung und Untersagung des Betriebs",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__5.html"
+    },
+    {
+      "label": "FZV § 12: Kennzeichen und Plaketten",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "FZV § 17: Verwertung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__17.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-beschaedigt-ersetzen",
+    "kennzeichen-verloren-gestohlen",
+    "auto-verwerten-abmelden",
+    "kennzeichen-fahrzeugwechsel-uebernehmen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Benötigte Ersatzschilder konfigurieren"
+    }
+  ]
+},
+{
+  "slug": "auto-zulassen-zweitwohnsitz",
+  "title": "Auto am Zweitwohnsitz zulassen: Welche Behörde ist zuständig?",
+  "description": "Bei mehreren Wohnungen zählt grundsätzlich die Hauptwohnung. Kläre Zuständigkeit und Kennzeichen vor der Reservierung am Zweitwohnsitz.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Du wohnst unter der Woche an einem anderen Ort oder hast eine Ferienwohnung. Kannst du dort einfach das Auto anmelden und das örtliche Kürzel wählen? Eine zusätzliche Anschrift macht die dortige Zulassungsstelle nicht automatisch zuständig."
+  ],
+  "takeaway": "Für Privatpersonen mit mehreren Wohnungen ist nach § 75 FZV grundsätzlich die Hauptwohnung maßgeblich. Lieferadresse, Stellplatz und Wunsch nach einem Ortskürzel ersetzen diese Zuständigkeitsregel nicht.",
+  "sections": [
+    {
+      "id": "hauptwohnung",
+      "title": "Die Hauptwohnung ist der Ausgangspunkt",
+      "paragraphs": [
+        "§ 75 Absatz 2 FZV bestimmt die örtliche Zuständigkeit. Bei mehreren Wohnungen einer natürlichen Person ist grundsätzlich die Behörde am Ort der Hauptwohnung zuständig. Entscheidend ist daher nicht allein, wo das Auto überwiegend geparkt wird.",
+        "Prüfe deine aktuelle Meldesituation, bevor du ein Kennzeichen reservierst. Ein Portal, das technisch eine Reservierung annimmt, bestätigt damit nicht zwingend die Zulässigkeit deiner späteren Anmeldung. Eine vorschnelle Prägung kann deshalb zu unbrauchbaren Schildern führen."
+      ]
+    },
+    {
+      "id": "ausnahme",
+      "title": "Auswärtige Bearbeitung setzt Abstimmung voraus",
+      "paragraphs": [
+        "§ 75 Absatz 4 ermöglicht die Bearbeitung durch eine gleichgeordnete auswärtige Behörde mit Zustimmung der örtlich zuständigen Behörde. Das ist keine pauschale freie Wahl jeder Zulassungsstelle. Kläre einen solchen Weg vorher mit den beteiligten Stellen.",
+        "Für Firmen, Vereinigungen oder Personen ohne deutschen Wohnsitz gibt es andere Anknüpfungspunkte und besondere Fälle. Übertrage diese nicht auf deine private Zweitwohnung. Der vorhandene Ratgeber ohne deutschen Wohnsitz behandelt eine andere Ausgangslage."
+      ]
+    },
+    {
+      "id": "umzug",
+      "title": "Wohnungswechsel und Kennzeichenmitnahme unterscheiden",
+      "paragraphs": [
+        "Wird aus der bisherigen Nebenwohnung deine Hauptwohnung, prüfe den nötigen Änderungs- beziehungsweise Umschreibungsvorgang. Dabei ist die Frage nach den Fahrzeugpapieren von der Frage zu trennen, ob die bisherige Kombination weitergeführt werden kann.",
+        "Eine zulässige Kennzeichenmitnahme bedeutet nicht, dass der frühere Wohnort weiterhin für alle Vorgänge zuständig bleibt. Umgekehrt erzwingt ein Umzug nicht in jedem Fall einen Schilderneukauf. Nutze für diesen Fall den Ratgeber zur Ummeldung mit Kennzeichenbeibehaltung."
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "Reservierung und Lieferanschrift richtig verwenden",
+      "paragraphs": [
+        "Reserviere über den für deinen bestätigten Vorgang passenden Weg. Kontrolliere Kombination, Reservierungsdaten und gegebenenfalls Halterzuordnung, bevor du Schilder prägen lässt. Die Versandanschrift im Shop bestimmt nicht, welches Ortskürzel die Behörde zuteilen darf.",
+        "Du kannst deshalb Lieferplanung und Behördenzuständigkeit getrennt organisieren. Entscheidend für die Bestellung bleibt die tatsächlich verwendbare Kombination im angebotenen Format. Die behördliche Zulassung und amtlichen Plaketten sind nicht Bestandteil der Schilderlieferung."
+      ],
+      "items": [
+        "Haupt- und Nebenwohnung eindeutig geklärt?",
+        "Zuständige Behörde beziehungsweise abgestimmte Ausnahme bestätigt?",
+        "Mitnahme einer vorhandenen Nummer geprüft?",
+        "Reservierung vor Prägung und Lieferadresse separat kontrolliert?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 75: örtliche Zuständigkeit und auswärtige Bearbeitung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__75.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-ummelden-kennzeichen-behalten",
+    "auto-zulassen-ohne-deutschen-wohnsitz"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Bestätigte Kombination prägen lassen"
+    }
+  ]
+},
+{
   "slug": "ungestempelte-kennzeichen-zulassungsfahrt",
   "title": "Mit ungestempelten Kennzeichen zur Zulassung: Welche Voraussetzungen gelten?",
   "description": "Zulassungsfahrt, Versicherung und vorab bestätigte Kombination prüfen: Eine gewöhnliche Wunschreservierung reicht für die Ausnahme nicht aus.",
@@ -908,6 +1358,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/kennzeichen-bestellen",
       "label": "Bestätigte Kombination konfigurieren"
+    },
+    {
+      "href": "/blog/auto-zulassen-ohne-fuehrerschein",
+      "label": "Zulassung ohne eigenen Führerschein"
     }
   ]
 },
@@ -1329,7 +1783,8 @@ export const blogArticles: BlogArticle[] = [
   "relatedGuideSlugs": [
     "anhaenger-gruenes-schwarzes-kennzeichen",
     "kennzeichengroessen",
-    "landwirtschaftlicher-anhaenger-folgekennzeichen"
+    "landwirtschaftlicher-anhaenger-folgekennzeichen",
+    "quad-zulassung-kennzeichen"
   ],
   "relatedLinks": [
     {
@@ -1495,6 +1950,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/kennzeichen-umlaute-buchstaben",
       "label": "Umlaute im Ortskürzel und bei Wunschbuchstaben"
+    },
+    {
+      "href": "/blog/alte-din-kennzeichen-weiterverwenden",
+      "label": "Alte DIN-Kennzeichen und Bestandsschutz"
     }
   ]
 },
@@ -1880,7 +2339,8 @@ export const blogArticles: BlogArticle[] = [
   ],
   "relatedGuideSlugs": [
     "auto-anmelden-unterlagen",
-    "eu-import-deutsche-kennzeichen"
+    "eu-import-deutsche-kennzeichen",
+    "versicherung-fehlt-stilllegung"
   ],
   "relatedLinks": [
     {
@@ -1906,6 +2366,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/ratgeber/selbstfahrervermietfahrzeug-zulassen",
       "label": "Versicherung bei gewerblicher Vermietung vorbereiten"
+    },
+    {
+      "href": "/blog/versicherungswechsel-kennzeichen",
+      "label": "Kennzeichen beim Versicherungswechsel"
     }
   ]
 },
@@ -1993,6 +2457,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/fahrradtraeger-kennzeichen-ohne-stempel",
       "label": "Kennzeichen am Fahrradträger"
+    },
+    {
+      "href": "/blog/kennzeichenverlust-im-ausland",
+      "label": "Kennzeichenverlust im Ausland"
     }
   ]
 },
@@ -3006,7 +3474,8 @@ export const blogArticles: BlogArticle[] = [
   ],
   "relatedGuideSlugs": [
     "kennzeichengroessen",
-    "auto-anmelden-unterlagen"
+    "auto-anmelden-unterlagen",
+    "leichtkraftrad-kennzeichen-zuteilung"
   ],
   "relatedLinks": [
     {
@@ -4046,83 +4515,87 @@ export const blogArticles: BlogArticle[] = [
   ]
 },
   {
-    "slug": "alte-kennzeichen-entsorgen",
-    "title": "Alte Kennzeichen entsorgen oder aufbewahren?",
-    "description": "Was nach Abmeldung oder Schildertausch wichtig ist: behördlichen Vorgang abschließen, Wiederverwendung prüfen und Metall richtig abgeben.",
-    "category": "Kennzeichen im Alltag",
-    "publishedAt": "2026-11-13",
-    "intro": [
-      "Nach einem Fahrzeugwechsel liegen die alten Schilder häufig noch in der Garage. Bevor du sie entsorgst, kläre ihren Status. Ein abmontiertes Schild ist nicht automatisch entstempelt und ein weggeworfenes Schild meldet kein Auto ab."
-    ],
-    "takeaway": "Erst das Zulassungsverfahren abschließen. Danach kannst du nicht mehr benötigte Aluminiumschilder nach den örtlichen Vorgaben als Altmetall abgeben oder als Erinnerung behalten.",
-    "sections": [
-      {
-        "id": "status",
-        "title": "Ist der behördliche Vorgang abgeschlossen?",
-        "paragraphs": [
-          "Bei einer Abmeldung müssen die erforderlichen Schritte der Außerbetriebsetzung abgeschlossen sein. Bei einem Ersatz wegen Beschädigung kann die Behörde die bisherigen Schilder noch benötigen. Entsorge sie deshalb nicht vor deinem Termin.",
-          "Befolge bei einer Online-Abmeldung genau die Anweisungen des offiziellen Portals. Lege Sicherheitscodes nicht vorsorglich frei. Das ist ein Verfahrensschritt und keine gewöhnliche Reinigung oder Vorbereitung für den Verkauf."
-        ]
-      },
-      {
-        "id": "behalten",
-        "title": "Kannst du die Schilder später erneut verwenden?",
-        "paragraphs": [
-          "Prüfe vor einer Entsorgung, ob du die Kombination reservieren oder das Schild später wieder nutzen möchtest. Die weitere Verfügbarkeit der Kombination ist eine behördliche Frage. Dass du das Blech besitzt, sichert dir die Buchstaben-Zahlen-Folge nicht automatisch.",
-          "Bewahre die Schilder trocken und so auf, dass die Oberfläche nicht zerkratzt. Bei späterer Verwendung müssen Kombination, Zustand, Ausführung und Zuteilung wieder zusammenpassen. Ein dekoratives Erinnerungsstück darf nicht als gültiges Schild an einem anderen Fahrzeug eingesetzt werden."
-        ]
-      },
-      {
-        "id": "recycling",
-        "title": "Welcher Entsorgungsweg passt?",
-        "paragraphs": [
-          "Für Aluminiumschilder ist die örtliche Altmetallsammlung beziehungsweise ein geeigneter Wertstoffhof ein sinnvoller Anlaufpunkt. Frage den kommunalen Entsorger nach seinen Annahmeregeln. Sie können sich zwischen Gemeinden unterscheiden.",
-          "Eine Gelbe Tonne ist nicht überall eine Wertstofftonne für beliebige Metallgegenstände. Wirf die Schilder deshalb nicht allein wegen ihres Materials hinein. Kunststoffhalter und Schrauben gegebenenfalls nach den örtlichen Vorgaben getrennt abgeben."
-        ]
-      },
-      {
-        "id": "abschluss",
-        "title": "Vor der Abgabe kurz sortieren",
-        "paragraphs": [
-          "Prüfe, welche Teile du noch brauchst: Schilder, Halter und Befestigung sind unterschiedliche Gegenstände. Ein intakter Rahmen kann unter Umständen weiterverwendet werden, wenn er zum neuen Fahrzeug und Schild passt."
-        ],
-        "items": [
-          "Abmeldung oder Austausch vollständig erledigt?",
-          "Alte Schilder von der Behörde nicht mehr benötigt?",
-          "Reservierung beziehungsweise Wiederverwendung geklärt?",
-          "Örtlichen Annahmeweg für Altmetall geprüft?"
-        ]
-      },
-      {
-        "id": "neue",
-        "title": "Neue Schilder nur für die bestätigte Kombination",
-        "paragraphs": [
-          "Für das nächste Auto bestellst du erst, wenn Kombination und Format feststehen. Eine frühere Reservierung lässt sich nicht allein durch dieselbe Eingabe im Shop verlängern. Die Bestellvorschau prüft deine Auswahl, ersetzt aber keine behördliche Zuteilung."
-        ]
-      }
-    ],
-    "sources": [
-      {
-        "label": "MV-Serviceportal: Außerbetriebsetzung und entstempelte Schilder",
-        "href": "https://www.mv-serviceportal.de/leistung?leistungId=108343211&ortId=7438"
-      },
-      {
-        "label": "FZV § 12: Ausgestaltung und Anbringung der Kennzeichen",
-        "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
-      }
-    ],
-    "relatedGuideSlugs": [
-      "auto-ummelden-kennzeichen-behalten",
-      "wunschkennzeichen-reservieren"
-    ],
-    "relatedLinks": [
-      {
-        "href": "/blog/kennzeichenhalter-wechseln",
-        "label": "Intakten Rahmen weiterverwenden oder wechseln"
-      },
-    {"href": "/ratgeber/kennzeichen-fahrzeugwechsel-uebernehmen", "label": "Alte Kombination für ein neues Auto übernehmen"}
+  "slug": "alte-kennzeichen-entsorgen",
+  "title": "Alte Kennzeichen entsorgen oder aufbewahren?",
+  "description": "Was nach Abmeldung oder Schildertausch wichtig ist: behördlichen Vorgang abschließen, Wiederverwendung prüfen und Metall richtig abgeben.",
+  "category": "Kennzeichen im Alltag",
+  "publishedAt": "2026-11-13",
+  "intro": [
+    "Nach einem Fahrzeugwechsel liegen die alten Schilder häufig noch in der Garage. Bevor du sie entsorgst, kläre ihren Status. Ein abmontiertes Schild ist nicht automatisch entstempelt und ein weggeworfenes Schild meldet kein Auto ab."
+  ],
+  "takeaway": "Erst das Zulassungsverfahren abschließen. Danach kannst du nicht mehr benötigte Aluminiumschilder nach den örtlichen Vorgaben als Altmetall abgeben oder als Erinnerung behalten.",
+  "sections": [
+    {
+      "id": "status",
+      "title": "Ist der behördliche Vorgang abgeschlossen?",
+      "paragraphs": [
+        "Bei einer Abmeldung müssen die erforderlichen Schritte der Außerbetriebsetzung abgeschlossen sein. Bei einem Ersatz wegen Beschädigung kann die Behörde die bisherigen Schilder noch benötigen. Entsorge sie deshalb nicht vor deinem Termin.",
+        "Befolge bei einer Online-Abmeldung genau die Anweisungen des offiziellen Portals. Lege Sicherheitscodes nicht vorsorglich frei. Das ist ein Verfahrensschritt und keine gewöhnliche Reinigung oder Vorbereitung für den Verkauf."
+      ]
+    },
+    {
+      "id": "behalten",
+      "title": "Kannst du die Schilder später erneut verwenden?",
+      "paragraphs": [
+        "Prüfe vor einer Entsorgung, ob du die Kombination reservieren oder das Schild später wieder nutzen möchtest. Die weitere Verfügbarkeit der Kombination ist eine behördliche Frage. Dass du das Blech besitzt, sichert dir die Buchstaben-Zahlen-Folge nicht automatisch.",
+        "Bewahre die Schilder trocken und so auf, dass die Oberfläche nicht zerkratzt. Bei späterer Verwendung müssen Kombination, Zustand, Ausführung und Zuteilung wieder zusammenpassen. Ein dekoratives Erinnerungsstück darf nicht als gültiges Schild an einem anderen Fahrzeug eingesetzt werden."
+      ]
+    },
+    {
+      "id": "recycling",
+      "title": "Welcher Entsorgungsweg passt?",
+      "paragraphs": [
+        "Für Aluminiumschilder ist die örtliche Altmetallsammlung beziehungsweise ein geeigneter Wertstoffhof ein sinnvoller Anlaufpunkt. Frage den kommunalen Entsorger nach seinen Annahmeregeln. Sie können sich zwischen Gemeinden unterscheiden.",
+        "Eine Gelbe Tonne ist nicht überall eine Wertstofftonne für beliebige Metallgegenstände. Wirf die Schilder deshalb nicht allein wegen ihres Materials hinein. Kunststoffhalter und Schrauben gegebenenfalls nach den örtlichen Vorgaben getrennt abgeben."
+      ]
+    },
+    {
+      "id": "abschluss",
+      "title": "Vor der Abgabe kurz sortieren",
+      "paragraphs": [
+        "Prüfe, welche Teile du noch brauchst: Schilder, Halter und Befestigung sind unterschiedliche Gegenstände. Ein intakter Rahmen kann unter Umständen weiterverwendet werden, wenn er zum neuen Fahrzeug und Schild passt."
+      ],
+      "items": [
+        "Abmeldung oder Austausch vollständig erledigt?",
+        "Alte Schilder von der Behörde nicht mehr benötigt?",
+        "Reservierung beziehungsweise Wiederverwendung geklärt?",
+        "Örtlichen Annahmeweg für Altmetall geprüft?"
+      ]
+    },
+    {
+      "id": "neue",
+      "title": "Neue Schilder nur für die bestätigte Kombination",
+      "paragraphs": [
+        "Für das nächste Auto bestellst du erst, wenn Kombination und Format feststehen. Eine frühere Reservierung lässt sich nicht allein durch dieselbe Eingabe im Shop verlängern. Die Bestellvorschau prüft deine Auswahl, ersetzt aber keine behördliche Zuteilung."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "MV-Serviceportal: Außerbetriebsetzung und entstempelte Schilder",
+      "href": "https://www.mv-serviceportal.de/leistung?leistungId=108343211&ortId=7438"
+    },
+    {
+      "label": "FZV § 12: Ausgestaltung und Anbringung der Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-ummelden-kennzeichen-behalten",
+    "wunschkennzeichen-reservieren",
+    "auto-verwerten-abmelden"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichenhalter-wechseln",
+      "label": "Intakten Rahmen weiterverwenden oder wechseln"
+    },
+    {
+      "href": "/ratgeber/kennzeichen-fahrzeugwechsel-uebernehmen",
+      "label": "Alte Kombination für ein neues Auto übernehmen"
+    }
   ]
-  },
+},
   {
   "slug": "fahrradtraeger-kennzeichen-ohne-stempel",
   "title": "Fahrradträger-Kennzeichen: Braucht es einen Stempel?",

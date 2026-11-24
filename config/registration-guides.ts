@@ -26,6 +26,402 @@ const shortTerm = { label: 'Service Berlin: Kurzzeitkennzeichen beantragen', hre
 
 export const registrationGuides: RegistrationGuide[] = [
 {
+  "slug": "quad-zulassung-kennzeichen",
+  "title": "Quad zulassen: Fahrzeugklasse und Kennzeichenschilder zuerst klären",
+  "teaser": "Welche Papiere, Kennzeichen und Formate ein Quad benötigt, hängt von seiner Einstufung ab. Prüfe den konkreten Fahrzeugtyp vor dem Schilderkauf.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Ein Quad sieht nach Freizeitfahrzeug aus, kann in den Papieren aber unterschiedlich eingestuft sein. Deshalb ist die Produktbezeichnung im Verkaufsangebot keine zuverlässige Grundlage für die Kennzeichenbestellung. Beginne mit den Genehmigungsunterlagen."
+  ],
+  "takeaway": "Fahrzeugklasse und Genehmigung bestimmen das Verfahren. Ein amtlich zu kennzeichnendes Quad ist nicht allein wegen seines Lenkers ein Motorrad und benötigt nicht automatisch Motorradschilder.",
+  "sections": [
+    {
+      "id": "klasse",
+      "title": "1. Die amtliche Fahrzeugklasse feststellen",
+      "paragraphs": [
+        "Lies die Fahrzeugpapiere beziehungsweise die CoC- oder Genehmigungsunterlagen. Bei vorhandener Zulassungsbescheinigung ist insbesondere die Fahrzeugklasse im Feld J wichtig. Notiere außerdem, ob das Fahrzeug bereits zugelassen war und ob es technische Änderungen gibt.",
+        "Ein leichtes vierrädriges Kraftfahrzeug kann einem anderen Verfahren unterliegen als ein zulassungspflichtiges schweres Quad. §§ 3 und 4 FZV unterscheiden Zulassungsfreiheit, Genehmigung und Kennzeichnung. Ein ausschließlich für das Gelände angebotenes Fahrzeug erhält durch den Kauf von Schildern keine Straßenzulassung."
+      ]
+    },
+    {
+      "id": "verfahren",
+      "title": "2. Versicherungskennzeichen und amtliche Zuteilung unterscheiden",
+      "paragraphs": [
+        "Kläre anhand der Einstufung, ob ein Versicherungskennzeichen vorgesehen ist oder eine amtliche Kennzeichenzuteilung benötigt wird. Bestelle nicht vorsorglich ein normales Kfz-Schild, wenn die Fahrzeugklasse einen anderen Kennzeichentyp verlangt.",
+        "Für den zulassungspflichtigen Fall bereitest du den passenden Antrag mit Identitäts-, Fahrzeug- und Versicherungsnachweisen vor. Bei einem Import oder fehlenden Genehmigungsunterlagen muss zunächst der Nachweisweg geklärt werden. Eine eVB ersetzt keine Betriebserlaubnis."
+      ]
+    },
+    {
+      "id": "lof",
+      "title": "3. Eine LoF-Einstufung nicht als Rundum-Freigabe verstehen",
+      "paragraphs": [
+        "Steht eine land- oder forstwirtschaftliche Einstufung in den Unterlagen, prüfe die tatsächlich eingetragene Fahrzeugart und den vorgesehenen Einsatz. Der Begriff LoF in einer Anzeige belegt weder eine fertige Umrüstung noch einen Anspruch auf grüne Schrift.",
+        "Steuerliche Voraussetzungen und Kennzeichenausführung sind gesondert zu klären. Auch die Bezeichnung als Zugmaschine erlaubt nicht automatisch jedes kleine Schildformat. Lass die konkrete Ausführung anhand der Papiere bestätigen, statt nach dem Aussehen anderer Quads zu bestellen."
+      ]
+    },
+    {
+      "id": "formate",
+      "title": "4. Anzahl und Format vor der Prägung bestätigen",
+      "paragraphs": [
+        "§ 12 Absatz 5 FZV sieht grundsätzlich Kennzeichen vorn und hinten vor; die dort genannte Ausnahme für Krafträder ist nicht einfach auf vierrädrige Quads übertragbar. Bei einem amtlich zu kennzeichnenden Quad musst du deshalb den Bedarf an zwei Schildern berücksichtigen.",
+        "Der Landkreis Schweinfurt weist in seiner Quad-Information ausdrücklich auf zwei Kennzeichen und die Abgrenzung zu Motorrad- und verkleinerten Leichtkraftradschildern hin. Nutze dies als Behördenbeispiel und stimme dein Format mit der zuständigen Stelle ab. Anlage 4 FZV regelt die unterschiedlichen Abmessungen und Verwendungsfälle."
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "5. Nur ein geeignetes angebotenes Schild auswählen",
+      "paragraphs": [
+        "Prüfe die Befestigungsflächen, ohne daraus allein die rechtliche Zulässigkeit eines Formats abzuleiten. Ein Standard-Schild mit 520 Millimetern Breite kommt nur infrage, wenn es für deinen Fall zulässig ist und montiert werden kann. Ein benötigtes Sonderformat ist nicht automatisch im Shop verfügbar.",
+        "Die hier angebotenen Motorrad- oder Landmaschinenformate sind keine pauschale Quad-Lösung. Bestelle erst nach Bestätigung von Kombination, Stückzahl, Farbe und Format. Amtliche Plaketten und die Zulassung kommen weiterhin von der zuständigen Stelle."
+      ],
+      "items": [
+        "Fahrzeugklasse und Genehmigung aus Originalunterlagen geprüft?",
+        "Versicherungskennzeichen oder amtliche Zuteilung unterschieden?",
+        "LoF- und Steuerfragen gegebenenfalls separat geklärt?",
+        "Zwei Schilder und zulässiges Format bestätigt?",
+        "Nur tatsächlich passendes Shop-Angebot gewählt?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Kann jedes Quad mit einem Motorradkennzeichen fahren?",
+      "answer": "Nein. Die äußere Ähnlichkeit entscheidet nicht über Kennzeichenart und Format. Maßgeblich sind Fahrzeugklasse, Genehmigung und die gesetzlichen Formatvorgaben."
+    },
+    {
+      "question": "Reicht bei einem amtlich gekennzeichneten Quad ein Schild hinten?",
+      "answer": "Die Ausnahme für Krafträder ist nicht pauschal auf vierrädrige Quads übertragbar. Kläre die erforderliche Kennzeichnung vorn und hinten nach § 12 FZV."
+    },
+    {
+      "question": "Bedeutet LoF automatisch grüne Kennzeichen?",
+      "answer": "Nein. Einstufung, tatsächliche Nutzung und steuerliche Voraussetzungen müssen getrennt geprüft werden. Eine Verkaufsbezeichnung genügt nicht."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 3: Zulassung und Ausnahmen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__3.html"
+    },
+    {
+      "label": "FZV § 4: Voraussetzungen zulassungsfreier Fahrzeuge",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__4.html"
+    },
+    {
+      "label": "FZV § 12: Anbringung von Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "FZV Anlage 4: Kennzeichenformate",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/anlage_4.html"
+    },
+    {
+      "label": "Landkreis Schweinfurt: Kennzeichen für ein Quad",
+      "href": "https://www.landkreis-schweinfurt.de/landratsamt/serviceleistungen-informationen/details/detail/zuteilung-von-kennzeichen-fuer-ein-quad-1464"
+    }
+  ],
+  "related": [
+    "kennzeichengroessen",
+    "eu-import-deutsche-kennzeichen",
+    "auto-anmelden-unterlagen"
+  ],
+  "cta": "Kombination, Anzahl und Format sind bestätigt? Prüfe, ob die angebotenen Schilder zu deinem Quad passen."
+},
+{
+  "slug": "leichtkraftrad-kennzeichen-zuteilung",
+  "title": "Leichtkraftrad anmelden: Warum die 125er ein amtliches Kennzeichen braucht",
+  "teaser": "Zulassungsfrei bedeutet beim Leichtkraftrad nicht ohne Behörde: Genehmigung, Versicherungsnachweis und Kennzeichenzuteilung richtig vorbereiten.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Du möchtest eine 125er anmelden und liest, dass Leichtkrafträder zulassungsfrei sind. Trotzdem brauchst du für ein entsprechend eingestuftes Fahrzeug ein amtliches Kennzeichen. Die Begriffe beschreiben unterschiedliche rechtliche Anforderungen."
+  ],
+  "takeaway": "Leichtkrafträder sind nach § 3 FZV vom normalen Zulassungsverfahren ausgenommen. § 4 FZV verlangt dennoch Genehmigung und amtliche Kennzeichenzuteilung. Ein jährliches Versicherungskennzeichen ersetzt das nicht.",
+  "sections": [
+    {
+      "id": "einstufung",
+      "title": "1. Leichtkraftrad-Einstufung aus den Papieren prüfen",
+      "paragraphs": [
+        "Verlasse dich nicht allein auf die Verkaufsbezeichnung 125er. Prüfe die amtlichen Fahrzeug- und Genehmigungsdaten. § 2 FZV definiert die Fahrzeugarten; Hubraum allein beantwortet nicht alle Merkmale der Einstufung.",
+        "Bei Umbauten oder unklaren Papieren klärst du die Genehmigung zuerst. Die Wahl eines kleineren Schildes kann eine unpassende Fahrzeugklasse nicht korrigieren. Für den bloßen Vergleich zwischen Motorrad- und Versicherungskennzeichen gibt es bereits einen eigenen Blogartikel."
+      ]
+    },
+    {
+      "id": "genehmigung",
+      "title": "2. Genehmigung und Fahrzeugunterlagen bereitlegen",
+      "paragraphs": [
+        "§ 4 Absatz 1 FZV setzt für diese zulassungsfreien Fahrzeuge einen genehmigten Typ oder eine Fahrzeug-Einzelgenehmigung voraus. Sammle vorhandene CoC-, Betriebserlaubnis- und Fahrzeugunterlagen, statt aus einer alten Schildnummer auf eine vollständige Genehmigung zu schließen.",
+        "Für die Kennzeichenzuteilung verweist § 4 Absatz 2 auf Zulassungsvorschriften, nimmt aber die Vorschriften über die Zulassungsbescheinigung Teil II aus. Ein fehlender Teil II ist bei diesem Verfahren deshalb nicht automatisch ein verlorener Fahrzeugbrief. Kläre mit der Behörde, welche vorhandenen Dokumente in deinem Fall vorzulegen sind."
+      ]
+    },
+    {
+      "id": "antrag",
+      "title": "3. Halter und Versicherungsnachweis passend vorbereiten",
+      "paragraphs": [
+        "Bereite den Identitätsnachweis und die für das Verfahren erforderliche Versicherungsbestätigung vor. Erkläre dem Versicherer die genaue Fahrzeugklasse und den geplanten Vorgang. Eine eVB ist ein Nachweis für die Behörde, keine auf das Schild zu prägende Kombination.",
+        "Bei Vertretung müssen die verlangte Vollmacht und Nachweise passen. Soll das Fahrzeug auf einen Minderjährigen geführt werden, sind die besonderen persönlichen Voraussetzungen zusätzlich zu prüfen. Der verlinkte Minderjährigenratgeber behandelt diesen Fall gesondert."
+      ]
+    },
+    {
+      "id": "format",
+      "title": "4. Das zulässige Schildformat nicht aus dem Halter ableiten",
+      "paragraphs": [
+        "Anlage 4 FZV lässt verkleinerte zweizeilige Kennzeichen bis 255 × 130 Millimeter unter anderem für Leichtkrafträder zu. Daraus folgt nicht, dass jedes unter einer anderen Shop-Kategorie angebotene Schild dieser Größe für deine Bestellung geeignet ist. Schriftfarbe und Ausführung müssen ebenfalls passen.",
+        "Prüfe daher Format und Kombination mit der Zulassungsstelle. Das aktuelle Landmaschinenangebot dieses Shops ist keine automatische Bestellung eines schwarzen Leichtkraftradkennzeichens. Auch ein vorhandener Motorradhalter bestätigt keine behördliche Formatfreigabe. Fehlt die benötigte Ausführung im Sortiment, wähle nicht ersatzweise ein unpassendes Produkt."
+      ]
+    },
+    {
+      "id": "montage",
+      "title": "5. Zuteilung, Abstempelung und Montage abschließen",
+      "paragraphs": [
+        "Bei Krafträdern wird das Kennzeichen nach § 12 Absatz 5 hinten angebracht. Bestelle die bestätigte Kombination im passenden angebotenen Format und prüfe die Prägung nach Erhalt. Ein frisches Schild allein schließt das behördliche Verfahren noch nicht ab.",
+        "Kläre die erforderliche Abstempelung und Fahrzeugunterlagen, bevor du losfährst. Montiere das Schild sicher und lesbar. Zulassungsfreiheit ist weder eine Befreiung von allen technischen Anforderungen noch eine allgemeine Erlaubnis zur Fahrt mit beliebigen oder ungestempelten Schildern."
+      ],
+      "items": [
+        "Amtliche Fahrzeugklasse geprüft?",
+        "Genehmigungsunterlagen und vorhandene Papiere zusammengestellt?",
+        "Halter, Versicherung und gegebenenfalls Vertretung geklärt?",
+        "Zulässiges und tatsächlich angebotenes Format bestätigt?",
+        "Zuteilung, Plakette und Montage vor Nutzung abgeschlossen?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Warum brauche ich trotz Zulassungsfreiheit eine Behörde?",
+      "answer": "§ 4 Absatz 2 FZV verlangt für Leichtkrafträder eine amtliche Kennzeichenzuteilung. Die Ausnahme vom normalen Zulassungsverfahren beseitigt diese Pflicht nicht."
+    },
+    {
+      "question": "Kann ich stattdessen ein jährliches Versicherungskennzeichen nehmen?",
+      "answer": "Nicht für ein als Leichtkraftrad eingestuftes Fahrzeug. Maßgeblich ist die amtliche Klasse, nicht der Wunsch nach einem einfacheren Verfahren."
+    },
+    {
+      "question": "Muss ich einen verlorenen Teil II ersetzen lassen?",
+      "answer": "Nicht allein deshalb, weil kein Teil II vorhanden ist. § 4 Absatz 2 nimmt dessen Vorschriften aus. Kläre zunächst, welche Fahrzeugdokumente tatsächlich ausgestellt und erforderlich sind."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 2: Fahrzeugarten",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__2.html"
+    },
+    {
+      "label": "FZV § 3: Zulassungsfreiheit",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__3.html"
+    },
+    {
+      "label": "FZV § 4: Genehmigung und Kennzeichenzuteilung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__4.html"
+    },
+    {
+      "label": "FZV § 12: Anbringung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "FZV Anlage 4: verkleinerte zweizeilige Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/anlage_4.html"
+    }
+  ],
+  "related": [
+    "kennzeichengroessen",
+    "fahrzeug-auf-minderjaehrige-zulassen",
+    "auto-anmelden-vollmacht"
+  ],
+  "cta": "Die passende Ausführung ist bestätigt? Prüfe vor der Bestellung, ob dein benötigtes Schild im Sortiment angeboten wird."
+},
+{
+  "slug": "versicherung-fehlt-stilllegung",
+  "title": "Stilllegung wegen fehlender Versicherung: Nachweis und Zulassungsstatus klären",
+  "teaser": "Behördenbrief, Versicherungsbestätigung und Wiederzulassung unterscheiden. Neue Schilder beheben keine fehlende Haftpflichtversicherung.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Die Zulassungsstelle meldet fehlenden Versicherungsschutz oder das Auto wurde bereits außer Betrieb gesetzt. Jetzt musst du zwei Fragen beantworten: Besteht tatsächlich Haftpflichtschutz und welchen Status hat das Fahrzeug bei der Behörde?"
+  ],
+  "takeaway": "Kläre Versicherung und behördlichen Status sofort. Eine Zahlung, neue eVB oder Schildbestellung hebt eine bereits erfolgte Außerbetriebsetzung nicht automatisch auf.",
+  "sections": [
+    {
+      "id": "status",
+      "title": "1. Den konkreten Stand des Verfahrens feststellen",
+      "paragraphs": [
+        "Lies das Schreiben vollständig. Notiere Aktenzeichen, Fahrzeugdaten, geforderte Handlung und genannte Frist. Unterscheide eine Aufforderung zum Nachweis von einer bereits angeordneten oder vollzogenen Außerbetriebsetzung. Eine allgemeine Internetauskunft ersetzt diesen Bescheid nicht.",
+        "§ 51 Absatz 3 FZV verpflichtet den Halter bei fehlender vorgeschriebener Haftpflichtversicherung zur unverzüglichen Außerbetriebsetzung. Absatz 4 regelt das behördliche Einschreiten. Gehe deshalb nicht davon aus, dass montierte Schilder oder eine äußerlich intakte Plakette eine ungeklärte Weiterfahrt erlauben."
+      ]
+    },
+    {
+      "id": "versicherer",
+      "title": "2. Tatsächlichen Schutz und mögliche Datenfehler klären",
+      "paragraphs": [
+        "Kontaktiere den Versicherer mit Kennzeichen, Fahrzeug-Identifizierungsnummer und Vertragsdaten. Frage konkret, ob und seit wann Haftpflichtschutz besteht. Ein Zahlungsbeleg allein beantwortet nicht sicher, ob der Vertrag aktiv ist oder der erforderliche Nachweis richtig übermittelt wurde.",
+        "Prüfe auch mögliche Zuordnungsfehler, etwa ein falsches Zeichen im Kennzeichen oder abweichende Halterdaten. Bei einem Versichererwechsel sollten alter und neuer Vertrag zeitlich sauber zugeordnet sein. Lass notwendige Korrekturen über den vorgesehenen Meldeweg veranlassen."
+      ]
+    },
+    {
+      "id": "nachweis",
+      "title": "3. Den Nachweis bei der Behörde zuordnen lassen",
+      "paragraphs": [
+        "§ 49 FZV regelt die Versicherungsbestätigung gegenüber der Zulassungsbehörde. Kläre mit Versicherer und Behörde, welcher Nachweis für deinen aktuellen Verfahrensstand benötigt wird. Eine eVB für einen anderen Vorgang ist nicht ohne Weiteres die passende Lösung.",
+        "Gib das Aktenzeichen an und frage nach, ob der eingegangene Nachweis richtig zugeordnet wurde. Bewahre Bestätigungen auf. Behaupte nicht allein aus einer zugesandten Versicherungs-E-Mail, dass eine behördliche Maßnahme bereits erledigt ist."
+      ]
+    },
+    {
+      "id": "wiederzulassung",
+      "title": "4. Nach einer Außerbetriebsetzung das neue Verfahren klären",
+      "paragraphs": [
+        "Ist das Fahrzeug bereits außer Betrieb gesetzt, prüfe die Wiederzulassung nach § 16 FZV. Dazu gehören die für deinen Fall erforderlichen Fahrzeugunterlagen und Nachweise. Zwischenzeitlich fällige Untersuchungen können ebenfalls relevant werden.",
+        "Eine nachträglich bestätigte Versicherung lässt ein bereits abgemeldetes Fahrzeug nicht einfach wieder zugelassen sein. Kläre den Abschluss des Verfahrens vor der Nutzung. Organisiere erforderliche Wege so, dass keine unversicherte oder sonst unzulässige Fahrt entsteht; übernimm keine fremden Kennzeichen als Übergangslösung."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "5. Erst danach über neue Schilder entscheiden",
+      "paragraphs": [
+        "Prüfe, ob die bisherige Kombination erneut verwendet werden kann und ob die vorhandenen Schilder geeignet sind. Eine frühere Nummer ist nicht allein durch den Besitz der Bleche dauerhaft gesichert. Der tatsächliche Verfahrensausgang bestimmt den Bedarf.",
+        "Wenn neue Schilder erforderlich sind, bestellst du nur die bestätigte Kombination im passenden Format. Die Lieferung ersetzt weder Versicherungsdeckung noch Wiederzulassung oder amtliche Plaketten. Bei einem reinen laufenden Versichererwechsel ohne diesen Problemfall hilft stattdessen der verlinkte Blogbeitrag."
+      ],
+      "items": [
+        "Bescheid, Frist und aktueller Zulassungsstatus verstanden?",
+        "Haftpflichtschutz und elektronische Meldung geprüft?",
+        "Nachweis behördlich zugeordnet?",
+        "Gegebenenfalls Wiederzulassung abgeschlossen?",
+        "Kombination und tatsächlicher Ersatzbedarf bestätigt?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Reicht es, den offenen Versicherungsbeitrag zu bezahlen?",
+      "answer": "Eine Zahlung allein bestätigt weder wirksamen Schutz noch den behördlichen Status. Kläre beides mit Versicherer und Zulassungsstelle."
+    },
+    {
+      "question": "Ist das Auto mit einer neuen eVB sofort wieder zugelassen?",
+      "answer": "Nein. Bei bereits erfolgter Außerbetriebsetzung ist das passende Wiederzulassungsverfahren erforderlich."
+    },
+    {
+      "question": "Brauche ich zwingend neue Kennzeichenschilder?",
+      "answer": "Nicht in jedem Fall. Die erneute Verwendbarkeit der Kombination und der Zustand der vorhandenen Schilder müssen zuerst geklärt werden."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 51: fehlender Haftpflichtversicherungsschutz",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__51.html"
+    },
+    {
+      "label": "FZV § 49: Versicherungsnachweis",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__49.html"
+    },
+    {
+      "label": "FZV § 16: Wiederzulassung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__16.html"
+    }
+  ],
+  "related": [
+    "auto-wiederzulassen-lange-standzeit",
+    "zulassung-abgelehnt-gruende",
+    "auto-anmelden-unterlagen"
+  ],
+  "cta": "Versicherung und Zulassungsverfahren sind geklärt und neue Schilder nötig? Bestelle die bestätigte Kombination."
+},
+{
+  "slug": "auto-verwerten-abmelden",
+  "title": "Auto verwerten und abmelden: Verwertungsnachweis und Kennzeichen ordnen",
+  "teaser": "Anerkannten Verwerter wählen, Nachweis sichern und Außerbetriebsetzung klären. Die Übergabe des Autos ersetzt nicht automatisch die behördliche Abmeldung.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Das Fahrzeug soll endgültig verwertet werden. Jetzt geht es um mehr als die alten Kennzeichenschilder: Der Verbleib des Autos, der Verwertungsnachweis und die Meldung bei der Zulassungsstelle müssen zusammenpassen."
+  ],
+  "takeaway": "Lass die Verwertung durch eine anerkannte Stelle dokumentieren und kläre die Außerbetriebsetzung ausdrücklich. Für das zu verwertende Auto ist ein Schilderneukauf normalerweise nicht sinnvoll.",
+  "sections": [
+    {
+      "id": "annahme",
+      "title": "1. Eine anerkannte Annahme- oder Verwertungsstelle wählen",
+      "paragraphs": [
+        "Die Altfahrzeug-Verordnung regelt die Überlassung von Altfahrzeugen an anerkannte Stellen. Das Umweltbundesamt empfiehlt die fachgerechte Entsorgung über diesen Weg. Eine beliebige Abholung mit dem Versprechen, alles zu erledigen, ist kein ausreichender Nachweis.",
+        "Frage vor der Übergabe, welche anerkannte Stelle die Verwertung übernimmt und wie du den Verwertungsnachweis erhältst. Halte Fahrzeug-Identifizierungsnummer, Übergabedatum und Ansprechpartner fest. Stimme auch die sichere Abholung ab, wenn das Fahrzeug nicht mehr gefahren werden darf oder kann."
+      ]
+    },
+    {
+      "id": "nachweis",
+      "title": "2. Verwertungsnachweis und Fahrzeugklasse zusammen prüfen",
+      "paragraphs": [
+        "§ 17 FZV betrifft bei der Verwertung insbesondere Fahrzeuge der Klassen M1, N1 und L5e. Prüfe die Klasse in den Fahrzeugunterlagen. Übertrage den beschriebenen Ablauf nicht ungeprüft auf jede andere Fahrzeugart.",
+        "Für die erfassten Fälle ist der Verwertungsnachweis im Zusammenhang mit der unverzüglichen Außerbetriebsetzung vorzulegen. Verlange die Dokumentation und bewahre einen geeigneten Nachweis über die Übergabe und den erledigten Vorgang auf. Ein Kaufvertrag oder eine Quittung ist nicht ohne Weiteres dasselbe wie der gesetzliche Verwertungsnachweis."
+      ]
+    },
+    {
+      "id": "abmeldung",
+      "title": "3. Zuständigkeit für die Abmeldung ausdrücklich vereinbaren",
+      "paragraphs": [
+        "Kläre schriftlich, ob du selbst oder eine beauftragte Person die behördliche Außerbetriebsetzung erledigt. Frage nach den dafür benötigten Unterlagen, Vollmachten und Kennzeichen. Die Übergabe der Schlüssel belegt noch nicht, dass das Fahrzeug bei der Behörde abgemeldet wurde.",
+        "§ 17 regelt auch die Vorlage der Zulassungsbescheinigungen Teil I und Teil II und deren Behandlung durch die Behörde. Gib Unterlagen deshalb nicht unkoordiniert an verschiedene Stellen. Lass dir den Abschluss des Vorgangs bestätigen, bevor du die Sache als erledigt ablegst."
+      ]
+    },
+    {
+      "id": "bereits-abgemeldet",
+      "title": "4. Bereits abgemeldete Fahrzeuge nicht übersehen",
+      "paragraphs": [
+        "Ein Auto kann schon länger außer Betrieb sein und erst später verwertet werden. § 17 enthält auch für bereits außer Betrieb gesetzte Fahrzeuge eine Nachweispflicht, wenn die Verwertung innerhalb von sieben Jahren erfolgt und das Fahrzeug zuvor nicht im Ausland wieder zugelassen wurde.",
+        "Das ist ein eigener Prüfschritt und kein Anlass, das Auto für die Verwertung erneut anzumelden. Bei unklarer Stilllegungsdauer oder fehlenden Papieren frage nach dem richtigen Nachweisverfahren. Leite aus der genannten Frist keine pauschale Entsorgungsfreiheit für ältere Fahrzeuge ab."
+      ]
+    },
+    {
+      "id": "nummer",
+      "title": "5. Eine gewünschte Nummer für das Folgeauto separat klären",
+      "paragraphs": [
+        "Möchtest du die bisherige Kombination an einem anderen Auto nutzen, frage vorab nach Reservierung und möglicher Übernahme. Eine Reservierung für die Wiederzulassung desselben Fahrzeugs ist nicht automatisch eine gesicherte Zuteilung für ein Folgefahrzeug.",
+        "Neue Schilder bestellst du erst für den bestätigten nächsten Vorgang. Was nach Entstempelung mit einzelnen alten Platten geschehen kann, behandelt der bestehende Blog zur Kennzeichenentsorgung. Fahrzeugverwertung und Blechentsorgung bleiben unterschiedliche Aufgaben."
+      ],
+      "items": [
+        "Anerkannte Stelle und Übergabeweg geprüft?",
+        "Verwertungsnachweis mit richtigen Fahrzeugdaten erhalten?",
+        "Abmeldung und Dokumentenweg klar vereinbart?",
+        "Behördlichen Abschluss bestätigt bekommen?",
+        "Eventuelle Nummernübernahme für das Folgeauto separat geklärt?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Ist das Auto mit Übergabe an den Verwerter automatisch abgemeldet?",
+      "answer": "Das solltest du nicht voraussetzen. Vereinbare, wer die Außerbetriebsetzung erledigt, und sichere die Bestätigung des behördlichen Abschlusses."
+    },
+    {
+      "question": "Brauche ich auch bei einem schon abgemeldeten Auto einen Nachweis?",
+      "answer": "§ 17 FZV regelt die Nachweispflicht auch bei bereits außer Betrieb gesetzten Fahrzeugen innerhalb der dort genannten Sieben-Jahres-Frist. Kläre den konkreten Fall."
+    },
+    {
+      "question": "Soll ich vor der Verwertung neue Kennzeichen kaufen?",
+      "answer": "Für das zu verwertende Fahrzeug ist das normalerweise nicht sinnvoll. Ein Bedarf kann erst für ein anderes, behördlich bestätigtes Zulassungsvorhaben entstehen."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 17: Außerbetriebsetzung zur Verwertung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__17.html"
+    },
+    {
+      "label": "Altfahrzeug-Verordnung § 4: Überlassung und Nachweise",
+      "href": "https://www.gesetze-im-internet.de/altfahrzeugv/__4.html"
+    },
+    {
+      "label": "Umweltbundesamt: Altauto fachgerecht entsorgen",
+      "href": "https://www.umweltbundesamt.de/umwelttipps-fuer-den-alltag/altauto-fachgerecht-entsorgen"
+    },
+    {
+      "label": "FZV § 16: Außerbetriebsetzung und Reservierung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__16.html"
+    }
+  ],
+  "related": [
+    "kennzeichen-fahrzeugwechsel-uebernehmen",
+    "auto-anmelden-vollmacht",
+    "auto-wiederzulassen-lange-standzeit"
+  ],
+  "cta": "Ein Folgefahrzeug erhält eine bestätigte Kombination? Konfiguriere dafür die tatsächlich benötigten Schilder."
+},
+{
   "slug": "auto-wiederzulassen-lange-standzeit",
   "title": "Auto nach langer Standzeit wieder zulassen: Papiere, HU und Kennzeichen",
   "teaser": "Ein stillgelegtes Fahrzeug reaktivieren: Welche Nachweise wichtig sind und warum mehr als sieben Jahre nicht automatisch ein Vollgutachten bedeuten.",
@@ -114,7 +510,9 @@ export const registrationGuides: RegistrationGuide[] = [
   "related": [
     "vollgutachten-21-zulassung",
     "auto-ohne-tuev-anmelden",
-    "auto-online-zulassen-kennzeichen"
+    "auto-online-zulassen-kennzeichen",
+    "versicherung-fehlt-stilllegung",
+    "auto-verwerten-abmelden"
   ],
   "cta": "Kombination und Ausführung sind bestätigt? Bestelle nur die Schilder, die für die Wiederzulassung tatsächlich benötigt werden."
 },
@@ -1426,7 +1824,8 @@ export const registrationGuides: RegistrationGuide[] = [
   "related": [
     "auto-anmelden-unterlagen",
     "wunschkennzeichen-reservieren",
-    "kennzeichengroessen"
+    "kennzeichengroessen",
+    "leichtkraftrad-kennzeichen-zuteilung"
   ],
   "cta": "Der konkrete Zulassungsfall und die Kombination sind bestätigt? Wähle die passende angebotene Schildart und prüfe die Vorschau. Die Schilderbestellung ersetzt weder Zustimmung noch Zulassung."
 },
@@ -1749,7 +2148,8 @@ export const registrationGuides: RegistrationGuide[] = [
     "wunschkennzeichen-reservieren",
     "kurzzeitkennzeichen-fahrzeugueberfuehrung",
     "drittland-import-zulassung",
-    "ausfuhrkennzeichen-ablauf"
+    "ausfuhrkennzeichen-ablauf",
+    "quad-zulassung-kennzeichen"
   ],
   "cta": "Deine deutsche Kombination und die passenden Maße stehen fest? Konfiguriere die angebotenen Schilder für deinen Zulassungstermin. Herkunftsdokumente, Versicherung, Zulassung und amtliche Plaketten bleiben eigenständige Schritte."
 },
