@@ -38,3 +38,11 @@ Shoplogik, Konfigurator, Checkout, Zahlungen, Tracking, Rechtstexte und Deployme
 ## Veröffentlichung
 
 Alle Vorprüfungen bestanden. Push, Deploymentstatus und öffentliche HTTP-Nachweise folgen als datierter Nachtrag. Dieser Abschnitt allein bestätigt noch keine Veröffentlichung.
+
+### Bestätigt live – 24.11.2026, ca. 02:12 Uhr Europe/Berlin
+
+Inhaltscommit: https://github.com/blackmarketing2026/http-kennzeichen-lieferung.de/commit/b10be65351159de88e079533f032f435bd63127b . Vor Push main erneut geprüft; unverändert und ungeschützt. Update mit erwartetem Vorgänger, kein Force-Push. Nach Fetch alle sechs veröffentlichten Dateien bytegleich mit dem lokal geprüften Stand.
+
+Vercel meldet für den Inhaltscommit `success`: https://vercel.com/stefve/http-kennzeichen-lieferung-de/DE7yetcG21nM1pg1DMhJdAS1XMtU . Öffentlicher Editorial-Smoke bestanden: zehn neue Seiten und 57 HTTP-Ziele, erwarteter Inhalt, H1/Metadaten/Canonicals/JSON-LD, interne Links, Übersichten und echte404. Zusätzlicher öffentlicher Node-HTTP-Test für OG, Datum, Bannerslots und Bildabmessungen bestanden.
+
+Öffentliche Sitemap https://www.kennzeichen-lieferung.de/sitemap.xml bestätigt112 eindeutige URLs, exakt+10 neue kanonische Seiten/-0 gegenüber Ausgangsbestand102. Alle zehn Seiten live. Keine Aussage über Google-Indexierung, Einreichung oder neue Käufe. Dieser Nachtrag betrifft nur Dokumentation und memory.
