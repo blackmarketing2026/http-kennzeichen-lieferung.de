@@ -104,3 +104,7 @@
 - Build/Lint/Editorial10Seiten49HTTP-Ziele/SEO84Seiten bestanden; Sitemap82→92+10/-0. Kein Browser. Live-Nachtrag folgt.
 - §79(9)FZV aktuelle Anwendungsgrenze31.12.2026 für§11/Anlage3: neuerAuslands-E-Artikel nennt sie. Vor2027 erneut amtlichenStand prüfen, keine automatische Fortgeltung behaupten.
 - Live-Abschluss24.11.: Content-Commit3c1748f5591c47c9b97b87e6d44b181ae32e9aa2, Vercel success, öffentlicher Editorial-Smoke10Seiten/49HTTP-Ziele bestanden. Live-Sitemap92 eindeutig,+10/-0. Alle10neuen Seiten live; keine Indexierungszusage.
+
+## SEO 2026-11-24 – zweiter Durchlauf
+
+Sechs neue Blogartikel und vier neue Ratgeber umgesetzt; Manifest `docs/seo/2026-11-24-zwei-new-pages.json`, vorgelagertes Briefing und Prüfbericht daneben. Themen: CoC, HU-Zweitschrift, verdeckende Ladung, Magnethalter, Umweltplakette 4/Euro 6, Halterrollen; Neuwagen, Bankbrief, Auslandswohnsitz, Selbstfahrervermietung. Nicht erneut als neue Themen planen. Build, gezieltes Lint, Editorial-Smoke (10 Seiten/50 HTTP-Ziele), globaler SEO-Smoke (94 Seiten), zusätzliche OG/Banner/Bild/Sitemap-Prüfung bestanden. Sitemap automatisch 92→102 (+10/-0). Keine Browserprüfung; kein visueller Nachweis. Drei OpenSEO-SERPs scheiterten an INSUFFICIENT_CREDITS. Wochenanalyse 23.11. wiederverwendet; nächste frühestens 30.11. Kein Umsatz-/Indexierungsnachweis. Veröffentlichung siehe Nachtrag im Prüfbericht.

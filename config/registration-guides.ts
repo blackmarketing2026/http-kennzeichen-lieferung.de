@@ -26,6 +26,382 @@ const shortTerm = { label: 'Service Berlin: Kurzzeitkennzeichen beantragen', hre
 
 export const registrationGuides: RegistrationGuide[] = [
 {
+  "slug": "neuwagen-erstzulassung",
+  "title": "Neuwagen erstmals zulassen: Von den Fahrzeugpapieren zu den Kennzeichen",
+  "teaser": "Welche Nachweise für ein bisher nicht zugelassenes Auto wichtig sind und wann du die Kennzeichenschilder bestellen kannst.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Dein neues Auto steht beim Händler. Bevor du Schilder bestellst, kläre, wer die Erstzulassung übernimmt und welche Originalunterlagen beziehungsweise elektronischen Nachweise bereits vorliegen."
+  ],
+  "takeaway": "Ein Neuwagen braucht einen passenden Genehmigungsnachweis und einen vollständigen Zulassungsantrag. Schilderprägung und behördliche Zulassung sind getrennte Schritte.",
+  "sections": [
+    {
+      "id": "vorgang",
+      "title": "1. Erstzulassung oder bereits zugelassenes Fahrzeug?",
+      "paragraphs": [
+        "Entscheidend ist nicht allein die Bezeichnung Neuwagen im Verkauf. Ein Fahrzeug mit Tageszulassung war bereits zugelassen. Für diesen Fall passt ein Ablauf zur Umschreibung besser als eine Anleitung für die erstmalige Zulassung.",
+        "Frage den Händler ausdrücklich nach dem bisherigen Zulassungsstatus. Vereinbare außerdem, ob er den Antrag stellt, einen Dienstleister beauftragt oder nur die Fahrzeugunterlagen bereitstellt. So vermeidest du doppelte Reservierungen und Schilderbestellungen."
+      ]
+    },
+    {
+      "id": "nachweise",
+      "title": "2. Fahrzeugpapiere und Genehmigung zusammenstellen",
+      "paragraphs": [
+        "§ 6 Absatz 4 FZV regelt den Nachweis der Genehmigung. Bei einem Fahrzeug mit EU-Typgenehmigung ist insbesondere die Übereinstimmungsbescheinigung, das CoC, relevant. Die Vorschrift sieht auch den behördlichen Abruf der CoC-Daten aus den genannten Datenbanken vor.",
+        "Prüfe mit Händler und Behörde, welcher Nachweis für dein Fahrzeug verfügbar ist. Lege eine bereits ausgestellte Zulassungsbescheinigung Teil II vor. Ist sie noch nicht vorhanden, ist ihre Ausfertigung nach § 6 Absatz 3 mit zu beantragen. Ein Kaufvertrag ersetzt nicht automatisch diese Fahrzeugnachweise."
+      ]
+    },
+    {
+      "id": "halter",
+      "title": "3. Antrag auf den vorgesehenen Halter vorbereiten",
+      "paragraphs": [
+        "Bereite Identitätsnachweise, den passenden Versicherungsnachweis und die für die Kfz-Steuer verlangten Angaben vor. Prüfe die aktuelle Unterlagenliste deiner zuständigen Zulassungsstelle. Bei Vertretung kommen Vollmacht und die dort verlangten Ausweiskopien oder Originalnachweise hinzu.",
+        "Wenn Teil II bei einer finanzierenden Bank liegt, organisiere den Dokumentenversand frühzeitig. Eine Versandbestätigung ist noch kein Nachweis, dass die Unterlage der Behörde für deinen Termin vorliegt. Stimmen Halter und Versicherungsnehmer nicht überein, kläre die eVB mit dem Versicherer."
+      ]
+    },
+    {
+      "id": "termin",
+      "title": "4. Zulassungsweg und Untersuchungspflichten klären",
+      "paragraphs": [
+        "Ob die Online-Zulassung möglich ist, hängt unter anderem von den Fahrzeugdokumenten, verfügbaren Daten und den Voraussetzungen des zuständigen Portals ab. Ein neu gekauftes Fahrzeug ist nicht allein deshalb automatisch online zulassungsfähig. Nutze für den konkreten Ablauf den verlinkten Online-Ratgeber.",
+        "Bei gewöhnlichen neuen Pkw beträgt die erste HU-Frist grundsätzlich 36 Monate. Für besondere Nutzungen und andere Fahrzeugarten gelten abweichende Fristen. Übertrage die Drei-Jahres-Angabe deshalb nicht ungeprüft auf beispielsweise gewerblich vermietete Fahrzeuge."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "5. Bestätigte Kombination prägen lassen",
+      "paragraphs": [
+        "Kläre die Kombination, die benötigte Ausführung und die Abmessungen. Wenn der Händler bereits Schilder bestellt, brauchst du keine zweite Bestellung. Übernimm eine bestätigte Reservierung sorgfältig und prüfe gegebenenfalls zusätzliche Zeichen wie E oder den Saisonzeitraum.",
+        "Die angebotenen Schilder kannst du anschließend im Konfigurator zusammenstellen. Die Lieferung enthält keine behördliche Zulassung und keine amtlichen Stempel- oder HU-Plaketten. Plane die Fahrzeugabholung erst auf Grundlage des tatsächlich abgeschlossenen Zulassungsvorgangs."
+      ],
+      "items": [
+        "Bisherigen Zulassungsstatus bestätigt?",
+        "CoC beziehungsweise abrufbare Genehmigungsdaten geklärt?",
+        "Teil II und Halterunterlagen vollständig?",
+        "Zuständigkeit für Reservierung und Schilderkauf vereinbart?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Ist eine Tageszulassung eine Erstzulassung auf mich?",
+      "answer": "Das Fahrzeug war bereits zugelassen. Kläre die dafür erforderliche Umschreibung statt von einem bisher unzugelassenen Neufahrzeug auszugehen."
+    },
+    {
+      "question": "Brauche ich zwingend ein neues Papier-CoC?",
+      "answer": "Nicht in jedem Fall. § 6 Absatz 4 FZV sieht auch einen behördlichen Datenabruf vor. Frage, ob dieser für dein Fahrzeug verfügbar ist."
+    },
+    {
+      "question": "Darf ich mit den gelieferten Schildern sofort losfahren?",
+      "answer": "Die Schilderlieferung allein erlaubt keine Fahrt. Zulassung, Kennzeichnung und Versicherung müssen zum tatsächlichen Fahrzeugstatus passen."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 6: Zulassungsantrag und Genehmigungsnachweise",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__6.html"
+    },
+    {
+      "label": "StVZO Anlage VIII: Untersuchungsfristen",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/anlage_viii.html"
+    },
+    {
+      "label": "Berlin: Erstzulassung eines fabrikneuen Fahrzeugs",
+      "href": "https://service.berlin.de/dienstleistung/120882/"
+    }
+  ],
+  "related": [
+    "auto-anmelden-unterlagen",
+    "auto-online-zulassen-kennzeichen",
+    "fahrzeugbrief-bank-zulassung"
+  ],
+  "cta": "Kombination und Ausführung stehen fest? Prüfe die angebotenen Schilder im Konfigurator."
+},
+{
+  "slug": "fahrzeugbrief-bank-zulassung",
+  "title": "Fahrzeugbrief bei der Bank: Zulassung und Dokumentenversand abstimmen",
+  "teaser": "So koordinierst du Teil II zwischen Bank und Zulassungsstelle, ohne Versandbestätigung, Dokumenteneingang und Zulassung zu verwechseln.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Die Zulassungsbescheinigung Teil II liegt bei der Bank. Das ist bei einer Finanzierung nicht ungewöhnlich, erfordert aber einen abgestimmten Dokumentenweg, wenn dein Zulassungsvorgang diese Unterlage benötigt."
+  ],
+  "takeaway": "Kläre zuerst, ob Teil II für den konkreten Antrag erforderlich ist. Falls ja, stimmen Bank und Zulassungsstelle Versandziel, Zuordnung und Rückgabe ab. Buche den Abschluss des Vorgangs nicht allein aufgrund einer Versandmeldung.",
+  "sections": [
+    {
+      "id": "bedarf",
+      "title": "1. Den Vorgang genau benennen",
+      "paragraphs": [
+        "Sag der Zulassungsstelle, ob es um Erstzulassung, Halterwechsel oder eine andere Änderung geht. Nicht jede Änderung erfordert dieselben Unterlagen. Bei einer bloßen Änderung der Anschrift sieht § 15 Absatz 1 FZV beispielsweise keine Vorlage von Teil II vor.",
+        "Fordere daher nicht vorsorglich für jeden Verwaltungsschritt den Fahrzeugbrief an. Lass dir die aktuelle Unterlagenliste für deinen Fall geben und teile sie der Bank mit. Die Zustimmung zu einem bestimmten Vorgang kann zusätzlich von den vertraglichen Vereinbarungen abhängen."
+      ]
+    },
+    {
+      "id": "versand",
+      "title": "2. Den Dokumentenweg mit der Bank vereinbaren",
+      "paragraphs": [
+        "Frage nach dem vorgesehenen Verfahren zur Übersendung an die zuständige Behörde. Übermittle die bestätigte Empfängeradresse und die Angaben, mit denen dein Antrag dem Fahrzeug zugeordnet werden kann. Dazu können FIN, Dokumentennummer oder ein Aktenzeichen gehören.",
+        "Vermeide selbst gewählte Abkürzungen beim Behördennamen. Kläre, wer die Anforderung auslösen darf und ob weitere Unterlagen benötigt werden. Bearbeitungs- und Postlaufzeiten musst du beim beteiligten Institut erfragen; eine allgemeingültige Zahl an Tagen wäre hier unzuverlässig."
+      ]
+    },
+    {
+      "id": "eingang",
+      "title": "3. Versand und tatsächlichen Eingang unterscheiden",
+      "paragraphs": [
+        "Eine Nachricht der Bank über den Versand sagt noch nicht, dass die Zulassungsstelle die Unterlage bereits bearbeiten kann. Frage nach dem vorgesehenen Weg zur Eingangsbestätigung, bevor du einen zeitkritischen Termin fest einplanst.",
+        "Berlin bietet dafür beispielsweise eine eigene Statusabfrage für übersandte Zulassungsbescheinigungen Teil II an. Diese örtliche Möglichkeit ist keine bundesweite Zusage. Nutze nur den offiziellen Dienst deiner Behörde und die dort verlangten Fahrzeug- oder Dokumentendaten."
+      ]
+    },
+    {
+      "id": "rueckgabe",
+      "title": "4. Rückgabe und digitale Verfahren vorher klären",
+      "paragraphs": [
+        "Vereinbare, an wen Teil II nach der Bearbeitung zurückgehen soll. § 14 Absatz 7 FZV regelt die Aushändigung an den Vorlegenden oder die von ihm bestimmte Person. Die Behörde entscheidet dabei keine privatrechtlichen Streitigkeiten.",
+        "Bei einem Online-Verfahren solltest du nicht einfach von einem frei verfügbaren Sicherheitscode ausgehen. Prüfe mit Bank und Portal, ob dein konkreter Vorgang auf diesem Weg möglich ist. Lege keine Sicherheitsfelder ohne geklärten Zweck frei und melde ein bei der Bank verwahrtes Dokument nicht als verloren."
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "5. Schilder nach dem abgestimmten Ablauf bestellen",
+      "paragraphs": [
+        "Prüfe die Gültigkeit einer Wunschreservierung und ob die geplante Kombination zum Antrag passt. Bestehende Schilder müssen nicht allein deshalb ersetzt werden, weil Teil II bei einer Bank liegt. Entscheidend ist der tatsächliche Zulassungsvorgang.",
+        "Brauchst du neue Kennzeichenschilder, bestellst du die bestätigte Kombination und passende Ausführung. Der Schilderanbieter beschafft keinen Fahrzeugbrief bei der Bank. Plane Dokumentenweg, behördlichen Termin und Lieferung als getrennte Aufgaben."
+      ],
+      "items": [
+        "Benötigt dieser Vorgang Teil II?",
+        "Sind Versandadresse und Zuordnung bestätigt?",
+        "Ist der Eingang nach dem örtlichen Verfahren geprüft?",
+        "Sind Rückgabe und tatsächlicher Schilderbedarf geklärt?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Muss mir die Bank den Fahrzeugbrief persönlich zusenden?",
+      "answer": "Das solltest du nicht voraussetzen. Häufig wird der Dokumentenweg direkt zur Behörde abgestimmt. Maßgeblich sind der konkrete Vorgang und die Vereinbarung mit der Bank."
+    },
+    {
+      "question": "Ist ein Fahrzeugbrief bei der Bank verloren?",
+      "answer": "Nein. Ein bekanntes Verwahrungsverhältnis ist kein Dokumentenverlust. Organisiere den vorgesehenen Versand statt ein Verlustverfahren zu beginnen."
+    },
+    {
+      "question": "Kann ich schon Kennzeichen bestellen?",
+      "answer": "Erst wenn Kombination, Ausführung und Zuständigkeit geklärt sind. Eine Schilderbestellung beschleunigt den Dokumentenversand nicht."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 6: Antrag und Teil II",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__6.html"
+    },
+    {
+      "label": "FZV § 14 Absatz 7: Aushändigung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__14.html"
+    },
+    {
+      "label": "FZV § 15: Änderung von Halterdaten",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    },
+    {
+      "label": "Berlin: Eingang der Zulassungsbescheinigung Teil II prüfen",
+      "href": "https://service.berlin.de/dienstleistung/329048/"
+    }
+  ],
+  "related": [
+    "fahrzeugschein-fahrzeugbrief-unterschied",
+    "auto-anmelden-vollmacht",
+    "auto-online-zulassen-kennzeichen"
+  ],
+  "cta": "Falls neue Schilder erforderlich sind, übernimm die bestätigte Kombination sorgfältig in den Konfigurator."
+},
+{
+  "slug": "auto-zulassen-ohne-deutschen-wohnsitz",
+  "title": "Auto ohne deutschen Wohnsitz zulassen: Standort und Zuständigkeit klären",
+  "teaser": "Was bei fehlendem Wohnsitz in Deutschland zu prüfen ist: regelmäßiger Fahrzeugstandort, zuständige Behörde und mögliche Empfangsbevollmächtigung.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Du wohnst außerhalb Deutschlands, das Fahrzeug soll aber regelmäßig hier stehen. Kläre die Zuständigkeit und den konkreten Zulassungsweg vor einer Kennzeichenreservierung. Eine deutsche Lieferadresse allein beantwortet diese Fragen nicht."
+  ],
+  "takeaway": "Die FZV enthält Regeln für Halter ohne inländischen Wohnsitz oder Sitz. Entscheidend sind der konkrete Fall und der regelmäßige Fahrzeugstandort. Eine Empfangsbevollmächtigung ist nicht in jeder Konstellation automatisch erforderlich.",
+  "sections": [
+    {
+      "id": "standort",
+      "title": "1. Die tatsächliche Situation beschreiben",
+      "paragraphs": [
+        "§ 6 Absatz 2 FZV betrifft Halter ohne Wohnsitz, gewöhnlichen Aufenthalt, Sitz oder Geschäftsleitung im Inland, wenn das Fahrzeug seinen regelmäßigen Standort in Deutschland hat. Eine reine Durchreise oder eine geplante dauerhafte Ausfuhr ist davon zu unterscheiden.",
+        "Notiere deine tatsächliche Anschrift und den vorgesehenen regelmäßigen Standort des Fahrzeugs. Kläre mit der Behörde, welche Nachweise sie hierfür benötigt. Verwende keine fremde Anschrift als angeblichen Wohnsitz. Dieser Ratgeber beurteilt keine etwaigen Zulassungspflichten deines Wohnsitzstaates."
+      ]
+    },
+    {
+      "id": "empfang",
+      "title": "2. Empfangsbevollmächtigung mit ihren Ausnahmen prüfen",
+      "paragraphs": [
+        "Nach § 6 Absatz 2 kann die Zulassungsbehörde in der beschriebenen Situation die Benennung eines Empfangsbevollmächtigten im Inland verlangen. Die Vorschrift enthält jedoch Ausnahmen. Dazu gehören bestimmte Fälle mit Wohnsitz oder Sitz in EU- beziehungsweise EWR-Staaten, wenn die vorgesehene Zustellung möglich ist.",
+        "Auch für Vertragsstaaten des dort genannten Europäischen Übereinkommens über die Zustellung von Schriftstücken in Verwaltungssachen ist eine Ausnahme geregelt. Lass deshalb prüfen, welche Regel auf deinen Staat und deinen Fall zutrifft. Die Aussage, jeder Halter im Ausland brauche zwingend eine deutsche Empfangsperson, wäre zu pauschal."
+      ]
+    },
+    {
+      "id": "behoerde",
+      "title": "3. Die zuständige Zulassungsstelle bestimmen",
+      "paragraphs": [
+        "§ 75 Absatz 2 FZV regelt die örtliche Zuständigkeit. Bei fehlendem inländischem Wohnsitz oder Aufenthalt kann der Ort des Empfangsbevollmächtigten maßgeblich sein. Für die Ausnahmefälle nach § 6 Absatz 2 Satz 2 stellt die Vorschrift auf den regelmäßigen Standort des Fahrzeugs ab.",
+        "Kontaktiere die danach in Betracht kommende Behörde und schildere die Situation vollständig. Lass dir ihre Zuständigkeit bestätigen, bevor du ein Ortskürzel reservierst. Ein bequem erreichbarer Schilderladen oder die Adresse eines Bekannten legt den Zulassungsbezirk nicht automatisch fest."
+      ]
+    },
+    {
+      "id": "unterlagen",
+      "title": "4. Empfang und Vertretung auseinanderhalten",
+      "paragraphs": [
+        "Ein Empfangsbevollmächtigter nimmt behördliche Schriftstücke im vorgesehenen Umfang entgegen. Daraus folgt nicht automatisch eine Vollmacht, den Zulassungsantrag für dich zu stellen. Wer den Termin übernimmt, benötigt die dafür verlangte Vertretungsberechtigung.",
+        "Frage nach den konkreten Identitäts-, Fahrzeug-, Versicherungs- und Steuerunterlagen. Stimme den Versicherungsnachweis auf die tatsächlichen Halterdaten und die Nutzung ab. Eine bloße Paketannahme für Kennzeichenschilder erfüllt keine behördliche Empfangsbevollmächtigung."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "5. Erst danach die passende Kombination bestellen",
+      "paragraphs": [
+        "Wenn Zuständigkeit und Verfahren geklärt sind, kannst du die behördlich bestätigte Kombination für die Schilderprägung verwenden. Prüfe Format, Ausführung und Stückzahl. Die Bestellung ersetzt keinen Nachweis des Fahrzeugstandorts.",
+        "Soll das Auto stattdessen dauerhaft ins Ausland gebracht werden, prüfe den separaten Ratgeber zum Ausfuhrkennzeichen und die zuständigen Stellen. Leite aus einer deutschen Schilderlieferung keine Fahrerlaubnis für ein unzugelassenes Fahrzeug ab."
+      ],
+      "items": [
+        "Tatsächlicher Halterwohnsitz und Fahrzeugstandort geklärt?",
+        "Zuständige Behörde bestätigt?",
+        "Empfangsbevollmächtigung samt Ausnahmen geprüft?",
+        "Vertretung und Fahrzeugunterlagen vorbereitet?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Reicht die Adresse eines Freundes für eine deutsche Zulassung?",
+      "answer": "Nicht automatisch. Tatsächliche Verhältnisse, Fahrzeugstandort und die gesetzlichen Zuständigkeitsregeln sind maßgeblich."
+    },
+    {
+      "question": "Brauche ich immer einen Empfangsbevollmächtigten?",
+      "answer": "Nein. § 6 Absatz 2 FZV enthält Ausnahmen. Lass die Regel für deinen Wohnsitzstaat und die mögliche Zustellung prüfen."
+    },
+    {
+      "question": "Ist der Empfangsbevollmächtigte zugleich mein Vertreter beim Termin?",
+      "answer": "Nicht automatisch. Empfang behördlicher Schriftstücke und Vertretung beim Zulassungsantrag sind getrennte Aufgaben."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 6 Absatz 2: Halter ohne inländischen Wohnsitz",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__6.html"
+    },
+    {
+      "label": "FZV § 75 Absatz 2: örtliche Zuständigkeit",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__75.html"
+    }
+  ],
+  "related": [
+    "auto-anmelden-vollmacht",
+    "auto-anmelden-unterlagen",
+    "ausfuhrkennzeichen-ablauf"
+  ],
+  "cta": "Zuständigkeit und Kombination sind bestätigt? Wähle die passende angebotene Schildausführung."
+},
+{
+  "slug": "selbstfahrervermietfahrzeug-zulassen",
+  "title": "Selbstfahrervermietfahrzeug: Nutzung, Versicherung und Zulassung vorbereiten",
+  "teaser": "Ein Auto gewerblich ohne Fahrer vermieten: Anzeige der Nutzung, Versicherungsnachweis und HU-Fristen vor dem Einsatz klären.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Du möchtest ein Fahrzeug gewerblich an Kunden vermieten, die selbst fahren. Bereite die Nutzungsangaben und Nachweise vor dem ersten Einsatz vor. Eine Zulassung auf den Firmennamen allein beschreibt diese Verwendung noch nicht vollständig."
+  ],
+  "takeaway": "Die gewerbliche Vermietung ohne Fahrer ist eine besondere Nutzung. Kläre Anzeige, Versicherung und Untersuchungsfristen. Ein spezielles Schilderdesign ersetzt keinen dieser Schritte.",
+  "sections": [
+    {
+      "id": "nutzung",
+      "title": "1. Vermietung ohne Fahrer richtig einordnen",
+      "paragraphs": [
+        "Hier geht es um gewerbliche Vermietung ohne Gestellung eines Fahrers. Ein Fahrzeug mit Chauffeur im Personenbeförderungsgewerbe ist ein anderer Fall. Ebenso solltest du eine gelegentliche private Überlassung nicht ohne Prüfung als gewerbliche Vermietung einordnen.",
+        "Beschreibe der Zulassungsstelle und dem Versicherer, wer das Fahrzeug fahren soll, auf wen es zugelassen bleibt und wie lange die Mietverträge laufen. Diese Angaben sind relevant; die Bezeichnung Firmenwagen allein reicht für die Prüfung nicht aus."
+      ]
+    },
+    {
+      "id": "meldung",
+      "title": "2. Die Nutzung im richtigen Verfahren angeben",
+      "paragraphs": [
+        "Bei der Zulassung ist die beabsichtigte gewerbliche Vermietung ohne Fahrer nach § 6 Absatz 5 FZV anzugeben. Beginnt diese Nutzung bei einem bereits zugelassenen Fahrzeug, regelt § 15 Absatz 3 die unverzügliche Anzeige bei der Zulassungsbehörde.",
+        "Die Vorschrift enthält Ausnahmen, unter anderem bei Zulassung auf den Mieter oder bei einer Mietdauer von mindestens einem Jahr. Wird eine solche vereinbarte Dauer später verkürzt, ist die dort geregelte Anzeige zu beachten. Prüfe deshalb deinen tatsächlichen Vertrag statt jedes Mietfahrzeug gleich zu behandeln."
+      ]
+    },
+    {
+      "id": "versicherung",
+      "title": "3. Versicherungsnachweis und Papiere abstimmen",
+      "paragraphs": [
+        "Informiere den Versicherer ausdrücklich über die gewerbliche Vermietung ohne Fahrer. Frage nach dem für den Vorgang passenden Versicherungsnachweis. Eine vorhandene eVB für eine andere Nutzung solltest du nicht ungeprüft weiterverwenden.",
+        "Die Berliner Behörde beschreibt für Beginn und Ende dieser Nutzung ein eigenes Änderungsverfahren einschließlich passender Versicherungsbestätigung. Das ist ein örtliches Beispiel; deine zuständige Behörde nennt die verbindliche Unterlagenliste für deinen Vorgang. Liegt Teil II bei einer Bank, kläre zusätzlich die benötigten Dokumente und den Versandweg."
+      ]
+    },
+    {
+      "id": "hu",
+      "title": "4. Die passende HU-Frist feststellen",
+      "paragraphs": [
+        "Anlage VIII Nummer 2.2 StVZO sieht grundsätzlich zwölf Monate vor, wenn untersuchungspflichtige Fahrzeuge gewerblich ohne Fahrer vermietet werden und nicht auf den Mieter zugelassen sind. Daraus darfst du aber kein ausnahmsloses Jährlich-Gebot für jede Vertragsgestaltung ableiten.",
+        "Bei einer Mindestmietdauer von einem Jahr an denselben Mieter nennt die Vorschrift besondere Fristen, darunter 36 Monate für die dort genannten erstmalig in Verkehr gekommenen Pkw. Für andere Fahrzeuge und spätere Änderungen gelten die jeweiligen Regelungen. Lass die konkrete Fälligkeit anhand von Fahrzeugart, Erstzulassung und Vertrag feststellen."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "5. Tatsächlichen Kennzeichenbedarf prüfen",
+      "paragraphs": [
+        "Die Nutzungsänderung bedeutet nicht automatisch, dass die bisherige Kombination ersetzt werden muss. Frage im Verfahren, ob vorhandene Schilder und Ausführung weitergeführt werden können. Ein gewöhnliches Kennzeichenschild wird nicht durch einen Aufdruck zum Nachweis der Vermietberechtigung.",
+        "Sind neue Schilder erforderlich, bestellst du die bestätigte Kombination im passenden angebotenen Format. Der Shop liefert keine Vermietgenehmigung, Versicherung oder amtlichen Plaketten. Halte die bestätigte HU-Fälligkeit und spätere Änderungen der Nutzung in deiner Fahrzeugorganisation fest."
+      ],
+      "items": [
+        "Nutzung und Mietdauer vollständig beschrieben?",
+        "Anzeige oder Ausnahme mit der Behörde geklärt?",
+        "Versicherungsnachweis passend vorbereitet?",
+        "HU-Fälligkeit und tatsächlicher Schilderbedarf geprüft?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Ist jedes Firmenauto ein Selbstfahrervermietfahrzeug?",
+      "answer": "Nein. Maßgeblich ist hier die gewerbliche Vermietung ohne Fahrer. Die Zulassung auf eine Firma allein reicht dafür nicht."
+    },
+    {
+      "question": "Muss jedes vermietete Fahrzeug jährlich zur HU?",
+      "answer": "Nicht ausnahmslos. Anlage VIII Nummer 2.2 StVZO enthält Regeln und Ausnahmen, die insbesondere Vertragsdauer und Zulassung auf den Mieter berücksichtigen."
+    },
+    {
+      "question": "Brauche ich besondere Vermietkennzeichen?",
+      "answer": "Die Nutzungsangabe wird nicht durch ein besonderes Schilderdesign ersetzt. Kläre im Vorgang, ob deine bestehende Kombination weitergeführt werden kann."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 6 Absatz 5: Angabe der Vermietung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__6.html"
+    },
+    {
+      "label": "FZV § 15 Absatz 3: Anzeige und Ausnahmen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    },
+    {
+      "label": "StVZO Anlage VIII Nummer 2.2: Untersuchungsfristen",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/anlage_viii.html"
+    },
+    {
+      "label": "Berlin: Selbstfahrervermietfahrzeug-Nutzung ändern",
+      "href": "https://service.berlin.de/dienstleistung/326039/"
+    }
+  ],
+  "related": [
+    "auto-auf-firma-zulassen",
+    "auto-ohne-tuev-anmelden",
+    "fahrzeugbrief-bank-zulassung"
+  ],
+  "cta": "Neue Schilder tatsächlich nötig? Prüfe die bestätigte Kombination und Ausführung vor der Bestellung."
+},
+{
   "slug": "ausfuhrkennzeichen-ablauf",
   "title": "Ausfuhrkennzeichen: Ablauf für die dauerhafte Überführung ins Ausland",
   "teaser": "Versicherung, HU, Unterlagen und Befristung beim Ausfuhrkennzeichen einordnen. Der Shop bietet reguläre Schilder, keine Ausfuhrkennzeichen.",

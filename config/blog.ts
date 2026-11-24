@@ -16,6 +16,446 @@ export type BlogArticle = {
 
 export const blogArticles: BlogArticle[] = [
 {
+  "slug": "coc-papiere-verloren",
+  "title": "CoC-Papiere verloren: Den passenden Nachweis vor der Zulassung beschaffen",
+  "description": "Was eine fehlende Übereinstimmungsbescheinigung bedeutet, wo du Ersatz anfragst und wann ein elektronischer Nachweis möglich ist.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Die Zulassungsstelle fragt nach dem CoC, doch in deiner Fahrzeugmappe liegt nur der Kaufvertrag. Bevor du einen beliebigen Ersatznachweis bestellst, kläre, welches Dokument für dein Fahrzeug tatsächlich fehlt."
+  ],
+  "takeaway": "Das CoC weist die Übereinstimmung mit einem genehmigten Fahrzeugtyp nach. Es ist weder der Fahrzeugbrief noch eine Kennzeichenreservierung. Frage den Hersteller nach Ersatz und die Behörde nach dem benötigten Nachweis.",
+  "sections": [
+    {
+      "id": "dokument",
+      "title": "CoC und Fahrzeugbrief sind unterschiedliche Unterlagen",
+      "paragraphs": [
+        "CoC steht für Certificate of Conformity, also Übereinstimmungsbescheinigung. Bei der Erstzulassung eines Fahrzeugs mit EU-Typgenehmigung nennt § 6 Absatz 4 FZV dieses Dokument als Nachweis der Übereinstimmung mit dem genehmigten Typ.",
+        "Die Zulassungsbescheinigung Teil II erfüllt eine andere Aufgabe. Wenn nur das CoC fehlt, ist das nicht automatisch ein Verlust des Fahrzeugbriefs. Benenne das fehlende Dokument genau, bevor du ein Ersatzverfahren anstößt."
+      ]
+    },
+    {
+      "id": "hersteller",
+      "title": "Ersatz beim passenden Hersteller anfragen",
+      "paragraphs": [
+        "Wende dich mit den Fahrzeugdaten an den Hersteller oder einen vorgesehenen Markenpartner. Volkswagen verweist für seine Fahrzeuge beispielsweise auf einen eigenen CoC-Bestellservice. Das belegt einen möglichen Beschaffungsweg, keine Zusage für jede Marke oder jedes Fahrzeug.",
+        "Halte insbesondere die Fahrzeug-Identifizierungsnummer bereit und frage nach den verlangten Berechtigungsnachweisen. Vergleiche Anbieter und Dokumentart sorgfältig: Ein allgemeines Datenblatt ist nicht automatisch die gesuchte Übereinstimmungsbescheinigung. Preise und Bearbeitungszeiten sind beim tatsächlichen Aussteller zu klären."
+      ]
+    },
+    {
+      "id": "elektronisch",
+      "title": "Vorher prüfen, ob die Behörde die Daten abrufen kann",
+      "paragraphs": [
+        "§ 6 Absatz 4 FZV lässt den Nachweis auch durch den behördlichen Abruf der CoC-Daten aus den dort genannten Datenbanken zu. Du solltest deshalb vor einer kostenpflichtigen Ersatzbestellung fragen, ob dieser Weg für dein Fahrzeug und deinen Vorgang verfügbar ist.",
+        "Das bedeutet nicht, dass jeder private Scan oder jedes Foto genügt. Die Behörde muss den vorgesehenen Nachweis erhalten. Bei einem Fahrzeug ohne entsprechende Typgenehmigung löst die Bestellung eines vermeintlichen CoC das grundlegende Genehmigungsproblem nicht."
+      ]
+    },
+    {
+      "id": "reihenfolge",
+      "title": "Schilder erst auf geklärter Grundlage planen",
+      "paragraphs": [
+        "Ordne den erhaltenen Nachweis dem richtigen Fahrzeug zu und vergleiche die FIN. Kläre anschließend die weiteren Zulassungsunterlagen sowie Kombination und Schildausführung. Ein CoC enthält keine persönliche Wunschkennzeichenreservierung.",
+        "Der Schilderkauf stellt kein CoC aus und ersetzt keine technische Genehmigung. Sobald dein Zulassungsvorgang vorbereitet und die Kombination bestätigt ist, kannst du die passenden angebotenen Kennzeichenschilder bestellen."
+      ],
+      "items": [
+        "Fehlendes Dokument genau bestimmen.",
+        "Hersteller und Behörde nach dem passenden Nachweis fragen.",
+        "Elektronischen Abruf vor Ersatzbestellung klären.",
+        "FIN und bestätigte Kennzeichenkombination getrennt prüfen."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 6 Absatz 4: Genehmigungsnachweise",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__6.html"
+    },
+    {
+      "label": "Volkswagen: CoC-Bestellservice",
+      "href": "https://www.volkswagen.de/de/besitzer-und-service/ueber-ihr-auto/hilfe-und-dialogcenter/fragen-und-antworten.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "neuwagen-erstzulassung",
+    "eu-import-deutsche-kennzeichen",
+    "vollgutachten-21-zulassung"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Schilder für die bestätigte Kombination"
+    }
+  ]
+},
+{
+  "slug": "hu-bericht-verloren-zweitschrift",
+  "title": "HU-Bericht verloren: Zweitschrift oder anderer amtlicher Nachweis?",
+  "description": "Ein fehlender Prüfbericht ist nicht automatisch eine abgelaufene HU. So klärst du den Nachweis für Zulassung oder Fahrzeugverkauf.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Der Termin zur Ummeldung steht, aber der letzte HU-Bericht ist nicht auffindbar. Trenne jetzt zwei Fragen: Ist die Untersuchung noch gültig, und welcher Nachweis wird für deinen Vorgang benötigt?"
+  ],
+  "takeaway": "Frage zuerst nach dem anerkannten Nachweis. Bei der Zulassung kann nach § 29 Absatz 10 StVZO ein anderes amtliches Dokument mit der HU-Fälligkeit genügen. Eine nötige Zweitschrift erhältst du bei der prüfenden Stelle.",
+  "sections": [
+    {
+      "id": "status",
+      "title": "Papierverlust ändert nicht das Untersuchungsdatum",
+      "paragraphs": [
+        "Dass du den Bericht nicht findest, bedeutet nicht automatisch, dass die HU abgelaufen ist. Umgekehrt verlängert eine neu ausgestellte Zweitschrift keine abgelaufene Untersuchung. Prüfe die tatsächliche Fälligkeit in den vorhandenen Unterlagen.",
+        "Eine Rechnung für eine Reparatur ist kein HU-Bericht. Suche auch in der Fahrzeugmappe und frage beim Vorbesitzer oder der betreuenden Werkstatt nach, welche Prüforganisation die Untersuchung durchgeführt hat."
+      ]
+    },
+    {
+      "id": "zulassung",
+      "title": "Für die Zulassung den konkreten Nachweis klären",
+      "paragraphs": [
+        "§ 29 Absatz 10 StVZO enthält eine Ausnahme von der Vorlage des HU-Berichts bei der Fahrzeugzulassung, wenn die nächste Fälligkeit für die Behörde aus einem anderen amtlichen Dokument ersichtlich ist. TÜV NORD weist außerdem auf den elektronisch verfügbaren HU-Datensatz hin.",
+        "Frage deine Zulassungsstelle, ob die vorliegenden Daten für diesen Vorgang ausreichen. Verlasse dich nicht darauf, dass ein Foto der runden Plakette jeden fehlenden Nachweis ersetzt. Die allgemeine Pflicht zur Aufbewahrung des Berichts bleibt von dieser Zulassungsausnahme zu unterscheiden."
+      ]
+    },
+    {
+      "id": "zweitschrift",
+      "title": "Die prüfende Stelle ist der richtige Ansprechpartner",
+      "paragraphs": [
+        "Benötigst du Ersatz, wende dich an die Stelle, die die HU durchgeführt hat. Bereite Fahrzeugdaten, möglichst das Untersuchungsdatum und einen Nachweis deiner Berechtigung vor. TÜV NORD nennt etwa Fahrzeugpapiere oder einen Kaufvertrag zusammen mit einem Identitätsnachweis.",
+        "Anforderungen und verfügbare Altunterlagen hängen vom Aussteller ab. Eine beliebige andere Prüfstelle kann nicht ohne Weiteres jeden fremden Bericht neu ausstellen. Kläre Kosten und Bereitstellung direkt, bevor du einen neuen Untersuchungstermin nur wegen des Papierverlusts buchst."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "Bericht, Prüfplakette und Kennzeichenschild getrennt behandeln",
+      "paragraphs": [
+        "Eine Zweitschrift ist ein Dokument. Sie ersetzt weder ein beschädigtes Kennzeichenschild noch eine fehlende amtliche Prüfplakette. Bestelle deshalb keine vermeintlichen HU-Aufkleber als Ersatz für den Bericht.",
+        "Sind Zulassungsnachweise und Kombination geklärt und brauchst du neue Schilder, kannst du die passende Prägung vorbereiten. Amtliche HU- und Stempelplaketten sind nicht Teil der normalen Schilderlieferung. Bewahre den neuen Bericht anschließend mindestens bis zur nächsten HU auf."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "StVZO § 29 Absatz 10: Aufbewahrung und Ersatz",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__29.html"
+    },
+    {
+      "label": "TÜV NORD: Zweitschriften für HU-Berichte",
+      "href": "https://www.tuev-nord.de/de/dienstleistungen/pruefung-und-gutachten/hauptuntersuchung/zweitschriften/"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-ohne-tuev-anmelden",
+    "fahrzeugpapiere-verloren"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/hu-plakette-lesen",
+      "label": "HU-Plakette richtig lesen"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Bei Bedarf neue Kennzeichenschilder bestellen"
+    }
+  ]
+},
+{
+  "slug": "ladung-verdeckt-kennzeichen",
+  "title": "Ladung verdeckt das Kennzeichen: Was vor der Transportfahrt zu prüfen ist",
+  "description": "Kennzeichenwiederholung, Ladungsüberstand und sichere Befestigung unterscheiden – für Gepäck, Möbel und andere Transporte am Fahrzeugheck.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Beim Beladen ist noch alles übersichtlich. Erst die festgezurrte Tasche oder ein überstehendes Möbelstück verdeckt einen Teil des hinteren Kennzeichens. Prüfe deshalb das fertig beladene Fahrzeug, nicht nur den leeren Träger."
+  ],
+  "takeaway": "Schon eine teilweise Verdeckung des hinteren Kennzeichens durch Ladung oder Ladungsträger erfordert nach § 12 Absatz 10 FZV eine Kennzeichenwiederholung. Eine rote Fahne für überstehende Ladung erfüllt eine andere Aufgabe.",
+  "sections": [
+    {
+      "id": "sicht",
+      "title": "Teilweise verdeckt reicht bereits aus",
+      "paragraphs": [
+        "Die FZV unterscheidet hier nicht zwischen einem völlig unsichtbaren Schild und wenigen verdeckten Zeichen. Wird das hintere Kennzeichen durch mitgeführte Ladung oder einen Ladungsträger teilweise verdeckt, ist es am Fahrzeug oder Ladungsträger zu wiederholen.",
+        "Prüfe nach dem Verzurren auch Gurte, Taschen und lose Abdeckungen. Was im Stand neben dem Schild liegt, kann sich während der Fahrt davor bewegen. Die Ladung muss so gesichert sein, dass sie auch bei Bremsen und Ausweichen nicht verrutscht."
+      ]
+    },
+    {
+      "id": "wiederholung",
+      "title": "Die richtige Kombination wiederholen",
+      "paragraphs": [
+        "Das Wiederholungskennzeichen zeigt die Fahrzeugkombination. Nach § 12 Absatz 10 ist keine Abstempelung erforderlich. Ein handgeschriebener Zettel oder eine beliebige alte Nummer ist damit nicht gleichzusetzen.",
+        "Wähle eine geeignete Anbringungsstelle und beachte die Vorgaben des verwendeten Trägers. Das eigentliche Fahrzeugkennzeichen bleibt Teil der regulären Kennzeichnung; der Wiederholungsbedarf ist kein Anlass, die amtlichen Plaketten selbst umzusetzen."
+      ]
+    },
+    {
+      "id": "ueberstand",
+      "title": "Überstandskennzeichnung ist eine zusätzliche Prüfung",
+      "paragraphs": [
+        "§ 22 StVO regelt unter anderem die Sicherung und Kennzeichnung überstehender Ladung. Ragt deren äußerstes Ende mehr als einen Meter über die Rückstrahler hinaus, ist die dort vorgesehene Kenntlichmachung erforderlich. Je nach Lichtverhältnissen kommen weitere Beleuchtungsanforderungen hinzu.",
+        "Eine solche Markierung macht ein verdecktes Kennzeichen nicht lesbar. Umgekehrt macht ein Zusatzschild eine unzulässige Transportanordnung nicht zulässig. Prüfe Maße, Ladungssicherung, Fahrzeugleuchten und Kennzeichnung als getrennte Punkte."
+      ]
+    },
+    {
+      "id": "abfahrt",
+      "title": "Vor der Abfahrt am fertig beladenen Fahrzeug prüfen",
+      "paragraphs": [
+        "Kontrolliere die Kennzeichenkombination und den festen Sitz des Zusatzschilds. Achte darauf, dass vorgeschriebene Leuchten nicht durch die Ladung verdeckt werden. Bei unklarer Montage oder fehlender geeigneter Aufnahme solltest du die Transportlösung ändern, statt improvisierte Schilderhalter zu verwenden.",
+        "Für eine passende Wiederholung kannst du die bestätigte Kombination im angebotenen Format bestellen. Kontrolliere Maße und Stückzahl ausdrücklich. Das Schild allein ist kein vollständiger Ladungsträger oder Beleuchtungssatz."
+      ],
+      "items": [
+        "Kennzeichen nach dem Beladen vollständig sichtbar?",
+        "Bei Verdeckung passende Wiederholung angebracht?",
+        "Ladung sicher und Überstand gesondert geprüft?",
+        "Leuchten und Zusatzschild frei und fest?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 12 Absatz 10: Kennzeichenwiederholung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "StVO § 22: Ladung sichern und kennzeichnen",
+      "href": "https://www.gesetze-im-internet.de/stvo_2013/__22.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichengroessen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/fahrradtraeger-kennzeichen-ohne-stempel",
+      "label": "Zusatzschild am Fahrradträger"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Passendes Wiederholungskennzeichen bestellen"
+    }
+  ]
+},
+{
+  "slug": "kennzeichen-magnethalter",
+  "title": "Kennzeichen mit Magnethalter: Was du vor der Montage prüfen solltest",
+  "description": "Fester Sitz, passende Materialien und freie Lesbarkeit zählen auch bei Magnethaltern. Eine Produktwerbung ersetzt keine Prüfung der konkreten Montage.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Ein abnehmbares Kennzeichen wirkt praktisch, etwa bei der Fahrzeugpflege. Für die Fahrt muss die Befestigung trotzdem zuverlässig passen. Die Aussage „magnetisch“ allein sagt weder etwas über die Eignung am Fahrzeug noch über die korrekte Anbringung aus."
+  ],
+  "takeaway": "§ 12 FZV verlangt für reguläre Kennzeichen eine feste Anbringung. Prüfe das vollständige Befestigungssystem und seine Anleitung. Wir geben hier keine pauschale Freigabe für beliebige Magnethalter.",
+  "sections": [
+    {
+      "id": "anforderung",
+      "title": "Die Befestigung muss am Fahrzeug funktionieren",
+      "paragraphs": [
+        "Die gesetzliche Anforderung betrifft das montierte Schild. Es muss vorhanden, fest angebracht und entsprechend den Vorgaben lesbar sein. Auch die vorgeschriebenen Maße, Neigung und Anbringungshöhen bleiben relevant.",
+        "Ein Produktname, eine hohe beworbene Magnetkraft oder ein Foto am stehenden Auto belegen für sich allein nicht, dass deine Montage diese Anforderungen erfüllt. Frage bei Unsicherheit den Hersteller des Systems oder eine geeignete Werkstatt nach der konkreten Kombination aus Fahrzeug, Halter und Schild."
+      ]
+    },
+    {
+      "id": "material",
+      "title": "Schildmaterial und Gegenstücke beachten",
+      "paragraphs": [
+        "Prüfe, wie das System tatsächlich hält. Nicht jede Schildplatte oder Fahrzeugfläche eignet sich unmittelbar für einen Magneten. Manche Systeme benötigen Gegenstücke, Trägerplatten oder eine zusätzliche Befestigung an der Karosserie.",
+        "Verwende keine zufällige Mischung einzelner Magnete, Klebestreifen und Restteile. Entscheidend sind die vom Hersteller vorgesehenen Komponenten sowie ein geeigneter Untergrund. Auch die Vorbereitung und Aushärtung einer eventuell verwendeten Klebeverbindung gehören zur Montageanleitung."
+      ]
+    },
+    {
+      "id": "kontrolle",
+      "title": "Lesbarkeit und Plaketten nicht beeinträchtigen",
+      "paragraphs": [
+        "Befestigungsteile dürfen die Kennzeichenkombination und die vorgeschriebene Ausgestaltung nicht verdecken. Eine zusätzliche transparente Abdeckung ist kein Ersatz für einen passenden Halter; § 12 schließt unzulässige Abdeckungen ausdrücklich aus.",
+        "Kontrolliere auch die Heckbeleuchtung und die Lage des Schilds. Lässt sich das Schild ungewollt verschieben oder lösen, ist die Montage nicht durch die bloße Bezeichnung Magnethalter ausreichend erklärt. Fahre erst, wenn der sichere Zustand geklärt ist."
+      ]
+    },
+    {
+      "id": "alternative",
+      "title": "Bei unklarer Eignung eine passende Alternative wählen",
+      "paragraphs": [
+        "Ein zum Fahrzeug und Schildformat passender konventioneller Halter kann die einfachere Lösung sein. Der Shop bietet Halter und Schrauben als Zusatz, aber keine hier geprüften oder zertifizierten Magnetsysteme an. Ein konkreter Magnetprodukttest wurde für diesen Artikel nicht durchgeführt.",
+        "Brauchst du wegen einer beschädigten Platte ein neues Schild, kläre vor der Prägung Format und Montage. Die Schilderbestellung umfasst keine Freigabe der Befestigung am Fahrzeug."
+      ],
+      "items": [
+        "Vollständiges System und Anleitung vorhanden?",
+        "Materialien und Montagefläche geeignet?",
+        "Schild fest und ohne Verschiebung angebracht?",
+        "Zeichen, Plaketten und Beleuchtung frei?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 12: feste Anbringung und Ausgestaltung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-beschaedigt-ersetzen",
+    "kennzeichengroessen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichen-bohren-befestigen",
+      "label": "Halter und direkte Verschraubung"
+    },
+    {
+      "href": "/kennzeichenhalter",
+      "label": "Angebotene Halter und Schrauben"
+    }
+  ]
+},
+{
+  "slug": "umweltplakette-4-euro-6",
+  "title": "Grüne Plakette mit 4 trotz Euro 6: Warum das zusammenpasst",
+  "description": "Die Zahl auf der Umweltplakette bezeichnet die Schadstoffgruppe, nicht die Euro-Abgasnorm. So prüfst du die richtige Kennzeichnung.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "In den Papieren steht Euro 6, auf der grünen Umweltplakette aber eine große 4. Das ist nicht automatisch ein Fehler. Hier werden zwei unterschiedliche Einteilungen miteinander verwechselt."
+  ],
+  "takeaway": "Die 4 steht für Schadstoffgruppe 4 nach der 35. BImSchV. Sie ist keine Aussage, dass dein Fahrzeug nur die Abgasnorm Euro 4 erfüllt. Eine grüne Plakette erlaubt außerdem nicht jede beliebige Einfahrt.",
+  "sections": [
+    {
+      "id": "gruppen",
+      "title": "Schadstoffgruppe und Eurostufe unterscheiden",
+      "paragraphs": [
+        "Die 35. BImSchV ordnet Fahrzeuge den Schadstoffgruppen 1 bis 4 zu. Das Plakettenmuster für Gruppe 4 ist grün. Die Eurostufe ist dagegen eine andere technische Einstufung des Abgasverhaltens.",
+        "Das Bundesumweltministerium ordnet in seiner Übersicht Diesel mit Euro 4 beziehungsweise bestimmten verbesserten Ausführungen und besser der grünen Gruppe zu. Die grüne Zahl wird deshalb nicht für jede neuere Eurostufe erhöht. Eine selbst gestaltete grüne Plakette mit 6 wäre keine Lösung."
+      ]
+    },
+    {
+      "id": "nachweis",
+      "title": "Die Zuordnung anhand der Fahrzeugdaten prüfen",
+      "paragraphs": [
+        "Lass die richtige Einstufung anhand der erforderlichen Fahrzeugunterlagen feststellen. Baujahr, Modellbezeichnung oder ein Verkaufsinserat allein sind nicht in jedem Fall ausreichend. Nachrüstungen und besondere Ausführungen können für den Nachweis relevant sein.",
+        "Wenn du einen Fehler vermutest, ändere die Zahl oder das Schriftfeld nicht selbst. Frage die ausstellende Stelle nach der Zuordnung. Das Kennzeichen im Schriftfeld und die Schadstoffgruppe erfüllen ebenfalls unterschiedliche Aufgaben."
+      ]
+    },
+    {
+      "id": "zone",
+      "title": "Grün ist keine Erlaubnis für jede gesperrte Straße",
+      "paragraphs": [
+        "§ 2 der Verordnung verbindet die Wirkung der Plakette mit dem jeweiligen Verkehrszeichen. Weitere örtliche Beschränkungen können neben der Umweltzonenregelung bestehen. Das Bundesumweltministerium erläutert beispielsweise zusätzliche streckenbezogene Dieselbeschränkungen.",
+        "Prüfe vor der Fahrt die aktuellen örtlichen Regeln und die Beschilderung. Aus der grünen Farbe allein lässt sich weder eine Parkberechtigung noch die Zulässigkeit jeder Route ableiten. Für besondere Ausnahmen ist ebenfalls die tatsächliche Fahrzeugkennzeichnung maßgeblich."
+      ]
+    },
+    {
+      "id": "wechsel",
+      "title": "Bei neuen Kennzeichen den Eintrag mitprüfen",
+      "paragraphs": [
+        "Die technische Schadstoffgruppe ändert sich nicht allein dadurch, dass du eine neue Kennzeichenkombination erhältst. Die Kennzeichenangabe auf der Umweltplakette muss aber zum Fahrzeug passen. Der verlinkte Wechselartikel erklärt diesen eigenen Ersatzfall.",
+        "Eine Schilderbestellung enthält nicht automatisch eine Umweltplakette. Prüfe den gewählten Lieferumfang und halte die benötigten Fahrzeugnachweise bereit. Amtliche HU- und Zulassungsplaketten sind wiederum andere Kennzeichnungen."
+      ],
+      "items": [
+        "Eurostufe und Schadstoffgruppe nicht gleichsetzen.",
+        "Einstufung anhand der Fahrzeugdaten prüfen lassen.",
+        "Örtliche Verkehrsregeln gesondert beachten.",
+        "Kennzeichenangabe und bestellten Lieferumfang kontrollieren."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "35. BImSchV § 2: Schadstoffgruppen",
+      "href": "https://www.gesetze-im-internet.de/bimschv_35/__2.html"
+    },
+    {
+      "label": "35. BImSchV Anhang 1: Plakettenmuster",
+      "href": "https://www.gesetze-im-internet.de/bimschv_35/anhang_1.html"
+    },
+    {
+      "label": "Bundesumweltministerium: Umweltplaketten und Umweltzonen",
+      "href": "https://www.bundesumweltministerium.de/themen/luft/umweltzonen-und-umweltplakette"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-freiwillig-aendern"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/umweltplakette-kennzeichenwechsel",
+      "label": "Umweltplakette bei neuer Kombination"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Kennzeichenschilder und aktuellen Lieferumfang prüfen"
+    }
+  ]
+},
+{
+  "slug": "halter-eigentuemer-zulassung",
+  "title": "Halter, Eigentümer und Fahrer: Welche Angaben zählen bei der Zulassung?",
+  "description": "Warum mehrere Personen an einem Fahrzeug beteiligt sein können und welche Rollen du vor Reservierung, Versicherung und Schilderbestellung klärst.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Du kaufst das Auto, eine andere Person soll es nutzen und der Zulassungstermin wird von einem Dienst erledigt. Dann hilft eine klare Zuordnung der Beteiligten. Rechnungsempfänger, Halter, Eigentümer und Vertreter müssen nicht dieselbe Person sein."
+  ],
+  "takeaway": "Lege vor dem Zulassungsantrag fest, wer als Halter geführt wird und wer wirksam handeln darf. Die Zulassung entscheidet keine privaten Eigentumsstreitigkeiten. Eine Lieferadresse für Schilder ersetzt keine Halterangabe.",
+  "sections": [
+    {
+      "id": "rollen",
+      "title": "Die Beteiligten getrennt erfassen",
+      "paragraphs": [
+        "Die FZV verlangt im Zulassungsantrag die Halterdaten. Sie unterscheidet an anderen Stellen ausdrücklich zwischen Halter und Eigentümer. Damit solltest du nicht automatisch annehmen, dass der Name auf einer Bestellung jede andere Rolle festlegt.",
+        "Notiere für die Vorbereitung, wer das Fahrzeug erwirbt, wer Halter werden soll, wer fährt und wer den Antrag bearbeitet. Bei Finanzierung, Leasing oder betrieblicher Nutzung klärst du die Zuordnung anhand der jeweiligen Vereinbarungen. Dieser Artikel stellt keine Eigentumsrechte im Einzelfall fest."
+      ]
+    },
+    {
+      "id": "papiere",
+      "title": "Fahrzeugpapiere lösen keinen Eigentumsstreit",
+      "paragraphs": [
+        "§ 14 Absatz 7 FZV stellt klar, dass die Zulassungsbehörde keine privatrechtlichen Sachverhalte entscheidet. Aus dem Besitz eines Fahrzeugbriefs oder eines Kennzeichens allein solltest du deshalb keine abschließende Aussage über streitige Rechte ableiten.",
+        "Kläre ungeklärte Verfügungsrechte vor dem Zulassungsvorgang. Liegt Teil II bei einer Bank, ist zunächst der vereinbarte Dokumentenweg zu organisieren. Eine neue Schilderprägung hilft nicht, wenn die erforderliche Berechtigung oder Unterlage fehlt."
+      ]
+    },
+    {
+      "id": "versicherung",
+      "title": "Versicherung und Vertretung passend vorbereiten",
+      "paragraphs": [
+        "Teile dem Versicherer die vorgesehenen Halterdaten und die tatsächliche Nutzung mit. Wenn Vertragspartner und Halter voneinander abweichen sollen, muss der Versicherungsnachweis dazu passen. Unterstelle nicht, dass jede beliebige eVB für jeden Beteiligten verwendet werden kann.",
+        "Wer den Termin wahrnimmt, benötigt gegebenenfalls die vorgeschriebene Vollmacht und Identitätsnachweise. Eine Fahrerlaubnis oder die Tatsache, dass jemand das Auto häufig fährt, ist keine automatische Vollmacht für den Zulassungsantrag."
+      ]
+    },
+    {
+      "id": "bestellen",
+      "title": "Bestellung und behördliche Daten abgleichen",
+      "paragraphs": [
+        "Prüfe bei einer Wunschreservierung, ob die Angaben zum vorgesehenen Vorgang passen. Für die Schilderprägung zählt die bestätigte Kombination mit der richtigen Ausführung. Liefer- und Rechnungsadresse kontrollierst du separat.",
+        "So kann ein Händler die Schilder erhalten, obwohl das Fahrzeug auf dich zugelassen wird. Das muss jedoch zum vereinbarten Ablauf passen. Die Schilderlieferung enthält keine Eigentumsprüfung, Versicherung oder behördliche Zulassung."
+      ],
+      "items": [
+        "Halter und Verfügungsberechtigung geklärt?",
+        "Versicherungsnachweis auf den Vorgang abgestimmt?",
+        "Vertretung und Vollmacht vorbereitet?",
+        "Kombination, Lieferung und Rechnung getrennt kontrolliert?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 6: Halterdaten und Versicherungsangaben",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__6.html"
+    },
+    {
+      "label": "FZV § 14 Absatz 7: privatrechtliche Sachverhalte",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__14.html"
+    },
+    {
+      "label": "FZV § 15: Halter und Eigentümer",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "fahrzeugbrief-bank-zulassung",
+    "auto-auf-firma-zulassen",
+    "auto-anmelden-vollmacht"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Bestätigte Kombination konfigurieren"
+    }
+  ]
+},
+{
   "slug": "kennzeichen-umlaute-buchstaben",
   "title": "Umlaute auf Kennzeichen: Ortskürzel und Wunschbuchstaben unterscheiden",
   "description": "Warum Ä, Ö und Ü im Ortskürzel vorkommen können, bei den Wunschbuchstaben aber nicht erlaubt sind – und was du vor dem Prägen prüfst.",
@@ -1001,6 +1441,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/fin-kennzeichen-unterschied",
       "label": "FIN und Kennzeichen unterscheiden"
+    },
+    {
+      "href": "/ratgeber/selbstfahrervermietfahrzeug-zulassen",
+      "label": "Versicherung bei gewerblicher Vermietung vorbereiten"
     }
   ]
 },
@@ -2020,6 +2464,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/kennzeichen-bestellen",
       "label": "Schilder für die bestätigte Kombination"
+    },
+    {
+      "href": "/blog/umweltplakette-4-euro-6",
+      "label": "Warum die grüne Plakette trotz Euro 6 eine 4 zeigt"
     }
   ]
 },
@@ -2653,8 +3101,18 @@ export const blogArticles: BlogArticle[] = [
       "href": "/blog/kennzeichen-reinigen",
       "label": "Kennzeichen schonend reinigen"
     },
-    {"href": "/blog/saisonkennzeichen-hu-ausserhalb-saison", "label": "HU-Termin außerhalb der Saison"},
-    {"href": "/blog/kennzeichen-vorne-hinten-vertauschen", "label": "Vertauschte Schilder richtig zuordnen"}
+    {
+      "href": "/blog/saisonkennzeichen-hu-ausserhalb-saison",
+      "label": "HU-Termin außerhalb der Saison"
+    },
+    {
+      "href": "/blog/kennzeichen-vorne-hinten-vertauschen",
+      "label": "Vertauschte Schilder richtig zuordnen"
+    },
+    {
+      "href": "/blog/hu-bericht-verloren-zweitschrift",
+      "label": "Fehlenden HU-Bericht ersetzen"
+    }
   ]
 },
 {
@@ -2889,6 +3347,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/kennzeichen-lieferung-pruefen",
       "label": "Gelieferte Schilder vor Übergabe prüfen"
+    },
+    {
+      "href": "/ratgeber/fahrzeugbrief-bank-zulassung",
+      "label": "Fahrzeugbrief bei der Bank: Dokumentenweg organisieren"
     }
   ]
 },
@@ -3037,75 +3499,79 @@ export const blogArticles: BlogArticle[] = [
   ]
 },
   {
-    "slug": "kennzeichen-bohren-befestigen",
-    "title": "Kennzeichen bohren oder im Halter befestigen?",
-    "description": "Was du vor einer direkten Verschraubung prüfen solltest: Befestigungspunkte, Lesbarkeit und Alternativen ohne Löcher im Schild.",
-    "category": "Kennzeichen im Alltag",
-    "publishedAt": "2026-11-13",
-    "intro": [
-      "Neue Kennzeichen liegen bereit, am Auto sind aber nur zwei Befestigungspunkte zu sehen. Jetzt einfach durch das Schild zu bohren, kann die falsche Entscheidung sein. Prüfe zuerst, ob ein passender Halter die vorhandenen Aufnahmen nutzt."
-    ],
-    "takeaway": "Eine Halterung vermeidet zusätzliche Löcher im Schild. Bei direkter Befestigung müssen Position, Schrauben und Untergrund zum Fahrzeug passen; eine universelle Bohrschablone gibt es nicht.",
-    "sections": [
-      {
-        "id": "halter",
-        "title": "Die Lösung ohne zusätzliche Schildlöcher",
-        "paragraphs": [
-          "Ein geeigneter Rahmen wird am Fahrzeug befestigt und hält das Kennzeichen über seine Führungen und Verschlüsse. Dadurch brauchst du für diese Montage keine Löcher durch die Schildfläche. Vergleiche vor dem Kauf das Schildformat mit dem Rahmen.",
-          "Ein beschädigter oder nicht vollständig geschlossener Halter ist keine sichere Alternative. Das Kennzeichen muss fest sitzen. Prüfe außerdem, ob der Rahmen die vorgeschriebene Beschriftung frei lässt."
-        ]
-      },
-      {
-        "id": "planung",
-        "title": "Direkte Verschraubung zuerst planen",
-        "paragraphs": [
-          "Für eine direkte Montage sind die Anweisungen für Fahrzeug und Befestigung maßgeblich. Löcher und Schraubenköpfe dürfen die Erkennbarkeit der Kombination und die vorgeschriebene Ausgestaltung nicht beeinträchtigen. Plaketten und wichtige Kennzeichnungen sind keine Bohrstellen.",
-          "Übertrage vorhandene Befestigungspunkte nicht blind: Das neue Schild kann anders angeordnet sein. Halte es zunächst an, kontrolliere die Lage und kläre im Zweifel mit Werkstatt oder Zulassungsstelle, ob die geplante Ausführung geeignet ist."
-        ]
-      },
-      {
-        "id": "grenzen",
-        "title": "Nicht am montierten Schild ins Fahrzeug bohren",
-        "paragraphs": [
-          "Nimm das Schild für Arbeiten ab. Hinter der Montagefläche können Bauteile liegen, die du von außen nicht siehst. Unbekannte Aufnahmen oder fehlende Herstellerangaben sind ein Grund, die Montage von einer Werkstatt ausführen zu lassen.",
-          "Eine fachgerechte Arbeit muss auch scharfe Kanten, lockere Schrauben und ein Verziehen des Schilds vermeiden. Drehe Schrauben nicht so fest, dass sich das dünne Schild sichtbar verformt. Halte die Vorgaben des Befestigungssystems ein."
-        ]
-      },
-      {
-        "id": "kontrolle",
-        "title": "Der abschließende Befestigungscheck",
-        "paragraphs": [
-          "Kontrolliere den festen Sitz und die freie Sicht auf Zeichen und Plaketten. Prüfe am Heck auch die Kennzeichenbeleuchtung. Das Schild darf nicht hinter der Scheibe liegen oder lose am Fahrzeug hängen.",
-          "Sind bereits falsche Löcher oder Risse vorhanden, löst eine weitere Schraube nicht jedes Problem. Prüfe den Ersatz des Schilds. Neue geprägte Schilder und amtliche Plaketten sind getrennte Schritte."
-        ],
-        "items": [
-          "Passt die Befestigung zum Fahrzeug?",
-          "Sind Kombination und Kennzeichnungen vollständig sichtbar?",
-          "Sitzen Schild und Schrauben sicher?",
-          "Ist die Fläche unverformt und ohne scharfe Kanten?"
-        ]
-      }
-    ],
-    "sources": [
-      {
-        "label": "FZV § 12: Ausgestaltung und Anbringung der Kennzeichen",
-        "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
-      }
-    ],
-    "relatedGuideSlugs": [
-      "kennzeichen-beschaedigt-ersetzen"
-    ],
-    "relatedLinks": [
-      {
-        "href": "/blog/kennzeichenhalter-wechseln",
-        "label": "Kennzeichenhalter wechseln"
-      },
-      {
-        "href": "/kennzeichenhalter",
-        "label": "Passende Halter und Zusätze ansehen"
-      }
-    ]
-  },
+  "slug": "kennzeichen-bohren-befestigen",
+  "title": "Kennzeichen bohren oder im Halter befestigen?",
+  "description": "Was du vor einer direkten Verschraubung prüfen solltest: Befestigungspunkte, Lesbarkeit und Alternativen ohne Löcher im Schild.",
+  "category": "Kennzeichen im Alltag",
+  "publishedAt": "2026-11-13",
+  "intro": [
+    "Neue Kennzeichen liegen bereit, am Auto sind aber nur zwei Befestigungspunkte zu sehen. Jetzt einfach durch das Schild zu bohren, kann die falsche Entscheidung sein. Prüfe zuerst, ob ein passender Halter die vorhandenen Aufnahmen nutzt."
+  ],
+  "takeaway": "Eine Halterung vermeidet zusätzliche Löcher im Schild. Bei direkter Befestigung müssen Position, Schrauben und Untergrund zum Fahrzeug passen; eine universelle Bohrschablone gibt es nicht.",
+  "sections": [
+    {
+      "id": "halter",
+      "title": "Die Lösung ohne zusätzliche Schildlöcher",
+      "paragraphs": [
+        "Ein geeigneter Rahmen wird am Fahrzeug befestigt und hält das Kennzeichen über seine Führungen und Verschlüsse. Dadurch brauchst du für diese Montage keine Löcher durch die Schildfläche. Vergleiche vor dem Kauf das Schildformat mit dem Rahmen.",
+        "Ein beschädigter oder nicht vollständig geschlossener Halter ist keine sichere Alternative. Das Kennzeichen muss fest sitzen. Prüfe außerdem, ob der Rahmen die vorgeschriebene Beschriftung frei lässt."
+      ]
+    },
+    {
+      "id": "planung",
+      "title": "Direkte Verschraubung zuerst planen",
+      "paragraphs": [
+        "Für eine direkte Montage sind die Anweisungen für Fahrzeug und Befestigung maßgeblich. Löcher und Schraubenköpfe dürfen die Erkennbarkeit der Kombination und die vorgeschriebene Ausgestaltung nicht beeinträchtigen. Plaketten und wichtige Kennzeichnungen sind keine Bohrstellen.",
+        "Übertrage vorhandene Befestigungspunkte nicht blind: Das neue Schild kann anders angeordnet sein. Halte es zunächst an, kontrolliere die Lage und kläre im Zweifel mit Werkstatt oder Zulassungsstelle, ob die geplante Ausführung geeignet ist."
+      ]
+    },
+    {
+      "id": "grenzen",
+      "title": "Nicht am montierten Schild ins Fahrzeug bohren",
+      "paragraphs": [
+        "Nimm das Schild für Arbeiten ab. Hinter der Montagefläche können Bauteile liegen, die du von außen nicht siehst. Unbekannte Aufnahmen oder fehlende Herstellerangaben sind ein Grund, die Montage von einer Werkstatt ausführen zu lassen.",
+        "Eine fachgerechte Arbeit muss auch scharfe Kanten, lockere Schrauben und ein Verziehen des Schilds vermeiden. Drehe Schrauben nicht so fest, dass sich das dünne Schild sichtbar verformt. Halte die Vorgaben des Befestigungssystems ein."
+      ]
+    },
+    {
+      "id": "kontrolle",
+      "title": "Der abschließende Befestigungscheck",
+      "paragraphs": [
+        "Kontrolliere den festen Sitz und die freie Sicht auf Zeichen und Plaketten. Prüfe am Heck auch die Kennzeichenbeleuchtung. Das Schild darf nicht hinter der Scheibe liegen oder lose am Fahrzeug hängen.",
+        "Sind bereits falsche Löcher oder Risse vorhanden, löst eine weitere Schraube nicht jedes Problem. Prüfe den Ersatz des Schilds. Neue geprägte Schilder und amtliche Plaketten sind getrennte Schritte."
+      ],
+      "items": [
+        "Passt die Befestigung zum Fahrzeug?",
+        "Sind Kombination und Kennzeichnungen vollständig sichtbar?",
+        "Sitzen Schild und Schrauben sicher?",
+        "Ist die Fläche unverformt und ohne scharfe Kanten?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 12: Ausgestaltung und Anbringung der Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-beschaedigt-ersetzen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichenhalter-wechseln",
+      "label": "Kennzeichenhalter wechseln"
+    },
+    {
+      "href": "/kennzeichenhalter",
+      "label": "Passende Halter und Zusätze ansehen"
+    },
+    {
+      "href": "/blog/kennzeichen-magnethalter",
+      "label": "Magnethalter vor der Montage prüfen"
+    }
+  ]
+},
   {
     "slug": "alte-kennzeichen-entsorgen",
     "title": "Alte Kennzeichen entsorgen oder aufbewahren?",
@@ -3185,86 +3651,90 @@ export const blogArticles: BlogArticle[] = [
   ]
   },
   {
-    "slug": "fahrradtraeger-kennzeichen-ohne-stempel",
-    "title": "Fahrradträger-Kennzeichen: Braucht es einen Stempel?",
-    "description": "Wann du ein Wiederholungskennzeichen am Fahrradträger brauchst und warum es ohne amtliche Abstempelung auskommt.",
-    "category": "Kennzeichen im Alltag",
-    "publishedAt": "2026-11-13",
-    "intro": [
-      "Die Fahrräder sind aufgeladen, aber das hintere Kennzeichen ist kaum noch zu sehen. Für diesen Fall gibt es das Wiederholungskennzeichen. Es zeigt die Kombination des Autos noch einmal am Fahrzeug oder Ladungsträger."
-    ],
-    "takeaway": "Verdeckt der Träger oder die Ladung das hintere Kennzeichen teilweise oder vollständig, ist eine Wiederholung erforderlich. Nach § 12 Absatz 10 FZV benötigt sie keine Abstempelung.",
-    "sections": [
-      {
-        "id": "pflicht",
-        "title": "Entscheidend ist die Sicht mit montierter Ladung",
-        "paragraphs": [
-          "Prüfe den beladenen Zustand. Auch wenn der leere Träger die Nummer frei lässt, können Fahrräder oder Zubehör sie später verdecken. Ein teilweise verdecktes Schild ist bereits relevant.",
-          "Das Zusatzschild ersetzt nicht die sonst erforderlichen Kennzeichen am Auto. Es sorgt dafür, dass die Fahrzeugkombination trotz Träger erkennbar bleibt. Prüfe außerdem die Sichtbarkeit der Fahrzeugleuchten und die Vorgaben für den Träger."
-        ]
-      },
-      {
-        "id": "ausfuehrung",
-        "title": "Ohne Stempel heißt nicht selbst gebastelt",
-        "paragraphs": [
-          "Die Ausnahme betrifft die Abstempelung des Wiederholungskennzeichens. Verwende deshalb trotzdem ein geeignetes Kennzeichenschild in der vorgeschriebenen Ausführung. Eine Pappkopie, ein handgeschriebenes Schild oder eine frei erfundene Kombination sind kein Ersatz.",
-          "Übernimm die tatsächlich zugeteilte Kombination des Zugfahrzeugs. Achte bei einer besonderen Ausführung wie einem E- oder Saisonkennzeichen auf die passende Wiederholung und kläre Zweifelsfälle vor der Bestellung."
-        ]
-      },
-      {
-        "id": "wechsel",
-        "title": "Wenn der Träger an ein anderes Auto kommt",
-        "paragraphs": [
-          "Der Träger kann für mehrere Fahrzeuge geeignet sein, seine Kennzeichenkombination aber nicht automatisch. Vor einem Fahrzeugwechsel musst du prüfen, ob das eingesetzte Schild zur neuen Fahrzeugkombination passt.",
-          "Das gilt auch beim Ausleihen eines Trägers. Lass ein fremdes Schild nicht aus Bequemlichkeit darin. Nutze die dafür vorgesehene Kennzeichenaufnahme und die modellbezogene Montageanleitung."
-        ]
-      },
-      {
-        "id": "check",
-        "title": "Kontrolle vor der Fahrt",
-        "paragraphs": [
-          "Setze das Schild vollständig in die vorgesehene Aufnahme. Teste Verschlüsse und Leuchten nach der Anleitung des Trägers. Lade Fahrräder so, dass sie die notwendige Kennzeichnung und Beleuchtung nicht wieder verdecken."
-        ],
-        "items": [
-          "Kombination stimmt mit dem Auto überein.",
-          "Zusatzschild sitzt fest im Träger.",
-          "Nummer ist mit aufgeladenen Rädern sichtbar.",
-          "Leuchtenträger und Anschlüsse sind geprüft."
-        ]
-      },
-      {
-        "id": "bestellen",
-        "title": "Die passende Bestelloption wählen",
-        "paragraphs": [
-          "Auf unserer Fahrradträger-Produktseite wird das Zusatzschild im dort beschriebenen Schilderpaket angeboten. Prüfe vor der Zahlung Anzahl und Zusammenstellung; dieser Artikel verspricht keinen separaten Einzelverkauf.",
-          "Du brauchst für diesen Anwendungsfall keine amtlichen Plaketten mitzubestellen. Das unterscheidet das Wiederholungskennzeichen vom Ersatz eines beschädigten amtlichen Schilds am Auto."
-        ]
-      }
-    ],
-    "sources": [
-      {
-        "label": "FZV § 12: Ausgestaltung und Anbringung der Kennzeichen",
-        "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
-      },
-      {
-        "label": "Thule: Sicherheitshinweise für Fahrradträger",
-        "href": "https://www.thule.com/-/s/approved/std.lang.all/fe/ty/bikesafety.pdf?rev=2.3"
-      }
-    ],
-    "relatedGuideSlugs": [
-      "kennzeichengroessen"
-    ],
-    "relatedLinks": [
-      {
-        "href": "/fahrradtraeger-kennzeichen",
-        "label": "Bestelloption für das Fahrradträger-Zusatzschild"
-      },
-      {
-        "href": "/blog/kennzeichen-lieferung-pruefen",
-        "label": "Gelieferte Schilder kontrollieren"
-      }
-    ]
-  },
+  "slug": "fahrradtraeger-kennzeichen-ohne-stempel",
+  "title": "Fahrradträger-Kennzeichen: Braucht es einen Stempel?",
+  "description": "Wann du ein Wiederholungskennzeichen am Fahrradträger brauchst und warum es ohne amtliche Abstempelung auskommt.",
+  "category": "Kennzeichen im Alltag",
+  "publishedAt": "2026-11-13",
+  "intro": [
+    "Die Fahrräder sind aufgeladen, aber das hintere Kennzeichen ist kaum noch zu sehen. Für diesen Fall gibt es das Wiederholungskennzeichen. Es zeigt die Kombination des Autos noch einmal am Fahrzeug oder Ladungsträger."
+  ],
+  "takeaway": "Verdeckt der Träger oder die Ladung das hintere Kennzeichen teilweise oder vollständig, ist eine Wiederholung erforderlich. Nach § 12 Absatz 10 FZV benötigt sie keine Abstempelung.",
+  "sections": [
+    {
+      "id": "pflicht",
+      "title": "Entscheidend ist die Sicht mit montierter Ladung",
+      "paragraphs": [
+        "Prüfe den beladenen Zustand. Auch wenn der leere Träger die Nummer frei lässt, können Fahrräder oder Zubehör sie später verdecken. Ein teilweise verdecktes Schild ist bereits relevant.",
+        "Das Zusatzschild ersetzt nicht die sonst erforderlichen Kennzeichen am Auto. Es sorgt dafür, dass die Fahrzeugkombination trotz Träger erkennbar bleibt. Prüfe außerdem die Sichtbarkeit der Fahrzeugleuchten und die Vorgaben für den Träger."
+      ]
+    },
+    {
+      "id": "ausfuehrung",
+      "title": "Ohne Stempel heißt nicht selbst gebastelt",
+      "paragraphs": [
+        "Die Ausnahme betrifft die Abstempelung des Wiederholungskennzeichens. Verwende deshalb trotzdem ein geeignetes Kennzeichenschild in der vorgeschriebenen Ausführung. Eine Pappkopie, ein handgeschriebenes Schild oder eine frei erfundene Kombination sind kein Ersatz.",
+        "Übernimm die tatsächlich zugeteilte Kombination des Zugfahrzeugs. Achte bei einer besonderen Ausführung wie einem E- oder Saisonkennzeichen auf die passende Wiederholung und kläre Zweifelsfälle vor der Bestellung."
+      ]
+    },
+    {
+      "id": "wechsel",
+      "title": "Wenn der Träger an ein anderes Auto kommt",
+      "paragraphs": [
+        "Der Träger kann für mehrere Fahrzeuge geeignet sein, seine Kennzeichenkombination aber nicht automatisch. Vor einem Fahrzeugwechsel musst du prüfen, ob das eingesetzte Schild zur neuen Fahrzeugkombination passt.",
+        "Das gilt auch beim Ausleihen eines Trägers. Lass ein fremdes Schild nicht aus Bequemlichkeit darin. Nutze die dafür vorgesehene Kennzeichenaufnahme und die modellbezogene Montageanleitung."
+      ]
+    },
+    {
+      "id": "check",
+      "title": "Kontrolle vor der Fahrt",
+      "paragraphs": [
+        "Setze das Schild vollständig in die vorgesehene Aufnahme. Teste Verschlüsse und Leuchten nach der Anleitung des Trägers. Lade Fahrräder so, dass sie die notwendige Kennzeichnung und Beleuchtung nicht wieder verdecken."
+      ],
+      "items": [
+        "Kombination stimmt mit dem Auto überein.",
+        "Zusatzschild sitzt fest im Träger.",
+        "Nummer ist mit aufgeladenen Rädern sichtbar.",
+        "Leuchtenträger und Anschlüsse sind geprüft."
+      ]
+    },
+    {
+      "id": "bestellen",
+      "title": "Die passende Bestelloption wählen",
+      "paragraphs": [
+        "Auf unserer Fahrradträger-Produktseite wird das Zusatzschild im dort beschriebenen Schilderpaket angeboten. Prüfe vor der Zahlung Anzahl und Zusammenstellung; dieser Artikel verspricht keinen separaten Einzelverkauf.",
+        "Du brauchst für diesen Anwendungsfall keine amtlichen Plaketten mitzubestellen. Das unterscheidet das Wiederholungskennzeichen vom Ersatz eines beschädigten amtlichen Schilds am Auto."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 12: Ausgestaltung und Anbringung der Kennzeichen",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__12.html"
+    },
+    {
+      "label": "Thule: Sicherheitshinweise für Fahrradträger",
+      "href": "https://www.thule.com/-/s/approved/std.lang.all/fe/ty/bikesafety.pdf?rev=2.3"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichengroessen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/fahrradtraeger-kennzeichen",
+      "label": "Bestelloption für das Fahrradträger-Zusatzschild"
+    },
+    {
+      "href": "/blog/kennzeichen-lieferung-pruefen",
+      "label": "Gelieferte Schilder kontrollieren"
+    },
+    {
+      "href": "/blog/ladung-verdeckt-kennzeichen",
+      "label": "Kennzeichen bei sonstiger Ladung frei halten"
+    }
+  ]
+},
   {
     "slug": "kennzeichen-falsch-bestellt",
     "title": "Kennzeichen falsch bestellt: Was jetzt hilft",
