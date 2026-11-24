@@ -26,6 +26,296 @@ const shortTerm = { label: 'Service Berlin: Kurzzeitkennzeichen beantragen', hre
 
 export const registrationGuides: RegistrationGuide[] = [
 {
+  "slug": "reifen-felgen-eintragen",
+  "title": "Reifen und Felgen eintragen: Von der Genehmigung zu den Fahrzeugpapieren",
+  "teaser": "CoC, Teilegenehmigung und Änderungsabnahme unterscheiden. Eine andere Rad-Reifen-Kombination bedeutet nicht automatisch neue Kennzeichenschilder.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Du möchtest andere Felgen oder Reifen montieren. Bevor du einen Termin bei der Zulassungsstelle planst, muss die technische Zulässigkeit der konkreten Kombination geklärt sein. Ein passender Lochkreis oder ein Online-Konfigurator reicht dafür allein nicht."
+  ],
+  "takeaway": "Prüfe Fahrzeugzuordnung und Auflagen der Genehmigung. Technische Abnahme, Änderung der Fahrzeugpapiere und Kennzeichenprägung sind drei unterschiedliche Vorgänge.",
+  "sections": [
+    {
+      "id": "bestand",
+      "title": "1. Fahrzeugdaten und bisherige Genehmigung zusammentragen",
+      "paragraphs": [
+        "Lege Zulassungsbescheinigung Teil I, vorhandene CoC-Unterlagen und Nachweise früherer Umbauten bereit. Notiere die vollständigen Bezeichnungen der gewünschten Räder und Reifen. Ein Modellname ohne Variante kann für die Prüfung zu ungenau sein.",
+        "TÜV SÜD erläutert, dass in Teil I häufig nur eine zulässige Reifengröße für Vorder- und Hinterachse vermerkt ist. Weitere genehmigte Kombinationen können sich aus den CoC-Unterlagen ergeben. Das Fehlen einer Größe im Fahrzeugschein allein beweist deshalb noch nicht, dass sie unzulässig ist."
+      ]
+    },
+    {
+      "id": "genehmigung",
+      "title": "2. Den Verwendungsbereich und alle Auflagen lesen",
+      "paragraphs": [
+        "Bei Zubehörteilen prüfst du den Nachweis für genau dein Fahrzeug. Eine ABE ist kein allgemeiner Freibrief für jede Montage. Sie kann Auflagen, Einschränkungen oder eine erforderliche Abnahme enthalten. § 19 StVZO beschreibt die Bedeutung solcher Genehmigungen und Bedingungen.",
+        "Vergleiche Fahrzeugtyp, Ausführung und Reifenkombination mit dem Dokument. Frage bei Abweichungen vor dem Kauf nach. Die Genehmigungsnummer auf einem Teil ersetzt nicht die Prüfung, ob der konkrete Verwendungsfall erfasst ist."
+      ]
+    },
+    {
+      "id": "kombination",
+      "title": "3. Weitere Umbauten in die Prüfung einbeziehen",
+      "paragraphs": [
+        "Ein bereits geändertes Fahrwerk, Spurplatten oder andere Umbauten können für die Bewertung der neuen Kombination wichtig sein. Lege deshalb alle vorhandenen Nachweise vor. Zwei einzeln beworbene Teile sind nicht automatisch gemeinsam für dein Fahrzeug freigegeben.",
+        "Stimme mit einer geeigneten Prüfstelle ab, ob eine Änderungsabnahme oder ein anderer Nachweis erforderlich ist. Die Ferndiagnose anhand eines Produktfotos reicht dafür nicht. Dieser Ratgeber ersetzt keine technische Freigabe des konkreten Fahrzeugs."
+      ]
+    },
+    {
+      "id": "papiere",
+      "title": "4. Abnahme und Berichtigung der Papiere unterscheiden",
+      "paragraphs": [
+        "Nach einer erforderlichen Abnahme liest du den Nachweis vollständig. Prüfe insbesondere, ob eine unverzügliche Berichtigung der Fahrzeugpapiere vorgeschrieben ist oder welche Unterlagen bis dahin mitzuführen sind. § 15 FZV und § 19 StVZO unterscheiden entsprechende Fälle.",
+        "Die Prüfstelle und die Zulassungsbehörde haben unterschiedliche Aufgaben. Eine technische Bescheinigung ist nicht automatisch eine bereits geänderte Zulassungsbescheinigung. Vereinbare den nötigen Behördentermin mit den geforderten Originalunterlagen."
+      ]
+    },
+    {
+      "id": "kennzeichen",
+      "title": "5. Nur einen tatsächlichen Schilderbedarf bestellen",
+      "paragraphs": [
+        "Eine Änderung der Rad-Reifen-Kombination allein erfordert normalerweise keine neue Kennzeichenkombination. Behalte die Schilderfrage deshalb vom technischen Nachweis getrennt. Ein neuer Fahrzeugschein bedeutet nicht automatisch neue Bleche.",
+        "Falls gleichzeitig eine Umkennzeichnung, ein Halterwechsel oder ein Ersatz beschädigter Schilder erfolgt, bestellst du für diesen gesonderten Anlass die bestätigte Ausführung. Der Shop liefert keine Abnahme, Teilegenehmigung oder amtlichen Plaketten."
+      ],
+      "items": [
+        "Fahrzeugdaten und CoC vorhanden?",
+        "Konkrete Teilezuordnung und Auflagen geprüft?",
+        "Weitere Umbauten angegeben?",
+        "Abnahme und Papierberichtigung abgeschlossen beziehungsweise richtig eingeplant?",
+        "Schilder nur bei tatsächlichem zusätzlichem Bedarf bestellt?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Muss jede andere Reifengröße eingetragen werden?",
+      "answer": "Nicht automatisch. Prüfe zunächst die vorhandene Fahrzeuggenehmigung und die Nachweise für die konkrete Kombination."
+    },
+    {
+      "question": "Ist mit einer ABE jede Montage ohne weitere Prüfung erlaubt?",
+      "answer": "Nein. Verwendungsbereich und Auflagen sind entscheidend; eine Abnahme kann vorgeschrieben sein."
+    },
+    {
+      "question": "Brauche ich wegen neuer Felgen neue Kennzeichen?",
+      "answer": "Allein dadurch normalerweise nicht. Eine zusätzliche Umkennzeichnung oder beschädigte Platte ist getrennt zu behandeln."
+    }
+  ],
+  "sources": [
+    {
+      "label": "StVZO § 19: Betriebserlaubnis und Änderungen",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__19.html"
+    },
+    {
+      "label": "FZV § 15: Mitteilungspflichten",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    },
+    {
+      "label": "TÜV SÜD: Kriterien beim Reifenkauf",
+      "href": "https://www.tuvsud.com/de-de/presse-und-medien/2026/oktober/kriterien-reifenkauf"
+    },
+    {
+      "label": "Service Berlin: technische Änderungen melden",
+      "href": "https://service.berlin.de/dienstleistung/120904/"
+    }
+  ],
+  "related": [
+    "vollgutachten-21-zulassung",
+    "fahrzeugschein-fahrzeugbrief-unterschied",
+    "kennzeichen-beschaedigt-ersetzen"
+  ],
+  "cta": "Ein zusätzlicher Schilderwechsel ist tatsächlich nötig? Konfiguriere die bestätigte Kombination im passenden Format."
+},
+{
+  "slug": "autogas-umbau-fahrzeugpapiere",
+  "title": "Autogas nachgerüstet: LPG-Anlage prüfen und Fahrzeugpapiere ändern",
+  "teaser": "Systemgenehmigung, Gassystemeinbauprüfung und behördliche Eintragung richtig einplanen. Der LPG-Umbau ist kein automatischer Kennzeichenwechsel.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Nach der Autogas-Nachrüstung ist die Werkstattarbeit nicht der einzige Schritt. Für den Betrieb und die Fahrzeugpapiere müssen die passenden technischen Nachweise vorliegen. Kläre diesen Ablauf möglichst schon vor dem Einbau."
+  ],
+  "takeaway": "Die Gassystemeinbauprüfung und die Meldung geänderter Fahrzeugdaten erfüllen unterschiedliche Aufgaben. Eine neue Kennzeichenplatte kann keinen dieser Nachweise ersetzen.",
+  "sections": [
+    {
+      "id": "system",
+      "title": "1. Genehmigung und Verwendungsbereich vor dem Einbau klären",
+      "paragraphs": [
+        "§ 41a StVZO regelt Druckgasanlagen und ihre genehmigten Ausrüstungen beziehungsweise Nachrüstsysteme. Lass dir erläutern, welche Genehmigung für das konkrete Fahrzeug und System verwendet wird. Eine allgemeine Werbeaussage zur LPG-Eignung genügt dafür nicht.",
+        "Vereinbare mit der Fachwerkstatt, welche Unterlagen du nach dem Einbau erhältst und welche weiteren Prüfungen nötig sind. Bewahre die Informationen zur sicheren Verwendung und Wartung auf. Dieser Artikel betrifft den behördlichen Ablauf, keine Anleitung zum eigenen Einbau."
+      ]
+    },
+    {
+      "id": "gsp",
+      "title": "2. Die vorgeschriebene Einbauprüfung durchführen lassen",
+      "paragraphs": [
+        "Nach § 41a Absatz 5 ist nach dem Einbau eine Gassystemeinbauprüfung nach Anlage XVII erforderlich. Sie darf nur von den dafür vorgesehenen berechtigten Personen durchgeführt werden. Eine Werkstattrechnung allein ist kein Ersatz für den erforderlichen Prüfnachweis.",
+        "Die Vorschrift unterscheidet außerdem verschiedene Ausrüstungsfälle. Für Ausrüstungen nach Absatz 3 verlangt sie nach der Einbauprüfung zusätzlich eine Begutachtung nach § 21 zur Erlangung einer neuen Betriebserlaubnis. Lass die Einordnung deines Systems fachlich bestimmen, statt jede Nachrüstung pauschal gleich zu behandeln."
+      ]
+    },
+    {
+      "id": "meldung",
+      "title": "3. Die Änderung der Kraftstoffart unverzüglich melden",
+      "paragraphs": [
+        "§ 15 Absatz 1 FZV nennt Änderungen der Kraftstoffart oder Energiequelle ausdrücklich als unverzüglich mitzuteilende Änderung. Dabei sind für diesen Fall grundsätzlich Teil I und Teil II der Zulassungsbescheinigung vorzulegen.",
+        "Stimme den Dokumentenweg rechtzeitig ab, wenn Teil II bei einer finanzierenden Bank liegt. Kläre zusätzlich mit der Zulassungsstelle, welche technischen Bescheinigungen sie benötigt. Der Behördengang ergänzt die Prüfung; er ersetzt sie nicht."
+      ]
+    },
+    {
+      "id": "abgleich",
+      "title": "4. Neue Angaben und weitere Folgen kontrollieren",
+      "paragraphs": [
+        "Prüfe nach der Bearbeitung, ob die geänderten Fahrzeugdaten mit den technischen Nachweisen übereinstimmen. Informiere deinen Versicherer über den Umbau und kläre die benötigten Angaben. Leite aus dem Einbau keine pauschale Steuer- oder Versicherungsersparnis ab.",
+        "Auch Umweltplakette und mögliche Verkehrsbeschränkungen dürfen nicht anhand des Kraftstoffnamens allein beurteilt werden. Maßgeblich bleiben die tatsächlich bestätigten Fahrzeug- und Emissionsdaten. Lass Unklarheiten anhand der Unterlagen auflösen."
+      ]
+    },
+    {
+      "id": "nummer",
+      "title": "5. Bestehende Kennzeichen und Prüfunterlagen auseinanderhalten",
+      "paragraphs": [
+        "Ein LPG-Umbau allein erfordert normalerweise keine neue Kombination. Vorhandene lesbare und passende Schilder werden nicht allein wegen geänderter Papiere unbrauchbar. Erledige deshalb keine vorschnelle Neubestellung.",
+        "Wenn zusätzlich eine freiwillige Umkennzeichnung oder ein beschädigtes Schild ansteht, kläre diesen Vorgang separat. Bestellt wird die bestätigte Kombination. Der Schilderversand umfasst weder eine Gassystemprüfung noch Fahrzeugzulassung oder amtliche Plaketten."
+      ],
+      "items": [
+        "Passendes genehmigtes System und Nachweisweg vereinbart?",
+        "Gassystemeinbauprüfung dokumentiert?",
+        "Gegebenenfalls zusätzliche Begutachtung geklärt?",
+        "Kraftstoffänderung mit erforderlichen Papieren gemeldet?",
+        "Schilderbedarf unabhängig vom Umbau geprüft?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Reicht die Rechnung des Umrüsters für den Behördenvorgang?",
+      "answer": "Nicht allein. Die erforderlichen technischen Prüf- und Genehmigungsnachweise müssen zum konkreten Umbau vorliegen."
+    },
+    {
+      "question": "Kann ich die Kraftstoffänderung bis zum nächsten beliebigen Termin aufschieben?",
+      "answer": "§ 15 Absatz 1 FZV verlangt für diese Änderung eine unverzügliche Mitteilung. Stimme den Vorgang rechtzeitig ab."
+    },
+    {
+      "question": "Erhalte ich für LPG automatisch andere Kennzeichen?",
+      "answer": "Nein. Der Kraftstoffwechsel allein ist keine automatische neue Kennzeichenzuteilung."
+    }
+  ],
+  "sources": [
+    {
+      "label": "StVZO § 41a: Gassystemeinbauprüfung und Genehmigung",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__41a.html"
+    },
+    {
+      "label": "FZV § 15: Kraftstoffart und benötigte Papiere",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    },
+    {
+      "label": "Service Berlin: technische Änderungen melden",
+      "href": "https://service.berlin.de/dienstleistung/120904/"
+    }
+  ],
+  "related": [
+    "vollgutachten-21-zulassung",
+    "fahrzeugbrief-bank-zulassung",
+    "kennzeichen-freiwillig-aendern"
+  ],
+  "cta": "Zusätzlich zum Umbau benötigst du neue Schilder? Bestelle erst nach Bestätigung von Kombination und Ausführung."
+},
+{
+  "slug": "auto-nach-diebstahl-wiedergefunden",
+  "title": "Gestohlenes Auto wiedergefunden: Zulassung und Kennzeichen vor der Abholung klären",
+  "teaser": "Polizeiliche Freigabe, Versicherung, Fahrzeugzustand und Zulassungsstatus prüfen. Wiederfinden bedeutet nicht automatisch, sofort weiterfahren zu dürfen.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Die Polizei hat dein gestohlenes Auto gefunden oder du entdeckst es selbst. Vor der Rückkehr in den Straßenverkehr sind mehrere Stellen zu beteiligen. Die vorhandenen Kennzeichen beantworten weder die Freigabe noch den aktuellen Zulassungsstatus."
+  ],
+  "takeaway": "Stimme den Wiederfund mit der Polizei ab. Prüfe danach Berechtigung zur Übernahme, Versicherung, Zulassung und technischen Zustand. Neue Schilder sind erst nach dieser Klärung sinnvoll.",
+  "sections": [
+    {
+      "id": "polizei",
+      "title": "1. Den Wiederfund melden und die Herausgabe abstimmen",
+      "paragraphs": [
+        "Die Polizei Bremerhaven weist darauf hin, dass du bei eigenem Wiederfinden eines als gestohlen gemeldeten Fahrzeugs sofort die Polizei kontaktieren sollst. Fahre nicht einfach mit einem Ersatzschlüssel los. Das Fahrzeug kann noch für Ermittlungen oder Untersuchungen benötigt werden.",
+        "Kläre Ansprechpartner, Vorgangsnummer, Standort und den vorgesehenen Herausgabeweg. Lass dir sagen, welche Identitäts- und Berechtigungsnachweise benötigt werden. Eine bloße Standortmitteilung ist nicht automatisch die Freigabe zur Mitnahme."
+      ]
+    },
+    {
+      "id": "berechtigung",
+      "title": "2. Versicherung und Verfügungsberechtigung klären",
+      "paragraphs": [
+        "Informiere den Versicherer über den Wiederfund. Falls bereits eine Entschädigung erfolgt ist, müssen die daraus folgenden Rechte und die weitere Abwicklung anhand des konkreten Vertrags geklärt werden. Behaupte nicht allein aus der früheren Haltereigenschaft, dass du das Fahrzeug uneingeschränkt übernehmen darfst.",
+        "Bei Leasing oder Finanzierung können weitere Vertragspartner beteiligt sein. Vereinbare, wer die Herausgabe organisiert und welche Unterlagen bereitgestellt werden. Dieser Ablauf ist von einer neuen Versicherungsbestätigung für die Zulassung zu unterscheiden."
+      ]
+    },
+    {
+      "id": "status",
+      "title": "3. Tatsächlichen Zulassungsstatus feststellen",
+      "paragraphs": [
+        "Frage bei der Zulassungsstelle nach, ob das Auto noch zugelassen oder inzwischen außer Betrieb gesetzt ist. Eine Diebstahlsanzeige, eine Versicherungsbearbeitung und eine behördliche Außerbetriebsetzung sind nicht derselbe Vorgang.",
+        "Bei bereits erfolgter Außerbetriebsetzung ist das passende Wiederzulassungsverfahren zu prüfen. Berlin nennt dafür beispielsweise Fahrzeugpapiere, Versicherungsnachweis und erforderlichen HU-Nachweis. Welche Unterlagen in deinem Sonderfall vorliegen oder ersetzt werden müssen, klärst du mit der zuständigen Stelle."
+      ]
+    },
+    {
+      "id": "zustand",
+      "title": "4. Papiere, Schilder und Fahrzeugzustand kontrollieren",
+      "paragraphs": [
+        "Prüfe, ob Dokumente oder Kennzeichenschilder fehlen, verändert oder ausgetauscht wurden. Vergleiche die Fahrzeug-Identifizierungsnummer mit den Unterlagen. Melde Abweichungen der Polizei und der Zulassungsstelle, statt fremde oder ungeklärte Schilder einfach weiterzuverwenden.",
+        "Lass mögliche Schäden und die Verkehrssicherheit fachlich beurteilen. Eine polizeiliche Herausgabe ist keine technische Untersuchung. Plane einen geeigneten Transport, wenn die Voraussetzungen für eine Fahrt nicht geklärt sind. Bei fehlenden Papieren oder Schildern gelten die jeweiligen Ersatzverfahren zusätzlich."
+      ]
+    },
+    {
+      "id": "bestellung",
+      "title": "5. Bestätigte Kombination und tatsächlichen Bedarf verwenden",
+      "paragraphs": [
+        "Frage, welche Kombination im weiteren Verfahren verwendet werden darf. Vorhandene Bleche beweisen keine fortbestehende Zuteilung. Wenn neue Schilder nötig sind, bestellst du erst nach Bestätigung von Nummer, Format und Stückzahl.",
+        "Behalte Polizeivorgang, Versicherungsunterlagen und Behördennachweise geordnet zusammen. Prüfe vor der ersten Fahrt, ob alle notwendigen Schritte abgeschlossen sind. Der Schilderkauf ersetzt weder eine Freigabe noch Versicherungsschutz, Wiederzulassung oder amtliche Plaketten."
+      ],
+      "items": [
+        "Wiederfund gemeldet und Herausgabe abgestimmt?",
+        "Berechtigung und Versicherungsabwicklung geklärt?",
+        "Zulassungsstatus und gegebenenfalls Wiederzulassung geprüft?",
+        "Fahrzeug, Dokumente und Schilder kontrolliert?",
+        "Fahrt oder Transport erst nach Klärung organisiert?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Darf ich ein selbst wiedergefundenes Auto einfach mitnehmen?",
+      "answer": "Kontaktiere zuerst die Polizei und stimme die Herausgabe ab. Das Fahrzeug kann noch für Ermittlungen benötigt werden."
+    },
+    {
+      "question": "Ist das Fahrzeug mit dem Wiederfund automatisch wieder zugelassen?",
+      "answer": "Nein. Kläre den tatsächlichen Status. Eine bereits erfolgte Außerbetriebsetzung erfordert gegebenenfalls eine Wiederzulassung."
+    },
+    {
+      "question": "Kann ich sofort die alte Nummer nachprägen lassen?",
+      "answer": "Bestelle erst, wenn die Zulassungsstelle die verwendbare Kombination bestätigt hat. Fehlende oder manipulierte Schilder sind gesondert zu melden."
+    }
+  ],
+  "sources": [
+    {
+      "label": "Polizei Bremerhaven: entwendetes Fahrzeug und Wiederfund",
+      "href": "https://www.polizei.bremerhaven.de/faq-entwendetes-kfz.html"
+    },
+    {
+      "label": "Polizei Berlin: umgesetzte und sichergestellte Fahrzeuge",
+      "href": "https://www.berlin.de/polizei/service/auto-fahrrad-bus/auto-wiederfinden/"
+    },
+    {
+      "label": "Service Berlin: Wiederzulassung ohne Halterwechsel",
+      "href": "https://service.berlin.de/dienstleistung/120905/"
+    },
+    {
+      "label": "FZV § 16: Wiederzulassung",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__16.html"
+    }
+  ],
+  "related": [
+    "auto-wiederzulassen-lange-standzeit",
+    "fahrzeugpapiere-verloren",
+    "kennzeichen-verloren-gestohlen"
+  ],
+  "cta": "Der weitere Zulassungsvorgang und die Kombination sind bestätigt? Konfiguriere die tatsächlich benötigten Schilder."
+},
+{
   "slug": "quad-zulassung-kennzeichen",
   "title": "Quad zulassen: Fahrzeugklasse und Kennzeichenschilder zuerst klären",
   "teaser": "Welche Papiere, Kennzeichen und Formate ein Quad benötigt, hängt von seiner Einstufung ab. Prüfe den konkreten Fahrzeugtyp vor dem Schilderkauf.",
@@ -512,7 +802,8 @@ export const registrationGuides: RegistrationGuide[] = [
     "auto-ohne-tuev-anmelden",
     "auto-online-zulassen-kennzeichen",
     "versicherung-fehlt-stilllegung",
-    "auto-verwerten-abmelden"
+    "auto-verwerten-abmelden",
+    "auto-nach-diebstahl-wiedergefunden"
   ],
   "cta": "Kombination und Ausführung sind bestätigt? Bestelle nur die Schilder, die für die Wiederzulassung tatsächlich benötigt werden."
 },
@@ -1439,7 +1730,9 @@ export const registrationGuides: RegistrationGuide[] = [
   "related": [
     "drittland-import-zulassung",
     "wohnmobil-umbau-zulassung",
-    "zulassung-abgelehnt-gruende"
+    "zulassung-abgelehnt-gruende",
+    "reifen-felgen-eintragen",
+    "autogas-umbau-fahrzeugpapiere"
   ],
   "cta": "Dein Verfahren ist geklärt und neue Schilder sind erforderlich? Wähle die bestätigte Kombination im passenden angebotenen Format."
 },

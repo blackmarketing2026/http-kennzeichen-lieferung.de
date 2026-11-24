@@ -16,6 +16,508 @@ export type BlogArticle = {
 
 export const blogArticles: BlogArticle[] = [
 {
+  "slug": "kennzeichenwechsel-digitale-vignette",
+  "title": "Kennzeichen gewechselt: Digitale Vignette vor der Reise prüfen",
+  "description": "Neue Nummer am Auto? Prüfe die Zuordnung deiner digitalen Vignette. Ein Ersatzschild mit gleicher Kombination ist von einer Umkennzeichnung zu unterscheiden.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Das Auto trägt die neue Wunschkombination, die Reise ist schon geplant. Eine digitale Vignette kann aber weiterhin auf die alte Nummer laufen. Die Schilderbestellung ändert keine Daten beim Mautbetreiber."
+  ],
+  "takeaway": "Prüfe das gespeicherte Kennzeichen und den Gültigkeitszeitraum beim jeweiligen Betreiber. Eine neue Kombination wird nicht automatisch durch die Zulassungsstelle oder den Schilderversand übertragen.",
+  "sections": [
+    {
+      "id": "unterschied",
+      "title": "Neue Platte oder neue Kombination?",
+      "paragraphs": [
+        "Wurde nur ein beschädigtes Schild mit derselben Kombination ersetzt, ist das eine andere Ausgangslage als eine Umkennzeichnung. Vergleiche die tatsächliche Nummer am Fahrzeug mit der Bestätigung des Mautprodukts. Auch das Zulassungsland muss stimmen.",
+        "Gehe nicht allein nach dem Fahrzeugmodell oder der Fahrzeug-Identifizierungsnummer. Digitale Mautprodukte können an das Kennzeichen gebunden sein. Lege deshalb alte und neue Kombination sowie die Bestellbestätigung nebeneinander, bevor du eine Änderung beantragst."
+      ]
+    },
+    {
+      "id": "betreiber",
+      "title": "Das österreichische Beispiel richtig einordnen",
+      "paragraphs": [
+        "ASFINAG unterscheidet Änderungen vor und nach dem Gültigkeitsbeginn. Nach Beginn ist eine Kennzeichenänderung nur bei bestimmten Produkten möglich, darunter Jahresvignetten, Mehrfahrten-Karten und Streckenmaut FLEX. Dabei muss grundsätzlich der Zulassungsbesitzer gleich bleiben.",
+        "Für den konkreten Änderungsgrund verlangt der Betreiber gegebenenfalls Nachweise. Prüfe den aktuellen Ablauf direkt dort. Diese Regeln gelten nicht automatisch für andere Länder, Betreiber oder Vignettenarten. Eine bereits gültige Kurzzeitvignette lässt sich nicht einfach wie jedes andere Produkt behandeln."
+      ]
+    },
+    {
+      "id": "ablauf",
+      "title": "Änderung und Bestätigung vor der Nutzung abschließen",
+      "paragraphs": [
+        "Rufe den offiziellen Änderungsweg auf und halte die verlangten Zulassungsunterlagen bereit. Prüfe, ob dein Produkt bereits gültig ist. Bei Unklarheiten klärst du erst die Möglichkeiten, bevor du dich auf eine Umbuchung verlässt.",
+        "Kontrolliere anschließend die bestätigte Kombination und Gültigkeit. Ein abgeschickter Änderungswunsch ist nicht dasselbe wie ein wirksam angepasstes Produkt. Plane diesen Schritt vor der Fahrt auf eine mautpflichtige Strecke ein, statt unterwegs auf eine automatische Datenübernahme zu hoffen."
+      ]
+    },
+    {
+      "id": "check",
+      "title": "Schilder und Reiseunterlagen gemeinsam prüfen",
+      "paragraphs": [
+        "Für neue Kennzeichenschilder verwendest du die behördlich bestätigte Kombination. Für die Mautzuordnung arbeitest du danach mit derselben Schreibweise nach den Eingabehinweisen des Betreibers. Der Shop verkauft die Schilder, keine Vignette oder Mautfreigabe.",
+        "Bewahre die Änderungsbestätigung bei deinen Reiseunterlagen auf. Nach einem Fahrzeugwechsel solltest du zusätzlich prüfen, ob weitere produktbezogene Angaben betroffen sind."
+      ],
+      "items": [
+        "Gleiche Nummer oder tatsächlich neue Kombination?",
+        "Zulassungsland und Gültigkeitsbeginn geprüft?",
+        "Änderung für genau dieses Produkt zulässig?",
+        "Neue Zuordnung vor der Fahrt bestätigt?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "ASFINAG: Kennzeichenänderung bei digitalen Mautprodukten",
+      "href": "https://shop.asfinag.at/de/infoseiten/kennzeichenanderung/"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-freiwillig-aendern",
+    "kennzeichen-fahrzeugwechsel-uebernehmen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichen-ausland-d-schild",
+      "label": "Länderkennzeichnung im Ausland"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Bestätigte neue Kombination prägen lassen"
+    }
+  ]
+},
+{
+  "slug": "bewohnerparkausweis-kennzeichenwechsel",
+  "title": "Bewohnerparkausweis nach Kennzeichenwechsel: Änderung separat beantragen",
+  "description": "Neue Kennzeichen aktualisieren deinen Bewohnerparkausweis nicht automatisch. Prüfe den kommunalen Änderungsweg und die Berechtigung während der Bearbeitung.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Die neue Nummer ist am Auto montiert, auf dem Bewohnerparkausweis steht noch die alte. Behandle die Parkberechtigung als eigenen Vorgang. Die Zulassungsstelle und die zuständige Stelle für Bewohnerparken erledigen unterschiedliche Aufgaben."
+  ],
+  "takeaway": "Prüfe nach einer neuen Kennzeichenzuteilung, ob dein Bewohnerparkausweis geändert werden muss. Eine Bestellung neuer Schilder ist kein Antrag auf eine Parkberechtigung.",
+  "sections": [
+    {
+      "id": "fall",
+      "title": "Zuerst feststellen, was sich geändert hat",
+      "paragraphs": [
+        "Ersetzt du nur ein beschädigtes Blech mit unveränderter Kombination, ändert sich dadurch nicht die auf dem Parkausweis gespeicherte Nummer. Bei einer neuen Wunschkombination oder einem anderen Fahrzeug sieht die Prüfung anders aus.",
+        "Vergleiche den Ausweis mit der aktuellen Zulassungsbescheinigung. Notiere zusätzlich einen möglichen Halter- oder Wohnungswechsel. Diese Änderungen können unterschiedliche Nachweise erfordern und sollten im Antrag nicht miteinander verwechselt werden."
+      ]
+    },
+    {
+      "id": "kommune",
+      "title": "Den örtlichen Änderungsweg nutzen",
+      "paragraphs": [
+        "Berlin bietet beispielsweise einen eigenen Antrag zur Änderung eines gültigen Bewohnerparkausweises wegen eines neuen Kennzeichens an. Dort bleibt die bisherige Gültigkeitsdauer bestehen. Das ist eine kommunale Regelung und keine bundesweit identische Verfahrensbeschreibung.",
+        "Rufe die Informationen deiner Stadt über deren offizielle Website auf. Prüfe, ob eine Änderung, ein Ersatz oder ein neuer Antrag vorgesehen ist. Übertrage weder Berliner Gebühren noch Bearbeitungswege ungeprüft auf deinen Wohnort."
+      ]
+    },
+    {
+      "id": "unterlagen",
+      "title": "Nachweise und Übergangszeit klären",
+      "paragraphs": [
+        "Halte den bisherigen Parkausweis und die aktuellen Fahrzeugdaten bereit. Welche weiteren Dokumente erforderlich sind, steht im örtlichen Antrag. Bei einem Fahrzeug, das nicht auf dich zugelassen ist, kann zusätzlich ein Nutzungsnachweis relevant sein.",
+        "Frage, welche Berechtigung während der Bearbeitung gilt. Ein Screenshot des Antrags oder die Bestätigung der Schilderbestellung erlaubt nicht automatisch das Bewohnerparken. Plane nötigenfalls eine andere zulässige Parkmöglichkeit, bis der Status geklärt ist."
+      ]
+    },
+    {
+      "id": "kontrolle",
+      "title": "Neue Nummer an allen Stellen abgleichen",
+      "paragraphs": [
+        "Kontrolliere die Schreibweise auf dem neuen oder geänderten Ausweis. Ein Buchstabenfehler sollte vor der Nutzung korrigiert werden. Wenn dein Wohnort ein digitales System verwendet, prüfe die dort bestätigten Daten statt auf einen Papierausweis zu warten.",
+        "Die Nummer muss zuerst behördlich verwendbar sein. Bestelle Schilder nach dieser Bestätigung und erledige die Änderung des Parkausweises separat. Eine längere Laufzeit entsteht nicht allein dadurch, dass neue Schilder geliefert wurden."
+      ],
+      "items": [
+        "Nur neues Blech oder neue Kombination?",
+        "Örtliche Stelle und Änderungsverfahren gefunden?",
+        "Nachweise und Übergangsberechtigung geprüft?",
+        "Bestätigtes Kennzeichen auf dem Parkausweis kontrolliert?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "Service Berlin: Parkausweis für Bewohner ändern",
+      "href": "https://service.berlin.de/dienstleistung/331380/"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-freiwillig-aendern",
+    "auto-ummelden-kennzeichen-behalten"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Schilder für die bestätigte Kombination bestellen"
+    }
+  ]
+},
+{
+  "slug": "zulassungsdienst-schilder-selbst-bestellen",
+  "title": "Zulassungsdienst beauftragen und Schilder selbst bestellen: Wer erledigt was?",
+  "description": "Stimme Kennzeichenprägung, Unterlagen und Behördenauftrag ab. So vermeidest du doppelte Schilderbestellungen und unklare Leistungen.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Ein Zulassungsdienst soll den Behördengang übernehmen, die Schilder möchtest du selbst bestellen. Ob das im gewählten Angebot funktioniert, muss vor der Beauftragung geklärt sein. Nicht jeder Dienst arbeitet mit denselben Abläufen."
+  ],
+  "takeaway": "Vereinbare ausdrücklich, wer die Kombination reserviert, wer Schilder beschafft und wer sie zur Behörde bringt. Eine Schilderbestellung allein umfasst keinen Zulassungsdienst.",
+  "sections": [
+    {
+      "id": "auftrag",
+      "title": "Den Leistungsumfang konkret festhalten",
+      "paragraphs": [
+        "Bitte um eine verständliche Aufstellung des Auftrags. Dazu können die Abgabe von Unterlagen, die Abholung neuer Papiere und die Beschaffung der Schilder gehören. Entscheidend ist die tatsächliche Vereinbarung mit dem Anbieter.",
+        "Frage vor deiner eigenen Bestellung, ob angelieferte Schilder angenommen werden und wann sie vorliegen müssen. Sonst kann der Dienst bereits ein eigenes Paar bestellen, während dein Paket noch unterwegs ist. Eine pauschale Aussage, dass selbst gekaufte Schilder immer akzeptiert werden, wäre unzuverlässig."
+      ]
+    },
+    {
+      "id": "nummer",
+      "title": "Die Kombination nur einmal verbindlich abstimmen",
+      "paragraphs": [
+        "Lege fest, wer die Reservierung beziehungsweise Zuteilung klärt. Übermittle die bestätigte Kombination schriftlich und prüfe Buchstaben, Zahlen und mögliche Zusätze. Eine telefonische Vermutung ist keine geeignete Vorlage für personalisierte Schilder.",
+        "Bei einer Wunschreservierung müssen auch die passenden Halter- und Reservierungsdaten stimmen. Lass Unklarheiten vor der Prägung klären. Der Dienst kann keine beliebige nicht verfügbare Kombination allein durch eine Schilderbestellung zulassungsfähig machen."
+      ]
+    },
+    {
+      "id": "unterlagen",
+      "title": "Vollmacht und Dokumentenübergabe vorbereiten",
+      "paragraphs": [
+        "Prüfe die Unterlagenliste der zuständigen Zulassungsstelle. Ein beauftragter Dienst benötigt die für den Vorgang verlangten Vollmachten und Identitätsnachweise. Der vorhandene Vollmachtsratgeber erläutert diese behördliche Seite.",
+        "Vereinbare, welche Originale abgeholt werden und wie du sie zurückerhältst. Dokumentiere die Übergabe. Gib sensible Daten nur für den tatsächlich beauftragten Zweck weiter; persönliche Ausweis-PINs gehören nicht in ein allgemeines Unterlagenpaket."
+      ]
+    },
+    {
+      "id": "kosten",
+      "title": "Kosten und Abschluss getrennt kontrollieren",
+      "paragraphs": [
+        "Lass Behördengebühren, Dienstleistung und Schilderkosten getrennt ausweisen. Frage nach zusätzlichen Versand- oder Abholkosten. So kannst du vergleichen, was im Angebot enthalten ist, ohne auf einen unklaren Gesamtpreis zu vertrauen.",
+        "Nach Abschluss prüfst du Fahrzeugpapiere, Kombination und die ausgeführten Leistungen. Eine Rechnung oder Paketlieferung beweist für sich genommen keine erfolgreiche Zulassung. Für den Straßenbetrieb müssen die erforderlichen behördlichen Schritte tatsächlich abgeschlossen sein."
+      ],
+      "items": [
+        "Eigene Schilder vom Dienst akzeptiert?",
+        "Reservierung und Bestellung eindeutig zugeordnet?",
+        "Vollmacht und Originalübergabe dokumentiert?",
+        "Kostenpositionen und Rückgabe vereinbart?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "Service Berlin: Wiederzulassung und Vertretungsunterlagen",
+      "href": "https://service.berlin.de/dienstleistung/120905/"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-anmelden-vollmacht",
+    "auto-anmelden-kosten",
+    "wunschkennzeichen-reservieren"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Abgestimmte Schilder selbst konfigurieren"
+    }
+  ]
+},
+{
+  "slug": "hu-nicht-bestanden-kennzeichen",
+  "title": "HU nicht bestanden: Mängel, Nachprüfung und Kennzeichen richtig einordnen",
+  "description": "Eine neue Platte ersetzt keine bestandene HU. Lies die Mangelkategorie, plane die Nachprüfung und kläre beschädigte Schilder gesondert.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Nach der Hauptuntersuchung gibt es keine neue Plakette. Vielleicht wurde auch das Kennzeichen oder seine Beleuchtung beanstandet. Entscheidend ist jetzt der Untersuchungsbericht, nicht die Frage nach einem möglichst schnellen neuen Schild."
+  ],
+  "takeaway": "Lass die festgestellten Mängel beheben und beachte die Nachprüfungsfrist. Ein geprägtes Ersatzschild ist keine HU-Plakette und bestätigt keine Verkehrssicherheit.",
+  "sections": [
+    {
+      "id": "bericht",
+      "title": "Die Mangelkategorie zuerst lesen",
+      "paragraphs": [
+        "Anlage VIII StVZO unterscheidet unter anderem geringe, erhebliche, gefährliche und die Verkehrssicherheit ausschließende Mängel. Bei erheblichen Mängeln wird keine neue Prüfplakette zugeteilt. Eine gewöhnliche Nachprüfung ist etwas anderes als eine uneingeschränkte Erlaubnis zur weiteren Nutzung.",
+        "Ist das Fahrzeug als verkehrsunsicher beurteilt, darf es auf öffentlichen Straßen nicht mehr in Betrieb gesetzt werden. Kläre den sicheren Transport und die Reparatur. Leite aus einer noch sichtbaren Stempelplakette keine technische Freigabe ab."
+      ]
+    },
+    {
+      "id": "frist",
+      "title": "Die Monatsfrist ist keine Reparaturpause",
+      "paragraphs": [
+        "Bei erheblichen Mängeln verlangt die Vorschrift deren unverzügliche Beseitigung und die erneute Vorführung spätestens bis zum Ablauf eines Monats nach der HU. Der Untersuchungsbericht ist zur Nachprüfung mitzubringen.",
+        "Wird das Fahrzeug später vorgeführt oder fehlt der erforderliche Bericht, ist nach Anlage VIII grundsätzlich eine neue HU statt der bloßen Nachprüfung nötig. Vereinbare deshalb den Reparatur- und Prüftermin rechtzeitig. Noch nicht behobene Mängel werden durch einen Termin nicht erledigt."
+      ]
+    },
+    {
+      "id": "schild",
+      "title": "Kennzeichenmangel gezielt beseitigen",
+      "paragraphs": [
+        "Steht eine unlesbare Platte im Bericht, prüfe den passenden Schilderersatz. Betrifft der Mangel die Befestigung oder Kennzeichenbeleuchtung, kann stattdessen eine Reparatur dieser Teile nötig sein. Bestelle nicht automatisch neue Bleche, wenn die eigentliche Ursache bestehen bleibt.",
+        "Bei beschädigten amtlichen Plaketten ist zusätzlich der zuständige behördliche beziehungsweise Prüfstellenweg zu klären. Übertrage Siegel oder HU-Plaketten nicht selbst auf ein anderes Schild. Der Shop liefert keine amtlichen Prüfaufkleber."
+      ]
+    },
+    {
+      "id": "abschluss",
+      "title": "Reparatur, Ersatz und Nachprüfung zusammenführen",
+      "paragraphs": [
+        "Stimme den Ablauf so ab, dass die erforderlichen Arbeiten vor der Nachprüfung abgeschlossen sind. Bewahre Bericht und Reparaturnachweise geordnet auf. Prüfe bei einer nötigen Schilderbestellung die bestätigte Kombination und das Format.",
+        "Nach erfolgreicher Prüfung kontrollierst du den neuen Bericht und die Fälligkeit. Für eine zusätzliche Anmeldung oder Wiederzulassung gelten weiterhin deren eigene Voraussetzungen."
+      ],
+      "items": [
+        "Mangelkategorie und zulässige Bewegung des Autos geklärt?",
+        "Reparatur unverzüglich veranlasst?",
+        "Nachprüfung innerhalb der Frist geplant?",
+        "Schild, Beleuchtung und amtliche Plaketten getrennt behandelt?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "StVZO Anlage VIII Nummer 3.1.4: Mängel und Nachprüfung",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/anlage_viii.html"
+    },
+    {
+      "label": "StVZO § 29: Prüfplakette",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__29.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-ohne-tuev-anmelden",
+    "kennzeichen-beschaedigt-ersetzen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichenbeleuchtung-pruefen",
+      "label": "Kennzeichenbeleuchtung prüfen"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Tatsächlich benötigtes Ersatzschild bestellen"
+    }
+  ]
+},
+{
+  "slug": "fahrzeugpapiere-sicherheitscode-weitergeben",
+  "title": "Sicherheitscode im Fahrzeugbrief weitergeben? Vor dem Autoverkauf prüfen",
+  "description": "Sicherheitscodes ermöglichen digitale Zulassungsvorgänge. Warum du sie nicht für eine bloße Kaufanfrage oder Schilderbestellung freilegen solltest.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Ein Interessent möchte ein Foto deiner Fahrzeugpapiere einschließlich freigelegtem Sicherheitscode. Das ist mehr als eine Anfrage nach technischen Daten. Behandle solche Codes als sensible Zugänge zu einem behördlichen Verfahren."
+  ],
+  "takeaway": "Lege Sicherheitscodes nur für den vorgesehenen Zulassungsvorgang frei. Für die reine Kennzeichenprägung ist der Sicherheitscode aus dem Fahrzeugbrief nicht nötig.",
+  "sections": [
+    {
+      "id": "funktion",
+      "title": "Ein Sicherheitscode ist keine normale Fahrzeugangabe",
+      "paragraphs": [
+        "Der verdeckte Code in Teil II gehört zum internetbasierten Zulassungsverfahren. § 14 FZV schreibt eine Markierung vor, die auf die Nutzung im Onlineverfahren und die Gültigkeit des unbeschädigten Dokuments hinweist.",
+        "Unterscheide diesen Code von Fahrzeug-Identifizierungsnummer, HSN/TSN und amtlichem Kennzeichen. Ein Käufer kann technische Angaben benötigen, ohne dass du dafür einen verdeckten Bereich öffnen musst. Auch eine allgemeine Schilderanfrage rechtfertigt das Freilegen nicht."
+      ]
+    },
+    {
+      "id": "risiko",
+      "title": "Die Weitergabe kann einen Behördenvorgang ermöglichen",
+      "paragraphs": [
+        "Das Berliner LABO warnt ausdrücklich davor, Sicherheitscodes unbedacht an Dritte weiterzugeben: Im Onlineverfahren kann damit Verfügungsberechtigung nachgewiesen werden. Das ist keine abschließende Prüfung der Eigentumsverhältnisse zwischen Käufer und Verkäufer.",
+        "Ein versandtes Foto lässt sich nicht zuverlässig zurückholen. Teile daher keine geöffneten Codefelder in öffentlichen Inseraten oder unverbindlichen Chats. Eine Kaufabsicht und eine abgestimmte tatsächliche Übergabe sind unterschiedliche Situationen."
+      ]
+    },
+    {
+      "id": "verkauf",
+      "title": "Den konkreten Übergabeweg vorab festlegen",
+      "paragraphs": [
+        "Kläre mit dem Käufer, ob das Fahrzeug angemeldet übergeben oder vorher außer Betrieb gesetzt wird und wer welches Zulassungsverfahren übernimmt. Der vorhandene Verkaufsartikel behandelt die Übergabe der Kennzeichen; hier geht es um die dafür verwendeten Daten.",
+        "Prüfe vor einem digitalen Vorgang dessen amtliche Anleitung. Öffne Codefelder nicht vorsorglich zum Testen. Gerade bei finanzierten Fahrzeugen muss auch der Dokumentenweg mit der Bank oder dem berechtigten Vertragspartner abgestimmt sein."
+      ]
+    },
+    {
+      "id": "fehler",
+      "title": "Bei versehentlicher Offenlegung den Status klären",
+      "paragraphs": [
+        "Wurde ein Code bereits freigelegt oder weitergegeben, kontaktiere die Zulassungsstelle und schildere genau, welches Dokument betroffen ist. Frage nach dessen Gültigkeit und dem erforderlichen weiteren Verfahren. Behaupte nicht allein wegen eines vorhandenen Papiers, dass sein Status unverändert sei.",
+        "Für die Schilderbestellung verwendest du nur die geklärte Kombination und gewünschte angebotene Ausführung. Ein Sicherheitscode ersetzt weder eine bestätigte Nummer noch amtliche Plaketten."
+      ],
+      "items": [
+        "Fahrzeugdaten und Sicherheitscodes unterschieden?",
+        "Kein Codefeld für eine bloße Anfrage geöffnet?",
+        "Verkauf und Zulassungsweg abgestimmt?",
+        "Bei Offenlegung Dokumentenstatus mit der Behörde geklärt?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV § 14: Sicherheitscode und Kennzeichnung von Teil II",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__14.html"
+    },
+    {
+      "label": "Berlin LABO: Bankbrief und Risiken der Codeweitergabe",
+      "href": "https://www.berlin.de/labo/mobilitaet/kfz-zulassung/aktuelles/artikel.1104028.php"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "auto-online-zulassen-kennzeichen",
+    "fahrzeugbrief-bank-zulassung"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/auto-verkaufen-kennzeichen-uebergeben",
+      "label": "Kennzeichen bei der Fahrzeugübergabe"
+    },
+    {
+      "href": "/blog/fin-kennzeichen-unterschied",
+      "label": "FIN und Kennzeichen unterscheiden"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Schilder mit bestätigter Kombination bestellen"
+    }
+  ]
+},
+{
+  "slug": "fahrtenbuchauflage-kennzeichenwechsel",
+  "title": "Fahrtenbuchauflage bei Kennzeichen- oder Fahrzeugwechsel: Was weiter zu klären ist",
+  "description": "Eine neue Nummer beendet eine behördliche Fahrtenbuchauflage nicht automatisch. Prüfe Bescheid, Ersatzfahrzeug und die korrekten Einträge.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Für dein Fahrzeug besteht eine behördliche Fahrtenbuchauflage. Nun möchtest du eine neue Wunschkombination oder ein anderes Auto nutzen. Plane die Abstimmung mit der anordnenden Stelle als eigenen Schritt ein."
+  ],
+  "takeaway": "Eine neue Kennzeichenprägung entscheidet nicht über eine Fahrtenbuchauflage. Maßgeblich sind der Bescheid und die behördliche Zuordnung, gegebenenfalls auch zu einem Ersatzfahrzeug.",
+  "sections": [
+    {
+      "id": "bescheid",
+      "title": "Behördliches und steuerliches Fahrtenbuch unterscheiden",
+      "paragraphs": [
+        "Dieser Beitrag betrifft eine Anordnung nach § 31a StVZO. Ein freiwilliges oder steuerlich geführtes Fahrtenbuch hat andere Grundlagen. Verwende deshalb nicht ungeprüft eine Anleitung zur Dienstwagenbesteuerung für die Erfüllung dieser Auflage.",
+        "Lies im Bescheid nach, welche Fahrzeuge und welcher Zeitraum erfasst sind. Halte das Aktenzeichen bereit. Bei einer unklaren Zuordnung fragst du die anordnende Stelle, bevor du aus einer neuen Nummer auf ein Ende der Pflicht schließt."
+      ]
+    },
+    {
+      "id": "wechsel",
+      "title": "Gleicher Wagen oder Ersatzfahrzeug?",
+      "paragraphs": [
+        "Bei einer Umkennzeichnung bleibt das Fahrzeug dasselbe. Die geänderte Kombination sollte in der Zuordnung nachvollziehbar sein. Informiere die zuständige Stelle über den geplanten oder erfolgten Wechsel und kläre die Fortführung nach dem konkreten Bescheid.",
+        "§ 31a erlaubt der Behörde ausdrücklich, ein oder mehrere Ersatzfahrzeuge zu bestimmen. Ein Fahrzeugverkauf oder Neukauf beendet die Angelegenheit daher nicht automatisch. Die Kennzeichenübernahme auf ein anderes Auto und die Fahrtenbuchzuordnung sind getrennt zu behandeln."
+      ]
+    },
+    {
+      "id": "eintraege",
+      "title": "Die tatsächlich verwendete Kombination eintragen",
+      "paragraphs": [
+        "Nach § 31a gehören unter anderem Fahrerangaben, amtliches Kennzeichen sowie Datum und Uhrzeit des Fahrtbeginns vor die jeweilige Fahrt in das Fahrtenbuch. Nach Fahrtende sind Datum und Uhrzeit unverzüglich mit Unterschrift zu ergänzen.",
+        "Prüfe nach einer Umkennzeichnung, ob du versehentlich noch die frühere Nummer verwendest. Bewahre frühere Einträge nachvollziehbar auf und ändere sie nicht einfach auf die neue Kombination um. Bei Zweifeln zur Dokumentation lässt du den richtigen Umgang mit der anordnenden Stelle klären."
+      ]
+    },
+    {
+      "id": "aufbewahrung",
+      "title": "Unterlagen geordnet bis zum Abschluss behalten",
+      "paragraphs": [
+        "Die Vorschrift verlangt eine Aufbewahrung für sechs Monate nach Ablauf der Zeit, für die das Fahrtenbuch geführt werden muss. Ein Schildertausch ist kein Anlass, das bisherige Buch vorzeitig zu entsorgen.",
+        "Bestelle neue Schilder nur für eine behördlich bestätigte Kombination. Die Prägung erfüllt weder die Fahrtenbuchführung noch die Abstimmung über ein Ersatzfahrzeug."
+      ],
+      "items": [
+        "Bescheid und betroffene Fahrzeuge geprüft?",
+        "Kennzeichenwechsel und Fahrzeugwechsel unterschieden?",
+        "Aktuelle Nummer bei neuen Fahrten verwendet?",
+        "Frühere Einträge und Aufbewahrungsfrist erhalten?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "StVZO § 31a: Fahrtenbuch und Ersatzfahrzeuge",
+      "href": "https://www.gesetze-im-internet.de/stvzo_2012/__31a.html"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-freiwillig-aendern",
+    "kennzeichen-fahrzeugwechsel-uebernehmen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Bestätigte neue Kennzeichen konfigurieren"
+    }
+  ]
+},
+{
+  "slug": "fremder-bussgeldbescheid-kennzeichen",
+  "title": "Fremdes Auto mit deinem Kennzeichen: Bescheid und mögliche Dublette klären",
+  "description": "Ein fremder Verkehrsverstoß kann auf einem Lesefehler oder Kennzeichenmissbrauch beruhen. Sichere Belege und kläre den Vorgang vor einer Umkennzeichnung.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Du erhältst Post zu einem Verkehrsverstoß, erkennst aber auf dem Foto ein anderes Fahrzeug. Bestelle nicht sofort neue Schilder. Zuerst muss geklärt werden, ob eine Verwechslung oder ein konkreter Verdacht auf Missbrauch vorliegt."
+  ],
+  "takeaway": "Prüfe den Vorgang mit der absendenden Stelle und beachte die Fristen des Schreibens. Eine Strafanzeige oder neue Kombination erledigt ein laufendes Bußgeldverfahren nicht automatisch.",
+  "sections": [
+    {
+      "id": "vergleich",
+      "title": "Schreiben und Fahrzeugdaten sorgfältig vergleichen",
+      "paragraphs": [
+        "Prüfe Absender, Aktenzeichen, Tatzeit und Tatort. Vergleiche die Kombination Zeichen für Zeichen und sieh dir, soweit vorhanden, Fahrzeugmodell und weitere erkennbare Merkmale an. Ein Lesefehler ist nicht dasselbe wie eine absichtlich hergestellte Dublette.",
+        "Sichere das Schreiben und vorhandene Belege. Halte sachlich fest, welche Angaben nicht zu deinem Fahrzeug passen. Verwende für Rückfragen einen unabhängig geprüften Kontakt der Behörde, wenn dir die Nachricht selbst verdächtig erscheint."
+      ]
+    },
+    {
+      "id": "frist",
+      "title": "Anhörung und Bußgeldbescheid auseinanderhalten",
+      "paragraphs": [
+        "Nicht jedes Schreiben ist bereits ein Bußgeldbescheid. Folge den jeweiligen Hinweisen und kläre die Art des Dokuments. Für einen Bußgeldbescheid sieht § 67 OWiG grundsätzlich eine Einspruchsfrist von zwei Wochen nach Zustellung vor.",
+        "Ein Telefonat oder eine Polizeianzeige ersetzt nicht automatisch die fristgerechte Reaktion im Bußgeldverfahren. Beachte die Rechtsbehelfsbelehrung und den vorgeschriebenen Übermittlungsweg. Wenn du den Vorgang nicht sicher einordnen kannst, hole rechtzeitig rechtliche Unterstützung."
+      ]
+    },
+    {
+      "id": "verdacht",
+      "title": "Konkreten Missbrauch mit der Polizei klären",
+      "paragraphs": [
+        "Kennzeichendubletten kommen tatsächlich vor; die Polizei Brandenburg hat beispielsweise einen entsprechenden Fall an einem gestohlenen Fahrzeug veröffentlicht. Daraus folgt aber nicht, dass jeder falsche Bescheid auf einer Dublette beruht.",
+        "Bei konkreten Anhaltspunkten für Missbrauch wendest du dich an die Polizei und übermittelst die vorhandenen Informationen. Veröffentliche fremde Personen oder Fahrzeugbilder nicht zur eigenständigen Fahndung. Bewahre eine Vorgangsnummer für die weitere Abstimmung auf."
+      ]
+    },
+    {
+      "id": "nummer",
+      "title": "Eine neue Kombination nur behördlich abstimmen",
+      "paragraphs": [
+        "Frage die Zulassungsstelle, ob und wie eine Umkennzeichnung in deinem Fall sinnvoll beziehungsweise erforderlich ist. Die neue Nummer muss zugeteilt werden; du darfst nicht einfach selbst eine andere Kombination anfertigen und montieren.",
+        "Wenn nur die Nummer missbraucht wurde, obwohl deine Schilder noch vorhanden sind, beschreibe genau diesen Sachverhalt. Ein bloßer Schilderverlust ist ein anderer Ausgangspunkt. Erst nach Bestätigung bestellst du die benötigten neuen Schilder."
+      ],
+      "items": [
+        "Verwechslung anhand der Unterlagen geprüft?",
+        "Dokumentart und Frist erkannt?",
+        "Konkreten Missbrauch mit der Polizei besprochen?",
+        "Eventuelle Umkennzeichnung vor Bestellung bestätigt?"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "OWiG § 67: Form und Frist des Einspruchs",
+      "href": "https://www.gesetze-im-internet.de/owig_1968/__67.html"
+    },
+    {
+      "label": "Polizei Brandenburg: dokumentierter Fall von Kennzeichendubletten",
+      "href": "https://polizei.brandenburg.de/pressemeldung/schon-zur-fahndung-ausgeschrieben-gewese/5690685"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-freiwillig-aendern",
+    "kennzeichen-verloren-gestohlen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/kennzeichen-o-oder-null",
+      "label": "Buchstabe O und Zahl 0 unterscheiden"
+    },
+    {
+      "href": "/kennzeichen-bestellen",
+      "label": "Behördlich bestätigte Ersatzkombination bestellen"
+    }
+  ]
+},
+{
   "slug": "alte-din-kennzeichen-weiterverwenden",
   "title": "Alte DIN-Kennzeichen weiterverwenden: Bestandsschutz und Ersatz unterscheiden",
   "description": "Wann alte Kennzeichen ohne Eurofeld gültig bleiben und was du vor einer Ersatzprägung prüfen solltest. Bestandsschutz ist keine freie Retro-Zulassung.",
@@ -389,7 +891,8 @@ export const blogArticles: BlogArticle[] = [
     "kennzeichen-beschaedigt-ersetzen",
     "kennzeichen-verloren-gestohlen",
     "auto-verwerten-abmelden",
-    "kennzeichen-fahrzeugwechsel-uebernehmen"
+    "kennzeichen-fahrzeugwechsel-uebernehmen",
+    "auto-nach-diebstahl-wiedergefunden"
   ],
   "relatedLinks": [
     {
@@ -677,7 +1180,8 @@ export const blogArticles: BlogArticle[] = [
   ],
   "relatedGuideSlugs": [
     "vollgutachten-21-zulassung",
-    "anhaenger-gruenes-schwarzes-kennzeichen"
+    "anhaenger-gruenes-schwarzes-kennzeichen",
+    "reifen-felgen-eintragen"
   ],
   "relatedLinks": [
     {
@@ -906,7 +1410,8 @@ export const blogArticles: BlogArticle[] = [
   ],
   "relatedGuideSlugs": [
     "kennzeichen-freiwillig-aendern",
-    "fahrzeugschein-fahrzeugbrief-unterschied"
+    "fahrzeugschein-fahrzeugbrief-unterschied",
+    "autogas-umbau-fahrzeugpapiere"
   ],
   "relatedLinks": [
     {
@@ -982,7 +1487,8 @@ export const blogArticles: BlogArticle[] = [
   "relatedGuideSlugs": [
     "neuwagen-erstzulassung",
     "eu-import-deutsche-kennzeichen",
-    "vollgutachten-21-zulassung"
+    "vollgutachten-21-zulassung",
+    "reifen-felgen-eintragen"
   ],
   "relatedLinks": [
     {
@@ -1362,6 +1868,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/auto-zulassen-ohne-fuehrerschein",
       "label": "Zulassung ohne eigenen Führerschein"
+    },
+    {
+      "href": "/blog/fahrtenbuchauflage-kennzeichenwechsel",
+      "label": "Fahrtenbuchauflage bei Fahrzeugwechsel"
     }
   ]
 },
@@ -2461,6 +2971,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/kennzeichenverlust-im-ausland",
       "label": "Kennzeichenverlust im Ausland"
+    },
+    {
+      "href": "/blog/kennzeichenwechsel-digitale-vignette",
+      "label": "Digitale Vignette nach Kennzeichenwechsel"
     }
   ]
 },
@@ -3146,6 +3660,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/kennzeichen-lieferung-pruefen",
       "label": "Gelieferte Kombination kontrollieren"
+    },
+    {
+      "href": "/blog/fremder-bussgeldbescheid-kennzeichen",
+      "label": "Fremdes Fahrzeug mit eigener Nummer klären"
     }
   ]
 },
@@ -3310,6 +3828,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/ratgeber/auto-geerbt-ummelden",
       "label": "Geerbtes Auto ummelden oder verkaufen"
+    },
+    {
+      "href": "/blog/fahrzeugpapiere-sicherheitscode-weitergeben",
+      "label": "Sicherheitscodes beim Verkauf schützen"
     }
   ]
 },
@@ -3558,6 +4080,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/digitaler-fahrzeugschein-kennzeichenwechsel",
       "label": "Digitalen Fahrzeugschein nach Änderungen prüfen"
+    },
+    {
+      "href": "/blog/bewohnerparkausweis-kennzeichenwechsel",
+      "label": "Bewohnerparkausweis bei neuer Nummer"
     }
   ]
 },
@@ -4046,6 +4572,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/hu-bericht-verloren-zweitschrift",
       "label": "Fehlenden HU-Bericht ersetzen"
+    },
+    {
+      "href": "/blog/hu-nicht-bestanden-kennzeichen",
+      "label": "Wenn die HU nicht bestanden wurde"
     }
   ]
 },
@@ -4936,6 +5466,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/stempelplakette-beschaedigt",
       "label": "Beschädigte amtliche Plakette erneuern"
+    },
+    {
+      "href": "/blog/zulassungsdienst-schilder-selbst-bestellen",
+      "label": "Eigene Schilder mit Zulassungsdienst abstimmen"
     }
   ]
 }
