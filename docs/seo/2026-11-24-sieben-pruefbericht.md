@@ -22,3 +22,9 @@ Teilerfolg:1 neuer Blog und1 neuer Ratgeber; Mindestmenge10 NICHT erreicht. Acht
 Korrekte GSC-Property unverändert bestätigt; Wochenanalyse23.11. samtQueries/Dreimonaten wiederverwendet, nächste ab30.11. OpenSEO3 neueSERPs INSUFFICIENT_CREDITS. Keine Volumina/Rankings erfunden, keine Umsatzdaten verfügbar. Keine GSC-Sitemapverwaltungsfunktion vorhanden; keine Einreichungs-/Indexierungsbehauptung.
 
 Öffentliche Veröffentlichung vor Push noch nicht bestätigt. Nach Push API/HTTP-Nachweis ergänzen. Andere Projekte/Automationen unverändert.
+
+## Live-Nachweis 24.11.2026, ca.06:07Uhr Europe/Berlin
+
+Contentcommit c8d8e2700c47cf7d20cf3ca2cec9ae5b7eefe723 direkt auf main. Frischer Main-Abgleich, Branch ungeschützt, kein Force. Alle sechs übertragenen Dateien nach Fetch bytegleich bestätigt. Vercelstatus success, Deployment GoBbVZqNtXx6Y1F4rTJnJssmturR.
+
+Öffentlicher Editorial-Smoke2 neue Seiten/33HTTP-Ziele erfolgreich: erwarteter Inhalt,200,Metadaten,Canonical,JSON-LD,interneLinks,Übersichten,404. Extra-Check OG/Datum/Banner/Bildattribute erfolgreich. Veröffentlichte Sitemap135 eindeutigeURLs, exakt+2/-0, beide neuen kanonischen URLs genau einmal. Somit2 von2 neu erstellten Seiten bestätigt live (1Blog,1Ratgeber). Die geforderte Mindestmenge10 bleibt unerfüllt. Kein Indexierungsnachweis. Dieser Nachtrag betrifft nur Dokumentation.
