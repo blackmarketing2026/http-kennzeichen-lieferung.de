@@ -26,6 +26,104 @@ const shortTerm = { label: 'Service Berlin: Kurzzeitkennzeichen beantragen', hre
 
 export const registrationGuides: RegistrationGuide[] = [
 {
+  "slug": "fahrzeug-ablasten-fahrzeugpapiere",
+  "title": "Fahrzeug ablasten: F.1, F.2 und die Änderung der Fahrzeugpapiere",
+  "teaser": "Technische und zugelassene Gesamtmasse unterscheiden. So bereitest du eine mögliche Ablastung vor und prüfst, ob überhaupt neue Kennzeichen nötig sind.",
+  "category": "Zulassung vorbereiten",
+  "reviewedAt": "2026-11-24",
+  "intro": [
+    "Du möchtest die eingetragene Gesamtmasse deines Autos, Wohnmobils oder Anhängers verringern. Prüfe zuerst, welcher Wert betroffen ist und ob das gewünschte Gewicht zum Fahrzeug und seiner Nutzung passt. Ein neuer Fahrzeugschein ist nicht automatisch ein Anlass für neue Kennzeichenschilder."
+  ],
+  "takeaway": "F.1 bezeichnet die technische Gesamtmasse, F.2 die im Zulassungsstaat zulässige Gesamtmasse. Eine Änderung muss für das konkrete Fahrzeug geklärt und anschließend richtig in die Papiere übernommen werden.",
+  "sections": [
+    {
+      "id": "felder",
+      "title": "1. Die Gewichtsangaben richtig zuordnen",
+      "paragraphs": [
+        "Anlage 6 FZV definiert die Felder der Zulassungsbescheinigung Teil I. F.1 steht für die technisch zulässige Gesamtmasse. F.2 nennt die im Zulassungsmitgliedstaat zulässige Gesamtmasse. Unter G findest du die Masse des in Betrieb befindlichen Fahrzeugs, also die Leermasse.",
+        "Schreibe die vorhandenen Werte und dein gewünschtes Zielgewicht auf. F.1 und F.2 dürfen nicht einfach als austauschbare Angaben behandelt werden. Ein Gespräch über eine Ablastung sollte deshalb immer den betroffenen Eintrag benennen."
+      ]
+    },
+    {
+      "id": "alltag",
+      "title": "2. Das Zielgewicht am tatsächlichen Einsatz prüfen",
+      "paragraphs": [
+        "Überlege vor dem Antrag, was regelmäßig mitfährt: Personen, Gepäck, feste Einbauten und Zubehör. Eine niedrigere eingetragene Masse macht das Fahrzeug nicht leichter. Für eine sinnvolle Planung brauchst du zuverlässige Angaben zum tatsächlichen Gewicht.",
+        "Notiere auch, warum du ablasten möchtest. Ob das gewünschte Ergebnis etwa für Fahrerlaubnis oder andere gewichtsabhängige Regeln erreicht wird, muss gesondert anhand der jeweiligen Vorschrift geprüft werden. Verlasse dich nicht auf die allgemeine Aussage, unter einem bestimmten Gewicht werde automatisch alles einfacher."
+      ]
+    },
+    {
+      "id": "nachweis",
+      "title": "3. Den zulässigen Nachweisweg vorab abstimmen",
+      "paragraphs": [
+        "Frage mit Fahrzeugpapieren und Zielgewicht bei einer geeigneten Prüfstelle und der zuständigen Zulassungsbehörde nach. Kläre, welche Bestätigung erforderlich ist und ob eine technische Änderung nötig wäre. Aus einem ähnlichen Fahrzeug lässt sich kein Anspruch für dein Modell ableiten.",
+        "Der Kreis Unna nennt für bestimmte Änderungen ohne Erlöschen der Betriebserlaubnis auch eine Datenbestätigung und führt die Auf- beziehungsweise Ablastung ohne technische Änderung als Beispiel an. Das ist keine Zusage, dass jede gewünschte Ablastung ohne Prüfung oder Umbau möglich ist. Die örtliche Unterlagenliste und der konkrete Nachweis sind entscheidend."
+      ]
+    },
+    {
+      "id": "eintragung",
+      "title": "4. Änderung und Fahrzeugpapiere zusammenführen",
+      "paragraphs": [
+        "§ 15 Absatz 1 Nummer 6 FZV nennt Änderungen der zulässigen Gesamtmasse als unverzüglich mitzuteilende Änderung. Lass den erforderlichen Nachweis daher nicht nur im Handschuhfach liegen. Stimme den nächsten Schritt mit der Behörde ab.",
+        "Halte Teil I und die erhaltenen Nachweise bereit. Ob zusätzlich Teil II oder weitere Unterlagen verlangt werden, hängt vom Vorgang ab; Kreis Unna nennt Teil II unter anderem bei dort zu ändernden Angaben oder alten Fahrzeugpapieren. Kontrolliere nach der Bearbeitung, ob die bestätigten Werte richtig übernommen wurden."
+      ]
+    },
+    {
+      "id": "schilder",
+      "title": "5. Schilderbedarf getrennt entscheiden",
+      "paragraphs": [
+        "Eine andere Gesamtmasse allein bedeutet nicht automatisch eine andere Kennzeichenkombination. Wenn die bisherige Zuteilung bestehen bleibt und die Schilder in Ordnung sind, ist nicht allein wegen der Papieränderung eine neue Prägung nötig.",
+        "Fällt gleichzeitig ein Halterwechsel, eine Umkennzeichnung oder der Ersatz eines beschädigten Schildes an, bestellst du für diesen zusätzlichen Anlass. Bestätige vor der Bestellung Kombination und Format. Der Shop liefert Schilder, keine technische Freigabe, Gewichtsänderung oder amtliche Plakette."
+      ],
+      "items": [
+        "F.1, F.2, G und Zielgewicht notiert?",
+        "Nutzbare Zuladung und tatsächlichen Einsatz berücksichtigt?",
+        "Nachweisweg mit Prüfstelle und Behörde abgestimmt?",
+        "Geänderte Papiere auf richtige Werte kontrolliert?",
+        "Neue Schilder nur bei tatsächlichem gesondertem Bedarf geplant?"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Sind F.1 und F.2 dasselbe?",
+      "answer": "Nein. F.1 ist die technisch zulässige Gesamtmasse, F.2 die im Zulassungsmitgliedstaat zulässige Gesamtmasse. Prüfe beide Einträge."
+    },
+    {
+      "question": "Kann jedes Fahrzeug auf mein Wunschgewicht abgelastet werden?",
+      "answer": "Das lässt sich nicht pauschal zusagen. Fahrzeug, Nachweise und Zielgewicht müssen im konkreten Fall geprüft werden."
+    },
+    {
+      "question": "Reicht ein Gutachten ohne Änderung der Papiere?",
+      "answer": "Die vorgeschriebene Mitteilung und Berichtigung der Fahrzeugdaten bleiben erforderlich. Kläre den Ablauf mit der zuständigen Zulassungsbehörde."
+    },
+    {
+      "question": "Brauche ich nach der Ablastung neue Schilder?",
+      "answer": "Nicht allein wegen der geänderten Gesamtmasse. Ein zusätzlicher Kennzeichenwechsel oder beschädigte Schilder sind getrennte Anlässe."
+    }
+  ],
+  "sources": [
+    {
+      "label": "FZV Anlage 6: Felder der Zulassungsbescheinigung Teil I",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/anlage_6.html"
+    },
+    {
+      "label": "FZV § 15: Mitteilung geänderter Fahrzeugdaten",
+      "href": "https://www.gesetze-im-internet.de/fzv_2023/__15.html"
+    },
+    {
+      "label": "Kreis Unna: technische Änderungen und erforderliche Nachweise",
+      "href": "https://www.kreis-unna.de/Serviceportal/Dienstleistungen/Darstellung-Dienstleistungen/Kfz-technische-%C3%84nderung-des-Fahrzeuges.php?FID=3674.737.1&ModID=10"
+    }
+  ],
+  "related": [
+    "fahrzeugschein-fahrzeugbrief-unterschied",
+    "vollgutachten-21-zulassung",
+    "kennzeichengroessen"
+  ],
+  "cta": "Ein zusätzlicher Schilderwechsel steht fest? Bestelle erst mit bestätigter Kombination und passendem Format."
+},
+{
   "slug": "auslaendische-kennzeichen-deutschland",
   "title": "Ausländische Kennzeichen in Deutschland: Wann ist eine deutsche Zulassung nötig?",
   "teaser": "Besuch oder regelmäßiger Standort? Warum ein ausländisches Kennzeichen nicht pauschal ein Jahr Nutzung nach einem Umzug erlaubt und wann du deutsche Schilder einplanst.",
@@ -1942,7 +2040,8 @@ export const registrationGuides: RegistrationGuide[] = [
   "related": [
     "vollgutachten-21-zulassung",
     "auto-anmelden-unterlagen",
-    "saisonkennzeichen-zeitraum-aendern"
+    "saisonkennzeichen-zeitraum-aendern",
+    "fahrzeug-ablasten-fahrzeugpapiere"
   ],
   "cta": "Falls du nach der behördlichen Klärung neue Schilder brauchst: Kontrolliere Kombination, Ausführung und Stückzahl im Konfigurator."
 },

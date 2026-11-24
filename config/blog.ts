@@ -16,6 +16,89 @@ export type BlogArticle = {
 
 export const blogArticles: BlogArticle[] = [
 {
+  "slug": "kennzeichen-verkaufsfotos-unkenntlich",
+  "title": "Kennzeichen auf Verkaufsfotos: Vor dem Inserat unkenntlich machen",
+  "description": "So schützt du Kennzeichendaten auf Autofotos: Bildkopien bearbeiten, alle Ansichten prüfen und Veröffentlichung von Fahrzeugübergabe trennen.",
+  "category": "Kennzeichenwissen",
+  "publishedAt": "2026-11-24",
+  "intro": [
+    "Du fotografierst dein Auto für eine Verkaufsanzeige. Auf den Bildern sind oft mehr Daten zu erkennen als beabsichtigt: Kennzeichen, Nachbarautos oder Unterlagen im Innenraum. Eine kurze Bildprüfung vor dem Hochladen hilft, unnötige Angaben aus dem Inserat herauszuhalten."
+  ],
+  "takeaway": "Bearbeite die Bilder für das Inserat. Eine digitale Schwärzung ist etwas anderes als das Abdecken oder Verändern des Kennzeichens am Fahrzeug.",
+  "sections": [
+    {
+      "id": "bezug",
+      "title": "Warum das Kennzeichen im Foto relevant ist",
+      "paragraphs": [
+        "Die Datenschutzaufsicht Brandenburg beschreibt in ihrem Tätigkeitsbericht 2025 einen Autohändler, der einen angekauften Pkw mit lesbarem Kennzeichen des vorherigen Halters inseriert hatte. Nach der Beschwerde schwärzte er die Bilder und überprüfte seine Abläufe. Die Behörde ordnet Kennzeichen grundsätzlich als personenbezogene Daten ein.",
+        "Der Fall betrifft die Veröffentlichung fremder Daten durch einen Händler. Daraus folgt kein pauschales Verbot jedes privaten Autofotos. Für dein Inserat ist das Unkenntlichmachen trotzdem eine einfache Möglichkeit, die sichtbaren Angaben auf das zum Verkauf nötige Maß zu beschränken."
+      ]
+    },
+    {
+      "id": "kopie",
+      "title": "Mit einer eigenen Bildkopie arbeiten",
+      "paragraphs": [
+        "Bewahre das Original getrennt auf und erstelle eine Kopie für die Verkaufsanzeige. Überdecke die Zeichenfolge in dieser Kopie vollständig und deckend. Ein dünner Strich oder ein transparenter Pinsel kann Teile der Kombination sichtbar lassen.",
+        "Exportiere die bearbeitete Fassung als neues Bild und öffne genau diese Datei erneut. Prüfe bei vergrößerter Ansicht, ob noch Zeichen erkennbar sind. Lade nicht versehentlich das Original oder eine bloße Bearbeitungsdatei hoch."
+      ]
+    },
+    {
+      "id": "ansichten",
+      "title": "Alle Ansichten statt nur das Titelbild prüfen",
+      "paragraphs": [
+        "Kontrolliere Front, Heck, Seitenansichten und Spiegelungen. Auf einem zweiten Foto kann die Nummer noch lesbar sein, obwohl das Titelbild bearbeitet wurde. Auch Nachbarfahrzeuge oder Papiere auf dem Beifahrersitz verdienen einen Blick.",
+        "Diese Checkliste ist eine praktische Veröffentlichungshilfe: Sie ersetzt keine Prüfung der Rechte an fremden Bildern. Verwende Fotos, die du selbst aufgenommen hast oder für dein Inserat verwenden darfst."
+      ],
+      "items": [
+        "Zeichenfolge auf jedem Fahrzeugfoto vollständig verdeckt?",
+        "Spiegelungen und andere Fahrzeuge geprüft?",
+        "Keine offen lesbaren Ausweis-, Adress- oder Fahrzeugpapiere im Bild?",
+        "Exportierte Datei statt Original ausgewählt?",
+        "Vorschaubilder und weitere Plattformen mitgeprüft?"
+      ]
+    },
+    {
+      "id": "fahrzeug",
+      "title": "Nur das Foto bearbeiten, nicht das Fahrzeugkennzeichen",
+      "paragraphs": [
+        "Lass das ordnungsgemäß angebrachte Kennzeichen am Fahrzeug unverändert. Die amtlichen Vorgaben zur Lesbarkeit gelten weiterhin. Eine Bildbearbeitung für das Inserat erlaubt keine Fahrt mit einer Abdeckung auf dem Schild.",
+        "Für Fotos brauchst du auch kein neues amtliches Kennzeichen. Ein zusätzlich geprägtes Schild ändert weder die Zuteilung noch den Zulassungsstatus und löst keine Frage zur Veröffentlichung alter Bilder."
+      ]
+    },
+    {
+      "id": "verkauf",
+      "title": "Nach dem Inserat die Übergabe separat planen",
+      "paragraphs": [
+        "Stimme für den tatsächlichen Verkauf ab, ob das Auto zugelassen übergeben oder vorher abgemeldet wird. Notiere den vereinbarten Übergabezeitpunkt und halte Fahrzeugpapiere für den geregelten Ablauf bereit. Sicherheitscodes gehören nicht in eine öffentliche Anzeige.",
+        "Wenn du für das nächste Auto neue Schilder benötigst, kläre erst die verwendbare Kombination und das passende Format. Die Fotobearbeitung ist kein Anlass für eine vorsorgliche Umkennzeichnung. Die verlinkten Ratgeber helfen bei Übergabe und Fahrzeugwechsel."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "LDA Brandenburg: Tätigkeitsbericht 2025, IV.9, Seite 98",
+      "href": "https://www.lda.brandenburg.de/sixcms/media.php/9/TB_DS_2025.pdf"
+    },
+    {
+      "label": "BMV: Kraftfahrzeugkennzeichen und Lesbarkeit",
+      "href": "https://bmv.de/SharedDocs/DE/Artikel/StV/Strassenverkehr/ueberblick-ueber-die-kraftfahrzeugkennzeichen"
+    }
+  ],
+  "relatedGuideSlugs": [
+    "kennzeichen-fahrzeugwechsel-uebernehmen"
+  ],
+  "relatedLinks": [
+    {
+      "href": "/blog/auto-verkaufen-kennzeichen-uebergeben",
+      "label": "Schilder bei der Fahrzeugübergabe"
+    },
+    {
+      "href": "/blog/fahrzeugpapiere-sicherheitscode-weitergeben",
+      "label": "Sicherheitscodes beim Verkauf schützen"
+    }
+  ]
+},
+{
   "slug": "kennzeichenwechsel-digitale-vignette",
   "title": "Kennzeichen gewechselt: Digitale Vignette vor der Reise prüfen",
   "description": "Neue Nummer am Auto? Prüfe die Zuordnung deiner digitalen Vignette. Ein Ersatzschild mit gleicher Kombination ist von einer Umkennzeichnung zu unterscheiden.",
@@ -372,6 +455,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/kennzeichen-bestellen",
       "label": "Schilder mit bestätigter Kombination bestellen"
+    },
+    {
+      "href": "/blog/kennzeichen-verkaufsfotos-unkenntlich",
+      "label": "Kennzeichen auf Verkaufsfotos schützen"
     }
   ]
 },
@@ -3398,7 +3485,8 @@ export const blogArticles: BlogArticle[] = [
   ],
   "relatedGuideSlugs": [
     "anhaenger-gruenes-schwarzes-kennzeichen",
-    "kennzeichen-beschaedigt-ersetzen"
+    "kennzeichen-beschaedigt-ersetzen",
+    "fahrzeug-ablasten-fahrzeugpapiere"
   ],
   "relatedLinks": [
     {
@@ -3833,6 +3921,10 @@ export const blogArticles: BlogArticle[] = [
     {
       "href": "/blog/fahrzeugpapiere-sicherheitscode-weitergeben",
       "label": "Sicherheitscodes beim Verkauf schützen"
+    },
+    {
+      "href": "/blog/kennzeichen-verkaufsfotos-unkenntlich",
+      "label": "Kennzeichen auf Verkaufsfotos schützen"
     }
   ]
 },
